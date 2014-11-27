@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:0f13a28e97f31c04b05325bed36612fd$ -->
+<TextureAtlas imagePath="guiatlas_min.png">
+    <SubTexture name="btnlevel0001" x="470" y="206" width="37" height="37"/>
+    <SubTexture name="btnlevel0002" x="470" y="167" width="37" height="37"/>
+    <SubTexture name="buttonlevels" x="318" y="240" width="53" height="60"/>
+    <SubTexture name="buttonlong0001" x="210" y="178" width="120" height="48"/>
+    <SubTexture name="buttonlong0002" x="2" y="207" width="120" height="48"/>
+    <SubTexture name="buttonmenu" x="387" y="229" width="53" height="60"/>
+    <SubTexture name="buttonpause" x="332" y="178" width="53" height="60"/>
+    <SubTexture name="buttonrestart" x="155" y="167" width="53" height="60"/>
+    <SubTexture name="chicketext" x="238" y="60" width="194" height="57"/>
+    <SubTexture name="crArt" x="124" y="229" width="48" height="24"/>
+    <SubTexture name="crCode" x="434" y="73" width="72" height="30"/>
+    <SubTexture name="crDen" x="238" y="34" width="195" height="24"/>
+    <SubTexture name="crdoro" x="238" y="2" width="206" height="30"/>
+    <SubTexture name="epictext" x="210" y="228" width="106" height="57"/>
+    <SubTexture name="grillertext" x="238" y="119" width="175" height="57"/>
+    <SubTexture name="levwinpanel" x="2" y="2" width="234" height="163"/>
+    <SubTexture name="locklevel" x="446" y="2" width="55" height="69"/>
+    <SubTexture name="logo_ingame" x="2" y="167" width="151" height="38"/>
+    <SubTexture name="sound0001" x="415" y="167" width="53" height="60"/>
+    <SubTexture name="sound0002" x="434" y="105" width="53" height="60"/>
+    <SubTexture name="star0001" x="373" y="291" width="50" height="48"/>
+    <SubTexture name="star0002" x="442" y="245" width="50" height="48"/>
+</TextureAtlas>

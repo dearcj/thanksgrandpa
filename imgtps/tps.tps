@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data version="1.0">
+    <struct type="Settings">
+        <key>fileFormatVersion</key>
+        <int>1</int>
+        <key>variation</key>
+        <string>main</string>
+        <key>verbose</key>
+        <false/>
+        <key>autoSDSettings</key>
+        <array/>
+        <key>allowRotation</key>
+        <false/>
+        <key>quiet</key>
+        <false/>
+        <key>premultiplyAlpha</key>
+        <false/>
+        <key>shapeDebug</key>
+        <false/>
+        <key>dpi</key>
+        <uint>72</uint>
+        <key>dataFormat</key>
+        <string>json</string>
+        <key>textureFileName</key>
+        <filename>pussyatlas.png</filename>
+        <key>flipPVR</key>
+        <false/>
+        <key>ditherType</key>
+        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
+        <key>backgroundColor</key>
+        <uint>0</uint>
+        <key>libGdx</key>
+        <struct type="LibGDX">
+            <key>filtering</key>
+            <struct type="LibGDXFiltering">
+                <key>x</key>
+                <enum type="LibGDXFiltering::Filtering">Linear</enum>
+                <key>y</key>
+                <enum type="LibGDXFiltering::Filtering">Linear</enum>
+            </struct>
+        </struct>
+        <key>shapePadding</key>
+        <uint>2</uint>
+        <key>jpgQuality</key>
+        <uint>80</uint>
+        <key>pngOptimizationLevel</key>
+        <uint>0</uint>
+        <key>textureSubPath</key>
+        <string></string>
+        <key>textureFormat</key>
+        <enum type="SettingsBase::TextureFormat">png</enum>
+        <key>borderPadding</key>
+        <uint>2</uint>
+        <key>maxTextureSize</key>
+        <QSize>
+            <key>width</key>
+            <int>2048</int>
+            <key>height</key>
+            <int>2048</int>
+        </QSize>
+        <key>fixedTextureSize</key>
+        <QSize>
+            <key>width</key>
+            <int>-1</int>
+            <key>height</key>
+            <int>-1</int>
+        </QSize>
+        <key>reduceBorderArtifacts</key>
+        <false/>
+        <key>algorithmSettings</key>
+        <struct type="AlgorithmSettings">
+            <key>algorithm</key>
+            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
+            <key>freeSizeMode</key>
+            <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
+            <key>sizeConstraints</key>
+            <enum type="AlgorithmSettings::SizeConstraints">POT</enum>
+            <key>forceSquared</key>
+            <false/>
+            <key>forceWordAligned</key>
+            <false/>
+            <key>maxRects</key>
+            <struct type="AlgorithmMaxRectsSettings">
+                <key>heuristic</key>
+                <enum type="AlgorithmMaxRectsSettings::Heuristic">Best</enum>
+            </struct>
+            <key>basic</key>
+            <struct type="AlgorithmBasicSettings">
+                <key>sortBy</key>
+                <enum type="AlgorithmBasicSettings::SortBy">Best</enum>
+                <key>order</key>
+                <enum type="AlgorithmBasicSettings::Order">Ascending</enum>
+            </struct>
+        </struct>
+        <key>andEngine</key>
+        <struct type="AndEngine">
+            <key>minFilter</key>
+            <enum type="AndEngine::MinFilter">Linear</enum>
+            <key>packageName</key>
+            <string>Texture</string>
+            <key>javaFileName</key>
+            <filename>../../MAAS2/img/pussyatlas.java</filename>
+            <key>wrap</key>
+            <struct type="AndEngineWrap">
+                <key>s</key>
+                <enum type="AndEngineWrap::Wrap">Clamp</enum>
+                <key>t</key>
+                <enum type="AndEngineWrap::Wrap">Clamp</enum>
+            </struct>
+            <key>magFilter</key>
+            <enum type="AndEngine::MagFilter">MagLinear</enum>
+        </struct>
+        <key>dataFileName</key>
+        <filename>pussyatlas.json</filename>
+        <key>mainExtension</key>
+        <string></string>
+        <key>forceIdenticalLayout</key>
+        <false/>
+        <key>outputFormat</key>
+        <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
+        <key>autoAliasEnabled</key>
+        <false/>
+        <key>trimSpriteNames</key>
+        <false/>
+        <key>globalSpriteSettings</key>
+        <struct type="SpriteSettings">
+            <key>scale</key>
+            <double>1</double>
+            <key>scaleMode</key>
+            <enum type="ScaleMode">Smooth</enum>
+            <key>innerPadding</key>
+            <uint>0</uint>
+            <key>extrude</key>
+            <uint>0</uint>
+            <key>trimThreshold</key>
+            <uint>1</uint>
+            <key>trimMode</key>
+            <enum type="SpriteSettings::TrimMode">None</enum>
+            <key>heuristicMask</key>
+            <false/>
+        </struct>
+        <key>fileList</key>
+        <array>
+            <filename>../img/guiBGitem.png</filename>
+            <filename>../img/metalstatic.png</filename>
+            <filename>../img/mister chicken.png</filename>
+            <filename>../img/monetabg.png</filename>
+            <filename>../img/tomatogood.png</filename>
+            <filename>../img/wood_wood.png</filename>
+            <filename>../img/yashick.png</filename>
+            <filename>../img/33l00000.png</filename>
+            <filename>../img/33l00001.png</filename>
+            <filename>../img/33l00002.png</filename>
+            <filename>../img/33l00003.png</filename>
+            <filename>../img/33l00004.png</filename>
+            <filename>../img/33l00005.png</filename>
+            <filename>../img/33l00006.png</filename>
+            <filename>../img/33l00007.png</filename>
+            <filename>../img/33l00008.png</filename>
+            <filename>../img/33l00009.png</filename>
+            <filename>../img/33l00010.png</filename>
+            <filename>../img/33l00011.png</filename>
+            <filename>../img/33l00012.png</filename>
+            <filename>../img/33l00013.png</filename>
+            <filename>../img/33l00014.png</filename>
+            <filename>../img/33l00015.png</filename>
+            <filename>../img/33l00016.png</filename>
+            <filename>../img/33l00017.png</filename>
+            <filename>../img/33l00018.png</filename>
+            <filename>../img/33l00019.png</filename>
+            <filename>../img/33l00020.png</filename>
+            <filename>../img/33l00021.png</filename>
+            <filename>../img/33l00022.png</filename>
+            <filename>../img/33l00023.png</filename>
+            <filename>../img/33l00024.png</filename>
+            <filename>../img/33l00025.png</filename>
+            <filename>../img/33l00026.png</filename>
+            <filename>../img/33l00027.png</filename>
+            <filename>../img/33l00028.png</filename>
+            <filename>../img/balka1.png</filename>
+            <filename>../img/block1.png</filename>
+            <filename>../img/blockmetal.png</filename>
+            <filename>../img/chest0001.png</filename>
+            <filename>../img/chest0002.png</filename>
+            <filename>../img/coin0001.png</filename>
+            <filename>../img/coin0002.png</filename>
+            <filename>../img/coin0003.png</filename>
+            <filename>../img/coin0004.png</filename>
+            <filename>../img/coin0005.png</filename>
+            <filename>../img/coin0006.png</filename>
+            <filename>../img/coin0007.png</filename>
+            <filename>../img/coin0008.png</filename>
+            <filename>../img/coin0009.png</filename>
+            <filename>../img/generator.png</filename>
+            <filename>../img/bomb1.png</filename>
+            <filename>../img/levwinpanel.png</filename>
+            <filename>../img/woodcircle.png</filename>
+            <filename>../img/panelspeed.png</filename>
+            <filename>../img/bgitem2.png</filename>
+            <filename>../img/chickendead.png</filename>
+            <filename>../img/wood1.png</filename>
+            <filename>../img/generatorRound.png</filename>
+            <filename>../img/ls200000.png</filename>
+            <filename>../img/ls200001.png</filename>
+            <filename>../img/ls200002.png</filename>
+            <filename>../img/ls200003.png</filename>
+            <filename>../img/ls200004.png</filename>
+            <filename>../img/ls200005.png</filename>
+            <filename>../img/ls200006.png</filename>
+            <filename>../img/ls200007.png</filename>
+            <filename>../img/ls200008.png</filename>
+            <filename>../img/ls200009.png</filename>
+            <filename>../img/ls200010.png</filename>
+            <filename>../img/ls200011.png</filename>
+            <filename>../img/ls200012.png</filename>
+            <filename>../img/ls200013.png</filename>
+            <filename>../img/ls200014.png</filename>
+            <filename>../img/ls200015.png</filename>
+            <filename>../img/ls200016.png</filename>
+            <filename>../img/ls200017.png</filename>
+            <filename>../img/ls200018.png</filename>
+            <filename>../img/ls200019.png</filename>
+            <filename>../img/ls200020.png</filename>
+            <filename>../img/ls200021.png</filename>
+            <filename>../img/ls200022.png</filename>
+            <filename>../img/ls200023.png</filename>
+            <filename>../img/ls200024.png</filename>
+            <filename>../img/ls200025.png</filename>
+            <filename>../img/ls200026.png</filename>
+            <filename>../img/propeller.png</filename>
+            <filename>../img/powerField0001.png</filename>
+            <filename>../img/powerField0002.png</filename>
+            <filename>../img/arrow1.png</filename>
+            <filename>../img/rectArea.png</filename>
+            <filename>../img/roundArea.png</filename>
+            <filename>../img/propeller0001.png</filename>
+            <filename>../img/propeller0002.png</filename>
+            <filename>../img/propeller0003.png</filename>
+            <filename>../img/propeller0004.png</filename>
+            <filename>../img/propeller0005.png</filename>
+            <filename>../img/propeller0006.png</filename>
+            <filename>../img/propeller0007.png</filename>
+            <filename>../img/propeller0008.png</filename>
+            <filename>../img/propeller0009.png</filename>
+            <filename>../img/brickbig.png</filename>
+            <filename>../img/coin0016.png</filename>
+            <filename>../img/coin0010.png</filename>
+            <filename>../img/coin0011.png</filename>
+            <filename>../img/coin0012.png</filename>
+            <filename>../img/coin0013.png</filename>
+            <filename>../img/coin0014.png</filename>
+            <filename>../img/coin0015.png</filename>
+            <filename>../img/imgugolok.png</filename>
+            <filename>../img/notif.png</filename>
+            <filename>../img/areaBeam.png</filename>
+            <filename>../img/coin0017.png</filename>
+            <filename>../img/coin0018.png</filename>
+            <filename>../img/coin0019.png</filename>
+            <filename>../img/coin0020.png</filename>
+            <filename>../img/coin0021.png</filename>
+            <filename>../img/coin0022.png</filename>
+            <filename>../img/coin0023.png</filename>
+            <filename>../img/coin0024.png</filename>
+            <filename>../img/coin0025.png</filename>
+            <filename>../img/expl0011.png</filename>
+            <filename>../img/expl0001.png</filename>
+            <filename>../img/expl0002.png</filename>
+            <filename>../img/expl0003.png</filename>
+            <filename>../img/expl0004.png</filename>
+            <filename>../img/expl0005.png</filename>
+            <filename>../img/expl0006.png</filename>
+            <filename>../img/expl0007.png</filename>
+            <filename>../img/expl0008.png</filename>
+            <filename>../img/expl0009.png</filename>
+            <filename>../img/expl0010.png</filename>
+            <filename>../img/chickeneffect0001.png</filename>
+            <filename>../img/chickeneffect0002.png</filename>
+            <filename>../img/engine.png</filename>
+            <filename>../img/coinCollect0001.png</filename>
+            <filename>../img/coinCollect0002.png</filename>
+            <filename>../img/coinCollect0003.png</filename>
+            <filename>../img/coinCollect0004.png</filename>
+            <filename>../img/coinCollect0005.png</filename>
+            <filename>../img/coinCollect0006.png</filename>
+            <filename>../img/coinCollect0007.png</filename>
+            <filename>../img/powerField0006.png</filename>
+            <filename>../img/powerField0003.png</filename>
+            <filename>../img/powerField0004.png</filename>
+            <filename>../img/powerField0005.png</filename>
+            <filename>../img/FAIL.png</filename>
+            <filename>../img/tracktorwheel.png</filename>
+            <filename>../img/tracktor.png</filename>
+            <filename>../img/BULLETSHOTGUN.png</filename>
+            <filename>../img/barHpBG.png</filename>
+        </array>
+        <key>ignoreFileList</key>
+        <array/>
+        <key>replaceList</key>
+        <array/>
+        <key>commonDivisorX</key>
+        <uint>1</uint>
+        <key>commonDivisorY</key>
+        <uint>1</uint>
+    </struct>
+</data>

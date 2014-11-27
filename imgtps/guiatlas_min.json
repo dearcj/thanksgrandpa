@@ -1,0 +1,188 @@
+{"frames": {
+
+"btnlevel0001.png":
+{
+	"frame": {"x":470,"y":206,"w":37,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":37},
+	"sourceSize": {"w":37,"h":37}
+},
+"btnlevel0002.png":
+{
+	"frame": {"x":470,"y":167,"w":37,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":37},
+	"sourceSize": {"w":37,"h":37}
+},
+"buttonlevels.png":
+{
+	"frame": {"x":318,"y":240,"w":53,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":60},
+	"sourceSize": {"w":53,"h":60}
+},
+"buttonlong0001.png":
+{
+	"frame": {"x":210,"y":178,"w":120,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":48},
+	"sourceSize": {"w":120,"h":48}
+},
+"buttonlong0002.png":
+{
+	"frame": {"x":2,"y":207,"w":120,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":48},
+	"sourceSize": {"w":120,"h":48}
+},
+"buttonmenu.png":
+{
+	"frame": {"x":387,"y":229,"w":53,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":60},
+	"sourceSize": {"w":53,"h":60}
+},
+"buttonpause.png":
+{
+	"frame": {"x":332,"y":178,"w":53,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":60},
+	"sourceSize": {"w":53,"h":60}
+},
+"buttonrestart.png":
+{
+	"frame": {"x":155,"y":167,"w":53,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":60},
+	"sourceSize": {"w":53,"h":60}
+},
+"chicketext.png":
+{
+	"frame": {"x":238,"y":60,"w":194,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":194,"h":57},
+	"sourceSize": {"w":194,"h":57}
+},
+"crArt.png":
+{
+	"frame": {"x":124,"y":229,"w":48,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":24},
+	"sourceSize": {"w":48,"h":24}
+},
+"crCode.png":
+{
+	"frame": {"x":434,"y":73,"w":72,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":30},
+	"sourceSize": {"w":72,"h":30}
+},
+"crDen.png":
+{
+	"frame": {"x":238,"y":34,"w":195,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":195,"h":24},
+	"sourceSize": {"w":195,"h":24}
+},
+"crdoro.png":
+{
+	"frame": {"x":238,"y":2,"w":206,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":206,"h":30},
+	"sourceSize": {"w":206,"h":30}
+},
+"epictext.png":
+{
+	"frame": {"x":210,"y":228,"w":106,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":106,"h":57},
+	"sourceSize": {"w":106,"h":57}
+},
+"grillertext.png":
+{
+	"frame": {"x":238,"y":119,"w":175,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":175,"h":57},
+	"sourceSize": {"w":175,"h":57}
+},
+"levwinpanel.png":
+{
+	"frame": {"x":2,"y":2,"w":234,"h":163},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":234,"h":163},
+	"sourceSize": {"w":234,"h":163}
+},
+"locklevel.png":
+{
+	"frame": {"x":446,"y":2,"w":55,"h":69},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":69},
+	"sourceSize": {"w":55,"h":69}
+},
+"logo_ingame.png":
+{
+	"frame": {"x":2,"y":167,"w":151,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":38},
+	"sourceSize": {"w":151,"h":38}
+},
+"sound0001.png":
+{
+	"frame": {"x":415,"y":167,"w":53,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":60},
+	"sourceSize": {"w":53,"h":60}
+},
+"sound0002.png":
+{
+	"frame": {"x":434,"y":105,"w":53,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":53,"h":60},
+	"sourceSize": {"w":53,"h":60}
+},
+"star0001.png":
+{
+	"frame": {"x":373,"y":291,"w":50,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":48},
+	"sourceSize": {"w":50,"h":48}
+},
+"star0002.png":
+{
+	"frame": {"x":442,"y":245,"w":50,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":48},
+	"sourceSize": {"w":50,"h":48}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "guiatlas_min.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "0.5",
+	"smartupdate": "$TexturePacker:SmartUpdate:c94bd0a9a95c9b5d027af648a65115a4$"
+}
+}

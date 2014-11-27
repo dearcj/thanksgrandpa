@@ -1,0 +1,36 @@
+{"frames": {
+
+"BG2.png":
+{
+	"frame": {"x":2,"y":2,"w":546,"h":364},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":546,"h":364},
+	"sourceSize": {"w":546,"h":364}
+},
+"bg.png":
+{
+	"frame": {"x":550,"y":2,"w":393,"h":337},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":393,"h":337},
+	"sourceSize": {"w":393,"h":337}
+},
+"bgmenutest.png":
+{
+	"frame": {"x":2,"y":368,"w":538,"h":359},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":538,"h":359},
+	"sourceSize": {"w":538,"h":359}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "bg_min.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "0.5",
+	"smartupdate": "$TexturePacker:SmartUpdate:a24b1cfc85f26e01dccc6e1c4a35b5b7$"
+}
+}
