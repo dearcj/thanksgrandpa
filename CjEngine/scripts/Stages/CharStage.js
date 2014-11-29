@@ -24,9 +24,8 @@ CharStage.prototype.onShowContinue = function()
 
     CObj.getById("btnachs").click = function(){
 
-                VK.Auth.login(authInfo);
-        VK;
-    //    SM.inst.openStage(achStage)
+
+       SM.inst.openStage(achStage)
     };
     CObj.getById("btnfight").click = function(){SM.inst.openStage(gameStage)};
 }
