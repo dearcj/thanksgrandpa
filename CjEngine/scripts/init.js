@@ -8,9 +8,9 @@ function getURLParameter(name) {
 }
 
 
-function createNewPlayer(apiid)
+function createNewPlayer(apiid, ref)
 {
-    client.getTable("tb_players").insert({vkapi: apiid});
+    client.getTable("tb_players").insert({vkapi: apiid, level: 1, xp: 0, ref: });
 
 }
 
@@ -23,12 +23,12 @@ function dbInit() {
     var gamerid = userid || viewerid;
     var auth_key = getURLParameter("auth_key");
     var refferer = getURLParameter("referrer");
-    userid = 2882845;
+    userid = 1;
     client.getTable("tb_players").where({
         vkapi: userid
     }).read().done(function (results) {
         if (results.length == 0) {
-            var db_player_id = createNewPlayer(2882845);
+            var db_player_id = createNewPlayer(1, refferer);
         }
         alert(results);
     }, function (err) {
@@ -37,8 +37,6 @@ function dbInit() {
 
 
    // var item = { text: "Прекрасный элемент" }; client.getTable("Item").insert(item);
-    var item = {vkapi: 666, complete: false}
-    client.getTable("tb_players").insert(item);
 
 
 
