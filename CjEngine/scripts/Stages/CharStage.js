@@ -22,7 +22,12 @@ CharStage.prototype.onShowContinue = function()
 {
     charStage.doProcess = true;
 
-    CObj.getById("btnachs").click = function(){SM.inst.openStage(achStage)};
+    CObj.getById("btnachs").click = function(){
+
+        VK.Auth.login(authInfo);
+
+    //    SM.inst.openStage(achStage)
+    };
     CObj.getById("btnfight").click = function(){SM.inst.openStage(gameStage)};
 }
 
