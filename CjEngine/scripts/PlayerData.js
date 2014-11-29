@@ -1,7 +1,7 @@
 /**
  * Created by KURWINDALLAS on 11.07.2014.
  */
-var PlayerData = function ()
+var PlayerData = function (id)
 {
    this.inst = this;
 }
