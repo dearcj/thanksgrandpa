@@ -3,6 +3,10 @@
  */
 var PlayerData = function (id)
 {
+   this.dbId = id;
+   SM.inst.openStage(charStage);
+
+
    this.inst = this;
 }
 
