@@ -21,7 +21,7 @@ createNewPlayer = function(apiid, _ref)
 }
 
 dbInit = function() {
-    window.azureclient = new WindowsAzure.MobileServiceClient("http://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
+    window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
     var userid = getURLParameter("user_id");
     var sid = getURLParameter("sid");
     var viewerid = getURLParameter("user_id");
