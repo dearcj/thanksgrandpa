@@ -7,18 +7,6 @@ getURLParameter = function (name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
 }
 
-
-createNewPlayer = function(apiid, _ref)
-{
- /*   var item = {vkapi: apiid, level: 1, xp: 0, ref: _ref};
-    window.azureclient.getTable("tb_players").insert(item).done(function (results) {
-        var db_player_id = new PlayerData(results[0].id);
-        var pl = new PlayerData(db_player_id);
-    }, function (err) {
-        console.log("Error: " + err);
-    });*/
-}
-
 loginCallback = function(playerItem)
 {
     VK.api('users.get',{user_ids:vkparams.userid.toString()}, function(data) {

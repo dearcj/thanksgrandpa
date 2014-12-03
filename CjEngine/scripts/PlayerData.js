@@ -4,11 +4,22 @@
 PlayerData = function(pi)
 {
    this.playerItem = pi;
-   this.saveData();
    SM.inst.openStage(charStage);
 
+   this.loadData(this.saveData());
 
    this.inst = this;
+}
+
+
+PlayerData.prototype.loadData = function(cb)
+{
+   window.azureclient.getTable("tb_players").read().done(
+   function (results) {
+      this.playerItem = results[0];
+      if (cb) cb();
+      }, function (res) {}
+   );
 }
 
 PlayerData.prototype.saveData = function()
@@ -16,5 +27,3 @@ PlayerData.prototype.saveData = function()
    window.azureclient.getTable("tb_players").update(this.playerItem);
    JSON.stringify(this.playerItem);
 }
-
-PlayerData.inst.score = 0;
