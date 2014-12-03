@@ -14,6 +14,7 @@ PlayerData = function(pi)
 PlayerData.prototype.loadEnd = function()
 {
    this.playerItem.level = 5;
+   this.saveData();
 }
 
 PlayerData.prototype.loadData = function(cb)
