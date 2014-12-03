@@ -23,7 +23,7 @@ CharStage.prototype.onShowContinue = function()
     charStage.doProcess = true;
 
     CObj.getById("sellev").text = "Level 1";
-    CObj.getById("tname").text = vkparams.first_name + " " + vkparams.last_name;
+    CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
 
     CObj.getById("btnachs").click = function(){
 
