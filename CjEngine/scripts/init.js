@@ -49,7 +49,8 @@ dbInit = function() {
     var refferer = getURLParameter("referrer");
     console.log("APIVK" + userid);
     console.log("APIVK" + userid);
-    console.log(window.location.href);
+    console.log("HREF = " + window.location.href);
+    console.log("SEARCH = " + window.location.search);
     //  userid = 444;
     azureclient.invokeApi("login", {
         body: {vkapi: viewerid, ref: refferer},
