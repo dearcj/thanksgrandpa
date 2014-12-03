@@ -8,7 +8,7 @@ PlayerData = function(pi)
 
    this.loadData(this.loadEnd);
 
-   this.inst = this;
+   PlayerData.inst = this;
 }
 
 PlayerData.prototype.loadEnd = function()
