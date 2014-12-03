@@ -3,18 +3,30 @@
  */
 PlayerData = function(pi)
 {
+   this.xpLevel = [0, 100, 200, 500, 1500, 2500, 4000, 7500, 12000, 20000, 25000];
+
+
    this.playerItem = pi;
-   SM.inst.openStage(charStage);
 
    this.loadData(this.loadEnd);
 
    PlayerData.inst = this;
 }
 
+
+PlayerData.prototype.gainExp = function(amount)
+{
+   this.playerItem.xp += amount;
+   if (this.playerItem.xp >= this.xpLevel[this.playerItem.level])
+   {
+      this.playerItem.xp -= this.playerItem.level[this.playerItem.level];
+      this.playerItem.level++;
+   }
+}
+
 PlayerData.prototype.loadEnd = function()
 {
-   PlayerData.inst.playerItem.level = 5;
-   PlayerData.inst.saveData();
+   SM.inst.openStage(charStage);
 }
 
 PlayerData.prototype.loadData = function(cb)
