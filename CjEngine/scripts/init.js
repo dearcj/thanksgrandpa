@@ -24,6 +24,7 @@ loginCallback = function()
     VK.api('users.get',{user_ids:vkparams.userid.toString()}, function(data) {
         vkparams.first_name = data.response[0].first_name;
         vkparams.last_name = data.response[0].last_name;
+        new PlayerData(vkparams.id);
     });
 }
 
@@ -63,8 +64,8 @@ dbInit = function() {
     }).done(function (results) {
         var message = results.result;
         azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
+        vkparams.id = results.result.id;
         createAchs(results.result.id);
-
         loginCallback();
     }, function(error) {
         azureclient.login(results.result.userId, results.result.token);

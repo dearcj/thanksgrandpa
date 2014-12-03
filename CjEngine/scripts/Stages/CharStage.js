@@ -22,6 +22,9 @@ CharStage.prototype.onShowContinue = function()
 {
     charStage.doProcess = true;
 
+    CObj.getById("selLev").text = "Level 1";
+    CObj.getById("tname").text = "ANUS";
+
     CObj.getById("btnachs").click = function(){
 
 
