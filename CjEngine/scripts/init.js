@@ -19,12 +19,12 @@ createNewPlayer = function(apiid, _ref)
     });*/
 }
 
-loginCallback = function()
+loginCallback = function(playerItem)
 {
     VK.api('users.get',{user_ids:vkparams.userid.toString()}, function(data) {
         vkparams.first_name = data.response[0].first_name;
         vkparams.last_name = data.response[0].last_name;
-        new PlayerData(vkparams.id);
+        new PlayerData(playerItem);
     });
 }
 
@@ -66,7 +66,7 @@ dbInit = function() {
         azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
         vkparams.id = results.result.id;
         createAchs(results.result.id);
-        loginCallback();
+        loginCallback(results.result);
     }, function(error) {
         azureclient.login(results.result.userId, results.result.token);
     //    loginCallback();

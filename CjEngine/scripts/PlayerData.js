@@ -1,13 +1,21 @@
 /**
  * Created by KURWINDALLAS on 11.07.2014.
  */
-var PlayerData = function (id)
+PlayerData = function(pi)
 {
-   this.dbId = id;
+   this.playerItem = pi;
+   this.saveData();
    SM.inst.openStage(charStage);
 
 
    this.inst = this;
+}
+
+PlayerData.prototype.saveData = function()
+{
+   azureclient.getTable("tb_players").update(playerItem);
+   JSON.stringify(playerItem);
+
 }
 
 PlayerData.inst = new PlayerData();
