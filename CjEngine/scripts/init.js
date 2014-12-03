@@ -48,7 +48,7 @@ dbInit = function() {
     var auth_key = getURLParameter("auth_key");
     var refferer = getURLParameter("referrer");
     console.log("APIVK" + userid);
-    console.log("APIVK" + userid);
+    console.log("APIVK" + viewerid);
     console.log("HREF = " + window.location.href);
     console.log("SEARCH = " + window.location.search);
     //  userid = 444;
