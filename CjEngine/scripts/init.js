@@ -52,13 +52,13 @@ dbInit = function() {
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
-    console.log("APIVK" + userid);
-    console.log("APIVK" + viewerid);
+    console.log("APIVK" + vkparams.userid);
+    console.log("APIVK" + vkparams.viewerid);
     console.log("HREF = " + window.location.href);
     console.log("SEARCH = " + window.location.search);
     //  userid = 444;
     azureclient.invokeApi("login", {
-        body: {vkapi: viewerid, ref: refferer},
+        body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},
         method: "post"
     }).done(function (results) {
         var message = results.result;
