@@ -21,7 +21,7 @@ createNewPlayer = function(apiid, _ref)
 
 loginCallback = function()
 {
-    VK.api('users.get',{user_ids:vkparams.userid}, function(data) {
+    VK.api('users.get',{user_ids:vkparams.userid.toString()}, function(data) {
        console.log(something);
         // Действия с полученными данными
     });
