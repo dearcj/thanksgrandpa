@@ -13,7 +13,7 @@ PlayerData = function(pi)
 
 PlayerData.prototype.saveData = function()
 {
-   azureclient.getTable("tb_players").update(this.playerItem);
+   window.azureclient.getTable("tb_players").update(this.playerItem);
    JSON.stringify(playerItem);
 }
 
