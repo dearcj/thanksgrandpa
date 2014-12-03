@@ -48,7 +48,7 @@ dbInit = function() {
     vkparams.sid = getURLParameter("sid");
     vkparams.viewerid = getURLParameter("viewer_id");
 
-    vkparams.gamerid = userid || viewerid;
+    vkparams.gamerid =  vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
