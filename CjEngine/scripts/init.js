@@ -47,7 +47,7 @@ dbInit = function() {
     var gamerid = userid || viewerid;
     var auth_key = getURLParameter("auth_key");
     var refferer = getURLParameter("referrer");
-   /// userid = 888;
+  //  userid = 444;
     azureclient.invokeApi("login", {
         body: {vkapi: userid, ref: refferer},
         method: "post"
