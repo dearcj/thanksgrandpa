@@ -14,9 +14,7 @@ PlayerData = function(pi)
 PlayerData.prototype.saveData = function()
 {
    window.azureclient.getTable("tb_players").update(this.playerItem);
-   JSON.stringify(playerItem);
+   JSON.stringify(this.playerItem);
 }
-
-PlayerData.inst = new PlayerData();
 
 PlayerData.inst.score = 0;
