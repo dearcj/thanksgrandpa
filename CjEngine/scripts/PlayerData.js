@@ -29,6 +29,6 @@ PlayerData.prototype.loadData = function(cb)
 
 PlayerData.prototype.saveData = function()
 {
-   window.azureclient.getTable("tb_players").update(this.playerItem);
+   window.azureclient.getTable("tb_players").update(this.playerItem, {success: function() {}, error: function () {}});
    JSON.stringify(this.playerItem);
 }
