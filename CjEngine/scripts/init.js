@@ -10,18 +10,21 @@ getURLParameter = function (name) {
 
 createNewPlayer = function(apiid, _ref)
 {
-    var item = {vkapi: apiid, level: 1, xp: 0, ref: _ref};
+ /*   var item = {vkapi: apiid, level: 1, xp: 0, ref: _ref};
     window.azureclient.getTable("tb_players").insert(item).done(function (results) {
         var db_player_id = new PlayerData(results[0].id);
         var pl = new PlayerData(db_player_id);
     }, function (err) {
         console.log("Error: " + err);
-    });
+    });*/
 }
 
 loginCallback = function()
 {
-
+    VK.api('users.get',{user_ids:vkparams.userid}, function(data) {
+       console.log(something);
+        // Действия с полученными данными
+    });
 }
 
 createAchs = function(uid)
@@ -40,13 +43,15 @@ createAchs = function(uid)
 }
 dbInit = function() {
     window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
-    var userid = getURLParameter("user_id");
-    var sid = getURLParameter("sid");
-    var viewerid = getURLParameter("viewer_id");
+    window.vkparams = {};
+    vkparams.userid = getURLParameter("user_id");
+    vkparams.sid = getURLParameter("sid");
+    vkparams.viewerid = getURLParameter("viewer_id");
 
-    var gamerid = userid || viewerid;
-    var auth_key = getURLParameter("auth_key");
-    var refferer = getURLParameter("referrer");
+    vkparams.gamerid = userid || viewerid;
+    vkparams.auth_key = getURLParameter("auth_key");
+    vkparams.refferer = getURLParameter("referrer");
+    vkparams.accesstoken = getURLParameter("access_token");
     console.log("APIVK" + userid);
     console.log("APIVK" + viewerid);
     console.log("HREF = " + window.location.href);
