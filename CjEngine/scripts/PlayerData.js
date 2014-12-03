@@ -6,11 +6,15 @@ PlayerData = function(pi)
    this.playerItem = pi;
    SM.inst.openStage(charStage);
 
-   this.loadData(this.saveData());
+   this.loadData(this.loadEnd);
 
    this.inst = this;
 }
 
+PlayerData.prototype.loadEnd = function()
+{
+   this.playerItem.level = 5;
+}
 
 PlayerData.prototype.loadData = function(cb)
 {
