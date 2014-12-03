@@ -42,13 +42,14 @@ dbInit = function() {
     window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
     var userid = getURLParameter("user_id");
     var sid = getURLParameter("sid");
-    var viewerid = getURLParameter("user_id");
+    var viewerid = getURLParameter("viewer_id");
 
     var gamerid = userid || viewerid;
     var auth_key = getURLParameter("auth_key");
     var refferer = getURLParameter("referrer");
     console.log("APIVK" + userid);
-  //  userid = 444;
+    console.log("APIVK" + userid);
+    //  userid = 444;
     azureclient.invokeApi("login", {
         body: {vkapi: userid, ref: refferer},
         method: "post"
