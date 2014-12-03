@@ -30,6 +30,7 @@ PlayerData.prototype.loadData = function(cb)
 PlayerData.prototype.saveData = function()
 {
    window.azureclient.getTable("tb_players").update(PlayerData.inst.playerItem).done(function (result) {
+      PlayerData.inst.playerItem = result;
       alert("updating done");
    }, function (err) {
       alert("Error: " + err);
