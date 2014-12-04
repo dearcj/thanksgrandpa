@@ -42,7 +42,7 @@ dbInit = function() {
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("APIVK" + vkparams.userid);
-    console.log("APIVK" + vkparams.viewerid);
+    console.log("APIVsK" + vkparams.viewerid);
     console.log("HREF = " + window.location.href);
     console.log("SEARCH = " + window.location.search);
     //  userid = 444;
