@@ -79,9 +79,9 @@ GameStage.prototype.onHide = function(newStage) {
         gameStage.pauseTexture = null;
         gameStage.pauseSprite = null;
     }
-}
     gameStage.distText =null;
-    GameStage.prototype.loseGame = function() {
+}
+GameStage.prototype.loseGame = function() {
     if (gameStage.losing) return;
     gameStage.losing = true;
 
