@@ -37,6 +37,7 @@ GameStage.prototype.process = function()
     }
     CObj.processAll();
 
+    gameStage.distText.text = LauncherBG.inst.distance;
     MM.inst.process();
 }
 
@@ -79,7 +80,7 @@ GameStage.prototype.onHide = function(newStage) {
         gameStage.pauseSprite = null;
     }
 }
-
+    gameStage.distText =null;
     GameStage.prototype.loseGame = function() {
     if (gameStage.losing) return;
     gameStage.losing = true;
@@ -311,7 +312,6 @@ GameStage.prototype.onLoadEnd = function()
     gameStage.doProcess = true;
     gameStage.stepSize = gameStage.invFR;
     gameStage.doPhys = true;
-    PlayerData.inst.score = 1000;
  //   CObj.getById("level").getText();
     CObj.getById("level").text = "УРОВЕНЬ " + gameStage.currentLevel.toString();
 
@@ -327,6 +327,7 @@ GameStage.prototype.onLoadEnd = function()
     gameStage.worldSpeed = 1;
 
     gameStage.createPools();
+    gameStage.distText = CObj.getById("dist");
 
     CObj.getById("restart").click = function () {
         SM.inst.openStage(gameStage);

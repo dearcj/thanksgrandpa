@@ -4,7 +4,6 @@
 
 
 var SM = function() {
-
     this.fg = new PIXI.DisplayObjectContainer();
     this.bg = new PIXI.DisplayObjectContainer();
     this.ol = new PIXI.DisplayObjectContainer();
@@ -21,9 +20,6 @@ var SM = function() {
     this.transStart = 0;
     this.transTime = 600;
     this.doTrans = false;
-
-
-  //  return this;
 }
 
 SM.inst = new SM();

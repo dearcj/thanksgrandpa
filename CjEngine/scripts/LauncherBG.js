@@ -10,6 +10,7 @@ LauncherBG = function(in_x,in_y,textname,in_body) {
     this.y = -70;
     var inx = CObj.objects.indexOf(this);
     CObj.objects.splice(inx);
+    this.distance = 0;
 }
 
 extend(LauncherBG, CObj, true);
@@ -20,7 +21,7 @@ LauncherBG.inst.maxVelocity = 5;
 LauncherBG.prototype.clear = function()
 {
     this.levCycles.splice(0, this.levCycles.length)
-
+    this.distance = 0;
 }
 
 
@@ -54,6 +55,7 @@ LauncherBG.prototype.process = function()
 {
     CObj.prototype.process.call(this);
 
+    this.distance += this.levCycles[0].velocity;
     for (var i = 0; i < this.levCycles[0].layers.length; ++i)
     {
         var l = this.levCycles[0].layers[i];
@@ -65,7 +67,6 @@ LauncherBG.prototype.process = function()
             clipOnScreen.position.x = clipOnScreen.position.x - l.velocity;
             if (clipOnScreen.position.x + clipOnScreen.width * 0.5 < this.x)
             {
-            //   l.clip.getChildAt(k).dispose();
                l.clip.removeChild(l.clip.getChildAt(k));
             }
         }
