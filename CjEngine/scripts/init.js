@@ -9,7 +9,9 @@ getURLParameter = function (name) {
 
 loginCallback = function(playerItem)
 {
-    VK.api('users.get',{user_ids:vkparams.userid.toString()}, function(data) {
+    if (vkparams.novk) new PlayerData(playerItem); else;
+
+    VK.api('users.get',{user_ids:vkparams.viewerid.toString()}, function(data) {
         vkparams.first_name = data.response[0].first_name;
         vkparams.last_name = data.response[0].last_name;
         new PlayerData(playerItem);
@@ -37,6 +39,12 @@ dbInit = function() {
     vkparams.sid = getURLParameter("sid");
     vkparams.viewerid = getURLParameter("viewer_id");
 
+    if (!vkparams.viewerid)
+    {
+        vkparams.viewerid = 2882845;
+        vkparams.novk = true;
+    }
+
     vkparams.gamerid =  vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
@@ -53,13 +61,12 @@ dbInit = function() {
         var message = results.result;
         azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
         vkparams.id = results.result.id;
-        createAchs(results.result.id);
+    //    createAchs(results.result.id);
         loginCallback(results.result);
     }, function(error) {
-        azureclient.login(results.result.userId, results.result.token);
+      //  azureclient.login(results.result.userId, results.result.token);
     //    loginCallback();
     });
-
 
 
     /*

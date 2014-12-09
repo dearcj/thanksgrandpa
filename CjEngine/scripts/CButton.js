@@ -17,6 +17,9 @@ CButton.prototype.destroy = function()
     this.click = null;
 }
 
+
+
+
 Object.defineProperty(CButton.prototype, 'click', {
     get: function () {
         return this._click;
@@ -30,13 +33,22 @@ Object.defineProperty(CButton.prototype, 'click', {
         } else
         if (this.gfx)
         {
-            var intermediateFunc = function(evt)
+
+            var btnclick = function()
             {
+                if (stage.getChildAt(stage.children.length - 1).trans)
+                {
+                    return;
+                }
+
                 ZSound.Play("CLICK");
-                value(evt);
+
+                if (value)
+                    value();
             }
-            this.gfx.tap = intermediateFunc;
-            this.gfx.click = intermediateFunc;
+
+            this.gfx.tap = btnclick;
+            this.gfx.click = btnclick;
         }
     }
 });
@@ -64,23 +76,40 @@ CButton.prototype.updateGraphics=function()
 {
     if (this.doRemove) return;
     CObj.prototype.updateGraphics.call(this);
-    if (this.gfx) {
+    if (this.gfx && this.textField) {
        // if (!window.iphone3) {
        //     this.textField.scale.x = this.gfx.scale.x;
         //    this.textField.scale.y = this.gfx.scale.y;
      //   }
-        this.textField.x = this.gfx.x - this.textField.width / 2;// - this.gfx.width * 0.25;
-        this.textField.y = this.gfx.y - this.textField.height*0.7;// + this.textField.height / 4;// - this.gfx.height * 0.25;
+/*
+        {
+
+            this.textField.x = -this.gfx.width / 2 + this.textField.width / 2;// - this.gfx.width * 0.25;
+            this.textField.y = -this.gfx.height / 2 + this.textField.height*0.7;// + this.textField.height / 4;// - this.gfx.height * 0.25;
+
+        } else
+*/
+        if (!this.addToSameLayer)
+      {
+            this.textField.x = this.gfx.x - this.textField.width / 2;// - this.gfx.width * 0.25;
+            this.textField.y = this.gfx.y - this.textField.height * 0.7;// + this.textField.height / 4;// - this.gfx.height * 0.25;
+        }
     }
 }
 
 CButton.prototype.init = function(){
     CObj.prototype.init.call(this);
+    if (!this.gfx)
+    {
+        this.gfx = new PIXI.DisplayObjectContainer();
+        this.updateGraphics();
+    }
     this.gfx.interactive = true;
     this.align = "center";
     this.fontSize = parseInt(this.fontSize);
     this.textField = CTextField.createTextField(this);
     //this.getText();
+    if (this.text)
     this.text = this.text.toUpperCase();
     //this.text = this.text;
 
@@ -95,10 +124,10 @@ CButton.prototype.init = function(){
     this.updateGraphics();
        this.gfx.mouseover = function (evt) {
         TweenMax.killTweensOf(f.scale);
-        new TweenMax(f.scale, 0.6, {y: bsY+0.2, ease: Elastic.easeOut} );
-        new TweenMax(f.scale, 0.4, {x: bsX+0.2, ease: Elastic.easeOut} );
-        new TweenMax(tf.scale, 0.6, {y: 1+0.2, ease: Elastic.easeOut} );
-        new TweenMax(tf.scale, 0.4, {x: 1+0.2, ease: Elastic.easeOut} );
+        new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
+        new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
+        new TweenMax(tf.scale, 0.6, {y: 1+0.1, ease: Elastic.easeOut} );
+        new TweenMax(tf.scale, 0.4, {x: 1+0.1, ease: Elastic.easeOut} );
 
     }
     this.gfx.mouseout = function (evt) {
@@ -108,7 +137,8 @@ CButton.prototype.init = function(){
         new TweenMax(tf.scale, 0.3, {x: 1, y: 1, ease: Elastic.easeOut} );
     }
 
-    SM.inst.fontLayer.addChild(this.textField);
-
+    if (!this.addToSameLayer)
+    SM.inst.fontLayer.addChild(this.textField); else
+    this.gfx.addChild(this.textField);
     //tf.tint = 0x6666FF;
 }

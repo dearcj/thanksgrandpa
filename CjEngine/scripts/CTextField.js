@@ -66,7 +66,10 @@ CTextField.createTextField = function(obj) {
         }
         inx++;
     }
-    if (obj.fontSize == undefined) obj.fontSize = 30/window.addScale;else
+
+        if (!obj.fontSize || obj.fontSize == undefined)
+        obj.fontSize = 30/window.addScale;
+    else
      obj.fontSize /= window.addScale;
     ///if (obj.fontSize < 60) obj.fontSize = 60;
     var fontParam = obj.fontSize + "px " + font.font;
@@ -74,7 +77,7 @@ CTextField.createTextField = function(obj) {
 
     var breaks = 0;
     if (obj.text) {
-        obj.text = this.convertSpaces(obj.text);
+        obj.text = CTextField.convertSpaces(obj.text);
     }
 
     var pt = new PIXI.BitmapText(obj.text, {font: fontParam, align: "center"});

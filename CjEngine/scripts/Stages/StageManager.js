@@ -20,9 +20,55 @@ var SM = function() {
     this.transStart = 0;
     this.transTime = 600;
     this.doTrans = false;
+
+    var mouseWheelHandler = function(e)
+    {
+        if (CObj.objects)
+        for (var i = 0; i < CObj.objects.length; ++i)
+        {
+            if (CObj.checkType(CObj.objects[i], CScrollbar),
+                    CObj.objects[i].mover)
+            {
+                CObj.objects[i].onWheel(e);
+            }
+
+        }
+
+    }
+    document.addEventListener("mousewheel", mouseWheelHandler, false);
+
+
 }
 
 SM.inst = new SM();
+
+
+SM.prototype.addDisableWindow = function(title)
+{
+    var d = new PIXI.DisplayObjectContainer();
+    var g = new PIXI.Graphics();
+    g.fillColor =0x22113322;
+    g.beginFill();
+    g.drawRect(0, 0, SCR_WIDTH, SCR_HEIGHT);
+    g.endFill();
+    g.alpha = 0.5;
+    d.addChild(g);
+
+    if (title) {
+        var text = CTextField.createTextField({text: "ХУЙ", fontSize: 25, align: "center"});
+        text.text = title;
+        text.updateText();
+        text.position.x = SCR_WIDTH / 2;
+        text.position.y = SCR_HEIGHT / 2;
+        text.position.x -= text.getLocalBounds().width / 2;
+        text.position.y -= text.getLocalBounds().height / 2;
+        d.addChild(text);
+    }
+    d.interactive = false;
+    d.trans = true;
+    stage.addChild(d);
+    return g;
+}
 
 SM.prototype.addLayersToStage = function()
 {

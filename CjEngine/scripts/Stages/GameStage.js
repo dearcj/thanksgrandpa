@@ -81,6 +81,7 @@ GameStage.prototype.onHide = function(newStage) {
     }
     gameStage.distText =null;
 }
+
 GameStage.prototype.loseGame = function() {
     if (gameStage.losing) return;
     gameStage.losing = true;
@@ -364,7 +365,6 @@ GameStage.prototype.onLoadEnd = function()
     {
         if (gameStage.player)
         gameStage.player.fireAngle = Math.PI + Math.atan2(gameStage.player.gfx.y - mouseData.global.y/SCR_SCALE, gameStage.player.gfx.x - mouseData.global.x/SCR_SCALE);
-
     }
 
 

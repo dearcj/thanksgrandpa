@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:d3aa926b710932746798e49b8bf4dabf$ -->
+<!-- $TexturePacker:SmartUpdate:5531dd3673560b59a811de167deac93e$ -->
 <TextureAtlas imagePath="guiatlas.png">
-    <SubTexture name="BULLETSHOTGUN" x="954" y="118" width="18" height="32"/>
-    <SubTexture name="barHpBG" x="2" y="2" width="790" height="42"/>
-    <SubTexture name="btnlevel0001" x="618" y="144" width="74" height="74"/>
-    <SubTexture name="btnlevel0002" x="713" y="46" width="74" height="74"/>
-    <SubTexture name="buttonlevels" x="421" y="466" width="105" height="120"/>
-    <SubTexture name="buttonlong0001" x="713" y="122" width="239" height="96"/>
-    <SubTexture name="buttonlong0002" x="472" y="46" width="239" height="96"/>
-    <SubTexture name="buttonmenu" x="314" y="374" width="105" height="120"/>
-    <SubTexture name="buttonpause" x="207" y="374" width="105" height="120"/>
-    <SubTexture name="buttonrestart" x="100" y="374" width="105" height="120"/>
-    <SubTexture name="chicketext" x="583" y="331" width="388" height="114"/>
-    <SubTexture name="crArt" x="2" y="466" width="96" height="48"/>
-    <SubTexture name="crCode" x="472" y="144" width="144" height="59"/>
-    <SubTexture name="crDen" x="583" y="281" width="390" height="48"/>
-    <SubTexture name="crdoro" x="583" y="220" width="411" height="59"/>
-    <SubTexture name="epictext" x="794" y="2" width="211" height="114"/>
-    <SubTexture name="grillertext" x="579" y="447" width="349" height="114"/>
-    <SubTexture name="levwinpanel" x="2" y="46" width="468" height="326"/>
-    <SubTexture name="locklevel" x="472" y="205" width="109" height="137"/>
-    <SubTexture name="sound0001" x="2" y="563" width="105" height="120"/>
-    <SubTexture name="sound0002" x="472" y="344" width="105" height="120"/>
-    <SubTexture name="star0001" x="211" y="496" width="100" height="96"/>
-    <SubTexture name="star0002" x="109" y="496" width="100" height="96"/>
-    <SubTexture name="textureHP" x="1007" y="2" width="15" height="44"/>
+    <SubTexture name="BULLETSHOTGUN" x="794" y="84" width="18" height="32"/>
+    <SubTexture name="ava icon" x="962" y="200" width="44" height="38"/>
+    <SubTexture name="back button" x="90" y="974" width="91" height="36"/>
+    <SubTexture name="barHpBG" x="2" y="84" width="790" height="42"/>
+    <SubTexture name="btnlevel0001" x="78" y="164" width="74" height="74"/>
+    <SubTexture name="btnlevel0002" x="2" y="164" width="74" height="74"/>
+    <SubTexture name="buttonlevels" x="216" y="801" width="105" height="120"/>
+    <SubTexture name="buttonlong0001" x="759" y="376" width="239" height="96"/>
+    <SubTexture name="buttonlong0002" x="759" y="278" width="239" height="96"/>
+    <SubTexture name="buttonmenu" x="109" y="801" width="105" height="120"/>
+    <SubTexture name="buttonpause" x="2" y="801" width="105" height="120"/>
+    <SubTexture name="buttonrestart" x="872" y="888" width="105" height="120"/>
+    <SubTexture name="buy button" x="582" y="128" width="143" height="57"/>
+    <SubTexture name="crdoro" x="402" y="190" width="411" height="59"/>
+    <SubTexture name="ded back" x="402" y="251" width="355" height="393"/>
+    <SubTexture name="energy home" x="154" y="188" width="106" height="50"/>
+    <SubTexture name="equipped button" x="437" y="128" width="143" height="57"/>
+    <SubTexture name="item back" x="817" y="2" width="162" height="156"/>
+    <SubTexture name="levwinpanel" x="402" y="646" width="468" height="326"/>
+    <SubTexture name="photo icon" x="962" y="160" width="44" height="38"/>
+    <SubTexture name="price coin" x="2" y="974" width="86" height="44"/>
+    <SubTexture name="price longer" x="727" y="128" width="63" height="44"/>
+    <SubTexture name="price star" x="262" y="188" width="86" height="44"/>
+    <SubTexture name="respect bar line" x="2" y="128" width="90" height="16"/>
+    <SubTexture name="respect bar" x="154" y="128" width="281" height="58"/>
+    <SubTexture name="scroll line element" x="811" y="118" width="4" height="70"/>
+    <SubTexture name="scroll" x="981" y="2" width="10" height="90"/>
+    <SubTexture name="shop back" x="2" y="240" width="398" height="559"/>
+    <SubTexture name="shop marker" x="872" y="474" width="127" height="70"/>
+    <SubTexture name="sound0001" x="872" y="766" width="105" height="120"/>
+    <SubTexture name="sound0002" x="872" y="644" width="105" height="120"/>
+    <SubTexture name="star0001" x="861" y="546" width="100" height="96"/>
+    <SubTexture name="star0002" x="759" y="546" width="100" height="96"/>
+    <SubTexture name="textureHP" x="794" y="118" width="15" height="44"/>
+    <SubTexture name="top cover" x="2" y="2" width="813" height="80"/>
+    <SubTexture name="unlock button" x="815" y="219" width="143" height="57"/>
+    <SubTexture name="wear button" x="817" y="160" width="143" height="57"/>
 </TextureAtlas>

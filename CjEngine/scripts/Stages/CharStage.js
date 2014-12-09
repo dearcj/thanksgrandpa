@@ -8,8 +8,7 @@ extend(CharStage, CustomStage);
 CharStage.prototype.onShow = function() {
     this.doProcess = false;
     CustomStage.prototype.onShow.call(this);
-
-    LevelManager.loadLevel("levchar", this.onShowContinue);
+//    LevelManager.loadLevel("levchar", this.onShowContinue);
 }
 
 CharStage.prototype.onHide = function(newStage) {
@@ -23,6 +22,7 @@ CharStage.prototype.onShowContinue = function()
     charStage.doProcess = true;
 
     CObj.getById("sellev").text = "Level 1";
+    if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
 
     CObj.getById("btnachs").click = function(){
@@ -31,6 +31,8 @@ CharStage.prototype.onShowContinue = function()
        SM.inst.openStage(achStage)
     };
     CObj.getById("btnfight").click = function(){SM.inst.openStage(gameStage)};
+
+
 }
 
 
