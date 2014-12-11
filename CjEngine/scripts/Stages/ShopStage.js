@@ -74,7 +74,7 @@ ShopStage.prototype.createItemBtn = function(item)
     var clickFunc;
 
     if (!owned) {
-        if (item.reqlvl > PlayerData.inst.playerItem.level) {
+        if (item.reqlvl > PlayerData.inst.playerItem.lvl) {
             clickFunc = unlockItem;
             btnName = "unlock button";
             tftext.text = "МИНИМУМ " + item.reqlvl.toString() + " УРОВЕНЬ";
@@ -210,8 +210,8 @@ ShopStage.prototype.updateBar = function(tab)
 ShopStage.prototype.updateStatsPanel = function()
 {
     CObj.getById("bar").gfx.width = 200;
-    CObj.getById("bar").prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.level];
-    CObj.getById("tflev").text = PlayerData.inst.playerItem.level.toString();
+    CObj.getById("bar").prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl];
+    CObj.getById("tflev").text = PlayerData.inst.playerItem.lvl.toString();
     if (!CObj.getById("bar").gfx.parent)
         SM.inst.fg.addChild(CObj.getById("bar").gfx);
 

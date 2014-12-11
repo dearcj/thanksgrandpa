@@ -68,10 +68,10 @@ PlayerData.prototype.equipItem = function(item)
 PlayerData.prototype.gainExp = function(amount)
 {
    this.playerItem.xp += amount;
-   if (this.playerItem.xp >= this.xpLevel[this.playerItem.level])
+   if (this.playerItem.xp >= this.xpLevel[this.playerItem.lvl])
    {
-      this.playerItem.xp -= this.playerItem.level[this.playerItem.level];
-      this.playerItem.level++;
+      this.playerItem.xp -= this.xpLevel[this.playerItem.lvl];
+      this.playerItem.lvl++;
    }
 }
 
