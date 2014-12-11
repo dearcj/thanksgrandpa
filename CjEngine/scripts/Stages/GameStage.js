@@ -59,7 +59,6 @@ GameStage.prototype.process = function()
     CObj.processAll();
 
     var d = Math.floor(LauncherBG.inst.distance);
-    console.log(d);
     gameStage.distText.text = d.toString();
     MM.inst.process();
 }
