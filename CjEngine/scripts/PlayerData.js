@@ -11,6 +11,7 @@ PlayerData = function(pi)
 
    }// else this.loadEnd();
 
+   this.score = 0;
    this.loadData(this.loadEnd);
 
    PlayerData.inst = this;
@@ -76,7 +77,7 @@ PlayerData.prototype.gainExp = function(amount)
 
 PlayerData.prototype.loadEnd = function()
 {
-   SM.inst.openStage(shopStage);
+   SM.inst.openStage(charStage);
 }
 
 PlayerData.prototype.loadData = function(cb)

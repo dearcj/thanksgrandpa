@@ -13,13 +13,16 @@ CPistol.prototype.shot = function()
 {
    var r = CWeapon.prototype.shot.call(this);
     if (!r) return;
-    var b = new CBullet(gameStage.player.x, gameStage.player.y, "bomb1");
+   var vx = Math.cos(gameStage.player.fireAngle);
+ var vy = Math.sin(gameStage.player.fireAngle);
+ var b = new CBullet(gameStage.player.x + vx * gameStage.player.bulletStart, gameStage.player.y + vy* gameStage.player.bulletStart, "bomb1");
     b.dmg = this.damage;
     b.gfx.scale.x = 0.3;
     b.gfx.scale.y = 0.3;
-    b.vx = Math.cos(gameStage.player.fireAngle)*30;
-    b.vy = Math.sin(gameStage.player.fireAngle)*30;
+    b.vx = vx*30;
+    b.vy = vy*30;
     b.colGroup = CG_BULLET;
     b.colMask = CG_MONSTER;
+  return r;
 }
 

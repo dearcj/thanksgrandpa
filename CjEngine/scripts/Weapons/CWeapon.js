@@ -65,8 +65,9 @@ CWeapon.prototype.shot = function()
 CWeapon.prototype.canShot = function()
 {
     var t = (new Date()).getTime();
-    if (t - this.lastShot >= this.delay) return true; else
+    if (this.state == this.sReload) return false;
 
+    if (t - this.lastShot >= this.delay) return true; else
     return false;
 }
 
@@ -81,7 +82,16 @@ CWeapon.prototype.updateAmmo = function()
 
 CWeapon.prototype.reload = function()
 {
-  TweenMax.delayedCall(this.reloadTime);
+    var wp = this;
+    wp.state = this.sReload;
+
+    new TweenMax(CObj.getById("ammobar"), this.reloadTime / 1000., {prop: 1});
+    TweenMax.delayedCall(this.reloadTime / 1000., function ()
+  {
+      wp.state = wp.sFire;
+      wp.ammo = wp.magCapacity;
+      wp.updateAmmo();
+  });
 }
 
 

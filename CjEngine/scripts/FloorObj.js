@@ -5,8 +5,10 @@ extend(FloorObj, CObj, true);
 
 function FloorObj(in_x,in_y,textname,in_body) {
     CObj.apply(this, [in_x, in_y, textname, in_body]);
-    this.gfx.parent.removeChild(this.gfx);
-    SM.inst.ol.addChildAt(this.gfx, 0);
+    if (this.gfx) {
+        this.gfx.parent.removeChild(this.gfx);
+        SM.inst.ol.addChildAt(this.gfx, 0);
+    }
 }
 
 FloorObj.prototype.process = function()

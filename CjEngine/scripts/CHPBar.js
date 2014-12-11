@@ -47,8 +47,11 @@ CHPBar.prototype.tweenProp = function(newProp)
 
 CHPBar.prototype.init = function()
 {
-    this.gfx.anchor.x = 0;
-    this.gfx.anchor.y = 0;
+    if (!this.gfx) this.gfx = new PIXI.DisplayObjectContainer(); else
+    {
+       this.gfx.anchor.x = 0;
+          this.gfx.anchor.y = 0;
+    }
     this.x -= this.gfx.width*0.5;
     if (!this.space) this.space = 0;
     if (this.upperImage)

@@ -46,7 +46,10 @@ Object.defineProperty(CButton.prototype, 'click', {
                 if (value)
                     value();
             }
-
+            if (this.postCreatedContainer) {
+                this.textField.tap = btnclick;
+                this.textField.click = btnclick;
+            }
             this.gfx.tap = btnclick;
             this.gfx.click = btnclick;
         }
@@ -102,12 +105,15 @@ CButton.prototype.init = function(){
     if (!this.gfx)
     {
         this.gfx = new PIXI.DisplayObjectContainer();
+        this.postCreatedContainer = true;
         this.updateGraphics();
     }
     this.gfx.interactive = true;
     this.align = "center";
     this.fontSize = parseInt(this.fontSize);
     this.textField = CTextField.createTextField(this);
+    if  (this.postCreatedContainer)
+    this.textField.interactive = true;
     //this.getText();
     if (this.text)
     this.text = this.text.toUpperCase();

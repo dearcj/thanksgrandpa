@@ -8,7 +8,7 @@ var w_pistol = new CPistol(
     "описание", //desc
     {recoil: 12, //recoil
     magcap: 20, //magcap
-    delay: 1200, //delay
+    delay: 420, //delay
     damage: 100, //damage
     unlockprice: 10, //unlockprice
     reloadTime: 1200},//__reloadTime,}

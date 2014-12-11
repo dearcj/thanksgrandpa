@@ -17,6 +17,7 @@ Object.defineProperty(CTextField.prototype, 'text', {
         return this._text;
     },
     set: function (value) {
+
         this._text = value.toUpperCase();
         if (this.gfx) {
             this.gfx.text = value;

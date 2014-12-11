@@ -30,7 +30,7 @@ MM.inst = new MM();
 
 MM.prototype.spawnSimpleMonster = function()
 {
-    var m = new CMonster(SCR_WIDTH+100,300,"mister chicken");
+    var m = new CMonster(SCR_WIDTH+100,300,"enemy fat");
     m.longJump();
 
     this.lastSpawnSimple =(new Date()).getTime();

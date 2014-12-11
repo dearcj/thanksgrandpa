@@ -26,6 +26,27 @@ Object.defineProperty(GameStage.prototype, 'worldSpeed', {
     }
 });
 
+GameStage.prototype.createCircle = function(w, x, y, r)
+{
+    var s = new PIXI.Graphics();
+
+    var n = 100;
+    var d = Math.PI * 2 / n;
+    var a = 0;
+    var xn; var yn;
+    s.moveTo(0, 0)
+    for (var i = 0; i < n; ++i)
+    {
+        xn = x + Math.cos(a)*r;
+        yn = y + Math.sin(a)*r;
+        a += d;
+        s.lineTo(xn, yn);
+        s.moveTo(xn, yn)
+    }
+    return s;
+}
+
+
 GameStage.prototype.process = function()
 {
     if (this.doPhys)
@@ -37,7 +58,9 @@ GameStage.prototype.process = function()
     }
     CObj.processAll();
 
-    gameStage.distText.text = LauncherBG.inst.distance;
+    var d = Math.floor(LauncherBG.inst.distance);
+    console.log(d);
+    gameStage.distText.text = d.toString();
     MM.inst.process();
 }
 
@@ -224,9 +247,10 @@ GameStage.prototype.onShow = function() {
     LevelManager.loadLevel("hud", gameStage.onLoadEnd, SM.inst.guiLayer);
 
 
-    LauncherBG.inst.addLevel("plantPart1");
+    LauncherBG.inst.addLevel("plantPart2");
     for (var i =0; i < 2500; ++i)
     LauncherBG.inst.process();
+    LauncherBG.inst.distance = 0;
     CObj.objects.push(LauncherBG.inst);
 
     MM.inst.monsterQueue = MM.inst.levels[0];
@@ -314,12 +338,16 @@ GameStage.prototype.onLoadEnd = function()
     gameStage.stepSize = gameStage.invFR;
     gameStage.doPhys = true;
  //   CObj.getById("level").getText();
-    CObj.getById("level").text = "УРОВЕНЬ " + gameStage.currentLevel.toString();
+  //  CObj.getById("level").text = "УРОВЕНЬ " + gameStage.currentLevel.toString();
 
-    var floorHeight = 150;
+    var xxx = gameStage.createCircle(20, 100, 100, 100);
+    SM.inst.guiLayer.addChild(xxx);
+
+    var floorHeight = 120;
     gameStage.floor = new FloorObj(SCR_WIDTH / 2, SCR_HEIGHT - floorHeight / 2, "brickbig");
     gameStage.floor.gfx.width = SCR_WIDTH;
     gameStage.floor.gfx.height = floorHeight;
+    gameStage.floor.gfx.visible = false;
     gameStage.player = new CPlayer(100, gameStage.floor.y -floorHeight / 2 - 50,"tomatogood");
     SM.inst.fg.addChild( gameStage.player.gfx);
 
@@ -359,12 +387,6 @@ GameStage.prototype.onLoadEnd = function()
 
     CObj.getById("levels").click = function () {
         SM.inst.openStage(levSel);
-    }
-
-    stage.touchmove = function (mouseData)
-    {
-        if (gameStage.player)
-        gameStage.player.fireAngle = Math.PI + Math.atan2(gameStage.player.gfx.y - mouseData.global.y/SCR_SCALE, gameStage.player.gfx.x - mouseData.global.x/SCR_SCALE);
     }
 
 

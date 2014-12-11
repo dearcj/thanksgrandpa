@@ -143,7 +143,7 @@ CObj.prototype.init = function(){
                 CObj.objects[j].body.shapes[i].collisionGroup = world.cgDYNAMIC;
             }
 
-            world.step(1/ 10000000);
+           // world.step(1/ 10000000);
             if (this.body.overlaps(CObj.objects[j].body))
             {
                 this.connected.push(CObj.objects[j]);
@@ -410,6 +410,15 @@ Object.defineProperty(CObj.prototype, 'rotation', {
     }
 });
 
+CObj.SORT_LAYERS = function(a, b)
+{
+    if (a.layer == b.layer) {
+        //return 0;
+        if (a.creationIndex < b.creationIndex) return -1; else return 1;
+    }
+    else if (a.layer < b.layer) return -1; else return 1
+}
+
 CObj.DeserializeArray = function(data){
 var count = data.objects.length;
 var objs = [];
@@ -419,6 +428,9 @@ var objs = [];
         }
     objs.push(CObj.DeserializeCObj(data.objects[i]));
    }
+   objs = objs.sort(CObj.SORT_LAYERS);
+
+
     return objs;
 }
 

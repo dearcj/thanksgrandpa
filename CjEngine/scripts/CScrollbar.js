@@ -5,7 +5,7 @@
 extend(CScrollbar, CObj, true);
 
 //pos = 0...ph
-Object.defineProperty(CObj.prototype, 'pos', {
+Object.defineProperty(CScrollbar.prototype, 'pos', {
     get: function () {
         return this._pos;
     },
@@ -25,13 +25,19 @@ Object.defineProperty(CObj.prototype, 'pos', {
 
 CScrollbar.prototype.destroy = function()
 {
-    CObj.prototype._destroy.call(this);
+    this.toucher.mousedown = null;
+    this.toucher.mouseup = null;
+    this.toucher.mousemove = null;
+    this.toucher.mouseupoutside = null;
     this.toucher.scrollbar = null;
     this.toucher = null;
+    this.bar.mousedown = null;
     this.bar.scrollbar = null;
     this.bar = null;
     this.container = null;
     this.sbMask = null;
+
+    CObj.prototype.destroy.call(this);
 }
 
 
@@ -87,6 +93,7 @@ function CScrollbar(in_x,in_y,textname,ww, hh) {
     this.toucher.interactive = true;
     this.toucher.scrollbar = this;
 
+
     this.toucher.mousedown = function(a)
     {
         this.pressed = true;
@@ -100,7 +107,7 @@ function CScrollbar(in_x,in_y,textname,ww, hh) {
 
     this.toucher.mousemove = function(a)
     {
-        if (this.pressed)
+        if (this.pressed && this.scrollbar)
         {
             this.scrollbar.pos = a.global.y / SCR_SCALE - this.scrollbar.y + this.scrollbar.ph / 2;
         }

@@ -7,7 +7,7 @@ LauncherBG = function(in_x,in_y,textname,in_body) {
     this.levCycles = [];
     this.gfx = new PIXI.DisplayObjectContainer();
     SM.inst.bg.addChild(this.gfx);
-    this.y = -70;
+  //  this.y = -70;
     var inx = CObj.objects.indexOf(this);
     CObj.objects.splice(inx);
     this.distance = 0;
@@ -55,7 +55,7 @@ LauncherBG.prototype.process = function()
 {
     CObj.prototype.process.call(this);
 
-    this.distance += this.levCycles[0].velocity;
+    this.distance += this.levCycles[0].layers[0].velocity;
     for (var i = 0; i < this.levCycles[0].layers.length; ++i)
     {
         var l = this.levCycles[0].layers[i];

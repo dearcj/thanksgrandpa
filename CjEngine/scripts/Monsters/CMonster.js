@@ -44,7 +44,7 @@ CMonster.prototype.kill = function()
 {
     for (var i = 0; i < 5; ++i)
     {
-        var c = new CCoin(this.x, this.y, "coin0016")
+        var c = new CCoin(this.x, this.y, "coin")
         c.vx = 20*(Math.random() - 0.5);
         c.vy = -20*(Math.random());
     }

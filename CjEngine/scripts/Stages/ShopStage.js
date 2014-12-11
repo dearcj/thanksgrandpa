@@ -191,10 +191,6 @@ ShopStage.prototype.updateBar = function(tab)
     CObj.getById("tabsheet").x = CObj.getById(tab).x;
 
 
-    CObj.getById("tfmoney").text = PlayerData.inst.playerItem.money.toString();
-    CObj.getById("tfcry").text = PlayerData.inst.playerItem.crystals.toString();
-    CObj.getById("tfenergy").text = PlayerData.inst.playerItem.energy.toString();
-
     for (var i = 0; i < this.bar.container.children.length; ++i)
     {
         this.bar.container.children[i].destroy();
@@ -211,17 +207,36 @@ ShopStage.prototype.updateBar = function(tab)
     }
 }
 
+ShopStage.prototype.updateStatsPanel = function()
+{
+    CObj.getById("bar").gfx.width = 200;
+    CObj.getById("bar").prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.level];
+    CObj.getById("tflev").text = PlayerData.inst.playerItem.level.toString();
+    if (!CObj.getById("bar").gfx.parent)
+        SM.inst.fg.addChild(CObj.getById("bar").gfx);
+
+    CObj.getById("tfmoney").text = PlayerData.inst.playerItem.money.toString();
+    CObj.getById("tfcry").text = PlayerData.inst.playerItem.crystals.toString();
+    CObj.getById("tfenergy").text = PlayerData.inst.playerItem.energy.toString();
+}
+
 ShopStage.prototype.onShowContinue = function()
 {
     CustomStage.prototype.onShow.call(this);
     shopStage.bar = new CScrollbar(610,339, "", 380, 524);
+
+    shopStage.updateStatsPanel();
+
+    CObj.getById("bback").click = function() {
+        SM.inst.openStage(charStage);
+    }
 
 
     CObj.getById("bstuff").click = function() {
         shopStage.updateBar("bstuff");
     }
     CObj.getById("bweap").click = function() {
-        shopStage.updateBar("bstuff");
+        shopStage.updateBar("bweap");
     }
 
     CObj.getById("bcloth").click = function () {
