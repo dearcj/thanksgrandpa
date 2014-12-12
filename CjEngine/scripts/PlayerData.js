@@ -11,6 +11,7 @@ PlayerData = function(pi)
 
    }// else this.loadEnd();
 
+
    this.score = 0;
    this.loadData(this.loadEnd);
 
@@ -83,13 +84,15 @@ PlayerData.prototype.loadEnd = function()
 PlayerData.prototype.loadData = function(cb)
 {
    this.loadCount = 0;
+
+   var totalLoads = 5;
    window.azureclient.getTable("tb_players").read().done(
    function (results) {
       PlayerData.inst.playerItem = results[0];
       if (!PlayerData.inst.playerItem.crystals)
          PlayerData.inst.playerItem.crystals = 0;
       PlayerData.inst.loadCount ++;
-      if (PlayerData.inst.loadCount == 3 && cb) cb();
+      if (PlayerData.inst.loadCount == totalLoads && cb) cb();
       }, function (res) {}
    );
 
@@ -97,7 +100,7 @@ PlayerData.prototype.loadData = function(cb)
        function (results) {
           PlayerData.inst.items = results;
           PlayerData.inst.loadCount ++;
-          if (PlayerData.inst.loadCount == 3 && cb) cb();
+          if (PlayerData.inst.loadCount == totalLoads && cb) cb();
        }, function (res) {}
    );
 
@@ -105,7 +108,23 @@ PlayerData.prototype.loadData = function(cb)
        function (results) {
           PlayerData.inst.items_enabled = results;
           PlayerData.inst.loadCount ++;
-          if (PlayerData.inst.loadCount == 3 && cb) cb();
+          if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+       }, function (res) {}
+   );
+
+   window.azureclient.getTable("tb_edevent_player").read().done(
+       function (results) {
+          PlayerData.inst.eventsplayer = results;
+          PlayerData.inst.loadCount ++;
+          if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+       }, function (res) {}
+   );
+
+   window.azureclient.getTable("tb_edevent").read().done(
+       function (results) {
+          PlayerData.inst.events = results;
+          PlayerData.inst.loadCount ++;
+          if (PlayerData.inst.loadCount == totalLoads && cb) cb();
        }, function (res) {}
    );
 
@@ -118,6 +137,24 @@ PlayerData.prototype.loadData = function(cb)
 */
 
 }
+
+PlayerData.prototype.savePlayerData = function()
+{
+   this.savePlayerData();
+   this.savePlayerItems();
+   this.savePlayerEvents();
+}
+
+PlayerData.prototype.savePlayerEvents = function()
+{
+   for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i)
+      window.azureclient.getTable("tb_edevent_player").update(PlayerData.inst.eventsplayer[i]).done(function (result) {
+         alert("updating done");
+      }, function (err) {
+         alert("Error: " + err);
+      });
+}
+
 
 PlayerData.prototype.savePlayerItems = function()
 {

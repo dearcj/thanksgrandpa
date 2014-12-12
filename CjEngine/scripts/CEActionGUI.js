@@ -59,11 +59,15 @@ CEActionGUI.prototype.destroy = function()
 {
     this.progressbg = null;
     this.progressfore = null;
+    this.event = null;
+    this.eventpl = null;
     CObj.prototype.destroy.call(this);
 }
 
 
-CEActionGUI.prototype.init = function()
+
+
+CEActionGUI.prototype.init = function(pledevent)
 {
     this.gfx = new PIXI.Sprite(PIXI.Texture.fromFrame("action bg.png"));
     this.progressbg = new PIXI.Sprite(PIXI.Texture.fromFrame("progress bg.png"));
@@ -82,4 +86,41 @@ CEActionGUI.prototype.init = function()
     this.pos = 0.;
     new TweenMax(this, 5, {pos: 1, yoyo: true,repeat: -1});
     this.updateGraphics();
+
+    var id = pledevent.id_edevent;
+    for (var i = 0; i < PlayerData.inst.events.length; ++i) {if (PlayerData.inst.events[i].id == id) break;}
+
+
+    this.eventpl = pledevent;
+    this.event = PlayerData.inst.events[i];
+
+    var edeventgui = this;
+    this.onclick = function()
+    {
+        if (edeventgui.pos >= 1)
+        {
+            edeventgui.eventpl.lastused = new Date();
+            if (edeventgui.event.gain_money)
+            PlayerData.inst.playerItem.money += edeventgui.event.gain_money;
+            if (edeventgui.event.gain_xp)
+            PlayerData.inst.playerItem.xp += edeventgui.event.gain_xp;
+            PlayerData.inst.savePlayerEvents();
+            PlayerData.inst.savePlayerData();
+            shopStage.updateStatsPanel();
+        }
+    }
+
+    this.progressbg.interactive = true;
+    this.progressbg.click = this.onclick;
+    this.progressbg.tap = this.onclick;
+    if (this.eventpl.lastused == null)
+    {
+        this.pos = 1;
+    }
+
+    var tf = CTextField.createTextField({text: PlayerData.inst.events[i].name.toUpperCase(), fontSize: 22, align: "center"});
+    tf.x = -tf.width / 2;
+    tf.y = 40;
+    //tf.al
+    this.gfx.addChild(tf);
 }

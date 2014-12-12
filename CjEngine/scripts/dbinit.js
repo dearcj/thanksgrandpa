@@ -14,6 +14,29 @@ function checkDb ()
 
 var dbobj =
 [
+
+
+    {
+        tbname: "tb_edevent",
+        items:
+            [
+                {
+                    name: "Накатить за победу",
+                    desc: "",
+                    delay_min: 30,
+                    xp_gain: 10,
+                    money_gain: 0
+                },
+                {
+                    name: "Получить пенсию",
+                    desc: "desc 2",
+                    delay_min: 2,
+                    xp_gain: 0,
+                    money_gain: 1000
+                }
+            ]
+
+    },
     {
         tbname: "tb_achs",
         items:
@@ -78,10 +101,16 @@ function updDb(o, onlyRead)
             var s = o[i].items[j];
             function xx(someobj, table)
             {
+                var whereobj;
+                    if (o[i].items[j].id)
+                    whereobj ={
+                        id: o[i].items[j].id
+                    }; else
+                whereobj ={
+                    name: o[i].items[j].name
+                };
 
-                table.where({
-                name: o[i].items[j].name
-            }).read().done(function(results)
+                table.where(whereobj).read().done(function(results)
             {
                 if (results.length > 0) {
                     someobj.id = results[0].id;

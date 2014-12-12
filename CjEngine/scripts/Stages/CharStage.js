@@ -23,9 +23,18 @@ CharStage.prototype.onShowContinue = function()
 
     shopStage.updateStatsPanel();
 
-    var o = new CEActionGUI(200, 200);
-    o.init();
-    SM.inst.fg.addChild(o.gfx);
+    var cx = 300;
+    var cy = 400;
+    var rad = 150;
+    var da = Math.PI * 2 / PlayerData.inst.eventsplayer.length;
+    var angle = 0;
+    for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
+        var o = new CEActionGUI(cx + Math.cos(angle)*rad, cy  + Math.sin(angle)*rad);
+        o.init(PlayerData.inst.eventsplayer[i]);
+        SM.inst.fg.addChild(o.gfx);
+        angle += da;
+    }
+
     CObj.getById("sellev").text = "Level 1";
     if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
@@ -43,7 +52,7 @@ CharStage.prototype.onShowContinue = function()
     CObj.getById("btnfight").click = function(){SM.inst.openStage(gameStage)};
 
     var pl = new CPlayer(300, 400);
-    SM.inst.fg.addChild(pl.gfx);
+    SM.inst.ol.addChild(pl.gfx);
 
 }
 
