@@ -23,7 +23,7 @@ var dbobj =
                 {
                     name: "Накатить за победу",
                     desc: "",
-                    delay_min: 30,
+                    delay_min: 2,
                     xp_gain: 10,
                     money_gain: 0
                 },

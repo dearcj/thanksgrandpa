@@ -9,7 +9,14 @@ getURLParameter = function (name) {
 
 loginCallback = function(playerItem)
 {
+
+    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000}, function(data) {
+        vkparams.friends = data.response[0];
+    })
+
     if (vkparams.novk) new PlayerData(playerItem); else;
+
+
 
     VK.api('users.get',{user_ids:vkparams.viewerid.toString()}, function(data) {
         vkparams.first_name = data.response[0].first_name;
@@ -67,6 +74,8 @@ dbInit = function() {
       //  azureclient.login(results.result.userId, results.result.token);
     //    loginCallback();
     });
+
+
 
 
     /*

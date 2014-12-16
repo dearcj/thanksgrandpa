@@ -33,7 +33,7 @@ Object.defineProperty(CHPBar.prototype, 'prop', {
         if (this.tile)
         w = Math.round(w / this.upperImageClip.texture.width + 1) * this.upperImageClip.texture.width;
         this.upperImageClip.width = w;
-        this.upperImageClip.x = this.space;
+        this.upperImageClip.x = 0;///parseInt(this.space);
         this.upperImageClip.y = 0;
     }
     }

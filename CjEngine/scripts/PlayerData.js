@@ -89,6 +89,10 @@ PlayerData.prototype.loadData = function(cb)
    window.azureclient.getTable("tb_players").read().done(
    function (results) {
       PlayerData.inst.playerItem = results[0];
+
+      PlayerData.inst.playerItem.name = vkparams.first_name;
+      PlayerData.inst.playerItem.last_name = vkparams.last_name;
+
       if (!PlayerData.inst.playerItem.crystals)
          PlayerData.inst.playerItem.crystals = 0;
       PlayerData.inst.loadCount ++;
@@ -96,7 +100,7 @@ PlayerData.prototype.loadData = function(cb)
       }, function (res) {}
    );
 
-   window.azureclient.getTable("tb_items").read().done(
+       window.azureclient.getTable("tb_items").read().done(
        function (results) {
           PlayerData.inst.items = results;
           PlayerData.inst.loadCount ++;
@@ -149,9 +153,9 @@ PlayerData.prototype.savePlayerEvents = function()
 {
    for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i)
       window.azureclient.getTable("tb_edevent_player").update(PlayerData.inst.eventsplayer[i]).done(function (result) {
-         alert("updating done");
+      //   alert("updating done");
       }, function (err) {
-         alert("Error: " + err);
+      //   alert("Error: " + err);
       });
 }
 
@@ -160,9 +164,9 @@ PlayerData.prototype.savePlayerItems = function()
 {
    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
    window.azureclient.getTable("tb_item_player").update(PlayerData.inst.items_enabled[i]).done(function (result) {
-      alert("updating done");
+   //   alert("updating done");
    }, function (err) {
-      alert("Error: " + err);
+   //   alert("Error: " + err);
    });
 }
 
@@ -171,8 +175,8 @@ PlayerData.prototype.savePlayerData = function()
 {
    window.azureclient.getTable("tb_players").update(PlayerData.inst.playerItem).done(function (result) {
       PlayerData.inst.playerItem = result;
-      alert("updating done");
+   //   alert("updating done");
    }, function (err) {
-      alert("Error: " + err);
+   //   alert("Error: " + err);
    });
 }

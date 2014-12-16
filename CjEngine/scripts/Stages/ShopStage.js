@@ -134,11 +134,9 @@ ShopStage.prototype.createItemBtn = function(item)
 
 
             }
-            if (buyitem.pricecrys> 0 && PlayerData.inst.playerItem.crystals >= buyitem.pricecrys)
-            {
+            if (buyitem.pricecrys> 0 && PlayerData.inst.playerItem.crystals >= buyitem.pricecrys) {
                 PlayerData.inst.playerItem.crystals -= buyitem.pricecrys;
             }
-            console.log();
         }
         g.addChild(btn.gfx);
     if (btn.text)
@@ -207,17 +205,18 @@ ShopStage.prototype.updateBar = function(tab)
     }
 }
 
-ShopStage.prototype.updateStatsPanel = function()
-{
-    CObj.getById("bar").gfx.width = 200;
-    CObj.getById("bar").prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl];
+ShopStage.prototype.updateStatsPanel = function() {
+    var b = CObj.getById("bar");
+    b.gfx.width = 200;
+    b.prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl];
     CObj.getById("tflev").text = PlayerData.inst.playerItem.lvl.toString();
-    if (!CObj.getById("bar").gfx.parent)
-        SM.inst.fg.addChild(CObj.getById("bar").gfx);
-
+    if (!CObj.getById("bar").gfx.parent) {
+             SM.inst.fg.addChild(CObj.getById("bar").gfx);
+        }
     CObj.getById("tfmoney").text = PlayerData.inst.playerItem.money.toString();
     CObj.getById("tfcry").text = PlayerData.inst.playerItem.crystals.toString();
     CObj.getById("tfenergy").text = PlayerData.inst.playerItem.energy.toString();
+
 }
 
 ShopStage.prototype.onShowContinue = function()

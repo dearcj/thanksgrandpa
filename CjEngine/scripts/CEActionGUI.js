@@ -65,11 +65,93 @@ CEActionGUI.prototype.destroy = function()
 }
 
 
+CEActionGUI.prototype.process= function()
+{
+    this.updateRecharge();
+    CObj.prototype.process.call(this);
+}
 
+CEActionGUI.prototype.startAction = function()
+{
+
+
+    this.acting = true;
+    var b = new PIXI.BlurFilter();
+    b.blur = 20;
+    SM.inst.ol.filters = [b];
+    this.progressbg.visible = true;
+    this.progressfore.visible = true;
+    this.pos = 0;
+    new TweenMax(this, 5, {pos: 1, onComplete: this.endAction, onCompleteParams: [this]});
+}
+
+CEActionGUI.prototype.endAction = function(p)
+{
+    p.progressbg.visible = false;
+    p.progressfore.visible = false;
+
+    p.eventpl.lastused = new Date();
+    if (p.event.money_gain)
+        PlayerData.inst.playerItem.money += p.event.money_gain;
+    if (p.event.xp_gain)
+        PlayerData.inst.playerItem.xp += p.event.xp_gain;
+
+    if (p.event.crystal_gain)
+        PlayerData.inst.playerItem.xp += p.event.crystal_gain;
+
+    PlayerData.inst.savePlayerEvents();
+    PlayerData.inst.savePlayerData();
+
+
+
+//    PlayerData.inst.playerItem.xp+=10;
+    shopStage.updateStatsPanel();
+
+    p.acting = false;
+}
+
+
+CEActionGUI.prototype.updateRecharge= function()
+{
+    if (!this.eventpl) return;
+    if (!this.eventpl.lastused) return;
+    var nd = new Date();
+    var offs = this.eventpl.lastused.getTimezoneOffset();
+    var d = nd.getTime() -this.eventpl.lastused.getTime();
+    d = this.event.delay_min*60*1000 - d;
+
+
+    d /= 1000;
+
+    var h = Math.floor(d / 3600);
+
+    d = d % 3600;
+
+    var m = Math.floor(d / 60);
+
+    d =d % 60;
+
+    var s = Math.floor(d % 60);
+
+    if (d < 0) {
+        str = "ГОТОВО";
+        this.ready = true;
+    }else {
+        var str = "ДОСТУПНО ЧЕРЕЗ " + '\n' + (h < 10 ? "0" + h : h) + " : " + (m < 10 ? "0" +m : m) + " : " + (s < 10 ? "0" + s : s);
+        this.ready = false;
+    }
+    this.timeleft.text = str;
+    this.timeleft.updateText();
+}
 
 CEActionGUI.prototype.init = function(pledevent)
 {
     this.gfx = new PIXI.Sprite(PIXI.Texture.fromFrame("action bg.png"));
+
+    this.icoevent =  new PIXI.Sprite(PIXI.Texture.fromFrame("action.png"));
+    this.icoevent.anchor.x = 0.5;
+    this.icoevent.anchor.y = 0.5;
+
     this.progressbg = new PIXI.Sprite(PIXI.Texture.fromFrame("progress bg.png"));
     this.progressbg.anchor.x = 0.5;
     this.progressbg.anchor.y = 0.5;
@@ -79,12 +161,12 @@ CEActionGUI.prototype.init = function(pledevent)
     this.mask = new PIXI.Graphics();
     this.gfx.addChild(this.progressbg);
     this.gfx.addChild(this.progressfore);
+    this.gfx.addChild(this.icoevent);
     this.gfx.addChild(this.mask);
     this.gfx.anchor.x = 0.5;
     this.gfx.anchor.y = 0.5;
     this.progressfore.mask = this.mask;
     this.pos = 0.;
-    new TweenMax(this, 5, {pos: 1, yoyo: true,repeat: -1});
     this.updateGraphics();
 
     var id = pledevent.id_edevent;
@@ -94,19 +176,49 @@ CEActionGUI.prototype.init = function(pledevent)
     this.eventpl = pledevent;
     this.event = PlayerData.inst.events[i];
 
-    var edeventgui = this;
-    this.onclick = function()
+    var gain = 0;
+    var gainbg = "";
+    if (this.event.xp_gain > 0)
     {
-        if (edeventgui.pos >= 1)
+        gain = this.event.xp_gain;
+        gainbg = "price star.png";
+    }
+    if (this.event.money_gain > 0)
+    {
+        gain = this.event.money_gain;
+        gainbg = "price coin.png";
+    }
+    if (this.event.crystal_gain > 0)
+    {
+        gain = this.event.crystal_gain;
+        gainbg = "price star.png";
+    }
+
+    var gainbgsprite = new PIXI.Sprite(PIXI.Texture.fromFrame(gainbg));
+    gainbgsprite.anchor.x = 0.5;
+    gainbgsprite.anchor.y = 0.5;
+
+    gainbgsprite.y = 80;
+    this.gfx.addChild(gainbgsprite);
+
+    this.timeleft = CTextField.createTextField({text: "ОСТАЛОСЬ 200 МИНУТ", fontSize: 22, align: "center"});
+    this.timeleft.x = 50;
+    this.timeleft.y = -20;
+    this.gfx.addChild(this.timeleft);
+
+
+    var tf = CTextField.createTextField({text: gain.toString(), fontSize: 22, align: "center"});
+    tf.x = 4;
+    tf.y = 70;
+    this.gfx.addChild(tf);
+
+    var edeventgui = this;
+    this.gfx.interactive = true;
+    this.gfx.click = function()
+    {
+        if (edeventgui.ready)
         {
-            edeventgui.eventpl.lastused = new Date();
-            if (edeventgui.event.gain_money)
-            PlayerData.inst.playerItem.money += edeventgui.event.gain_money;
-            if (edeventgui.event.gain_xp)
-            PlayerData.inst.playerItem.xp += edeventgui.event.gain_xp;
-            PlayerData.inst.savePlayerEvents();
-            PlayerData.inst.savePlayerData();
-            shopStage.updateStatsPanel();
+            edeventgui.startAction();
         }
     }
 
@@ -119,8 +231,13 @@ CEActionGUI.prototype.init = function(pledevent)
     }
 
     var tf = CTextField.createTextField({text: PlayerData.inst.events[i].name.toUpperCase(), fontSize: 22, align: "center"});
-    tf.x = -tf.width / 2;
-    tf.y = 40;
+    tf.x = 50;//-tf.width / 2;
+    tf.y = -45;
     //tf.al
     this.gfx.addChild(tf);
+
+    this.progressbg.visible = false;
+    this.progressfore.visible = false;
+
+    this.updateRecharge();
 }

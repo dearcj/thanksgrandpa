@@ -26,6 +26,33 @@ Object.defineProperty(GameStage.prototype, 'worldSpeed', {
     }
 });
 
+
+GameStage.prototype.createHPBar = function( x, y, max)
+{
+    var bar = new CObj(x,y);
+    var t = PIXI.Texture.fromFrame("health dead.png");
+
+    bar.gfx = new PIXI.DisplayObjectContainer();
+    var lower = new PIXI.TilingSprite(t, t.width, t.height);
+    bar.id = "hpbar";
+    lower.width = max * t.width;
+    bar.gfx.addChild(lower);
+    bar.updateGraphics();
+
+    var tupper = PIXI.Texture.fromFrame("health.png");
+    var upperBar = new PIXI.TilingSprite(tupper, tupper.width, tupper.height);
+     upperBar.width = max * tupper.width;
+    bar.gfx.addChild(upperBar);
+
+    SM.inst.fg.addChild(bar.gfx);
+
+    bar.tweenProp = function (ratio)
+    {
+        bar.gfx.getChildAt(1).width = bar.gfx.getChildAt(1).texture.width*ratio*max;
+    }
+}
+
+
 GameStage.prototype.createCircle = function(w, x, y, r)
 {
     var s = new PIXI.Graphics();
@@ -347,7 +374,10 @@ GameStage.prototype.onLoadEnd = function()
     gameStage.floor.gfx.width = SCR_WIDTH;
     gameStage.floor.gfx.height = floorHeight;
     gameStage.floor.gfx.visible = false;
-    gameStage.player = new CPlayer(100, gameStage.floor.y -floorHeight / 2 - 50,"tomatogood");
+
+    gameStage.createHPBar(100, 100, 5);
+
+    gameStage.player = new CPlayer(100, gameStage.floor.y -floorHeight / 2 - 50,"");
     SM.inst.fg.addChild( gameStage.player.gfx);
 
     gameStage.scoreObj = CObj.getById("score");
@@ -379,7 +409,6 @@ GameStage.prototype.onLoadEnd = function()
         TweenMax.killTweensOf(menuBtn, true);
         LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.guiLayer);
     }
-
 
     CObj.getById("timeout").gfx.visible = false;
     CObj.getById("timeout").text = "";

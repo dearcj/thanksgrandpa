@@ -35,13 +35,17 @@ CharStage.prototype.onShowContinue = function()
         angle += da;
     }
 
-    CObj.getById("sellev").text = "Level 1";
-    if (vkparams.first_name)
+     if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
 
     CObj.getById("bshop").click = function() {
         SM.inst.openStage(shopStage);
     }
+    CObj.getById("bscore").click = function(){
+
+
+        SM.inst.openStage(scoreStage)
+    };
 
 
         CObj.getById("btnachs").click = function(){
