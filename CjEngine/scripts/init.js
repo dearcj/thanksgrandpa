@@ -11,7 +11,19 @@ loginCallback = function(playerItem)
 {
 
     VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000}, function(data) {
-        vkparams.friends = data.response[0];
+        vkparams.friends = data.response.items;
+        azureclient.invokeApi("get_scores", {
+            body: {filter: vkparams.friends},
+            method: "post"
+        }).done(function (results) {
+            var message = results.result;
+
+            loginCallback(results.result);
+        }, function(error) {
+            //  azureclient.login(results.result.userId, results.result.token);
+            //    loginCallback();
+        });
+
     })
 
     if (vkparams.novk) new PlayerData(playerItem); else;
