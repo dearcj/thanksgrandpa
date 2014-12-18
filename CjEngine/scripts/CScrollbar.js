@@ -73,7 +73,7 @@ CScrollbar.prototype.onWheel = function(e)
     this.pos += e.deltaY / 3;
 }
 
-function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrolltoucher) {
+function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrolltoucher, dw) {
 
     var bgpanel = "shop back";
     if (clipbg) bgpanel= clipbg;
@@ -84,6 +84,7 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
 
     this.pw = ww;
     this.ph = hh;
+    if (!dw) dw = 0;
 //    this.gfx.width = this.pw;
  //   this.gfx.height = this.ph;
 
@@ -107,9 +108,9 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
         obj.mover = false;
     }
 
-    this.bg = new PIXI.Sprite(PIXI.Texture.fromFrame("shop back.png"));
-    this.bg.width = this.pw;
-    this.bg.height = this.ph;
+    this.bg = new PIXI.Sprite(PIXI.Texture.fromFrame(bgpanel));
+    this.bg.width = this.pw + dw;
+    this.bg.height = this.ph + dw;
     this.bg.anchor.x = 0.5;
     this.bg.anchor.y = 0.5;
     this.gfx.addChild(this.bg);

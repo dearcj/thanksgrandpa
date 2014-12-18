@@ -114,25 +114,27 @@ CEActionGUI.prototype.endAction = function(p)
 CEActionGUI.prototype.updateRecharge= function()
 {
     if (!this.eventpl) return;
-    if (!this.eventpl.lastused) return;
-    var nd = new Date();
-    var offs = this.eventpl.lastused.getTimezoneOffset();
-    var d = nd.getTime() -this.eventpl.lastused.getTime();
-    d = this.event.delay_min*60*1000 - d;
+    if (!this.eventpl.lastused) d = -10000;
+    else {
+        var nd = new Date();
+        var offs = this.eventpl.lastused.getTimezoneOffset();
+
+        var d = nd.getTime() - this.eventpl.lastused.getTime();
+        d = this.event.delay_min * 60 * 1000 - d;
 
 
-    d /= 1000;
+        d /= 1000;
 
-    var h = Math.floor(d / 3600);
+        var h = Math.floor(d / 3600);
 
-    d = d % 3600;
+        d = d % 3600;
 
-    var m = Math.floor(d / 60);
+        var m = Math.floor(d / 60);
 
-    d =d % 60;
+        d = d % 60;
 
-    var s = Math.floor(d % 60);
-
+        var s = Math.floor(d % 60);
+    }
     if (d < 0) {
         str = "ГОТОВО";
         this.ready = true;
@@ -198,7 +200,7 @@ CEActionGUI.prototype.init = function(pledevent)
     gainbgsprite.anchor.x = 0.5;
     gainbgsprite.anchor.y = 0.5;
 
-    gainbgsprite.y = 80;
+    gainbgsprite.y = 72;
     this.gfx.addChild(gainbgsprite);
 
     this.timeleft = CTextField.createTextField({text: "ОСТАЛОСЬ 200 МИНУТ", fontSize: 22, align: "center"});
@@ -209,7 +211,7 @@ CEActionGUI.prototype.init = function(pledevent)
 
     var tf = CTextField.createTextField({text: gain.toString(), fontSize: 22, align: "center"});
     tf.x = 4;
-    tf.y = 70;
+    tf.y = 60;
     this.gfx.addChild(tf);
 
     var edeventgui = this;

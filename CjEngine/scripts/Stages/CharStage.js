@@ -23,17 +23,7 @@ CharStage.prototype.onShowContinue = function()
 
     shopStage.updateStatsPanel();
 
-    var cx = 300;
-    var cy = 400;
-    var rad = 150;
-    var da = Math.PI * 2 / PlayerData.inst.eventsplayer.length;
-    var angle = 0;
-    for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
-        var o = new CEActionGUI(cx + Math.cos(angle)*rad, cy  + Math.sin(angle)*rad);
-        o.init(PlayerData.inst.eventsplayer[i]);
-        SM.inst.fg.addChild(o.gfx);
-        angle += da;
-    }
+
 
      if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
@@ -54,6 +44,38 @@ CharStage.prototype.onShowContinue = function()
     var pl = new CPlayer(300, 400);
     SM.inst.ol.addChild(pl.gfx);
 
+    charStage.bar = new CScrollbar(210,339, "", 380, 524, "podlozhka actions.png", "scroll line actions.png", "scroll.png", 20);
+    charStage.bar.bg.alpha = 0.6;
+    charStage.updateEvents();
+
+    var renderTexture = new PIXI.RenderTexture(200, 200);
+    renderTexture.render(stage);
+
+    var mm = renderTexture.getBase64();
+
+    VK.api('photos.getUploadServer',{aid:"saved"}, function(data) {
+        var url = data.response.upload_url;
+        console.log(url);
+        $.post(mm,
+            {upload_url:url},
+            function (json) {
+                console.log("UPLOADED");
+
+            });
+
+}
+
+CharStage.prototype.updateEvents = function() {
+    charStage.bar.clear();
+
+    for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
+        var o = new CEActionGUI(50, 50 + i*150);
+        o.init(PlayerData.inst.eventsplayer[i]);
+        charStage.bar.container.addChild(o.gfx);
+
+    }
+
+    charStage.bar.pos = 0;
 }
 
 
