@@ -41,16 +41,12 @@ CharStage.prototype.onShowContinue = function()
     CObj.getById("bshop").click = function() {
         SM.inst.openStage(shopStage);
     }
+
     CObj.getById("bscore").click = function(){
-
-
         SM.inst.openStage(scoreStage)
     };
 
-
-        CObj.getById("btnachs").click = function(){
-
-
+    CObj.getById("btnachs").click = function(){
        SM.inst.openStage(achStage)
     };
     CObj.getById("btnfight").click = function(){SM.inst.openStage(gameStage)};

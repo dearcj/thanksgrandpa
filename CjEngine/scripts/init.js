@@ -9,30 +9,38 @@ getURLParameter = function (name) {
 
 loginCallback = function(playerItem)
 {
-
+    if (vkparams.novk) {
+        new PlayerData(playerItem);
+        return;
+    }
+    var loaded = 0;
     VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000}, function(data) {
         vkparams.friends = data.response.items;
         azureclient.invokeApi("get_scores", {
             body: {filter: vkparams.friends},
             method: "post"
         }).done(function (results) {
-            var message = results.result;
+            loaded ++;
 
-            loginCallback(results.result);
+            vkparams.friendsIngame = new Array();
+            if (!results.result) return;
+            for (var i = 0; i < results.result.length; ++i)
+            {
+                vkparams.friendsIngame.push(results.result[i].vkapi);
+            }
+
+            if (loaded == 2)
+                new PlayerData(playerItem);
         }, function(error) {
-            //  azureclient.login(results.result.userId, results.result.token);
-            //    loginCallback();
         });
 
     })
 
-    if (vkparams.novk) new PlayerData(playerItem); else;
-
-
-
     VK.api('users.get',{user_ids:vkparams.viewerid.toString()}, function(data) {
         vkparams.first_name = data.response[0].first_name;
         vkparams.last_name = data.response[0].last_name;
+        loaded++;
+        if (loaded == 2)
         new PlayerData(playerItem);
     });
 }
@@ -51,6 +59,8 @@ createAchs = function(uid)
             console.log("Error: " + err);
         });
 }
+
+
 dbInit = function() {
     window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
     window.vkparams = {};

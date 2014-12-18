@@ -9,7 +9,7 @@ var tBoost = "boost";
 
 function checkDb ()
 {
-    updDb(dbobj);
+   // updDb(dbobj);
 }
 
 var dbobj =
@@ -92,6 +92,37 @@ var dbobj =
 
 function updDb(o, onlyRead)
 {
+    /*
+    function makeid()
+    {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 5; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
+
+
+    for (var i =0; i < 1000; ++i) {
+
+        var obj = {
+            name: makeid(),
+            last_name: makeid(),
+            vkapi: Math.floor((Math.random()*50000000)).toString(),
+            money: 0,
+            crystals: 0,
+            xp: 0,
+            lvl: Math.floor(Math.random()*20),
+            energy: 0,
+            maxdistance: Math.random()*10000
+        }
+
+        azureclient.getTable("tb_players").insert(obj);
+    }
+*/
+
     for (var i = 0; i < o.length; ++i)
     {
         var tname = o[i].tbname;

@@ -47,6 +47,8 @@ CHPBar.prototype.tweenProp = function(newProp)
 
 CHPBar.prototype.init = function()
 {
+
+    this.space = parseInt(this.space);
     if (!this.gfx) this.gfx = new PIXI.DisplayObjectContainer(); else
     {
        this.gfx.anchor.x = 0;
@@ -67,9 +69,10 @@ CHPBar.prototype.init = function()
         this.upperImageClip.height -= this.space;
         this.gfx.addChild(this.upperImageClip);
     }
-    this.y -= this.gfx.height / 2;
-    this.gfx.pivot.y -= tex.height / 2;
+  //  this.y += this.gfx.height / 2;
+    //this.gfx.y = -tex.height / 2;
     this.prop = 1;
+    this.updateGraphics();
   //  new TweenMax(this, 10.8, {prop: 0., repeat:-1, ease: Linear.easeNone});
     CObj.prototype.init.call(this);
 }

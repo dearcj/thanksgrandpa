@@ -11,17 +11,44 @@ Object.defineProperty(CScrollbar.prototype, 'pos', {
     },
     set: function (value) {
 
-        if (value < this.toucher.height / 2)
-            value = this.toucher.height / 2;
+        if (value < 0)//this.toucher.height / 2)
+            value = 0;//this.toucher.height / 2;
 
         if (value > this.ph - this.toucher.height / 2)
             value = this.ph - this.toucher.height / 2;
         this._pos = value;
 
-        this.toucher.y = value - this.ph / 2;
-        this.container.y = -value- this.ph / 2;;
+        var touchervalue = value;
+        if (touchervalue < this.toucher.height / 2)
+            touchervalue = this.toucher.height / 2;
+            this.toucher.y = touchervalue - this.ph / 2;
+        this.container.y = -this.ph/2 - (value)*this.posScale;
     }
 });
+
+
+
+CScrollbar.prototype.updateHeight = function()
+{
+    this.ph = this.container.height;
+}
+
+
+CScrollbar.prototype.clear = function()
+{
+    for (var i = 0; i < this.container.children.length; ++i)
+    {
+        if (this.container.children[i].destroy)
+        {
+            this.container.children[i].destroy();
+
+        } else
+        {
+            this.container.removeChild(this.container.children[i]);
+            i--;
+        }
+    }
+}
 
 CScrollbar.prototype.destroy = function()
 {
@@ -46,9 +73,10 @@ CScrollbar.prototype.onWheel = function(e)
     this.pos += e.deltaY / 3;
 }
 
-function CScrollbar(in_x,in_y,textname,ww, hh) {
+function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrolltoucher) {
 
     var bgpanel = "shop back";
+    if (clipbg) bgpanel= clipbg;
 
     CObj.apply(this, [in_x, in_y, null, null]);
 
@@ -63,7 +91,9 @@ function CScrollbar(in_x,in_y,textname,ww, hh) {
     SM.inst.fg.addChildAt(this.gfx, 0);
 
     var sbTexName = "scroll line element.png";
+    if (clipscrollline) sbTexName= clipscrollline;
     var sbToucher = "scroll.png";
+    if (clipscrolltoucher) sbToucher= clipscrolltoucher;
     var scrWidth = 8;
 
     var obj = this;
@@ -130,7 +160,7 @@ function CScrollbar(in_x,in_y,textname,ww, hh) {
     this.container = new PIXI.DisplayObjectContainer();
     this.container.x = -this.pw/2;
     this.container.y = -this.ph/2;
-    this.sbMask =  new PIXI.Graphics();
+   this.sbMask =  new PIXI.Graphics();
     this.sbMask.beginFill();
     this.sbMask.drawRect(-this.pw/2, -this.ph/2, this.pw, this.ph);
     this.sbMask.endFill();
@@ -139,8 +169,8 @@ function CScrollbar(in_x,in_y,textname,ww, hh) {
     this.gfx.addChild(this.container);
     this.gfx.addChild(this.bar);
     this.gfx.addChild(this.toucher);
-    this.pos = -100;
-
+    this.pos =0;
+    this.posScale = 1;
     this.x = in_x;
     this.y = in_y;
 }

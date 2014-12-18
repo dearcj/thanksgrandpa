@@ -215,8 +215,7 @@ ShopStage.prototype.updateStatsPanel = function() {
         }
     CObj.getById("tfmoney").text = PlayerData.inst.playerItem.money.toString();
     CObj.getById("tfcry").text = PlayerData.inst.playerItem.crystals.toString();
-    CObj.getById("tfenergy").text = PlayerData.inst.playerItem.energy.toString();
-
+    CObj.getById("tfenergy").text = Math.round(PlayerData.inst.playerItem.energy).toString();
 }
 
 ShopStage.prototype.onShowContinue = function()

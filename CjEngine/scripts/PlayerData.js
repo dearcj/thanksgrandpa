@@ -81,6 +81,14 @@ PlayerData.prototype.loadEnd = function()
    SM.inst.openStage(charStage);
 }
 
+PlayerData.prototype.updateEnergy = function()
+{
+   var d = (new Date()).getTime() - this.playerItem.updateDate.getTime();
+   d /= 1000;//secs
+   d /= 60; //minutes
+   this.playerItem.energy += d*0.08;
+}
+
 PlayerData.prototype.loadData = function(cb)
 {
    this.loadCount = 0;
@@ -92,6 +100,13 @@ PlayerData.prototype.loadData = function(cb)
 
       PlayerData.inst.playerItem.name = vkparams.first_name;
       PlayerData.inst.playerItem.last_name = vkparams.last_name;
+
+      PlayerData.inst.updateEnergy();
+
+      azureclient.invokeApi("update_score", {
+         body: {id_player: PlayerData.inst.playerItem.id, score: PlayerData.inst.playerItem.maxdistance},
+         method: "post"
+      }).done();
 
       if (!PlayerData.inst.playerItem.crystals)
          PlayerData.inst.playerItem.crystals = 0;
