@@ -75,7 +75,7 @@ CScrollbar.prototype.onWheel = function(e)
 
 function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrolltoucher, dw) {
 
-    var bgpanel = "shop back";
+    var bgpanel = "shop back.png";
     if (clipbg) bgpanel= clipbg;
 
     CObj.apply(this, [in_x, in_y, null, null]);
