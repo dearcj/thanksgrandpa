@@ -57,12 +57,12 @@ CharStage.prototype.onShowContinue = function()
         var url = data.response.upload_url;
         console.log(url);
         $.post(mm,
-            {upload_url:url},
+            {upload_url: url},
             function (json) {
                 console.log("UPLOADED");
 
             });
-
+    });
 }
 
 CharStage.prototype.updateEvents = function() {
