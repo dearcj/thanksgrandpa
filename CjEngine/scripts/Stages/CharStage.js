@@ -20,6 +20,9 @@ CharStage.prototype.onHide = function(newStage) {
 CharStage.prototype.createFriendsPanel = function() {
     var panel = new PIXI.DisplayObjectContainer();
 
+  //  var purl = "http://cs618119.vk.me/v618119951/1fb0d/_AF_FOLZN_U.jpg";
+
+
     PlayerData.inst.friends = [{uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }, {uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }];
 
     if (!PlayerData.inst.friends) return null;
@@ -31,15 +34,30 @@ CharStage.prototype.createFriendsPanel = function() {
         friendClip.anchor.x = 0.5;
         friendClip.interactive = true;
         friendClip.x = i*100;
-        VK.api('users.get',{user_ids:PlayerData.inst.friends[i].uid, fields: "photo"}, function(data) {
-            console.log();
 
-        });
+        var setPhotoCB = function(upperClip) {
+            VK.api('users.get', {user_ids: PlayerData.inst.friends[i].uid, fields: "photo"}, function (data) {
 
-            friendClip.click = function()
+                if (!data.response ||data.response.length == 0) return;
+                upperClip.loader = new PIXI.ImageLoader(data.response[0].photo);
+
+                var setLoader = function (clip) {
+                    clip.loader.onLoaded = function () {
+                        var ico = new PIXI.Sprite(PIXI.TextureCache[purl]);
+                        ico.anchor.x = 0.5;
+                        ico.anchor.y = 0.5;
+                        clip.addChild(ico);
+                    }
+                }
+                setLoader(upperClip);
+                upperClip.loader.load();
+
+            });
+        }
+        setPhotoCB(friendClip);
+        friendClip.click = function()
         {
 
-            var base = new PIXI.BaseTexture(data.response[0].photo);
 
             console.log(base);
 
