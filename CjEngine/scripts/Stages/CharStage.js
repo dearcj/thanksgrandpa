@@ -17,13 +17,21 @@ CharStage.prototype.onHide = function(newStage) {
     CObj.processAll();
 }
 
+CharStage.prototype.createFriendsPanel = function() {
+    var panel = new PIXI.DisplayObjectContainer();
+    for (var i = 0; i < 10; ++i)
+    {
+        PlayerData.inst.friends
+
+    }
+}
+
+
 CharStage.prototype.onShowContinue = function()
 {
     charStage.doProcess = true;
 
     shopStage.updateStatsPanel();
-
-
 
      if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
@@ -48,13 +56,13 @@ CharStage.prototype.onShowContinue = function()
     charStage.bar.bg.alpha = 0.6;
     charStage.updateEvents();
 
-    var renderTexture = new PIXI.RenderTexture(200, 200);
+ /*   var renderTexture = new PIXI.RenderTexture(200, 200);
     renderTexture.render(stage);
 
     var mm = renderTexture.getBase64();
+*/
 
-
-    VK.callMethod("showRequestBox");
+  //  VK.callMethod("showRequestBox");
 
  /*   VK.api('photos.getUploadServer',{aid:"saved"}, function(data) {
         var url = data.response.upload_url;
@@ -75,8 +83,9 @@ CharStage.prototype.updateEvents = function() {
         var o = new CEActionGUI(50, 50 + i*150);
         o.init(PlayerData.inst.eventsplayer[i]);
         charStage.bar.container.addChild(o.gfx);
-
     }
+
+
 
     charStage.bar.pos = 0;
 }

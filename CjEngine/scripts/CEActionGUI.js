@@ -73,8 +73,6 @@ CEActionGUI.prototype.process= function()
 
 CEActionGUI.prototype.startAction = function()
 {
-
-
     this.acting = true;
     var b = new PIXI.BlurFilter();
     b.blur = 20;
@@ -121,7 +119,6 @@ CEActionGUI.prototype.updateRecharge= function()
 
         var d = nd.getTime() - this.eventpl.lastused.getTime();
         d = this.event.delay_min * 60 * 1000 - d;
-
 
         d /= 1000;
 
