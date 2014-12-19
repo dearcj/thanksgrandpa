@@ -14,7 +14,7 @@ loginCallback = function(playerItem)
         return;
     }
     var loaded = 0;
-    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000}, function(data) {
+    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000, fields: "domain"}, function(data) {
         vkparams.friends = data.response.items;
         azureclient.invokeApi("get_scores", {
             body: {filter: vkparams.friends},
