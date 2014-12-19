@@ -38,7 +38,10 @@ CharStage.prototype.createFriendsPanel = function() {
 
             friendClip.click = function()
         {
-            console.log("ENIS");
+
+            var base = new PIXI.BaseTexture(data.response[0].photo);
+
+            console.log(base);
 
         }
         friendClip.anchor.y = 0.5;
