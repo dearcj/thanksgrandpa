@@ -54,9 +54,9 @@ CharStage.prototype.onShowContinue = function()
     var mm = renderTexture.getBase64();
 
 
-    VK.callMethod("showInviteBox");
+    VK.callMethod("showRequestBox");
 
-    VK.api('photos.getUploadServer',{aid:"saved"}, function(data) {
+ /*   VK.api('photos.getUploadServer',{aid:"saved"}, function(data) {
         var url = data.response.upload_url;
         console.log(url);
         $.post(mm,
@@ -65,7 +65,7 @@ CharStage.prototype.onShowContinue = function()
                 console.log("UPLOADED");
 
             });
-    });
+    });*/
 }
 
 CharStage.prototype.updateEvents = function() {
