@@ -79,7 +79,7 @@ GameStage.prototype.process = function()
     if (this.doPhys)
     world.step(this.invFR*this._worldSpeed);
 
-    if (gameStage.fireState)
+    if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40)
     {
         gameStage.player.fire();
     }
@@ -102,7 +102,6 @@ GameStage.prototype.onHide = function(newStage) {
     }
     gameStage.losing = false;
     gameStage.scoreObj = null;
-    gameStage.scoreTimeoutID.kill();
     gameStage.preWinText = null;
 
     TweenMax.killAll(true, true, true);
@@ -243,14 +242,14 @@ function getChar(event) {
 GameStage.prototype.doKeyDown = function(evt) {
     evt = evt || window.event;
     var c = getChar(evt);
-    if (c == " ")
+    if (evt.which == 87)
    gameStage.player.jump();
 }
 
 GameStage.prototype.onShow = function() {
     CustomStage.prototype.onShow.call(this);
 
-    window.addEventListener("keypress", this.doKeyDown, false );
+    window.addEventListener("keydown", this.doKeyDown, false );
     gameStage.currentLevel = 1;
 
     this.doProcess = false;
@@ -375,9 +374,11 @@ GameStage.prototype.onLoadEnd = function()
     gameStage.floor.gfx.height = floorHeight;
     gameStage.floor.gfx.visible = false;
 
-    gameStage.createHPBar(100, 100, 5);
+    gameStage.createHPBar(10, 5, 5);
 
-    gameStage.player = new CPlayer(100, gameStage.floor.y -floorHeight / 2 - 50,"");
+    gameStage.player = new CPlayer(110, gameStage.floor.y - floorHeight / 2 - 50, "");
+    gameStage.player.gfx.scale.x = 0.8;
+    gameStage.player.gfx.scale.y = 0.8;
     SM.inst.fg.addChild( gameStage.player.gfx);
 
     gameStage.scoreObj = CObj.getById("score");
@@ -400,7 +401,6 @@ GameStage.prototype.onLoadEnd = function()
             SM.inst.fontLayer.children[i].visible = false;
         }
         TweenMax.pauseAll();
-        gameStage.toolContainer.interactive = false;
         gameStage.pauseTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
         gameStage.pauseTexture.render(stage);
         gameStage.pauseSprite  = new PIXI.Sprite(gameStage.pauseTexture);
@@ -414,7 +414,7 @@ GameStage.prototype.onLoadEnd = function()
     CObj.getById("timeout").text = "";
 
     CObj.getById("levels").click = function () {
-        SM.inst.openStage(levSel);
+        SM.inst.openStage(charStage);
     }
 
 

@@ -19,11 +19,20 @@ CharStage.prototype.onHide = function(newStage) {
 
 CharStage.prototype.createFriendsPanel = function() {
     var panel = new PIXI.DisplayObjectContainer();
+
+    if (!PlayerData.inst.friends) return null;
     for (var i = 0; i < 10; ++i)
     {
-        PlayerData.inst.friends
+        var friendClip = new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
+        friendClip.anchor.x = 0.5;
+        friendClip.anchor.y = 0.5;
+        panel.addChild(friendClip);
+        var nametf = CTextField.createTextField({text: "ХУЙ"});
+        friendClip.addChild(nametf);
 
     }
+    SM.inst.guiLayer.addChild(panel);
+    return panel;
 }
 
 
@@ -55,6 +64,9 @@ CharStage.prototype.onShowContinue = function()
     charStage.bar = new CScrollbar(210,339, "", 380, 524, "podlozhka actions.png", "scroll line actions.png", "scroll.png", 20);
     charStage.bar.bg.alpha = 0.6;
     charStage.updateEvents();
+
+    var frp = charStage.createFriendsPanel();
+
 
  /*   var renderTexture = new PIXI.RenderTexture(200, 200);
     renderTexture.render(stage);
