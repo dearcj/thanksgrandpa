@@ -21,15 +21,16 @@ CharStage.prototype.createFriendsPanel = function() {
     var panel = new PIXI.DisplayObjectContainer();
 
     if (!PlayerData.inst.friends) return null;
-    for (var i = 0; i < 10; ++i)
+    var skip = 0;
+    for (var i = 0 + skip; i < 10 + skip; ++i)
     {
+        if (i >= PlayerData.inst.friends.length) break;
         var friendClip = new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.anchor.x = 0.5;
         friendClip.anchor.y = 0.5;
         panel.addChild(friendClip);
-        var nametf = CTextField.createTextField({text: "ХУЙ"});
+        var nametf = CTextField.createTextField({text: PlayerData.inst.friends[i].first_name + " " + PlayerData.inst.friends[i].last_name});
         friendClip.addChild(nametf);
-
     }
     SM.inst.guiLayer.addChild(panel);
     return panel;

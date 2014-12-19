@@ -15,9 +15,14 @@ loginCallback = function(playerItem)
     }
     var loaded = 0;
     VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000, fields: "domain"}, function(data) {
-        vkparams.friends = data.response.items;
+        vkparams.friends = data.response;
+        vkparams.friendsids = new Array();
+        for (var i = 0; i < vkparams.friends.length; ++i)
+        {
+            vkparams.friendsids.push(vkparams.friends[i].uid);
+        }
         azureclient.invokeApi("get_scores", {
-            body: {filter: vkparams.friends},
+            body: {filter: vkparams.friendsids},
             method: "post"
         }).done(function (results) {
             loaded ++;
