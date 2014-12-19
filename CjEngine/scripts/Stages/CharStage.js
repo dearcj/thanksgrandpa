@@ -53,6 +53,9 @@ CharStage.prototype.onShowContinue = function()
 
     var mm = renderTexture.getBase64();
 
+
+    VK.callMethod("showInviteBox");
+
     VK.api('photos.getUploadServer',{aid:"saved"}, function(data) {
         var url = data.response.upload_url;
         console.log(url);

@@ -117,6 +117,9 @@ ScoreStage.prototype.onShowContinue = function()
             scoreStage.updateFriends();
 
     };
+
+    CObj.getById("bbacklist").click = function ()
+    {SM.inst.openStage(charStage);}
     CObj.getById("bbacklist").click = function ()
     {
         scoreStage.skip -= scoreStage.showRecords;
