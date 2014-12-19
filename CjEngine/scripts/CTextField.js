@@ -82,7 +82,7 @@ CTextField.createTextField = function(obj) {
     }
 
     var pt = new PIXI.BitmapText(obj.text, {font: fontParam, align: "center"});
-
+    pt.align = "center";
     if (obj.tint != "0xffffff" && obj.tint != undefined)
     pt.tint = parseInt(obj.tint);
     pt.breaks = breaks;

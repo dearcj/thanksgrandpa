@@ -20,6 +20,8 @@ CharStage.prototype.onHide = function(newStage) {
 CharStage.prototype.createFriendsPanel = function() {
     var panel = new PIXI.DisplayObjectContainer();
 
+    PlayerData.inst.friends = [{uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }, {uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }];
+
     if (!PlayerData.inst.friends) return null;
     var skip = 0;
     for (var i = 0 + skip; i < 10 + skip; ++i)
@@ -27,12 +29,32 @@ CharStage.prototype.createFriendsPanel = function() {
         if (i >= PlayerData.inst.friends.length) break;
         var friendClip = new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.anchor.x = 0.5;
+        friendClip.interactive = true;
+        friendClip.x = i*100;
+        VK.api('users.get',{user_ids:PlayerData.inst.friends[i].uid, fields: "photo"}, function(data) {
+            console.log();
+
+        });
+
+            friendClip.click = function()
+        {
+            console.log("ENIS");
+
+        }
         friendClip.anchor.y = 0.5;
-        panel.addChild(friendClip);
-        var nametf = CTextField.createTextField({text: PlayerData.inst.friends[i].first_name + " " + PlayerData.inst.friends[i].last_name});
+        friendClip.y = 10;
+        var nametf = CTextField.createTextField({align: "center", text: PlayerData.inst.friends[i].first_name + "\n" + PlayerData.inst.friends[i].last_name});
+        nametf.x -= nametf.width / 2;
+        nametf.y = 15;
         friendClip.addChild(nametf);
+        panel.addChild(friendClip);
     }
+
+    panel.x = 100;
+    panel.y=SCR_HEIGHT - 80;
     SM.inst.guiLayer.addChild(panel);
+
+
     return panel;
 }
 
