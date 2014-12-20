@@ -20,24 +20,23 @@ CharStage.prototype.onHide = function(newStage) {
 CharStage.prototype.createFriendsPanel = function() {
     var panel = new PIXI.DisplayObjectContainer();
 
-  //  var purl = "http://cs618119.vk.me/v618119951/1fb0d/_AF_FOLZN_U.jpg";
-
-
-    //
-    // PlayerData.inst.friends = [{uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }, {uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }];
-
     if (!vkparams.friends) return null;
     var skip = 0;
     for (var i = 0 + skip; i < 10 + skip; ++i)
     {
-        if (i >= vkparams.friends.length) break;
         var friendClip = new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.anchor.x = 0.5;
         friendClip.interactive = true;
         friendClip.x = i*100;
 
+        if (i >= vkparams.friendsIngame.length) break else
+        friendClip.click = function()
+        {
+            VK.callMethod("showInviteBox");
+        }
+
         var setPhotoCB = function(upperClip) {
-            VK.api('users.get', {user_ids: vkparams.friends[i].uid, fields: "photo"}, function (data) {
+            VK.api('users.get', {user_ids: vkparams.friendsIngame[i].vkapi, fields: "photo"}, function (data) {
 
                 var purl = data.response[0].photo;
                 if (!data.response ||data.response.length == 0) return;
@@ -50,23 +49,17 @@ CharStage.prototype.createFriendsPanel = function() {
                         ico.anchor.y = 0.5;
                         clip.addChild(ico);
                     }
-                }
+                };
                 setLoader(upperClip);
                 upperClip.loader.load();
 
             });
         }
         setPhotoCB(friendClip);
-        friendClip.click = function()
-        {
 
-
-            console.log(base);
-
-        }
         friendClip.anchor.y = 0.5;
         friendClip.y = 10;
-        var nametf = CTextField.createTextField({align: "center", text: vkparams.friends[i].first_name + "\n" + vkparams.friends[i].last_name});
+        var nametf = CTextField.createTextField({align: "center", text: vkparams.friendsIngame[i].first_name + "\n" + vkparams.friendsIngame[i].last_name});
         nametf.x -= nametf.width / 2;
         nametf.y = 15;
         friendClip.addChild(nametf);

@@ -10,7 +10,7 @@ ScoreStage.prototype.updateFriends = function() {
     PlayerData.inst.savePlayerData();
 
     azureclient.invokeApi("get_scores", {
-        body: {filter: vkparams.friendsIngame, take: 20, skip: scoreStage.skip},
+        body: {filter: vkparams.friendsIngameIDs, take: 20, skip: scoreStage.skip},
         method: "post"
     }).done(function (results) {
         scoreStage.updateSB(results.result);

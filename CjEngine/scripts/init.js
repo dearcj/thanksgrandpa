@@ -27,11 +27,12 @@ loginCallback = function(playerItem)
         }).done(function (results) {
             loaded ++;
 
-            vkparams.friendsIngame = new Array();
+            vkparams.friendsIngame = results.result;
+            vkparams.friendsIngameIDs = new Array();
             if (!results.result) return;
             for (var i = 0; i < results.result.length; ++i)
             {
-                vkparams.friendsIngame.push(results.result[i].vkapi);
+                vkparams.friendsIngameIDs.push(results.result[i].vkapi);
             }
 
             if (loaded == 2)
