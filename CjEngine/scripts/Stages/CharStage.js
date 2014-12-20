@@ -38,8 +38,9 @@ CharStage.prototype.createFriendsPanel = function() {
         var setPhotoCB = function(upperClip) {
             VK.api('users.get', {user_ids: PlayerData.inst.friends[i].uid, fields: "photo"}, function (data) {
 
+                var purl = data.response[0].photo;
                 if (!data.response ||data.response.length == 0) return;
-                upperClip.loader = new PIXI.ImageLoader(data.response[0].photo);
+                upperClip.loader = new PIXI.ImageLoader(purl);
 
                 var setLoader = function (clip) {
                     clip.loader.onLoaded = function () {
