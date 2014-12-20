@@ -23,7 +23,7 @@ CharStage.prototype.createFriendsPanel = function() {
   //  var purl = "http://cs618119.vk.me/v618119951/1fb0d/_AF_FOLZN_U.jpg";
 
 
-    PlayerData.inst.friends = [{uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }, {uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }];
+    //PlayerData.inst.friends = [{uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }, {uid: 254648951, first_name:" ХУЙ СОБ", last_name: "ХУЙ" }];
 
     if (!PlayerData.inst.friends) return null;
     var skip = 0;
