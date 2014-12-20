@@ -28,8 +28,11 @@ CharStage.prototype.createFriendsPanel = function() {
         friendClip.anchor.x = 0.5;
         friendClip.interactive = true;
         friendClip.x = i*100;
+        friendClip.anchor.y = 0.5;
+        friendClip.y = 10;
 
-        if (i >= vkparams.friendsIngame.length) break else
+        panel.addChild(friendClip);
+        if (i >= vkparams.friendsIngame.length) break; else
         friendClip.click = function()
         {
             VK.callMethod("showInviteBox");
@@ -57,13 +60,11 @@ CharStage.prototype.createFriendsPanel = function() {
         }
         setPhotoCB(friendClip);
 
-        friendClip.anchor.y = 0.5;
-        friendClip.y = 10;
+
         var nametf = CTextField.createTextField({align: "center", text: vkparams.friendsIngame[i].first_name + "\n" + vkparams.friendsIngame[i].last_name});
         nametf.x -= nametf.width / 2;
         nametf.y = 15;
         friendClip.addChild(nametf);
-        panel.addChild(friendClip);
     }
 
     panel.x = 100;
