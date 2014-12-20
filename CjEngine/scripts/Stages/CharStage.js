@@ -22,7 +22,7 @@ CharStage.prototype.createFriendsPanel = function() {
 
     if (!vkparams.friends) return null;
     var skip = 0;
-    for (var i = 0 + skip; i < 10 + skip; ++i)
+    for (var i = 0 + skip; i < 8 + skip; ++i)
     {
         var friendClip = new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.anchor.x = 0.5;
@@ -32,10 +32,12 @@ CharStage.prototype.createFriendsPanel = function() {
         friendClip.y = 10;
 
         panel.addChild(friendClip);
-        if (i >= vkparams.friendsIngame.length) break; else
-        friendClip.click = function()
-        {
-            VK.callMethod("showInviteBox");
+        if (i >= vkparams.friendsIngame.length) {
+            friendClip.click = function () {
+                VK.callMethod("showInviteBox");
+            }
+
+            continue;
         }
 
         var setPhotoCB = function(upperClip) {
