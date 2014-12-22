@@ -308,7 +308,20 @@ CObj.processAll = function(){
     var len = CObj.objects.length;
 
     for (var i = 0; i < len; i++) {
+
+        if (CObj.objects[i].x > SCR_WIDTH*1.3 || CObj.objects[i].x < -SCR_WIDTH*0.3 ||
+            CObj.objects[i].y > SCR_HEIGHT*1.3 || CObj.objects[i].y < -SCR_HEIGHT*0.3 )
+        {
+            if (CObj.checkType(CObj.objects[i], CHPBar)) continue;
+            if (CObj.objects[i].kill)
+            CObj.objects[i].kill();
+            continue;
+        }
+
+
         if (CObj.objects[i].colMask > 0) {
+
+
             for (var j = 0; j < len; j++) {
                 if (i == j) continue;
                 var obj1 = CObj.objects[i];

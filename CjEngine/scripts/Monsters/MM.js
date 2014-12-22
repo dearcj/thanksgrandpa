@@ -28,9 +28,23 @@ MM = function() {
 MM.inst = new MM();
 
 
+MM.prototype.spawnObstacle = function()
+{
+    var m = new CMonster(SCR_WIDTH+100,450,"COLUMN1");
+    m.gfx.scale.x = 0.8;
+    m.gfx.scale.y = 0.8;
+    m.vx = -LauncherBG.inst.levCycles[0].layers[LauncherBG.inst.levCycles[0].layers.length - 1].velocity*0.7;
+
+    this.lastSpawnSimple =(new Date()).getTime();
+    this.simpleMonsterDelay = Math.random() * 1000 + 2000;
+}
+
+
 MM.prototype.spawnSimpleMonster = function()
 {
     var m = new CMonster(SCR_WIDTH+100,300,"enemy fat");
+    m.gfx.scale.x = 0.8;
+    m.gfx.scale.y = 0.8;
     m.longJump();
 
     this.lastSpawnSimple =(new Date()).getTime();
@@ -42,7 +56,8 @@ MM.prototype.doStep = function()
     var s = this.monsterQueue.charAt(0);
     this.monsterQueue = this.monsterQueue.slice(1);
 
-    if (s == "s") this.spawnSimpleMonster();
+ //   if (s == "s") this.spawnSimpleMonster();
+    if (s == "s") this.spawnObstacle();
   /*  if (s == "z") spawnVeryRandomZomby();
     if (s == "a") spawnArmoredSimple();
     if (s == "A") spawnArmoredPolice();

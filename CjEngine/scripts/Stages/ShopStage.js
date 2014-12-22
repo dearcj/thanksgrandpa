@@ -200,9 +200,10 @@ ShopStage.prototype.updateBar = function(tab)
     for (var i = 0; i < PlayerData.inst.items.length; ++i) {
         var g = shopStage.createItemBtn(PlayerData.inst.items[i]);
         g.x = 10 + (i % numColumns)*120;
-        g.y = 70+Math.floor(i / numColumns)*220;
+        g.y = 20+Math.floor(i / numColumns)*220;
         this.bar.container.addChild(g);
     }
+    this.bar.pos = 0;
 }
 
 ShopStage.prototype.updateStatsPanel = function() {
@@ -221,7 +222,8 @@ ShopStage.prototype.updateStatsPanel = function() {
 ShopStage.prototype.onShowContinue = function()
 {
     CustomStage.prototype.onShow.call(this);
-    shopStage.bar = new CScrollbar(610,339, "", 380, 524);
+    shopStage.bar = new CScrollbar(610,332, "", 380, 524);
+    shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
 
     shopStage.updateStatsPanel();
 

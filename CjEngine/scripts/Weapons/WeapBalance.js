@@ -6,10 +6,14 @@ var w_pistol = new CPistol(
     "pistol", //id
     "пистолет", //name
     "описание", //desc
-    {recoil: 12, //recoil
+
+
+    {
+        acc: 0.05,
+        recoil: 12, //recoil
     magcap: 20, //magcap
-    delay: 420, //delay
-    damage: 100, //damage
+    delay: 120, //delay
+    damage: 12, //damage
     unlockprice: 10, //unlockprice
     reloadTime: 1200},//__reloadTime,}
     "asd",// __gfx,

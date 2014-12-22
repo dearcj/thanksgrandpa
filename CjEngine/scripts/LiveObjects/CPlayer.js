@@ -13,6 +13,8 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.ammobar = CObj.getById("ammobar");
     this.colGroup = CG_PLAYER;
     this.nullPhase = 0;
+    this.maxHp = 5;
+    this.hp = 5;
     this.startPlayerX = this.x;
     this.radius = this.gfx.width / 2;
 }
@@ -87,35 +89,50 @@ CPlayer.prototype.jump = function()
 
 CPlayer.prototype.process = function()
 {
-    if (!this.jumpTween || !this.jumpTween.isActive())
-    {
-        this.freq = 800;
-        this.nullPhase += 22;
-        this.x = this.startPlayerX + Math.sin((this.nullPhase) / this.freq) * 30;
+
+    if (SM.inst.currentStage == gameStage) {
+        if (!this.jumpTween || !this.jumpTween.isActive()) {
+            this.freq = 800;
+            this.nullPhase += 22;
+            this.x = this.startPlayerX + Math.sin((this.nullPhase) / this.freq) * 30;
+        }
+
+        this.fireAngle = Math.PI + Math.atan2(this.gfx.y - window.mouseY, this.gfx.x - window.mouseX);
+        var newAngle = this.fireAngle + Math.PI / 12;
+       // if ((!this.handTween || !this.handTween.isActive())) {
+            this.dedLeftHand.rotation = newAngle + 0.13;
+            this.dedRightHand.rotation = newAngle;
+      //  }
+
+        this.dedWeaponContainer.rotation = newAngle;
     }
-
-    this.fireAngle = Math.PI + Math.atan2(this.gfx.y - window.mouseY, this.gfx.x - window.mouseX);
-    var newAngle = this.fireAngle + Math.PI / 12;
-    if ((!this.handTween || !this.handTween.isActive())) {
-        this.dedLeftHand.rotation = newAngle + 0.13;
-        this.dedRightHand.rotation = newAngle;
-    }
-
-    this.dedWeaponContainer.rotation = newAngle;
-
 
     CLiveObj.prototype.process.call(this);
 }
+
+
+CPlayer.prototype.dealDamage = function(dmg)
+{
+    for (var i = 0; i < this.gfx.children.length; ++i) {
+        if (this.dedWeaponContainer == this.gfx.children[i]) continue;
+        new TweenMax(this.gfx.children[i], 0.2, {tint: 0xff0000, repeat: 1, yoyo: true});
+    }
+    this.hp = this.hp - dmg;
+}
+
 
 CPlayer.prototype.fire = function()
 {
     if (this.weapon.shot())
     {
+        if (this.handTween)
+        this.handTween.kill();
         var w =
         this.dedWeaponContainer.getChildAt(0);
-        new TweenMax(w, 0.1, {x: -11, rotation: -0.08, yoyo: true, repeat: 1});
-        this.handTween = new TweenMax(this.dedLeftHand, 0.1, { rotation: this.dedLeftHand.rotation-0.14, yoyo: true, repeat: 1});
-        new TweenMax(this.dedRightHand, 0.1, { rotation: this.dedRightHand.rotation-0.11, yoyo: true, repeat: 1});
+        var time = 0.5* this.weapon.delay / 1000;
+        new TweenMax(w, time, {x: -5, rotation: -0.04, yoyo: true, repeat: 1});
+        this.handTween = new TweenMax(this.dedLeftHand, time, { rotation: this.dedLeftHand.rotation-0.04, yoyo: true, repeat: 1});
+        new TweenMax(this.dedRightHand, time, { rotation: this.dedRightHand.rotation-0.04, yoyo: true, repeat: 1});
 
     }
 

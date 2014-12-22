@@ -7,7 +7,6 @@ LauncherBG = function(in_x,in_y,textname,in_body) {
     this.levCycles = [];
     this.gfx = new PIXI.DisplayObjectContainer();
     SM.inst.bg.addChild(this.gfx);
-  //  this.y = -70;
     var inx = CObj.objects.indexOf(this);
     CObj.objects.splice(inx);
     this.distance = 0;
@@ -16,21 +15,20 @@ LauncherBG = function(in_x,in_y,textname,in_body) {
 extend(LauncherBG, CObj, true);
 
 LauncherBG.inst = new LauncherBG(0,0);
-LauncherBG.inst.maxVelocity = 5;
+LauncherBG.inst.maxVelocity = 8;
 
 LauncherBG.prototype.clear = function()
 {
-    this.levCycles.splice(0, this.levCycles.length)
+    this.levCycles.splice(0, this.levCycles.length);
     this.distance = 0;
 }
-
 
 LauncherBG.prototype.destroy = function()
 {
     CObj.prototype.destroy.call(this);
 }
 
-LauncherBG.prototype.spawnClip = function(layer, obj)
+LauncherBG.prototype.spawnClip = function(layer, obj, spawnStart)
 {
     var cobj = CObj.DeserializeCObj(obj);
     CObj.AssignTexturesToObjects([cobj],SM.inst.bg);
@@ -40,12 +38,12 @@ LauncherBG.prototype.spawnClip = function(layer, obj)
     cobj.destroy();
 
     if (g) {
-      //  var lastX = layer.clip.children[layer.clip.children.length - 1].position.x +
-       //     layer.clip.children[layer.clip.children.length - 1].width / 2;
-       // SM.inst.fg.addChild(g);
         layer.clip.addChild(g);
         layer.rightBound += obj.baseDim.x*obj.scaleX;
-        g.position.x =  SCR_WIDTH + obj.baseDim.x*obj.scaleX / 2;
+        if (spawnStart)
+        g.position.x = obj.baseDim.x*obj.scaleX / 2; else
+
+        g.position.x = SCR_WIDTH + obj.baseDim.x*obj.scaleX / 2;
     } else
     layer.rightBound += obj.baseDim.x*obj.scaleX;
 
@@ -55,8 +53,10 @@ LauncherBG.prototype.process = function()
 {
     CObj.prototype.process.call(this);
 
-    this.distance += this.levCycles[0].layers[0].velocity;
-    for (var i = 0; i < this.levCycles[0].layers.length; ++i)
+    var upper = this.levCycles[0].layers[this.levCycles[0].layers.length - 1];
+    this.distance += upper.velocity / 100;
+    var t = this.levCycles[0].layers.length;
+    for (var i = 0; i < t; ++i)
     {
         var l = this.levCycles[0].layers[i];
         l.curDist += l.velocity;
@@ -84,7 +84,6 @@ LauncherBG.prototype.process = function()
             }
         }
     }
-
 }
 
 LauncherBG.prototype.addLevel = function (levName, distance)
@@ -97,7 +96,13 @@ LauncherBG.prototype.addLevel = function (levName, distance)
     for (var i = 0; i < layerNum; ++i)
     {
         var cont = new PIXI.DisplayObjectContainer();
-        var layer = {rightBound: SCR_WIDTH, clip:cont, curDist: SCR_WIDTH, objects: [], velocity: 0.1 + LauncherBG.inst.maxVelocity - (layerNum-i)*LauncherBG.inst.maxVelocity/layerNum};
+        var vel = 0.1 + LauncherBG.inst.maxVelocity - (layerNum-i)*LauncherBG.inst.maxVelocity/layerNum;
+        if (i == 1) {
+            vel = 0;
+
+
+        }
+            var layer = {rightBound: SCR_WIDTH, clip:cont, curDist: SCR_WIDTH, objects: [], velocity: vel};
         layers.push(layer);
         this.gfx.addChild(layer.clip);
     }
@@ -126,6 +131,15 @@ LauncherBG.prototype.addLevel = function (levName, distance)
         layers[l].maxx = maxx;
         layers[l].minx = minx;
         layers[l].width = maxx - minx;
+
+        if (layers[l].velocity == 0)
+        {
+            for (var k = 0; k < layers[l].objects.length; ++k)
+            {
+                var obj = layers[l].objects[k];
+                this.spawnClip(layers[l] , obj, true);
+            }
+        }
     }
 
     this.levCycles.push({layers: layers, dist: distance});

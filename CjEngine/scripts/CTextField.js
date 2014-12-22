@@ -96,7 +96,7 @@ CTextField.prototype.init = function(){
     this.gfx = CTextField.createTextField(this);
     this.gfx.scale.x *= window.addScale;
     this.gfx.scale.y *= window.addScale;
-    this.text = this.text.toUpperCase();
+    this.text = this.text;
    // this.text = this.text;
   //  this.getText();
 /*    if (this.text)

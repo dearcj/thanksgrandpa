@@ -116,7 +116,7 @@ CButton.prototype.init = function(){
     this.textField.interactive = true;
     //this.getText();
     if (this.text)
-    this.text = this.text.toUpperCase();
+    this.text = this.text;
     //this.text = this.text;
 
     if (this.isClip)
@@ -130,13 +130,16 @@ CButton.prototype.init = function(){
     this.updateGraphics();
        this.gfx.mouseover = function (evt) {
         TweenMax.killTweensOf(f.scale);
-        new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
+
+           f.tint = 0xaaffaa;
+           new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
         new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
         new TweenMax(tf.scale, 0.6, {y: 1+0.1, ease: Elastic.easeOut} );
         new TweenMax(tf.scale, 0.4, {x: 1+0.1, ease: Elastic.easeOut} );
 
     }
     this.gfx.mouseout = function (evt) {
+        f.tint = 0xffffff;
         if (f.currentFrame)
         f.gotoAndStop(1);
         new TweenMax(f.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut} );
