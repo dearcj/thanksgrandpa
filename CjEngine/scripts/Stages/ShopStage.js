@@ -223,7 +223,7 @@ ShopStage.prototype.onShowContinue = function()
 {
     CustomStage.prototype.onShow.call(this);
     shopStage.bar = new CScrollbar(610,332, "", 380, 524);
-    shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
+   // shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
 
     shopStage.updateStatsPanel();
 

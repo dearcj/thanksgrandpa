@@ -7,19 +7,19 @@ AM = function() {
         {
             name: "Heavy Medal",
             desc: "asda dasd jasjd ij ioasdj io",
-            img: "propeller0009",
+            img: "chickendead",
             enabled: false
         },
         {
             name: "Heavy Medal2",
             desc: "asda dasd jasjd ij ioasdj io",
-            img: "tracktorwheel",
+            img: "chickendead",
             enabled: true
         },
         {
             name: "asdas",
             desc: "asda dasd jasjd ij ioasdj io",
-            img: "bomb1",
+            img: "chickendead",
             enabled: false
         }
 

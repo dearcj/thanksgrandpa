@@ -56,8 +56,8 @@ MM.prototype.doStep = function()
     var s = this.monsterQueue.charAt(0);
     this.monsterQueue = this.monsterQueue.slice(1);
 
- //   if (s == "s") this.spawnSimpleMonster();
-    if (s == "s") this.spawnObstacle();
+    if (s == "s") this.spawnSimpleMonster();
+    if (s == "r") this.spawnObstacle();
   /*  if (s == "z") spawnVeryRandomZomby();
     if (s == "a") spawnArmoredSimple();
     if (s == "A") spawnArmoredPolice();
