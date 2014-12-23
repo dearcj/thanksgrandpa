@@ -118,7 +118,7 @@ ScoreStage.prototype.onShowContinue = function()
 
     };
 
-    CObj.getById("bbacklist").click = function ()
+    CObj.getById("bback").click = function ()
     {SM.inst.openStage(charStage);}
     CObj.getById("bbacklist").click = function ()
     {

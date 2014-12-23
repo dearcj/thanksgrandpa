@@ -52,15 +52,15 @@ AchStage.prototype.updateAchievements = function()
     for (var i = 0; i < AM.inst.achs.length ;++i)
     {
         var ach = AM.inst.achs[i];
-        var achObject = CObj.getById("ach"+(i+1));
-        achObject.gfx = new PIXI.Sprite(PIXI.Texture.fromFrame(ach.img+ ".png"));
-        achObject.gfx.anchor.x = 0.5;
-        achObject.gfx.anchor.y = 0.5;
-        achObject.gfx.interactive = true;
-        achObject.updateGraphics();
-        SM.inst.ol.addChild(achObject.gfx);
+
+
+        achObject = new PIXI.Sprite(PIXI.Texture.fromFrame(ach.img+ ".png"));
+        achObject.anchor.x = 0.5;
+        achObject.anchor.y = 0.5;
+        achObject.interactive = true;
+        achStage.bar.container.addChild(achObject);
    //    achObject.gfx.hitArea =new PIXI.Rectangle(-150, -150, 300, 300);
-        achObject.gfx.mouseover = function (evt) {
+        achObject.mouseover = function (evt) {
             achStage.desc.position.x = window.mouseX*SCR_SCALE;
             achStage.desc.position.y = window.mouseY*SCR_SCALE;
             achStage.desc.alpha = 1;
@@ -86,9 +86,12 @@ AchStage.prototype.onHide = function(newStage) {
 
 AchStage.prototype.onShowContinue = function()
 {
-    achStage.updateAchievements();
     achStage.doProcess = true;
     CObj.getById("btnback").click = function(){SM.inst.openStage(charStage);};
+
+    achStage.bar = new CScrollbar(330,332, "", 380, 524);
+    achStage.updateAchievements();
+
 }
 
 
