@@ -85,7 +85,7 @@ AchStage.prototype.onHide = function(newStage) {
 }
 
 AchStage.prototype.onShowContinue = function()
-{
+{https://github.com/dearcj/thanksgrandpa.git
     achStage.doProcess = true;
     CObj.getById("btnback").click = function(){SM.inst.openStage(charStage);};
 
