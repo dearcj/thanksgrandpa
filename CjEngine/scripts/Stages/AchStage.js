@@ -1,4 +1,9 @@
 
+
+
+
+
+
 function AchStage() {
     CustomStage.apply(this);
 }
@@ -67,6 +72,7 @@ AchStage.prototype.updateAchievements = function()
             //    SM.inst.ol.addChild(achStage.desc);
             //achStage.desc.parent.add = true;
         }
+
 
 
         achObject.gfx.mouseout = function (evt) {
