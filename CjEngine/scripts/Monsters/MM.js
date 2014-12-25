@@ -2,7 +2,7 @@
 MM = function() {
  this.levels =
  [
- "s..............s...s...r..s...s...s.....l...r...r...s...l...l...s...c...s..r..c..s..l...c....r...r.......o..l.l.....ss..r.....cccc.....r..l..l..l......A",
+ ".......c....z....s.z..s.c..r..s...s...s.c..l..ll...z....l...r...r...s...l...l...s...c...s..r..c..s..l...c....r...r.......o..l.l.....ss..r.....cccc.....r..l..l..l......A",
  "..............c....cccc....svvv..cc.....c.r..s......cccc...o....1...l...l.vv....l..cc....c..r..r...cc....o...c...a..c...m.......l..l.......s......ssss..l..o......a......s...a...s",
  "..............c..c..ccvvcc..l...y.vv.r.r..l.o...s...sr..c...G.....c..v...vvv...hh..hh..o.....2....h....1....h..h..h..h...m..cccc..s..h..vvv.....cccc..l..l...aa...b.vvv...a..a....1.....u",
  "..............A....rrs..s..p..ppp...1...vvv...G...o....G......1...s..a..a..s....vvvv...p..pcr..p......1.......l..m...Grrsss....vvvrvvcc...s.s...s..s....m.....1....rr..r....m.....ss.......a..llc..ll...cccc....u...s.s.s.....a...ppp..rrr..rrr...z....m...cc0ccc",
@@ -28,12 +28,14 @@ MM = function() {
 MM.inst = new MM();
 
 
-MM.prototype.spawnObstacle = function()
+MM.prototype.spawnObstacle = function(clip, offsY)
 {
-    var m = new CMonster(SCR_WIDTH+100,450,"COLUMN1");
+    var m = new CMonster(SCR_WIDTH+240,450 + offsY,clip);
+    m.radius = (m.gfx.width / 2)*0.94;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
-    m.vx = -LauncherBG.inst.levCycles[0].layers[LauncherBG.inst.levCycles[0].layers.length - 1].velocity*0.7;
+    m.vx = -LauncherBG.inst.levCycles[0].layers[LauncherBG.inst.levCycles[0].layers.length - 1].velocity;
+    m.colGroup = 0;
 
     this.lastSpawnSimple =(new Date()).getTime();
     this.simpleMonsterDelay = Math.random() * 1000 + 2000;
@@ -42,7 +44,7 @@ MM.prototype.spawnObstacle = function()
 
 MM.prototype.spawnSimpleMonster = function()
 {
-    var m = new CMonster(SCR_WIDTH+100,300,"enemy fat");
+    var m = new CMonster(SCR_WIDTH+100,300,"enemy fat",false);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
     m.longJump();
@@ -57,33 +59,35 @@ MM.prototype.doStep = function()
     this.monsterQueue = this.monsterQueue.slice(1);
 
     if (s == "s") this.spawnSimpleMonster();
-    if (s == "r") this.spawnObstacle();
-  /*  if (s == "z") spawnVeryRandomZomby();
-    if (s == "a") spawnArmoredSimple();
-    if (s == "A") spawnArmoredPolice();
-    if (s == "w") spawnWorm();
-    if (s == "2") spawnJumper();
-    if (s == "1") spawnSaw();
-    if (s == "0") spawnRocket();
-    if (s == "r") spawnRandomMonster();
-    if (s == "R") spawnRandomMonster2();
-    if (s == "o") spawnMoneyMonster();
-    if (s == "b") spawnBoss1();
-    if (s == "t") spawnBoss2();
-    if (s == "g") spawnBoss3();
-    if (s == "l") spawnLadyMonster();
-    if (s == "m") spawnMacMonster();
-    if (s == "c") spawnChildMonster();
-    if (s == "p") spawnPolice();//+
-    if (s == "d") spawnDonut();//+
-    if (s == "h") spawnHead();//+
-    if (s == "i") spawnPirate();//
-    if (s == "k") spawnKamikaze();//
-    if (s == "G") spawnGrenadeMonster();
-    if (s == "v") spawnChildVertical();
-    if (s == "u") spawnGroundMonster();
-    if (s == "8") spawnDreamLady();
-    if (s == "9") spawnDreamPuzan();*/
+    if (s == "c") this.spawnObstacle("car", 40);
+    if (s == "l") this.spawnObstacle("luke", 40);
+    if (s == "z") this.spawnObstacle("conus", 20);
+    /*  if (s == "z") spawnVeryRandomZomby();
+      if (s == "a") spawnArmoredSimple();
+      if (s == "A") spawnArmoredPolice();
+      if (s == "w") spawnWorm();
+      if (s == "2") spawnJumper();
+      if (s == "1") spawnSaw();
+      if (s == "0") spawnRocket();
+      if (s == "r") spawnRandomMonster();
+      if (s == "R") spawnRandomMonster2();
+      if (s == "o") spawnMoneyMonster();
+      if (s == "b") spawnBoss1();
+      if (s == "t") spawnBoss2();
+      if (s == "g") spawnBoss3();
+      if (s == "l") spawnLadyMonster();
+      if (s == "m") spawnMacMonster();
+      if (s == "c") spawnChildMonster();
+      if (s == "p") spawnPolice();//+
+      if (s == "d") spawnDonut();//+
+      if (s == "h") spawnHead();//+
+      if (s == "i") spawnPirate();//
+      if (s == "k") spawnKamikaze();//
+      if (s == "G") spawnGrenadeMonster();
+      if (s == "v") spawnChildVertical();
+      if (s == "u") spawnGroundMonster();
+      if (s == "8") spawnDreamLady();
+      if (s == "9") spawnDreamPuzan();*/
     var p = 0.014;
     var d = 5000;
    /* if (Main.Instance.gameStage.currentLevel == 14)

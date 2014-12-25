@@ -131,32 +131,7 @@ GameStage.prototype.onHide = function(newStage) {
 }
 
 GameStage.prototype.loseGame = function() {
-    if (gameStage.losing) return;
-    gameStage.losing = true;
 
-    var c = new CObj(0, 0);
-    c.gfx = new PIXI.Sprite(PIXI.Texture.fromFrame("FAIL.png"));
-    c.gfx.width = SCR_WIDTH;
-    c.gfx.height = SCR_HEIGHT;
-    SM.inst.fg.addChild(c.gfx);
-
-    var t = new CTextField(SCR_WIDTH / 2, SCR_HEIGHT
-    / 2);
-    t.fontFamily = 0;
-    t.fontSize = 62;
-    t.align = "center";
-    t.tint = 0xEE0000;
-    t.gfx = CTextField.createTextField(t);
-    t.text = "Don't kill tomatoes!";
-    t.updateGraphics();
-    SM.inst.ol.addChild(t.gfx);
-
-    if (gameStage.winDelayedCall)
-        gameStage.winDelayedCall.kill();
-
-    TweenMax.delayedCall(0.8, function () {
-        SM.inst.openStage(gameStage);
-    });
 }
 
 GameStage.prototype.remGfx = function(obj)
@@ -168,9 +143,10 @@ GameStage.prototype.remGfx = function(obj)
     }
 }
 
-GameStage.prototype.doLevelComplete = function()
+GameStage.prototype.sessionEnd = function()
 {
-    gameStage.pause();
+   gameStage.fadeScreen();
+   gameStage.pause();
    LevelManager.loadLevel("levelgameover", gameStage.updateWindowLevWin, SM.inst.guiLayer);
 }
 
@@ -279,6 +255,7 @@ GameStage.prototype.onShow = function() {
     CObj.objects.push(LauncherBG.inst);
 
     MM.inst.monsterQueue = MM.inst.levels[0];
+
 }
 
 
@@ -356,6 +333,17 @@ GameStage.prototype.createPools = function() {
             return c;});
 }
 
+GameStage.prototype.fadeScreen = function()
+{
+    gameStage.pauseTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
+    gameStage.pauseTexture.render(stage);
+    gameStage.pauseSprite  = new PIXI.Sprite(gameStage.pauseTexture);
+    /*gameStage.pauseSprite.beginFill(0x5599AA, 0.4);
+    gameStage.pauseSprite.drawRect(0, 0, SCR_WIDTH, SCR_HEIGHT);
+    gameStage.pauseSprite.endFill();*/
+    SM.inst.guiLayer.addChild(gameStage.pauseSprite);
+}
+
 //NO "THIS" IN CURRENT CONTEXT
 GameStage.prototype.onLoadEnd = function()
 {
@@ -369,7 +357,8 @@ GameStage.prototype.onLoadEnd = function()
     SM.inst.guiLayer.addChild(xxx);
 
     var floorHeight = 120;
-    gameStage.floor = new FloorObj(SCR_WIDTH / 2, SCR_HEIGHT - floorHeight / 2, "brickbig");
+    gameStage.floor = new FloorObj(SCR_WIDTH / 2, SCR_HEIGHT - floorHeight / 2, null);
+    gameStage.floor.gfx = new PIXI.DisplayObjectContainer();
     gameStage.floor.gfx.width = SCR_WIDTH;
     gameStage.floor.gfx.height = floorHeight;
     gameStage.floor.gfx.visible = false;
@@ -401,11 +390,9 @@ GameStage.prototype.onLoadEnd = function()
             SM.inst.fontLayer.children[i].visible = false;
         }
         TweenMax.pauseAll();
-        gameStage.pauseTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
-        gameStage.pauseTexture.render(stage);
-        gameStage.pauseSprite  = new PIXI.Sprite(gameStage.pauseTexture);
-        gameStage.pauseSprite.tint = 0x99fffa;
-        SM.inst.guiLayer.addChild(gameStage.pauseSprite);
+
+        gameStage.fadeScreen();
+
         TweenMax.killTweensOf(menuBtn, true);
         LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.guiLayer);
     }
@@ -441,6 +428,7 @@ GameStage.prototype.onLoadEnd = function()
         updateDS();
         gameStage.updateSoundBtn(gameStage.muteBtn);
     }
+    gameStage.sessionEnd();
 
 }
 

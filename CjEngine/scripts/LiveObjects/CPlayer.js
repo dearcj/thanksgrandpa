@@ -70,7 +70,7 @@ CPlayer.prototype.createDedGraphics = function()
 CPlayer.prototype.kill = function()
 {
     this.destroy();
-    gameStage.doLevelComplete();
+    gameStage.sessionEnd();
 }
 
 CPlayer.prototype.destroy = function()

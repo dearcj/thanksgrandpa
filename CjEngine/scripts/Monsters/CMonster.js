@@ -3,8 +3,8 @@
  */
 extend(CMonster, CLiveObj, true);
 
-function CMonster(in_x,in_y,textname,in_body){
-    CLiveObj.apply(this,[in_x,in_y,textname,in_body]);
+function CMonster(in_x,in_y,textname,cr_bar){
+    CLiveObj.apply(this,[in_x,in_y,textname,null]);
     this.radius = 50;
     this.colGroup = CG_MONSTER;
     this.colMask = CG_PLAYER;
@@ -14,12 +14,14 @@ function CMonster(in_x,in_y,textname,in_body){
     CMonster.list.push(this);
     this.maxHp = 50;
     this.hp = this.maxHp;
-    this.bar = new CHPBar(in_x, in_y, "barHpBG");
-    this.bar.upperImage = "textureHP";
-    this.bar.init();
-    this.bar.gfx.scale.x = 0.1;
-    this.bar.gfx.scale.y = 0.2;
-    this.bar.prop = 1;
+    if (cr_bar) {
+        this.bar = new CHPBar(in_x, in_y, "barHpBG");
+        this.bar.upperImage = "textureHP";
+        this.bar.init();
+        this.bar.gfx.scale.x = 0.1;
+        this.bar.gfx.scale.y = 0.2;
+        this.bar.prop = 1;
+    }
     this.process();
     this.dmg = 0.5;
 }
@@ -35,8 +37,10 @@ CMonster.prototype.collide = function (obj2)
 
 CMonster.prototype.process = function()
 {
-    this.bar.x = this.x - this.bar.gfx.width * 0.5 - 10;
-    this.bar.y = this.y - this.radius*1.5;
+    if (this.bar) {
+        this.bar.x = this.x - this.bar.gfx.width * 0.5 - 10;
+        this.bar.y = this.y - this.radius * 1.5;
+    }
     CLiveObj.prototype.process.call(this);
 }
 
