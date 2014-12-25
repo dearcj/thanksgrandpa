@@ -225,6 +225,9 @@ GameStage.prototype.doKeyDown = function(evt) {
 GameStage.prototype.onShow = function() {
     CustomStage.prototype.onShow.call(this);
 
+
+    $(document).on('keydown keyup keypress', this.doKeyDow);
+    $('iframe').on('keydown keyup keypress', this.doKeyDow);
     window.addEventListener("keydown", this.doKeyDown, false );
     gameStage.currentLevel = 1;
 
