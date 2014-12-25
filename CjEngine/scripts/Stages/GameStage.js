@@ -225,7 +225,7 @@ GameStage.prototype.doKeyDown = function(evt) {
 GameStage.prototype.onShow = function() {
     CustomStage.prototype.onShow.call(this);
 
-
+    window.parent.addEventListener("keydown", this.doKeyDown, false );
     window.addEventListener("keydown", this.doKeyDown, false );
     gameStage.currentLevel = 1;
 
