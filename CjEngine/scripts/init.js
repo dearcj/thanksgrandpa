@@ -74,6 +74,8 @@ dbInit = function() {
     vkparams.sid = getURLParameter("sid");
     vkparams.viewerid = getURLParameter("viewer_id");
 
+
+    //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid)
     {
         vkparams.viewerid = 2882845;
@@ -84,10 +86,6 @@ dbInit = function() {
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
-    console.log("APIVK" + vkparams.userid);
-    console.log("APIVsK" + vkparams.viewerid);
-    console.log("HREF = " + window.location.href);
-    console.log("SEARCH = " + window.location.search);
     //  userid = 444;
     azureclient.invokeApi("login", {
         body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},

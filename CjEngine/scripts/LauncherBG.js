@@ -2,20 +2,19 @@
  * Created by KURWINDALLAS on 19.11.2014.
  */
 
-LauncherBG = function(in_x,in_y,textname,in_body) {
+extend(LauncherBG, CObj, true);
+
+
+function LauncherBG(in_x,in_y,textname,in_body) {
     CObj.apply(this, [in_x, in_y, textname, in_body]);
     this.levCycles = [];
     this.gfx = new PIXI.DisplayObjectContainer();
     SM.inst.bg.addChild(this.gfx);
-    var inx = CObj.objects.indexOf(this);
-    CObj.objects.splice(inx);
+    this.maxVelocity = 8;
+  //  var inx = CObj.objects.indexOf(this);
+  //  CObj.objects.splice(inx);
     this.distance = 0;
 }
-
-extend(LauncherBG, CObj, true);
-
-LauncherBG.inst = new LauncherBG(0,0);
-LauncherBG.inst.maxVelocity = 8;
 
 LauncherBG.prototype.clear = function()
 {
@@ -25,6 +24,7 @@ LauncherBG.prototype.clear = function()
 
 LauncherBG.prototype.destroy = function()
 {
+    this.clear();
     CObj.prototype.destroy.call(this);
 }
 
@@ -53,6 +53,7 @@ LauncherBG.prototype.process = function()
 {
     CObj.prototype.process.call(this);
 
+    if (this.levCycles.length == 0) return;
     var upper = this.levCycles[0].layers[this.levCycles[0].layers.length - 1];
     this.distance += upper.velocity / 100;
     var t = this.levCycles[0].layers.length;

@@ -423,24 +423,29 @@ Object.defineProperty(CObj.prototype, 'rotation', {
     }
 });
 
-CObj.SORT_LAYERS = function(a, b)
-{
-    if (a.layer == b.layer) {
-        //return 0;
-        if (a.creationIndex > b.creationIndex) return -1; else return 1;
-    }
-    else if (a.layer > b.layer) return -1; else return 1
-}
 
 CObj.DeserializeArray = function(data){
-var count = data.objects.length;
+
+    sortlayers = function(a, b)
+    {
+        if (a.layer == b.layer) {
+            //return 0;
+            if (a.creationIndex > b.creationIndex) return 1.; else return -1.;
+        }
+        else if (a.layer > b.layer) return 1.; else return -1.;
+        return -1;
+    }
+
+
+    var count = data.objects.length;
 var objs = [];
     for (i = 0; i < count; i++) {
     var obj = CObj.DeserializeCObj(data.objects[i]);
         obj.creationIndex = i;
+        obj.layer ;;//= parseInt();
       objs.push(obj);
    }
-   objs = objs.sort(CObj.SORT_LAYERS);
+    objs.sort(sortlayers);
 
 
     return objs;

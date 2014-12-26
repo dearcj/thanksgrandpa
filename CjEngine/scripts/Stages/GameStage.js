@@ -3,10 +3,10 @@
  */
 function GameStage() {
     this.invFR = 1 / FRAME_RATE;
+    this.state = "game";
 }
 
 extend(GameStage, CustomStage);
-
 
 Object.defineProperty(GameStage.prototype, 'worldSpeed', {
     get: function () {
@@ -25,7 +25,6 @@ Object.defineProperty(GameStage.prototype, 'worldSpeed', {
         }
     }
 });
-
 
 GameStage.prototype.createHPBar = function( x, y, max)
 {
@@ -76,9 +75,9 @@ GameStage.prototype.createCircle = function(w, x, y, r)
 
 GameStage.prototype.process = function()
 {
-    if (this.doPhys)
+ /*   if (this.doPhys)
     world.step(this.invFR*this._worldSpeed);
-
+*/
     if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40)
     {
         gameStage.player.fire();
@@ -107,8 +106,9 @@ GameStage.prototype.onHide = function(newStage) {
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
 
-    var inx = CObj.objects.indexOf(LauncherBG.inst);
-    CObj.objects.splice(inx, 1);
+
+/*    var inx = CObj.objects.indexOf(LauncherBG.inst);
+    CObj.objects.splice(inx, 1);*/
     CObj.destroyAll();
     gameStage.preWinText = null;
 
@@ -143,11 +143,173 @@ GameStage.prototype.remGfx = function(obj)
     }
 }
 
+
+
+GameStage.prototype.shAfterLife = function()
+{
+    var cb = new CircleBar(SCR_WIDTH / 2, SCR_HEIGHT / 2);
+    cb.init();
+    SM.inst.guiLayer.addChild(cb.gfx);
+    openCharStage = function()
+    {
+        removeafterlife();
+        gameStage.openEndWindow();
+    }
+
+    removeafterlife = function () {
+        gainbgsprite.parent.removeChild(gainbgsprite);
+        bodrtext.parent.removeChild(bodrtext);
+        tf.parent.removeChild(tf);
+        cb.gfx.visible = false;
+    }
+
+
+    new TweenMax(cb, 5, {pos: 1, onComplete: openCharStage});
+    var bodrtext = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost text.png"));
+    bodrtext.anchor.x = 0.5;
+    bodrtext.anchor.y = 0.5;
+    bodrtext.x = SCR_WIDTH / 2;
+    bodrtext.y = SCR_HEIGHT / 2 - 108;
+    SM.inst.guiLayer.addChild(bodrtext);
+
+    cb.gfx.interactive = true;
+    
+    cb.gfx.click = function()
+    {
+        if (PlayerData.inst.playerItem.crystals > 1)
+        {
+            removeafterlife();
+            TweenMax.killTweensOf(cb);
+            gameStage.removeFade();
+            gameStage.unpause();
+            gameStage.state = "game";
+            PlayerData.inst.playerItem.crystals--;
+            PlayerData.inst.savePlayerData();
+        }
+    }
+
+    var gainbgsprite = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost star.png"));
+    gainbgsprite.anchor.x = 0.5;
+    gainbgsprite.anchor.y = 0.5;
+    gainbgsprite.x = SCR_WIDTH / 2;
+    gainbgsprite.y = SCR_HEIGHT / 2 + 120;
+    SM.inst.guiLayer.addChild(gainbgsprite);
+
+
+    var tf = CTextField.createTextField({text: "1", fontSize: 22, align: "center"});
+    tf.x = 8 + SCR_WIDTH / 2;
+    tf.y = SCR_HEIGHT / 2 + 107;
+    SM.inst.guiLayer.addChild(tf);
+}
+
+GameStage.prototype.openEndWindow = function() {
+    LevelManager.loadLevel("levelgameover", gameStage.openEndWindowLoaded, SM.inst.guiLayer);
+}
+
+GameStage.prototype.openEndWindowLoaded = function() {
+
+    function addLine(num)
+    {
+        var l = -70;
+        var space = CObj.getById("div").y + 10;
+        var d = 44;
+        var tf1 = new CTextField(SCR_WIDTH / 2 - 100 + l, space + num*d);
+        tf1.text = (num + 1).toString() + ".";
+        tf1.fontSize = 18;
+        tf1.init();
+        tf1.id = "tf" + (num + 1).toString() + "1";
+
+        var tf2 = new CTextField(SCR_WIDTH / 2 + l, space + num*d);
+        tf2.text = "---";
+        tf2.align = "center";
+        tf2.fontSize = 18;
+        tf2.init();
+        tf2.id = "tf" + (num + 1).toString() + "2";
+
+        var tf3 = new CTextField(SCR_WIDTH / 2 + 85 + l, space + num*d);
+        tf3.text = "---";
+        tf3.fontSize = 18;
+        tf3.init();
+        tf3.id = "tf" + (num + 1).toString() + "3";
+    }
+
+    CObj.getById("tfmon").text  = PlayerData.inst.score.toString();
+    CObj.getById("tfprev").text = LauncherBG.inst.distance.toString() + " м";
+
+    var rec =  PlayerData.inst.playerItem.maxdistance;
+    if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance)
+    {
+        rec = LauncherBG.inst.distance;
+
+    }
+    CObj.getById("tfrec").text = rec.toString() + " м";
+
+
+    for (var i = 1; i <= 5; ++i) {
+        CObj.getById("b" + i.toString()).gfx.visible = false;
+        CObj.getById("b" + i.toString()).text = "";
+    }
+
+    PlayerData.inst.playerItem.money += PlayerData.inst.score;
+    PlayerData.inst.playerItem.maxdistance = rec;
+    PlayerData.inst.savePlayerData();
+
+
+    for (var i = 0; i < 5; ++i)
+    {
+        addLine(i);
+    }
+
+    azureclient.invokeApi("get_scores", {
+        body: {filter: vkparams.friendsIngameIDs, take: 5, skip: scoreStage.skip},
+        method: "post"
+    }).done(function (results) {
+        var arr = results.result;
+        arr = [{name: "ПИсюкин", last_name: "Антон", maxdistance: 2000}, {name: "ПИсюкин", last_name: "Антон", maxdistance: 1000}, {name: "ПИсюкин", last_name: "Антон", maxdistance: 500}];
+        for (var i = 0; i < Math.min(5, arr.length); ++i)
+        {
+            CObj.getById("tf" + (i + 1).toString() + "2").text = arr[i].name + " " + arr[i].last_name;
+            CObj.getById("tf" + (i + 1).toString() + "3").text = arr[i].maxdistance.toString();
+            if (rec > arr[i].maxdistance) {
+                CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
+                CObj.getById("b" + (i + 1).toString()).text = "Я тебя уделал";
+                CObj.getById("b" + (i + 1).toString()).click = function ()
+                {
+                    VK.api("wall.post", {owner_id: vkparams.viewerid, message: arr[i].name + " " + arr[i].last_name + ", я тебя уделал!", attachments: ["https://vk.com/app4654201"]}, function (data)
+                    {
+
+
+                    });
+
+                }
+            }
+
+        }
+
+        for (var j = i; j < 5; ++j)
+        {
+            CObj.getById("b" + (j + 1).toString()).gfx.visible = true;
+            CObj.getById("b" + (j + 1).toString()).text = "Пригласить в игру";
+            CObj.getById("b" + (j + 1).toString()).click = function ()
+            {
+                VK.callMethod("showInviteBox");
+            }
+
+        }
+
+    }, function(error) {
+
+    });
+}
+
+
 GameStage.prototype.sessionEnd = function()
 {
-   gameStage.fadeScreen();
+   gameStage.state = "endsession";
    gameStage.pause();
-   LevelManager.loadLevel("levelgameover", gameStage.updateWindowLevWin, SM.inst.guiLayer);
+   gameStage.fadeScreen();
+   gameStage.shAfterLife();
+
 }
 
 GameStage.prototype.updateWindowLevWin = function()
@@ -155,7 +317,6 @@ GameStage.prototype.updateWindowLevWin = function()
     ZSound.Play("levelWIN");
 
     gameStage.doPhys = false;
-
 }
 
 GameStage.prototype.removeFromToolsObject = function(obj)
@@ -191,14 +352,6 @@ GameStage.prototype.updateScore = function()
     gameStage.scoreObj.text = PlayerData.inst.score.toString() + "$";
 }
 
-GameStage.prototype.minusScore = function()
-{
-    if (!gameStage.doProcess) return;
-    PlayerData.inst.score -= 15;
-    gameStage.updateScore();
-
-    gameStage.scoreTimeoutID = TweenMax.delayedCall(1., gameStage.minusScore);
-}
 
 // event.type должен быть keypress
 function getChar(event) {
@@ -216,6 +369,8 @@ function getChar(event) {
 }
 
 GameStage.prototype.doKeyDown = function(evt) {
+
+   if (gameStage.state != "game") return;
     evt = evt || window.event;
     var c = getChar(evt);
     if (evt.which == 87)
@@ -225,30 +380,12 @@ GameStage.prototype.doKeyDown = function(evt) {
 GameStage.prototype.onShow = function() {
     CustomStage.prototype.onShow.call(this);
 
-  //  window.parent.addEventListener("keydown", this.doKeyDown, false );
     window.addEventListener("keydown", this.doKeyDown, false );
     gameStage.currentLevel = 1;
-
     this.doProcess = false;
-    var bgname = "BG2";
-    if (gameStage.currentLevel > 26)
-    {
-        bgname = "BG3"
-    } else
-    if (gameStage.currentLevel > 13)
-    {
-        bgname = "BG4"
-    }
-
-   /* var bg = new CObj(SCR_WIDTH / 2, SCR_HEIGHT / 2, bgname);
-    bg.gfx.parent.removeChild(bg.gfx);
-    bg.gfx.width = SCR_WIDTH;
-    bg.gfx.height = SCR_HEIGHT;
-    SM.inst.ol.addChildAt(bg.gfx, 0);
-*/
     LevelManager.loadLevel("hud", gameStage.onLoadEnd, SM.inst.guiLayer);
 
-
+    LauncherBG.inst = new LauncherBG(0,0);
     LauncherBG.inst.addLevel("plantPart2");
     for (var i =0; i < 2500; ++i)
     LauncherBG.inst.process();
@@ -256,13 +393,10 @@ GameStage.prototype.onShow = function() {
     CObj.objects.push(LauncherBG.inst);
 
     MM.inst.monsterQueue = MM.inst.levels[0];
-
 }
-
 
 GameStage.prototype.makePause = function() {
     gameStage.doPhys = false;
-
 
     CObj.getById("bresume").click = function () {
         while (LevelManager.objs.length > 0) {
@@ -271,9 +405,7 @@ GameStage.prototype.makePause = function() {
         }
         LevelManager.objs = null;
         gameStage.doPhys = true;
-
         TweenMax.resumeAll();
-
 
         for (var i = 0; i < SM.inst.fontLayer.children.length; ++i) {
             SM.inst.fontLayer.children[i].visible = true;
@@ -334,14 +466,29 @@ GameStage.prototype.createPools = function() {
             return c;});
 }
 
+GameStage.prototype.removeFade = function()
+{
+    TweenMax.killTweensOf(gameStage.pauseSprite);
+    gameStage.pauseSprite.parent.removeChild(gameStage.pauseSprite);
+    gameStage.pauseSprite = null;
+
+    PIXI.Texture.removeTextureFromCache(gameStage.pauseTexture);
+    gameStage.pauseTexture.destroy();
+    gameStage.pauseTexture = null;
+
+
+}
+
 GameStage.prototype.fadeScreen = function()
 {
     gameStage.pauseTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
-    gameStage.pauseTexture.render(stage);
-    gameStage.pauseSprite  = new PIXI.Sprite(gameStage.pauseTexture);
-    /*gameStage.pauseSprite.beginFill(0x5599AA, 0.4);
+    gameStage.pauseSprite = new PIXI.Graphics();//PIXI.Sprite(gameStage.pauseTexture);
+    gameStage.pauseSprite.beginFill(0x55FFDD, 0.4);
     gameStage.pauseSprite.drawRect(0, 0, SCR_WIDTH, SCR_HEIGHT);
-    gameStage.pauseSprite.endFill();*/
+    gameStage.pauseSprite.endFill();
+    gameStage.pauseSprite.alpha = 0;
+    gameStage.pauseSprite.blendMode = PIXI.blendModes.DIFFERENCE;
+    new TweenMax(gameStage.pauseSprite, 1.1, {alpha: 1, ease: Elastic.easeOut});
     SM.inst.guiLayer.addChild(gameStage.pauseSprite);
 }
 
@@ -370,6 +517,7 @@ GameStage.prototype.onLoadEnd = function()
     gameStage.player.gfx.scale.x = 0.8;
     gameStage.player.gfx.scale.y = 0.8;
     SM.inst.fg.addChild( gameStage.player.gfx);
+    gameStage.player.process();
 
     gameStage.scoreObj = CObj.getById("score");
     gameStage.updateScore();
@@ -398,18 +546,15 @@ GameStage.prototype.onLoadEnd = function()
         LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.guiLayer);
     }
 
-    CObj.getById("timeout").gfx.visible = false;
-    CObj.getById("timeout").text = "";
 
     CObj.getById("levels").click = function () {
         SM.inst.openStage(charStage);
     }
 
 
-    stage.touchstart = function (md) {
+   stage.touchstart = function (md) {
         gameStage.fireState = true;
     }
-
 
     stage.touchend = function (md) {
         gameStage.fireState = false;
@@ -430,7 +575,17 @@ GameStage.prototype.onLoadEnd = function()
         gameStage.updateSoundBtn(gameStage.muteBtn);
     }
     gameStage.sessionEnd();
+}
 
+GameStage.prototype.unpause = function()
+{
+    gameStage.doProcess = true;
+    //if (!gameStage.doPhys) return;
+    /*   for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
+     {
+     SM.inst.fontLayer.children[i].visible = false;
+     }*/
+    TweenMax.resumeAll();
 }
 
 GameStage.prototype.pause = function()
@@ -438,10 +593,10 @@ GameStage.prototype.pause = function()
     if (! gameStage.doProcess) return;
     gameStage.doProcess = false;
     //if (!gameStage.doPhys) return;
-    for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
+ /*   for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
     {
         SM.inst.fontLayer.children[i].visible = false;
-    }
+    }*/
     TweenMax.pauseAll();
 }
 

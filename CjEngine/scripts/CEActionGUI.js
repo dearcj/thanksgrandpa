@@ -59,6 +59,7 @@ CEActionGUI.prototype.destroy = function()
 {
     this.progressbg = null;
     this.progressfore = null;
+    this.icoevent = null;
     this.event = null;
     this.eventpl = null;
     CObj.prototype.destroy.call(this);
