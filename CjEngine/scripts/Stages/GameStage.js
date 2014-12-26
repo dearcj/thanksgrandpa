@@ -260,7 +260,7 @@ GameStage.prototype.openEndWindowLoaded = function() {
         addLine(i);
     }
 
-    res = 4000;
+    rec = 4000;
 
     azureclient.invokeApi("get_scores", {
         body: {filter: vkparams.friendsIngameIDs, take: 5, skip: scoreStage.skip},
