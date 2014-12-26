@@ -280,9 +280,8 @@ GameStage.prototype.openEndWindowLoaded = function() {
                 {
                     CObj.getById("b" + (i + 1).toString()).click = function ()
                     {
-                        VK.api("wall.post", {owner_id: vkparams.viewerid, message: friendObject.name + " " + friendObject.last_name + ", я тебя уделал!", attachments: ["https://vk.com/app4654201"]}, function (data)
+                        VK.api("wall.post", {owner_id: vkparams.viewerid, message: friendObject.name + " " + friendObject.last_name + ", я тебя уделал!", attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]}, function (data)
                         {
-
 
                         });
 
