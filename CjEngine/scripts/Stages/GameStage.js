@@ -275,15 +275,22 @@ GameStage.prototype.openEndWindowLoaded = function() {
             if (rec > arr[i].maxdistance) {
                 CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
                 CObj.getById("b" + (i + 1).toString()).text = "Я тебя уделал";
-                CObj.getById("b" + (i + 1).toString()).click = function ()
+
+                function setClick(i, friendObject)
                 {
-                    VK.api("wall.post", {owner_id: vkparams.viewerid, message: arr[i].name + " " + arr[i].last_name + ", я тебя уделал!", attachments: ["https://vk.com/app4654201"]}, function (data)
+                    CObj.getById("b" + (i + 1).toString()).click = function ()
                     {
+                        VK.api("wall.post", {owner_id: vkparams.viewerid, message: friendObject.name + " " + friendObject.last_name + ", я тебя уделал!", attachments: ["https://vk.com/app4654201"]}, function (data)
+                        {
 
 
-                    });
+                        });
+
+                    }
 
                 }
+
+                setClick(i, arr[i]);
             }
 
         }
