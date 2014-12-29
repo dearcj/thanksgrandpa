@@ -200,7 +200,7 @@ CObj.prototype.process = function(){
     if (this.gravityEnabled)
     {
         this.vy += this.gravPower;
-        this.vx = -LauncherBG.inst.maxVelocity;
+        this.vx = this.vx*0.5 + (-LauncherBG.inst.maxVelocity)*0.5;
     }
     this.updateGraphics();
 };
@@ -313,8 +313,7 @@ CObj.processAll = function(){
             CObj.objects[i].y > SCR_HEIGHT*1.3 || CObj.objects[i].y < -SCR_HEIGHT*0.3 )
         {
             if (CObj.checkType(CObj.objects[i], CHPBar)) continue;
-            if (CObj.objects[i].kill)
-            CObj.objects[i].kill();
+            CObj.objects[i].destroy();
             continue;
         }
 

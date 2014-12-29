@@ -44,13 +44,15 @@ AchStage.prototype.updateAchievements = function()
    // achStage.desc = achStage.createDesc();
 
    // SM.inst.fg.addChild(achStage.desc);//achStage.updateDesc(AM.inst.achs[1]);
+    var numColumns = 3;
     for (var i = 0; i < AM.inst.achs.length ;++i)
     {
         var ach = AM.inst.achs[i];
-        achObject = new PIXI.Sprite(PIXI.Texture.fromFrame(ach.img+ ".png"));
-        achObject.x = 50;
-        achObject.y = 50 + i*90;
-        achObject.width = 60;
+        achObject = new PIXI.Sprite(PIXI.Texture.fromFrame("orden.png"));
+
+        achObject.x = 220 + (i % numColumns)*200;
+        achObject.y = 120+Math.floor(i / numColumns)*220;
+        achObject.width = 90;
         achObject.scale.y = achObject.scale.x;
         achObject.anchor.x = 0.5;
         achObject.anchor.y = 0.5;
@@ -86,15 +88,16 @@ AchStage.prototype.onHide = function(newStage) {
 
 AchStage.prototype.onShowContinue = function()
 {
-//https://github.com/dearcj/thanksgrandpa.git
     achStage.doProcess = true;
-    CObj.getById("btnback").click = function(){
+    var btn = CObj.getById("btnback");
+    btn.click = function(){
         SM.inst.openStage(charStage);
     };
 
-    achStage.bar = new CScrollbar(400,332, "", 380, 524);
+    achStage.bar = new CScrollbar(400,338, "", SCR_WIDTH, 524, "ordena background 1 px.png");
+    achStage.bar.gfx.parent.removeChild(achStage.bar.gfx);
+    SM.inst.bg.addChild(achStage.bar.gfx);
     achStage.updateAchievements();
-
 }
 
 

@@ -84,6 +84,18 @@ GameStage.prototype.process = function()
     }
     CObj.processAll();
 
+    if (gameStage.jumping)
+    {
+        if (gameStage.jumpboost && gameStage.player.vy< 0)
+            gameStage.player.vy *= 1.048;
+
+        if (gameStage.player.vy < -17)
+        {
+            gameStage.jumpboost = false;
+            gameStage.player.vy = -17;
+            console.log("BOOST OFF");
+        }
+    }
     var d = Math.floor(LauncherBG.inst.distance);
     gameStage.distText.text = d.toString();
     MM.inst.process();
@@ -236,11 +248,10 @@ GameStage.prototype.openEndWindowLoaded = function() {
     CObj.getById("tfmon").text  = PlayerData.inst.score.toString();
     CObj.getById("tfprev").text = LauncherBG.inst.distance.toString() + " м";
 
-    var rec =  PlayerData.inst.playerItem.maxdistance;
+    var rec =  Math.round(PlayerData.inst.playerItem.maxdistance);
     if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance)
     {
-        rec = LauncherBG.inst.distance;
-
+        rec = Math.round(LauncherBG.inst.distance);
     }
     CObj.getById("tfrec").text = rec.toString() + " м";
 
@@ -267,6 +278,8 @@ GameStage.prototype.openEndWindowLoaded = function() {
         method: "post"
     }).done(function (results) {
         var arr = results.result;
+
+        ////CCREMOVE
         arr = [{name: "ПИсюкин", last_name: "Антон", maxdistance: 2000}, {name: "ПИсюкин", last_name: "Антон", maxdistance: 1000}, {name: "ПИсюкин", last_name: "Антон", maxdistance: 500}];
         for (var i = 0; i < Math.min(5, arr.length); ++i)
         {
@@ -381,14 +394,33 @@ GameStage.prototype.doKeyDown = function(evt) {
    if (gameStage.state != "game") return;
     evt = evt || window.event;
     var c = getChar(evt);
-    if (evt.which == 87)
-   gameStage.player.jump();
+    if (evt.which == 87 && !gameStage.jumping) {
+        gameStage.jumping = true;
+        gameStage.jumpboost = true;
+        gameStage.player.gravityEnabled = true;
+        gameStage.player.vy = -13;
+        console.log("JUMP");
+    }
 }
+
+GameStage.prototype.doKeyUp = function(evt) {
+
+    if (gameStage.state != "game") return;
+    evt = evt || window.event;
+    var c = getChar(evt);
+    if (evt.which == 87) {
+        gameStage.jumpboost = false;
+       // gameStage.jumping = false;
+        console.log("JUMP END");
+    }
+}
+
 
 GameStage.prototype.onShow = function() {
     CustomStage.prototype.onShow.call(this);
 
     window.addEventListener("keydown", this.doKeyDown, false );
+    window.addEventListener("keyup", this.doKeyUp, false );
     gameStage.currentLevel = 1;
     this.doProcess = false;
     LevelManager.loadLevel("hud", gameStage.onLoadEnd, SM.inst.guiLayer);
@@ -398,13 +430,11 @@ GameStage.prototype.onShow = function() {
     for (var i =0; i < 2500; ++i)
     LauncherBG.inst.process();
     LauncherBG.inst.distance = 0;
-    CObj.objects.push(LauncherBG.inst);
 
     MM.inst.monsterQueue = MM.inst.levels[0];
 }
 
 GameStage.prototype.makePause = function() {
-    gameStage.doPhys = false;
 
     CObj.getById("bresume").click = function () {
         while (LevelManager.objs.length > 0) {
@@ -413,24 +443,18 @@ GameStage.prototype.makePause = function() {
         }
         LevelManager.objs = null;
         gameStage.doPhys = true;
-        TweenMax.resumeAll();
+        gameStage.unpause();
+        gameStage.removeFade();
 
-        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i) {
-            SM.inst.fontLayer.children[i].visible = true;
-        }
 
-        gameStage.pauseSprite.parent.removeChild(gameStage.pauseSprite);
-        gameStage.pauseTexture.destroy();
-        gameStage.pauseTexture = null;
-        gameStage.pauseSprite = null;
-        CObj.getById("menu").gfx.mouseout(null);
     }
+//    gameStage.doPhys = false;
 
-    CObj.getById("blevs").click = function () {
+    /*CObj.getById("blevs").click = function () {
         SM.inst.openStage(levSel);
     }
-
-    CObj.getById("bmore").click = window.openSponsorWindow;
+*/
+     //   CObj.getById("bmore").click = window.openSponsorWindow;
 }
 
 GameStage.prototype.createPools = function() {
@@ -546,8 +570,10 @@ GameStage.prototype.onLoadEnd = function()
         {
             SM.inst.fontLayer.children[i].visible = false;
         }
-        TweenMax.pauseAll();
 
+
+        gameStage.state = "paused";
+        gameStage.pause();
         gameStage.fadeScreen();
 
         TweenMax.killTweensOf(menuBtn, true);
@@ -582,7 +608,7 @@ GameStage.prototype.onLoadEnd = function()
         updateDS();
         gameStage.updateSoundBtn(gameStage.muteBtn);
     }
-    gameStage.sessionEnd();
+  //  gameStage.sessionEnd();
 }
 
 GameStage.prototype.unpause = function()

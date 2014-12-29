@@ -18,7 +18,7 @@ FloorObj.prototype.process = function()
         for (var i = 0; i < CObj.objects.length; ++i) {
             var o = CObj.objects[i];
             if (CObj.checkType(o, CMonster)) {
-                if (o.y + o.radius / 2 > floorLine) {
+                if (o.vy > 0 && o.y + o.radius / 2 > floorLine) {
                     o.destroy();
                 }
             }

@@ -8,7 +8,7 @@ function CCoin(in_x,in_y,textname,in_body) {
     this.gravityEnabled = true;
     this.colGroup = 1;
     this.colMask = CG_PLAYER;
-    this.gravPower = 0.35;
+    this.gravPower = 0.6;
     this.radius = 15;
 }
 

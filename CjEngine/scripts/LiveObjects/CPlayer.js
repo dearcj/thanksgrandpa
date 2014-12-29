@@ -6,6 +6,7 @@ extend(CPlayer, CLiveObj, true);
 function CPlayer(in_x,in_y,textname,in_body){
     CLiveObj.apply(this,[in_x,in_y,null,in_body]);
 
+    this.gravPower = 0.77;
     this.gfx = this.createDedGraphics();
     this.fireAngle = 0;
     this.weapon = w_pistol;
@@ -16,6 +17,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.maxHp = 5;
     this.hp = 5;
     this.startPlayerX = this.x;
+    this.baseY = this.y;
     this.radius = this.gfx.width / 2;
 }
 
@@ -90,6 +92,15 @@ CPlayer.prototype.jump = function()
 CPlayer.prototype.process = function()
 {
 
+    if (this.vy > 0 && this.y > this.baseY)
+    {
+        {
+            this.vy = 0;
+            gameStage.jumping = false;
+            this.y = this.baseY;
+            this.gravityEnabled = false;
+        }
+    }
     if (SM.inst.currentStage == gameStage) {
         if (!this.jumpTween || !this.jumpTween.isActive()) {
             this.freq = 800;
@@ -113,9 +124,11 @@ CPlayer.prototype.process = function()
 
 CPlayer.prototype.dealDamage = function(dmg)
 {
-    for (var i = 0; i < this.gfx.children.length; ++i) {
-        if (this.dedWeaponContainer == this.gfx.children[i]) continue;
-        new TweenMax(this.gfx.children[i], 0.2, {tint: 0xff0000, repeat: 1, yoyo: true});
+    if   (!TweenMax.isTweening(this.gfx.children[0])) {
+       for (var i = 0; i < this.gfx.children.length; ++i) {
+            if (this.dedWeaponContainer == this.gfx.children[i]) continue;
+            new TweenMax(this.gfx.children[i], 0.3, {ease: Linear.ease, tint: 0xff0000, repeat: 1, yoyo: true});
+        }
     }
     this.hp = this.hp - dmg;
 }
@@ -133,7 +146,6 @@ CPlayer.prototype.fire = function()
         new TweenMax(w, time, {x: -5, rotation: -0.04, yoyo: true, repeat: 1});
         this.handTween = new TweenMax(this.dedLeftHand, time, { rotation: this.dedLeftHand.rotation-0.04, yoyo: true, repeat: 1});
         new TweenMax(this.dedRightHand, time, { rotation: this.dedRightHand.rotation-0.04, yoyo: true, repeat: 1});
-
     }
 
 }

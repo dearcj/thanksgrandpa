@@ -14,7 +14,7 @@ function CMonster(in_x,in_y,textname,cr_bar){
     CMonster.list.push(this);
     this.maxHp = 50;
     this.hp = this.maxHp;
-    if (cr_bar) {
+    if (cr_bar == true || cr_bar == null) {
         this.bar = new CHPBar(in_x, in_y, "barHpBG");
         this.bar.upperImage = "textureHP";
         this.bar.init();
@@ -50,7 +50,9 @@ CMonster.prototype.kill = function()
     for (var i = 0; i < 5; ++i)
     {
         var c = new CCoin(this.x, this.y, "coin");
-        c.vx = 20*(Math.random() - 0.5);
+        var maxvx = 20 + Math.random()*10;
+        c.vx = maxvx;
+      //  new TweenMax(c, 0.4, {vx: maxvx});
         c.vy = -20*(Math.random());
     }
     this.prekilled = true;
