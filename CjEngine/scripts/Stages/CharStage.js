@@ -86,7 +86,10 @@ CharStage.prototype.onShowContinue = function()
 
     shopStage.updateStatsPanel();
 
-     if (vkparams.first_name)
+    CObj.getById("btnorder").click = order;
+
+
+    if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
 
     CObj.getById("bshop").click = function() {
