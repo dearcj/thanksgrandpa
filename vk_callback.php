@@ -82,6 +82,21 @@ case 'order_status_change':
       if ($input['status'] == 'chargeable') {
         $order_id = intval($input['order_id']);
 
+$user_id = $input['receiver_id'];
+  ?>
+      <script src="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.min.js"></script>
+      <script>
+        var azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75");
+        var x = <?php echo json_encode($user_id);?>;
+
+       azureclient.invokeApi("givemoneytosomeguy", {
+        body: {userid: x},
+        method: "post"
+    }).done(function (r) {
+      }, function (r){});
+        //
+      </script>
+<?php>
 // Код проверки товара, включая его стоимость
         $app_order_id = 1; // Получающийся у вас идентификатор заказа.
 
