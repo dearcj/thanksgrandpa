@@ -5,7 +5,8 @@ extend(CButton, CObj, true);
 
 function CButton(in_x,in_y,textname,in_body){
     CObj.apply(this,[in_x,in_y,textname,in_body]);
-    this.PublicFields += 'text,fontFamily,fontSize,align';
+    this.PublicFields += 'text,fontFamily,fontSize,align,hover';
+ //   this.hover = true;
 }
 
 
@@ -16,9 +17,6 @@ CButton.prototype.destroy = function()
     this.textField = null;
     this.click = null;
 }
-
-
-
 
 Object.defineProperty(CButton.prototype, 'click', {
     get: function () {
@@ -80,22 +78,20 @@ CButton.prototype.updateGraphics=function()
     if (this.doRemove) return;
     CObj.prototype.updateGraphics.call(this);
     if (this.gfx && this.textField) {
-       // if (!window.iphone3) {
-       //     this.textField.scale.x = this.gfx.scale.x;
-        //    this.textField.scale.y = this.gfx.scale.y;
-     //   }
-/*
-        {
-
-            this.textField.x = -this.gfx.width / 2 + this.textField.width / 2;// - this.gfx.width * 0.25;
-            this.textField.y = -this.gfx.height / 2 + this.textField.height*0.7;// + this.textField.height / 4;// - this.gfx.height * 0.25;
-
-        } else
-*/
         if (!this.addToSameLayer)
-      {
-            this.textField.x = this.gfx.x - this.textField.width / 2;// - this.gfx.width * 0.25;
-            this.textField.y = this.gfx.y - this.textField.height * 0.7;// + this.textField.height / 4;// - this.gfx.height * 0.25;
+        {
+            var dx = 0;
+            var dy = 0;
+            if (this.hover)
+            {
+               if (this.y > SCR_HEIGHT - 100)
+                {
+                    dy = -50;
+                } else dy = 50;
+
+            }
+            this.textField.y = this.gfx.y - this.textField.height * 0.7 + dy;// + this.textField.height / 4;// - this.gfx.height * 0.25;
+            this.textField.x = this.gfx.x - this.textField.width / 2 + dx;// - this.gfx.width * 0.25;
         }
     }
 }
@@ -110,10 +106,22 @@ CButton.prototype.init = function(){
     }
     this.gfx.interactive = true;
     this.align = "center";
-    this.fontSize = parseInt(this.fontSize);
+    if (this.fontSize != "")
+    this.fontSize = parseInt(this.fontSize); else
+        this.fontSize = "30";
+
     this.textField = CTextField.createTextField(this);
     if  (this.postCreatedContainer)
     this.textField.interactive = true;
+
+    if (this.hover == "" || this.hover == "true") this.hover = true;
+    if (this.hover == "false") this.hover = false;
+
+
+    if (this.hover)
+    {
+        this.textField.alpha = 0;
+    }
     //this.getText();
     if (this.text)
     this.text = this.text;
@@ -127,9 +135,12 @@ CButton.prototype.init = function(){
     this.baseScaleY = f.scale.y;
     var bsX = this.baseScaleX;
     var bsY = this.baseScaleY;
+    var obj = this;
     this.updateGraphics();
        this.gfx.mouseover = function (evt) {
         TweenMax.killTweensOf(f.scale);
+
+
 
            f.tint = 0xaaffaa;
            new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
@@ -137,8 +148,20 @@ CButton.prototype.init = function(){
         new TweenMax(tf.scale, 0.6, {y: 1+0.1, ease: Elastic.easeOut} );
         new TweenMax(tf.scale, 0.4, {x: 1+0.1, ease: Elastic.easeOut} );
 
+           if (obj.hover)
+           {
+               obj.textField.alpha = 1;
+               obj.updateGraphics();
+           }
+
     }
     this.gfx.mouseout = function (evt) {
+
+        if (obj.hover)
+        {
+            obj.textField.alpha = 0;
+        }
+
         f.tint = 0xffffff;
         if (f.currentFrame)
         f.gotoAndStop(1);

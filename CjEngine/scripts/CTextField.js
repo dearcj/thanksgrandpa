@@ -59,13 +59,13 @@ CTextField.convertSpaces = function(a)
 
 CTextField.createTextField = function(obj) {
     var inx = 0;
-    for (var s in PIXI.BitmapText.fonts) {
-        if (!obj.fontFamily || inx == obj.fontFamily) {
-            font = PIXI.BitmapText.fonts[s];
-        //    font.lineHeight *= 0.98;
-            break;
-        }
-        inx++;
+
+    var font = PIXI.BitmapText.fonts["dedgamedesc"];
+
+    if (obj.fontFamily && obj.fontFamily != "") {
+        var fnt = PIXI.BitmapText.fonts[obj.fontFamily];
+        if (fnt != undefined)
+        font = fnt;
     }
 
         if (!obj.fontSize || obj.fontSize == undefined)
@@ -77,9 +77,16 @@ CTextField.createTextField = function(obj) {
     if (!obj.align || obj.align == "") obj.align = "left";
 
     var breaks = 0;
+    if (obj.fontFamily == "dedgamecaps")
+    {
+        obj.text = obj.text.toUpperCase();
+    }
+
     if (obj.text) {
         obj.text = CTextField.convertSpaces(obj.text);
     }
+
+
 
     var pt = new PIXI.BitmapText(obj.text, {font: fontParam, align: "center", valign: "center"});
     pt.align = "center";

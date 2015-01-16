@@ -78,8 +78,6 @@ CWeapon.prototype.updateAmmo = function()
     CObj.getById("ammobar").prop =(this.ammo / this.magCapacity);
 }
 
-
-
 CWeapon.prototype.reload = function()
 {
     var wp = this;

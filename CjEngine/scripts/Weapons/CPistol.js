@@ -16,7 +16,21 @@ CPistol.prototype.shot = function()
     var fireAngle = gameStage.player.fireAngle + Math.random()*this.backupStats.acc;
    var vx = Math.cos(fireAngle);
  var vy = Math.sin(fireAngle);
- var b = new CBullet(gameStage.player.x + vx * gameStage.player.bulletStart, gameStage.player.y + vy* gameStage.player.bulletStart, "bomb1");
+    //
+    //
+
+    var xx =
+        gameStage.player.firePointX + vx*gameStage.player.bulletStart;
+    var yy = gameStage.player.firePointY+ vy* gameStage.player.bulletStart;
+    var fx = new PIXI.Sprite(PIXI.Texture.fromFrame("fxblink.png"));
+    fx.x = xx;
+    fx.y = yy;
+    fx.rotation = fireAngle;
+    SM.inst.fg.addChild(fx);
+
+    TweenMax.delayedCall(0.1, function (){fx.parent.removeChild(fx);});
+
+    var b = new CBullet(xx, yy, "bomb1");
     b.dmg = this.damage;
     b.rotation = Math.PI / 2 + fireAngle;
     b.vx = vx*40.5;

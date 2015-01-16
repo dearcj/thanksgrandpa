@@ -56,6 +56,18 @@ LauncherBG.prototype.process = function()
     if (this.levCycles.length == 0) return;
     var upper = this.levCycles[0].layers[this.levCycles[0].layers.length - 1];
     this.distance += upper.velocity / 100;
+
+    if (this.distance > 100 && this.distance < 120){
+        PlayerData.inst.progressAch("Gold medal 2", 1);
+    }
+
+    if (this.distance > 500 && this.distance < 520){
+        PlayerData.inst.progressAch("Gold medal 3", 1);
+    }
+    if (this.distance > 1000 && this.distance < 1020){
+        PlayerData.inst.progressAch("Gold medal 4", 1);
+    }
+
     var t = this.levCycles[0].layers.length;
     for (var i = 0; i < t; ++i)
     {

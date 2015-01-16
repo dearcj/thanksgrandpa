@@ -57,6 +57,8 @@ CMonster.prototype.kill = function()
     }
     this.prekilled = true;
 
+    PlayerData.inst.gainExp(this.xp);
+
     var parent = this.gfx.parent;
     parent.removeChild(this.gfx);
 
@@ -75,6 +77,8 @@ CMonster.prototype.kill = function()
         CLiveObj.prototype.kill.call(f);
     };
     this.updateGraphics();
+
+
     //new TweenMax(this.gfx, 0.7, {currentFrame: this.gfx.totalFrames, onComplete: CLiveObj.prototype.kill.call, onCompleteParams: [this]});
     //TweenMax.delayedCall(0.7, , [this]);
 

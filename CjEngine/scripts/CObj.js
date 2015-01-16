@@ -197,6 +197,7 @@ CObj.prototype.collide = function(obj2){
 CObj.prototype.process = function(){
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
+
     if (this.gravityEnabled)
     {
         this.vy += this.gravPower;

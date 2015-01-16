@@ -3,13 +3,13 @@
  */
 
 var tWeapon = "weap";
-var tPerk = "perl";
+var tPerk = "perk";
 var tBoost = "boost";
-
+var tApp = "appearence";
 
 function checkDb ()
 {
-   // updDb(dbobj);
+    updDb(dbobj);
 }
 
 var dbobj =
@@ -43,14 +43,52 @@ var dbobj =
             [
                 {
                     name: "Gold medal 1",
-                    desc: "descAPRIO"
+                    desc: "Первый бой",
+                    gfx: "orden.png"
                 },
                 {
                     name: "Gold medal 2",
-                    desc: "desc 2"
+                    desc: "Долгий путь 100м", //+
+                    gfx: "orden.png"
+                },
+                {
+                    name: "Gold medal 3",
+                    desc: "Долгий путь 500м", //+
+                    gfx: "orden.png"
+                },
+                {
+                    name: "Gold medal 4",
+                    desc: "Долгий путь 1000м",// +
+                    gfx: "orden.png"
+                },
+                {
+                    name: "Gold medal 5",
+                    desc: "Использовать бустер",
+                    gfx: "orden.png"
+                },
+                {
+                    name: "Gold medal 6",
+                    desc: "10 раз помянул друзей",
+                    gfx: "orden.png"
+                },
+                {
+                    name: "Gold medal 7",
+                    desc: "Убил первого босса",
+                    gfx: "orden.png"
+                }
+                ,
+                {
+                    name: "Gold medal 8",
+                    desc: "5 дней без перерыва", //+
+                    gfx: "orden.png"
+                }
+                ,
+                {
+                    name: "Gold medal 9",
+                    desc: "10 дней без перерыва", //+
+                    gfx: "orden.png"
                 }
             ]
-
     },
     {
         tbname: "tb_items",
@@ -61,27 +99,88 @@ var dbobj =
                     type: tWeapon,
                     price :-1,
                     pricecrys: -1,
-                    name:"Pistol",
+                    name:"Rifle",
                     desc:"Regular pistol",
                     gfx: "item_pistol",
                     reqlvl: -1
                 },
                 {
                     type: tWeapon,
-                    price: 1000,
+                    price: -1,
                     pricecrys: -1,
-                    name: "Shotgun",
+                    name: "AK-74",
                     desc: "Regular shotgun",
                     gfx: "item_shotgun",
                     reqlvl: -1
-                },
+                }
+                ,
                 {
-                    type: tPerk,
+                    type: tWeapon,
                     price: -1,
                     pricecrys: -1,
-                    name: "Grenade",
+                    name: "Minigun",
                     desc: "Граната",
                     gfx: "item_boost1",
+                    reqlvl: -1
+                }
+                ,
+                {
+                    type: tWeapon,
+                    price: -1,
+                    pricecrys: -1,
+                    name: "Grenade launcher",
+                    desc: "Граната",
+                    gfx: "item_boost1",
+                    reqlvl: -1
+                }
+                ,
+                {
+                    type: tBoost,
+                    price: -1,
+                    pricecrys: -1,
+                    name: "Magnet",
+                    desc: "Магнит",
+                    gfx: "item_boost1",
+                    reqlvl: 10
+                }
+                ,
+                {
+                    type: tBoost,
+                    price: -1,
+                    pricecrys: 5,
+                    name: "Tablets",
+                    desc: "Биодобавки",
+                    gfx: "item_boost1",
+                    reqlvl: 10
+                }
+                ,
+                {
+                    type: tBoost,
+                    price: -1,
+                    pricecrys: -1,
+                    name: "Double",
+                    desc: "В два раза больше монет!",
+                    gfx: "item_boost1",
+                    reqlvl: -1
+                }
+                ,
+                {
+                    type: tApp,
+                    price: -1,
+                    pricecrys: -1,
+                    name: "Appearence.Hat1",
+                    desc: "Шляпа 1",
+                    gfx: "hat1",
+                    reqlvl: -1
+                }
+                ,
+                {
+                    type: tApp,
+                    price: -1,
+                    pricecrys: -1,
+                    name: "Appearence.Hat2",
+                    desc: "Шляпа 2",
+                    gfx: "hat2",
                     reqlvl: -1
                 }
             ]

@@ -7,12 +7,15 @@ extend(CharStage, CustomStage);
 
 CharStage.prototype.onShow = function() {
     this.doProcess = false;
+
     CustomStage.prototype.onShow.call(this);
+
+
    LevelManager.loadLevel("levchar", this.onShowContinue);
 }
 
 CharStage.prototype.onHide = function(newStage) {
-
+    charStage.pl = null;
     charStage.frp.parent.removeChild(charStage.frp);
     charStage.frp = null;
     CustomStage.prototype.onHide.call(this, null);
@@ -24,7 +27,7 @@ CharStage.prototype.createFriendsPanel = function() {
     var panel = new PIXI.DisplayObjectContainer();
 
     var skip = 0;
-    for (var i = 0 + skip; i < 8 + skip; ++i)
+    for (var i = 0 + skip; i < 6 + skip; ++i)
     {
         var frClpBtn = new CButton(i*80, 10, "add friend");
         var friendClip = frClpBtn.gfx;//new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
@@ -72,7 +75,7 @@ CharStage.prototype.createFriendsPanel = function() {
         friendClip.addChild(nametf);
     }
 
-    panel.x = 45;
+    panel.x = 215;
     panel.y=SCR_HEIGHT - 50;
     SM.inst.guiLayer.addChild(panel);
 
@@ -87,7 +90,6 @@ CharStage.prototype.onShowContinue = function()
     shopStage.updateStatsPanel();
 
     CObj.getById("btnorder").click = order;
-
 
     if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
@@ -105,11 +107,28 @@ CharStage.prototype.onShowContinue = function()
     };
     CObj.getById("btnfight").click = function(){SM.inst.openStage(gameStage)};
 
-    var pl = new CPlayer(300, 400);
+    var pl = new CPlayer(400, 430);
+    charStage.pl = pl;
+    pl.gfx.scale.x = 0.4;
+    pl.gfx.scale.y = 0.4;
+    pl.gfx.state.setAnimationByName(0, "breath", true);
     SM.inst.ol.addChild(pl.gfx);
 
     var f = pl.gfx; pl.gfx.interactive = true;
     pl.gfx.click = function() {
+     /*    var renderTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
+
+        charStage.bluredBg = new PIXI.Sprite.fromImage("VBG.png");
+        renderTexture.render(stage);
+
+        var b = new PIXI.BlurFilter();
+        charStage.bluredBg.filters = [b];
+        new TweenMax(b, 1, {blur: 30});
+
+        stage.addChild(charStage.bluredBg);
+        //renderer.render(stage);
+*/
+
         if (!charStage.bar.gfx.visible) {
             charStage.bar.gfx.visible = true;
         } else {
@@ -117,6 +136,9 @@ CharStage.prototype.onShowContinue = function()
         }
     }
 
+    PlayerData.inst.comboCheck();
+
+    var baseScl = pl.gfx.scale.x;
     pl.gfx.mouseover = function (evt) {
             TweenMax.killTweensOf(f.scale);
 
@@ -126,8 +148,8 @@ CharStage.prototype.onShowContinue = function()
             {
                 f.children[i].tint =color;
             }
-            new TweenMax(f.scale, 0.6, {y: 1+0.05, ease: Elastic.easeOut} );
-            new TweenMax(f.scale, 0.4, {x: 1+0.05, ease: Elastic.easeOut} );
+            new TweenMax(f.scale, 0.6, {y: baseScl*1.05, ease: Elastic.easeOut} );
+            new TweenMax(f.scale, 0.4, {x: baseScl*1.05, ease: Elastic.easeOut} );
        };
 
     pl.gfx.mouseout = function (evt) {
@@ -139,7 +161,7 @@ CharStage.prototype.onShowContinue = function()
         {
             f.children[i].tint =color;
         }
-        new TweenMax(f.scale, 0.3, {x: 1, y: 1, ease: Elastic.easeOut} );
+        new TweenMax(f.scale, 0.3, {x: baseScl, y: baseScl, ease: Elastic.easeOut} );
     }
 
     charStage.bar = new CScrollbar(602,339, "", 380, 524, "podlozhka actions.png", "scroll line actions.png", "scroll.png", 20);
@@ -148,26 +170,7 @@ CharStage.prototype.onShowContinue = function()
     charStage.updateEvents();
 
     charStage.frp = charStage.createFriendsPanel();
-
-
- /*   var renderTexture = new PIXI.RenderTexture(200, 200);
-    renderTexture.render(stage);
-
-    var mm = renderTexture.getBase64();
-*/
-
-  //  VK.callMethod("showRequestBox");
-
- /*   VK.api('photos.getUploadServer',{aid:"saved"}, function(data) {
-        var url = data.response.upload_url;
-        console.log(url);
-        $.post(mm,
-            {upload_url: url},
-            function (json) {
-                console.log("UPLOADED");
-
-            });
-    });*/
+   // PlayerData.inst.showAch(PlayerData.inst.achs[1]);
 }
 
 CharStage.prototype.updateEvents = function() {
@@ -178,8 +181,6 @@ CharStage.prototype.updateEvents = function() {
         o.init(PlayerData.inst.eventsplayer[i]);
         charStage.bar.container.addChild(o.gfx);
     }
-
-
 
     charStage.bar.pos = 0;
 }

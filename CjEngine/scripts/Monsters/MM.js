@@ -1,6 +1,22 @@
 
 MM = function() {
- this.levels =
+
+
+
+    this.patterns =
+    [
+        {mons: "...l...l...c...z..c..c..s..l.s..l", diff: 1},
+        {mons: ".lll...lll.", diff: 2},
+        {mons: "ss..ss.s..l..ss..l...l...s", diff: 3},
+        {mons: "..ssss..s..l", diff: 4},
+        {mons: "c..c..c..s..sc..sc..sc", diff: 5}
+    ];
+
+
+
+    // c l z - преграды
+    //s - монстр
+    this.levels =
  [
  "ll..ll.......c....z....s.z..s.c..r..s...s...s.c..l..ll...z....l...r...r...s...l...l...s...c...s..r..c..s..l...c....r...r.......o..l.l.....ss..r.....cccc.....r..l..l..l......A",
  "..............c....cccc....svvv..cc.....c.r..s......cccc...o....1...l...l.vv....l..cc....c..r..r...cc....o...c...a..c...m.......l..l.......s......ssss..l..o......a......s...a...s",
@@ -28,6 +44,46 @@ MM = function() {
 MM.inst = new MM();
 
 
+MM.prototype.generateMonsterQueue = function()
+{
+    var s = "";
+    var it = 3000;
+    var d = 0; // distance in dots
+    for (var i = 0; i < it; ++i)
+    {
+        var maxd = 3;
+        var currDiff = ((1 + Math.sin(d / 100))*0.5)*maxd + d / 1000;
+
+        var summ = 0;
+        for (var j = 0; j < this.patterns.length; ++j)
+        {
+            var p = 1 / (Math.abs(this.patterns[j].diff - currDiff) + 1);
+
+            if (j > 0) {
+                this.patterns[j].prob = this.patterns[j - 1].prob + p;
+                this.patterns[j].prob0 = this.patterns[j - 1].prob;
+            } else
+            {
+                this.patterns[j].prob = p;
+                this.patterns[j].prob0 = 0;
+            }
+            summ += p;
+        }
+
+        var r = Math.random()*summ;
+        for (var j = 0; j < this.patterns.length; ++j)
+        {
+            if (r >= this.patterns[j].prob0 && r <= this.patterns[j].prob) break;
+        }
+
+        var inx = j;
+        s += this.patterns[inx].mons;
+        d += this.patterns[inx].mons.length;
+    }
+
+    return s;
+}
+
 MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
 {
     var m = new CMonster(SCR_WIDTH+240,450 + offsY,clip, false);
@@ -43,13 +99,13 @@ MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
 }
 
 
-MM.prototype.spawnSimpleMonster = function()
+MM.prototype.spawnSimpleMonster = function(xp)
 {
     var m = new CMonster(SCR_WIDTH+100,300,"enemy fat");
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
     m.longJump();
-
+    m.xp = xp + LauncherBG.inst.distance*0.01;
     this.lastSpawnSimple =(new Date()).getTime();
     this.simpleMonsterDelay = Math.random() * 1000 + 2000;
 }
@@ -59,7 +115,7 @@ MM.prototype.doStep = function()
     var s = this.monsterQueue.charAt(0);
     this.monsterQueue = this.monsterQueue.slice(1);
 
-    if (s == "s") this.spawnSimpleMonster();
+    if (s == "s") this.spawnSimpleMonster(5);
     if (s == "c") this.spawnObstacle("car", 40, 0);
     if (s == "l") this.spawnObstacle("luke", 40, 15);
     if (s == "z") this.spawnObstacle("conus", 20, 0);

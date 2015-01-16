@@ -18137,6 +18137,7 @@ PIXI.JsonLoader.prototype.onJSONLoaded = function () {
 		}
 		else
 		{
+
 			/* use a bit of hackery to load the atlas file, here we assume that the .json, .atlas and .png files
 			 * that correspond to the spine file are in the same base URL and that the .json and .atlas files
 			 * have the same name

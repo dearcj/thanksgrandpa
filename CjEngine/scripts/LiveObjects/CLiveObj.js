@@ -7,7 +7,7 @@ function CLiveObj(in_x,in_y,textname,in_body) {
     CObj.apply(this, [in_x, in_y, textname, in_body]);
    this._hp = 100;
    this._maxHp = 100;
-    this.bar = null;
+   this.bar = null;
 }
 
 CLiveObj.prototype.kill = function()

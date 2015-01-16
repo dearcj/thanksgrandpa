@@ -41,16 +41,26 @@ AchStage.prototype.updateDesc = function(ach)
 
 AchStage.prototype.updateAchievements = function()
 {
-   // achStage.desc = achStage.createDesc();
+    var numColumns = 4;
 
-   // SM.inst.fg.addChild(achStage.desc);//achStage.updateDesc(AM.inst.achs[1]);
-    var numColumns = 3;
-    for (var i = 0; i < AM.inst.achs.length ;++i)
+
+    for (var i = 0; i < PlayerData.inst.achs_progress.length;++i)
     {
-        var ach = AM.inst.achs[i];
-        achObject = new PIXI.Sprite(PIXI.Texture.fromFrame("orden.png"));
+        var id = PlayerData.inst.achs_progress[i].id_ach;
 
-        achObject.x = 220 + (i % numColumns)*200;
+        for (var j = 0; j < PlayerData.inst.achs.length; ++j)
+        {
+            if (PlayerData.inst.achs[j].id == id)
+            {
+                break;
+            }
+        }
+
+        var ach = PlayerData.inst.achs[j];
+        achObject = new PIXI.Sprite(PIXI.Texture.fromFrame(ach.gfx));
+        if (PlayerData.inst.achs_progress[i].progress < 1)
+        achObject.tint = 0x332299;
+        achObject.x = 95 + (i % numColumns)*200;
         achObject.y = 120+Math.floor(i / numColumns)*220;
         achObject.width = 90;
         achObject.scale.y = achObject.scale.x;
@@ -59,23 +69,11 @@ AchStage.prototype.updateAchievements = function()
         achObject.interactive = true;
 
 
-        var txtName = CTextField.createTextField({text: ach.name, align: "left", fontSize: "24"});
-        txtName.x = 80;//-bg.width / 2;
-        txtName.y = 20 + i*90;//-bg.height / 2;
-        var txtDesc = CTextField.createTextField({text: ach.desc, align: "left", fontSize: "24"});
-        txtDesc.x = 80;//-bg.width / 2;
-        txtDesc.y = 50 + i*90;//-bg.height / 2;
+        var txtName = CTextField.createTextField({text: ach.desc, align: "center", fontSize: "20"});
+        txtName.x = achObject.x - txtName.width / 2;
+        txtName.y = achObject.y + 100;//-bg.height / 2;
         achStage.bar.container.addChild(txtName);
-        achStage.bar.container.addChild(txtDesc);
-
-
-
         achStage.bar.container.addChild(achObject);
-
-
-
-
-
     }
     achStage.bar.pos = 0;
 }
@@ -89,7 +87,7 @@ AchStage.prototype.onHide = function(newStage) {
 AchStage.prototype.onShowContinue = function()
 {
     achStage.doProcess = true;
-    var btn = CObj.getById("btnback");
+    var btn = CObj.getById("btnback2");
     btn.click = function(){
         SM.inst.openStage(charStage);
     };

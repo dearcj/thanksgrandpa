@@ -30,7 +30,7 @@ if ($sig != md5($str.$secret_key)) {
 if ($item == 'item1') {
         $response['response'] = array(
           'item_id' => 25,
-          'title' => '300 золотых монет',
+          'title' => '10 звезд',
           'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
           'price' => 5
         );
@@ -38,7 +38,7 @@ if ($item == 'item1') {
       elseif ($item == 'item2') {
         $response['response'] = array(
           'item_id' => 27,
-          'title' => '500 золотых монет',
+          'title' => '25 звезд',
           'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
           'price' => 10
         );
@@ -57,14 +57,14 @@ case 'get_item_test':
       if ($item == 'item1') {
         $response['response'] = array(
           'item_id' => 125,
-          'title' => '300 золотых монет (тестовый режим)',
+          'title' => '10 звезд (тестовый режим)',
           'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
           'price' => 5
         );
       } elseif ($item == 'item2') {
         $response['response'] = array(
           'item_id' => 127,
-          'title' => '500 золотых монет (тестовый режим)',
+          'title' => '25 звезд (тестовый режим)',
           'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
           'price' => 10
         );

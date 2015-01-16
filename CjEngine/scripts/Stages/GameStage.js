@@ -84,7 +84,7 @@ GameStage.prototype.process = function()
     }
     CObj.processAll();
 
-    if (gameStage.jumping)
+    if (gameStage.player && gameStage.jumping)
     {
         if (gameStage.jumpboost && gameStage.player.vy< 0)
             gameStage.player.vy *= 1.048;
@@ -155,8 +155,6 @@ GameStage.prototype.remGfx = function(obj)
     }
 }
 
-
-
 GameStage.prototype.shAfterLife = function()
 {
     var cb = new CircleBar(SCR_WIDTH / 2, SCR_HEIGHT / 2);
@@ -220,41 +218,41 @@ GameStage.prototype.openEndWindow = function() {
 
 GameStage.prototype.openEndWindowLoaded = function() {
 
-    function addLine(num)
-    {
+    function addLine(num) {
         var l = -70;
         var space = CObj.getById("div").y + 10;
         var d = 44;
-        var tf1 = new CTextField(SCR_WIDTH / 2 - 100 + l, space + num*d);
+        var tf1 = new CTextField(SCR_WIDTH / 2 - 100 + l, space + num * d);
         tf1.text = (num + 1).toString() + ".";
         tf1.fontSize = 18;
         tf1.init();
         tf1.id = "tf" + (num + 1).toString() + "1";
 
-        var tf2 = new CTextField(SCR_WIDTH / 2 + l, space + num*d);
+        var tf2 = new CTextField(SCR_WIDTH / 2 + l, space + num * d);
         tf2.text = "---";
         tf2.align = "center";
         tf2.fontSize = 18;
         tf2.init();
         tf2.id = "tf" + (num + 1).toString() + "2";
 
-        var tf3 = new CTextField(SCR_WIDTH / 2 + 85 + l, space + num*d);
+        var tf3 = new CTextField(SCR_WIDTH / 2 + 85 + l, space + num * d);
         tf3.text = "---";
         tf3.fontSize = 18;
         tf3.init();
         tf3.id = "tf" + (num + 1).toString() + "3";
     }
 
-    CObj.getById("tfmon").text  = PlayerData.inst.score.toString();
-    CObj.getById("tfprev").text = LauncherBG.inst.distance.toString() + " м";
+    CObj.getById("tfmon").text = PlayerData.inst.score.toString();
+    CObj.getById("tfprev").text = Math.round(LauncherBG.inst.distance).toString() + " м";
 
-    var rec =  Math.round(PlayerData.inst.playerItem.maxdistance);
-    if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance)
-    {
+    var rec = Math.round(PlayerData.inst.playerItem.maxdistance);
+    if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance) {
         rec = Math.round(LauncherBG.inst.distance);
     }
     CObj.getById("tfrec").text = rec.toString() + " м";
-
+    CObj.getById("bmenu").click = function (){
+        SM.inst.openStage(charStage);
+    };
 
     for (var i = 1; i <= 5; ++i) {
         CObj.getById("b" + i.toString()).gfx.visible = false;
@@ -397,6 +395,7 @@ GameStage.prototype.doKeyDown = function(evt) {
     if (evt.which == 87 && !gameStage.jumping) {
         gameStage.jumping = true;
         gameStage.jumpboost = true;
+        gameStage.player.gfx.state.setAnimationByName(0, "jump", false);
         gameStage.player.gravityEnabled = true;
         gameStage.player.vy = -13;
         console.log("JUMP");
@@ -416,6 +415,7 @@ GameStage.prototype.doKeyUp = function(evt) {
 }
 
 
+
 GameStage.prototype.onShow = function() {
     CustomStage.prototype.onShow.call(this);
 
@@ -431,7 +431,7 @@ GameStage.prototype.onShow = function() {
     LauncherBG.inst.process();
     LauncherBG.inst.distance = 0;
 
-    MM.inst.monsterQueue = MM.inst.levels[0];
+    MM.inst.monsterQueue = MM.inst.generateMonsterQueue();
 }
 
 GameStage.prototype.makePause = function() {
@@ -448,13 +448,6 @@ GameStage.prototype.makePause = function() {
 
 
     }
-//    gameStage.doPhys = false;
-
-    /*CObj.getById("blevs").click = function () {
-        SM.inst.openStage(levSel);
-    }
-*/
-     //   CObj.getById("bmore").click = window.openSponsorWindow;
 }
 
 GameStage.prototype.createPools = function() {
@@ -546,9 +539,13 @@ GameStage.prototype.onLoadEnd = function()
     gameStage.createHPBar(10, 5, 5);
 
     gameStage.player = new CPlayer(110, gameStage.floor.y - floorHeight / 2 - 50, "");
-    gameStage.player.gfx.scale.x = 0.8;
-    gameStage.player.gfx.scale.y = 0.8;
+    gameStage.player.gfx.pivot.y = -190;
     SM.inst.fg.addChild( gameStage.player.gfx);
+
+    gameStage.player.gfx.state.setAnimationByName(0, "idle", true);
+
+    gameStage.player.gfx.skeleton.setAttachment("gun", "riffle")
+
     gameStage.player.process();
 
     gameStage.scoreObj = CObj.getById("score");

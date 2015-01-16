@@ -20,7 +20,9 @@ function clone(obj) {
 
 function crsp(texName)
 {
-    var s = new PIXI.Sprite(PIXI.Texture.fromFrame(texName+ ".png"));
+    if (texName.length > 4 && texName.charAt(texName.length-4) != ".")
+    var add  = ".png"; else add = "";
+    var s = new PIXI.Sprite(PIXI.Texture.fromFrame(texName + add));
     s.anchor.x = 0.5;
     s.anchor.y = 0.5;
     return s;

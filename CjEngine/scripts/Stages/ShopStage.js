@@ -62,6 +62,7 @@ ShopStage.prototype.createItemBtn = function(item)
     item.pricecrys = 10;
 
     tftext = "";
+    tftext.tint = "0x333333";
     if (!owned) {
         if (item.pricecrys < 0 && item.price < 0)
         tftext = ""; else {
@@ -159,13 +160,14 @@ ShopStage.prototype.createItemBtn = function(item)
         }
     }
     var priceTF = new CTextField();
+    priceTF.tint = "0x333333";
     priceTF.fontSize = 22;
     priceTF.align = "center";
     priceTF.text = tftext;
     priceTF.init();
     g.tfprice = priceTF;
     priceTF.x = g.width / 2 + 10;
-    priceTF.y = 112;
+    priceTF.y = 100;
     priceTF.gfx.parent.removeChild(priceTF.gfx);
     g.addChild(priceTF.gfx);
     priceTF.text = priceTF.text;
@@ -183,11 +185,10 @@ ShopStage.prototype.createItemBtn = function(item)
     return g;
 }
 
-ShopStage.prototype.updateBar = function(tab)
+ShopStage.prototype.updateBar = function(tab, filter)
 {
     shopStage.currentTab = tab;
     CObj.getById("tabsheet").x = CObj.getById(tab).x;
-
 
     for (var i = 0; i < this.bar.container.children.length; ++i)
     {
@@ -196,12 +197,15 @@ ShopStage.prototype.updateBar = function(tab)
     }
 
     var numColumns = 3;
-
+    var l = 0;
     for (var i = 0; i < PlayerData.inst.items.length; ++i) {
+        if (PlayerData.inst.items[i].type != filter) continue;
+
         var g = shopStage.createItemBtn(PlayerData.inst.items[i]);
-        g.x = 10 + (i % numColumns)*120;
-        g.y = 20+Math.floor(i / numColumns)*220;
+        g.x = 10 + (l % numColumns)*120;
+        g.y = 20+Math.floor(l / numColumns)*220;
         this.bar.container.addChild(g);
+        l++;
     }
     this.bar.pos = 0;
 }
@@ -223,8 +227,8 @@ ShopStage.prototype.onShowContinue = function()
 {
     CustomStage.prototype.onShow.call(this);
     shopStage.bar = new CScrollbar(610,332, "", 380, 524);
-   // shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
-
+    shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
+    SM.inst.ol.addChildAt( shopStage.bar.gfx,0);
     shopStage.updateStatsPanel();
 
     CObj.getById("bback").click = function() {
@@ -233,17 +237,27 @@ ShopStage.prototype.onShowContinue = function()
 
 
     CObj.getById("bstuff").click = function() {
-        shopStage.updateBar("bstuff");
+        shopStage.updateBar("bstuff", tBoost);
     }
     CObj.getById("bweap").click = function() {
-        shopStage.updateBar("bweap");
+        shopStage.updateBar("bweap", tWeapon);
     }
 
     CObj.getById("bcloth").click = function () {
-        shopStage.updateBar("bcloth");
+        shopStage.updateBar("bcloth", tApp);
     }
 
-    shopStage.updateBar("bstuff");
+    shopStage.updateBar("bstuff", tBoost);
+
+    var pl = new CPlayer(180, 430);
+    shopStage.pl = pl;
+    pl.gfx.state.setAnimationByName(0, "breath", true);
+    pl.gfx.scale.x = 0.4;
+    pl.gfx.scale.y = 0.4;
+    SM.inst.ol.addChild(pl.gfx);
+    pl.gfx.skeleton.setAttachment("board", null)
+
+
 }
 
 function levelClick(evt){
