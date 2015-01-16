@@ -124,25 +124,3 @@ dbInit = function() {
 
     });*/
 }
-
-VK.addCallback('onOrderSuccess', function(order_id) {
-    var amount = 0;
-    if (window.currentOrder == "item1")
-    {
-        PlayerData.inst.playerItem.crystals += 10;
-    }
-
-    if (window.currentOrder == "item2")
-    {
-        PlayerData.inst.playerItem.crystals += 25;
-    }
-
-    PlayerData.inst.savePlayerData();
-
-    console.log("ON ORDER SUCCESS");
-});
-VK.addCallback('onOrderFail', function() {
-});
-VK.addCallback('onOrderCancel', function() {
-    console.log("ORDER CANCEL");
-});
