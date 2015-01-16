@@ -71,6 +71,7 @@ CScrollbar.prototype.destroy = function()
 CScrollbar.prototype.onWheel = function(e)
 {
     this.pos += e.deltaY / 3;
+    e.stopImmediatePropagation();
 }
 
 function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrolltoucher, dw) {
