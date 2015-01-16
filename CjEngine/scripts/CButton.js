@@ -114,7 +114,7 @@ CButton.prototype.init = function(){
     if  (this.postCreatedContainer)
     this.textField.interactive = true;
 
-    if (this.hover == "" || this.hover == "true") this.hover = true;
+    if (this.hover == undefined || this.hover == "true") this.hover = true;
     if (this.hover == "false") this.hover = false;
 
 
