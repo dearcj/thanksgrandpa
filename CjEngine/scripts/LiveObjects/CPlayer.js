@@ -21,8 +21,6 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.radius = this.gfx.width / 2;
 }
 
-
-
 CPlayer.prototype.createDedGraphics = function()
 {
     var g = new PIXI.Spine("imgtps/skeleton.json");

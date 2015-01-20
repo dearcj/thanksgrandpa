@@ -544,7 +544,7 @@ GameStage.prototype.onLoadEnd = function()
 
     gameStage.player.gfx.state.setAnimationByName(0, "idle", true);
 
-    gameStage.player.gfx.skeleton.setAttachment("gun", "riffle")
+    gameStage.player.gfx.skeleton.setAttachment("gun", "riffle");
 
     gameStage.player.process();
 

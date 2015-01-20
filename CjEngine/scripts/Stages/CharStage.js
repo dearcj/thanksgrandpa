@@ -69,7 +69,7 @@ CharStage.prototype.createFriendsPanel = function() {
         };
         setPhotoCB(friendClip);
 
-        var nametf = CTextField.createTextField({align: "center", text: vkparams.friendsIngame[i].first_name + "\n" + vkparams.friendsIngame[i].last_name});
+        var nametf = CTextField.createTextField({align: "center", text: vkparams.friendsIngame[i].name + "\n" + vkparams.friendsIngame[i].last_name});
         nametf.x -= nametf.width / 2;
         nametf.y = 15;
         friendClip.addChild(nametf);

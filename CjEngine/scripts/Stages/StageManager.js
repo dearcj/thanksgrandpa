@@ -84,9 +84,7 @@ SM.prototype.addLayersToStage = function()
     }
 }
 
-
 SM.prototype.fadeBegin = function(newStage) {
-
         if (this.currentStage) {
             this.currentStage.onHide(newStage);
             this.currentStage.doProcess = false;
@@ -95,9 +93,7 @@ SM.prototype.fadeBegin = function(newStage) {
         newStage.doProcess = true;
         newStage.onShow();
         this.fadeEnd(newStage);
-
-
-    }
+}
 
 SM.prototype.soundplay = function() {
             //sound
