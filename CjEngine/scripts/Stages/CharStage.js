@@ -10,8 +10,8 @@ CharStage.prototype.onShow = function() {
 
     CustomStage.prototype.onShow.call(this);
 
-
    LevelManager.loadLevel("levchar", this.onShowContinue);
+  //  SM.inst.guiLayer.addChild(crsp("btnlevel0002"));
 }
 
 CharStage.prototype.onHide = function(newStage) {

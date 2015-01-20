@@ -5,6 +5,7 @@ extend(CTextField, CObj, true);
 
 function CTextField(in_x,in_y,textname,in_body){
     CObj.apply(this,[in_x,in_y,textname,in_body]);
+    this.text = "";
     this.PublicFields += 'text,fontFamily,fontSize,align,tint, ';
 }
 

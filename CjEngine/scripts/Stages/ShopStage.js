@@ -62,7 +62,7 @@ ShopStage.prototype.createItemBtn = function(item)
     item.pricecrys = 10;
 
     tftext = "";
-    tftext.tint = "0x333333";
+    tftext = "0x333333";
     if (!owned) {
         if (item.pricecrys < 0 && item.price < 0)
         tftext = ""; else {
@@ -73,15 +73,16 @@ ShopStage.prototype.createItemBtn = function(item)
     }
 
     var clickFunc;
-
+var infoText = "";
+    var btnName = "buy button";
     if (!owned) {
         if (item.reqlvl > PlayerData.inst.playerItem.lvl) {
             clickFunc = unlockItem;
             btnName = "unlock button";
-            tftext.text = "МИНИМУМ " + item.reqlvl.toString() + " УРОВЕНЬ";
+            infoText = "МИН " + item.reqlvl.toString() + " УРОВЕНЬ";
         } else {
             clickFunc = buyItem;
-            btnName = "buy button"
+            btnName = "buy button";
         }
     } else
     {
@@ -91,7 +92,7 @@ ShopStage.prototype.createItemBtn = function(item)
             btnName = "wear button"
         }
     }
-        var btn = new CButton(50, 162, btnName);
+        var btn = new CButton(50, 182, btnName);
         btn.fontSize = 33;
         btn.addToSameLayer = true;
         btn.gfx.scale.x = 0.8;
@@ -159,6 +160,21 @@ ShopStage.prototype.createItemBtn = function(item)
             g.addChild(tfBg);
         }
     }
+
+    var infoTF = new CTextField();
+    infoTF.tint = "0x333333";
+    infoTF.fontSize = 15;
+    infoTF.align = "center";
+    infoTF.init();
+    g.infoTF = infoTF;
+    infoTF.x = btn.gfx.width / 2;
+    infoTF.y = 135;
+    infoTF.gfx.parent.removeChild(infoTF.gfx);
+    infoTF.text = infoText;
+    g.addChild(infoTF.gfx);
+
+
+
     var priceTF = new CTextField();
     priceTF.tint = "0x333333";
     priceTF.fontSize = 22;
@@ -166,7 +182,7 @@ ShopStage.prototype.createItemBtn = function(item)
     priceTF.text = tftext;
     priceTF.init();
     g.tfprice = priceTF;
-    priceTF.x = g.width / 2 + 10;
+    priceTF.x = btn.gfx.width / 2 + 10;
     priceTF.y = 100;
     priceTF.gfx.parent.removeChild(priceTF.gfx);
     g.addChild(priceTF.gfx);

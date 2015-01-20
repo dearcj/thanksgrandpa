@@ -181,10 +181,14 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
 
 PlayerData.prototype.loadEnd = function()
 {
-
    PlayerData.inst.createAchProgress();
-   onAssetsLoaded();
-
+   window.dbinit  = true;
+   checkDb();
+   if (window.dbinit && window.loaded)
+   {
+      window.loadingState = "game";
+      assetsButSoundsLoaded();
+   }
    SM.inst.openStage(charStage);
 }
 
@@ -215,12 +219,10 @@ PlayerData.prototype.createAchProgress = function(cb)
       if (!containAch)
       {
          this.achs_progress.push({id_ach: this.achs[i].id, id_player: this.playerItem.id, progress: 0});
-
       }
 
    }
 
-   console;
 }
 
 PlayerData.prototype.loadData = function(cb)
@@ -299,15 +301,6 @@ PlayerData.prototype.loadData = function(cb)
           if (PlayerData.inst.loadCount == totalLoads && cb) cb();
        }, function (res) {}
    );
-
-/*
-
-
- query.where({
- id_player: "Custom:"+user.userId
- });
-*/
-
 }
 
 PlayerData.prototype.savePlayerData = function()

@@ -75,7 +75,7 @@ CWeapon.prototype.canShot = function()
 
 CWeapon.prototype.updateAmmo = function()
 {
-    CObj.getById("ammobar").prop =(this.ammo / this.magCapacity);
+    gameStage.player.ammobar.text = this.ammo.toString();
 }
 
 CWeapon.prototype.reload = function()
@@ -83,7 +83,7 @@ CWeapon.prototype.reload = function()
     var wp = this;
     wp.state = this.sReload;
 
-    new TweenMax(CObj.getById("ammobar"), this.reloadTime / 1000., {prop: 1});
+    new TweenMax(this, this.reloadTime / 1000., {ammo: wp.magCapacity});
     TweenMax.delayedCall(this.reloadTime / 1000., function ()
   {
       wp.state = wp.sFire;

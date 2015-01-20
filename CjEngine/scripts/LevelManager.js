@@ -3,9 +3,6 @@
  */
 LevelManager = function()
 {
-
-
-
 }
 
 LevelManager.totalScore = function()
@@ -20,49 +17,6 @@ LevelManager.totalScore = function()
    }
     return t;
 }
-
-LevelManager.stars3score = [
-    1910, //1
-    2850, //2
-    2770, //3
-    2560, //4
-    4650, //5
-    3050, //6
-    3060, //7
-    3480, //8
-    4760, //9
-    2760, //10
-    4940, //11
-    6800, //12
-    5890, //13
-    4320, //14
-    5400, //15
-    4660, //16
-    3780, //17
-    6200, //18
-    5230, //19
-    6100, //20
-    3520, //21
-    4860, //22
-    3500, //23
-    3820, //24
-    4410, //25
-    3650, //26
-    5820, //27
-    4470, //28
-    4210, //29
-    5200, //30
-    5040, //31
-    2250, //32
-    2370, //33
-    3000, //34
-    5380, //35
-    5370, //36
-    5290, //37
-    3240, //38
-    4770, //39
-    3610
-];
 
 
 LevelManager.getStars = function (lev, totalScore)
@@ -92,7 +46,6 @@ LevelManager.onComplete = function()
         LevelManager.objs[i].init();
     }
 
-
     //OPTIMIZATION ISSUE
     //LevelManager.objs = null;
 
@@ -118,8 +71,6 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer)
     {
         if ((LevelManager.objs[i].sAtlasName != undefined) && (LevelManager.objs[i].sAtlasName!="")&& atlases.indexOf(LevelManager.objs[i].sAtlasName) < 0)
         {
-            if (window.iphone3)
-                atlases.push(LevelManager.objs[i].sAtlasName + "_min"); else
             atlases.push(LevelManager.objs[i].sAtlasName);
         }
     }

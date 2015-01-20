@@ -120,51 +120,8 @@ Function.prototype.generateProperty = function(name, options) {
 
 
 CObj.prototype.init = function(){
-    if (this.body && this.body.type == p2.Body.STATIC && this.isConductor)
-    {
-       var len = CObj.objects.length;
-        for (var j = 0; j < len; ++j)
-        {
-            if (CObj.objects[j] == this || !CObj.objects[j].isConductor || !CObj.objects[j].body || CObj.objects[j].body.motionState != p2.Body.STATIC)
-            continue;
 
-            if (!this.connected) var inxConnect  = -1; else
-            inxConnect = this.connected.indexOf(CObj.objects[j]);
-
-            if (inxConnect >= 0) continue;
-
-            this.body.type = p2.Body.DYNAMIC;
-            for (var i = 0; i < this.body.shapes.length; ++i)
-            {
-                this.body.shapes[i].collisionGroup = world.cgDYNAMIC;
-            }
-            for (var i = 0; i < CObj.objects[j].body.shapes.length; ++i)
-            {
-                CObj.objects[j].body.shapes[i].collisionGroup = world.cgDYNAMIC;
-            }
-
-           // world.step(1/ 10000000);
-            if (this.body.overlaps(CObj.objects[j].body))
-            {
-                this.connected.push(CObj.objects[j]);
-                CObj.objects[j].connected.push(this);
-            }
-            for (var i = 0; i < this.body.shapes.length; ++i)
-            {
-                this.body.shapes[i].collisionGroup = world.cgSTATIC;
-            }
-            for (var i = 0; i < CObj.objects[j].body.shapes.length; ++i)
-            {
-                CObj.objects[j].body.shapes[i].collisionGroup = world.cgSTATIC;
-            }
-
-
-            this.body.type = p2.Body.STATIC;
-        }
-   }
 }
-
-CObj.conductClips = ["tracktor", "tracktorwheel", "engine", "guiBGitem", "powerField0001", "propeller", "generatorRound", "bomb1", "tomato", "chest", "block1", "blockmetal", "balka1", "generator", "chickentestsmall", "mister chicken", "metalstatic"];
 
 CObj.prototype.updateElectroGfx = function(obj){
     if (obj.sensor) return;
@@ -214,8 +171,8 @@ CObj.prototype._destroy = function(){
     if (this.gfx && this.gfx.parent) this.gfx.parent.removeChild(this.gfx);
     this.gfx = null;
 
-    if (this.body)
-        world.removeBody(this.body);
+    // if (this.body)
+     //   world.removeBody(this.body);
 }
 
 CObj.prototype.destroy = function(){
@@ -540,7 +497,8 @@ CObj.AssignTexturesToObjects = function (objs, layerToAdd){
             img.height += 1;
 
             objs[i].gfx = img;
-            if (layerToAdd) layerToAdd.addChild(img);
+            if (layerToAdd)
+                layerToAdd.addChild(img);
     }
 }
 
@@ -552,7 +510,7 @@ CObj.setBodyMass = function (b, density)
 
 CObj.getBodyFromJSON = function (d)
 {
-
+    return null;
     var isStatic  = false;
 
     if (!CObj.steelMaterialHiFriction) {

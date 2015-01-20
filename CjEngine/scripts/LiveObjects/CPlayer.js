@@ -11,7 +11,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.fireAngle = 0;
     this.weapon = w_pistol;
     this.bar = CObj.getById("hpbar");
-    this.ammobar = CObj.getById("ammobar");
+    this.ammobar = CObj.getById("ammot");
     this.colGroup = CG_PLAYER;
     this.nullPhase = 0;
     this.maxHp = 5;
