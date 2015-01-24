@@ -27,45 +27,45 @@ if ($sig != md5($str.$secret_key)) {
       $item = $input['item']; // наименование товара
     if ($item == 'item1') {
         $response['response'] = array(
-          'item_id' => 601,
+          'item_id' => 611,
           'title' => '100 монет',
-          'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
+          'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
           'price' => 1
         );
       }
       elseif ($item == 'item2') {
         $response['response'] = array(
-          'item_id' => 602,
+          'item_id' => 612,
           'title' => '1200 монет',
-          'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
+          'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
           'price' => 10
         );
       }
       elseif ($item == 'item3') {
                $response['response'] = array(
-                 'item_id' => 603,
+                 'item_id' => 613,
                  'title' => '7000 монет',
-                 'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
+                 'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
                  'price' => 50
                );
              }
       elseif ($item == 'item4') {
                      $response['response'] = array(
-                       'item_id' => 701,
+                       'item_id' => 711,
                        'title' => '3 звезд',
                        'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                        'price' => 1
                      );}
       elseif ($item == 'item5') {
                            $response['response'] = array(
-                             'item_id' => 702,
+                             'item_id' => 712,
                              'title' => '15 звезд',
                              'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                              'price' => 10
                            );}
       elseif ($item == 'item6') {
                                  $response['response'] = array(
-                                   'item_id' => 703,
+                                   'item_id' => 713,
                                    'title' => '80 звезд',
                                    'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                                    'price' => 50);
@@ -86,7 +86,7 @@ case 'get_item_test':
             $response['response'] = array(
               'item_id' => 601,
               'title' => '100 монет',
-              'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
+              'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
               'price' => 1
             );
           }
@@ -94,7 +94,7 @@ case 'get_item_test':
             $response['response'] = array(
               'item_id' => 602,
               'title' => '1200 монет',
-              'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
+              'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
               'price' => 10
             );
           }
@@ -102,7 +102,7 @@ case 'get_item_test':
                    $response['response'] = array(
                      'item_id' => 603,
                      'title' => '7000 монет',
-                     'photo_url' => 'https://pp.vk.me/c625724/v625724259/16774/FkNfzQleIHc.jpg',
+                     'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
                      'price' => 50
                    );
                  }
