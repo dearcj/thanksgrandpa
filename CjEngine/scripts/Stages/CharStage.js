@@ -119,15 +119,15 @@ CharStage.prototype.onShowContinue = function()
 
             CObj.getById("buy1").click = function(){order("item1");};
 
-            CObj.getById("buy2").click = function(){order("item1");};
+            CObj.getById("buy2").click = function(){order("item2");};
 
-            CObj.getById("buy3").click = function(){order("item1");};
+            CObj.getById("buy3").click = function(){order("item3");};
 
-            CObj.getById("buy4").click = function(){order("item1");};
+            CObj.getById("buy4").click = function(){order("item4");};
 
-            CObj.getById("buy5").click = function(){order("item1");};
+            CObj.getById("buy5").click = function(){order("item5");};
 
-            CObj.getById("buy6").click = function(){order("item1");};
+            CObj.getById("buy6").click = function(){order("item6");};
 
             CObj.getById("btnclose").click = close;
             CObj.getById("btnfree").click = close;
