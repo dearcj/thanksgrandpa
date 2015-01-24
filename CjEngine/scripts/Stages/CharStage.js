@@ -68,7 +68,7 @@ CharStage.prototype.createFriendsPanel = function() {
         };
         setPhotoCB(friendClip);
 
-        var nametf = CTextField.createTextField({fontSize: "18", align: "center", text: vkparams.friendsIngame[i].name + "\n" + vkparams.friendsIngame[i].last_name});
+        var nametf = CTextField.createTextField({fontSize: "14", align: "center", text: vkparams.friendsIngame[i].name + vkparams.friendsIngame[i].last_name});
         nametf.x -= nametf.width / 2;
         nametf.y = 15;
         friendClip.addChild(nametf);
@@ -93,41 +93,32 @@ CharStage.prototype.onShowContinue = function()
         var hided = [];
         CObj.enableButtons(false);
 
-        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
-        {
-            SM.inst.fontLayer.children[i].visible = false;
-            hided.push(SM.inst.fontLayer.children[i]);
-        }
+        CObj.getById("tname").gfx.visible = false;
         var wnd = SM.inst.addDisableWindow(null, SM.inst.guiLayer);
 
         LevelManager.loadLevel("levelpremium", function()
         {
             close = function()
             {
+                CObj.getById("tname").gfx.visible = false;
                 LevelManager.removeLastLevel();
 
-                for (var i = 0; i < hided.length; ++i)
-                {
-                    hided[i].visible = true;
-                }
-
-                hided = null;
 
                 CObj.enableButtons(true);
                 wnd.parent.removeChild(wnd);
             };
 
-            CObj.getById("buy1").click = function(){order("item1");};
+            CObj.getById("buy1").click = function(){order("item1"); shopStage.updateStatsPanel();};
 
-            CObj.getById("buy2").click = function(){order("item2");};
+            CObj.getById("buy2").click = function(){order("item2");shopStage.updateStatsPanel();};
 
-            CObj.getById("buy3").click = function(){order("item3");};
+            CObj.getById("buy3").click = function(){order("item3");shopStage.updateStatsPanel();};
 
-            CObj.getById("buy4").click = function(){order("item4");};
+            CObj.getById("buy4").click = function(){order("item4");shopStage.updateStatsPanel();};
 
-            CObj.getById("buy5").click = function(){order("item5");};
+            CObj.getById("buy5").click = function(){order("item5");shopStage.updateStatsPanel();};
 
-            CObj.getById("buy6").click = function(){order("item6");};
+            CObj.getById("buy6").click = function(){order("item6");shopStage.updateStatsPanel();};
 
             CObj.getById("btnclose").click = close;
             CObj.getById("btnfree").click = close;
