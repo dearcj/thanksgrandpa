@@ -3,14 +3,26 @@
  */
 PlayerData = function(pi)
 {
-   this.xpLevel = [0, 100, 200, 500, 1500, 2500, 4000, 7500, 12000, 20000, 25000];
+   this.xpLevel = [
+      {crystals: 0, money: 25, xp: 0},
+      {crystals: 0, money: 50, xp: 250},
+      {crystals: 0, money: 100, xp: 400},
+      {crystals: 0, money: 200, xp: 500},
+      {crystals: 0, money: 400, xp: 1000},
+      {crystals: 0, money: 800, xp: 1800},
+      {crystals: 0, money: 1000, xp: 3300},
+      {crystals: 0, money: 1500, xp: 6000},
+      {crystals: 0, money: 2000, xp: 10000},
+      {crystals: 0, money: 2500, xp: 18000},
+      {crystals: 0, money: 3000, xp: 25000}];
+
    this.items = {};
    this.achs = {};
    if (pi) {
       this.playerItem = pi;
 
    }// else this.loadEnd();
-
+   this.activeBoosters = [];
 
    this.score = 0;
    this.loadData(this.loadEnd);
@@ -57,19 +69,19 @@ PlayerData.prototype.getItemById = function(id)
    return null;
 }
 
+PlayerData.prototype.getType = function (item_player)
+{
+   for (var i = 0; i < PlayerData.inst.items.length; ++i)
+   {
+      if (PlayerData.inst.items[i].id == item_player.id_item)
+         return PlayerData.inst.items[i].type;
+   }
+   return null;
+}
 PlayerData.prototype.equipItem = function(item)
 {
 
-   function getType(item_player)
-   {
-      for (var i = 0; i < PlayerData.inst.items.length; ++i)
-      {
-         if (PlayerData.inst.items[i].id == item_player.id_item)
-         return PlayerData.inst.items[i].type;
-      }
 
-      return null;
-   }
    var id = item.id;
 
    var itemOwned = false;
@@ -84,7 +96,7 @@ PlayerData.prototype.equipItem = function(item)
 
    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
    {
-      if (getType(PlayerData.inst.items_enabled[i]) == itemtype)
+      if (this.getType(PlayerData.inst.items_enabled[i]) == itemtype)
       {
          if (PlayerData.inst.items_enabled[i].id_item == id)
             PlayerData.inst.items_enabled[i].equipped = true; else
@@ -99,11 +111,41 @@ PlayerData.prototype.equipItem = function(item)
 PlayerData.prototype.gainExp = function(amount)
 {
    this.playerItem.xp += amount;
-   if (this.playerItem.xp >= this.xpLevel[this.playerItem.lvl])
+   if (this.playerItem.xp >= this.xpLevel[this.playerItem.lvl].xp && this.playerItem.lvl + 1 < this.xpLevel.length)
    {
-      this.playerItem.xp -= this.xpLevel[this.playerItem.lvl];
+      this.playerItem.xp -= this.xpLevel[this.playerItem.lvl].xp;
+      this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
+      this.playerItem.crystals += this.xpLevel[this.playerItem.lvl].crystals;
       this.playerItem.lvl++;
       this.savePlayerData();
+
+      if (SM.inst.currentStage == gameStage)
+      {
+         gameStage.pause();
+         LevelManager.loadLevel("levelup",
+             function()
+             {
+                CObj.getById("moneytf").text = PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].money.toString();
+                CObj.getById("crystalstf").text = PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].crystals.toString();
+                CObj.getById("levnum").text = PlayerData.inst.playerItem.lvl.toString();
+                CObj.getById("btnclose").click = function()
+                {
+                   for (var i = 0;i < LevelManager.objs.length; ++i)
+                   {
+                      LevelManager.objs[i].destroy();
+                   }
+                   LevelManager.objs = null;
+                   gameStage.unpause();
+                };
+
+
+             }
+             , SM.inst.guiLayer);
+
+      }
+
+
+
    }
 }
 
@@ -135,7 +177,7 @@ PlayerData.prototype.showAch = function(ach)
 
    new TweenMax(cont, 0.4, {y: bg.height / 2});
  //  TweenMax.delayedCall(1, );
-  new TweenMax(cont, 0.3, {delay: 1.8, alpha: 0., onComplete: function () {ach.parent.removeChild(ach);}});
+  new TweenMax(cont, 0.3, {delay: 1.8, alpha: 0., onComplete: function () {cont.parent.removeChild(cont);}});
 }
 
 
@@ -154,7 +196,7 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
    var complete = false;
    for (var j = 0; j < this.achs_progress.length; ++j)
    {
-      if (this.achs_progress[j].id == this.achs[i].id)
+      if (this.achs_progress[j].id_ach == this.achs[i].id)
       {
 
          if (replace)
@@ -281,6 +323,47 @@ PlayerData.prototype.loadData = function(cb)
    window.azureclient.getTable("tb_item_player").read().done(
        function (results) {
           PlayerData.inst.items_enabled = results;
+
+
+          var defaultRifleID = "68AFAEDC-B3E0-401E-9E1A-E272084F2E11";
+
+
+
+          var found = false;
+          for (var i = 0;i < PlayerData.inst.items_enabled.length; ++i)
+          {
+             var iditem = PlayerData.inst.items_enabled[i].id_item;
+            if (iditem == defaultRifleID)
+            {
+               found = true;
+               break;
+            }
+          }
+
+          if (!found)
+          {
+             azureclient.invokeApi("buy_item", {
+                body: {id_item: defaultRifleID, id_player: PlayerData.pid},
+                method: "post"
+             }).done(function (results) {
+             }, function(error) {
+             });
+
+             var eq = true;
+             if (PlayerData.inst.items_enabled.length > 0) eq = false;
+             PlayerData.inst.items_enabled.push(
+                 {
+                    id_item: defaultRifleID,
+                    id_player:PlayerData.pid,
+                    equipped: eq
+                 }
+             );
+
+
+
+             PlayerData.inst.savePlayerItems();
+          }
+
           PlayerData.inst.loadCount ++;
           if (PlayerData.inst.loadCount == totalLoads && cb) cb();
        }, function (res) {}
@@ -315,9 +398,7 @@ PlayerData.prototype.savePlayerAchs = function()
 {
    for (var i = 0; i < PlayerData.inst.achs_progress.length; ++i)
       window.azureclient.getTable("tb_achs_player").update(PlayerData.inst.achs_progress[i]).done(function (result) {
-         //   alert("updating done");
       }, function (err) {
-         //   alert("Error: " + err);
       });
 }
 
@@ -326,9 +407,7 @@ PlayerData.prototype.savePlayerEvents = function()
 {
    for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i)
       window.azureclient.getTable("tb_edevent_player").update(PlayerData.inst.eventsplayer[i]).done(function (result) {
-      //   alert("updating done");
       }, function (err) {
-      //   alert("Error: " + err);
       });
 }
 
@@ -337,9 +416,7 @@ PlayerData.prototype.savePlayerItems = function()
 {
    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
    window.azureclient.getTable("tb_item_player").update(PlayerData.inst.items_enabled[i]).done(function (result) {
-   //   alert("updating done");
    }, function (err) {
-   //   alert("Error: " + err);
    });
 }
 
@@ -348,8 +425,6 @@ PlayerData.prototype.savePlayerData = function()
 {
    window.azureclient.getTable("tb_players").update(PlayerData.inst.playerItem).done(function (result) {
       PlayerData.inst.playerItem = result;
-   //   alert("updating done");
    }, function (err) {
-   //   alert("Error: " + err);
    });
 }

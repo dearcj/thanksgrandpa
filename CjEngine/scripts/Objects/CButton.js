@@ -12,6 +12,10 @@ function CButton(in_x,in_y,textname,in_body){
 
 CButton.prototype.destroy = function()
 {
+    this.gfx.mouseout = null;
+    this.gfx.mouseover = null;
+    this.textField.mouseout = null;
+    this.textField.mouseover = null;
     CObj.prototype.destroy.call(this);
     this.textField.parent.removeChild(this.textField);
     this.textField = null;
@@ -32,7 +36,7 @@ Object.defineProperty(CButton.prototype, 'click', {
         if (this.gfx)
         {
 
-            var btnclick = function()
+            var btnclick = function(e)
             {
                 if (stage.getChildAt(stage.children.length - 1).trans)
                 {
@@ -42,7 +46,7 @@ Object.defineProperty(CButton.prototype, 'click', {
                 ZSound.Play("CLICK");
 
                 if (value)
-                    value();
+                    value(e);
             }
             if (this.postCreatedContainer) {
                 this.textField.tap = btnclick;

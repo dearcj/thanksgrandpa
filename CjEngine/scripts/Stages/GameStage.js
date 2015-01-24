@@ -15,20 +15,17 @@ Object.defineProperty(GameStage.prototype, 'worldSpeed', {
     set: function (value) {
         this._worldSpeed = value;
         var objlen = CObj.objects.length;
-        for (var i = 0; i < objlen; ++i)
-        {
+        for (var i = 0; i < objlen; ++i) {
             //////////////////////////FAIL CHECK
-            if (CObj.objects[i].gfx && CObj.checkType(CObj.objects[i].gfx, PIXI.MovieClip))
-            {
+            if (CObj.objects[i].gfx && CObj.checkType(CObj.objects[i].gfx, PIXI.MovieClip)) {
                 CObj.objects[i].gfx.animationSpeed = value * CObj.objects[i].fps / FRAME_RATE;
             }
         }
     }
 });
 
-GameStage.prototype.createHPBar = function( x, y, max)
-{
-    var bar = new CObj(x,y);
+GameStage.prototype.createHPBar = function (x, y, max) {
+    var bar = new CObj(x, y);
     var t = PIXI.Texture.fromFrame("health dead.png");
 
     bar.gfx = new PIXI.DisplayObjectContainer();
@@ -40,31 +37,29 @@ GameStage.prototype.createHPBar = function( x, y, max)
 
     var tupper = PIXI.Texture.fromFrame("health.png");
     var upperBar = new PIXI.TilingSprite(tupper, tupper.width, tupper.height);
-     upperBar.width = max * tupper.width;
+    upperBar.width = max * tupper.width;
     bar.gfx.addChild(upperBar);
 
     SM.inst.fg.addChild(bar.gfx);
 
-    bar.tweenProp = function (ratio)
-    {
-        bar.gfx.getChildAt(1).width = bar.gfx.getChildAt(1).texture.width*ratio*max;
+    bar.tweenProp = function (ratio) {
+        this.gfx.getChildAt(1).width = this.gfx.getChildAt(0).width * ratio;
     }
 }
 
 
-GameStage.prototype.createCircle = function(w, x, y, r)
-{
+GameStage.prototype.createCircle = function (w, x, y, r) {
     var s = new PIXI.Graphics();
 
     var n = 100;
     var d = Math.PI * 2 / n;
     var a = 0;
-    var xn; var yn;
-    s.moveTo(0, 0)
-    for (var i = 0; i < n; ++i)
-    {
-        xn = x + Math.cos(a)*r;
-        yn = y + Math.sin(a)*r;
+    var xn;
+    var yn;
+    s.moveTo(0, 0);
+    for (var i = 0; i < n; ++i) {
+        xn = x + Math.cos(a) * r;
+        yn = y + Math.sin(a) * r;
         a += d;
         s.lineTo(xn, yn);
         s.moveTo(xn, yn)
@@ -73,24 +68,20 @@ GameStage.prototype.createCircle = function(w, x, y, r)
 }
 
 
-GameStage.prototype.process = function()
-{
- /*   if (this.doPhys)
-    world.step(this.invFR*this._worldSpeed);
-*/
-    if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40)
-    {
+GameStage.prototype.process = function () {
+    /*   if (this.doPhys)
+     world.step(this.invFR*this._worldSpeed);
+     */
+    if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40) {
         gameStage.player.fire();
     }
     CObj.processAll();
 
-    if (gameStage.player && gameStage.jumping)
-    {
-        if (gameStage.jumpboost && gameStage.player.vy< 0)
+    if (gameStage.player && gameStage.jumping) {
+        if (gameStage.jumpboost && gameStage.player.vy < 0)
             gameStage.player.vy *= 1.048;
 
-        if (gameStage.player.vy < -17)
-        {
+        if (gameStage.player.vy < -17) {
             gameStage.jumpboost = false;
             gameStage.player.vy = -17;
             console.log("BOOST OFF");
@@ -101,26 +92,26 @@ GameStage.prototype.process = function()
     MM.inst.process();
 }
 
-GameStage.prototype.onHide = function(newStage) {
+GameStage.prototype.onHide = function (newStage) {
 
     gameStage.player = null;
 
     gameStage.floor = null;
-    if (gameStage.winDelayedCall)
-    {
+    if (gameStage.winDelayedCall) {
         gameStage.winDelayedCall.kill(false);
         gameStage.winDelayedCall = null;
     }
     gameStage.losing = false;
     gameStage.scoreObj = null;
     gameStage.preWinText = null;
+    gameStage.curweapon = null;
 
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
 
 
-/*    var inx = CObj.objects.indexOf(LauncherBG.inst);
-    CObj.objects.splice(inx, 1);*/
+    /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
+     CObj.objects.splice(inx, 1);*/
     CObj.destroyAll();
     gameStage.preWinText = null;
 
@@ -139,34 +130,73 @@ GameStage.prototype.onHide = function(newStage) {
         gameStage.pauseTexture = null;
         gameStage.pauseSprite = null;
     }
-    gameStage.distText =null;
+    gameStage.distText = null;
 }
 
-GameStage.prototype.loseGame = function() {
+GameStage.prototype.loseGame = function () {
 
 }
 
-GameStage.prototype.remGfx = function(obj)
-{
+GameStage.prototype.remGfx = function (obj) {
     if (!obj) return;
-    if (obj.parent)
-    {
+    if (obj.parent) {
         obj.parent.removeChild(obj);
     }
 }
 
-GameStage.prototype.shAfterLife = function()
-{
+GameStage.prototype.updateItems = function () {
+    var k = 0;
+    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
+        var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
+        if (item.type == tBoost) {
+            var boostClass;
+            if (item.name == "Double") boostClass = CDoubleBooster;
+            if (item.name == "Health") boostClass = CHeartBooster;
+            if (item.name == "Magnet") boostClass = CMagnetBooster;
+            if (item.name == "MarioStar") boostClass = CSupermanBooster;
+            if (item.name == "Tablets") boostClass = CTabletsBooster;
+            var b = new boostClass(30 + 50*k, 110, null);
+
+            b.gfx = crsp(item.gfx);
+            b.gfx.scale.x = 0.3;
+            b.gfx.scale.y = 0.3;
+            b.updateGraphics();
+
+            if (b.activate == null)
+            {
+                b.gfx.tint = 0x778822;
+            }
+
+            SM.inst.guiLayer.addChild(b.gfx);
+            k++;
+        }
+
+        if (item.type == tWeapon && PlayerData.inst.items_enabled[i].equipped)
+        {
+            if (item.name == "Rifle") gameStage.curweapon = w_rifle;
+            if (item.name == "PPS") gameStage.curweapon = w_pps;
+            if (item.name == "AK-74")
+                gameStage.curweapon = w_ak74;
+            if (item.name == "Minigun") gameStage.curweapon = w_minigun;
+            if (item.name == "Grenade Launcher") gameStage.curweapon = w_pistol;
+            if (item.name == "Plazma Cannon") gameStage.curweapon = w_pistol;
+        }
+    }
+
+}
+
+GameStage.prototype.shAfterLife = function () {
     var cb = new CircleBar(SCR_WIDTH / 2, SCR_HEIGHT / 2);
     cb.init();
     SM.inst.guiLayer.addChild(cb.gfx);
-    openCharStage = function()
-    {
+    openCharStage = function () {
         removeafterlife();
         gameStage.openEndWindow();
     }
 
     removeafterlife = function () {
+        if (!gainbgsprite)
+        console;
         gainbgsprite.parent.removeChild(gainbgsprite);
         bodrtext.parent.removeChild(bodrtext);
         tf.parent.removeChild(tf);
@@ -183,17 +213,16 @@ GameStage.prototype.shAfterLife = function()
     SM.inst.guiLayer.addChild(bodrtext);
 
     cb.gfx.interactive = true;
-    
-    cb.gfx.click = function()
-    {
-        if (PlayerData.inst.playerItem.crystals > 1)
-        {
-            removeafterlife();
+
+    cb.gfx.click = function () {
+        if (PlayerData.inst.playerItem.crystals > price) {
             TweenMax.killTweensOf(cb);
+            removeafterlife();
             gameStage.removeFade();
             gameStage.unpause();
             gameStage.state = "game";
-            PlayerData.inst.playerItem.crystals--;
+            PlayerData.inst.playerItem.crystals -= price;
+            gameStage.player.hp = gameStage.player.maxHp / 2;
             PlayerData.inst.savePlayerData();
         }
     }
@@ -205,18 +234,20 @@ GameStage.prototype.shAfterLife = function()
     gainbgsprite.y = SCR_HEIGHT / 2 + 120;
     SM.inst.guiLayer.addChild(gainbgsprite);
 
-
-    var tf = CTextField.createTextField({text: "1", fontSize: 22, align: "center"});
+    var price = Math.round(1 + (LauncherBG.inst.distance / 500));
+    var tf = CTextField.createTextField({text: price.toString(), fontSize: 22, align: "center"});
+    tf.tint = 0x333333;
+    tf.updateText();
     tf.x = 8 + SCR_WIDTH / 2;
     tf.y = SCR_HEIGHT / 2 + 107;
     SM.inst.guiLayer.addChild(tf);
 }
 
-GameStage.prototype.openEndWindow = function() {
+GameStage.prototype.openEndWindow = function () {
     LevelManager.loadLevel("levelgameover", gameStage.openEndWindowLoaded, SM.inst.guiLayer);
 }
 
-GameStage.prototype.openEndWindowLoaded = function() {
+GameStage.prototype.openEndWindowLoaded = function () {
 
     function addLine(num) {
         var l = -70;
@@ -250,7 +281,7 @@ GameStage.prototype.openEndWindowLoaded = function() {
         rec = Math.round(LauncherBG.inst.distance);
     }
     CObj.getById("tfrec").text = rec.toString() + " м";
-    CObj.getById("bmenu").click = function (){
+    CObj.getById("bmenu").click = function () {
         SM.inst.openStage(charStage);
     };
 
@@ -264,8 +295,7 @@ GameStage.prototype.openEndWindowLoaded = function() {
     PlayerData.inst.savePlayerData();
 
 
-    for (var i = 0; i < 5; ++i)
-    {
+    for (var i = 0; i < 5; ++i) {
         addLine(i);
     }
 
@@ -278,99 +308,86 @@ GameStage.prototype.openEndWindowLoaded = function() {
         var arr = results.result;
 
         ////CCREMOVE
-        arr = [{name: "ПИсюкин", last_name: "Антон", maxdistance: 2000}, {name: "ПИсюкин", last_name: "Антон", maxdistance: 1000}, {name: "ПИсюкин", last_name: "Антон", maxdistance: 500}];
-        for (var i = 0; i < Math.min(5, arr.length); ++i)
-        {
+        arr = [{name: "ПИсюкин", last_name: "Антон", maxdistance: 2000}, {
+            name: "ПИсюкин",
+            last_name: "Антон",
+            maxdistance: 1000
+        }, {name: "ПИсюкин", last_name: "Антон", maxdistance: 500}];
+        for (var i = 0; i < Math.min(5, arr.length); ++i) {
             CObj.getById("tf" + (i + 1).toString() + "2").text = arr[i].name + " " + arr[i].last_name;
             CObj.getById("tf" + (i + 1).toString() + "3").text = arr[i].maxdistance.toString();
             if (rec > arr[i].maxdistance) {
                 CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
                 CObj.getById("b" + (i + 1).toString()).text = "Я тебя уделал";
 
-                function setClick(i, friendObject)
-                {
-                    CObj.getById("b" + (i + 1).toString()).click = function ()
-                    {
-                        VK.api("wall.post", {owner_id: vkparams.viewerid, message: friendObject.name + " " + friendObject.last_name + ", я тебя уделал!", attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]}, function (data)
-                        {
+                function setClick(i, friendObject) {
+                    CObj.getById("b" + (i + 1).toString()).click = function () {
+                        VK.api("wall.post", {
+                            owner_id: vkparams.viewerid,
+                            message: friendObject.name + " " + friendObject.last_name + ", я тебя уделал!",
+                            attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]
+                        }, function (data) {
 
                         });
-
                     }
-
                 }
-
                 setClick(i, arr[i]);
             }
 
         }
 
-        for (var j = i; j < 5; ++j)
-        {
+        for (var j = i; j < 5; ++j) {
             CObj.getById("b" + (j + 1).toString()).gfx.visible = true;
             CObj.getById("b" + (j + 1).toString()).text = "Пригласить в игру";
-            CObj.getById("b" + (j + 1).toString()).click = function ()
-            {
+            CObj.getById("b" + (j + 1).toString()).click = function () {
                 VK.callMethod("showInviteBox");
             }
-
         }
-
-    }, function(error) {
+    }, function (error) {
 
     });
 }
 
 
-GameStage.prototype.sessionEnd = function()
-{
-   gameStage.state = "endsession";
-   gameStage.pause();
-   gameStage.fadeScreen();
-   gameStage.shAfterLife();
-
+GameStage.prototype.sessionEnd = function () {
+    if (gameStage.state == "game") {
+        gameStage.state = "endsession";
+        gameStage.pause();
+        gameStage.fadeScreen();
+        gameStage.shAfterLife();
+    }
 }
 
-GameStage.prototype.updateWindowLevWin = function()
-{
+GameStage.prototype.updateWindowLevWin = function () {
     ZSound.Play("levelWIN");
-
     gameStage.doPhys = false;
 }
 
-GameStage.prototype.removeFromToolsObject = function(obj)
-{
+GameStage.prototype.removeFromToolsObject = function (obj) {
     var len = gameStage.toolContainer.children.length;
-    for (var i = 0; i < len; ++i)
-    {
-        if (gameStage.toolContainer.children[i].gameobject == obj)
-        {
+    for (var i = 0; i < len; ++i) {
+        if (gameStage.toolContainer.children[i].gameobject == obj) {
             break;
         }
     }
 
-    if (i < len)
-    {
+    if (i < len) {
         var ch = gameStage.toolContainer.children[i];
         ch.interactive = false;
         new TweenMax(ch, 0.33, {alpha: 0.5, y: ch.y - 100, onComplete: gameStage.remGfx, onCompleteParams: [ch]});
     }
 
-    for (var j = i + 1; j < len; ++j)
-    {
+    for (var j = i + 1; j < len; ++j) {
         ch = gameStage.toolContainer.children[j];
         new TweenMax(ch, 0.5, {x: ch.x - this.secretIngridient, ease: TweenMax.LINEAR});
     }
 }
 
 
-
-GameStage.prototype.updateScore = function()
-{
+GameStage.prototype.updateScore = function () {
     if (gameStage.scoreObj)
-    gameStage.scoreObj.text = PlayerData.inst.score.toString() + "$";
+        gameStage.scoreObj.text = PlayerData.inst.score.toString() + "$";
 }
-
 
 // event.type должен быть keypress
 function getChar(event) {
@@ -379,7 +396,7 @@ function getChar(event) {
         return String.fromCharCode(event.keyCode)
     }
 
-    if (event.which!=0 && event.charCode!=0) { // все кроме IE
+    if (event.which != 0 && event.charCode != 0) { // все кроме IE
         if (event.which < 32) return null; // спец. символ
         return String.fromCharCode(event.which); // остальные
     }
@@ -387,9 +404,9 @@ function getChar(event) {
     return null; // спец. символ
 }
 
-GameStage.prototype.doKeyDown = function(evt) {
+GameStage.prototype.doKeyDown = function (evt) {
 
-   if (gameStage.state != "game") return;
+    if (gameStage.state != "game") return;
     evt = evt || window.event;
     var c = getChar(evt);
     if (evt.which == 87 && !gameStage.jumping) {
@@ -402,57 +419,52 @@ GameStage.prototype.doKeyDown = function(evt) {
     }
 }
 
-GameStage.prototype.doKeyUp = function(evt) {
+GameStage.prototype.doKeyUp = function (evt) {
 
     if (gameStage.state != "game") return;
     evt = evt || window.event;
     var c = getChar(evt);
     if (evt.which == 87) {
         gameStage.jumpboost = false;
-       // gameStage.jumping = false;
+        // gameStage.jumping = false;
         console.log("JUMP END");
     }
 }
 
 
-
-GameStage.prototype.onShow = function() {
+GameStage.prototype.onShow = function () {
     CustomStage.prototype.onShow.call(this);
 
-    window.addEventListener("keydown", this.doKeyDown, false );
-    window.addEventListener("keyup", this.doKeyUp, false );
+    window.addEventListener("keydown", this.doKeyDown, false);
+    window.addEventListener("keyup", this.doKeyUp, false);
     gameStage.currentLevel = 1;
     this.doProcess = false;
     LevelManager.loadLevel("hud", gameStage.onLoadEnd, SM.inst.guiLayer);
 
-    LauncherBG.inst = new LauncherBG(0,0);
+    LauncherBG.inst = new LauncherBG(0, 0);
     LauncherBG.inst.addLevel("plantPart2");
-    for (var i =0; i < 2500; ++i)
-    LauncherBG.inst.process();
+    for (var i = 0; i < 2500; ++i)
+        LauncherBG.inst.process();
     LauncherBG.inst.distance = 0;
 
     MM.inst.monsterQueue = MM.inst.generateMonsterQueue();
 }
 
-GameStage.prototype.makePause = function() {
+GameStage.prototype.makePause = function () {
 
     CObj.getById("bresume").click = function () {
-        while (LevelManager.objs.length > 0) {
-            LevelManager.objs[0].destroy();
-            LevelManager.objs.splice(0, 1);
-        }
+        LevelManager.removeLastLevel();
+
         LevelManager.objs = null;
         gameStage.doPhys = true;
         gameStage.unpause();
         gameStage.removeFade();
-
-
     }
 }
 
-GameStage.prototype.createPools = function() {
+GameStage.prototype.createPools = function () {
     if (pool.Size("textParticle") == 0)
-        pool.Fill("textParticle", 20, function() {
+        pool.Fill("textParticle", 20, function () {
             var c = new CTextField(0, 0);
             c.fontFamily = 0;
             c.fontSize = 25;
@@ -461,38 +473,41 @@ GameStage.prototype.createPools = function() {
             c.gfx = CTextField.createTextField(c);
             c.gfx.scale.x *= window.addScale;
             c.gfx.scale.y *= window.addScale;
-            return c;});
+            return c;
+        });
 
     if (pool.Size("coinCollect") == 0)
-        pool.Fill("coinCollect", 15, function() {
+        pool.Fill("coinCollect", 15, function () {
             var c = CObj.CreateMovieClip("coinCollect");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
-            return c;});
+            return c;
+        });
 
 
     if (pool.Size("expl") == 0)
-        pool.Fill("expl", 5, function() {
+        pool.Fill("expl", 5, function () {
             var c = new CObj(0, 0);
             c.gfx = CObj.CreateMovieClip("expl");
             c.gfx.anchor.x = 0.5;
             c.gfx.anchor.y = 0.5;
             c.gfx.scale.x = 1.55;
             c.gfx.scale.y = 1.55;
-            return c;});
+            return c;
+        });
 
     if (pool.Size("chickeneffect") == 0)
-        pool.Fill("chickeneffect", 3, function() {
-            var c =CObj.CreateMovieClip("chickeneffect");
+        pool.Fill("chickeneffect", 3, function () {
+            var c = CObj.CreateMovieClip("chickeneffect");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
             c.scale.x *= window.addScale;
             c.scale.y *= window.addScale;
-            return c;});
+            return c;
+        });
 }
 
-GameStage.prototype.removeFade = function()
-{
+GameStage.prototype.removeFade = function () {
     TweenMax.killTweensOf(gameStage.pauseSprite);
     gameStage.pauseSprite.parent.removeChild(gameStage.pauseSprite);
     gameStage.pauseSprite = null;
@@ -504,8 +519,7 @@ GameStage.prototype.removeFade = function()
 
 }
 
-GameStage.prototype.fadeScreen = function()
-{
+GameStage.prototype.fadeScreen = function () {
     gameStage.pauseTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
     gameStage.pauseSprite = new PIXI.Graphics();//PIXI.Sprite(gameStage.pauseTexture);
     gameStage.pauseSprite.beginFill(0x55FFDD, 0.4);
@@ -518,13 +532,10 @@ GameStage.prototype.fadeScreen = function()
 }
 
 //NO "THIS" IN CURRENT CONTEXT
-GameStage.prototype.onLoadEnd = function()
-{
+GameStage.prototype.onLoadEnd = function () {
     gameStage.doProcess = true;
     gameStage.stepSize = gameStage.invFR;
     gameStage.doPhys = true;
- //   CObj.getById("level").getText();
-  //  CObj.getById("level").text = "УРОВЕНЬ " + gameStage.currentLevel.toString();
 
     var xxx = gameStage.createCircle(20, 100, 100, 100);
     SM.inst.guiLayer.addChild(xxx);
@@ -538,13 +549,18 @@ GameStage.prototype.onLoadEnd = function()
 
     gameStage.createHPBar(10, 5, 5);
 
+    gameStage.updateItems();
     gameStage.player = new CPlayer(110, gameStage.floor.y - floorHeight / 2 - 50, "");
     gameStage.player.gfx.pivot.y = -190;
-    SM.inst.fg.addChild( gameStage.player.gfx);
+    gameStage.player.gfx.scale.x = 0.25;
+    gameStage.player.gfx.scale.y = 0.25;
+    SM.inst.fg.addChild(gameStage.player.gfx);
 
-    gameStage.player.gfx.state.setAnimationByName(0, "idle", true);
+   // gameStage.player.gfx.state.setAnimationByName(0, "idle", true);
 
-    gameStage.player.gfx.skeleton.setAttachment("gun", "riffle");
+    gameStage.player.gfx.skeleton.setAttachment("gun", "gun0");
+    //gameStage.player.updateAppearence(true);
+
 
     gameStage.player.process();
 
@@ -561,10 +577,9 @@ GameStage.prototype.onLoadEnd = function()
 
     var menuBtn = CObj.getById("menu");
     menuBtn.click = function () {
-        if (! gameStage.doProcess) return;
+        if (!gameStage.doProcess) return;
         if (!gameStage.doPhys) return;
-        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
-        {
+        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i) {
             SM.inst.fontLayer.children[i].visible = false;
         }
 
@@ -583,7 +598,7 @@ GameStage.prototype.onLoadEnd = function()
     }
 
 
-   stage.touchstart = function (md) {
+    stage.touchstart = function (md) {
         gameStage.fireState = true;
     }
 
@@ -598,41 +613,41 @@ GameStage.prototype.onLoadEnd = function()
     gameStage.updateSoundBtn(gameStage.muteBtn);
     gameStage.muteBtn.click = function () {
         if (ZSound.available)
-        ZSound.Mute(); else
-        ZSound.UnMute();
+            ZSound.Mute(); else
+            ZSound.UnMute();
 
         dataStorage.soundEnabled = ZSound.available;
         updateDS();
         gameStage.updateSoundBtn(gameStage.muteBtn);
     }
-  //  gameStage.sessionEnd();
+    //  gameStage.sessionEnd();
+
+
 }
 
-GameStage.prototype.unpause = function()
-{
+GameStage.prototype.unpause = function () {
     gameStage.doProcess = true;
+
+    if (gameStage.player)
+        gameStage.player.gfx.autoUpdate = true;
+
+    TweenMax.resumeAll();
+}
+
+GameStage.prototype.pause = function () {
+    if (!gameStage.doProcess) return;
+    gameStage.doProcess = false;
+    if (gameStage.player)
+        gameStage.player.gfx.autoUpdate = false;
     //if (!gameStage.doPhys) return;
     /*   for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
      {
      SM.inst.fontLayer.children[i].visible = false;
      }*/
-    TweenMax.resumeAll();
-}
-
-GameStage.prototype.pause = function()
-{
-    if (! gameStage.doProcess) return;
-    gameStage.doProcess = false;
-    //if (!gameStage.doPhys) return;
- /*   for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
-    {
-        SM.inst.fontLayer.children[i].visible = false;
-    }*/
     TweenMax.pauseAll();
 }
 
-GameStage.prototype.updateSoundBtn = function(btn)
-{
+GameStage.prototype.updateSoundBtn = function (btn) {
     if (ZSound.available)
         btn.gfx.gotoAndStop(0); else
         btn.gfx.gotoAndStop(1);

@@ -74,7 +74,6 @@ dbInit = function() {
     vkparams.sid = getURLParameter("sid");
     vkparams.viewerid = getURLParameter("viewer_id");
 
-
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid)
     {
@@ -82,45 +81,20 @@ dbInit = function() {
         vkparams.novk = true;
     }
 
-    vkparams.gamerid =  vkparams.userid ||  vkparams.viewerid;
+    vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
-    //  userid = 444;
     azureclient.invokeApi("login", {
         body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},
         method: "post"
     }).done(function (results) {
         var message = results.result;
+        PlayerData.pid = results.result.userId.split(':')[1];;
+
         azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
         vkparams.id = results.result.id;
-    //    createAchs(results.result.id);
         loginCallback(results.result);
     }, function(error) {
-      //  azureclient.login(results.result.userId, results.result.token);
-    //    loginCallback();
     });
-
-
-
-
-    /*
-
-    window.azureclient.getTable("tb_players").where({
-        vkapi: userid
-    }).read().done(function (results) {
-        if (results.length == 0) {
-            var db_player_id = createNewPlayer(1, refferer);
-
-
-        } else
-        {
-            db_player_id = results[0].id;
-            var pl = new PlayerData(db_player_id);
-        }
-    }, function (err) {
-        console.log("Error: " + err);
-
-
-    });*/
 }

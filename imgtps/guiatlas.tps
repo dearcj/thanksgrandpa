@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>json</string>
+        <string>sparrow</string>
         <key>textureFileName</key>
         <filename>guiatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>guiatlas.json</filename>
+        <filename>guiatlas.xml</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -142,7 +142,6 @@
         <key>fileList</key>
         <array>
             <filename>../../img/btnlevel0002.png</filename>
-            <filename>../../img/levwinpanel.png</filename>
             <filename>../../img/btnlevel0001.png</filename>
             <filename>../../img/sound0002.png</filename>
             <filename>../../img/buttonlevels.png</filename>
@@ -151,7 +150,6 @@
             <filename>../../img/buttonrestart.png</filename>
             <filename>../../img/sound0001.png</filename>
             <filename>../../img/buttonlong0002.png</filename>
-            <filename>../../img/buttonlong0001.png</filename>
             <filename>../../img/star0001.png</filename>
             <filename>../../img/star0002.png</filename>
             <filename>../../../../Android/Graphics/barHpBG.png</filename>
@@ -165,7 +163,6 @@
             <filename>../../../../dedgame/shop/ava icon.png</filename>
             <filename>../../../../dedgame/shop/back button.png</filename>
             <filename>../../../../dedgame/shop/buy button.png</filename>
-            <filename>../../../../dedgame/shop/ded back.png</filename>
             <filename>../../../../dedgame/shop/equipped button.png</filename>
             <filename>../../../../dedgame/shop/item back.png</filename>
             <filename>../../../../dedgame/shop/photo icon.png</filename>
@@ -207,13 +204,26 @@
             <filename>../../../../dedgame/gameover/score cover.png</filename>
             <filename>../../../../dedgame/gameover/share button.png</filename>
             <filename>../../../../dedgame/gameover/bodrost bar.png</filename>
-            <filename>../../../../dedgame/gameover/bodrost cover.png</filename>
             <filename>../../../../dedgame/gameover/bodrost bar bg.png</filename>
             <filename>../../../../dedgame/ordens/orden.png</filename>
             <filename>../../../../dedgame/ordens/ordena background 1 px.png</filename>
             <filename>../../../../dedgame/ordens/ordena top.png</filename>
             <filename>../../../../dedgame/ordens/notifiction cover.png</filename>
             <filename>../../../../dedgame/home screen/settings.png</filename>
+            <filename>../../../../dedgame/weapons/ak47.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat2.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat3.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat4.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat5.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat6.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat1.png</filename>
+            <filename>../../../../dedgame/gameover/bodrost cover.png</filename>
+            <filename>../../../../dedgame/shop/guns/gun1.png</filename>
+            <filename>../../../../dedgame/shop/guns/gun2.png</filename>
+            <filename>../../../../dedgame/shop/guns/gun3.png</filename>
+            <filename>../../../../dedgame/shop/guns/gun4.png</filename>
+            <filename>../../../../dedgame/shop/guns/gun5.png</filename>
+            <filename>../../../../dedgame/shop/ded back.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

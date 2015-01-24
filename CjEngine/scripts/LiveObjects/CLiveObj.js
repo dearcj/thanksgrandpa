@@ -41,6 +41,7 @@ Object.defineProperty(CLiveObj.prototype, 'maxHp', {
     },
     set: function (value) {
         this._maxHp = value;
+        if (this._hp > this._maxHp) this._hp = this._maxHp;
     }
 });
 
@@ -55,7 +56,8 @@ CLiveObj.generateProperty('hp', {
         if (value > this._maxHp) this._hp = this._maxHp; else
             this._hp = value;
 
-        if (this.bar) this.bar.tweenProp(this._hp / this._maxHp);
+        if (this.bar)
+            this.bar.tweenProp(this._hp / this._maxHp);
 
         if (this._hp < 1. && !this.isKilled)
         {

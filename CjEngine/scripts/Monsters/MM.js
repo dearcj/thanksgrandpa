@@ -5,9 +5,9 @@ MM = function() {
 
     this.patterns =
     [
-        {mons: "...l...l...c...z..c..c..s..l.s..l", diff: 1},
-        {mons: ".lll...lll.", diff: 2},
-        {mons: "ss..ss.s..l..ss..l...l...s", diff: 3},
+        {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1},
+        {mons: ".l.l.l...l.l.l..", diff: 2},
+        {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3},
         {mons: "..ssss..s..l", diff: 4},
         {mons: "c..c..c..s..sc..sc..sc", diff: 5}
     ];
@@ -87,10 +87,10 @@ MM.prototype.generateMonsterQueue = function()
 MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
 {
     var m = new CMonster(SCR_WIDTH+240,450 + offsY,clip, false);
-    m.radius = (m.gfx.width / 2)*0.94;
+    m.radius = (m.gfx.width - 20/ 2)*0.94;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
-    m.offsY = innerOffs;
+    m.offsY = -innerOffs;
     m.vx = -LauncherBG.inst.maxVelocity;
     m.colGroup = 0;
 
@@ -99,9 +99,41 @@ MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
 }
 
 
+
+MM.prototype.spawnFatty = function(xp)
+{
+    var str = "enemy1";
+    if (Math.random() > 0.5) str = "enemy1_1";
+    var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.gfx.scale.x = 0.8;
+    m.gfx.scale.y = 0.8;
+    m.longJump();
+    m.maxHp = 100;
+    m.hp = m.maxHp;
+    m.xp = xp + LauncherBG.inst.distance*0.01;
+    this.lastSpawnSimple =(new Date()).getTime();
+    this.simpleMonsterDelay = Math.random() * 1000 + 2000;
+}
+
+MM.prototype.spawnGopnick = function(xp)
+{
+    var str = "enemy3";
+    if (Math.random() > 0.5) str = "enemy3_3";
+    var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.gfx.scale.x = 0.8;
+    m.gfx.scale.y = 0.8;
+    m.longJump();
+    m.xp = xp + LauncherBG.inst.distance*0.01;
+    this.lastSpawnSimple =(new Date()).getTime();
+    this.simpleMonsterDelay = Math.random() * 1000 + 2000;
+}
+
+
 MM.prototype.spawnSimpleMonster = function(xp)
 {
-    var m = new CMonster(SCR_WIDTH+100,300,"enemy fat");
+    var str = "enemy2";
+    if (Math.random() > 0.5) str = "enemy2_2";
+    var m = new CMonster(SCR_WIDTH+100,300,str);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
     m.longJump();
@@ -116,6 +148,8 @@ MM.prototype.doStep = function()
     this.monsterQueue = this.monsterQueue.slice(1);
 
     if (s == "s") this.spawnSimpleMonster(5);
+    if (s == "f") this.spawnFatty(15);
+    if (s == "g") this.spawnGopnick(10);
     if (s == "c") this.spawnObstacle("car", 40, 0);
     if (s == "l") this.spawnObstacle("luke", 40, 15);
     if (s == "z") this.spawnObstacle("conus", 20, 0);

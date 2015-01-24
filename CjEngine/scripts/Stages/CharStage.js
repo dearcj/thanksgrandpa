@@ -10,7 +10,7 @@ CharStage.prototype.onShow = function() {
 
     CustomStage.prototype.onShow.call(this);
 
-   LevelManager.loadLevel("levchar", this.onShowContinue);
+   LevelManager.loadLevel("levchar", this.onShowContinue, SM.inst.ol);
   //  SM.inst.guiLayer.addChild(crsp("btnlevel0002"));
 }
 
@@ -29,11 +29,10 @@ CharStage.prototype.createFriendsPanel = function() {
     var skip = 0;
     for (var i = 0 + skip; i < 6 + skip; ++i)
     {
-        var frClpBtn = new CButton(i*80, 10, "add friend");
+        var frClpBtn = new CButton(i*80, 5, "add friend");
         var friendClip = frClpBtn.gfx;//new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.parent.removeChild(friendClip);
         friendClip.anchor.x = 0.5;
-      //  friendClip.interactive = true;
         friendClip.x = i*80;
         friendClip.anchor.y = 0.5;
         friendClip.y = 10;
@@ -69,7 +68,7 @@ CharStage.prototype.createFriendsPanel = function() {
         };
         setPhotoCB(friendClip);
 
-        var nametf = CTextField.createTextField({align: "center", text: vkparams.friendsIngame[i].name + "\n" + vkparams.friendsIngame[i].last_name});
+        var nametf = CTextField.createTextField({fontSize: "18", align: "center", text: vkparams.friendsIngame[i].name + "\n" + vkparams.friendsIngame[i].last_name});
         nametf.x -= nametf.width / 2;
         nametf.y = 15;
         friendClip.addChild(nametf);
@@ -89,7 +88,52 @@ CharStage.prototype.onShowContinue = function()
 
     shopStage.updateStatsPanel();
 
-    CObj.getById("btnorder").click = order;
+    CObj.getById("btnorder").click = function()
+    {
+        var hided = [];
+        CObj.enableButtons(false);
+
+        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
+        {
+            SM.inst.fontLayer.children[i].visible = false;
+            hided.push(SM.inst.fontLayer.children[i]);
+        }
+        var wnd = SM.inst.addDisableWindow(null, SM.inst.guiLayer);
+
+        LevelManager.loadLevel("levelpremium", function()
+        {
+            close = function()
+            {
+                LevelManager.removeLastLevel();
+
+                for (var i = 0; i < hided.length; ++i)
+                {
+                    hided[i].visible = true;
+                }
+
+                hided = null;
+
+                CObj.enableButtons(true);
+                wnd.parent.removeChild(wnd);
+            };
+
+            CObj.getById("buy1").click = function(){order("item1");};
+
+            CObj.getById("buy2").click = function(){order("item1");};
+
+            CObj.getById("buy3").click = function(){order("item1");};
+
+            CObj.getById("buy4").click = function(){order("item1");};
+
+            CObj.getById("buy5").click = function(){order("item1");};
+
+            CObj.getById("buy6").click = function(){order("item1");};
+
+            CObj.getById("btnclose").click = close;
+            CObj.getById("btnfree").click = close;
+
+        }, SM.inst.superGuiLayer);
+    };
 
     if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
@@ -109,9 +153,7 @@ CharStage.prototype.onShowContinue = function()
 
     var pl = new CPlayer(400, 430);
     charStage.pl = pl;
-    pl.gfx.scale.x = 0.4;
-    pl.gfx.scale.y = 0.4;
-    pl.gfx.state.setAnimationByName(0, "breath", true);
+   pl.gfx.state.setAnimationByName(0, "breath", true);
     SM.inst.ol.addChild(pl.gfx);
 
     var f = pl.gfx; pl.gfx.interactive = true;

@@ -10,7 +10,7 @@ function LauncherBG(in_x,in_y,textname,in_body) {
     this.levCycles = [];
     this.gfx = new PIXI.DisplayObjectContainer();
     SM.inst.bg.addChild(this.gfx);
-    this.maxVelocity = 12;
+    this.maxVelocity = 8;
   //  var inx = CObj.objects.indexOf(this);
   //  CObj.objects.splice(inx);
     this.distance = 0;
@@ -53,11 +53,15 @@ LauncherBG.prototype.process = function()
 {
    // CObj.prototype.process.call(this);
 
+
     if (this.levCycles.length == 0) return;
     var upper = this.levCycles[0].layers[this.levCycles[0].layers.length - 1];
-    this.distance += upper.velocity / 100;
+    var delta = upper.velocity / 50;
+    if (Math.floor(this.distance / 500) != Math.floor((this.distance + delta) / 500))
+    this.maxVelocity += 1;
+    this.distance += delta;
 
-    if (this.distance > 100 && this.distance < 120){
+    if (this.distance > 10 && this.distance < 20){
         PlayerData.inst.progressAch("Gold medal 2", 1);
     }
 
@@ -74,8 +78,6 @@ LauncherBG.prototype.process = function()
         var l = this.levCycles[0].layers[i];
         l.curDist += l.velocity;
         l.rightBound -= l.velocity;
-
-
 
         for (var k = 0; k < l.clip.children.length; ++k) {
             var clipOnScreen = l.clip.children[k];
@@ -105,7 +107,6 @@ LauncherBG.prototype.process = function()
 
 LauncherBG.prototype.addLevel = function (levName, distance)
 {
-
     var original = LevelManager.levels["levels/" + levName + ".json"];
     var dataClone = clone(original);
     var layers = [];
@@ -116,12 +117,10 @@ LauncherBG.prototype.addLevel = function (levName, distance)
         var vel =LauncherBG.inst.maxVelocity - (layerNum-i - 1)*LauncherBG.inst.maxVelocity/layerNum;
         if (i == 1) {
             vel = 0;
-
-
         }
             var layer = {rightBound: SCR_WIDTH, clip:cont, curDist: SCR_WIDTH, objects: [], velocity: vel};
-        layers.push(layer);
-        this.gfx.addChild(layer.clip);
+         layers.push(layer);
+            this.gfx.addChild(layer.clip);
     }
 
     for (var i = 0; i < original.objects.length; ++i)

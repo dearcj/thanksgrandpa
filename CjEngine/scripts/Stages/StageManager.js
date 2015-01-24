@@ -8,12 +8,15 @@ var SM = function() {
     this.bg = new PIXI.DisplayObjectContainer();
     this.ol = new PIXI.DisplayObjectContainer();
     this.guiLayer = new PIXI.DisplayObjectContainer();
+    this.superGuiLayer = new PIXI.DisplayObjectContainer();
     this.fontLayer = new PIXI.DisplayObjectContainer();
+
 //add layers on stage
     this.bg.interactive = true;
     this.fg.interactive = false;
     this.ol.interactive = false;
     this.guiLayer.interactive = true;
+    this.superGuiLayer.interactive = true;
     this.fontLayer.interactive = false;
 
     this.currentStage = null;
@@ -43,7 +46,7 @@ var SM = function() {
 SM.inst = new SM();
 
 
-SM.prototype.addDisableWindow = function(title)
+SM.prototype.addDisableWindow = function(title, layer)
 {
     var d = new PIXI.DisplayObjectContainer();
     var g = new PIXI.Graphics();
@@ -55,7 +58,7 @@ SM.prototype.addDisableWindow = function(title)
     d.addChild(g);
 
     if (title) {
-        var text = CTextField.createTextField({text: "ХУЙ", fontSize: 25, align: "center"});
+        var text = CTextField.createTextField({text: title, fontSize: 25, align: "center"});
         text.text = title;
         text.updateText();
         text.position.x = SCR_WIDTH / 2;
@@ -66,8 +69,9 @@ SM.prototype.addDisableWindow = function(title)
     }
     d.interactive = false;
     d.trans = true;
+    if (layer) layer.addChild(d); else
     stage.addChild(d);
-    return g;
+    return d;
 }
 
 SM.prototype.addLayersToStage = function()
@@ -76,6 +80,7 @@ SM.prototype.addLayersToStage = function()
     stage.addChild(this.ol);
     stage.addChild(this.fg);
     stage.addChild(this.guiLayer);
+    stage.addChild(this.superGuiLayer);
     stage.addChild(this.fontLayer);
 
     this.bg.mousemove = function(md){
@@ -91,8 +96,8 @@ SM.prototype.fadeBegin = function(newStage) {
         }
 
         newStage.doProcess = true;
-        newStage.onShow();
         this.fadeEnd(newStage);
+        newStage.onShow();
 }
 
 SM.prototype.soundplay = function() {
@@ -116,6 +121,7 @@ SM.prototype.process = function() {
 SM.prototype.openStage = function(newStage, trns){
         if (this.doTrans) return;
 
+        newStage.previousStage = this.currentStage;
         if (this.currentStage)
         {
             if (!this.currentStage.doProcess) return;
@@ -128,7 +134,6 @@ SM.prototype.openStage = function(newStage, trns){
             this.currentStage.doProcess = true;
             newStage.onShow();
         }
-        newStage.previousStage = this.currentStage;
     }
 
 SM.prototype.deleteMC = function(_do) {

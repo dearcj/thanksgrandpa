@@ -48,13 +48,19 @@ CBullet.prototype.updateBulletSpeed = function()
 
 CBullet.prototype.collide = function (obj2)
 {
-    obj2.dealDamage(this.dmg);
-    this.destroy();
+    if (this.prevVictim != obj2) {
+        obj2.dealDamage(this.dmg);
+        this.life--;
+        if (this.life <= 0)
+            this.destroy();
+        this.prevVictim = obj2;
+    }
 }
 
 
 CBullet.prototype.destroy = function()
 {
+    this.prevVictim = null;
     var inx = CBullet.list.indexOf(this);
    if (inx >= 0) CBullet.list.splice(inx, 1);
    CObj.prototype.destroy.call(this);
@@ -62,7 +68,7 @@ CBullet.prototype.destroy = function()
 
 CBullet.prototype.process = function() {
 
-    this.visualVel += 9.5;
+    this.visualVel += 29.5;
     this.visualWidth -= 0.7;
     this.updateBulletSpeed(this.visualVel);
 

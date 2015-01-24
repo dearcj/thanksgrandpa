@@ -262,6 +262,14 @@ Object.defineProperty(CObj.prototype, 'x', {
     }
 });
 
+CObj.enableButtons = function(state){
+        for (var i = 0; i < CObj.objects.length; ++i) {
+            if (CObj.checkType(CObj.objects[i], CButton)) {
+                CObj.objects[i].gfx.interactive = state;
+            }
+        }
+}
+
 CObj.processAll = function(){
     var len = CObj.objects.length;
 
@@ -284,12 +292,12 @@ CObj.processAll = function(){
                 var obj1 = CObj.objects[i];
                 var obj2 = CObj.objects[j];
                 if (obj1.doRemove || obj2.doRemove) continue;
-                if (obj1.colMask != 0 && obj2.colGroup != 0)
+             /*   if (obj1.colMask != 0 && obj2.colGroup != 0)
                 {
                     if (CObj.checkType(obj1, CCoin) &&
                         CObj.checkType(obj2, CPlayer) )
                     console.log();
-                }
+                }*/
                 if (((obj1.colMask & obj2.colGroup) != 0) ||
                     ((obj2.colMask & obj1.colGroup) != 0) )
                 {
@@ -482,7 +490,6 @@ CObj.AssignTexturesToObjects = function (objs, layerToAdd){
             objs[i].isConductor = false;
             }
         }
-
             img.anchor.x = 0.5;
             img.anchor.y = 0.5;
             img.x = objs[i].x;

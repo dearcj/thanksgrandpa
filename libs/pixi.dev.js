@@ -16151,7 +16151,12 @@ spine.AtlasAttachmentLoader = function (atlas) {
 };
 spine.AtlasAttachmentLoader.prototype = {
 	newRegionAttachment: function (skin, name, path) {
-		var region = this.atlas.findRegion(path);
+		/*if (path.indexOf("/") >= 0)
+        {
+            ////////////////REMOVE!!!!!!!!!!!!
+            path = path.split("/")[1];
+        }*/
+        var region = this.atlas.findRegion(path);
 		if (!region) throw "Region not found in atlas: " + path + " (region attachment: " + name + ")";
 		var attachment = new spine.RegionAttachment(name);
 		attachment.rendererObject = region;

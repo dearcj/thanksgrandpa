@@ -2,8 +2,6 @@
  * Created by KURWINDALLAS on 22.11.2014.
  */
 CWeapon = function(_id, _name, _desc,  __params, __gfx, _upgrades) {
-
-
     this.lastShot = 0;
     this.backupStats = __params;
     this.resetParams();
@@ -11,15 +9,14 @@ CWeapon = function(_id, _name, _desc,  __params, __gfx, _upgrades) {
     this.sReload = 1;
     this.sFire = 2;
     this.state = this.sFire;
-
     this.id = _id;
     this.name = _name;
     this.desc = _desc;
     this.unlocked = false;
     this.upgrades = _upgrades;
+    this.recoilValue = 0;
     if (!CWeapon.list) CWeapon.objects = [];
     CWeapon.objects.push(this);
-
 };
 
 
@@ -33,10 +30,13 @@ CWeapon.prototype.resetParams = function()
     this.unlockPrice = this.backupStats.unlockPrice;
     this.reloadTime = this.backupStats.reloadTime;
     this.upgrCostLevel = this.backupStats.upgrCostLevel;
+    this.life = this.backupStats.life;
 }
 
 CWeapon.prototype.process = function()
 {
+    this.recoil -= 0.07;
+    if (this.recoil < 0) this.recoil = 0;
 }
 
 CWeapon.prototype.shot = function()
@@ -50,7 +50,7 @@ CWeapon.prototype.shot = function()
     }
     this.lastShot = (new Date()).getTime();
 
-    window.recoil += this.recoil * (0.8 + 0.8 * (Math.random()));
+    this.recoilValue += this.recoil;
     this.ammo --;
     if (!window.totalShots) window.totalShots = 0;
     window.totalShots ++;
@@ -70,8 +70,6 @@ CWeapon.prototype.canShot = function()
     if (t - this.lastShot >= this.delay) return true; else
     return false;
 }
-
-
 
 CWeapon.prototype.updateAmmo = function()
 {

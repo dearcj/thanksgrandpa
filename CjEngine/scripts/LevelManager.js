@@ -52,6 +52,14 @@ LevelManager.onComplete = function()
     if (LevelManager.onVeryComplete) LevelManager.onVeryComplete();
 }
 
+LevelManager.removeLastLevel = function()
+{
+    while (LevelManager.objs.length > 0) {
+        LevelManager.objs[0].destroy();
+        LevelManager.objs.splice(0, 1);
+    }
+}
+
 LevelManager.loadLevel = function(str, onCompleteFunction, layer)
 {
     var data = LevelManager.levels["levels/" + str + ".json"];

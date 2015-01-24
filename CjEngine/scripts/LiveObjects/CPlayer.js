@@ -9,7 +9,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.gravPower = 0.77;
     this.gfx = this.createDedGraphics();
     this.fireAngle = 0;
-    this.weapon = w_pistol;
+    this.weapon = gameStage.curweapon;
     this.bar = CObj.getById("hpbar");
     this.ammobar = CObj.getById("ammot");
     this.colGroup = CG_PLAYER;
@@ -21,21 +21,40 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.radius = this.gfx.width / 2;
 }
 
+CPlayer.prototype.updateAppearence = function(showGun) {
+
+    var hatSlot = null;
+    var gunSlot = null;
+    if (showGun)
+    {
+        for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
+        {
+            if (PlayerData.inst.items_enabled[i].equipped)
+            {
+                var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
+                if (item.type == tApp + tHat) hatSlot = item.gfx;
+                if (item.type == tWeapon) gunSlot = item.gfx;
+
+            }
+        }
+        g.skeleton.setAttachment("gun", gunSlot);
+    } else
+        g.skeleton.setAttachment("gun", null);
+    g.skeleton.setAttachment("hat", hatSlot);
+}
+
 CPlayer.prototype.createDedGraphics = function()
 {
     var g = new PIXI.Spine("imgtps/skeleton.json");
 
     g.skeleton.setSkinByName('perded');
-    g.scale.x = 0.3;
-    g.scale.y = 0.3;
-   // g.state.setAnimationByName(0, "breath", true);
-    this.gunBone = g.skeleton.findBone("gun");
+    g.state.setAnimationByName(0, "idle", true);
+    this.gunBone = g.skeleton.findSlot("gun");
 
     this.rshSlot = g.skeleton.findSlot("r_shoulder");
     this.lshSlot = g.skeleton.findSlot("l_shoulder");
-
-    g.skeleton.setAttachment("gun", null)
-    g.skeleton.setAttachment("hat", null)
+    g.scale.x = 0.3;
+    g.scale.y = 0.3;
 
     this.bulletStart = 40;
 
@@ -86,7 +105,7 @@ CPlayer.prototype.createDedGraphics = function()
 
 CPlayer.prototype.kill = function()
 {
-    this.destroy();
+    //this.destroy();
     gameStage.sessionEnd();
 }
 
@@ -114,28 +133,28 @@ CPlayer.prototype.process = function()
             this.y = this.baseY;
             this.gravityEnabled = false;
             this.gfx.state.setAnimationByName(0, "idle", true);
-
         }
     }
 
-    this.firePointX =this.x;
-    this.firePointY =this.y + this.gfx.pivot.y*this.gfx.scale.y
+  //  this.gunBone.data.boneData.inheritScale = false;
+   // this.gunBone.data.boneData.scaleX += 1;
+   // this.gunBone.data.boneData.scaleY += 1;
+ //   this.gunBone.bone.worldScaleX += 0.2;
+  //  this.gunBone.bone.worldScaleY += 0.2;
+    var p = this.gunBone.currentSprite.toGlobal({x:220, y: -20});
+    this.firePointX = p.x;
+    this.firePointY = p.y;
 
-
-    /*for (var i = 0; i < this.gfx.spineData.bones.length; ++i)
-    {
-        this.gfx.skeleton.bones[i].scaleX = SCR_SCALE;
-        this.gfx.skeleton.bones[i].scaleY = SCR_SCALE;
-
-    }*/
 
     if (SM.inst.currentStage == gameStage) {
+        if (this.weapon)
+            this.weapon.process();
+
         if (!this.jumpTween || !this.jumpTween.isActive()) {
             this.freq = 800;
             this.nullPhase += 22;
             this.x = this.startPlayerX + Math.sin((this.nullPhase) / this.freq) * 30;
         }
-
 
         var mx = window.mouseX;
         var my = window.mouseY;
@@ -144,18 +163,17 @@ CPlayer.prototype.process = function()
         var bangle = Math.atan2(this.firePointY - my, this.firePointX - mx);
 
         this.fireAngle = Math.PI + bangle;
-        var newAngle = this.fireAngle + Math.PI / 12;
+        var newAngle = this.fireAngle+Math.PI / 4;
        // if ((!this.handTween || !this.handTween.isActive())) {
-        this.gunBone.rotation =  -180*newAngle / Math.PI;
 
         this.rshSlot.data.boneData.rotation =  270 - 180*newAngle / Math.PI;
         this.lshSlot.data.boneData.rotation =  270 - 180*newAngle / Math.PI;
+       // this.gunBone.data.boneData.rotation =  270 -180*newAngle / Math.PI;
         //this.dedLeftHand.rotation = newAngle + 0.13;
             //this.dedRightHand.rotation = newAngle;
       //  }
 
     }
-
     CLiveObj.prototype.process.call(this);
 }
 

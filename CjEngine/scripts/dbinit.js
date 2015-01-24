@@ -5,7 +5,8 @@
 var tWeapon = "weap";
 var tPerk = "perk";
 var tBoost = "boost";
-var tApp = "appearence";
+var tApp = "app.";
+var tHat = "hat";
 
 function checkDb ()
 {
@@ -94,79 +95,117 @@ var dbobj =
         tbname: "tb_items",
 
         items:
-            [
+            [ {
+                type: tWeapon,
+                price :-1,
+                pricecrys: -1,
+                name:"Rifle",
+                desc:"Ружьишко",
+                gfx: "gun0",
+                reqlvl: -1
+            },
                 {
                     type: tWeapon,
-                    price :-1,
+                    price :500,
                     pricecrys: -1,
-                    name:"Rifle",
-                    desc:"Regular pistol",
-                    gfx: "item_pistol",
-                    reqlvl: -1
+                    name:"PPS",
+                    desc:"ППШ",
+                    gfx: "gun1",
+                    reqlvl: 2
                 },
                 {
                     type: tWeapon,
-                    price: -1,
+                    price: 1000,
                     pricecrys: -1,
                     name: "AK-74",
-                    desc: "Regular shotgun",
-                    gfx: "item_shotgun",
-                    reqlvl: -1
+                    desc: "Калаш",
+                    gfx: "gun2",
+                    reqlvl: 4
                 }
                 ,
                 {
                     type: tWeapon,
-                    price: -1,
-                    pricecrys: -1,
+                    price: 2000,
+                    pricecrys: 1,
                     name: "Minigun",
-                    desc: "Граната",
-                    gfx: "item_boost1",
-                    reqlvl: -1
+                    desc: "Пулемет",
+                    gfx: "gun4",
+                    reqlvl: 7
                 }
                 ,
                 {
                     type: tWeapon,
-                    price: -1,
-                    pricecrys: -1,
+                    price: 10000,
+                    pricecrys: 5,
                     name: "Grenade launcher",
-                    desc: "Граната",
-                    gfx: "item_boost1",
-                    reqlvl: -1
+                    desc: "Гранатомет",
+                    gfx: "gun3",
+                    reqlvl: 10
+                }
+                ,
+                {
+                    type: tWeapon,
+                    price: 60000,
+                    pricecrys: 15,
+                    name: "Plazma Cannon",
+                    desc: "Что-то мощное",
+                    gfx: "gun5",
+                    reqlvl: 15
                 }
                 ,
                 {
                     type: tBoost,
-                    price: -1,
+                    price: 500,
                     pricecrys: -1,
                     name: "Magnet",
                     desc: "Магнит",
-                    gfx: "item_boost1",
-                    reqlvl: 10
+                    gfx: "booster2",
+                    reqlvl: 2
                 }
                 ,
                 {
                     type: tBoost,
-                    price: -1,
+                    price: 200,
                     pricecrys: 5,
                     name: "Tablets",
                     desc: "Биодобавки",
-                    gfx: "item_boost1",
-                    reqlvl: 10
+                    gfx: "booster1",
+                    reqlvl: 1
                 }
                 ,
                 {
                     type: tBoost,
-                    price: -1,
+                    price: 800,
+                    pricecrys: -1,
+                    name: "Health",
+                    desc: "Больше ЖЫЗНИ",
+                    gfx: "booster4",
+                    reqlvl: 5
+                }
+                ,
+                {
+                    type: tBoost,
+                    price: 1,
+                    pricecrys: 1,
+                    name: "MarioStar",
+                    desc: "Неуязвимость!",
+                    gfx: "booster5",
+                    reqlvl: 5
+                }
+                ,
+                {
+                    type: tBoost,
+                    price: 100,
                     pricecrys: -1,
                     name: "Double",
                     desc: "В два раза больше монет!",
-                    gfx: "item_boost1",
+                    gfx: "booster3",
                     reqlvl: -1
                 }
                 ,
                 {
-                    type: tApp,
-                    price: -1,
+                    type: tApp + tHat,
+                    price: 100,
                     pricecrys: -1,
                     name: "Appearence.Hat1",
                     desc: "Шляпа 1",
@@ -175,12 +214,50 @@ var dbobj =
                 }
                 ,
                 {
-                    type: tApp,
-                    price: -1,
+                    type: tApp + tHat,
+                    price: 200,
                     pricecrys: -1,
                     name: "Appearence.Hat2",
                     desc: "Шляпа 2",
                     gfx: "hat2",
+                    reqlvl: -1
+                },
+                {
+                    type: tApp + tHat,
+                    price: 300,
+                    pricecrys: -1,
+                    name: "Appearence.Hat3",
+                    desc: "Шляпа 3",
+                    gfx: "hat3",
+                    reqlvl: -1
+                }
+                ,
+                {
+                    type: tApp + tHat,
+                    price: 400,
+                    pricecrys: -1,
+                    name: "Appearence.Hat4",
+                    desc: "Шляпа 4",
+                    gfx: "hat4",
+                    reqlvl: -1
+                },
+                {
+                    type: tApp + tHat,
+                    price: 500,
+                    pricecrys: -1,
+                    name: "Appearence.Hat5",
+                    desc: "Шляпа 5",
+                    gfx: "hat5",
+                    reqlvl: -1
+                }
+                ,
+                {
+                    type: tApp + tHat,
+                    price: 600,
+                    pricecrys: -1,
+                    name: "Appearence.Hat6",
+                    desc: "Шляпа 6",
+                    gfx: "hat6",
                     reqlvl: -1
                 }
             ]

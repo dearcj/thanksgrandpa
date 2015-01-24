@@ -10,6 +10,9 @@ function CCoin(in_x,in_y,textname,in_body) {
     this.colMask = CG_PLAYER;
     this.gravPower = 0.7;
     this.radius = 15;
+
+    if (!CCoin.coins) CCoin.coins = [];
+    CCoin.coins.push(this);
 }
 CCoin.prototype.process = function ()
 {
