@@ -87,7 +87,7 @@ CharStage.prototype.onShowContinue = function()
     charStage.doProcess = true;
 
     shopStage.updateStatsPanel();
-
+//asdasd
     CObj.getById("btnorder").click = function()
     {
         var hided = [];
