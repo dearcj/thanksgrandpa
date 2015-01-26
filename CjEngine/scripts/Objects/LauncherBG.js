@@ -60,9 +60,9 @@ LauncherBG.prototype.process = function()
     if (Math.floor(this.distance / 500) != Math.floor((this.distance + delta) / 500)) {
 
         var delta = 1;
-        for (var l = 0; l < this.layers.length; ++l)
+        for (var l = 0; l < this.levCycles[0].layers.length; ++l)
         {
-            this.layers.velocity += delta;
+            this.levCycles[0].layers[l].velocity += delta;
         }
         this.maxVelocity += delta;
     }
