@@ -448,10 +448,9 @@ GameStage.prototype.onShow = function () {
     LauncherBG.inst = new LauncherBG(0, 0);
     LauncherBG.inst.addLevel("plantPart2");
     for (var i = 0; i < 2500; ++i)
-        LauncherBG.inst.process();
+        LauncherBG.inst.process(true);
     LauncherBG.inst.distance = 0;
-
-    MM.inst.monsterQueue = MM.inst.generateMonsterQueue();
+    MM.inst.init();
 }
 
 GameStage.prototype.makePause = function () {

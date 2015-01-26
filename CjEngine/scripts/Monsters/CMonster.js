@@ -49,8 +49,9 @@ CMonster.prototype.kill = function()
     if (this.prekilled) return;
     for (var i = 0; i < 5; ++i)
     {
+        if (Math.random() > 0.3) continue;
         var c = new CCoin(this.x, this.y, "coin");
-        c.amount = 2;
+        c.amount = 4;
         var maxvx = 20 + Math.random()*10;
         c.vx = maxvx;
       //  new TweenMax(c, 0.4, {vx: maxvx});
@@ -100,7 +101,12 @@ CMonster.prototype.destroy = function()
 
 CMonster.prototype.longJump = function()
 {
-    var x = this;
-    new TweenMax(this, 5*this.jumpTimeCoef, {x: 50, ease: Linear.easeIn});
-    new TweenMax(this, 2.1*this.jumpTimeCoef, { y: this.y - 240*(this.highCoef + Math.random()*0.1), yoyo: true, repeat: 1, ease: Quad.easeInOut, onComplete: function(){x.gravityEnabled = true;}} );
+    this.gravityEnabled = true;
+    this.jumpTimeCoef = 1;
+   var t = 2.2*this.jumpTimeCoef;
+    this.gravPower = 0.12;
+    this.vy = -this.gravPower*t*20;
+    this.allowTrackSpeed = false;
+    new TweenMax(this, t, {x: 50, ease: Linear.easeIn});
+  //  new TweenMax(this, 1.7*this.jumpTimeCoef, { y: this.y - 220*(this.highCoef + Math.random()*0.1), yoyo: true, repeat: 1, ease: Quad.easeInOut, onComplete: function(){x.gravityEnabled = true;}} );
 }

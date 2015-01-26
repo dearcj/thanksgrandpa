@@ -73,15 +73,21 @@ CLaser.prototype.process = function()
 
             this.particlesClip.addChild(part);
         }
+        var len = this.lineClip.children.length;
+        for (var i = 0; i < len; ++i) {
+            this.lineClip.children[i].scale.x = 1 + i / len;
 
+            this.lineClip.children[i].x = 2.5*Math.cos(4*Math.PI * (i / len) + t/100);
+
+        }
         for (var i = 0; i < this.particlesClip.children.length; ++i)
         {
             var scale = 1 - Math.abs(this.maxL / 2 - this.particlesClip.children[i].y) / (this.maxL / 2) ;
             if (scale < 0.3) scale = 0.3;
             this.particlesClip.children[i].scale.x = scale;
             this.particlesClip.children[i].scale.y = -scale;
-            this.particlesClip.children[i].x = 3*(Math.cos((this.particlesClip.children[i].y*2 + t) / 1000));
-            var dy = 25*Math.abs(Math.cos((this.particlesClip.children[i].y*2 + t) / 800));
+            //this.particlesClip.children[i].x = 3*(Math.cos((this.particlesClip.children[i].y*2 + t) / 1000));
+            var dy = 10 + 4*(Math.cos((t) / 800));
             this.particlesClip.children[i].y += dy;
             if (this.particlesClip.children[i].y > this.maxL)
             {
@@ -109,7 +115,7 @@ CLaser.prototype.process = function()
             var dyy = y3 - y4;
             if (dxx*dxx + dyy*dyy < CMonster.list[i]._sqr)
             {
-                CMonster.list[i].dealDamage(1);
+                CMonster.list[i].dealDamage(this.damage / 60);
             }
         }
 

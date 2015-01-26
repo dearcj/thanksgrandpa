@@ -3,14 +3,14 @@
  */
 
 ////////////CObj
+
 CObj = function(in_x,in_y,filename,in_body) {
 
     this.PublicFields = "allowRotation,drawAsTexture,userData,[Graphics],isClip,fps,autoPlay,scaleX,scaleY,offsetX,offsetY,offsetR;";
 
-    CObj.debugView = true;
 
-    this._isConductor = false;
-    this.connected;
+    this.allowTrackSpeed = true;
+
     this._x = 0;
     this._y = 0;
     this._sensor = false;
@@ -64,6 +64,8 @@ CObj = function(in_x,in_y,filename,in_body) {
     this.gravityEnabled = false;
 
 };
+
+CObj.debugView = false;
 
 Function.prototype.generateProperty = function(name, options) {
     // internal member variable name
@@ -162,8 +164,11 @@ CObj.prototype.collide = function(obj2){
 }
 
 CObj.prototype.process = function(){
+
+    if (this.vx != 0)
     this.x = this.x + this.vx;
-    this.y = this.y + this.vy;
+    if (this.vy != 0)
+        this.y = this.y + this.vy;
 
     if (CObj.debugView) {
         this.gfx2.x = this.x;
@@ -173,6 +178,8 @@ CObj.prototype.process = function(){
     if (this.gravityEnabled)
     {
         this.vy += this.gravPower;
+
+        if (this.allowTrackSpeed)
         this.vx = this.vx*0.5 + (-LauncherBG.inst.maxVelocity)*0.5;
     }
     this.updateGraphics();

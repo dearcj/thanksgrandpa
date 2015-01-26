@@ -9,8 +9,6 @@ function CLiveObj(in_x,in_y,textname,in_body) {
    this._maxHp = 100;
    this.bar = null;
 
-
-   SM.inst.guiLayer.addChild(this.gfx2);
 }
 
 

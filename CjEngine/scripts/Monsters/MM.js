@@ -27,10 +27,31 @@ MM = function() {
 
 MM.inst = new MM();
 
+MM.prototype.init = function()
+{
+    this.monsterQueue = MM.inst.generateMonsterQueue();
+    var lastMoney = -100;
+    this.bonusQueue = "";
+    for (var i = 0; i < this.monsterQueue.length; ++i)
+    {
+        if (this.monsterQueue.charAt(i) == 'c')
+        {
+            if (Math.abs(lastMoney - i) > 3)
+            {
+                var bonusStr = "c1c2c3c3c3";
+                lastMoney = i;
+                this.bonusQueue.slice(Math.max(i-bonusStr.length, 0), bonusStr.length);
+                this.bonusQueue += bonusStr;
+            }
+        } else this.bonusQueue += "..";
+    }
+    console;
+}
+
 
 MM.prototype.generateMonsterQueue = function()
 {
-    var s = "";
+    var s = [];
     var it = 3000;
     var d = 0; // distance in dots
     for (var i = 0; i < it; ++i)
@@ -80,9 +101,22 @@ MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
     m.offsY = -innerOffs;
     m.vx = -LauncherBG.inst.maxVelocity;
     m.colGroup = 0;
+    m.allowTrackSpeed = true;
 
     this.lastSpawnSimple =(new Date()).getTime();
     this.simpleMonsterDelay = Math.random() * 1000 + 2000;
+}
+
+
+MM.prototype.spawnCoin = function(height)
+{
+    for (var i = 0; i < 5; ++i) {
+        var c = new CCoin(SCR_WIDTH + 240, SCR_HEIGHT - height * 50 - i* 50 - 150, "coin");
+        c.amount = 1;
+        c.vx = -LauncherBG.inst.maxVelocity;
+        c.vy = 0;
+        c.gravityEnabled = false;
+    }
 }
 
 
@@ -152,6 +186,14 @@ MM.prototype.doStep = function()
 {
     var s = this.monsterQueue.charAt(0);
     this.monsterQueue = this.monsterQueue.slice(1);
+
+    var b = this.bonusQueue.charAt(0);
+    this.bonusQueue= this.bonusQueue.slice(1);
+    if (b == "c") {
+        var height = parseInt(this.bonusQueue.charAt(0));
+        this.spawnCoin(height);
+    }
+    this.bonusQueue= this.bonusQueue.slice(1);
 
     if (s == "s") this.spawnSimpleMonster(5);
     if (s == "f") this.spawnFatty(15);

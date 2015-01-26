@@ -115,7 +115,7 @@ var w_laser = new CLaser(
         recoil: 0, //recoil
         magcap: 60, //magcap
         delay: 150, //delay
-        damage: 18, //damage
+        damage: 180, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 2200},//__reloadTime,}
     "asd",// __gfx,
