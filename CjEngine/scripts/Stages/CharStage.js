@@ -37,7 +37,7 @@ CharStage.prototype.createFriendsPanel = function() {
         friendClip.anchor.y = 0.5;
         friendClip.y = 10;
         frClpBtn.hover = true;
-        if (vkparams.friendsIngame)
+        if (vkparams.friendsIngame && i < vkparams.friendsIngame.length)
         frClpBtn.text = vkparams.friendsIngame[i].name + vkparams.friendsIngame[i].last_name;
 
      frClpBtn.init();
