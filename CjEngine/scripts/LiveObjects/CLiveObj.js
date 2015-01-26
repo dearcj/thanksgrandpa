@@ -8,7 +8,17 @@ function CLiveObj(in_x,in_y,textname,in_body) {
    this._hp = 100;
    this._maxHp = 100;
    this.bar = null;
+
+
+   SM.inst.guiLayer.addChild(this.gfx2);
 }
+
+
+CLiveObj.prototype.process = function()
+{
+    CObj.prototype.process.call(this);
+}
+
 
 CLiveObj.prototype.kill = function()
 {

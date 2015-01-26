@@ -205,17 +205,19 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
             this.achs_progress[j].progress = progress;
          } else {
             if (this.achs_progress[j].progress < 1 &&
-                this.achs_progress[j].progress + progress >= 1) complete = true;
+                this.achs_progress[j].progress + progress >= 1)
+               complete = true;
             this.achs_progress[j].progress += progress;
          }
             break;
       }
    }
 
-   this.savePlayerAchs();
+
 
    if (complete)
    {
+      this.savePlayerAchs();
       this.showAch(this.achs[i]);
    }
    return complete;
@@ -248,7 +250,7 @@ PlayerData.prototype.createAchProgress = function(cb)
    {
 
       var containAch = false;
-      for (var j = 0; j < this.achs_progress; ++j)
+      for (var j = 0; j < this.achs_progress.length; ++j)
       {
          if (this.achs[i].id == this.achs_progress[j].id_ach)
          {
@@ -308,7 +310,9 @@ PlayerData.prototype.loadData = function(cb)
 
           PlayerData.inst.loadCount ++;
           if (PlayerData.inst.loadCount == totalLoads && cb) cb();
-       }, function (res) {}
+       }, function (res) {
+          console;
+       }
    );
 
 
@@ -397,7 +401,7 @@ PlayerData.prototype.savePlayerData = function()
 PlayerData.prototype.savePlayerAchs = function()
 {
    for (var i = 0; i < PlayerData.inst.achs_progress.length; ++i)
-      window.azureclient.getTable("tb_achs_player").update(PlayerData.inst.achs_progress[i]).done(function (result) {
+      window.azureclient.getTable("tb_ach_player").update(PlayerData.inst.achs_progress[i]).done(function (result) {
       }, function (err) {
       });
 }

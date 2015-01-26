@@ -84,18 +84,18 @@ CButton.prototype.updateGraphics=function()
     if (this.gfx && this.textField) {
         if (!this.addToSameLayer)
         {
-            var dx = 0;
-            var dy = 0;
+            var ddx = 0;
+            var ddy = 0;
             if (this.hover)
             {
                if (this.y > SCR_HEIGHT - 100)
                 {
-                    dy = -50;
-                } else dy = 50;
+                    ddy = -50;
+                } else ddy = 50;
 
             }
-            this.textField.y = this.gfx.y - this.textField.height * 0.7 + dy;// + this.textField.height / 4;// - this.gfx.height * 0.25;
-            this.textField.x = this.gfx.x - this.textField.width / 2 + dx;// - this.gfx.width * 0.25;
+            this.textField.y = this.gfx.y - this.textField.height * 0.7 + ddy;// + this.textField.height / 4;// - this.gfx.height * 0.25;
+            this.textField.x = this.gfx.x - this.textField.width / 2;// - this.gfx.width * 0.25;
         }
     }
 }
@@ -120,7 +120,6 @@ CButton.prototype.init = function(){
 
     if (this.hover == undefined || this.hover == "true") this.hover = true;
     if (this.hover == "false") this.hover = false;
-
 
     if (this.hover)
     {
@@ -155,7 +154,8 @@ CButton.prototype.init = function(){
            if (obj.hover)
            {
                obj.textField.alpha = 1;
-               obj.updateGraphics();
+           //    if (gameStage.state == "paused")
+           //    obj.updateGraphics();
            }
 
     }

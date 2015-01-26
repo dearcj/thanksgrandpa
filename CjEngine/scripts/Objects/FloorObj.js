@@ -22,7 +22,7 @@ FloorObj.prototype.process = function()
                     o.destroy();
                 }
             }
-            if (CObj.checkType(o, CCoin) && o.y + o.radius / 2 > floorLine) {
+            if (CObj.checkType(o, CCoin) && o.y + o.radius / 2 > floorLine - 50) {
                 if (o.vy > 0)
                 o.vy = -o.vy*0.5;
             }

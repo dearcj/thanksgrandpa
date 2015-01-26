@@ -29,14 +29,18 @@ CharStage.prototype.createFriendsPanel = function() {
     var skip = 0;
     for (var i = 0 + skip; i < 6 + skip; ++i)
     {
-        var frClpBtn = new CButton(i*80, 5, "add friend");
+        var frClpBtn = new CButton(i*80, 0, "add friend");
         var friendClip = frClpBtn.gfx;//new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.parent.removeChild(friendClip);
         friendClip.anchor.x = 0.5;
         friendClip.x = i*80;
         friendClip.anchor.y = 0.5;
         friendClip.y = 10;
-        frClpBtn.init();
+        frClpBtn.hover = true;
+        if (vkparams.friendsIngame)
+        frClpBtn.text = vkparams.friendsIngame[i].name + vkparams.friendsIngame[i].last_name;
+
+     frClpBtn.init();
         panel.addChild(friendClip);
         if (!vkparams.friendsIngame || i >= vkparams.friendsIngame.length) {
             friendClip.click = function () {
@@ -67,11 +71,10 @@ CharStage.prototype.createFriendsPanel = function() {
             });
         };
         setPhotoCB(friendClip);
-
-        var nametf = CTextField.createTextField({fontSize: "14", align: "center", text: vkparams.friendsIngame[i].name + vkparams.friendsIngame[i].last_name});
+        /*var nametf = CTextField.createTextField({fontSize: "14", align: "center", text: });
         nametf.x -= nametf.width / 2;
         nametf.y = 15;
-        friendClip.addChild(nametf);
+        friendClip.addChild(nametf); */
     }
 
     panel.x = 215;
@@ -94,15 +97,16 @@ CharStage.prototype.onShowContinue = function()
         CObj.enableButtons(false);
 
         CObj.getById("tname").gfx.visible = false;
+        CObj.getById("btnorder").textField.visible = false;
         var wnd = SM.inst.addDisableWindow(null, SM.inst.guiLayer);
 
         LevelManager.loadLevel("levelpremium", function()
         {
             close = function()
             {
-                CObj.getById("tname").gfx.visible = false;
+                CObj.getById("tname").gfx.visible = true;
+                CObj.getById("btnorder").textField.visible = true;
                 LevelManager.removeLastLevel();
-
 
                 CObj.enableButtons(true);
                 wnd.parent.removeChild(wnd);

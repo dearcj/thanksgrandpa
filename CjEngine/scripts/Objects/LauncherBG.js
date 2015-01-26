@@ -57,8 +57,15 @@ LauncherBG.prototype.process = function()
     if (this.levCycles.length == 0) return;
     var upper = this.levCycles[0].layers[this.levCycles[0].layers.length - 1];
     var delta = upper.velocity / 50;
-    if (Math.floor(this.distance / 500) != Math.floor((this.distance + delta) / 500))
-    this.maxVelocity += 1;
+    if (Math.floor(this.distance / 500) != Math.floor((this.distance + delta) / 500)) {
+
+        var delta = 1;
+        for (var l = 0; l < this.layers.length; ++l)
+        {
+            this.layers.velocity += delta;
+        }
+        this.maxVelocity += delta;
+    }
     this.distance += delta;
 
     if (this.distance > 10 && this.distance < 20){

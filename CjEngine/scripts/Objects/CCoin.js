@@ -24,7 +24,7 @@ CCoin.prototype.process = function ()
 CCoin.prototype.collide = function(obj2)
 {
     if (this.doRemove) return;
-    PlayerData.inst.score += 100;
+    PlayerData.inst.score += this.amount;
     gameStage.updateScore();
     this.destroy();
 }

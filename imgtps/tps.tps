@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>sparrow</string>
+        <string>json</string>
         <key>textureFileName</key>
         <filename>pussyatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>pussyatlas.xml</filename>
+        <filename>pussyatlas.json</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -170,14 +170,9 @@
             <filename>../../img/METAL_LEVEL_TEXTURES/VBG.png</filename>
             <filename>../../img/METAL_LEVEL_TEXTURES/COLUMN1.png</filename>
             <filename>../../img/METAL_LEVEL_TEXTURES/COLUMN2.png</filename>
-            <filename>../../img/items/item_pistol.png</filename>
-            <filename>../../img/items/item_shotgun.png</filename>
-            <filename>../../img/items/item_boost1.png</filename>
             <filename>../../../../dedgame/fight screen/coin.png</filename>
             <filename>../../../../dedgame/fight screen/road tile.png</filename>
             <filename>../../../../dedgame/fight screen/road up tile.png</filename>
-            <filename>../../../../dedgame/fight screen/enemy fat.png</filename>
-            <filename>../../../../dedgame/fight screen/enemy thin.png</filename>
             <filename>../../../../dedgame/fight screen/health dead.png</filename>
             <filename>../../../../dedgame/fight screen/health.png</filename>
             <filename>../../../../dedgame/fight screen/road down.png</filename>
@@ -209,6 +204,13 @@
             <filename>../../../../dedgame/ded skeleton/r_hand.png</filename>
             <filename>../../../../dedgame/ded skeleton/r_hip.png</filename>
             <filename>../../../../dedgame/ded skeleton/r_leg.png</filename>
+            <filename>../../../../dedgame/animation sprites/shot/fxblink.png</filename>
+            <filename>../../../../dedgame/fight screen/enemies/enemy1.png</filename>
+            <filename>../../../../dedgame/fight screen/enemies/enemy1_1.png</filename>
+            <filename>../../../../dedgame/fight screen/enemies/enemy2.png</filename>
+            <filename>../../../../dedgame/fight screen/enemies/enemy2_2.png</filename>
+            <filename>../../../../dedgame/fight screen/enemies/enemy3.png</filename>
+            <filename>../../../../dedgame/fight screen/enemies/enemy3_3.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

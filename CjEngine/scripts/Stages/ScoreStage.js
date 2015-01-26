@@ -57,7 +57,6 @@ ScoreStage.prototype.updateSB = function(arr)
 }
 
 ScoreStage.prototype.onShow = function() {
-    this.doProcess = false;
     CustomStage.prototype.onShow.call(this);
 
 
@@ -79,8 +78,7 @@ ScoreStage.prototype.onHide = function(newStage) {
 
 ScoreStage.prototype.onShowContinue = function()
 {
-    charStage.doProcess = true;
-    CObj.getById("tfpl").text = "ВАШ РЕКОРД " + PlayerData.inst.playerItem.maxdistance.toString() + ' МЕТРА \n' +
+   CObj.getById("tfpl").text = "ВАШ РЕКОРД " + PlayerData.inst.playerItem.maxdistance.toString() + ' МЕТРА \n' +
     "ВАШ РАНГ " + PlayerData.inst.playerItem.rank.toString();
 
     var current = scoreStage.skip + 1;
@@ -119,7 +117,9 @@ ScoreStage.prototype.onShowContinue = function()
     };
 
     CObj.getById("bback").click = function ()
-    {SM.inst.openStage(charStage);}
+    {
+        SM.inst.openStage(charStage);
+    }
     CObj.getById("bbacklist").click = function ()
     {
         scoreStage.skip -= scoreStage.showRecords;

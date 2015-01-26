@@ -171,6 +171,7 @@ GameStage.prototype.updateItems = function () {
             k++;
         }
 
+        gameStage.curweapon = w_rifle;
         if (item.type == tWeapon && PlayerData.inst.items_enabled[i].equipped)
         {
             if (item.name == "Rifle") gameStage.curweapon = w_rifle;
@@ -179,8 +180,11 @@ GameStage.prototype.updateItems = function () {
                 gameStage.curweapon = w_ak74;
             if (item.name == "Minigun") gameStage.curweapon = w_minigun;
             if (item.name == "Grenade Launcher") gameStage.curweapon = w_pistol;
-            if (item.name == "Plazma Cannon") gameStage.curweapon = w_pistol;
+            if (item.name == "Plazma Cannon") gameStage.curweapon = w_laser;
         }
+
+        gameStage.curweapon = w_laser;
+
     }
 
 }
@@ -550,7 +554,7 @@ GameStage.prototype.onLoadEnd = function () {
     gameStage.createHPBar(10, 5, 5);
 
     gameStage.updateItems();
-    gameStage.player = new CPlayer(110, gameStage.floor.y - floorHeight / 2 - 50, "");
+    gameStage.player = new CPlayer(110, SCR_HEIGHT - 170);
     gameStage.player.gfx.pivot.y = -190;
     gameStage.player.gfx.scale.x = 0.25;
     gameStage.player.gfx.scale.y = 0.25;

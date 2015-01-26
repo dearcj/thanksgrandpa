@@ -7,6 +7,8 @@ CObj = function(in_x,in_y,filename,in_body) {
 
     this.PublicFields = "allowRotation,drawAsTexture,userData,[Graphics],isClip,fps,autoPlay,scaleX,scaleY,offsetX,offsetY,offsetR;";
 
+    CObj.debugView = true;
+
     this._isConductor = false;
     this.connected;
     this._x = 0;
@@ -50,10 +52,18 @@ CObj = function(in_x,in_y,filename,in_body) {
     this.colGroup = 0;
     this.x = in_x;
     this.y = in_y;
+
+    if (CObj.debugView) {
+
+        this.gfx2 = new PIXI.Graphics();
+        SM.inst.guiLayer.addChild(this.gfx2);
+    }
+
     this.radius = 1;
     this.rotation = 0;
     this.gravityEnabled = false;
- };
+
+};
 
 Function.prototype.generateProperty = function(name, options) {
     // internal member variable name
@@ -155,6 +165,11 @@ CObj.prototype.process = function(){
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
 
+    if (CObj.debugView) {
+        this.gfx2.x = this.x;
+        this.gfx2.y = this.y;
+    }
+
     if (this.gravityEnabled)
     {
         this.vy += this.gravPower;
@@ -167,7 +182,9 @@ CObj.prototype.process = function(){
 CObj.prototype._destroy = function(){
     if (!this.doRemove) return;
 
-
+    if (CObj.debugView) {
+        this.gfx2.parent.removeChild(this.gfx2);
+    }
     if (this.gfx && this.gfx.parent) this.gfx.parent.removeChild(this.gfx);
     this.gfx = null;
 
@@ -244,6 +261,13 @@ Object.defineProperty(CObj.prototype, 'radius', {
         this._radius = value;
         if (value)
         this._sqr = value*value;
+
+        if (CObj.debugView) {
+            this.gfx2.clear();
+            this.gfx2.beginFill(0x000000, 0.2);
+            this.gfx2.drawCircle(0, 0, this.radius);
+            this.gfx2.endFill();
+        }
     }
 });
 
@@ -301,7 +325,9 @@ CObj.processAll = function(){
                 if (((obj1.colMask & obj2.colGroup) != 0) ||
                     ((obj2.colMask & obj1.colGroup) != 0) )
                 {
-                    if ((obj1.x - obj2.x)*(obj1.x - obj2.x) + (obj1.y - obj2.y)*(obj1.y - obj2.y) < obj2._sqr + obj1._sqr) {
+                    var dx = obj1.x - obj2.x;
+                    var dy = obj1.y - obj2.y;
+                    if (dx*dx + dy*dy < (obj2.radius + obj1.radius)*(obj2.radius + obj1.radius)) {
                      if ((obj1.colMask & obj2.colGroup) != 0) obj1.collide(obj2);
                      if ((obj2.colMask & obj1.colGroup) != 0) obj2.collide(obj1);
                     }

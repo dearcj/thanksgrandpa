@@ -105,3 +105,23 @@ var w_ak74 = new CQueueGun(
         {name: "Быстрая стрельба", param: "delay", valuesUpgr: [-10, -20, -30, -40], level: 0}
     ]);
 
+var w_laser = new CLaser(
+    "laser", //id
+    "лазер", //name
+    "описание", //desc
+    {
+        life: 1,
+        acc: 0.08,
+        recoil: 0, //recoil
+        magcap: 60, //magcap
+        delay: 150, //delay
+        damage: 18, //damage
+        unlockprice: 10, //unlockprice
+        reloadTime: 2200},//__reloadTime,}
+    "asd",// __gfx,
+    [
+        {name: "Точный ствол", param: "recoil", valuesUpgr: [10, 20, 30, 40], level: 0},
+        {name: "Дополнительный магазин", param: "magCapacity", valuesUpgr: [2, 4, 6, 8], level: 0},
+        {name: "Быстрая стрельба", param: "delay", valuesUpgr: [-10, -20, -30, -40], level: 0}
+    ]);
+

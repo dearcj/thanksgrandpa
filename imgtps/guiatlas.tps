@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>sparrow</string>
+        <string>json</string>
         <key>textureFileName</key>
         <filename>guiatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>guiatlas.xml</filename>
+        <filename>guiatlas.json</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -198,7 +198,6 @@
             <filename>../../../../dedgame/home screen/records.png</filename>
             <filename>../../../../dedgame/gameover/bodrost star.png</filename>
             <filename>../../../../dedgame/gameover/bodrost text.png</filename>
-            <filename>../../../../dedgame/gameover/game over ded.png</filename>
             <filename>../../../../dedgame/gameover/game over home.png</filename>
             <filename>../../../../dedgame/gameover/game over screen.png</filename>
             <filename>../../../../dedgame/gameover/score cover.png</filename>
@@ -224,6 +223,21 @@
             <filename>../../../../dedgame/shop/guns/gun4.png</filename>
             <filename>../../../../dedgame/shop/guns/gun5.png</filename>
             <filename>../../../../dedgame/shop/ded back.png</filename>
+            <filename>../../../../dedgame/shop/boosters/booster1.png</filename>
+            <filename>../../../../dedgame/shop/boosters/booster2.png</filename>
+            <filename>../../../../dedgame/shop/boosters/booster3.png</filename>
+            <filename>../../../../dedgame/shop/boosters/booster4.png</filename>
+            <filename>../../../../dedgame/shop/boosters/booster5.png</filename>
+            <filename>../../../../dedgame/shop/guns/gun0.png</filename>
+            <filename>../../../../dedgame/level up window.png</filename>
+            <filename>../../../../dedgame/level up button.png</filename>
+            <filename>../../../MCC/img/buttonlong0001.png</filename>
+            <filename>../../../../dedgame/buy coins/buy_back.png</filename>
+            <filename>../../../../dedgame/buy coins/buy_button.png</filename>
+            <filename>../../../../dedgame/buy coins/buy_cover.png</filename>
+            <filename>../../../../dedgame/buy coins/buy_cover_crystals.png</filename>
+            <filename>../../../../dedgame/buy coins/cross.png</filename>
+            <filename>../../../../dedgame/buy coins/free coins.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

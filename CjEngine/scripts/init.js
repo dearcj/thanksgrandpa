@@ -50,7 +50,7 @@ loginCallback = function(playerItem)
         new PlayerData(playerItem);
     });
 }
-
+/*
 createAchs = function(uid)
 {
     azureclient.getTable('tb_achs').read().done(
@@ -65,7 +65,7 @@ createAchs = function(uid)
             console.log("Error: " + err);
         });
 }
-
+*/
 
 dbInit = function() {
     window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );

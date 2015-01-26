@@ -17,8 +17,11 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.maxHp = 5;
     this.hp = 5;
     this.startPlayerX = this.x;
+    this.y += 10;
     this.baseY = this.y;
-    this.radius = this.gfx.width / 2;
+    this.offsetY = -20;
+    this.radius = this.gfx.width / 2 - 20;
+
 }
 
 CPlayer.prototype.updateAppearence = function(showGun) {
@@ -55,6 +58,7 @@ CPlayer.prototype.createDedGraphics = function()
     this.lshSlot = g.skeleton.findSlot("l_shoulder");
     g.scale.x = 0.3;
     g.scale.y = 0.3;
+
 
     this.bulletStart = 40;
 
