@@ -67,7 +67,7 @@ CLiveObj.generateProperty('hp', {
         if (this.bar)
             this.bar.tweenProp(this._hp / this._maxHp);
 
-        if (this._hp < 1. && !this.isKilled)
+        if (this._hp <= 0 && !this.isKilled)
         {
             this.kill();
         }

@@ -34,16 +34,19 @@ MM.prototype.init = function()
     this.bonusQueue = "";
     for (var i = 0; i < this.monsterQueue.length; ++i)
     {
+        this.bonusQueue += "..";
         if (this.monsterQueue.charAt(i) == 'c')
         {
-            if (Math.abs(lastMoney - i) > 3)
+            if (i > 5)
             {
                 var bonusStr = "c1c2c3c3c3";
                 lastMoney = i;
-                this.bonusQueue.slice(Math.max(i-bonusStr.length, 0), bonusStr.length);
+              //  console.log(this.bonusQueue.length);
+                this.bonusQueue = this.bonusQueue.slice(0, this.bonusQueue.length-bonusStr.length);
+              //  console.log(this.bonusQueue.length);
                 this.bonusQueue += bonusStr;
             }
-        } else this.bonusQueue += "..";
+        }
     }
     console;
 }

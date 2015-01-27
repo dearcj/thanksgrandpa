@@ -226,7 +226,7 @@ GameStage.prototype.shAfterLife = function () {
             gameStage.unpause();
             gameStage.state = "game";
             PlayerData.inst.playerItem.crystals -= price;
-            gameStage.player.hp = gameStage.player.maxHp / 2;
+            gameStage.player.reveal();
             PlayerData.inst.savePlayerData();
         }
     }
@@ -555,8 +555,8 @@ GameStage.prototype.onLoadEnd = function () {
     gameStage.updateItems();
     gameStage.player = new CPlayer(110, SCR_HEIGHT - 170);
     gameStage.player.gfx.pivot.y = -190;
-    gameStage.player.gfx.scale.x = 0.25;
-    gameStage.player.gfx.scale.y = 0.25;
+    gameStage.player.gfx.scale.x = 0.22;
+    gameStage.player.gfx.scale.y = 0.22;
     SM.inst.fg.addChild(gameStage.player.gfx);
 
    // gameStage.player.gfx.state.setAnimationByName(0, "idle", true);

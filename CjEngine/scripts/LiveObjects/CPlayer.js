@@ -15,13 +15,15 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.colGroup = CG_PLAYER;
     this.nullPhase = 0;
     this.maxHp = 5;
-    this.hp = 5;
+    this.hp = this.maxHp;
     this.startPlayerX = this.x;
     this.y += 10;
     this.baseY = this.y;
     this.offsetY = -20;
     this.radius = this.gfx.width / 2 - 20;
-
+    this.sMoving = 1;
+    this.sDying = 2;
+    this.state = this.sMoving;
 }
 
 CPlayer.prototype.updateAppearence = function(showGun) {
@@ -63,54 +65,27 @@ CPlayer.prototype.createDedGraphics = function()
     this.bulletStart = 40;
 
     return g;
-
-/*
-    this.dedLeftHand = new PIXI.Sprite(PIXI.Texture.fromFrame("ded fight 2 arm.png"));
-    this.dedBody = new PIXI.Sprite(PIXI.Texture.fromFrame("ded fight body.png"));
-    this.dedHead = new PIXI.Sprite(PIXI.Texture.fromFrame("ded fight head.png"));
-    this.dedWeaponContainer = new PIXI.DisplayObjectContainer();
-    this.dedRightHand = new PIXI.Sprite(PIXI.Texture.fromFrame("ded fight 1 arm.png"));
-    this.dedBoard = new PIXI.Sprite(PIXI.Texture.fromFrame("ded fight board.png"));
-
-
-    this.dedBody.anchor.x = 0.5;
-    this.dedBody.anchor.y = 0.5;
-    this.dedHead.anchor.x = 0.5;
-    this.dedHead.anchor.y = 0.5;
-    this.dedHead.y = - 67;
-    this.dedHead.x = 27;
-
-    this.dedBoard.anchor.x = 0.5;
-    this.dedBoard.anchor.y = 0.5;
-    this.dedBoard.y = 62;
-
-    this.dedLeftHand.pivot.y = 10;
-    this.dedLeftHand.pivot.x = 5;
-    this.dedLeftHand.y = -35;
-    this.dedLeftHand.x = 2;
-    this.dedRightHand.y = -38;
-    this.dedRightHand.x = - 20;
-
-    this.dedWeaponContainer.x = -17;
-    this.dedWeaponContainer.y = -47;
-
-    g.addChild(this.dedLeftHand);
-    g.addChild(this.dedBoard);
-    g.addChild(this.dedBody);
-    g.addChild(this.dedHead);
-    this.dedWeaponContainer.addChild(this.dedWeapon);
-    g.addChild(this.dedWeaponContainer);
-    g.addChild(this.dedRightHand);
-
-
-    return g;
-*/
 }
+
+
+CPlayer.prototype.reveal = function()
+{
+    this.hp = this.maxHp / 2;
+    this.state = this.sMoving;
+    this.revealTime = new Date().getTime();
+    this.gfx.state.setAnimationByName(0, "idle", true);
+}
+
 
 CPlayer.prototype.kill = function()
 {
     //this.destroy();
-    gameStage.sessionEnd();
+    if (this.state == this.sMoving) {
+        this.state = this.sDying;
+
+        this.gfx.state.setAnimationByName(0, "defeated", false);
+        TweenMax.delayedCall(0.57, gameStage.sessionEnd);
+    }
 }
 
 CPlayer.prototype.destroy = function()
@@ -164,14 +139,17 @@ CPlayer.prototype.process = function()
         var my = window.mouseY;
         if (mx < this.firePointX) mx = this.firePointX;
         if (my > SCR_HEIGHT - 50) my = SCR_HEIGHT - 50;
-        var bangle = Math.atan2(this.firePointY - my, this.firePointX - mx);
+
+        var bangle = Math.atan2(this.y - my, this.x - mx);
 
         this.fireAngle = Math.PI + bangle;
-        var newAngle = this.fireAngle+Math.PI / 4;
+        var newAngle = this.fireAngle+Math.PI / 2;
        // if ((!this.handTween || !this.handTween.isActive())) {
 
-        this.rshSlot.data.boneData.rotation =  270 - 180*newAngle / Math.PI;
-        this.lshSlot.data.boneData.rotation =  270 - 180*newAngle / Math.PI;
+        if (this.state == this.sMoving) {
+            this.rshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI - 10;
+            this.lshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI - 10;
+        }
        // this.gunBone.data.boneData.rotation =  270 -180*newAngle / Math.PI;
         //this.dedLeftHand.rotation = newAngle + 0.13;
             //this.dedRightHand.rotation = newAngle;
@@ -186,6 +164,9 @@ CPlayer.prototype.process = function()
 
 CPlayer.prototype.dealDamage = function(dmg)
 {
+    var t = new Date().getTime();
+    if (t - this.revealTime < 2000) return;
+
 
     for (var i = 0; i < this.gfx.skeleton.slots.length; ++i)
     {

@@ -73,6 +73,7 @@ CLaser.prototype.process = function()
 
             this.particlesClip.addChild(part);
         }
+
         var len = this.lineClip.children.length;
         for (var i = 0; i < len; ++i) {
             this.lineClip.children[i].scale.x = 1 + i / len;

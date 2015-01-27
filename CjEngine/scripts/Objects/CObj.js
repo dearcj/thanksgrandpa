@@ -180,7 +180,7 @@ CObj.prototype.process = function(){
         this.vy += this.gravPower;
 
         if (this.allowTrackSpeed)
-        this.vx = this.vx*0.5 + (-LauncherBG.inst.maxVelocity)*0.5;
+        this.vx = -LauncherBG.inst.maxVelocity;//this.vx*0.5 + (
     }
     this.updateGraphics();
 };

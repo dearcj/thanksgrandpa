@@ -20,28 +20,28 @@ CHPBar.prototype.destroy = function()
     CObj.prototype.destroy.call(this);
 }
 
-
-
 Object.defineProperty(CHPBar.prototype, 'prop', {
     get: function () {
         return this._prop;
     },
     set: function (value) {
         if (this.doRemove) return;
+
+
         this._prop = value;
+        if (this._prop < 0) this._prop = 0;
         var w = (1/this.gfx.scale.x)*this._prop*(this.gfx.width - 2*this.space);
         if (this.tile)
         w = Math.round(w / this.upperImageClip.texture.width + 1) * this.upperImageClip.texture.width;
         this.upperImageClip.width = w;
-        this.upperImageClip.x = 0;///parseInt(this.space);
+        this.upperImageClip.x = 0;
         this.upperImageClip.y = 0;
-    }
+        }
     }
 );
 
 CHPBar.prototype.tweenProp = function(newProp)
 {
-    // TweenMax.killChildTweensOf(this, true);
     new TweenMax(this, 0.8, {prop: newProp, ease: Cubic.easeOut});
 }
 
@@ -69,8 +69,7 @@ CHPBar.prototype.init = function()
         this.upperImageClip.height -= this.space;
         this.gfx.addChild(this.upperImageClip);
     }
-  //  this.y += this.gfx.height / 2;
-    //this.gfx.y = -tex.height / 2;
+
     this.prop = 1;
     this.updateGraphics();
   //  new TweenMax(this, 10.8, {prop: 0., repeat:-1, ease: Linear.easeNone});

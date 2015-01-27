@@ -18,6 +18,7 @@ CCoin.prototype.process = function ()
 {
     CObj.prototype.process.call(this);
 
+    if (this.gravityEnabled)
     this.vx = -7;
 }
 
