@@ -4,190 +4,218 @@ format: RGBA8888
 filter: Linear,Linear
 repeat: none
 board
-  rotate: false
-  xy: 1373, 706
+  rotate: true
+  xy: 2, 160
   size: 495, 143
   orig: 495, 143
   offset: 0, 0
   index: -1
 body
-  rotate: false
-  xy: 1705, 375
+  rotate: true
+  xy: 120, 676
   size: 246, 329
   orig: 246, 329
   offset: 0, 0
   index: -1
 gun0
-  rotate: false
-  xy: 728, 715
+  rotate: true
+  xy: 2, 657
   size: 600, 116
   orig: 600, 116
   offset: 0, 0
   index: -1
 gun1
   rotate: false
-  xy: 1373, 851
+  xy: 1373, 1831
   size: 588, 149
   orig: 588, 149
   offset: 0, 0
   index: -1
 gun2
   rotate: false
-  xy: 728, 833
+  xy: 728, 1813
   size: 643, 167
   orig: 643, 167
   offset: 0, 0
   index: -1
 gun3
   rotate: false
-  xy: 2, 731
+  xy: 2, 1711
   size: 724, 269
   orig: 742, 269
   offset: 12, 0
   index: -1
 gun4
   rotate: false
-  xy: 2, 279
+  xy: 2, 1259
   size: 578, 221
   orig: 578, 221
   offset: 0, 0
   index: -1
 gun5
   rotate: false
-  xy: 2, 502
+  xy: 2, 1482
   size: 591, 227
   orig: 591, 227
   offset: 0, 0
   index: -1
 hat1
-  rotate: false
-  xy: 992, 472
+  rotate: true
+  xy: 1777, 1456
   size: 373, 241
   orig: 375, 241
   offset: 0, 0
   index: -1
 hat2
   rotate: false
-  xy: 1367, 417
+  xy: 1439, 1542
   size: 336, 287
   orig: 336, 287
   offset: 0, 0
   index: -1
 hat3
-  rotate: false
-  xy: 582, 272
+  rotate: true
+  xy: 368, 286
   size: 388, 228
   orig: 388, 228
   offset: 0, 0
   index: -1
 hat4
   rotate: false
-  xy: 595, 502
+  xy: 728, 1600
   size: 395, 211
   orig: 395, 211
   offset: 0, 0
   index: -1
 hat5
-  rotate: true
-  xy: 972, 146
+  rotate: false
+  xy: 120, 924
   size: 324, 333
   orig: 324, 333
   offset: 0, 0
   index: -1
 hat6
-  rotate: false
-  xy: 2, 58
+  rotate: true
+  xy: 147, 246
   size: 428, 219
   orig: 428, 219
   offset: 0, 0
   index: -1
 head
   rotate: false
-  xy: 1307, 148
+  xy: 1125, 1544
+  size: 312, 267
+  orig: 312, 267
+  offset: 0, 0
+  index: -1
+head1
+  rotate: true
+  xy: 446, 945
+  size: 312, 267
+  orig: 312, 267
+  offset: 0, 0
+  index: -1
+head2
+  rotate: false
+  xy: 451, 676
+  size: 312, 267
+  orig: 312, 272
+  offset: 0, 5
+  index: -1
+head3
+  rotate: true
+  xy: 598, 362
+  size: 312, 267
+  orig: 312, 267
+  offset: 0, 0
+  index: -1
+head4
+  rotate: false
+  xy: 598, 93
   size: 312, 267
   orig: 312, 267
   offset: 0, 0
   index: -1
 l_arm
-  rotate: false
-  xy: 1621, 258
+  rotate: true
+  xy: 147, 216
   size: 28, 157
   orig: 28, 157
   offset: 0, 0
   index: -1
 r_arm
-  rotate: false
-  xy: 1621, 258
+  rotate: true
+  xy: 147, 216
   size: 28, 157
   orig: 28, 157
   offset: 0, 0
   index: -1
 l_foot
-  rotate: true
-  xy: 1870, 752
+  rotate: false
+  xy: 368, 250
   size: 97, 34
   orig: 97, 34
   offset: 0, 0
   index: -1
 l_hand
   rotate: true
-  xy: 1330, 786
+  xy: 685, 1664
   size: 45, 41
   orig: 45, 41
   offset: 0, 0
   index: -1
 r_hand
   rotate: true
-  xy: 1330, 786
+  xy: 685, 1664
   size: 45, 41
   orig: 45, 41
   offset: 0, 0
   index: -1
 l_hip
-  rotate: true
-  xy: 2, 2
+  rotate: false
+  xy: 595, 1536
   size: 54, 173
   orig: 54, 173
   offset: 0, 0
   index: -1
 r_hip
-  rotate: true
-  xy: 2, 2
+  rotate: false
+  xy: 595, 1536
   size: 54, 173
   orig: 54, 173
   offset: 0, 0
   index: -1
 l_leg
   rotate: false
-  xy: 1963, 901
+  xy: 1963, 1881
   size: 37, 99
   orig: 37, 99
   offset: 0, 0
   index: -1
 r_leg
   rotate: false
-  xy: 1963, 901
+  xy: 1963, 1881
   size: 37, 99
   orig: 37, 99
   offset: 0, 0
   index: -1
 l_shoulder
   rotate: false
-  xy: 432, 121
+  xy: 2, 2
   size: 37, 156
   orig: 37, 156
   offset: 0, 0
   index: -1
 r_shoulder
   rotate: false
-  xy: 432, 121
+  xy: 2, 2
   size: 37, 156
   orig: 37, 156
   offset: 0, 0
   index: -1
 r_foot
-  rotate: false
-  xy: 177, 24
+  rotate: true
+  xy: 651, 1621
   size: 88, 32
   orig: 88, 34
   offset: 0, 0

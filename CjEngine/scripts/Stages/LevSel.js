@@ -51,7 +51,7 @@ LevSel.prototype.onShowContinue = function()
         }
         var vspace = 22;
         var star1 = new CObj(btn.x-32, btn.y + vspace);
-        star1.gfx = CObj.CreateMovieClip("star0001");
+        star1.gfx = CObj.createMovieClip("star0001");
         star1.gfx.interactive = false;
         star1.gfx.scale.x = 0.4* window.addScale;
         star1.gfx.scale.y = 0.4* window.addScale;
@@ -59,7 +59,7 @@ LevSel.prototype.onShowContinue = function()
         star1.gfx.anchor.x = 0.5;
         SM.inst.guiLayer.addChild(star1.gfx);
         var star2 = new CObj(btn.x, btn.y + vspace);
-        star2.gfx = CObj.CreateMovieClip("star0001");
+        star2.gfx = CObj.createMovieClip("star0001");
         star2.gfx.interactive = false;
         star2.gfx.scale.x = 0.4* window.addScale;
         star2.gfx.scale.y = 0.4* window.addScale;
@@ -67,7 +67,7 @@ LevSel.prototype.onShowContinue = function()
         star2.gfx.anchor.x = 0.5;
         SM.inst.guiLayer.addChild(star2.gfx);
         var star3 = new CObj(btn.x + 32, btn.y + vspace);
-        star3.gfx = CObj.CreateMovieClip("star0001");
+        star3.gfx = CObj.createMovieClip("star0001");
         star3.gfx.interactive = false;
         star3.gfx.scale.x = 0.4* window.addScale;
         star3.gfx.scale.y = 0.4* window.addScale;

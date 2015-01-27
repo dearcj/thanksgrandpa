@@ -468,7 +468,7 @@ CObj.ExtractFrameNum = function(clipSrc) {
     if (isNaN(frame)) return 0; else return frame;
 }
 
-CObj.CreateMovieClip = function(name)
+CObj.createMovieClip = function(name)
 {
     var frameName = CObj.ExtractFrameName(name);
     var textures = [];
@@ -506,7 +506,7 @@ CObj.AssignTexturesToObjects = function (objs, layerToAdd){
         var img = null;
 
         if (objs[i].isClip) {
-            img = CObj.CreateMovieClip(objs[i].clipSrc);
+            img = CObj.createMovieClip(objs[i].clipSrc);
             img.animationSpeed = objs[i].fps / FRAME_RATE;
             if (objs[i].autoPlay) {
                 img.play();

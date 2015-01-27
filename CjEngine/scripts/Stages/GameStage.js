@@ -481,7 +481,7 @@ GameStage.prototype.createPools = function () {
 
     if (pool.Size("coinCollect") == 0)
         pool.Fill("coinCollect", 15, function () {
-            var c = CObj.CreateMovieClip("coinCollect");
+            var c = CObj.createMovieClip("coinCollect");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
             return c;
@@ -491,7 +491,7 @@ GameStage.prototype.createPools = function () {
     if (pool.Size("expl") == 0)
         pool.Fill("expl", 5, function () {
             var c = new CObj(0, 0);
-            c.gfx = CObj.CreateMovieClip("expl");
+            c.gfx = CObj.createMovieClip("expl");
             c.gfx.anchor.x = 0.5;
             c.gfx.anchor.y = 0.5;
             c.gfx.scale.x = 1.55;
@@ -501,7 +501,7 @@ GameStage.prototype.createPools = function () {
 
     if (pool.Size("chickeneffect") == 0)
         pool.Fill("chickeneffect", 3, function () {
-            var c = CObj.CreateMovieClip("chickeneffect");
+            var c = CObj.createMovieClip("chickeneffect");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
             c.scale.x *= window.addScale;
@@ -561,8 +561,8 @@ GameStage.prototype.onLoadEnd = function () {
 
    // gameStage.player.gfx.state.setAnimationByName(0, "idle", true);
 
-    gameStage.player.gfx.skeleton.setAttachment("gun", "gun0");
-    //gameStage.player.updateAppearence(true);
+    gameStage.player.updateAppearence(true);
+    gameStage.player.gfx.skeleton.setAttachment("head", "head1");
 
 
     gameStage.player.process();

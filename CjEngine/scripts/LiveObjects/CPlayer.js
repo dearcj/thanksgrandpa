@@ -29,7 +29,7 @@ function CPlayer(in_x,in_y,textname,in_body){
 CPlayer.prototype.updateAppearence = function(showGun) {
 
     var hatSlot = null;
-    var gunSlot = null;
+    var gunSlot = "gun0";
     if (showGun)
     {
         for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
@@ -39,13 +39,12 @@ CPlayer.prototype.updateAppearence = function(showGun) {
                 var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
                 if (item.type == tApp + tHat) hatSlot = item.gfx;
                 if (item.type == tWeapon) gunSlot = item.gfx;
-
             }
         }
-        g.skeleton.setAttachment("gun", gunSlot);
+       this.gfx.skeleton.setAttachment("gun", gunSlot);
     } else
-        g.skeleton.setAttachment("gun", null);
-    g.skeleton.setAttachment("hat", hatSlot);
+        this.gfx.skeleton.setAttachment("gun", null);
+    this.gfx.skeleton.setAttachment("hat", hatSlot);
 }
 
 CPlayer.prototype.createDedGraphics = function()
@@ -119,10 +118,8 @@ CPlayer.prototype.process = function()
    // this.gunBone.data.boneData.scaleX += 1;
    // this.gunBone.data.boneData.scaleY += 1;
  //   this.gunBone.bone.worldScaleX += 0.2;
-  //  this.gunBone.bone.worldScaleY += 0.2;
-    var p = this.gunBone.currentSprite.toGlobal({x:220, y: -20});
-    this.firePointX = p.x;
-    this.firePointY = p.y;
+  //  this.gunBone.bone.worldScaleY += 0.2;//220 - 20
+
 
 
     if (SM.inst.currentStage == gameStage) {
@@ -134,6 +131,12 @@ CPlayer.prototype.process = function()
             this.nullPhase += 22;
             this.x = this.startPlayerX + Math.sin((this.nullPhase) / this.freq) * 30;
         }
+
+        var p = this.gunBone.currentSprite.toGlobal({x:20, y: -220});
+      //  p = this.gunBone.currentSprite.parent.toGlobal(p);
+        this.firePointX = p.x/SCR_SCALE;
+        this.firePointY = p.y/SCR_SCALE;
+
 
         var mx = window.mouseX;
         var my = window.mouseY;
@@ -185,8 +188,13 @@ CPlayer.prototype.dealDamage = function(dmg)
             f.skeleton.slots[i].b = 1;
         }
 
-    })
-  //  this.tweenColor(this.gfx);
+    });
+
+    gameStage.player.gfx.skeleton.setAttachment("head", "head4");
+    TweenMax.delayedCall(0.7, function(){
+        gameStage.player.gfx.skeleton.setAttachment("head", "head1");
+    });
+    //  this.tweenColor(this.gfx);
 /*    if   (!TweenMax.isTweening(this.gfx.children[0])) {
        for (var i = 0; i < this.gfx.children.length; ++i) {
             if (this.dedWeaponContainer == this.gfx.children[i]) continue;

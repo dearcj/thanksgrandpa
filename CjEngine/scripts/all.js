@@ -701,7 +701,7 @@ LevSel.prototype.onShowContinue = function()
         }
         var vspace = 22;
         var star1 = new CObj(btn.x-32, btn.y + vspace);
-        star1.gfx = CObj.CreateMovieClip("star0001");
+        star1.gfx = CObj.createMovieClip("star0001");
         star1.gfx.interactive = false;
         star1.gfx.scale.x = 0.4* window.addScale;
         star1.gfx.scale.y = 0.4* window.addScale;
@@ -709,7 +709,7 @@ LevSel.prototype.onShowContinue = function()
         star1.gfx.anchor.x = 0.5;
         StageManager.inst.guiLayer.addChild(star1.gfx);
         var star2 = new CObj(btn.x, btn.y + vspace);
-        star2.gfx = CObj.CreateMovieClip("star0001");
+        star2.gfx = CObj.createMovieClip("star0001");
         star2.gfx.interactive = false;
         star2.gfx.scale.x = 0.4* window.addScale;
         star2.gfx.scale.y = 0.4* window.addScale;
@@ -717,7 +717,7 @@ LevSel.prototype.onShowContinue = function()
         star2.gfx.anchor.x = 0.5;
         StageManager.inst.guiLayer.addChild(star2.gfx);
         var star3 = new CObj(btn.x + 32, btn.y + vspace);
-        star3.gfx = CObj.CreateMovieClip("star0001");
+        star3.gfx = CObj.createMovieClip("star0001");
         star3.gfx.interactive = false;
         star3.gfx.scale.x = 0.4* window.addScale;
         star3.gfx.scale.y = 0.4* window.addScale;
@@ -1253,7 +1253,7 @@ GameStage.prototype.createPools = function()
 
     if (pool.Size("coinCollect") == 0)
         pool.Fill("coinCollect", 15, function() {
-            var c = CObj.CreateMovieClip("coinCollect");
+            var c = CObj.createMovieClip("coinCollect");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
             return c;});
@@ -1262,7 +1262,7 @@ GameStage.prototype.createPools = function()
     if (pool.Size("expl") == 0)
         pool.Fill("expl", 5, function() {
             var c = new CObj(0, 0);
-            c.gfx = CObj.CreateMovieClip("expl");
+            c.gfx = CObj.createMovieClip("expl");
             c.gfx.anchor.x = 0.5;
             c.gfx.anchor.y = 0.5;
             c.gfx.scale.x = 1.55;
@@ -1271,7 +1271,7 @@ GameStage.prototype.createPools = function()
 
     if (pool.Size("chickeneffect") == 0)
         pool.Fill("chickeneffect", 3, function() {
-            var c =CObj.CreateMovieClip("chickeneffect");
+            var c =CObj.createMovieClip("chickeneffect");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
             c.scale.x *= window.addScale;
@@ -1282,11 +1282,11 @@ GameStage.prototype.createPools = function()
 
     if (pool.Size("roundElectro") == 0)
         pool.Fill("roundElectro", 8, function() {
-            return CObj.CreateMovieClip("ls2");});
+            return CObj.createMovieClip("ls2");});
 
     if (pool.Size("rectElectro") == 0)
         pool.Fill("rectElectro", 20, function() {
-            return CObj.CreateMovieClip("33l");});
+            return CObj.createMovieClip("33l");});
 }
 
 //NO "THIS" IN CURRENT CONTEXT
@@ -2144,7 +2144,7 @@ CObj.ExtractFrameNum = function(clipSrc) {
     if (isNaN(frame)) return 0; else return frame;
 }
 
-CObj.CreateMovieClip = function(name)
+CObj.createMovieClip = function(name)
 {
     var frameName = CObj.ExtractFrameName(name);
     var textures = [];
@@ -2182,7 +2182,7 @@ CObj.AssignTexturesToObjects = function (objs, layerToAdd){
         var img = null;
 
         if (objs[i].isClip) {
-            img = CObj.CreateMovieClip(objs[i].clipSrc);
+            img = CObj.createMovieClip(objs[i].clipSrc);
             img.animationSpeed = objs[i].fps / FRAME_RATE;
             if (objs[i].autoPlay) {
                 img.play();

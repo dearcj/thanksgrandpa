@@ -50,8 +50,7 @@ CMonster.prototype.kill = function()
     for (var i = 0; i < 5; ++i)
     {
         if (Math.random() > 0.3) continue;
-        var c = new CCoin(this.x, this.y, "coin");
-        c.amount = 4;
+        var c = new CCoin(this.x, this.y, 4);
         var maxvx = 20 + Math.random()*10;
         c.vx = maxvx;
       //  new TweenMax(c, 0.4, {vx: maxvx});
@@ -64,7 +63,7 @@ CMonster.prototype.kill = function()
     var parent = this.gfx.parent;
     parent.removeChild(this.gfx);
 
-    this.gfx = new CObj.CreateMovieClip("bloodblow");
+    this.gfx = new CObj.createMovieClip("bloodblow");
     this.gfx.anchor.x = 0.5;
     this.gfx.anchor.y = 0.5;
     this.gfx.scale.x = 1.8;

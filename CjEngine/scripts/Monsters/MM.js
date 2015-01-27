@@ -95,6 +95,8 @@ MM.prototype.generateMonsterQueue = function()
 MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
 {
     var m = new CMonster(SCR_WIDTH+240,450 + 2*offsY,clip, false);
+    m.maxHp = 100000000;
+    m.hp =  m.maxHp;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
 
@@ -114,8 +116,7 @@ MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
 MM.prototype.spawnCoin = function(height)
 {
     for (var i = 0; i < 5; ++i) {
-        var c = new CCoin(SCR_WIDTH + 240, SCR_HEIGHT - height * 50 - i* 50 - 150, "coin");
-        c.amount = 1;
+        var c = new CCoin(SCR_WIDTH + 240, SCR_HEIGHT - height * 50 - i* 50 - 150, 1);
         c.vx = -LauncherBG.inst.maxVelocity;
         c.vy = 0;
         c.gravityEnabled = false;
