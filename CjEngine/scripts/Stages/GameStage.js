@@ -230,7 +230,18 @@ GameStage.prototype.shAfterLife = function () {
             PlayerData.inst.savePlayerData();
         }
     }
-
+    var bsX = cb.gfx.scale.x;
+    var bsY = cb.gfx.scale.y;
+    cb.gfx.mouseover = function (evt) {
+        TweenMax.killTweensOf(cb.gfx.scale);
+        cb.gfx.tint = CButton.tintColor;
+        new TweenMax(cb.gfx.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
+        new TweenMax(cb.gfx.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
+    }
+    cb.gfx.mouseout = function (evt) {
+        cb.gfx.tint = 0xffffff;
+        new TweenMax(cb.gfx.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut} );
+    }
     var gainbgsprite = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost star.png"));
     gainbgsprite.anchor.x = 0.5;
     gainbgsprite.anchor.y = 0.5;
@@ -390,7 +401,7 @@ GameStage.prototype.removeFromToolsObject = function (obj) {
 
 GameStage.prototype.updateScore = function () {
     if (gameStage.scoreObj)
-        gameStage.scoreObj.text = PlayerData.inst.score.toString() + "$";
+        gameStage.scoreObj.text = PlayerData.inst.score.toString();
 }
 
 // event.type должен быть keypress
@@ -447,21 +458,37 @@ GameStage.prototype.onShow = function () {
 
     LauncherBG.inst = new LauncherBG(0, 0);
     LauncherBG.inst.addLevel("plantPart2");
+
     for (var i = 0; i < 2500; ++i)
-        LauncherBG.inst.process(true);
+       LauncherBG.inst.process(true);
     LauncherBG.inst.distance = 0;
     MM.inst.init();
 }
 
 GameStage.prototype.makePause = function () {
 
-    CObj.getById("bresume").click = function () {
-        LevelManager.removeLastLevel();
+        removePause = function()
+        {
+            LevelManager.removeLastLevel();
 
-        LevelManager.objs = null;
-        gameStage.doPhys = true;
-        gameStage.unpause();
-        gameStage.removeFade();
+            LevelManager.objs = null;
+            gameStage.doPhys = true;
+            gameStage.unpause();
+            gameStage.removeFade();
+        }
+
+     CObj.getById("brestart").click = function () {
+         removePause();
+        SM.inst.openStage(gameStage);
+     };
+
+    CObj.getById("bresume").click = function () {
+        removePause();
+    }
+
+    CObj.getById("blevs").click = function () {
+        removePause();
+        SM.inst.openStage(charStage);
     }
 }
 
@@ -559,11 +586,13 @@ GameStage.prototype.onLoadEnd = function () {
     gameStage.player.gfx.scale.y = 0.22;
     SM.inst.fg.addChild(gameStage.player.gfx);
 
-   // gameStage.player.gfx.state.setAnimationByName(0, "idle", true);
+    gameStage.player.updateAppearence(true, true, "idle");
 
-    gameStage.player.updateAppearence(true);
-    gameStage.player.gfx.skeleton.setAttachment("head", "head1");
+    TweenMax.delayedCall(1.3, function(){
+        gameStage.player.gfx.skeleton.setAttachment("head", "head1");
+    });
 
+    gameStage.player.weapon.updateAmmo();
 
     gameStage.player.process();
 
@@ -574,9 +603,6 @@ GameStage.prototype.onLoadEnd = function () {
     gameStage.createPools();
     gameStage.distText = CObj.getById("dist");
 
-    CObj.getById("restart").click = function () {
-        SM.inst.openStage(gameStage);
-    }
 
     var menuBtn = CObj.getById("menu");
     menuBtn.click = function () {
@@ -596,10 +622,10 @@ GameStage.prototype.onLoadEnd = function () {
     }
 
 
-    CObj.getById("levels").click = function () {
+  /*  CObj.getById("levels").click = function () {
         SM.inst.openStage(charStage);
     }
-
+*/
 
     stage.touchstart = function (md) {
         gameStage.fireState = true;
@@ -612,8 +638,12 @@ GameStage.prototype.onLoadEnd = function () {
     stage.mousemove = stage.touchmove;
     stage.mousedown = stage.touchstart;
     stage.mouseup = stage.touchend;
+
+    /*
     gameStage.muteBtn = CObj.getById("mutebtn");
     gameStage.updateSoundBtn(gameStage.muteBtn);
+
+
     gameStage.muteBtn.click = function () {
         if (ZSound.available)
             ZSound.Mute(); else
@@ -623,6 +653,7 @@ GameStage.prototype.onLoadEnd = function () {
         updateDS();
         gameStage.updateSoundBtn(gameStage.muteBtn);
     }
+    */
     //  gameStage.sessionEnd();
 
 
@@ -651,6 +682,8 @@ GameStage.prototype.pause = function () {
 }
 
 GameStage.prototype.updateSoundBtn = function (btn) {
+
+
     if (ZSound.available)
         btn.gfx.gotoAndStop(0); else
         btn.gfx.gotoAndStop(1);

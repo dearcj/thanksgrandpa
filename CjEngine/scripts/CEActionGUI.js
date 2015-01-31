@@ -75,9 +75,9 @@ CEActionGUI.prototype.process= function()
 CEActionGUI.prototype.startAction = function()
 {
     this.acting = true;
-    var b = new PIXI.BlurFilter();
+    /*var b = new PIXI.BlurFilter();
     b.blur = 20;
-    SM.inst.ol.filters = [b];
+    SM.inst.ol.filters = [b];*/
     this.progressbg.visible = true;
     this.progressfore.visible = true;
     this.pos = 0;

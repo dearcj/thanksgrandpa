@@ -23,7 +23,7 @@ function CMonster(in_x,in_y,textname,cr_bar){
         this.bar.prop = 1;
     }
     this.process();
-    this.dmg = 0.5;
+    this.dmg = 1;
 }
 
 CMonster.prototype.collide = function (obj2)
@@ -58,6 +58,10 @@ CMonster.prototype.kill = function()
     }
     this.prekilled = true;
 
+    if (this.bar) {
+        new TweenMax(this.bar.gfx, 0.2, {width: 0.});//.width
+        //this.bar.gfx.visible = false;
+    }
     PlayerData.inst.gainExp(this.xp);
 
     var parent = this.gfx.parent;

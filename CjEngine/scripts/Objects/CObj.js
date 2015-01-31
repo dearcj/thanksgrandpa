@@ -7,10 +7,7 @@
 CObj = function(in_x,in_y,filename,in_body) {
 
     this.PublicFields = "allowRotation,drawAsTexture,userData,[Graphics],isClip,fps,autoPlay,scaleX,scaleY,offsetX,offsetY,offsetR;";
-
-
-    this.allowTrackSpeed = true;
-
+    this.allowTrackSpeed = false;
     this._x = 0;
     this._y = 0;
     this._sensor = false;
@@ -167,6 +164,7 @@ CObj.prototype.process = function(){
 
     if (this.vx != 0)
     this.x = this.x + this.vx;
+
     if (this.vy != 0)
         this.y = this.y + this.vy;
 
@@ -179,9 +177,11 @@ CObj.prototype.process = function(){
     {
         this.vy += this.gravPower;
 
-        if (this.allowTrackSpeed)
-        this.vx = -LauncherBG.inst.maxVelocity;//this.vx*0.5 + (
     }
+
+    if (this.allowTrackSpeed)
+        this.vx = -LauncherBG.maxVelocity;//this.vx*0.5 + (
+
     this.updateGraphics();
 };
 
@@ -486,6 +486,8 @@ CObj.createMovieClip = function(name)
         }
     }
 
+    if (textures.length == 0)
+        textures[0] = PIXI.TextureCache[name + ".png"];
     var img = new PIXI.MovieClip(textures);
     img.gotoAndStop(cinx);
     return img;

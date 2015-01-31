@@ -26,10 +26,18 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.state = this.sMoving;
 }
 
-CPlayer.prototype.updateAppearence = function(showGun) {
+CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, overrideGun, overrideHat) {
+
+    if (anim)
+    this.gfx.state.setAnimationByName(0, anim, true);
+
+    if (showBoard)
+        this.gfx.skeleton.setAttachment("board", "board"); else
+        this.gfx.skeleton.setAttachment("board", null);
 
     var hatSlot = null;
     var gunSlot = "gun0";
+
     if (showGun)
     {
         for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
@@ -41,9 +49,18 @@ CPlayer.prototype.updateAppearence = function(showGun) {
                 if (item.type == tWeapon) gunSlot = item.gfx;
             }
         }
-       this.gfx.skeleton.setAttachment("gun", gunSlot);
+
     } else
         this.gfx.skeleton.setAttachment("gun", null);
+
+    if (overrideGun)
+        gunSlot =  overrideGun;
+
+        this.gfx.skeleton.setAttachment("gun", gunSlot);
+
+    if (overrideHat)
+        hatSlot = overrideHat;
+
     this.gfx.skeleton.setAttachment("hat", hatSlot);
 }
 
@@ -69,7 +86,7 @@ CPlayer.prototype.createDedGraphics = function()
 
 CPlayer.prototype.reveal = function()
 {
-    this.hp = this.maxHp / 2;
+    this.hp = 2;
     this.state = this.sMoving;
     this.revealTime = new Date().getTime();
     this.gfx.state.setAnimationByName(0, "idle", true);
@@ -103,24 +120,19 @@ CPlayer.prototype.jump = function()
 
 CPlayer.prototype.process = function()
 {
-    if (this.vy > 0 && this.y > this.baseY)
+
+    if (this.vy > 0 && this.y > this.baseY - 30) {
+        gameStage.jumping = false;
+    }
+
+        if (this.vy > 0 && this.y > this.baseY)
     {
-        {
             this.vy = 0;
             gameStage.jumping = false;
             this.y = this.baseY;
             this.gravityEnabled = false;
             this.gfx.state.setAnimationByName(0, "idle", true);
-        }
     }
-
-  //  this.gunBone.data.boneData.inheritScale = false;
-   // this.gunBone.data.boneData.scaleX += 1;
-   // this.gunBone.data.boneData.scaleY += 1;
- //   this.gunBone.bone.worldScaleX += 0.2;
-  //  this.gunBone.bone.worldScaleY += 0.2;//220 - 20
-
-
 
     if (SM.inst.currentStage == gameStage) {
         if (this.weapon)
@@ -201,7 +213,10 @@ CPlayer.prototype.dealDamage = function(dmg)
             new TweenMax(this.gfx.children[i], 0.1, {ease: Linear.ease, tint: 0xff0000, repeat: 1, yoyo: true});
         }
     }*/
-    this.hp = this.hp - dmg;
+
+    if (this.hp - dmg < 0) this.hp = 0; else
+        this.hp = this.hp - dmg;
+
 }
 
 

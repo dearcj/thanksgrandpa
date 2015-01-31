@@ -13,13 +13,7 @@ ShopStage.prototype.onShow = function() {
     PlayerData.inst.playerItem.money = 10000;
     PlayerData.inst.playerItem.crystals = 1000;
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
-    // .read({success: function(r)
-    /*{
-        console.log();
-    }, error: function(e) {
-        console.log();
-    }});
-*/
+
     LevelManager.loadLevel("levshop", this.onShowContinue);
 }
 
@@ -41,23 +35,55 @@ ShopStage.prototype.checkOwned = function(item)
     return false;
 }
 
-
 ShopStage.prototype.unequipAll = function() {
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         if (PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item).type == shopStage.currentFilter)
             PlayerData.inst.items_enabled[i].equipped = false;
     }
 }
+
 ShopStage.prototype.createItemBtn = function(item)
 {
     var g = new PIXI.DisplayObjectContainer();
 
     var ico = crsp(item.gfx)//;new PIXI.Sprite(PIXI.Texture.fromFrame(item.gfx+".png"));
     ico.x = 0;
-    ico.scale.x = 0.5;
-    ico.scale.y = 0.5;
+    var bsX = 0.5;
+    var bsY = 0.5;
+    ico.scale.x = bsX;
+    ico.scale.y = bsY;
     ico.y = ico.height / 2;
     g.addChild(ico);
+
+    ico.interactive = true;
+    var f = ico;
+    ico.mouseover = function (evt) {
+
+        if (item.type == tWeapon || item.type == tApp + tHat) {
+            var gfxhat = null;
+            var gfxweap = null;
+            if (item.type == tWeapon) {
+                gfxweap = item.gfx;
+            }
+            if (item.type == tApp + tHat) {
+                gfxhat = item.gfx;
+            }
+            shopStage.pl.updateAppearence(true, false, null, gfxweap, gfxhat);
+        }
+        TweenMax.killTweensOf(f.scale);
+        f.tint = CButton.tintColor;
+        new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
+        new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
+    }
+    ico.mouseout = function (evt) {
+        if (item.type == tWeapon || item.type == tApp + tHat) {
+            shopStage.pl.updateAppearence(true, false, null, null, null);
+        }
+        f.tint = 0xffffff;
+        if (f.currentFrame)
+            f.gotoAndStop(1);
+        new TweenMax(f.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut} );
+    }
 
     var owned = this.checkOwned(item);
     var equipped = this.checkEq(item);
@@ -194,7 +220,7 @@ var infoText = "";
 
     var priceTF = new CTextField();
     priceTF.tint = "0x333333";
-    priceTF.fontSize = 22;
+    priceTF.fontSize = 17;
     priceTF.align = "left";
     priceTF.text = tftext;
     priceTF.init();
@@ -223,7 +249,12 @@ ShopStage.prototype.updateBar = function(tab, filter, baroffset)
     shopStage.updateStatsPanel();
     shopStage.currentTab = tab;
     shopStage.currentFilter = filter;
-    CObj.getById("tabsheet").x = CObj.getById(tab).x;
+
+    CObj.getById("bstuff").gfx.alpha = 0.1;
+    CObj.getById("bweap").gfx.alpha = 0.1;
+    CObj.getById("bcloth").gfx.alpha = 0.1;
+
+    CObj.getById(tab).gfx.alpha = 1;
 
     for (var i = 0; i < this.bar.container.children.length; ++i)
     {
@@ -231,7 +262,7 @@ ShopStage.prototype.updateBar = function(tab, filter, baroffset)
         i--;
     }
 
-    var numColumns = 3;
+    var numColumns = 2;
     if (tab == "bweap")
     {
         numColumns = 2;
@@ -267,9 +298,9 @@ ShopStage.prototype.updateStatsPanel = function() {
 ShopStage.prototype.onShowContinue = function()
 {
     CustomStage.prototype.onShow.call(this);
-    shopStage.bar = new CScrollbar(610,332, "", 380, 524);
+    shopStage.bar = new CScrollbar(610,335, "", 380, 524);
     shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
-    SM.inst.ol.addChildAt( shopStage.bar.gfx,0);
+    SM.inst.ol.addChildAt( shopStage.bar.gfx,1);
     shopStage.updateStatsPanel();
 
     CObj.getById("bback").click = function() {
@@ -291,13 +322,10 @@ ShopStage.prototype.onShowContinue = function()
 
     var pl = new CPlayer(180, 430);
     shopStage.pl = pl;
-    pl.gfx.state.setAnimationByName(0, "breath", true);
+    shopStage.pl.updateAppearence(true, false, "breath", null, null);
     pl.gfx.scale.x = 0.4;
     pl.gfx.scale.y = 0.4;
     SM.inst.ol.addChild(pl.gfx);
-    pl.gfx.skeleton.setAttachment("board", null)
-
-
 }
 
 function levelClick(evt){
@@ -306,6 +334,8 @@ function levelClick(evt){
 }
 
 ShopStage.prototype.onHide = function(newStage) {
+
+    shopStage.pl = null;
     CustomStage.prototype.onHide.call(this, null);
     CObj.destroyAll();
     CObj.processAll();

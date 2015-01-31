@@ -7,11 +7,10 @@ extend(CharStage, CustomStage);
 
 CharStage.prototype.onShow = function() {
     this.doProcess = false;
-
+    charStage.skipFriends = 0;
     CustomStage.prototype.onShow.call(this);
 
    LevelManager.loadLevel("levchar", this.onShowContinue, SM.inst.ol);
-  //  SM.inst.guiLayer.addChild(crsp("btnlevel0002"));
 }
 
 CharStage.prototype.onHide = function(newStage) {
@@ -26,16 +25,14 @@ CharStage.prototype.onHide = function(newStage) {
 CharStage.prototype.createFriendsPanel = function() {
     var panel = new PIXI.DisplayObjectContainer();
 
-    var skip = 0;
-    for (var i = 0 + skip; i < 6 + skip; ++i)
+    var skip = charStage.skipFriends;
+    for (var i = 0 + skip; i < 5 + skip; ++i)
     {
-        var frClpBtn = new CButton(i*80, 0, "add friend");
+        var frClpBtn = new CButton(63 + (i - skip)*100, 5, "add friend");
         var friendClip = frClpBtn.gfx;//new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.parent.removeChild(friendClip);
         friendClip.anchor.x = 0.5;
-        friendClip.x = i*80;
         friendClip.anchor.y = 0.5;
-        friendClip.y = 10;
         frClpBtn.hover = true;
         if (vkparams.friendsIngame && i < vkparams.friendsIngame.length)
         frClpBtn.text = vkparams.friendsIngame[i].name + vkparams.friendsIngame[i].last_name;
@@ -85,15 +82,31 @@ CharStage.prototype.createFriendsPanel = function() {
 }
 
 
+
 CharStage.prototype.onShowContinue = function()
 {
     charStage.doProcess = true;
 
     shopStage.updateStatsPanel();
-//asdasd
+
+    CObj.getById("frprev").click = function() {
+        charStage.skipFriends -= 5;
+        if (charStage.skipFriends < 0)
+            charStage.skipFriends = 0;
+
+        charStage.frp.parent.removeChild(charStage.frp);
+        charStage.frp = charStage.createFriendsPanel();
+
+    }
+
+    CObj.getById("frnext").click = function() {
+        charStage.skipFriends += 5;
+        charStage.frp.parent.removeChild(charStage.frp);
+        charStage.frp = charStage.createFriendsPanel();
+    }
+
     CObj.getById("btnorder").click = function()
     {
-        var hided = [];
         CObj.enableButtons(false);
 
         CObj.getById("tname").gfx.visible = false;
@@ -111,6 +124,9 @@ CharStage.prototype.onShowContinue = function()
                 CObj.enableButtons(true);
                 wnd.parent.removeChild(wnd);
             };
+
+            charStage.skipFriends = 0;
+
 
             CObj.getById("buy1").click = function(){order("item1"); shopStage.updateStatsPanel();};
 
@@ -148,23 +164,17 @@ CharStage.prototype.onShowContinue = function()
 
     var pl = new CPlayer(400, 430);
     charStage.pl = pl;
-   pl.gfx.state.setAnimationByName(0, "breath", true);
+    pl.updateAppearence(true, false, "breath");
     SM.inst.ol.addChild(pl.gfx);
 
     var f = pl.gfx; pl.gfx.interactive = true;
-    pl.gfx.click = function() {
-     /*    var renderTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
+    CObj.getById("bsofa").click = function() {
+        CObj.enableButtons(false);
 
-        charStage.bluredBg = new PIXI.Sprite.fromImage("VBG.png");
-        renderTexture.render(stage);
-
-        var b = new PIXI.BlurFilter();
-        charStage.bluredBg.filters = [b];
-        new TweenMax(b, 1, {blur: 30});
-
-        stage.addChild(charStage.bluredBg);
-        //renderer.render(stage);
-*/
+        CObj.getById("bsofa").textField.visible = false;
+        var wnd = SM.inst.addDisableWindow(null, SM.inst.guiLayer);
+        charStage.bar.gfx.parent.removeChild(charStage.bar.gfx);
+        SM.inst.guiLayer.addChild(charStage.bar.gfx);
 
         if (!charStage.bar.gfx.visible) {
             charStage.bar.gfx.visible = true;
@@ -176,7 +186,7 @@ CharStage.prototype.onShowContinue = function()
     PlayerData.inst.comboCheck();
 
     var baseScl = pl.gfx.scale.x;
-    pl.gfx.mouseover = function (evt) {
+  /*  pl.gfx.mouseover = function (evt) {
             TweenMax.killTweensOf(f.scale);
 
         var color = 0xaaffaa;
@@ -200,14 +210,15 @@ CharStage.prototype.onShowContinue = function()
         }
         new TweenMax(f.scale, 0.3, {x: baseScl, y: baseScl, ease: Elastic.easeOut} );
     }
-
-    charStage.bar = new CScrollbar(602,339, "", 380, 524, "podlozhka actions.png", "scroll line actions.png", "scroll.png", 20);
+*/
+    charStage.bar = new CScrollbar(180,309, "", 380, 524, "podlozhka actions.png", "scroll line actions.png", "scroll.png", 20);
+    charStage.bar.gfx.scale.x = 0.7;
+    charStage.bar.gfx.scale.y = 0.7;
     charStage.bar.bg.alpha = 0.6;
     charStage.bar.gfx.visible = false;
     charStage.updateEvents();
 
     charStage.frp = charStage.createFriendsPanel();
-   // PlayerData.inst.showAch(PlayerData.inst.achs[1]);
 }
 
 CharStage.prototype.updateEvents = function() {

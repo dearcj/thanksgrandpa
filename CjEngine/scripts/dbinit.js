@@ -129,7 +129,7 @@ var dbobj =
                     pricecrys: 1,
                     name: "Minigun",
                     desc: "Пулемет",
-                    gfx: "gun4",
+                    gfx: "gun3",
                     reqlvl: 7
                 }
                 ,
@@ -139,7 +139,7 @@ var dbobj =
                     pricecrys: 5,
                     name: "Grenade launcher",
                     desc: "Гранатомет",
-                    gfx: "gun3",
+                    gfx: "gun4",
                     reqlvl: 10
                 }
                 ,

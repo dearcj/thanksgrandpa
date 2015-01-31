@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>json</string>
+        <string>sparrow</string>
         <key>textureFileName</key>
         <filename>guiatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>guiatlas.json</filename>
+        <filename>guiatlas.xml</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -143,12 +143,6 @@
         <array>
             <filename>../../img/btnlevel0002.png</filename>
             <filename>../../img/btnlevel0001.png</filename>
-            <filename>../../img/sound0002.png</filename>
-            <filename>../../img/buttonlevels.png</filename>
-            <filename>../../img/buttonmenu.png</filename>
-            <filename>../../img/buttonpause.png</filename>
-            <filename>../../img/buttonrestart.png</filename>
-            <filename>../../img/sound0001.png</filename>
             <filename>../../img/buttonlong0002.png</filename>
             <filename>../../img/star0001.png</filename>
             <filename>../../img/star0002.png</filename>
@@ -238,6 +232,10 @@
             <filename>../../../../dedgame/buy coins/buy_cover_crystals.png</filename>
             <filename>../../../../dedgame/buy coins/cross.png</filename>
             <filename>../../../../dedgame/buy coins/free coins.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/replay button.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/start button.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/home button.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/pause button.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

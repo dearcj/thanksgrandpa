@@ -334,27 +334,36 @@ PlayerData.prototype.loadData = function(cb)
 
 
           var found = false;
+          var eq = false;
+          var inxRifle = -1;
           for (var i = 0;i < PlayerData.inst.items_enabled.length; ++i)
           {
-             var iditem = PlayerData.inst.items_enabled[i].id_item;
-            if (iditem == defaultRifleID)
+            if (PlayerData.inst.items_enabled[i].id_item == defaultRifleID)
             {
+               inxRifle = i;
                found = true;
-               break;
+          //     break;
             }
+             if (PlayerData.inst.items_enabled[i].equipped)
+             eq = true;
           }
+
+          if (!eq)
+             PlayerData.inst.items_enabled[inxRifle].equipped = true;
+
 
           if (!found)
           {
              azureclient.invokeApi("buy_item", {
-                body: {id_item: defaultRifleID, id_player: PlayerData.pid},
+                body: {id_item: defaultRifleID, id_player: PlayerData.pid, equipped: eq},
                 method: "post"
              }).done(function (results) {
              }, function(error) {
              });
 
              var eq = true;
-             if (PlayerData.inst.items_enabled.length > 0) eq = false;
+             if (PlayerData.inst.items_enabled.length > 0)
+                eq = false;
              PlayerData.inst.items_enabled.push(
                  {
                     id_item: defaultRifleID,

@@ -9,6 +9,7 @@ function CButton(in_x,in_y,textname,in_body){
  //   this.hover = true;
 }
 
+CButton.tintColor = 0xffffaa;
 
 CButton.prototype.destroy = function()
 {
@@ -145,7 +146,7 @@ CButton.prototype.init = function(){
 
 
 
-           f.tint = 0xaaffaa;
+           f.tint = CButton.tintColor;
            new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
         new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
         new TweenMax(tf.scale, 0.6, {y: 1+0.1, ease: Elastic.easeOut} );

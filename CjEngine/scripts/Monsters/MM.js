@@ -1,8 +1,5 @@
 
 MM = function() {
-
-
-
     this.patterns =
     [
         {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1},
@@ -11,9 +8,6 @@ MM = function() {
         {mons: "..ssss..s..l", diff: 4},
         {mons: "c..c..c..s..sc..sc..sc", diff: 5}
     ];
-
-
-
     // c l z - преграды
     //s - монстр
 
@@ -48,7 +42,6 @@ MM.prototype.init = function()
             }
         }
     }
-    console;
 }
 
 
@@ -104,10 +97,8 @@ MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
 
     m.radius = (m.gfx.width / 2 - 20/ 2)*0.94;
     m.offsY = -innerOffs;
-    m.vx = -LauncherBG.inst.maxVelocity;
     m.colGroup = 0;
     m.allowTrackSpeed = true;
-
     this.lastSpawnSimple =(new Date()).getTime();
     this.simpleMonsterDelay = Math.random() * 1000 + 2000;
 }
@@ -117,7 +108,7 @@ MM.prototype.spawnCoin = function(height)
 {
     for (var i = 0; i < 5; ++i) {
         var c = new CCoin(SCR_WIDTH + 240, SCR_HEIGHT - height * 50 - i* 50 - 150, 1);
-        c.vx = -LauncherBG.inst.maxVelocity;
+
         c.vy = 0;
         c.gravityEnabled = false;
     }
@@ -135,7 +126,7 @@ MM.prototype.spawnCar = function(clip, offsY, innerOffs)
 
     m.radius = (m.gfx.width / 2 - 20/ 2)*0.94;
     m.offsY = -innerOffs;
-    m.vx = -LauncherBG.inst.maxVelocity;
+    m.allowTrackSpeed = true;
     m.colGroup = 0;
 
     this.lastSpawnSimple =(new Date()).getTime();

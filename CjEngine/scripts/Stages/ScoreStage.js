@@ -123,9 +123,9 @@ ScoreStage.prototype.onShowContinue = function()
     CObj.getById("bbacklist").click = function ()
     {
         scoreStage.skip -= scoreStage.showRecords;
+        if (scoreStage.skip < 0) scoreStage.skip = 0;
         var current = scoreStage.skip + 1;
         CObj.getById("tdisplayed").text =  (current).toString() + " - " + (current+ scoreStage.showRecords).toString();
-        if (scoreStage.skip < 0) scoreStage.skip = 0;
         if (scoreStage.tab == "total")
             scoreStage.updateTotal();
         if (scoreStage.tab == "friends")

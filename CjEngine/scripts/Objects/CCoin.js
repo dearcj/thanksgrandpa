@@ -19,6 +19,8 @@ function CCoin(in_x,in_y,amount) {
     this.updateGraphics();
     this.amount = amount;
 
+    this.allowTrackSpeed = true;
+
     if (!CCoin.coins) CCoin.coins = [];
     CCoin.coins.push(this);
 }
@@ -30,11 +32,15 @@ CCoin.prototype.process = function ()
     this.vx = -7;
 }
 
-
 CCoin.prototype.collide = function(obj2)
 {
-    if (this.doRemove) return;
+    if (this.isCollected) return;
+
+    this.isCollected = true;
     PlayerData.inst.score += this.amount;
     gameStage.updateScore();
-    this.destroy();
+
+    new TweenMax(this.gfx, 0.3, {alpha: 0, onComplete: this.destroy, scaleX: 10, scaleY: 10});
+    new TweenMax(this.gfx.scale, 0.3, {x: this.gfx.scale.x*1.3, y: this.gfx.scale.y*1.3});
+    //this.destroy();
 }
