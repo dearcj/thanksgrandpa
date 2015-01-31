@@ -348,7 +348,7 @@ PlayerData.prototype.loadData = function(cb)
              eq = true;
           }
 
-          if (!eq)
+          if (!eq && found)
              PlayerData.inst.items_enabled[inxRifle].equipped = true;
 
 
