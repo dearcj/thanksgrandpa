@@ -164,6 +164,8 @@ CharStage.prototype.onShowContinue = function()
 
     var pl = new CPlayer(400, 430);
     charStage.pl = pl;
+    pl.gfx.scale.x = 0.34;
+    pl.gfx.scale.y = 0.34;
     pl.updateAppearence(true, false, "breath");
     SM.inst.ol.addChild(pl.gfx);
 

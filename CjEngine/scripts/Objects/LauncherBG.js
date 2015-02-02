@@ -42,14 +42,14 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
     cobj.gfx = null;
     cobj.destroy();
 
-    if (!obj.fff) obj.fff = 0;
+/*    if (!obj.fff) obj.fff = 0;
     obj.fff++;
 
     if (obj.fff % 2 == 0) {
         g.tint = 0xff0000;
        // g.alpha = 0.5;
     }
-
+*/
     if (g) {
         layer.clip.addChild(g);
         layer.rightBound += obj.baseDim.x * obj.scaleX;

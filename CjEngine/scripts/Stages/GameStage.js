@@ -3,7 +3,6 @@
  */
 function GameStage() {
     this.invFR = 1 / FRAME_RATE;
-    this.state = "game";
 }
 
 extend(GameStage, CustomStage);
@@ -443,8 +442,6 @@ GameStage.prototype.doKeyUp = function (evt) {
     var c = getChar(evt);
     if (evt.which == 87) {
         gameStage.jumpboost = false;
-        // gameStage.jumping = false;
-        console.log("JUMP END");
     }
 }
 
@@ -454,8 +451,11 @@ GameStage.prototype.onShow = function () {
 
     window.addEventListener("keydown", this.doKeyDown, false);
     window.addEventListener("keyup", this.doKeyUp, false);
-    gameStage.currentLevel = 1;
+
+    this.state = "game";
+    this.jumping = undefined;
     this.doProcess = false;
+
     LevelManager.loadLevel("hud", gameStage.onLoadEnd, SM.inst.guiLayer);
 
     LauncherBG.inst = new LauncherBG(0, 0);
@@ -464,6 +464,7 @@ GameStage.prototype.onShow = function () {
     for (var i = 0; i < 2500; ++i)
        LauncherBG.inst.process(true);
     LauncherBG.inst.distance = 0;
+
     MM.inst.init();
 }
 
@@ -472,6 +473,7 @@ GameStage.prototype.makePause = function () {
         removePause = function()
         {
             gameStage.state = "game";
+            gameStage.doProcess = true;
             LevelManager.removeLastLevel();
             LevelManager.objs = null;
             gameStage.doPhys = true;
@@ -480,7 +482,7 @@ GameStage.prototype.makePause = function () {
         }
 
      CObj.getById("brestart").click = function () {
-         removePause();
+        removePause();
         SM.inst.openStage(gameStage);
      };
 
@@ -591,6 +593,7 @@ GameStage.prototype.onLoadEnd = function () {
     gameStage.player.updateAppearence(true, true, "idle");
 
     TweenMax.delayedCall(1.3, function(){
+        if (gameStage.player)
         gameStage.player.gfx.skeleton.setAttachment("head", "head1");
     });
 

@@ -13,6 +13,7 @@ CButton.tintColor = 0xffffff;
 
 CButton.prototype.destroy = function()
 {
+    if (this.doRemove) return;
     this.gfx.mouseout = null;
     this.gfx.mouseover = null;
     this.textField.mouseout = null;

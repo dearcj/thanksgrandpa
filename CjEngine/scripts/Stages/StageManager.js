@@ -26,6 +26,8 @@ var SM = function() {
 
     var mouseWheelHandler = function(e)
     {
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         if (CObj.objects)
         for (var i = 0; i < CObj.objects.length; ++i)
         {
