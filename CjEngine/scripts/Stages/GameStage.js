@@ -29,14 +29,15 @@ GameStage.prototype.createHPBar = function (x, y, max) {
     var t = PIXI.Texture.fromFrame("health dead.png");
 
     bar.gfx = new PIXI.DisplayObjectContainer();
-    var lower = new PIXI.TilingSprite(t, t.width, t.height);
+    var lower = new PIXI.TilingSprite(t, (t.width) - 0.5, (t.height - 0.5));
     bar.id = "hpbar";
     lower.width = max * t.width;
     bar.gfx.addChild(lower);
     bar.updateGraphics();
 
     var tupper = PIXI.Texture.fromFrame("health.png");
-    var upperBar = new PIXI.TilingSprite(tupper, tupper.width, tupper.height);
+    var upperBar = new PIXI.TilingSprite(tupper, tupper.width - 0.5, tupper.height - 0.5);
+    upperBar.height = tupper.height - 1;
     upperBar.width = max * tupper.width;
     bar.gfx.addChild(upperBar);
 
@@ -72,9 +73,7 @@ GameStage.prototype.process = function () {
     /*   if (this.doPhys)
      world.step(this.invFR*this._worldSpeed);
      */
-    if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40) {
-        gameStage.player.fire();
-    }
+
     CObj.processAll();
 
     if (gameStage.player && gameStage.jumping) {
@@ -94,6 +93,7 @@ GameStage.prototype.process = function () {
 
 GameStage.prototype.onHide = function (newStage) {
 
+    gameStage.menuBtn = null;
     gameStage.player = null;
 
     gameStage.floor = null;
@@ -108,7 +108,6 @@ GameStage.prototype.onHide = function (newStage) {
 
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
-
 
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
      CObj.objects.splice(inx, 1);*/
@@ -131,6 +130,7 @@ GameStage.prototype.onHide = function (newStage) {
         gameStage.pauseSprite = null;
     }
     gameStage.distText = null;
+    gameStage;
 }
 
 GameStage.prototype.loseGame = function () {
@@ -146,6 +146,7 @@ GameStage.prototype.remGfx = function (obj) {
 
 GameStage.prototype.updateItems = function () {
     var k = 0;
+    gameStage.curweapon = w_rifle;
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
         if (item.type == tBoost) {
@@ -171,32 +172,29 @@ GameStage.prototype.updateItems = function () {
             k++;
         }
 
-        gameStage.curweapon = w_rifle;
         if (item.type == tWeapon && PlayerData.inst.items_enabled[i].equipped)
         {
-            if (item.name == "Rifle") gameStage.curweapon = w_rifle;
-            if (item.name == "PPS") gameStage.curweapon = w_pps;
+            if (item.name == "Rifle")
+                gameStage.curweapon = w_rifle;
+            if (item.name == "PPS")
+                gameStage.curweapon = w_pps;
             if (item.name == "AK-74")
                 gameStage.curweapon = w_ak74;
-            if (item.name == "Minigun") gameStage.curweapon = w_minigun;
-            if (item.name == "Grenade Launcher") gameStage.curweapon = w_pistol;
-            if (item.name == "Plazma Cannon") gameStage.curweapon = w_laser;
+            if (item.name == "Minigun")
+                gameStage.curweapon = w_minigun;
+            if (item.name == "Grenade Launcher")
+                gameStage.curweapon = w_pistol;
+            if (item.name == "Plazma Cannon")
+                gameStage.curweapon = w_laser;
         }
-
-        gameStage.curweapon = w_laser;
-
     }
-
 }
 
 GameStage.prototype.shAfterLife = function () {
     var cb = new CircleBar(SCR_WIDTH / 2, SCR_HEIGHT / 2);
     cb.init();
     SM.inst.guiLayer.addChild(cb.gfx);
-    openCharStage = function () {
-        removeafterlife();
-        gameStage.openEndWindow();
-    }
+
 
     removeafterlife = function () {
         if (!gainbgsprite)
@@ -207,8 +205,13 @@ GameStage.prototype.shAfterLife = function () {
         cb.gfx.visible = false;
     }
 
+    openScoreWnd = function () {
+        removeafterlife();
+        LevelManager.loadLevel("levelgameover", gameStage.openEndWindowLoaded, SM.inst.guiLayer);
+    }
 
-    new TweenMax(cb, 5, {pos: 1, onComplete: openCharStage});
+
+    new TweenMax(cb, 3, {pos: 1, onComplete: openScoreWnd});
     var bodrtext = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost text.png"));
     bodrtext.anchor.x = 0.5;
     bodrtext.anchor.y = 0.5;
@@ -258,9 +261,6 @@ GameStage.prototype.shAfterLife = function () {
     SM.inst.guiLayer.addChild(tf);
 }
 
-GameStage.prototype.openEndWindow = function () {
-    LevelManager.loadLevel("levelgameover", gameStage.openEndWindowLoaded, SM.inst.guiLayer);
-}
 
 GameStage.prototype.openEndWindowLoaded = function () {
 
@@ -297,6 +297,8 @@ GameStage.prototype.openEndWindowLoaded = function () {
     }
     CObj.getById("tfrec").text = rec.toString() + " м";
     CObj.getById("bmenu").click = function () {
+        gameStage.doProcess = true;
+
         SM.inst.openStage(charStage);
     };
 
@@ -469,8 +471,8 @@ GameStage.prototype.makePause = function () {
 
         removePause = function()
         {
+            gameStage.state = "game";
             LevelManager.removeLastLevel();
-
             LevelManager.objs = null;
             gameStage.doPhys = true;
             gameStage.unpause();
@@ -604,8 +606,8 @@ GameStage.prototype.onLoadEnd = function () {
     gameStage.distText = CObj.getById("dist");
 
 
-    var menuBtn = CObj.getById("menu");
-    menuBtn.click = function () {
+    gameStage.menuBtn = CObj.getById("menu");
+    gameStage.menuBtn.click = function () {
         if (!gameStage.doProcess) return;
         if (!gameStage.doPhys) return;
         for (var i = 0; i < SM.inst.fontLayer.children.length; ++i) {
@@ -617,7 +619,7 @@ GameStage.prototype.onLoadEnd = function () {
         gameStage.pause();
         gameStage.fadeScreen();
 
-        TweenMax.killTweensOf(menuBtn, true);
+        TweenMax.killTweensOf(gameStage.menuBtn, true);
         LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.guiLayer);
     }
 
@@ -665,6 +667,7 @@ GameStage.prototype.unpause = function () {
     if (gameStage.player)
         gameStage.player.gfx.autoUpdate = true;
 
+    window.focus();
     TweenMax.resumeAll();
 }
 
@@ -673,11 +676,7 @@ GameStage.prototype.pause = function () {
     gameStage.doProcess = false;
     if (gameStage.player)
         gameStage.player.gfx.autoUpdate = false;
-    //if (!gameStage.doPhys) return;
-    /*   for (var i = 0; i < SM.inst.fontLayer.children.length; ++i)
-     {
-     SM.inst.fontLayer.children[i].visible = false;
-     }*/
+
     TweenMax.pauseAll();
 }
 

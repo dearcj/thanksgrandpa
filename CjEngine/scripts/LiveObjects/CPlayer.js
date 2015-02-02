@@ -135,6 +135,11 @@ CPlayer.prototype.process = function()
     }
 
     if (SM.inst.currentStage == gameStage) {
+
+        if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40) {
+            this.fire();
+        }
+
         if (this.weapon)
             this.weapon.process();
 
@@ -144,11 +149,19 @@ CPlayer.prototype.process = function()
             this.x = this.startPlayerX + Math.sin((this.nullPhase) / this.freq) * 30;
         }
 
-        var p = this.gunBone.currentSprite.toGlobal({x:20, y: -220});
+        var dx = 220;
+        var dy = 20;
+        var da = 0;
+        if (gameStage.curweapon == w_minigun)
+        {
+            dy = 310;
+            dx = -68;
+            da = Math.PI / 7.5;
+        }
+        var p = this.gunBone.currentSprite.toGlobal({x:dy, y: -dx});
       //  p = this.gunBone.currentSprite.parent.toGlobal(p);
         this.firePointX = p.x/SCR_SCALE;
         this.firePointY = p.y/SCR_SCALE;
-
 
         var mx = window.mouseX;
         var my = window.mouseY;
@@ -158,7 +171,7 @@ CPlayer.prototype.process = function()
         var bangle = Math.atan2(this.y - my, this.x - mx);
 
         this.fireAngle = Math.PI + bangle;
-        var newAngle = this.fireAngle+Math.PI / 2;
+        var newAngle = this.fireAngle+Math.PI / 2 + da;
        // if ((!this.handTween || !this.handTween.isActive())) {
 
         if (this.state == this.sMoving) {
@@ -204,6 +217,7 @@ CPlayer.prototype.dealDamage = function(dmg)
 
     gameStage.player.gfx.skeleton.setAttachment("head", "head4");
     TweenMax.delayedCall(0.7, function(){
+        if (gameStage.player)
         gameStage.player.gfx.skeleton.setAttachment("head", "head1");
     });
     //  this.tweenColor(this.gfx);
@@ -222,15 +236,17 @@ CPlayer.prototype.dealDamage = function(dmg)
 
 CPlayer.prototype.fire = function()
 {
-    if (this.weapon.shot())
+    if (!gameStage.menuBtn.over)
     {
-        if (this.handTween)
-        this.handTween.kill();
-
-      //  var time = 0.5* this.weapon.delay / 1000;
-      //  new TweenMax(w, time, {x: -5, rotation: -0.04, yoyo: true, repeat: 1});
-    /*    this.handTween = new TweenMax(this.dedLeftHand, time, { rotation: this.dedLeftHand.rotation-0.04, yoyo: true, repeat: 1});
-        new TweenMax(this.dedRightHand, time, { rotation: this.dedRightHand.rotation-0.04, yoyo: true, repeat: 1});
-  */  }
-
+        if (this.weapon.shot())
+        {
+            /*    if (this.handTween)
+             this.handTween.kill();
+             */
+            //  var time = 0.5* this.weapon.delay / 1000;
+            //  new TweenMax(w, time, {x: -5, rotation: -0.04, yoyo: true, repeat: 1});
+            /*    this.handTween = new TweenMax(this.dedLeftHand, time, { rotation: this.dedLeftHand.rotation-0.04, yoyo: true, repeat: 1});
+             new TweenMax(this.dedRightHand, time, { rotation: this.dedRightHand.rotation-0.04, yoyo: true, repeat: 1});
+             */  }
+    }
 }

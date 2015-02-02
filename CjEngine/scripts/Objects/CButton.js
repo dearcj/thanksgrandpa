@@ -9,7 +9,7 @@ function CButton(in_x,in_y,textname,in_body){
  //   this.hover = true;
 }
 
-CButton.tintColor = 0xffffaa;
+CButton.tintColor = 0xffffff;
 
 CButton.prototype.destroy = function()
 {
@@ -73,7 +73,6 @@ Object.defineProperty(CButton.prototype, 'text', {
             tf.x = -b.width / 2;
             tf.y = -b.height;
             this.updateGraphics(true);
-
         }
     }
 });
@@ -126,10 +125,9 @@ CButton.prototype.init = function(){
     {
         this.textField.alpha = 0;
     }
-    //this.getText();
+
     if (this.text)
     this.text = this.text;
-    //this.text = this.text;
 
     if (this.isClip)
     this.gfx.gotoAndStop(0);
@@ -140,18 +138,20 @@ CButton.prototype.init = function(){
     var bsX = this.baseScaleX;
     var bsY = this.baseScaleY;
     var obj = this;
+
     this.updateGraphics();
        this.gfx.mouseover = function (evt) {
         TweenMax.killTweensOf(f.scale);
-
-
+           obj.over = true;
 
            f.tint = CButton.tintColor;
            new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
-        new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
-        new TweenMax(tf.scale, 0.6, {y: 1+0.1, ease: Elastic.easeOut} );
-        new TweenMax(tf.scale, 0.4, {x: 1+0.1, ease: Elastic.easeOut} );
+           new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
 
+           if (tf.visible && tf.text != "") {
+               new TweenMax(tf.scale, 0.6, {y: 1 + 0.1, ease: Elastic.easeOut});
+               new TweenMax(tf.scale, 0.4, {x: 1 + 0.1, ease: Elastic.easeOut});
+           }
            if (obj.hover)
            {
                obj.textField.alpha = 1;
@@ -160,22 +160,24 @@ CButton.prototype.init = function(){
            }
 
     }
-    this.gfx.mouseout = function (evt) {
 
+    this.gfx.mouseout = function (evt) {
+        obj.over = false;
         if (obj.hover)
         {
             obj.textField.alpha = 0;
         }
-
         f.tint = 0xffffff;
         if (f.currentFrame)
         f.gotoAndStop(1);
         new TweenMax(f.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut} );
-        new TweenMax(tf.scale, 0.3, {x: 1, y: 1, ease: Elastic.easeOut} );
+
+        if (tf.visible && tf.text != "") {
+            new TweenMax(tf.scale, 0.3, {x: 1, y: 1, ease: Elastic.easeOut});
+        }
     }
 
     if (!this.addToSameLayer)
     SM.inst.fontLayer.addChild(this.textField); else
     this.gfx.addChild(this.textField);
-    //tf.tint = 0x6666FF;
 }

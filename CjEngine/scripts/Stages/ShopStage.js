@@ -42,6 +42,44 @@ ShopStage.prototype.unequipAll = function() {
     }
 }
 
+ShopStage.prototype.buyItem = function (event, unlock)
+{
+    var buyitem =  event.target.btn.item;
+    if ((!unlock && buyitem.price > 0 && PlayerData.inst.playerItem.money >= buyitem.price) ||
+        (unlock && buyitem.pricecrys> 0 && PlayerData.inst.playerItem.crystals >= buyitem.pricecrys))
+    {
+
+        // shopStage.unequipAll();
+        shopStage.transScreen = SM.inst.addDisableWindow("ПРОВОДИТСЯ ТРАНЗАКЦИЯ" +'\n' + "ПОЖАЛУЙСТА ПОДОЖДИТЕ");
+
+        if  (unlock && buyitem.pricecrys > 0)
+            PlayerData.inst.playerItem.crystals -= buyitem.pricecrys; else
+            PlayerData.inst.playerItem.money -= buyitem.price;
+
+        shopStage.updateStatsPanel();
+
+        azureclient.invokeApi("buy_item", {
+            body: {id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id},
+            method: "post"
+        }).done(function (results) {
+
+            PlayerData.inst.loadData(function()
+            {
+                PlayerData.inst.equipItem(buyitem);
+                shopStage.pl.updateAppearence(true, false, null, null, null);
+
+                shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
+                shopStage.updateStatsPanel();
+                shopStage.transScreen.parent.removeChild(shopStage.transScreen);
+                shopStage.transScreen = null;
+            });
+        }, function(error) {
+            shopStage.transScreen.parent.removeChild(shopStage.transScreen);
+            shopStage.transScreen = null;
+        });
+    }
+}
+
 ShopStage.prototype.createItemBtn = function(item)
 {
     var g = new PIXI.DisplayObjectContainer();
@@ -140,49 +178,20 @@ var infoText = "";
         btn.click = clickFunc;
 
         function unlockItem(event) {
-
+            shopStage.buyItem(event, true);
         }
 
         function wearItem(event) {
-         //   shopStage.unequipAll();
-
             PlayerData.inst.equipItem(item);
+            shopStage.pl.updateAppearence(true, false, null, null, null);
             shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
         }
+
+
+
         function buyItem(event)
         {
-
-            var buyitem =  event.target.btn.item;
-            if ((buyitem.price > 0 && PlayerData.inst.playerItem.money >= buyitem.price) ||
-                (buyitem.pricecrys> 0 && PlayerData.inst.playerItem.crystals >= buyitem.pricecrys))
-            {
-
-               // shopStage.unequipAll();
-                shopStage.transScreen = SM.inst.addDisableWindow("ПРОВОДИТСЯ ТРАНЗАКЦИЯ" +'\n' + "ПОЖАЛУЙСТА ПОДОЖДИТЕ");
-
-                if  (buyitem.pricecrys > 0)
-                    PlayerData.inst.playerItem.crystals -= buyitem.pricecrys; else
-
-                PlayerData.inst.playerItem.money -= buyitem.price;
-
-                azureclient.invokeApi("buy_item", {
-                    body: {id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id},
-                    method: "post"
-                }).done(function (results) {
-
-                    PlayerData.inst.loadData(function()
-                    {
-                        PlayerData.inst.equipItem(buyitem);
-
-                        shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
-                        shopStage.transScreen.parent.removeChild(shopStage.transScreen);
-                        shopStage.transScreen = null;
-                    });
-                }, function(error) {
-                    shopStage.transScreen.parent.removeChild(shopStage.transScreen);
-                    shopStage.transScreen = null;
-                });
-            }
+            shopStage.buyItem(event, false);
         }
 
 
