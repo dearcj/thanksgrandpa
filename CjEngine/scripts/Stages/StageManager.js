@@ -41,6 +41,7 @@ var SM = function() {
 
     }
     document.addEventListener("mousewheel", mouseWheelHandler, false);
+    document.addEventListener("DOMMouseScroll", mouseWheelHandler, false);
 
 
 }
