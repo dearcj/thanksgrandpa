@@ -49,7 +49,8 @@ LevelManager.onComplete = function()
     //OPTIMIZATION ISSUE
     //LevelManager.objs = null;
 
-    if (LevelManager.onVeryComplete) LevelManager.onVeryComplete();
+    if (LevelManager.onVeryComplete)
+        LevelManager.onVeryComplete();
 }
 
 LevelManager.removeLastLevel = function()
@@ -99,7 +100,8 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer)
         var loader = new PIXI.AssetLoader(assetsToLoader);
         loader.load();
         loader.onComplete = LevelManager.onComplete;
-    } else LevelManager.onComplete();
+    } else
+        LevelManager.onComplete();
 
 }
 LevelManager.inst = new LevelManager();

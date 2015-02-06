@@ -10,9 +10,9 @@ function CSupermanBooster(x,y,gfx) {
     this.activate = function ()
     {
         gameStage.player.invulnerable = true;
-        LauncherBG.maxVelocity += speedBonus;
+        LauncherBG.inst.maxVelocity += speedBonus;
         TweenMax.delayedCall(5, function (){
-            LauncherBG.maxVelocity -= speedBonus;
+            LauncherBG.inst.maxVelocity -= speedBonus;
             gameStage.player.invulnerable = false;
         })
 

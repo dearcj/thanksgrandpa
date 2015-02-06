@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>sparrow</string>
+        <string>json</string>
         <key>textureFileName</key>
         <filename>guiatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>guiatlas.xml</filename>
+        <filename>guiatlas.json</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -131,7 +131,7 @@
             <key>innerPadding</key>
             <uint>0</uint>
             <key>extrude</key>
-            <uint>1</uint>
+            <uint>0</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
@@ -144,8 +144,6 @@
             <filename>../../img/btnlevel0002.png</filename>
             <filename>../../img/btnlevel0001.png</filename>
             <filename>../../img/buttonlong0002.png</filename>
-            <filename>../../img/star0001.png</filename>
-            <filename>../../img/star0002.png</filename>
             <filename>../../../../Android/Graphics/barHpBG.png</filename>
             <filename>../../../../Android/Graphics/textureHP.png</filename>
             <filename>../../img/BULLETSHOTGUN.png</filename>
@@ -174,10 +172,8 @@
             <filename>../../../../dedgame/home screen/awards.png</filename>
             <filename>../../../../dedgame/home screen/battle button.png</filename>
             <filename>../../../../dedgame/everyday actions/progress fore.png</filename>
-            <filename>../../../../dedgame/everyday actions/action bg.png</filename>
             <filename>../../../../dedgame/everyday actions/progress bg.png</filename>
             <filename>../../../../dedgame/fight screen/bullet counter.png</filename>
-            <filename>../../../../dedgame/everyday actions/action.png</filename>
             <filename>../../../../dedgame/fight screen/health dead.png</filename>
             <filename>../../../../dedgame/fight screen/health.png</filename>
             <filename>../../../../dedgame/everyday actions/podlozhka actions.png</filename>
@@ -186,7 +182,6 @@
             <filename>../../../../dedgame/home screen/add friend.png</filename>
             <filename>../../../../dedgame/home screen/arrow.png</filename>
             <filename>../../../../dedgame/home screen/top cover.png</filename>
-            <filename>../../../../dedgame/everyday actions/object podlozhka actions.png</filename>
             <filename>../../../../dedgame/everyday actions/scroll actions.png</filename>
             <filename>../../../../dedgame/everyday actions/separator actions.png</filename>
             <filename>../../../../dedgame/home screen/records.png</filename>
@@ -236,6 +231,25 @@
             <filename>../../../../dedgame/fight screen/menu/start button.png</filename>
             <filename>../../../../dedgame/fight screen/menu/home button.png</filename>
             <filename>../../../../dedgame/fight screen/menu/pause button.png</filename>
+            <filename>../../../../dedgame/home screen/coins home.png</filename>
+            <filename>../../../../dedgame/home screen/stars home.png</filename>
+            <filename>../../../../dedgame/shop/background color.png</filename>
+            <filename>../../../../dedgame/gameover/game over ded.png</filename>
+            <filename>../../../../dedgame/fight screen/coins.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 5.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 6.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 7.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 8.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 9.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 10.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 11.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 12.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 13.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 14.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 1.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 2.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 3.png</filename>
+            <filename>../../../../dedgame/everyday actions/action 4.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

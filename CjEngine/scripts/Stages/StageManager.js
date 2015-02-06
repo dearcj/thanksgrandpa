@@ -10,6 +10,7 @@ var SM = function() {
     this.guiLayer = new PIXI.DisplayObjectContainer();
     this.superGuiLayer = new PIXI.DisplayObjectContainer();
     this.fontLayer = new PIXI.DisplayObjectContainer();
+    this.superStage = new PIXI.DisplayObjectContainer();
 
 //add layers on stage
     this.bg.interactive = true;
@@ -49,6 +50,7 @@ var SM = function() {
 SM.inst = new SM();
 
 
+
 SM.prototype.addDisableWindow = function(title, layer)
 {
     var d = new PIXI.DisplayObjectContainer();
@@ -73,18 +75,19 @@ SM.prototype.addDisableWindow = function(title, layer)
     d.interactive = false;
     d.trans = true;
     if (layer) layer.addChild(d); else
-    stage.addChild(d);
+        this.superStage.addChild(d);
     return d;
 }
 
 SM.prototype.addLayersToStage = function()
 {
-    stage.addChild(this.bg);
-    stage.addChild(this.ol);
-    stage.addChild(this.fg);
-    stage.addChild(this.guiLayer);
-    stage.addChild(this.superGuiLayer);
-    stage.addChild(this.fontLayer);
+    this.superStage.addChild(this.bg);
+    this.superStage.addChild(this.ol);
+    this.superStage.addChild(this.fg);
+    this.superStage.addChild(this.guiLayer);
+    this.superStage.addChild(this.superGuiLayer);
+    this.superStage.addChild(this.fontLayer);
+    stage.addChild(this.superStage);
 
     this.bg.mousemove = function(md){
         window.mouseX = md.global.x/SCR_SCALE;

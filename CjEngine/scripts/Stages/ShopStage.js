@@ -14,7 +14,10 @@ ShopStage.prototype.onShow = function() {
     PlayerData.inst.playerItem.crystals = 1000;
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
 
-    LevelManager.loadLevel("levshop", this.onShowContinue);
+    LevelManager.loadLevel("levshop",  function()
+    {
+        LevelManager.loadLevel("upperPanel", shopStage.onShowContinue, SM.inst.ol);
+    });
 }
 
 ShopStage.prototype.checkEq = function(item)
@@ -77,6 +80,9 @@ ShopStage.prototype.buyItem = function (event, unlock)
             shopStage.transScreen.parent.removeChild(shopStage.transScreen);
             shopStage.transScreen = null;
         });
+    } else
+    {
+        charStage.openPremiumWindow();
     }
 }
 
@@ -112,8 +118,20 @@ ShopStage.prototype.createItemBtn = function(item)
         f.tint = CButton.tintColor;
         new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
         new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
+
+        var desc = item.desc.split("|");
+        var desctext = "Описание будет здесь..... позже";
+        if (desc.length > 1) desctext = desc[2];
+        var tf =
+        CObj.getById("tfdescd");
+        tf.setTextSafe(desctext);
+        console.log("MOUSE IN");
+        tf.item = item;
     }
     ico.mouseout = function (evt) {
+        var tf = CObj.getById("tfdescd");
+        if (tf.item == item)
+        tf.setTextSafe("");
         if (item.type == tWeapon || item.type == tApp + tHat) {
             shopStage.pl.updateAppearence(true, false, null, null, null);
         }
@@ -121,6 +139,7 @@ ShopStage.prototype.createItemBtn = function(item)
         if (f.currentFrame)
             f.gotoAndStop(1);
         new TweenMax(f.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut} );
+        console.log("MOUSE OUT");
     }
 
     var owned = this.checkOwned(item);
@@ -294,11 +313,15 @@ ShopStage.prototype.updateBar = function(tab, filter, baroffset)
 ShopStage.prototype.updateStatsPanel = function() {
     var b = CObj.getById("bar");
     b.gfx.width = 200;
-    b.prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].xp;
+    var xp = PlayerData.inst.playerItem.xp;
+    var needed = PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].xp;
+    b.prop = xp / needed;
     CObj.getById("tflev").text = PlayerData.inst.playerItem.lvl.toString();
     if (!CObj.getById("bar").gfx.parent) {
              SM.inst.fg.addChild(CObj.getById("bar").gfx);
         }
+    CObj.getById("tfexp").text = Math.floor(xp).toString() + " / " + Math.floor(needed).toString();
+
     CObj.getById("tfmoney").text = PlayerData.inst.playerItem.money.toString();
     CObj.getById("tfcry").text = PlayerData.inst.playerItem.crystals.toString();
     CObj.getById("tfenergy").text = Math.round(PlayerData.inst.playerItem.energy).toString();

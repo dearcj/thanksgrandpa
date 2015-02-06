@@ -5,6 +5,7 @@ extend(CTextField, CObj, true);
 
 function CTextField(in_x,in_y,textname,in_body){
     CObj.apply(this,[in_x,in_y,textname,in_body]);
+    this.gui = true;
     this.text = "";
     this.PublicFields += 'text,fontFamily,fontSize,align,tint, ';
 }
@@ -19,9 +20,11 @@ Object.defineProperty(CTextField.prototype, 'text', {
     },
     set: function (value) {
 
-        this._text = value.toUpperCase();
+        this._text = value;
+        if (this._text == "") this._text = " ";
         if (this.gfx) {
-            this.gfx.text = value;
+            this.gfx.text = this._text;
+
             this.gfx.updateText();
             var b = this.gfx.getLocalBounds();
 
@@ -36,8 +39,9 @@ Object.defineProperty(CTextField.prototype, 'text', {
                 this.offsetX = 0;
             }
             //this.offsetY = -b.height / 2;
+
             this.updateGraphics(true);
-       }
+        }
     }
 });
 
@@ -94,7 +98,22 @@ CTextField.createTextField = function(obj) {
     pt.tint = parseInt(obj.tint);
     pt.breaks = breaks;
     pt.fs = obj.fontSize;
+
+    pt.updateText();
     return pt;
+}
+
+CTextField.prototype.setTextSafe = function(t) {
+    this.safeText = t;
+    console.log("TEXT " + t);
+}
+
+CTextField.prototype.process = function() {
+    if (this.safeText != undefined)
+    {
+        this.text = this.safeText;
+        this.safeText = null;
+    }
 }
 
 CTextField.prototype.init = function(){

@@ -22,18 +22,162 @@ var dbobj =
         items:
             [
                 {
-                    name: "Накатить за победу",
-                    desc: "",
-                    delay_min: 2,
-                    xp_gain: 10,
-                    money_gain: 0
+                    desc: "Помянуть боевых товарищей",
+                    name: "event1",
+                    delay_min: 24*60,
+                    xp_gain: 0,
+                    money_gain: 0,
+                    crystal_gain: 2,
+                    gfx: "action 1.png",
+                    reqlvl: 2,
+                    exectime: 30
                 },
                 {
-                    name: "Получить пенсию",
-                    desc: "desc 2",
+                    desc: "Получить пенсию",
+                    name: "event2",
+                    delay_min: 48*60,
+                    xp_gain: 0,
+                    money_gain: 500,
+                    crystal_gain: 0,
+                    gfx: "action 2.png",
+                    reqlvl: 1,
+                    exectime: 120
+                },
+                {
+                    desc: "Посмотреть новости",
+                    name: "event3",
+                    delay_min: 6*60,
+                    xp_gain: 50,
+                    money_gain: 0,
+                    crystal_gain: 0,
+                    gfx: "action 3.png",
+                    reqlvl: 1,
+                    exectime: 30
+                },
+                {
+                    desc: "Заглянуть в интернет",
+                    name: "event4",
+                    delay_min: 24*60,
+                    xp_gain: 1000,
+                    money_gain: 0,
+                    crystal_gain: 0,
+                    gfx: "action 4.png",
+                    reqlvl: 4,
+                    exectime: 140
+                },
+                {
+                    desc: "Постирать мундир",
+                    name: "event5",
                     delay_min: 2,
                     xp_gain: 0,
-                    money_gain: 1000
+                    money_gain: 0,
+                    crystal_gain: 8,
+                    gfx: "action 5.png",
+                    reqlvl: 5,
+                    exectime: 120
+                },
+                {
+                    desc: "Доесть ужин",
+                    name: "event6",
+                    delay_min: 24*60,
+                    xp_gain: 100,
+                    money_gain: 0,
+                    crystal_gain: 0,
+                    gfx: "action 6.png",
+                    reqlvl: 1,
+                    exectime: 10
+                },
+                {
+                    desc: "Позвонить внуку",
+                    name: "event7",
+                    delay_min: 24*60,
+                    xp_gain: 1500,
+                    money_gain: 0,
+                    crystal_gain: 0,
+                    gfx: "action 7.png",
+                    reqlvl: 5,
+                    exectime: 80
+                },
+                {
+                    desc: "Помочь бабке по хозяйству",
+                    name: "event8",
+                    delay_min: 4*60,
+                    xp_gain: 0,
+                    money_gain: 0,
+                    crystal_gain: 3,
+                    gfx: "action 8.png",
+                    reqlvl: 4,
+                    exectime: 50
+                },
+                {
+                    desc: "Подремать",
+                    name: "event9",
+                    delay_min: 6*60,
+                    xp_gain: 300,
+                    money_gain: 0,
+                    crystal_gain: 0,
+                    gfx: "action 9.png",
+                    reqlvl: 3,
+                    exectime: 120
+                },
+                {
+                    desc: "Посмотреть фотографии",
+                    name: "event10",
+                    delay_min: 60,
+                    xp_gain: 50,
+                    money_gain: 0,
+                    crystal_gain: 0,
+                    gfx: "action 10.png",
+                    reqlvl: 1,
+                    exectime: 10
+
+                },
+                {
+                    desc: "Почитать книгу",
+                    name: "event11",
+                    delay_min: 4*60,
+                    xp_gain: 0,
+                    money_gain: 0,
+                    crystal_gain: 1,
+                    gfx: "action 11.png",
+                    reqlvl: 3,
+                    exectime: 60
+
+                },
+                {
+                    desc: "Почистить ордена",
+                    name: "event12",
+                    delay_min: 24*60,
+                    xp_gain: 0,
+                    money_gain: 0,
+                    crystal_gain: 2,
+                    gfx: "action 12.png",
+                    reqlvl: 1,
+                    exectime: 1
+
+                },
+                {
+                    desc: "Сходить в поликлинику",
+                    name: "event13",
+                    delay_min: 48*60,
+                    xp_gain: 0,
+                    money_gain: 1000,
+                    crystal_gain: 3,
+                    gfx: "action 13.png",
+                    reqlvl: 2,
+                    exectime: 200
+
+                },
+                {
+                    name: "event14",
+                    desc: "Покормить кота",
+                    delay_min: 6*60,
+                    xp_gain: 600,
+                    money_gain: 1000,
+                    crystal_gain: 0,
+                    gfx: "action 14.png",
+                    reqlvl: 5,
+                    exectime: 30
                 }
             ]
 

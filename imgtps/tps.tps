@@ -145,7 +145,6 @@
             <filename>../../img/wood_wood.png</filename>
             <filename>../../img/balka1.png</filename>
             <filename>../../img/block1.png</filename>
-            <filename>../../img/levwinpanel.png</filename>
             <filename>../../img/woodcircle.png</filename>
             <filename>../../img/chickendead.png</filename>
             <filename>../../img/wood1.png</filename>
@@ -155,7 +154,6 @@
             <filename>../../img/arrow1.png</filename>
             <filename>../../img/rectArea.png</filename>
             <filename>../../img/roundArea.png</filename>
-            <filename>../../img/notif.png</filename>
             <filename>../../img/areaBeam.png</filename>
             <filename>../../img/coinCollect0001.png</filename>
             <filename>../../img/coinCollect0002.png</filename>
@@ -166,11 +164,8 @@
             <filename>../../img/coinCollect0007.png</filename>
             <filename>../../img/BULLETSHOTGUN.png</filename>
             <filename>../../img/barHpBG.png</filename>
-            <filename>../../img/METAL_LEVEL_TEXTURES/TECH1.png</filename>
-            <filename>../../img/METAL_LEVEL_TEXTURES/VBG.png</filename>
             <filename>../../img/METAL_LEVEL_TEXTURES/COLUMN1.png</filename>
             <filename>../../img/METAL_LEVEL_TEXTURES/COLUMN2.png</filename>
-            <filename>../../../../dedgame/fight screen/coin.png</filename>
             <filename>../../../../dedgame/fight screen/road tile.png</filename>
             <filename>../../../../dedgame/fight screen/road up tile.png</filename>
             <filename>../../../../dedgame/fight screen/health dead.png</filename>
@@ -211,6 +206,16 @@
             <filename>../../../../dedgame/fight screen/enemies/enemy2_2.png</filename>
             <filename>../../../../dedgame/fight screen/enemies/enemy3.png</filename>
             <filename>../../../../dedgame/fight screen/enemies/enemy3_3.png</filename>
+            <filename>../../../../dedgame/bullet/laser/laser.png</filename>
+            <filename>../../../../dedgame/bullet/laser/laserparticle.png</filename>
+            <filename>../../../../dedgame/animation sprites/coin/coin002.png</filename>
+            <filename>../../../../dedgame/animation sprites/coin/coin003.png</filename>
+            <filename>../../../../dedgame/animation sprites/coin/coin004.png</filename>
+            <filename>../../../../dedgame/animation sprites/coin/coin005.png</filename>
+            <filename>../../../../dedgame/animation sprites/coin/coin006.png</filename>
+            <filename>../../../../dedgame/animation sprites/coin/coin001.png</filename>
+            <filename>../../../../dedgame/fight screen/recharge icon bar.png</filename>
+            <filename>../../../../dedgame/fight screen/recharge icon.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

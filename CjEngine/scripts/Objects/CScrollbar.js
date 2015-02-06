@@ -19,10 +19,12 @@ Object.defineProperty(CScrollbar.prototype, 'pos', {
         this._pos = value;
 
         var touchervalue = value;
-        if (touchervalue < this.toucher.height / 2)
-            touchervalue = this.toucher.height / 2;
-            this.toucher.y = touchervalue - this.ph / 2;
-        this.container.y = -this.ph/2 - (value)*this.posScale;
+
+        this.toucher.y =this.toucher.height / 2 + (this.ph0 - this.toucher.height)*( touchervalue/(this.ph)) - this.ph0/2;// - this.ph0*(value/this.ph);
+       /* if (this.toucher.y < this.toucher.height / 2 - this.ph0/2)
+            this.toucher.y = this.toucher.height / 2 - this.ph0/2;
+*/
+        this.container.y = -this.ph0/2 - (value)*this.posScale;
     }
 });
 
@@ -83,9 +85,10 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
     CObj.apply(this, [in_x, in_y, null, null]);
 
     this.gfx = new PIXI.DisplayObjectContainer();
-
+    this.gui = true;
     this.pw = ww;
     this.ph = hh;
+    this.ph0 = hh;
     if (!dw) dw = 0;
 //    this.gfx.width = this.pw;
  //   this.gfx.height = this.ph;

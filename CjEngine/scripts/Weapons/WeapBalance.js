@@ -52,7 +52,7 @@ var w_pps = new CPistol(
         recoil: 12, //recoil
         magcap: 20, //magcap
         delay: 120, //delay
-        damage: 12, //damage
+        damage: 33, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 1200},//__reloadTime,}
     "asd",// __gfx,
@@ -68,7 +68,7 @@ var w_minigun = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
-        life: 1,
+        life: 2,
         acc: 0.25,
         recoil: 0.1, //recoil
         magcap: 100, //magcap

@@ -22,8 +22,9 @@ Object.defineProperty(CircleBar.prototype, 'pos', {
         if (value > 1)
             value = 1;
         this._pos = value;
+
         this.mask.clear();
-        var r = 128;
+        var r = this.radius;
         var angle = Math.PI * 2 * value;
         var cx = Math.cos(angle - Math.PI / 2)*r;
         var cy = Math.sin(angle - Math.PI / 2)*r;
@@ -71,15 +72,16 @@ CircleBar.prototype.process= function()
     CObj.prototype.process.call(this);
 }
 
-CircleBar.prototype.init = function(pledevent)
+CircleBar.prototype.init = function(cover, barup, bardown)
 {
-    this.gfx = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost cover.png"));
+    this.gfx = new PIXI.Sprite(PIXI.Texture.fromFrame(cover));
 
+    this.radius = this.gfx.width * 1.5;
 
-    this.progressbg = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost bar bg.png"));
+    this.progressbg = new PIXI.Sprite(PIXI.Texture.fromFrame(bardown));
     this.progressbg.anchor.x = 0.5;
     this.progressbg.anchor.y = 0.5;
-    this.progressfore = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost bar.png"));
+    this.progressfore = new PIXI.Sprite(PIXI.Texture.fromFrame(barup));
     this.progressfore.anchor.x = 0.5;
     this.progressfore.anchor.y = 0.5;
     this.mask = new PIXI.Graphics();
@@ -91,8 +93,4 @@ CircleBar.prototype.init = function(pledevent)
     this.progressfore.mask = this.mask;
     this.pos = 0;
     this.updateGraphics();
-
-//    this.progressbg.visible = false;
- //   this.progressfore.visible = false;
-
 }

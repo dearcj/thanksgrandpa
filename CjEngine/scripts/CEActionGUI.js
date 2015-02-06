@@ -1,75 +1,26 @@
 /**
  * Created by KURWINDALLAS on 10.12.2014.
  */
-extend(CEActionGUI, CObj, true);
+extend(CEActionGUI, CircleBar, true);
 
 function CEActionGUI(in_x,in_y,textname,in_body){
-    CObj.apply(this,[in_x,in_y,textname,in_body]);
+    CircleBar.apply(this,[in_x,in_y,textname,in_body]);
+    this.gui = true;
 }
-
-Object.defineProperty(CEActionGUI.prototype, 'pos', {
-    get: function () {
-        return this._pos;
-    },
-    set: function (value) {
-
-        if (value < 0)
-            value = 0;
-
-        if (value > 1)
-            value = 1;
-        this._pos = value;
-        this.mask.clear();
-        var r = 58;
-        var angle = Math.PI * 2 * value;
-        var cx = Math.cos(angle - Math.PI / 2)*r;
-        var cy = Math.sin(angle - Math.PI / 2)*r;
-
-        var points = [0, -r, 0,0];
-
-        if (angle < Math.PI / 2)
-        {
-            points.push(cx, cy);
-        } else
-        if (angle < Math.PI)
-        {
-            points.push(cx, cy);
-            points.push(r, 0);
-        } else
-        if (angle < 3 * Math.PI / 2)
-        {
-            points.push(cx, cy);
-            points.push(0, r);
-            points.push(r, 0);
-        } else
-        {
-            points.push(cx, cy);
-            points.push(-r, 0);
-            points.push(0, r);
-            points.push(r, 0);
-        }
-
-        this.mask.beginFill(0xffffffff);
-        this.mask.drawPolygon(points);
-        this.mask.endFill();
-    }
-});
 
 CEActionGUI.prototype.destroy = function()
 {
-    this.progressbg = null;
-    this.progressfore = null;
-    this.icoevent = null;
+    //this.icoevent = null;
     this.event = null;
     this.eventpl = null;
-    CObj.prototype.destroy.call(this);
+    CircleBar.prototype.destroy.call(this);
 }
 
 
 CEActionGUI.prototype.process= function()
 {
     this.updateRecharge();
-    CObj.prototype.process.call(this);
+    CircleBar.prototype.process.call(this);
 }
 
 CEActionGUI.prototype.startAction = function()
@@ -98,12 +49,10 @@ CEActionGUI.prototype.endAction = function(p)
     if (p.event.crystal_gain)
         PlayerData.inst.playerItem.xp += p.event.crystal_gain;
 
+    incMetric("USED EVENT " + p.event.name);
+
     PlayerData.inst.savePlayerEvents();
     PlayerData.inst.savePlayerData();
-
-
-
-//    PlayerData.inst.playerItem.xp+=10;
     shopStage.updateStatsPanel();
 
     p.acting = false;
@@ -133,41 +82,39 @@ CEActionGUI.prototype.updateRecharge= function()
 
         var s = Math.floor(d % 60);
     }
-    if (d < 0) {
-        str = "ГОТОВО";
+    this.timeleft.tint = 0x333333;
+    if (d < 0 || this.event.reqlvl <= PlayerData.inst.playerItem.lvl) {
+        str = "Готово";
         this.ready = true;
     }else {
-        var str = "ДОСТУПНО ЧЕРЕЗ " + '\n' + (h < 10 ? "0" + h : h) + " : " + (m < 10 ? "0" +m : m) + " : " + (s < 10 ? "0" + s : s);
+        var str;
+        if (this.event.reqlvl > PlayerData.inst.playerItem.lvl) {
+            str = "Требуется " + this.event.reqlvl.toString() + " ур.";
+            this.timeleft.tint = 0xff0000;
+        }else {
+            str = "Доступно через" + (h < 10 ? "0" + h : h) + " : " + (m < 10 ? "0" + m : m) + " : " + (s < 10 ? "0" + s : s);
+            this.timeleft.tint = 0xff0000;
+        }
         this.ready = false;
     }
     this.timeleft.text = str;
     this.timeleft.updateText();
 }
 
-CEActionGUI.prototype.init = function(pledevent)
+CEActionGUI.prototype.init = function(pledevent, bg, upper, lower)
 {
-    this.gfx = new PIXI.Sprite(PIXI.Texture.fromFrame("action bg.png"));
-
-    this.icoevent =  new PIXI.Sprite(PIXI.Texture.fromFrame("action.png"));
+    CircleBar.prototype.init.call(this, bg, upper, lower);
+    /*this.icoevent =  new PIXI.Sprite(PIXI.Texture.fromFrame("action.png"));
     this.icoevent.anchor.x = 0.5;
     this.icoevent.anchor.y = 0.5;
 
-    this.progressbg = new PIXI.Sprite(PIXI.Texture.fromFrame("progress bg.png"));
-    this.progressbg.anchor.x = 0.5;
-    this.progressbg.anchor.y = 0.5;
-    this.progressfore = new PIXI.Sprite(PIXI.Texture.fromFrame("progress fore.png"));
-    this.progressfore.anchor.x = 0.5;
-    this.progressfore.anchor.y = 0.5;
-    this.mask = new PIXI.Graphics();
-    this.gfx.addChild(this.progressbg);
-    this.gfx.addChild(this.progressfore);
-    this.gfx.addChild(this.icoevent);
-    this.gfx.addChild(this.mask);
+*/
+
+    //this.gfx.addChild(this.icoevent);
+
     this.gfx.anchor.x = 0.5;
     this.gfx.anchor.y = 0.5;
-    this.progressfore.mask = this.mask;
-    this.pos = 0.;
-    this.updateGraphics();
+
 
     var id = pledevent.id_edevent;
     for (var i = 0; i < PlayerData.inst.events.length; ++i) {if (PlayerData.inst.events[i].id == id) break;}
@@ -181,7 +128,7 @@ CEActionGUI.prototype.init = function(pledevent)
     if (this.event.xp_gain > 0)
     {
         gain = this.event.xp_gain;
-        gainbg = "price star.png";
+        gainbg = "price xp.png";
     }
     if (this.event.money_gain > 0)
     {
@@ -197,19 +144,18 @@ CEActionGUI.prototype.init = function(pledevent)
     var gainbgsprite = new PIXI.Sprite(PIXI.Texture.fromFrame(gainbg));
     gainbgsprite.anchor.x = 0.5;
     gainbgsprite.anchor.y = 0.5;
-
-    gainbgsprite.y = 72;
+    gainbgsprite.x = 140;
+    gainbgsprite.y = 12 + 8;
     this.gfx.addChild(gainbgsprite);
 
-    this.timeleft = CTextField.createTextField({text: "ОСТАЛОСЬ 200 МИНУТ", fontSize: 22, align: "center"});
+    this.timeleft = CTextField.createTextField({tint: "0x333333", text: "", fontSize: 17, align: "center"});
     this.timeleft.x = 50;
     this.timeleft.y = -20;
     this.gfx.addChild(this.timeleft);
 
-
-    var tf = CTextField.createTextField({text: gain.toString(), fontSize: 22, align: "center"});
-    tf.x = 4;
-    tf.y = 60;
+    var tf = CTextField.createTextField({tint: "0x333333", text: gain.toString(), fontSize: 16, align: "center"});
+    tf.x = 140;
+    tf.y = 3 + 8;
     this.gfx.addChild(tf);
 
     var edeventgui = this;
@@ -230,7 +176,7 @@ CEActionGUI.prototype.init = function(pledevent)
         this.pos = 1;
     }
 
-    var tf = CTextField.createTextField({text: PlayerData.inst.events[i].name.toUpperCase(), fontSize: 22, align: "center"});
+    var tf = CTextField.createTextField({tint: "0x333333", text: PlayerData.inst.events[i].desc, fontSize: 19, align: "center"});
     tf.x = 50;//-tf.width / 2;
     tf.y = -45;
     //tf.al
@@ -239,5 +185,4 @@ CEActionGUI.prototype.init = function(pledevent)
     this.progressbg.visible = false;
     this.progressfore.visible = false;
 
-    this.updateRecharge();
 }

@@ -11,22 +11,50 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.gfx = new PIXI.DisplayObjectContainer();
     SM.inst.bg.addChild(this.gfx);
     this.nullSpeed = 8;
-    LauncherBG.maxVelocity = this.nullSpeed;
-    //  var inx = CObj.objects.indexOf(this);
+   //  var inx = CObj.objects.indexOf(this);
     //  CObj.objects.splice(inx);
     this.distance = 0;
     this.incDist = 50;
     this.speedUpCoef = 0.1;
 }
 
-LauncherBG.maxVelocity = 0;
+
+
+
+LauncherBG.generateProperty('maxVelocity', {
+    defaultValue: 0,
+    get: function() {
+        return this._maxVelocity;
+    },
+    set: function (value)
+    {
+        if (!this._maxVelocity) this._maxVelocity = 0;
+        var prop = value / this._maxVelocity;
+        //var add = 0;
+        if (prop == Infinity) {
+        //    add = value;
+            prop = 1;
+        }
+        this._maxVelocity = value;
+
+        var len = this.levCycles[0].layers.length;
+        for (var l = 0; l < len; ++l) {
+            var ll = this.levCycles[0].layers[l];
+            if (ll.velocity > 0) {
+                ll.velocity *= prop;
+            //    ll.velocity += add;
+            }
+        }
+
+    }
+});
 
 LauncherBG.prototype.clear = function () {
     this.speedUpCoef = 0.1;
+    this.maxVelocity = this.nullSpeed;
     this.levCycles.splice(0, this.levCycles.length);
     this.distance = 0;
     this.incDist = 50;
-    LauncherBG.maxVelocity = this.nullSpeed;
 }
 
 LauncherBG.prototype.destroy = function () {
@@ -65,15 +93,7 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
 
 }
 
-LauncherBG.prototype.speedUp = function(d)
-{
-    console.log("SPD INCR, dist = ", this.distance.toString());
-    for (var l = 0; l < this.levCycles[0].layers.length; ++l) {
-        if (this.levCycles[0].layers[l].velocity > 0)
-            this.levCycles[0].layers[l].velocity += d;
-    }
-    LauncherBG.maxVelocity += d;
-}
+
 
 LauncherBG.prototype.process = function (fake) {
     // CObj.prototype.process.call(this);
@@ -98,7 +118,7 @@ LauncherBG.prototype.process = function (fake) {
         if (Math.floor(this.distance / this.incDist) != Math.floor((this.distance + delta) / this.incDist)) {
 
             this.speedUpCoef *= 0.98;
-            this.speedUp(this.speedUpCoef);
+            this.maxVelocity += this.speedUpCoef;
         }
     }
     this.distance += delta;
@@ -142,7 +162,7 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
     var layerNum = 5;
     for (var i = 0; i < layerNum; ++i) {
         var cont = new PIXI.DisplayObjectContainer();
-        var vel = Math.round(LauncherBG.maxVelocity - (layerNum - i - 1) * LauncherBG.maxVelocity / layerNum);
+        var vel = Math.round(this.nullSpeed - (layerNum - i - 1) * this.nullSpeed / layerNum);
         if (i == 1) {
             vel = 0;
         }
@@ -151,9 +171,11 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
         this.gfx.addChild(layer.clip);
     }
 
+
     for (var i = 0; i < original.objects.length; ++i) {
         layers[original.objects[i].layer].objects.push(original.objects[i]);
     }
+
 
     for (var l = 0; l < layers.length; ++l) {
         var minx = 100000;
@@ -184,5 +206,7 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
     }
 
     this.levCycles.push({layers: layers, dist: distance});
+
+    this.maxVelocity = this.nullSpeed;
 }
 

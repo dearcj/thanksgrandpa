@@ -11,7 +11,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.fireAngle = 0;
     this.weapon = gameStage.curweapon;
     this.bar = CObj.getById("hpbar");
-    this.ammobar = CObj.getById("ammot");
+    this.ammobar = gameStage.ammobar;
     this.colGroup = CG_PLAYER;
     this.nullPhase = 0;
     this.maxHp = 5;
@@ -24,6 +24,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.sMoving = 1;
     this.sDying = 2;
     this.state = this.sMoving;
+    this.allowFlowMove = true;
 }
 
 CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, overrideGun, overrideHat) {
@@ -66,6 +67,7 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
 
 CPlayer.prototype.createDedGraphics = function()
 {
+
     var g = new PIXI.Spine("imgtps/skeleton.json");
 
     g.skeleton.setSkinByName('perded');
@@ -77,6 +79,8 @@ CPlayer.prototype.createDedGraphics = function()
     g.scale.x = 0.3;
     g.scale.y = 0.3;
 
+    g.stateData.setMixByName("idle", "jump", 0.2);
+    g.stateData.setMixByName("jump", "idle", 0.4);
 
     this.bulletStart = 40;
 
@@ -87,20 +91,36 @@ CPlayer.prototype.createDedGraphics = function()
 CPlayer.prototype.reveal = function()
 {
     this.hp = 2;
+    this.invulnerable = false;
     this.state = this.sMoving;
     this.revealTime = new Date().getTime();
     this.gfx.state.setAnimationByName(0, "idle", true);
 }
 
+CPlayer.prototype.onJump = function()
+{
+ //   this.kill(); return;
+    if (this.state == this.sMoving
+    && !this.jumping) {
+        this.jumping = true;
+        this.jumpboost = true;
+        this.gfx.state.setAnimationByName(0, "jump", false);
+        this.gravityEnabled = true;
+        this.vy = -13;
+    }
+}
 
 CPlayer.prototype.kill = function()
 {
     //this.destroy();
     if (this.state == this.sMoving) {
         this.state = this.sDying;
-
+        this.invulnerable = true;
+        var lbg = LauncherBG.inst;
+        lbg.preVelocity = lbg.maxVelocity;
+        new TweenMax(lbg, 2, {maxVelocity: 0.5});
         this.gfx.state.setAnimationByName(0, "defeated", false);
-        TweenMax.delayedCall(0.57, gameStage.sessionEnd);
+        TweenMax.delayedCall(2.57, gameStage.sessionEnd);
     }
 }
 
@@ -121,20 +141,42 @@ CPlayer.prototype.jump = function()
 CPlayer.prototype.process = function()
 {
 
-    if (this.vy > 0 && this.y > this.baseY - 30) {
-        gameStage.jumping = false;
-    }
+
+
+    if (SM.inst.currentStage == gameStage && gameStage.doProcess) {
+
+        if (this.vy > 0 && this.y > this.baseY - 30) {
+            this.jumping = false;
+        }
 
         if (this.vy > 0 && this.y > this.baseY)
-    {
+        {
             this.vy = 0;
-            gameStage.jumping = false;
+            this.jumping = false;
             this.y = this.baseY;
             this.gravityEnabled = false;
-            this.gfx.state.setAnimationByName(0, "idle", true);
-    }
+            if (this.state != this.sDying)
+                this.gfx.state.setAnimationByName(0, "idle", true);
+        }
 
-    if (SM.inst.currentStage == gameStage) {
+        if (this.jumping) {
+            if (this.jumpboost && this.vy < 0)
+                this.vy *= 1.048;
+
+            if (this.vy < -17) {
+                this.jumpboost = false;
+                this.vy = -17;
+            }
+        }
+
+
+        gameStage.ammoico.x = this.x-80;
+        gameStage.ammoico.y = this.y-50;
+
+        gameStage.ammobar.x = gameStage.ammoico.x + 25;
+        gameStage.ammobar.y = gameStage.ammoico.y - 21;
+        gameStage.reloadBar.x = gameStage.ammoico.x;
+        gameStage.reloadBar.y = gameStage.ammoico.y;
 
         if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40) {
             this.fire();
@@ -143,15 +185,24 @@ CPlayer.prototype.process = function()
         if (this.weapon)
             this.weapon.process();
 
-        if (!this.jumpTween || !this.jumpTween.isActive()) {
+        if (this.allowFlowMove && (!this.jumpTween || !this.jumpTween.isActive())) {
             this.freq = 800;
             this.nullPhase += 22;
             this.x = this.startPlayerX + Math.sin((this.nullPhase) / this.freq) * 30;
         }
 
-        var dx = 220;
-        var dy = 20;
+        var dx = 0;
+        var dy = 0;
         var da = 0;
+        if (gameStage.curweapon == w_rifle) {
+            dx = 220;
+            dy = 20;
+        }else
+        if (gameStage.curweapon == w_pps) {
+            dx = -45;
+            dy = 280;
+            da = -Math.PI / 20;
+        }else
         if (gameStage.curweapon == w_minigun)
         {
             dy = 310;
@@ -170,12 +221,12 @@ CPlayer.prototype.process = function()
 
         var bangle = Math.atan2(this.y - my, this.x - mx);
 
-        this.fireAngle = Math.PI + bangle;
+        this.fireAngle = Math.PI + bangle ;
         var newAngle = this.fireAngle+Math.PI / 2 + da;
        // if ((!this.handTween || !this.handTween.isActive())) {
 
         if (this.state == this.sMoving) {
-            this.rshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI - 10;
+            this.rshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI + 25;
             this.lshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI - 10;
         }
        // this.gunBone.data.boneData.rotation =  270 -180*newAngle / Math.PI;
@@ -188,13 +239,12 @@ CPlayer.prototype.process = function()
 }
 
 
-
-
 CPlayer.prototype.dealDamage = function(dmg)
 {
     var t = new Date().getTime();
     if (t - this.revealTime < 2000) return;
 
+    if (this.invulnerable) return;
 
     for (var i = 0; i < this.gfx.skeleton.slots.length; ++i)
     {
@@ -215,11 +265,15 @@ CPlayer.prototype.dealDamage = function(dmg)
 
     });
 
-    gameStage.player.gfx.skeleton.setAttachment("head", "head4");
+    this.gfx.skeleton.setAttachment("head", "head4");
     TweenMax.delayedCall(0.7, function(){
         if (gameStage.player)
         gameStage.player.gfx.skeleton.setAttachment("head", "head1");
     });
+
+    var pl = this;
+    this.allowFlowMove = false;
+    new TweenMax(this, 0.6, {x: Math.max(this.x - 50,80), repeat: 1, yoyo: true, onComplete: function(){pl.allowFlowMove = true;}});
     //  this.tweenColor(this.gfx);
 /*    if   (!TweenMax.isTweening(this.gfx.children[0])) {
        for (var i = 0; i < this.gfx.children.length; ++i) {
@@ -230,7 +284,6 @@ CPlayer.prototype.dealDamage = function(dmg)
 
     if (this.hp - dmg < 0) this.hp = 0; else
         this.hp = this.hp - dmg;
-
 }
 
 
@@ -238,7 +291,7 @@ CPlayer.prototype.fire = function()
 {
     if (!gameStage.menuBtn.over)
     {
-        if (this.weapon.shot())
+        if (this.state == this.sMoving && this.weapon.shot())
         {
             /*    if (this.handTween)
              this.handTween.kill();

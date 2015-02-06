@@ -6,7 +6,8 @@ extend(CButton, CObj, true);
 function CButton(in_x,in_y,textname,in_body){
     CObj.apply(this,[in_x,in_y,textname,in_body]);
     this.PublicFields += 'text,fontFamily,fontSize,align,hover';
- //   this.hover = true;
+    this.gui = true;
+    //   this.hover = true;
 }
 
 CButton.tintColor = 0xffffff;

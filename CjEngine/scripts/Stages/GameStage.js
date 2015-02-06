@@ -75,16 +75,6 @@ GameStage.prototype.process = function () {
 
     CObj.processAll();
 
-    if (gameStage.player && gameStage.jumping) {
-        if (gameStage.jumpboost && gameStage.player.vy < 0)
-            gameStage.player.vy *= 1.048;
-
-        if (gameStage.player.vy < -17) {
-            gameStage.jumpboost = false;
-            gameStage.player.vy = -17;
-            console.log("BOOST OFF");
-        }
-    }
     var d = Math.floor(LauncherBG.inst.distance);
     gameStage.distText.text = d.toString();
     MM.inst.process();
@@ -105,6 +95,10 @@ GameStage.prototype.onHide = function (newStage) {
     gameStage.preWinText = null;
     gameStage.curweapon = null;
 
+    gameStage.ammobar = null;
+    gameStage.ammoico = null;
+
+
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
 
@@ -124,7 +118,7 @@ GameStage.prototype.onHide = function (newStage) {
 
     if (gameStage.pauseSprite) {
         gameStage.pauseSprite.parent.removeChild(gameStage.pauseSprite);
-        gameStage.pauseTexture.destroy();
+        gameStage.pauseTexture.destroy(true);
         gameStage.pauseTexture = null;
         gameStage.pauseSprite = null;
     }
@@ -191,7 +185,7 @@ GameStage.prototype.updateItems = function () {
 
 GameStage.prototype.shAfterLife = function () {
     var cb = new CircleBar(SCR_WIDTH / 2, SCR_HEIGHT / 2);
-    cb.init();
+    cb.init("bodrost cover.png",  "bodrost bar.png",  "bodrost bar bg.png");
     SM.inst.guiLayer.addChild(cb.gfx);
 
 
@@ -230,6 +224,9 @@ GameStage.prototype.shAfterLife = function () {
             PlayerData.inst.playerItem.crystals -= price;
             gameStage.player.reveal();
             PlayerData.inst.savePlayerData();
+
+            new TweenMax(LauncherBG.inst, 2, {maxVelocity: LauncherBG.inst.preVelocity});
+
         }
     }
     var bsX = cb.gfx.scale.x;
@@ -315,7 +312,6 @@ GameStage.prototype.openEndWindowLoaded = function () {
         addLine(i);
     }
 
-    rec = 4000;
 
     azureclient.invokeApi("get_scores", {
         body: {filter: vkparams.friendsIngameIDs, take: 5, skip: scoreStage.skip},
@@ -323,12 +319,6 @@ GameStage.prototype.openEndWindowLoaded = function () {
     }).done(function (results) {
         var arr = results.result;
 
-        ////CCREMOVE
-        arr = [{name: "ПИсюкин", last_name: "Антон", maxdistance: 2000}, {
-            name: "ПИсюкин",
-            last_name: "Антон",
-            maxdistance: 1000
-        }, {name: "ПИсюкин", last_name: "Антон", maxdistance: 500}];
         for (var i = 0; i < Math.min(5, arr.length); ++i) {
             CObj.getById("tf" + (i + 1).toString() + "2").text = arr[i].name + " " + arr[i].last_name;
             CObj.getById("tf" + (i + 1).toString() + "3").text = arr[i].maxdistance.toString();
@@ -425,13 +415,9 @@ GameStage.prototype.doKeyDown = function (evt) {
     if (gameStage.state != "game") return;
     evt = evt || window.event;
     var c = getChar(evt);
-    if (evt.which == 87 && !gameStage.jumping) {
-        gameStage.jumping = true;
-        gameStage.jumpboost = true;
-        gameStage.player.gfx.state.setAnimationByName(0, "jump", false);
-        gameStage.player.gravityEnabled = true;
-        gameStage.player.vy = -13;
-        console.log("JUMP");
+    if (evt.which == 87)
+    {
+        gameStage.player.onJump();
     }
 }
 
@@ -441,7 +427,7 @@ GameStage.prototype.doKeyUp = function (evt) {
     evt = evt || window.event;
     var c = getChar(evt);
     if (evt.which == 87) {
-        gameStage.jumpboost = false;
+        gameStage.player.jumpboost = false;
     }
 }
 
@@ -453,7 +439,6 @@ GameStage.prototype.onShow = function () {
     window.addEventListener("keyup", this.doKeyUp, false);
 
     this.state = "game";
-    this.jumping = undefined;
     this.doProcess = false;
 
     LevelManager.loadLevel("hud", gameStage.onLoadEnd, SM.inst.guiLayer);
@@ -466,6 +451,104 @@ GameStage.prototype.onShow = function () {
     LauncherBG.inst.distance = 0;
 
     MM.inst.init();
+}
+
+
+//NO "THIS" IN CURRENT CONTEXT
+GameStage.prototype.onLoadEnd = function () {
+    gameStage.doProcess = true;
+    gameStage.stepSize = gameStage.invFR;
+    gameStage.doPhys = true;
+
+    var xxx = gameStage.createCircle(20, 100, 100, 100);
+    SM.inst.guiLayer.addChild(xxx);
+
+    var floorHeight = 120;
+    gameStage.floor = new FloorObj(SCR_WIDTH / 2, SCR_HEIGHT - floorHeight / 2, null);
+    gameStage.floor.gfx = new PIXI.DisplayObjectContainer();
+    gameStage.floor.gfx.width = SCR_WIDTH;
+    gameStage.floor.gfx.height = floorHeight;
+    gameStage.floor.gfx.visible = false;
+
+    gameStage.createHPBar(10, 5, 5);
+
+    gameStage.updateItems();
+
+    gameStage.ammobar = CObj.getById("ammot");
+    gameStage.ammoico = CObj.getById("ammoico");
+    gameStage.reloadBar = new CircleBar(gameStage.ammoico.x, gameStage.ammoico.y);
+    gameStage.reloadBar.init("recharge icon.png", "recharge icon bar.png", "recharge icon.png");
+    gameStage.reloadBar.pos = 0.5;
+    gameStage.reloadBar.gfx.visible = false;
+    SM.inst.guiLayer.addChild(gameStage.reloadBar.gfx);
+    gameStage.player = new CPlayer(110, SCR_HEIGHT - 170);
+    gameStage.player.gfx.pivot.y = -190;
+    gameStage.player.gfx.scale.x = 0.22;
+    gameStage.player.gfx.scale.y = 0.22;
+    SM.inst.fg.addChild(gameStage.player.gfx);
+
+    gameStage.player.updateAppearence(true, true, "idle");
+
+    TweenMax.delayedCall(1.3, function(){
+        if (gameStage.player)
+            gameStage.player.gfx.skeleton.setAttachment("head", "head1");
+    });
+
+    gameStage.player.weapon.updateAmmo();
+
+    gameStage.player.process();
+
+    gameStage.scoreObj = CObj.getById("score");
+    gameStage.updateScore();
+    gameStage.worldSpeed = 1;
+
+    gameStage.createPools();
+    gameStage.distText = CObj.getById("dist");
+
+    gameStage.menuBtn = CObj.getById("menu");
+    gameStage.menuBtn.click = function () {
+        if (!gameStage.doProcess) return;
+        if (!gameStage.doPhys) return;
+        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i) {
+            SM.inst.fontLayer.children[i].visible = false;
+        }
+
+        gameStage.state = "paused";
+        gameStage.pause();
+        gameStage.fadeScreen();
+
+        TweenMax.killTweensOf(gameStage.menuBtn, true);
+        LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.guiLayer);
+    }
+
+    stage.touchstart = function (md) {
+        gameStage.fireState = true;
+    }
+
+    stage.touchend = function (md) {
+        gameStage.fireState = false;
+    }
+
+    stage.mousemove = stage.touchmove;
+    stage.mousedown = stage.touchstart;
+    stage.mouseup = stage.touchend;
+
+    /*
+     gameStage.muteBtn = CObj.getById("mutebtn");
+     gameStage.updateSoundBtn(gameStage.muteBtn);
+
+
+     gameStage.muteBtn.click = function () {
+     if (ZSound.available)
+     ZSound.Mute(); else
+     ZSound.UnMute();
+
+     dataStorage.soundEnabled = ZSound.available;
+     updateDS();
+     gameStage.updateSoundBtn(gameStage.muteBtn);
+     }
+     */
+    //  gameStage.sessionEnd();
 }
 
 GameStage.prototype.makePause = function () {
@@ -565,104 +648,7 @@ GameStage.prototype.fadeScreen = function () {
     SM.inst.guiLayer.addChild(gameStage.pauseSprite);
 }
 
-//NO "THIS" IN CURRENT CONTEXT
-GameStage.prototype.onLoadEnd = function () {
-    gameStage.doProcess = true;
-    gameStage.stepSize = gameStage.invFR;
-    gameStage.doPhys = true;
 
-    var xxx = gameStage.createCircle(20, 100, 100, 100);
-    SM.inst.guiLayer.addChild(xxx);
-
-    var floorHeight = 120;
-    gameStage.floor = new FloorObj(SCR_WIDTH / 2, SCR_HEIGHT - floorHeight / 2, null);
-    gameStage.floor.gfx = new PIXI.DisplayObjectContainer();
-    gameStage.floor.gfx.width = SCR_WIDTH;
-    gameStage.floor.gfx.height = floorHeight;
-    gameStage.floor.gfx.visible = false;
-
-    gameStage.createHPBar(10, 5, 5);
-
-    gameStage.updateItems();
-    gameStage.player = new CPlayer(110, SCR_HEIGHT - 170);
-    gameStage.player.gfx.pivot.y = -190;
-    gameStage.player.gfx.scale.x = 0.22;
-    gameStage.player.gfx.scale.y = 0.22;
-    SM.inst.fg.addChild(gameStage.player.gfx);
-
-    gameStage.player.updateAppearence(true, true, "idle");
-
-    TweenMax.delayedCall(1.3, function(){
-        if (gameStage.player)
-        gameStage.player.gfx.skeleton.setAttachment("head", "head1");
-    });
-
-    gameStage.player.weapon.updateAmmo();
-
-    gameStage.player.process();
-
-    gameStage.scoreObj = CObj.getById("score");
-    gameStage.updateScore();
-    gameStage.worldSpeed = 1;
-
-    gameStage.createPools();
-    gameStage.distText = CObj.getById("dist");
-
-
-    gameStage.menuBtn = CObj.getById("menu");
-    gameStage.menuBtn.click = function () {
-        if (!gameStage.doProcess) return;
-        if (!gameStage.doPhys) return;
-        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i) {
-            SM.inst.fontLayer.children[i].visible = false;
-        }
-
-
-        gameStage.state = "paused";
-        gameStage.pause();
-        gameStage.fadeScreen();
-
-        TweenMax.killTweensOf(gameStage.menuBtn, true);
-        LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.guiLayer);
-    }
-
-
-  /*  CObj.getById("levels").click = function () {
-        SM.inst.openStage(charStage);
-    }
-*/
-
-    stage.touchstart = function (md) {
-        gameStage.fireState = true;
-    }
-
-    stage.touchend = function (md) {
-        gameStage.fireState = false;
-    }
-
-    stage.mousemove = stage.touchmove;
-    stage.mousedown = stage.touchstart;
-    stage.mouseup = stage.touchend;
-
-    /*
-    gameStage.muteBtn = CObj.getById("mutebtn");
-    gameStage.updateSoundBtn(gameStage.muteBtn);
-
-
-    gameStage.muteBtn.click = function () {
-        if (ZSound.available)
-            ZSound.Mute(); else
-            ZSound.UnMute();
-
-        dataStorage.soundEnabled = ZSound.available;
-        updateDS();
-        gameStage.updateSoundBtn(gameStage.muteBtn);
-    }
-    */
-    //  gameStage.sessionEnd();
-
-
-}
 
 GameStage.prototype.unpause = function () {
     gameStage.doProcess = true;
@@ -676,7 +662,9 @@ GameStage.prototype.unpause = function () {
 
 GameStage.prototype.pause = function () {
     if (!gameStage.doProcess) return;
+
     gameStage.doProcess = false;
+
     if (gameStage.player)
         gameStage.player.gfx.autoUpdate = false;
 

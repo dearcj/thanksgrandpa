@@ -180,7 +180,7 @@ CObj.prototype.process = function(){
     }
 
     if (this.allowTrackSpeed)
-        this.vx = -LauncherBG.maxVelocity;//this.vx*0.5 + (
+        this.vx = -LauncherBG.inst.maxVelocity;//this.vx*0.5 + (
 
     this.updateGraphics();
 };
@@ -306,8 +306,8 @@ CObj.processAll = function(){
 
     for (var i = 0; i < len; i++) {
 
-        if (CObj.objects[i].x > SCR_WIDTH*1.3 || CObj.objects[i].x < -SCR_WIDTH*0.3 ||
-            CObj.objects[i].y > SCR_HEIGHT*1.3 || CObj.objects[i].y < -SCR_HEIGHT*0.3 )
+        if ((!CObj.objects[i].gui )&&( CObj.objects[i].x > SCR_WIDTH*1.3 || CObj.objects[i].x < -SCR_WIDTH*0.3 ||
+            CObj.objects[i].y > SCR_HEIGHT*1.3 || CObj.objects[i].y < -SCR_HEIGHT*0.3 ))
         {
             if (CObj.checkType(CObj.objects[i], CHPBar)) continue;
             CObj.objects[i].destroy();

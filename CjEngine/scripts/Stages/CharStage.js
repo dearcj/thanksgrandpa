@@ -10,21 +10,11 @@ CharStage.prototype.onShow = function() {
     charStage.skipFriends = 0;
     CustomStage.prototype.onShow.call(this);
 
-    $(function() {
-        var toolbox = $('body'),
-            height = toolbox.height(),
-            scrollHeight = toolbox.get(0).scrollHeight;
-
-        toolbox.bind('mousewheel', function(e, d) {
-            //    if((this.scrollTop === (scrollHeight - height) && d < 0) || (this.scrollTop === 0 && d > 0)) {
-            e.preventDefault();
-            //    }
-        });
-
-    });
-
-
-    LevelManager.loadLevel("levchar", this.onShowContinue, SM.inst.ol);
+    LevelManager.loadLevel("levchar", function()
+        {
+            LevelManager.loadLevel("upperPanel", charStage.onShowContinue, SM.inst.ol);
+        }
+        , SM.inst.ol);
 }
 
 CharStage.prototype.onHide = function(newStage) {
@@ -96,6 +86,40 @@ CharStage.prototype.createFriendsPanel = function() {
 }
 
 
+CharStage.prototype.openPremiumWindow = function()
+{
+    CObj.enableButtons(false);
+    var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
+
+    LevelManager.loadLevel("levelpremium", function()
+    {
+        close = function()
+        {
+            LevelManager.removeLastLevel();
+
+            CObj.enableButtons(true);
+            wnd.parent.removeChild(wnd);
+        };
+
+        charStage.skipFriends = 0;
+
+        CObj.getById("buy1").click = function(){order("item1"); shopStage.updateStatsPanel();};
+
+        CObj.getById("buy2").click = function(){order("item2");shopStage.updateStatsPanel();};
+
+        CObj.getById("buy3").click = function(){order("item3");shopStage.updateStatsPanel();};
+
+        CObj.getById("buy4").click = function(){order("item4");shopStage.updateStatsPanel();};
+
+        CObj.getById("buy5").click = function(){order("item5");shopStage.updateStatsPanel();};
+
+        CObj.getById("buy6").click = function(){order("item6");shopStage.updateStatsPanel();};
+
+        CObj.getById("btnclose").click = close;
+        CObj.getById("btnfree").click = close;
+
+    }, SM.inst.fontLayer);
+}
 
 CharStage.prototype.onShowContinue = function()
 {
@@ -121,43 +145,7 @@ CharStage.prototype.onShowContinue = function()
 
     CObj.getById("btnorder").click = function()
     {
-        CObj.enableButtons(false);
-
-        CObj.getById("tname").gfx.visible = false;
-        CObj.getById("btnorder").textField.visible = false;
-        var wnd = SM.inst.addDisableWindow(null, SM.inst.guiLayer);
-
-        LevelManager.loadLevel("levelpremium", function()
-        {
-            close = function()
-            {
-                CObj.getById("tname").gfx.visible = true;
-                CObj.getById("btnorder").textField.visible = true;
-                LevelManager.removeLastLevel();
-
-                CObj.enableButtons(true);
-                wnd.parent.removeChild(wnd);
-            };
-
-            charStage.skipFriends = 0;
-
-
-            CObj.getById("buy1").click = function(){order("item1"); shopStage.updateStatsPanel();};
-
-            CObj.getById("buy2").click = function(){order("item2");shopStage.updateStatsPanel();};
-
-            CObj.getById("buy3").click = function(){order("item3");shopStage.updateStatsPanel();};
-
-            CObj.getById("buy4").click = function(){order("item4");shopStage.updateStatsPanel();};
-
-            CObj.getById("buy5").click = function(){order("item5");shopStage.updateStatsPanel();};
-
-            CObj.getById("buy6").click = function(){order("item6");shopStage.updateStatsPanel();};
-
-            CObj.getById("btnclose").click = close;
-            CObj.getById("btnfree").click = close;
-
-        }, SM.inst.superGuiLayer);
+        charStage.openPremiumWindow();
     };
 
     if (vkparams.first_name)
@@ -187,16 +175,19 @@ CharStage.prototype.onShowContinue = function()
     CObj.getById("bsofa").click = function() {
         CObj.enableButtons(false);
 
-        CObj.getById("bsofa").textField.visible = false;
-        var wnd = SM.inst.addDisableWindow(null, SM.inst.guiLayer);
+        //CObj.getById("bsofa").textField.visible = false;
+        var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
         charStage.bar.gfx.parent.removeChild(charStage.bar.gfx);
-        SM.inst.guiLayer.addChild(charStage.bar.gfx);
-
-        if (!charStage.bar.gfx.visible) {
-            charStage.bar.gfx.visible = true;
-        } else {
-            charStage.bar.gfx.visible = false;
+        SM.inst.fontLayer.addChild(charStage.bar.gfx);
+        wnd.interactive = true;
+        wnd.click = function () {
+            if (!charStage.bar.gfx.getBounds().contains(window.mouseX, window.mouseY)) {
+                wnd.parent.removeChild(wnd);
+                CObj.enableButtons(true);
+                charStage.bar.gfx.visible = false;
+            }
         }
+        charStage.bar.gfx.visible = true;
     }
 
     PlayerData.inst.comboCheck();
@@ -228,9 +219,10 @@ CharStage.prototype.onShowContinue = function()
     }
 */
     charStage.bar = new CScrollbar(180,309, "", 380, 524, "podlozhka actions.png", "scroll line actions.png", "scroll.png", 20);
+
     charStage.bar.gfx.scale.x = 0.7;
     charStage.bar.gfx.scale.y = 0.7;
-    charStage.bar.bg.alpha = 0.6;
+    //charStage.bar.bg.alpha = 0.6;
     charStage.bar.gfx.visible = false;
     charStage.updateEvents();
 
@@ -241,11 +233,14 @@ CharStage.prototype.updateEvents = function() {
     charStage.bar.clear();
 
     for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
-        var o = new CEActionGUI(50, 50 + i*150);
-        o.init(PlayerData.inst.eventsplayer[i]);
+        var o = new CEActionGUI(50, 70 + (i)*150);
+        var event = PlayerData.inst.getEventById(PlayerData.inst.eventsplayer[i].id_edevent);
+        o.init(PlayerData.inst.eventsplayer[i], event.gfx, "progress fore.png", "progress bg.png");
+        o.updateGraphics();
         charStage.bar.container.addChild(o.gfx);
     }
 
+    charStage.bar.updateHeight();
     charStage.bar.pos = 0;
 }
 

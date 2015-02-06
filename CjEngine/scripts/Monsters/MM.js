@@ -244,12 +244,22 @@ MM.prototype.doStep = function()
     }
 }
 
-MM.prototype.process = function()
-{
+MM.prototype.process = function() {
     var d = (new Date()).getTime();
-    if (this.state == this.sNormal && d - this.lastStep > this.stepDelay)
-    {
-        this.lastStep = d;
+
+
+    /*    if (this.state == this.sNormal && d - this.lastStep > this.stepDelay)
+     {
+     this.lastStep = d;
+     this.doStep();
+     }*/
+
+    var dd = 4;
+    var st = Math.floor(LauncherBG.inst.distance / dd);
+    if (st != this.prevS) {
+        console.log(LauncherBG.inst.distance);
         this.doStep();
     }
+
+    this.prevS = Math.floor(LauncherBG.inst.distance / dd);
 }

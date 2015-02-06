@@ -78,10 +78,10 @@ PlayerData.prototype.getType = function (item_player)
    }
    return null;
 }
+
+
 PlayerData.prototype.equipItem = function(item)
 {
-
-
    var id = item.id;
 
    var itemOwned = false;
@@ -110,18 +110,20 @@ PlayerData.prototype.equipItem = function(item)
 
 PlayerData.prototype.gainExp = function(amount)
 {
-   this.playerItem.xp += amount;
+   this.playerItem.xp += 50*amount;
    if (this.playerItem.xp >= this.xpLevel[this.playerItem.lvl].xp && this.playerItem.lvl + 1 < this.xpLevel.length)
    {
       this.playerItem.xp -= this.xpLevel[this.playerItem.lvl].xp;
-      this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
       this.playerItem.crystals += this.xpLevel[this.playerItem.lvl].crystals;
       this.playerItem.lvl++;
-      this.savePlayerData();
+
 
       if (SM.inst.currentStage == gameStage)
       {
+         this.score += this.xpLevel[this.playerItem.lvl].money;
+         gameStage.updateScore();
          gameStage.pause();
+
          LevelManager.loadLevel("levelup",
              function()
              {
@@ -141,6 +143,12 @@ PlayerData.prototype.gainExp = function(amount)
 
              }
              , SM.inst.guiLayer);
+
+      } else
+      {
+         this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
+         this.savePlayerData();
+
 
       }
 
@@ -267,6 +275,24 @@ PlayerData.prototype.createAchProgress = function(cb)
 
    }
 
+}
+
+incMetric = function(name)
+{
+   azureclient.invokeApi("increasemetric", {
+      body: {name: name},
+      method: "post"
+   }).done();
+}
+
+PlayerData.prototype.getEventById = function(id)
+{
+   for (var i = 0; i < this.events.length; ++i)
+   {
+      if (this.events[i].id == id) return this.events[i];
+   }
+
+   return null;
 }
 
 PlayerData.prototype.loadData = function(cb)
