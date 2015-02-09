@@ -128,6 +128,7 @@ ShopStage.prototype.createItemBtn = function(item)
         console.log("MOUSE IN");
         tf.item = item;
     }
+
     ico.mouseout = function (evt) {
         var tf = CObj.getById("tfdescd");
         if (tf.item == item)

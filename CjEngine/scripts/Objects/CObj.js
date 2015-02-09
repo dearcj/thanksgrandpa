@@ -6,6 +6,10 @@
 
 CObj = function(in_x,in_y,filename,in_body) {
 
+    if (!CObj.objects) CObj.objects = [];
+    CObj.objects.push(this);
+
+
     this.PublicFields = "allowRotation,drawAsTexture,userData,[Graphics],isClip,fps,autoPlay,scaleX,scaleY,offsetX,offsetY,offsetR;";
     this.allowTrackSpeed = false;
     this._x = 0;
@@ -16,8 +20,7 @@ CObj = function(in_x,in_y,filename,in_body) {
     this._body = null;
     this.baseDim = {};
     this._rotation = 0.;
-    if (!CObj.objects) CObj.objects = [];
-    CObj.objects.push(this);
+
     this.clipSrc = "";
     this.userData = null;
     this.oX = 0;
@@ -27,11 +30,11 @@ CObj = function(in_x,in_y,filename,in_body) {
     if (this.offsetR == undefined) this.offsetR = 0;
     this.doRemove = false;
     this.gravPower = 0.24;
+
     if (filename) {
         var tex = PIXI.Texture.fromFrame(filename + ".png");
         this.gfx = new PIXI.Sprite(tex);
 
-    //    this.gfx.setInteractive(true);
         this.gfx.gameobject = this;
         this.gfx.anchor.x = 0.5;
         this.gfx.anchor.y = 0.5;
@@ -45,24 +48,20 @@ CObj = function(in_x,in_y,filename,in_body) {
         this.body.position[1] = in_y;
     }
 
+    //this.hitTestCircles = null;
     this.colMask = 0;
     this.colGroup = 0;
     this.x = in_x;
     this.y = in_y;
 
-    if (CObj.debugView) {
-
-        this.gfx2 = new PIXI.Graphics();
-        SM.inst.guiLayer.addChild(this.gfx2);
-    }
-
     this.radius = 1;
     this.rotation = 0;
     this.gravityEnabled = false;
 
+   // return this;
 };
 
-CObj.debugView = false;
+CObj.debugView = true;
 
 Function.prototype.generateProperty = function(name, options) {
     // internal member variable name
@@ -168,9 +167,9 @@ CObj.prototype.process = function(){
     if (this.vy != 0)
         this.y = this.y + this.vy;
 
-    if (CObj.debugView) {
-        this.gfx2.x = this.x;
-        this.gfx2.y = this.y;
+    if (CObj.debugView && this.debugGfx) {
+       this.debugGfx.position.x = this.x;
+       this.debugGfx.position.y = this.y;
     }
 
     if (this.gravityEnabled)
@@ -189,14 +188,13 @@ CObj.prototype.process = function(){
 CObj.prototype._destroy = function(){
     if (!this.doRemove) return;
 
-    if (CObj.debugView) {
-        this.gfx2.parent.removeChild(this.gfx2);
+    if (CObj.debugView && this.debugGfx) {
+       this.debugGfx.parent.removeChild(this.debugGfx);
+       this.debugGfx = null;
     }
+
     if (this.gfx && this.gfx.parent) this.gfx.parent.removeChild(this.gfx);
     this.gfx = null;
-
-    // if (this.body)
-     //   world.removeBody(this.body);
 }
 
 CObj.prototype.destroy = function(){
@@ -245,21 +243,6 @@ CObj.prototype.updateGraphics = function(force){
 
 CObj.prototype.constructor = CObj;
 
-Object.defineProperty(CObj.prototype, 'isConductor', {
-    get: function () {
-        return this._isConductor;
-    },
-    set: function (value) {
-        this._isConductor = value;
-        if (value && !this.connected)
-        {
-            TweenMax.delayedCall(CObj.updateGfxDelay, this.updateElectroGfx, [this]);
-            this.connected = [];
-        }
-    }
-});
-
-
 Object.defineProperty(CObj.prototype, 'radius', {
     get: function () {
        return this._radius;
@@ -269,11 +252,21 @@ Object.defineProperty(CObj.prototype, 'radius', {
         if (value)
         this._sqr = value*value;
 
-        if (CObj.debugView) {
-            this.gfx2.clear();
-            this.gfx2.beginFill(0x000000, 0.2);
-            this.gfx2.drawCircle(0, 0, this.radius);
-            this.gfx2.endFill();
+        if (CObj.debugView && this.debugGfx) {
+            this.debugGfx.clear();
+            this.debugGfx.beginFill(0x000000, 0.2);
+
+            if (this.hitTestCircles)
+            {
+                for (var i = 0; i < this.hitTestCircles.length; ++i)
+                {
+                    this.debugGfx.drawCircle(this.hitTestCircles[i].x, this.hitTestCircles[i].y, this.hitTestCircles[i].r);
+                }
+            } else
+            if (this.radius >= 1)
+            this.debugGfx.drawCircle(0, 0, value);
+
+            this.debugGfx.endFill();
         }
     }
 });
@@ -323,28 +316,47 @@ CObj.processAll = function(){
                 var obj1 = CObj.objects[i];
                 var obj2 = CObj.objects[j];
                 if (obj1.doRemove || obj2.doRemove) continue;
-             /*   if (obj1.colMask != 0 && obj2.colGroup != 0)
-                {
-                    if (CObj.checkType(obj1, CCoin) &&
-                        CObj.checkType(obj2, CPlayer) )
-                    console.log();
-                }*/
+                /*   if (obj1.colMask != 0 && obj2.colGroup != 0)
+                 {
+                 if (CObj.checkType(obj1, CCoin) &&
+                 CObj.checkType(obj2, CPlayer) )
+                 console.log();
+                 }*/
                 if (((obj1.colMask & obj2.colGroup) != 0) ||
                     ((obj2.colMask & obj1.colGroup) != 0) )
                 {
-                    var dx = obj1.x - obj2.x;
-                    var dy = obj1.y - obj2.y;
-                    if (dx*dx + dy*dy < (obj2.radius + obj1.radius)*(obj2.radius + obj1.radius)) {
-                     if ((obj1.colMask & obj2.colGroup) != 0) obj1.collide(obj2);
-                     if ((obj2.colMask & obj1.colGroup) != 0) obj2.collide(obj1);
+                    if (obj1.hitTestCircles)
+                    {
+                        var clen = obj1.hitTestCircles.length;
+                        for (var c = 0; c <clen; ++c)
+                        {
+                            var dx = obj2.x - (obj1.x + obj1.hitTestCircles[c].x);
+                            var dy = obj2.y - (obj1.y + obj1.hitTestCircles[c].y);
+                            var dr = (obj2.radius + obj1.hitTestCircles[c].r);
+                            if (dx*dx + dy*dy < dr*dr) {
+                                if ((obj1.colMask & obj2.colGroup) != 0) obj1.collide(obj2);
+                                if ((obj2.colMask & obj1.colGroup) != 0) obj2.collide(obj1);
+                                break;
+                            }
+                        }
+
+                    } else
+                    {
+                        var dx = obj1.x - obj2.x;
+                        var dy = obj1.y - obj2.y;
+                        if (dx*dx + dy*dy < (obj2.radius + obj1.radius)*(obj2.radius + obj1.radius)) {
+                            if ((obj1.colMask & obj2.colGroup) != 0) obj1.collide(obj2);
+                            if ((obj2.colMask & obj1.colGroup) != 0) obj2.collide(obj1);
+                        }
                     }
                 }
             }
         }
     }
 
-        for (var i = 0; i < len; i++) {
-        CObj.objects[i].process();
+    for (var i = 0; i < len; i++)
+    {
+       CObj.objects[i].process();
 
         if (CObj.objects[i].doRemove)
         {
@@ -522,7 +534,7 @@ CObj.AssignTexturesToObjects = function (objs, layerToAdd){
             {
 
                 img = new PIXI.Sprite(tex);
-            objs[i].isConductor = false;
+            //objs[i].isConductor = false;
             }
         }
             img.anchor.x = 0.5;

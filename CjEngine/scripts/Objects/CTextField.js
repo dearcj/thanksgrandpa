@@ -10,10 +10,6 @@ function CTextField(in_x,in_y,textname,in_body){
     this.PublicFields += 'text,fontFamily,fontSize,align,tint, ';
 }
 
-CTextField.prototype._destroy = function(){
-    CObj.prototype._destroy.call(this);
-}
-
 Object.defineProperty(CTextField.prototype, 'text', {
     get: function () {
         return this._text;

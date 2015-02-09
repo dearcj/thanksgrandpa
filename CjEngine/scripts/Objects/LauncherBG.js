@@ -66,7 +66,7 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
     var cobj = CObj.DeserializeCObj(obj);
     CObj.AssignTexturesToObjects([cobj], SM.inst.bg);
     var g = cobj.gfx;
-    if (g) cobj.gfx.parent.removeChild(g);
+    if (g && g.parent) g.parent.removeChild(g);
     cobj.gfx = null;
     cobj.destroy();
 

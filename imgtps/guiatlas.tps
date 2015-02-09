@@ -131,7 +131,7 @@
             <key>innerPadding</key>
             <uint>0</uint>
             <key>extrude</key>
-            <uint>0</uint>
+            <uint>1</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
@@ -250,6 +250,9 @@
             <filename>../../../../dedgame/everyday actions/action 2.png</filename>
             <filename>../../../../dedgame/everyday actions/action 3.png</filename>
             <filename>../../../../dedgame/everyday actions/action 4.png</filename>
+            <filename>../../../../dedgame/fight screen/recharge icon bar.png</filename>
+            <filename>../../../../dedgame/fight screen/recharge icon.png</filename>
+            <filename>../../../../dedgame/shop/price xp.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

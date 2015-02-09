@@ -59,7 +59,7 @@ CMonster.prototype.kill = function()
     this.prekilled = true;
 
     if (this.bar) {
-        new TweenMax(this.bar.gfx, 0.2, {width: 0.});//.width
+        new TweenMax(this.bar.gfx, 0.2, {width: this.bar.gfx.width*3, height: 0});//.width
         //this.bar.gfx.visible = false;
     }
     PlayerData.inst.gainExp(this.xp);
@@ -82,11 +82,6 @@ CMonster.prototype.kill = function()
         CLiveObj.prototype.kill.call(f);
     };
     this.updateGraphics();
-
-
-    //new TweenMax(this.gfx, 0.7, {currentFrame: this.gfx.totalFrames, onComplete: CLiveObj.prototype.kill.call, onCompleteParams: [this]});
-    //TweenMax.delayedCall(0.7, , [this]);
-
 }
 
 CMonster.prototype.destroy = function()

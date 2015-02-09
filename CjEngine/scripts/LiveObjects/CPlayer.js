@@ -6,7 +6,7 @@ extend(CPlayer, CLiveObj, true);
 function CPlayer(in_x,in_y,textname,in_body){
     CLiveObj.apply(this,[in_x,in_y,null,in_body]);
 
-    this.gravPower = 0.77;
+    this.gravPower = 0.81;
     this.gfx = this.createDedGraphics();
     this.fireAngle = 0;
     this.weapon = gameStage.curweapon;

@@ -4,10 +4,18 @@
 extend(CLiveObj, CObj, true);
 
 function CLiveObj(in_x,in_y,textname,in_body) {
+    if (CObj.debugView) {
+        this.debugGfx = new PIXI.Graphics();
+        SM.inst.guiLayer.addChild(this.debugGfx);
+    }
+
     CObj.apply(this, [in_x, in_y, textname, in_body]);
    this._hp = 100;
    this._maxHp = 100;
    this.bar = null;
+
+
+
 
 }
 
@@ -42,7 +50,7 @@ CLiveObj.prototype.destroy = function()
 
 }
 
-
+/*
 Object.defineProperty(CLiveObj.prototype, 'maxHp', {
     get: function () {
         return this._maxHp;
@@ -52,6 +60,19 @@ Object.defineProperty(CLiveObj.prototype, 'maxHp', {
         if (this._hp > this._maxHp) this._hp = this._maxHp;
     }
 });
+*/
+
+CLiveObj.generateProperty('maxHp', {
+    defaultValue: 100,
+    get: function () {
+        return this._maxHp;
+    },
+    set: function (value) {
+        this._maxHp = value;
+        if (this._hp > this._maxHp) this._hp = this._maxHp;
+    }
+});
+
 
 CLiveObj.generateProperty('hp', {
     defaultValue: 100,
@@ -73,6 +94,8 @@ CLiveObj.generateProperty('hp', {
         }
     }
 });
+
+
 /*
 Object.defineProperty(CLiveObj.prototype, 'hp', {
     get: function () {

@@ -8,6 +8,8 @@ MM = function() {
         {mons: "..ssss..s..l", diff: 4},
         {mons: "c..c..c..s..sc..sc..sc", diff: 5}
     ];
+
+    this.bosses = [{class: Boss1, dist: 50}, {class: Boss1, dist: 150}];
     // c l z - преграды
     //s - монстр
 
@@ -15,6 +17,9 @@ MM = function() {
     this.sNormal = 1;
     this.sBoss = 2;
     this.lastStep = 0;
+
+    this.currentBoss = null;
+
     this.state = this.sNormal;
     this.stepDelay = 330;
 }
@@ -257,7 +262,16 @@ MM.prototype.process = function() {
     var dd = 4;
     var st = Math.floor(LauncherBG.inst.distance / dd);
     if (st != this.prevS) {
+        if (this.bosses.length > 0 && (this.prevS*dd < this.bosses[0].dist && LauncherBG.inst.distance >= this.bosses[0].dist))
+        {
+            var b = this.bosses.shift();
+            this.currentBoss = new b.class(SCR_WIDTH+200,500,"imgtps/boss1.json");
+            this.currentBoss.showUpAnimation();
+        }
+
         console.log(LauncherBG.inst.distance);
+
+        if (!this.currentBoss)
         this.doStep();
     }
 
