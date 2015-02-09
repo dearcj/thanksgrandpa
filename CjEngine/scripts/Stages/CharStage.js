@@ -134,7 +134,6 @@ CharStage.prototype.onShowContinue = function()
 
         charStage.frp.parent.removeChild(charStage.frp);
         charStage.frp = charStage.createFriendsPanel();
-
     }
 
     CObj.getById("frnext").click = function() {
