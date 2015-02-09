@@ -235,6 +235,7 @@ CharStage.prototype.updateEvents = function() {
     for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
         var o = new CEActionGUI(50, 70 + (i)*150);
         var event = PlayerData.inst.getEventById(PlayerData.inst.eventsplayer[i].id_edevent);
+        if (!event) continue;
         o.init(PlayerData.inst.eventsplayer[i], event.gfx, "progress fore.png", "progress bg.png");
         o.updateGraphics();
         charStage.bar.container.addChild(o.gfx);
