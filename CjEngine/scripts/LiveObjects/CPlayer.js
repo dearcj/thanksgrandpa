@@ -15,12 +15,13 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.colGroup = CG_PLAYER;
     this.nullPhase = 0;
     this.maxHp = 5;
-    this.hp = this.maxHp;
+    this.hp = 1;//this.maxHp;
     this.startPlayerX = this.x;
     this.y += 10;
     this.baseY = this.y;
     this.offsetY = -20;
-    this.radius = this.gfx.width / 2 - 20;
+    this.offsetX = -25;
+    this.radius = this.gfx.width / 2 - 25;
     this.sMoving = 1;
     this.sDying = 2;
     this.state = this.sMoving;
@@ -81,6 +82,8 @@ CPlayer.prototype.createDedGraphics = function()
 
     g.stateData.setMixByName("idle", "jump", 0.2);
     g.stateData.setMixByName("jump", "idle", 0.4);
+    g.stateData.setMixByName("jump", "defeated", 0.72);
+    g.stateData.setMixByName("idle", "defeated", 0.72);
 
     this.bulletStart = 40;
 
@@ -118,8 +121,18 @@ CPlayer.prototype.kill = function()
         this.invulnerable = true;
         var lbg = LauncherBG.inst;
         lbg.preVelocity = lbg.maxVelocity;
-        new TweenMax(lbg, 2, {maxVelocity: 0.5});
+     /*   this.gravityEnabled = false;
+        this.jumping = false;
+        this.vy = 0;
+        this.y = this.baseY;*/
+    //    this.vy = 0;
+    //    this.gravityEnabled = false;
+        this.gfx.state.update(0.5);
         this.gfx.state.setAnimationByName(0, "defeated", false);
+        // if (this.jumpTween) this.jumpTween.kill();
+    //    new TweenMax(this, 0.4, {y: this.baseY});
+
+        new TweenMax(lbg, 2, {maxVelocity: 0.5});
         TweenMax.delayedCall(2.57, gameStage.sessionEnd);
     }
 }
@@ -140,32 +153,34 @@ CPlayer.prototype.jump = function()
 
 CPlayer.prototype.process = function()
 {
-
-
-
     if (SM.inst.currentStage == gameStage && gameStage.doProcess) {
 
-        if (this.vy > 0 && this.y > this.baseY - 30) {
-            this.jumping = false;
-        }
+            if (this.vy > 0 && this.y > this.baseY - 30) {
+                this.jumping = false;
+            }
 
-        if (this.vy > 0 && this.y > this.baseY)
+            if (this.vy > 0 && this.y > this.baseY)
+            {
+                this.vy = 0;
+                this.jumping = false;
+                this.y = this.baseY;
+                this.gravityEnabled = false;
+
+                if (this.state != this.sDying)
+                    this.gfx.state.setAnimationByName(0, "idle", true);
+            }
+
+        if (this.state != this.sDying)
         {
-            this.vy = 0;
-            this.jumping = false;
-            this.y = this.baseY;
-            this.gravityEnabled = false;
-            if (this.state != this.sDying)
-                this.gfx.state.setAnimationByName(0, "idle", true);
-        }
 
-        if (this.jumping) {
-            if (this.jumpboost && this.vy < 0)
-                this.vy *= 1.048;
+            if (this.jumping) {
+                if (this.jumpboost && this.vy < 0)
+                    this.vy *= 1.048;
 
-            if (this.vy < -17) {
-                this.jumpboost = false;
-                this.vy = -17;
+                if (this.vy < -17) {
+                    this.jumpboost = false;
+                    this.vy = -17;
+                }
             }
         }
 
@@ -197,12 +212,14 @@ CPlayer.prototype.process = function()
         if (gameStage.curweapon == w_rifle) {
             dx = 220;
             dy = 20;
-        }else
+        }
+        else
         if (gameStage.curweapon == w_pps) {
             dx = -45;
             dy = 280;
             da = -Math.PI / 20;
-        }else
+        }
+        else
         if (gameStage.curweapon == w_minigun)
         {
             dy = 310;
@@ -272,8 +289,11 @@ CPlayer.prototype.dealDamage = function(dmg)
     });
 
     var pl = this;
-    this.allowFlowMove = false;
+   /* this.allowFlowMove = false;
     new TweenMax(this, 0.6, {x: Math.max(this.x - 50,80), repeat: 1, yoyo: true, onComplete: function(){pl.allowFlowMove = true;}});
+  */
+
+
     //  this.tweenColor(this.gfx);
 /*    if   (!TweenMax.isTweening(this.gfx.children[0])) {
        for (var i = 0; i < this.gfx.children.length; ++i) {

@@ -26,13 +26,11 @@ CEActionGUI.prototype.process= function()
 CEActionGUI.prototype.startAction = function()
 {
     this.acting = true;
-    /*var b = new PIXI.BlurFilter();
-    b.blur = 20;
-    SM.inst.ol.filters = [b];*/
+
     this.progressbg.visible = true;
     this.progressfore.visible = true;
     this.pos = 0;
-    new TweenMax(this, 5, {pos: 1, onComplete: this.endAction, onCompleteParams: [this]});
+    new TweenMax(this, this.event.exectime, {pos: 1, onComplete: this.endAction, onCompleteParams: [this]});
 }
 
 CEActionGUI.prototype.endAction = function(p)
@@ -82,17 +80,22 @@ CEActionGUI.prototype.updateRecharge= function()
 
         var s = Math.floor(d % 60);
     }
+
     this.timeleft.tint = 0x333333;
-    if (d < 0 || this.event.reqlvl <= PlayerData.inst.playerItem.lvl) {
-        str = "Готово";
+    if (d < 0 && this.event.reqlvl <= PlayerData.inst.playerItem.lvl) {
+        str = "";
+        this.ico.interactive = true;
+       // this.ico.tint = 0xFFFFFF;
         this.ready = true;
     }else {
         var str;
+        this.ico.interactive = false;
+        this.ico.alpha = 0.5;
         if (this.event.reqlvl > PlayerData.inst.playerItem.lvl) {
             str = "Требуется " + this.event.reqlvl.toString() + " ур.";
             this.timeleft.tint = 0xff0000;
         }else {
-            str = "Доступно через" + (h < 10 ? "0" + h : h) + " : " + (m < 10 ? "0" + m : m) + " : " + (s < 10 ? "0" + s : s);
+            str = "Доступно через " + (h < 10 ? "0" + h : h) + " : " + (m < 10 ? "0" + m : m) + " : " + (s < 10 ? "0" + s : s);
             this.timeleft.tint = 0xff0000;
         }
         this.ready = false;
@@ -101,27 +104,12 @@ CEActionGUI.prototype.updateRecharge= function()
     this.timeleft.updateText();
 }
 
-CEActionGUI.prototype.init = function(pledevent, bg, upper, lower)
+CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
 {
     CircleBar.prototype.init.call(this, bg, upper, lower);
-    /*this.icoevent =  new PIXI.Sprite(PIXI.Texture.fromFrame("action.png"));
-    this.icoevent.anchor.x = 0.5;
-    this.icoevent.anchor.y = 0.5;
-
-*/
-
-    //this.gfx.addChild(this.icoevent);
-
-    this.gfx.anchor.x = 0.5;
-    this.gfx.anchor.y = 0.5;
-
-
-    var id = pledevent.id_edevent;
-    for (var i = 0; i < PlayerData.inst.events.length; ++i) {if (PlayerData.inst.events[i].id == id) break;}
-
 
     this.eventpl = pledevent;
-    this.event = PlayerData.inst.events[i];
+    this.event = event;
 
     var gain = 0;
     var gainbg = "";
@@ -150,7 +138,7 @@ CEActionGUI.prototype.init = function(pledevent, bg, upper, lower)
 
     this.timeleft = CTextField.createTextField({tint: "0x333333", text: "", fontSize: 17, align: "center"});
     this.timeleft.x = 50;
-    this.timeleft.y = -20;
+    this.timeleft.y = -28;
     this.gfx.addChild(this.timeleft);
 
     var tf = CTextField.createTextField({tint: "0x333333", text: gain.toString(), fontSize: 16, align: "center"});
@@ -159,8 +147,25 @@ CEActionGUI.prototype.init = function(pledevent, bg, upper, lower)
     this.gfx.addChild(tf);
 
     var edeventgui = this;
-    this.gfx.interactive = true;
-    this.gfx.click = function()
+    //this.gfx.interactive = true;
+    var gf = this.ico;
+    gf.interactive = true;
+    var bsX = gf.scale.x;
+    var bsY = gf.scale.y;
+
+    gf.mouseover = function()
+    {
+        new TweenMax(gf.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
+        new TweenMax(gf.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
+    }
+
+    gf.mouseout = function()
+    {
+        new TweenMax(gf.scale, 0.6, {y: bsY, ease: Elastic.easeOut} );
+        new TweenMax(gf.scale, 0.4, {x: bsX, ease: Elastic.easeOut} );
+    }
+
+    gf.click = function()
     {
         if (edeventgui.ready)
         {
@@ -176,13 +181,11 @@ CEActionGUI.prototype.init = function(pledevent, bg, upper, lower)
         this.pos = 1;
     }
 
-    var tf = CTextField.createTextField({tint: "0x333333", text: PlayerData.inst.events[i].desc, fontSize: 19, align: "center"});
-    tf.x = 50;//-tf.width / 2;
-    tf.y = -45;
-    //tf.al
+    var tf = CTextField.createTextField({fontFamily: "dedgamedesc", tint: "0x1111111", text: PlayerData.inst.events[i].desc, fontSize: 20, align: "center"});
+    tf.x = 50;
+    tf.y = -55;
     this.gfx.addChild(tf);
 
     this.progressbg.visible = false;
     this.progressfore.visible = false;
-
 }

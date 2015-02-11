@@ -22,16 +22,16 @@ var w_pistol = new CPistol(
     ]);
 
 var w_rifle = new CPistol(
-    "pistol", //id
+    "Мосинка", //id
     "пистолет", //name
     "описание", //desc
     {
-        life: 2,
+        life: 3,
         acc: 0.05,
-        recoil: 12, //recoil
-        magcap: 40, //magcap
+        recoil: 19, //recoil
+        magcap: 5, //magcap
         delay: 820, //delay
-        damage: 50, //damage
+        damage: 66, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 1200},//__reloadTime,}
     "asd",// __gfx,

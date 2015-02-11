@@ -32,7 +32,6 @@ LauncherBG.generateProperty('maxVelocity', {
         var prop = value / this._maxVelocity;
         //var add = 0;
         if (prop == Infinity) {
-        //    add = value;
             prop = 1;
         }
         this._maxVelocity = value;
@@ -42,7 +41,6 @@ LauncherBG.generateProperty('maxVelocity', {
             var ll = this.levCycles[0].layers[l];
             if (ll.velocity > 0) {
                 ll.velocity *= prop;
-            //    ll.velocity += add;
             }
         }
 
@@ -70,12 +68,12 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
     cobj.gfx = null;
     cobj.destroy();
 
-/*    if (!obj.fff) obj.fff = 0;
+   /*if (!obj.fff) obj.fff = 0;
     obj.fff++;
 
     if (obj.fff % 2 == 0) {
         g.tint = 0xff0000;
-       // g.alpha = 0.5;
+        g.alpha = 0.5;
     }
 */
     if (g) {
@@ -84,13 +82,12 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
         if (spawnStart)
             g.position.x = obj.baseDim.x * obj.scaleX / 2; else
 
-            g.position.x = SCR_WIDTH + obj.baseDim.x * obj.scaleX / 2 - dist;
+            g.position.x = SCR_WIDTH + obj.baseDim.x * obj.scaleX / 2 + offs;
     } else
         layer.rightBound += obj.baseDim.x * obj.scaleX;
 
     if (dist)
     console.log("SPAWNED OBJ AT " + g.position.x + " AT DISTANCE " + dist.toString());
-
 }
 
 
@@ -149,7 +146,7 @@ LauncherBG.prototype.process = function (fake) {
             var objStartX = obj.x - obj.scaleX*obj.baseDim.x / 2;// + 3*l.velocity;
             if (objStartX >= distPrev && objStartX < distLocal) {
                 var d = objStartX - distPrev;
-                this.spawnClip(l, obj, null, distLocal, objStartX - distPrev);
+                this.spawnClip(l, obj, null, distLocal, d);
             }
         }
     }
@@ -158,11 +155,13 @@ LauncherBG.prototype.process = function (fake) {
 LauncherBG.prototype.addLevel = function (levName, distance) {
     var original = LevelManager.levels["levels/" + levName + ".json"];
     var dataClone = clone(original);
+    var layersSpeed = [0.2, 0.3, 0.5, 0.72, 1];
     var layers = [];
     var layerNum = 5;
     for (var i = 0; i < layerNum; ++i) {
+
         var cont = new PIXI.DisplayObjectContainer();
-        var vel = Math.round(this.nullSpeed - (layerNum - i - 1) * this.nullSpeed / layerNum);
+        var vel = this.nullSpeed*layersSpeed[i];
         if (i == 1) {
             vel = 0;
         }

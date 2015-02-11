@@ -13,7 +13,9 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.gfx.scale.x = 0.48;
     this.gfx.scale.y = 0.48;
     this.maxHp = 700;
+    this.xp = 300;
     this.hp = this.maxHp;
+    this.barOffsetY = - 300;
     SM.inst.ol.addChild(this.gfx);
 }
 

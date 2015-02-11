@@ -139,6 +139,11 @@ GameStage.prototype.remGfx = function (obj) {
 
 GameStage.prototype.updateItems = function () {
     var k = 0;
+
+    var btns = [{key: "a", gfx: "1boost_button.png"},
+        {key: "s", gfx: "2boost_button.png"},
+        {key: "d", gfx: "3boost_button.png"}];
+
     gameStage.curweapon = w_rifle;
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
@@ -149,16 +154,31 @@ GameStage.prototype.updateItems = function () {
             if (item.name == "Magnet") boostClass = CMagnetBooster;
             if (item.name == "MarioStar") boostClass = CSupermanBooster;
             if (item.name == "Tablets") boostClass = CTabletsBooster;
-            var b = new boostClass(30 + 50*k, 110, null);
+            var b = new boostClass(30 + 50*k, SCR_HEIGHT - 40, null);
 
             b.gfx = crsp(item.gfx);
             b.gfx.scale.x = 0.3;
             b.gfx.scale.y = 0.3;
             b.updateGraphics();
 
+            var icobtn;
             if (b.activate == null)
             {
                 b.gfx.tint = 0x778822;
+            } else
+            {
+                var x = btns.shift();
+                if (x)
+                {
+                    b.key = x.key;
+                    icobtn = crsp(x.gfx);
+                    icobtn.scale.x = 3;
+                    icobtn.scale.y = 3;
+                    icobtn.y = 82;
+                    icobtn.x = -50;
+                    b.gfx.addChild(icobtn);
+                }
+
             }
 
             SM.inst.guiLayer.addChild(b.gfx);
@@ -369,25 +389,6 @@ GameStage.prototype.updateWindowLevWin = function () {
     gameStage.doPhys = false;
 }
 
-GameStage.prototype.removeFromToolsObject = function (obj) {
-    var len = gameStage.toolContainer.children.length;
-    for (var i = 0; i < len; ++i) {
-        if (gameStage.toolContainer.children[i].gameobject == obj) {
-            break;
-        }
-    }
-
-    if (i < len) {
-        var ch = gameStage.toolContainer.children[i];
-        ch.interactive = false;
-        new TweenMax(ch, 0.33, {alpha: 0.5, y: ch.y - 100, onComplete: gameStage.remGfx, onCompleteParams: [ch]});
-    }
-
-    for (var j = i + 1; j < len; ++j) {
-        ch = gameStage.toolContainer.children[j];
-        new TweenMax(ch, 0.5, {x: ch.x - this.secretIngridient, ease: TweenMax.LINEAR});
-    }
-}
 
 
 GameStage.prototype.updateScore = function () {
@@ -415,8 +416,18 @@ GameStage.prototype.doKeyDown = function (evt) {
     if (gameStage.state != "game") return;
     evt = evt || window.event;
     var c = getChar(evt);
+
+    for (var i = 0; i < CBooster.list.length; ++i)
+    {
+        if (CBooster.list[i].key == c && CBooster.list[i].activate)
+        {
+            CBooster.list[i].activate();
+        }
+    }
+
     if (evt.which == 87)
     {
+        if (gameStage.player)
         gameStage.player.onJump();
     }
 }
@@ -427,6 +438,7 @@ GameStage.prototype.doKeyUp = function (evt) {
     evt = evt || window.event;
     var c = getChar(evt);
     if (evt.which == 87) {
+        if (gameStage.player)
         gameStage.player.jumpboost = false;
     }
 }
@@ -436,6 +448,7 @@ GameStage.prototype.onShow = function () {
     CustomStage.prototype.onShow.call(this);
 
     window.addEventListener("keydown", this.doKeyDown, false);
+    window.addEventListener("keypress", this.doKeyDown, false);
     window.addEventListener("keyup", this.doKeyUp, false);
 
     this.state = "game";
@@ -481,7 +494,7 @@ GameStage.prototype.onLoadEnd = function () {
     gameStage.reloadBar.pos = 0.5;
     gameStage.reloadBar.gfx.visible = false;
     SM.inst.guiLayer.addChild(gameStage.reloadBar.gfx);
-    gameStage.player = new CPlayer(110, SCR_HEIGHT - 170);
+    gameStage.player = new CPlayer(110, SCR_HEIGHT - 160);
     gameStage.player.gfx.pivot.y = -190;
     gameStage.player.gfx.scale.x = 0.22;
     gameStage.player.gfx.scale.y = 0.22;

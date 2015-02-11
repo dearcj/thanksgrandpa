@@ -32,6 +32,13 @@ CCoin.prototype.process = function ()
     this.vx = -7;
 }
 
+CCoin.spawnCoin = function(x, y, a)
+{
+    var c = new CCoin(x, y, a);
+    c.vx = 20 + Math.random()*10;
+    c.vy = -20*(Math.random());
+}
+
 CCoin.prototype.collide = function(obj2)
 {
     if (this.isCollected) return;

@@ -6,6 +6,7 @@ extend(CMonster, CLiveObj, true);
 function CMonster(in_x,in_y,textname,cr_bar){
     CLiveObj.apply(this,[in_x,in_y,textname,null]);
     this.radius = 50;
+    this.xp = 1;
     this.colGroup = CG_MONSTER;
     this.colMask = CG_PLAYER;
     this.highCoef = 1;
@@ -21,6 +22,7 @@ function CMonster(in_x,in_y,textname,cr_bar){
         this.bar.gfx.scale.x = 0.1;
         this.bar.gfx.scale.y = 0.2;
         this.bar.prop = 1;
+        this.barOffsetY = 0;
     }
     this.process();
     this.dmg = 1;
@@ -28,10 +30,10 @@ function CMonster(in_x,in_y,textname,cr_bar){
 
 CMonster.prototype.collide = function (obj2)
 {
-
+    if (this.prekilled || this.doRemove) return;
     if (!this.hitDone) {
         obj2.dealDamage(this.dmg);
-        this.hitDone = true;
+        if (!obj2.invulnerable)  this.hitDone = true;
     }
 }
 
@@ -39,10 +41,11 @@ CMonster.prototype.process = function()
 {
     if (this.bar) {
         this.bar.x = this.x - this.bar.gfx.width * 0.5 - 10;
-        this.bar.y = this.y - this.radius * 1.5;
+        this.bar.y = this.y - this.radius * 1.5 + this.barOffsetY;
     }
     CLiveObj.prototype.process.call(this);
 }
+
 
 CMonster.prototype.kill = function()
 {
@@ -50,11 +53,8 @@ CMonster.prototype.kill = function()
     for (var i = 0; i < 5; ++i)
     {
         if (Math.random() > 0.3) continue;
-        var c = new CCoin(this.x, this.y, 4);
-        var maxvx = 20 + Math.random()*10;
-        c.vx = maxvx;
-      //  new TweenMax(c, 0.4, {vx: maxvx});
-        c.vy = -20*(Math.random());
+
+        CCoin.spawnCoin(this.x, this.y, 4);
     }
     this.prekilled = true;
 
@@ -101,9 +101,10 @@ CMonster.prototype.longJump = function()
 {
     this.gravityEnabled = true;
     this.jumpTimeCoef = 1;
-   var t = 2.2*this.jumpTimeCoef;
-    this.gravPower = 0.12;
-    this.vy = -this.gravPower*t*20;
+    var pow = (1 + 0.1*(Math.random() - 0.5));
+    var t = 2.2*this.jumpTimeCoef/pow;
+    this.gravPower = 0.12*pow;
+    this.vy = -this.gravPower*t*20*pow;
     this.allowTrackSpeed = false;
     new TweenMax(this, t, {x: 50, ease: Linear.easeIn});
   //  new TweenMax(this, 1.7*this.jumpTimeCoef, { y: this.y - 220*(this.highCoef + Math.random()*0.1), yoyo: true, repeat: 1, ease: Quad.easeInOut, onComplete: function(){x.gravityEnabled = true;}} );

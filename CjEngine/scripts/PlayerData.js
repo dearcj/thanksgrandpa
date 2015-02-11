@@ -4,17 +4,17 @@
 PlayerData = function(pi)
 {
    this.xpLevel = [
-      {crystals: 0, money: 25, xp: 0},
-      {crystals: 0, money: 50, xp: 250},
-      {crystals: 0, money: 100, xp: 400},
-      {crystals: 0, money: 200, xp: 500},
-      {crystals: 0, money: 400, xp: 1000},
-      {crystals: 0, money: 800, xp: 1800},
-      {crystals: 0, money: 1000, xp: 3300},
-      {crystals: 0, money: 1500, xp: 6000},
-      {crystals: 0, money: 2000, xp: 10000},
-      {crystals: 0, money: 2500, xp: 18000},
-      {crystals: 0, money: 3000, xp: 25000}];
+      {crystals: 1, money: 25, xp: 0},
+      {crystals: 1, money: 50, xp: 250},
+      {crystals: 1, money: 100, xp: 400},
+      {crystals: 1, money: 200, xp: 500},
+      {crystals: 2, money: 400, xp: 1000},
+      {crystals: 2, money: 800, xp: 1800},
+      {crystals: 2, money: 1000, xp: 3300},
+      {crystals: 2, money: 1500, xp: 6000},
+      {crystals: 3, money: 2000, xp: 10000},
+      {crystals: 3, money: 2500, xp: 18000},
+      {crystals: 3, money: 3000, xp: 25000}];
 
    this.items = {};
    this.achs = {};
@@ -110,7 +110,8 @@ PlayerData.prototype.equipItem = function(item)
 
 PlayerData.prototype.gainExp = function(amount)
 {
-   this.playerItem.xp += 50*amount;
+   console.log("XP " + amount.toString());
+   this.playerItem.xp += amount;
    if (this.playerItem.xp >= this.xpLevel[this.playerItem.lvl].xp && this.playerItem.lvl + 1 < this.xpLevel.length)
    {
       this.playerItem.xp -= this.xpLevel[this.playerItem.lvl].xp;
@@ -118,8 +119,7 @@ PlayerData.prototype.gainExp = function(amount)
       this.playerItem.lvl++;
 
 
-      if (SM.inst.currentStage == gameStage)
-      {
+      if (SM.inst.currentStage == gameStage) {
          this.score += this.xpLevel[this.playerItem.lvl].money;
          gameStage.updateScore();
          gameStage.pause();
@@ -137,20 +137,25 @@ PlayerData.prototype.gainExp = function(amount)
                       LevelManager.objs[i].destroy();
                    }
                    LevelManager.objs = null;
-                   gameStage.unpause();
+                   if (SM.inst.currentStage == gameStage) {
+                      gameStage.unpause();
+                   } else {
+                      charStage.updateStatsPanel();
+                   }
                 };
 
 
              }
              , SM.inst.guiLayer);
-
-      } else
+      }  else
       {
          this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
          this.savePlayerData();
-
+         charStage.updateStatsPanel();
 
       }
+
+
 
 
 
@@ -249,7 +254,10 @@ PlayerData.prototype.updateEnergy = function()
    var d = (new Date()).getTime() - this.playerItem.updateDate.getTime();
    d /= 1000;//secs
    d /= 60; //minutes
-   this.playerItem.energy += d*0.08;
+   this.playerItem.energy += d*0.2;
+   if (this.playerItem.energy > 10) {
+      this.playerItem.energy = 10;
+   }
 }
 
 PlayerData.prototype.createAchProgress = function(cb)

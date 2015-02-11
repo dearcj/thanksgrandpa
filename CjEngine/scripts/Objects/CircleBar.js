@@ -10,7 +10,8 @@ function CircleBar(in_x,in_y,textname,in_body){
     CObj.apply(this,[in_x,in_y,textname,in_body]);
 }
 
-Object.defineProperty(CircleBar.prototype, 'pos', {
+CircleBar.generateProperty('pos', {
+    defaultValue: 1,
     get: function () {
         return this._pos;
     },
@@ -59,8 +60,10 @@ Object.defineProperty(CircleBar.prototype, 'pos', {
     }
 });
 
+
 CircleBar.prototype.destroy = function()
 {
+    this.ico = null;
     this.progressbg = null;
     this.progressfore = null;
     CObj.prototype.destroy.call(this);
@@ -74,22 +77,21 @@ CircleBar.prototype.process= function()
 
 CircleBar.prototype.init = function(cover, barup, bardown)
 {
-    this.gfx = new PIXI.Sprite(PIXI.Texture.fromFrame(cover));
+    this.gfx = new PIXI.DisplayObjectContainer();
+    this.ico = crsp(cover);
 
-    this.radius = this.gfx.width * 1.5;
 
-    this.progressbg = new PIXI.Sprite(PIXI.Texture.fromFrame(bardown));
-    this.progressbg.anchor.x = 0.5;
-    this.progressbg.anchor.y = 0.5;
-    this.progressfore = new PIXI.Sprite(PIXI.Texture.fromFrame(barup));
-    this.progressfore.anchor.x = 0.5;
-    this.progressfore.anchor.y = 0.5;
+    this.progressbg = crsp(bardown);
+    this.progressfore = crsp(barup);
     this.mask = new PIXI.Graphics();
+
+    this.gfx.addChild(this.ico);
+    this.radius = this.gfx.width * 1.5;
     this.gfx.addChild(this.progressbg);
     this.gfx.addChild(this.progressfore);
     this.gfx.addChild(this.mask);
-    this.gfx.anchor.x = 0.5;
-    this.gfx.anchor.y = 0.5;
+//    this.gfx.anchor.x = 0.5;
+ //   this.gfx.anchor.y = 0.5;
     this.progressfore.mask = this.mask;
     this.pos = 0;
     this.updateGraphics();

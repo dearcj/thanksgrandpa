@@ -161,7 +161,13 @@ CharStage.prototype.onShowContinue = function()
     CObj.getById("btnachs").click = function(){
        SM.inst.openStage(achStage)
     };
-    CObj.getById("btnfight").click = function(){SM.inst.openStage(gameStage)};
+    CObj.getById("btnfight").click = function(){
+        if (PlayerData.inst.playerItem.energy > 0) {
+            PlayerData.inst.playerItem.energy -= 1;
+            PlayerData.inst.savePlayerData();
+            SM.inst.openStage(gameStage)
+        }
+    };
 
     var pl = new CPlayer(400, 430);
     charStage.pl = pl;
@@ -217,7 +223,7 @@ CharStage.prototype.onShowContinue = function()
         new TweenMax(f.scale, 0.3, {x: baseScl, y: baseScl, ease: Elastic.easeOut} );
     }
 */
-    charStage.bar = new CScrollbar(180,309, "", 380, 524, "podlozhka actions.png", "scroll line actions.png", "scroll.png", 20);
+    charStage.bar = new CScrollbar(180,309, "", 380, 524, "podlozhka actions.png", "scroll line actions.png", "scroll.png", 50);
 
     charStage.bar.gfx.scale.x = 0.7;
     charStage.bar.gfx.scale.y = 0.7;
@@ -234,8 +240,8 @@ CharStage.prototype.updateEvents = function() {
     for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
         var o = new CEActionGUI(50, 70 + (i)*150);
         var event = PlayerData.inst.getEventById(PlayerData.inst.eventsplayer[i].id_edevent);
-        if (!event) continue;
-        o.init(PlayerData.inst.eventsplayer[i], event.gfx, "progress fore.png", "progress bg.png");
+        //if (!event) continue;
+        o.init(PlayerData.inst.eventsplayer[i], event, event.gfx, "progress fore.png", "progress bg.png");
         o.updateGraphics();
         charStage.bar.container.addChild(o.gfx);
     }

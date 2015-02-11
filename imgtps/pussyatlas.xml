@@ -1,79 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:cbaed651a48787cc4af3a6a8e4c7d0f0$ -->
+<!-- $TexturePacker:SmartUpdate:ad1f8699bed078e668b42c388dd35e47$ -->
 <TextureAtlas imagePath="pussyatlas.png">
-    <SubTexture name="BULLETSHOTGUN" x="1471" y="690" width="18" height="32"/>
+    <SubTexture name="BULLETSHOTGUN" x="1648" y="321" width="18" height="32"/>
     <SubTexture name="COLUMN1" x="1675" y="43" width="281" height="640"/>
-    <SubTexture name="COLUMN2" x="1936" y="843" width="66" height="527"/>
-    <SubTexture name="areaBeam" x="1660" y="685" width="195" height="18"/>
-    <SubTexture name="arrow1" x="1856" y="845" width="59" height="85"/>
-    <SubTexture name="back sky" x="2" y="630" width="800" height="600"/>
+    <SubTexture name="COLUMN2" x="2" y="1424" width="66" height="527"/>
+    <SubTexture name="areaBeam" x="1042" y="883" width="195" height="18"/>
+    <SubTexture name="arrow1" x="1519" y="479" width="59" height="85"/>
+    <SubTexture name="back sky" x="2" y="822" width="800" height="600"/>
     <SubTexture name="balka1" x="1675" y="2" width="317" height="39"/>
-    <SubTexture name="barHpBG" x="1114" y="932" width="790" height="42"/>
-    <SubTexture name="block1" x="1660" y="705" width="147" height="147"/>
-    <SubTexture name="bloodblow0001" x="1856" y="765" width="78" height="78"/>
-    <SubTexture name="bloodblow0002" x="1937" y="707" width="78" height="78"/>
-    <SubTexture name="bloodblow0003" x="1857" y="685" width="78" height="78"/>
-    <SubTexture name="bloodblow0004" x="1034" y="914" width="78" height="78"/>
-    <SubTexture name="bloodblow0005" x="1042" y="834" width="78" height="78"/>
-    <SubTexture name="bloodblow0006" x="1042" y="754" width="78" height="78"/>
+    <SubTexture name="barHpBG" x="1042" y="903" width="790" height="42"/>
+    <SubTexture name="block1" x="1898" y="857" width="147" height="147"/>
+    <SubTexture name="bloodblow0001" x="342" y="1818" width="78" height="78"/>
+    <SubTexture name="bloodblow0002" x="262" y="1936" width="78" height="78"/>
+    <SubTexture name="bloodblow0003" x="262" y="1856" width="78" height="78"/>
+    <SubTexture name="bloodblow0004" x="70" y="1858" width="78" height="78"/>
+    <SubTexture name="bloodblow0005" x="2" y="1953" width="78" height="78"/>
+    <SubTexture name="bloodblow0006" x="1042" y="803" width="78" height="78"/>
     <SubTexture name="bloodblow0007" x="1958" y="627" width="78" height="78"/>
     <SubTexture name="bloodblow0008" x="1958" y="547" width="78" height="78"/>
     <SubTexture name="bloodblow0009" x="1958" y="467" width="78" height="78"/>
     <SubTexture name="bloodblow0010" x="1958" y="387" width="78" height="78"/>
     <SubTexture name="buildings back" x="2" y="2" width="1295" height="267"/>
     <SubTexture name="car" x="1299" y="2" width="374" height="279"/>
-    <SubTexture name="center" x="804" y="873" width="31" height="39"/>
-    <SubTexture name="chickendead" x="1512" y="494" width="150" height="126"/>
-    <SubTexture name="coin001" x="1715" y="854" width="59" height="54"/>
-    <SubTexture name="coin002" x="1654" y="854" width="59" height="54"/>
-    <SubTexture name="coin003" x="1593" y="873" width="59" height="54"/>
-    <SubTexture name="coin004" x="1593" y="817" width="59" height="54"/>
-    <SubTexture name="coin005" x="1532" y="854" width="59" height="54"/>
-    <SubTexture name="coin006" x="1471" y="854" width="59" height="54"/>
-    <SubTexture name="coinCollect0001" x="1149" y="715" width="105" height="60"/>
-    <SubTexture name="coinCollect0002" x="1042" y="692" width="105" height="60"/>
-    <SubTexture name="coinCollect0003" x="1165" y="653" width="105" height="60"/>
-    <SubTexture name="coinCollect0004" x="1165" y="591" width="105" height="60"/>
-    <SubTexture name="coinCollect0005" x="1168" y="529" width="105" height="60"/>
-    <SubTexture name="coinCollect0006" x="1168" y="467" width="105" height="60"/>
-    <SubTexture name="coinCollect0007" x="1168" y="405" width="105" height="60"/>
+    <SubTexture name="center" x="804" y="1024" width="31" height="39"/>
+    <SubTexture name="coin001" x="403" y="1954" width="59" height="54"/>
+    <SubTexture name="coin002" x="342" y="1954" width="59" height="54"/>
+    <SubTexture name="coin003" x="82" y="1938" width="59" height="54"/>
+    <SubTexture name="coin004" x="1425" y="837" width="59" height="54"/>
+    <SubTexture name="coin005" x="1834" y="903" width="59" height="54"/>
+    <SubTexture name="coin006" x="1580" y="479" width="59" height="54"/>
+    <SubTexture name="coinCollect0001" x="1149" y="711" width="105" height="60"/>
+    <SubTexture name="coinCollect0002" x="1042" y="655" width="105" height="60"/>
+    <SubTexture name="coinCollect0003" x="1168" y="649" width="105" height="60"/>
+    <SubTexture name="coinCollect0004" x="1168" y="587" width="105" height="60"/>
+    <SubTexture name="coinCollect0005" x="1168" y="525" width="105" height="60"/>
+    <SubTexture name="coinCollect0006" x="1168" y="463" width="105" height="60"/>
+    <SubTexture name="coinCollect0007" x="1537" y="417" width="105" height="60"/>
     <SubTexture name="conus" x="1958" y="285" width="83" height="100"/>
-    <SubTexture name="enemy1" x="843" y="681" width="197" height="200"/>
-    <SubTexture name="enemy1_1" x="843" y="463" width="221" height="216"/>
-    <SubTexture name="enemy2" x="1272" y="690" width="197" height="200"/>
-    <SubTexture name="enemy2_2" x="1496" y="622" width="162" height="193"/>
-    <SubTexture name="enemy3" x="1289" y="283" width="221" height="259"/>
-    <SubTexture name="enemy3_3" x="837" y="883" width="195" height="237"/>
-    <SubTexture name="fxblink" x="1066" y="463" width="100" height="84"/>
+    <SubTexture name="enemy1" x="843" y="857" width="197" height="200"/>
+    <SubTexture name="enemy1_1" x="1675" y="685" width="221" height="216"/>
+    <SubTexture name="enemy2" x="843" y="655" width="197" height="200"/>
+    <SubTexture name="enemy2_2" x="70" y="1663" width="162" height="193"/>
+    <SubTexture name="enemy3" x="1296" y="430" width="221" height="259"/>
+    <SubTexture name="enemy3_3" x="70" y="1424" width="195" height="237"/>
+    <SubTexture name="fxblink" x="1042" y="717" width="100" height="84"/>
     <SubTexture name="head" x="1958" y="43" width="31" height="14"/>
-    <SubTexture name="health dead" x="2004" y="881" width="42" height="36"/>
-    <SubTexture name="health" x="2004" y="843" width="42" height="36"/>
-    <SubTexture name="l_foot" x="1066" y="656" width="97" height="34"/>
-    <SubTexture name="l_hand" x="1809" y="840" width="45" height="41"/>
-    <SubTexture name="l_hip" x="2" y="1547" width="54" height="173"/>
-    <SubTexture name="l_leg" x="804" y="731" width="37" height="99"/>
-    <SubTexture name="laser" x="1471" y="724" width="17" height="24"/>
+    <SubTexture name="health dead" x="278" y="1818" width="42" height="36"/>
+    <SubTexture name="health" x="234" y="1818" width="42" height="36"/>
+    <SubTexture name="l_foot" x="1144" y="773" width="97" height="34"/>
+    <SubTexture name="l_hand" x="82" y="1994" width="45" height="41"/>
+    <SubTexture name="l_hip" x="206" y="1858" width="54" height="173"/>
+    <SubTexture name="l_leg" x="804" y="923" width="37" height="99"/>
+    <SubTexture name="laser" x="1648" y="355" width="17" height="24"/>
     <SubTexture name="laserparticle" x="1994" y="2" width="47" height="78"/>
-    <SubTexture name="luke" x="1512" y="283" width="160" height="54"/>
-    <SubTexture name="monetabg" x="1936" y="787" width="75" height="54"/>
-    <SubTexture name="powerField0001" x="1168" y="357" width="109" height="46"/>
-    <SubTexture name="powerField0002" x="1168" y="309" width="109" height="46"/>
-    <SubTexture name="propeller" x="1066" y="549" width="97" height="105"/>
-    <SubTexture name="r_arm" x="804" y="914" width="28" height="157"/>
+    <SubTexture name="luke" x="1263" y="837" width="160" height="54"/>
+    <SubTexture name="monetabg" x="342" y="1898" width="75" height="54"/>
+    <SubTexture name="powerField0001" x="1537" y="369" width="109" height="46"/>
+    <SubTexture name="powerField0002" x="1537" y="321" width="109" height="46"/>
+    <SubTexture name="r_arm" x="1644" y="417" width="28" height="157"/>
     <SubTexture name="r_foot" x="1958" y="82" width="88" height="34"/>
-    <SubTexture name="r_hand" x="1809" y="797" width="45" height="41"/>
-    <SubTexture name="r_hip" x="2" y="1372" width="54" height="173"/>
-    <SubTexture name="r_leg" x="804" y="630" width="37" height="99"/>
-    <SubTexture name="recharge icon bar" x="1809" y="751" width="45" height="44"/>
-    <SubTexture name="recharge icon" x="1809" y="705" width="45" height="44"/>
-    <SubTexture name="rectArea" x="1275" y="544" width="219" height="144"/>
-    <SubTexture name="road down" x="2" y="583" width="839" height="45"/>
-    <SubTexture name="road tile" x="2" y="463" width="839" height="118"/>
-    <SubTexture name="road up tile" x="2" y="271" width="1164" height="190"/>
-    <SubTexture name="roundArea" x="1512" y="339" width="153" height="153"/>
-    <SubTexture name="shleyf" x="804" y="832" width="31" height="39"/>
+    <SubTexture name="r_hand" x="1216" y="837" width="45" height="41"/>
+    <SubTexture name="r_hip" x="150" y="1858" width="54" height="173"/>
+    <SubTexture name="r_leg" x="804" y="822" width="37" height="99"/>
+    <SubTexture name="recharge icon bar" x="1169" y="837" width="45" height="44"/>
+    <SubTexture name="recharge icon" x="1122" y="837" width="45" height="44"/>
+    <SubTexture name="rectArea" x="1275" y="691" width="219" height="144"/>
+    <SubTexture name="road down" x="2" y="775" width="839" height="45"/>
+    <SubTexture name="road tile" x="2" y="655" width="839" height="118"/>
+    <SubTexture name="road up tile" x="2" y="463" width="1164" height="190"/>
+    <SubTexture name="roundArea" x="234" y="1663" width="153" height="153"/>
+    <SubTexture name="shleyf" x="1580" y="535" width="31" height="39"/>
+    <SubTexture name="tree 1" x="1519" y="576" width="154" height="149"/>
+    <SubTexture name="tree 2" x="1496" y="727" width="170" height="149"/>
+    <SubTexture name="tree 3" x="1296" y="283" width="239" height="145"/>
+    <SubTexture name="winter road tile" x="2" y="271" width="1292" height="190"/>
     <SubTexture name="wood1" x="1958" y="118" width="84" height="165"/>
-    <SubTexture name="wood_wood" x="1168" y="271" width="119" height="36"/>
-    <SubTexture name="woodcircle" x="1122" y="777" width="148" height="148"/>
+    <SubTexture name="wood_wood" x="1537" y="283" width="119" height="36"/>
+    <SubTexture name="woodcircle" x="1898" y="707" width="148" height="148"/>
 </TextureAtlas>

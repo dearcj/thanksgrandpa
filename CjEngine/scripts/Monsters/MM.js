@@ -2,14 +2,19 @@
 MM = function() {
     this.patterns =
     [
-        {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1},
-        {mons: ".l.l.l...l.l.l..", diff: 2},
-        {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3},
-        {mons: "..ssss..s..l", diff: 4},
-        {mons: "c..c..c..s..sc..sc..sc", diff: 5}
+     /*   {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1, prob: 1},
+        {mons: ".l.l.l...l.l.l..", diff: 2, prob: 1},
+        {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3, prob: 1},
+        {mons: ".f..f..f..", diff: 3, prob: 1},
+        {mons: ".F..l.lF..l.", diff: 4, prob: 1},
+        {mons: ".f..c.flf.c.", diff: 4, prob: 1},
+        {mons: ".f..c.flf.c.", diff: 4, prob: 1},
+        {mons: "..ssss..s..l", diff: 4, prob: 1},*/
+        {mons: "..c..c..c..s..sc..sc..sc..", diff: 5, prob: 1},
+        {mons: "b", diff: 2, prob: 0.1}
     ];
 
-    this.bosses = [{class: Boss1, dist: 50}, {class: Boss1, dist: 150}];
+    this.bosses = [{class: Boss1, dist: 800}, {class: Boss1, dist: 1600}];
     // c l z - преграды
     //s - монстр
 
@@ -28,8 +33,9 @@ MM.inst = new MM();
 
 MM.prototype.init = function()
 {
+    this.bossDistance = 0;
     this.monsterQueue = MM.inst.generateMonsterQueue();
-    var lastMoney = -100;
+   /* var lastMoney = -100;
     this.bonusQueue = "";
     for (var i = 0; i < this.monsterQueue.length; ++i)
     {
@@ -46,7 +52,7 @@ MM.prototype.init = function()
                 this.bonusQueue += bonusStr;
             }
         }
-    }
+    }*/
 }
 
 
@@ -57,20 +63,19 @@ MM.prototype.generateMonsterQueue = function()
     var d = 0; // distance in dots
     for (var i = 0; i < it; ++i)
     {
-        var maxd = 3;
+        var maxd = 2.5;
         var currDiff = ((1 + Math.sin(d / 100))*0.5)*maxd + d / 1000;
 
         var summ = 0;
         for (var j = 0; j < this.patterns.length; ++j)
         {
-            var p = 1 / (Math.abs(this.patterns[j].diff - currDiff) + 1);
-
+            var p = 1 / (Math.abs(this.patterns[j].diff - currDiff) + 1)*this.patterns[j].prob;
             if (j > 0) {
-                this.patterns[j].prob = this.patterns[j - 1].prob + p;
-                this.patterns[j].prob0 = this.patterns[j - 1].prob;
+                this.patterns[j].prob1 = this.patterns[j - 1].prob1 + p;
+                this.patterns[j].prob0 = this.patterns[j - 1].prob1;
             } else
             {
-                this.patterns[j].prob = p;
+                this.patterns[j].prob1 = p;
                 this.patterns[j].prob0 = 0;
             }
             summ += p;
@@ -79,7 +84,7 @@ MM.prototype.generateMonsterQueue = function()
         var r = Math.random()*summ;
         for (var j = 0; j < this.patterns.length; ++j)
         {
-            if (r >= this.patterns[j].prob0 && r <= this.patterns[j].prob) break;
+            if (r >= this.patterns[j].prob0 && r <= this.patterns[j].prob1) break;
         }
 
         var inx = j;
@@ -122,28 +127,35 @@ MM.prototype.spawnCoin = function(height)
 
 MM.prototype.spawnCar = function(clip, offsY, innerOffs)
 {
-    var m = new CMonster(SCR_WIDTH+240,450 + 2*offsY,clip, true);
+    var m = new CObstacle(SCR_WIDTH+240,450 + 2*offsY,clip, true);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
     m.maxHp = 80;
     m.hp = m.maxHp;
     m.gfx.anchor.y = 0.5 + offsY / (m.gfx.height /  m.gfx.scale.y);
 
-    m.radius = (m.gfx.width / 2 - 20/ 2)*0.94;
+    m.radius = ((m.gfx.width - 50) / 2)*0.94;
     m.offsY = -innerOffs;
     m.allowTrackSpeed = true;
     m.colGroup = 0;
-
-    this.lastSpawnSimple =(new Date()).getTime();
-    this.simpleMonsterDelay = Math.random() * 1000 + 2000;
 }
 
+
+MM.prototype.spawnBonusGnome = function(xp) {
+    var  str = "enemy1_1";
+    var m = new BonusMonGnome(SCR_WIDTH+100,150,str);
+    m.gfx.scale.x = 0.8;
+    m.gfx.scale.y = 0.8;
+    new TweenMax(m, 25, {x: -100, onComplete: m.kill});
+    m.maxHp = 1000;
+    m.hp = m.maxHp;
+    m.xp = xp + LauncherBG.inst.distance*0.01;
+}
 
 
 MM.prototype.spawnFatty = function(xp)
 {
     var str = "enemy1";
-    if (Math.random() > 0.5) str = "enemy1_1";
     var m = new CMonster(SCR_WIDTH+100,300,str);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
@@ -151,21 +163,41 @@ MM.prototype.spawnFatty = function(xp)
     m.maxHp = 100;
     m.hp = m.maxHp;
     m.xp = xp + LauncherBG.inst.distance*0.01;
-    this.lastSpawnSimple =(new Date()).getTime();
-    this.simpleMonsterDelay = Math.random() * 1000 + 2000;
 }
 
-MM.prototype.spawnGopnick = function(xp)
+MM.prototype.spawnFatty2 = function(xp)
 {
-    var str = "enemy3";
-    if (Math.random() > 0.5) str = "enemy3_3";
+    var str = "enemy1_1";
     var m = new CMonster(SCR_WIDTH+100,300,str);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
     m.longJump();
+    m.maxHp = 100;
+    m.hp = m.maxHp;
     m.xp = xp + LauncherBG.inst.distance*0.01;
-    this.lastSpawnSimple =(new Date()).getTime();
-    this.simpleMonsterDelay = Math.random() * 1000 + 2000;
+}
+
+
+MM.prototype.spawnGopnick = function(xp)
+{
+    var str = "enemy3";
+    var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.jumpTimeCoef = 0.7;
+    m.gfx.scale.x = 0.8;
+    m.gfx.scale.y = 0.8;
+    m.longJump();
+    m.xp = xp + LauncherBG.inst.distance*0.01;
+}
+
+MM.prototype.spawnGopnick2 = function(xp)
+{
+    var str = "enemy3_3";
+    var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.jumpTimeCoef = 0.6;
+    m.gfx.scale.x = 0.8;
+    m.gfx.scale.y = 0.8;
+    m.longJump();
+    m.xp = xp + LauncherBG.inst.distance*0.01;
 }
 
 
@@ -178,8 +210,6 @@ MM.prototype.spawnSimpleMonster = function(xp)
     m.gfx.scale.y = 0.8;
     m.longJump();
     m.xp = xp + LauncherBG.inst.distance*0.01;
-    this.lastSpawnSimple =(new Date()).getTime();
-    this.simpleMonsterDelay = Math.random() * 1000 + 2000;
 }
 
 MM.prototype.doStep = function()
@@ -187,20 +217,24 @@ MM.prototype.doStep = function()
     var s = this.monsterQueue.charAt(0);
     this.monsterQueue = this.monsterQueue.slice(1);
 
-    var b = this.bonusQueue.charAt(0);
+    /*var b = this.bonusQueue.charAt(0);
     this.bonusQueue= this.bonusQueue.slice(1);
     if (b == "c") {
         var height = parseInt(this.bonusQueue.charAt(0));
         this.spawnCoin(height);
     }
     this.bonusQueue= this.bonusQueue.slice(1);
-
+*/
     if (s == "s") this.spawnSimpleMonster(5);
-    if (s == "f") this.spawnFatty(15);
+    if (s == "f") this.spawnFatty(10);
+    if (s == "F") this.spawnFatty2(13);
+    if (s == "G") this.spawnGopnick2(17);
     if (s == "g") this.spawnGopnick(10);
     if (s == "c") this.spawnCar("car", 40, 0);
     if (s == "l") this.spawnObstacle("luke", 40, 10);
     if (s == "z") this.spawnObstacle("conus", 20, 0);
+    if (s == "b") this.spawnBonusGnome(5);
+
     /*  if (s == "z") spawnVeryRandomZomby();
       if (s == "a") spawnArmoredSimple();
       if (s == "A") spawnArmoredPolice();
@@ -262,14 +296,18 @@ MM.prototype.process = function() {
     var dd = 4;
     var st = Math.floor(LauncherBG.inst.distance / dd);
     if (st != this.prevS) {
-        if (this.bosses.length > 0 && (this.prevS*dd < this.bosses[0].dist && LauncherBG.inst.distance >= this.bosses[0].dist))
+        if (!this.currentBoss && this.bosses.length > 0 && (this.prevS*dd- this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist))
         {
             var b = this.bosses.shift();
             this.currentBoss = new b.class(SCR_WIDTH+200,500,"imgtps/boss1.json");
             this.currentBoss.showUpAnimation();
+        } else
+        {
+            if (this.currentBoss)
+            {
+                this.bossDistance += dd;
+            }
         }
-
-        console.log(LauncherBG.inst.distance);
 
         if (!this.currentBoss)
         this.doStep();
