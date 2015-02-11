@@ -15,7 +15,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.colGroup = CG_PLAYER;
     this.nullPhase = 0;
     this.maxHp = 5;
-    this.hp = 1;//this.maxHp;
+    this.hp =this.maxHp;
     this.startPlayerX = this.x;
     this.y += 10;
     this.baseY = this.y;

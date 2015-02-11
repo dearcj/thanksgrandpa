@@ -179,6 +179,8 @@ var infoText = "";
             btnName = "wear button"
         }
     }
+        //вкладка бустер if ()
+
         var btn = new CButton(0, 182 + dy, btnName);
         if (btnName == "equipped button")
         {
