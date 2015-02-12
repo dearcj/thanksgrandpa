@@ -422,6 +422,7 @@ GameStage.prototype.doKeyDown = function (evt) {
     evt = evt || window.event;
     var c = getChar(evt);
 
+    if (CBooster.list)
     for (var i = 0; i < CBooster.list.length; ++i)
     {
         if (CBooster.list[i].key == c && CBooster.list[i].activate)
