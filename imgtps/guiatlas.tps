@@ -253,6 +253,13 @@
             <filename>../../../../dedgame/fight screen/recharge icon bar.png</filename>
             <filename>../../../../dedgame/fight screen/recharge icon.png</filename>
             <filename>../../../../dedgame/shop/price xp.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/3boost_button.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/1boost_button.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/2boost_button.png</filename>
+            <filename>../../../../dedgame/home screen/buy button.png</filename>
+            <filename>../../../../dedgame/home screen/buy small button.png</filename>
+            <filename>../../../../dedgame/fight screen/exp bar.png</filename>
+            <filename>../../../../dedgame/fight screen/exp bar line.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

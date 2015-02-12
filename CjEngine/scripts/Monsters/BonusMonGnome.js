@@ -8,6 +8,7 @@ extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
    CMonster.apply(this,[in_x,in_y,animname, cr_bar]);
+    this.xp = 30;
     new TweenMax(this, 0.9, {y: this.y + 40, repeat: -1, yoyo: true});
 }
 

@@ -1,4 +1,3 @@
-
 function CharStage() {
     CustomStage.apply(this);
 }
@@ -125,7 +124,6 @@ CharStage.prototype.onShowContinue = function()
 {
     charStage.doProcess = true;
 
-    shopStage.updateStatsPanel();
 
     CObj.getById("frprev").click = function() {
         charStage.skipFriends -= 5;
@@ -142,10 +140,8 @@ CharStage.prototype.onShowContinue = function()
         charStage.frp = charStage.createFriendsPanel();
     }
 
-    CObj.getById("btnorder").click = function()
-    {
-        charStage.openPremiumWindow();
-    };
+    CObj.getById("bbuy1").click = charStage.openPremiumWindow;
+    CObj.getById("bbuy2").click = charStage.openPremiumWindow;
 
     if (vkparams.first_name)
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
@@ -162,10 +158,17 @@ CharStage.prototype.onShowContinue = function()
        SM.inst.openStage(achStage)
     };
     CObj.getById("btnfight").click = function(){
-        if (PlayerData.inst.playerItem.energy > 0) {
+        if (PlayerData.inst.playerItem.energy >= 1) {
             PlayerData.inst.playerItem.energy -= 1;
-            PlayerData.inst.savePlayerData();
+          //  PlayerData.inst.updateEnergy();
+            //PlayerData.inst.savePlayerData();
             SM.inst.openStage(gameStage)
+        } else
+        {
+            var en1 = CObj.getById("tfenergy");
+            var en2 = CObj.getById("energyback");
+            new TweenMax(en1, 0.1, {y: en1.y - 10, repeat: 3, yoyo: true, ease: Linear.easeInOut});
+            new TweenMax(en2, 0.1, {y: en2.y - 10, repeat: 3, yoyo: true, ease: Linear.easeInOut});
         }
     };
 
@@ -231,6 +234,8 @@ CharStage.prototype.onShowContinue = function()
     charStage.bar.gfx.visible = false;
     charStage.updateEvents();
 
+    shopStage.updateStatsPanel();
+
     charStage.frp = charStage.createFriendsPanel();
 }
 
@@ -252,5 +257,12 @@ CharStage.prototype.updateEvents = function() {
 
 
 CharStage.prototype.process = function() {
+
+    if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
+        var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
+        CObj.getById("tfdelay").text = timeRes.timeString;
+    } else {
+        CObj.getById("tfdelay").text = "";
+    }
     CObj.processAll();
 }

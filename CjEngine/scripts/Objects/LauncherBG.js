@@ -16,10 +16,11 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.distance = 0;
     this.incDist = 50;
     this.speedUpCoef = 0.1;
+    this.layersSpeed = [0, 0.2, 0.25, 0.72, 1];
+
+    this.defaultLayer = null;
+   // this.verticalParallax = 0;
 }
-
-
-
 
 LauncherBG.generateProperty('maxVelocity', {
     defaultValue: 0,
@@ -86,8 +87,8 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
     } else
         layer.rightBound += obj.baseDim.x * obj.scaleX;
 
-    if (dist)
-    console.log("SPAWNED OBJ AT " + g.position.x + " AT DISTANCE " + dist.toString());
+   // if (dist)
+   // console.log("SPAWNED OBJ AT " + g.position.x + " AT DISTANCE " + dist.toString());
 }
 
 
@@ -122,7 +123,19 @@ LauncherBG.prototype.process = function (fake) {
 
     var t = this.levCycles[0].layers.length;
     for (var i = 0; i < t; ++i) {
-       var l = this.levCycles[0].layers[i];
+
+        var l = this.levCycles[0].layers[i];
+
+        if (l.clip) {
+            if (i != 0) {
+                var v = 15*Math.pow(this.layersSpeed[i], 1.7);
+                l.clip.y = this.verticalParallax*v;
+                if (i == 4)
+                {
+                    SM.inst.ol.y = this.verticalParallax*v;
+                }
+            }
+        }
         l.curDist += l.velocity;
         l.rightBound -= l.velocity;
 
@@ -137,7 +150,6 @@ LauncherBG.prototype.process = function (fake) {
                 l.clip.removeChild(l.clip.getChildAt(k));
             }
         }
-
 
         var distLocal = l.minx  + l.curDist - Math.floor(l.curDist / l.width) * l.width;
         var distPrev = distLocal - l.velocity;
@@ -155,16 +167,13 @@ LauncherBG.prototype.process = function (fake) {
 LauncherBG.prototype.addLevel = function (levName, distance) {
     var original = LevelManager.levels["levels/" + levName + ".json"];
     var dataClone = clone(original);
-    var layersSpeed = [0.2, 0.3, 0.5, 0.72, 1];
     var layers = [];
     var layerNum = 5;
     for (var i = 0; i < layerNum; ++i) {
 
         var cont = new PIXI.DisplayObjectContainer();
-        var vel = this.nullSpeed*layersSpeed[i];
-        if (i == 1) {
-            vel = 0;
-        }
+        var vel = this.nullSpeed*this.layersSpeed[i];
+
         var layer = {rightBound: SCR_WIDTH, clip: cont, curDist: SCR_WIDTH, objects: [], velocity: vel};
         layers.push(layer);
         this.gfx.addChild(layer.clip);
@@ -172,7 +181,7 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
 
 
     for (var i = 0; i < original.objects.length; ++i) {
-        layers[original.objects[i].layer].objects.push(original.objects[i]);
+        layers[original.objects[i].layer - 1].objects.push(original.objects[i]);
     }
 
 
@@ -203,6 +212,8 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
             }
         }
     }
+
+    this.defaultLayer = layers[layers.length - 1].clip;
 
     this.levCycles.push({layers: layers, dist: distance});
 

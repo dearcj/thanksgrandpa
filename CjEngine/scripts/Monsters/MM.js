@@ -2,16 +2,16 @@
 MM = function() {
     this.patterns =
     [
-     /*   {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1, prob: 1},
-        {mons: ".l.l.l...l.l.l..", diff: 2, prob: 1},
+       {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1, prob: 1}//,
+        /*    {mons: ".l.l.l...l.l.l..", diff: 2, prob: 1},
         {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3, prob: 1},
         {mons: ".f..f..f..", diff: 3, prob: 1},
         {mons: ".F..l.lF..l.", diff: 4, prob: 1},
         {mons: ".f..c.flf.c.", diff: 4, prob: 1},
         {mons: ".f..c.flf.c.", diff: 4, prob: 1},
         {mons: "..ssss..s..l", diff: 4, prob: 1},*/
-        {mons: "..c..c..c..s..sc..sc..sc..", diff: 5, prob: 1},
-        {mons: "b", diff: 2, prob: 0.1}
+      //  {mons: "..c..c..c..s..sc..sc..sc..", diff: 5, prob: 1},
+      //  {mons: "b", diff: 2, prob: 0.1}
     ];
 
     this.bosses = [{class: Boss1, dist: 800}, {class: Boss1, dist: 1600}];
@@ -97,7 +97,7 @@ MM.prototype.generateMonsterQueue = function()
 
 MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
 {
-    var m = new CMonster(SCR_WIDTH+240,450 + 2*offsY,clip, false);
+    var m = new CObstacle(SCR_WIDTH+240,450 + 2*offsY,clip, false);
     m.maxHp = 100000000;
     m.hp =  m.maxHp;
     m.gfx.scale.x = 0.8;

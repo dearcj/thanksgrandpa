@@ -2,7 +2,7 @@
 extend(CObstacle, CMonster, true);
 
 function CObstacle(in_x,in_y,animname,cr_bar){
-    CMonster.apply(this,[in_x,in_y,animname, cr_bar]);
+    CMonster.apply(this,[in_x,in_y,animname, false]);
 }
 
 CObstacle.prototype.dealDamage = function(dmg)
@@ -18,6 +18,6 @@ CObstacle.prototype.collide = function (obj2)
 
     if (obj2 == gameStage.player && obj2.hp != preHp && obj2.y < this.y)
     {
-        gameStage.player.vy -= 30;
+        gameStage.player.onDmgAnim(this);
     }
 }

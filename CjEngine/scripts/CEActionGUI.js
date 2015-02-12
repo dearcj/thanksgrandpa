@@ -60,29 +60,13 @@ CEActionGUI.prototype.endAction = function(p)
 CEActionGUI.prototype.updateRecharge= function()
 {
     if (!this.eventpl) return;
-    if (!this.eventpl.lastused) d = -10000;
+    if (!this.eventpl.lastused) timeRes = {d: -1};
     else {
-        var nd = new Date();
-        var offs = this.eventpl.lastused.getTimezoneOffset();
-
-        var d = nd.getTime() - this.eventpl.lastused.getTime();
-        d = this.event.delay_min * 60 * 1000 - d;
-
-        d /= 1000;
-
-        var h = Math.floor(d / 3600);
-
-        d = d % 3600;
-
-        var m = Math.floor(d / 60);
-
-        d = d % 60;
-
-        var s = Math.floor(d % 60);
+        var timeRes = dateDiff(this.eventpl.lastused, this.event.delay_min);
     }
 
     this.timeleft.tint = 0x333333;
-    if (d < 0 && this.event.reqlvl <= PlayerData.inst.playerItem.lvl) {
+    if (timeRes.d < 0 && this.event.reqlvl <= PlayerData.inst.playerItem.lvl) {
         str = "";
         this.ico.interactive = true;
        // this.ico.tint = 0xFFFFFF;
@@ -95,7 +79,7 @@ CEActionGUI.prototype.updateRecharge= function()
             str = "Требуется " + this.event.reqlvl.toString() + " ур.";
             this.timeleft.tint = 0xff0000;
         }else {
-            str = "Доступно через " + (h < 10 ? "0" + h : h) + " : " + (m < 10 ? "0" + m : m) + " : " + (s < 10 ? "0" + s : s);
+            str = "Доступно через " + timeRes.timeString;
             this.timeleft.tint = 0xff0000;
         }
         this.ready = false;
@@ -181,7 +165,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
         this.pos = 1;
     }
 
-    var tf = CTextField.createTextField({fontFamily: "dedgamedesc", tint: "0x1111111", text: PlayerData.inst.events[i].desc, fontSize: 20, align: "center"});
+    var tf = CTextField.createTextField({fontFamily: "dedgamedesc", tint: "0x1111111", text: event.desc, fontSize: 20, align: "center"});
     tf.x = 50;
     tf.y = -55;
     this.gfx.addChild(tf);

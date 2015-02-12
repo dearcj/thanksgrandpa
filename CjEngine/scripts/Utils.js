@@ -17,6 +17,27 @@ function clone(obj) {
     return copy;*/
 }
 
+function dateDiff(date, delayMin)
+{
+    var nd = new Date();
+    var d = nd.getTime() - date.getTime();
+    d = delayMin * 60 * 1000 - d;
+
+    d /= 1000;
+
+    var h = Math.floor(d / 3600);
+
+    d = d % 3600;
+
+    var m = Math.floor(d / 60);
+
+    d = d % 60;
+
+    var s = Math.floor(d % 60);
+
+
+    return {d: d, m: m, h: h, s: s, timeString : (h < 10 ? "0" + h : h) + " : " + (m < 10 ? "0" + m : m) + " : " + (s < 10 ? "0" + s : s)};
+}
 
 function crsp(texName)
 {

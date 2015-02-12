@@ -26,6 +26,11 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.sDying = 2;
     this.state = this.sMoving;
     this.allowFlowMove = true;
+
+    if (SM.inst.currentStage == gameStage)
+    {
+        this.movementTween = new TweenMax(this, 2, {ease: Sine.easeInOut, x: this.x - 50, yoyo: true, repeat: -1});
+    }
 }
 
 CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, overrideGun, overrideHat) {
@@ -110,8 +115,10 @@ CPlayer.prototype.onJump = function()
         this.gfx.state.setAnimationByName(0, "jump", false);
         this.gravityEnabled = true;
         this.vy = -13;
+        this.movementTween.pause();
     }
 }
+
 
 CPlayer.prototype.kill = function()
 {
@@ -141,6 +148,9 @@ CPlayer.prototype.destroy = function()
 {
     if (this.jumpTween) this.jumpTween.kill();
     this.jumpTween = null;
+    if (this.movementTween)
+    this.movementTween.kill();
+    this.movementTween = null;
     CLiveObj.prototype.destroy.call(this);
     gameStage.player = null;
 }
@@ -149,6 +159,31 @@ CPlayer.prototype.jump = function()
 {
     if (this.jumpTween && this.jumpTween.isActive()) return;
     this.jumpTween = new TweenMax(this, 0.55, {y: 140., yoyo: true, repeat: 1, ease: Cubic.easeOut});
+}
+
+CPlayer.prototype.landing = function() {
+    this.vy = 0;
+    this.jumping = false;
+    this.y = this.baseY;
+    this.gravityEnabled = false;
+
+    if (this.state != this.sDying) {
+        this.gfx.state.setAnimationByName(0, "idle", true);
+        this.movementTween.resume();
+    }
+}
+
+CPlayer.prototype.onDmgAnim = function(pusher) {
+    if (this.gravityEnabled)
+        this.vy -= 30; else
+    {
+        this.movementTween.pause();
+        var p = this;
+        new TweenMax(this, 0.6, {x: Math.max(this.x - 50,80),  onComplete: function(){
+            if (p.movementTween)
+            p.movementTween.resume();
+        }});
+    }
 }
 
 CPlayer.prototype.process = function()
@@ -161,13 +196,7 @@ CPlayer.prototype.process = function()
 
             if (this.vy > 0 && this.y > this.baseY)
             {
-                this.vy = 0;
-                this.jumping = false;
-                this.y = this.baseY;
-                this.gravityEnabled = false;
-
-                if (this.state != this.sDying)
-                    this.gfx.state.setAnimationByName(0, "idle", true);
+                this.landing();
             }
 
         if (this.state != this.sDying)
@@ -184,7 +213,7 @@ CPlayer.prototype.process = function()
             }
         }
 
-
+        LauncherBG.inst.verticalParallax = (this.baseY - this.y) / 100;
         gameStage.ammoico.x = this.x-80;
         gameStage.ammoico.y = this.y-50;
 
@@ -200,11 +229,11 @@ CPlayer.prototype.process = function()
         if (this.weapon)
             this.weapon.process();
 
-        if (this.allowFlowMove && (!this.jumpTween || !this.jumpTween.isActive())) {
+      /*  if (this.allowFlowMove && (!this.jumpTween || !this.jumpTween.isActive())) {
             this.freq = 800;
             this.nullPhase += 22;
             this.x = this.startPlayerX + Math.sin((this.nullPhase) / this.freq) * 30;
-        }
+        }*/
 
         var dx = 0;
         var dy = 0;

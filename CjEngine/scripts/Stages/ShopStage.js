@@ -338,6 +338,9 @@ ShopStage.prototype.onShowContinue = function()
     SM.inst.ol.addChildAt( shopStage.bar.gfx,1);
     shopStage.updateStatsPanel();
 
+    CObj.getById("bbuy1").click = charStage.openPremiumWindow;
+    CObj.getById("bbuy2").click = charStage.openPremiumWindow;
+
     CObj.getById("bback").click = function() {
         SM.inst.openStage(charStage);
     }
@@ -377,5 +380,12 @@ ShopStage.prototype.onHide = function(newStage) {
 }
 
 ShopStage.prototype.process = function() {
+   if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
+       var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
+       CObj.getById("tfdelay").text = timeRes.timeString;
+   } else {
+       CObj.getById("tfdelay").text = "";
+   }
+
     CObj.processAll();
 }

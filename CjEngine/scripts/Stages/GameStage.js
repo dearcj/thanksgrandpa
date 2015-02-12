@@ -84,7 +84,7 @@ GameStage.prototype.onHide = function (newStage) {
 
     gameStage.menuBtn = null;
     gameStage.player = null;
-
+    gameStage.barXP = null;
     gameStage.floor = null;
     if (gameStage.winDelayedCall) {
         gameStage.winDelayedCall.kill(false);
@@ -135,6 +135,11 @@ GameStage.prototype.remGfx = function (obj) {
     if (obj.parent) {
         obj.parent.removeChild(obj);
     }
+}
+
+GameStage.prototype.updateXP = function()
+{
+    gameStage.barXP.prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].xp;
 }
 
 GameStage.prototype.updateItems = function () {
@@ -454,21 +459,21 @@ GameStage.prototype.onShow = function () {
     this.state = "game";
     this.doProcess = false;
 
-    LevelManager.loadLevel("hud", gameStage.onLoadEnd, SM.inst.guiLayer);
-
     LauncherBG.inst = new LauncherBG(0, 0);
     LauncherBG.inst.addLevel("plantPart2");
 
     for (var i = 0; i < 2500; ++i)
-       LauncherBG.inst.process(true);
+        LauncherBG.inst.process(true);
     LauncherBG.inst.distance = 0;
 
     MM.inst.init();
+
+    LevelManager.loadLevel("hud", gameStage.onShowContinue, SM.inst.guiLayer);
 }
 
 
 //NO "THIS" IN CURRENT CONTEXT
-GameStage.prototype.onLoadEnd = function () {
+GameStage.prototype.onShowContinue = function () {
     gameStage.doProcess = true;
     gameStage.stepSize = gameStage.invFR;
     gameStage.doPhys = true;
@@ -494,11 +499,13 @@ GameStage.prototype.onLoadEnd = function () {
     gameStage.reloadBar.pos = 0.5;
     gameStage.reloadBar.gfx.visible = false;
     SM.inst.guiLayer.addChild(gameStage.reloadBar.gfx);
-    gameStage.player = new CPlayer(110, SCR_HEIGHT - 160);
+    gameStage.player = new CPlayer(140, SCR_HEIGHT - 160);
     gameStage.player.gfx.pivot.y = -190;
     gameStage.player.gfx.scale.x = 0.22;
     gameStage.player.gfx.scale.y = 0.22;
     SM.inst.fg.addChild(gameStage.player.gfx);
+
+    gameStage.barXP = CObj.getById("barxp");
 
     gameStage.player.updateAppearence(true, true, "idle");
 
@@ -545,7 +552,7 @@ GameStage.prototype.onLoadEnd = function () {
     stage.mousemove = stage.touchmove;
     stage.mousedown = stage.touchstart;
     stage.mouseup = stage.touchend;
-
+    gameStage.updateXP();
     /*
      gameStage.muteBtn = CObj.getById("mutebtn");
      gameStage.updateSoundBtn(gameStage.muteBtn);

@@ -3,6 +3,9 @@
  */
 PlayerData = function(pi)
 {
+   this.maxEnergy = 10;
+   this.epm = 0.2;
+   this.delayEnergyMS = (1 / this.epm)*60000;
    this.xpLevel = [
       {crystals: 1, money: 25, xp: 0},
       {crystals: 1, money: 50, xp: 250},
@@ -108,11 +111,13 @@ PlayerData.prototype.equipItem = function(item)
 }
 
 
-PlayerData.prototype.gainExp = function(amount)
-{
+PlayerData.prototype.gainExp = function(amount) {
    console.log("XP " + amount.toString());
    this.playerItem.xp += amount;
-   if (this.playerItem.xp >= this.xpLevel[this.playerItem.lvl].xp && this.playerItem.lvl + 1 < this.xpLevel.length)
+   var c = this.playerItem.xp;
+   var needed = this.xpLevel[this.playerItem.lvl].xp;
+
+   if (c >= needed && this.playerItem.lvl + 1 < this.xpLevel.length) ///levelup
    {
       this.playerItem.xp -= this.xpLevel[this.playerItem.lvl].xp;
       this.playerItem.crystals += this.xpLevel[this.playerItem.lvl].crystals;
@@ -121,19 +126,17 @@ PlayerData.prototype.gainExp = function(amount)
 
       if (SM.inst.currentStage == gameStage) {
          this.score += this.xpLevel[this.playerItem.lvl].money;
+
          gameStage.updateScore();
          gameStage.pause();
 
          LevelManager.loadLevel("levelup",
-             function()
-             {
+             function () {
                 CObj.getById("moneytf").text = PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].money.toString();
                 CObj.getById("crystalstf").text = PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].crystals.toString();
                 CObj.getById("levnum").text = PlayerData.inst.playerItem.lvl.toString();
-                CObj.getById("btnclose").click = function()
-                {
-                   for (var i = 0;i < LevelManager.objs.length; ++i)
-                   {
+                CObj.getById("btnclose").click = function () {
+                   for (var i = 0; i < LevelManager.objs.length; ++i) {
                       LevelManager.objs[i].destroy();
                    }
                    LevelManager.objs = null;
@@ -147,18 +150,15 @@ PlayerData.prototype.gainExp = function(amount)
 
              }
              , SM.inst.guiLayer);
-      }  else
-      {
+      } else {
          this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
          this.savePlayerData();
          charStage.updateStatsPanel();
-
       }
+   }
 
-
-
-
-
+   if (SM.inst.currentStage == gameStage) {
+      gameStage.updateXP();
    }
 }
 
@@ -252,12 +252,29 @@ PlayerData.prototype.loadEnd = function()
 PlayerData.prototype.updateEnergy = function()
 {
    var d = (new Date()).getTime() - this.playerItem.updateDate.getTime();
+   this.playerItem.updateDate = new Date();
+
    d /= 1000;//secs
    d /= 60; //minutes
-   this.playerItem.energy += d*0.2;
-   if (this.playerItem.energy > 10) {
-      this.playerItem.energy = 10;
+   if (d > 0)
+
+
+   this.playerItem.energy += d*this.epm;
+
+
+   if (this.playerItem.energy > this.maxEnergy) {
+      this.playerItem.energy = this.maxEnergy;
    }
+   this.savePlayerData();
+
+   if (SM.inst.currentStage == charStage || SM.inst.currentStage == shopStage)
+   {
+      shopStage.updateStatsPanel();
+
+   }
+   console.log("UPD ENERGY");
+   var t = this;
+   setTimeout(function(){t.updateEnergy();}, this.delayEnergyMS);
 }
 
 PlayerData.prototype.createAchProgress = function(cb)

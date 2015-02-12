@@ -9,7 +9,6 @@ CObj = function(in_x,in_y,filename,in_body) {
     if (!CObj.objects) CObj.objects = [];
     CObj.objects.push(this);
 
-
     this.PublicFields = "allowRotation,drawAsTexture,userData,[Graphics],isClip,fps,autoPlay,scaleX,scaleY,offsetX,offsetY,offsetR;";
     this.allowTrackSpeed = false;
     this._x = 0;
@@ -38,6 +37,8 @@ CObj = function(in_x,in_y,filename,in_body) {
         this.gfx.gameobject = this;
         this.gfx.anchor.x = 0.5;
         this.gfx.anchor.y = 0.5;
+   /*     if (LauncherBG.inst && LauncherBG.inst.defaultLayer)
+            LauncherBG.inst.defaultLayer.addChild(this.gfx); else*/
         SM.inst.ol.addChild(this.gfx);
     }
 
@@ -61,7 +62,7 @@ CObj = function(in_x,in_y,filename,in_body) {
    // return this;
 };
 
-CObj.debugView = true;
+CObj.debugView = false;
 
 Function.prototype.generateProperty = function(name, options) {
     // internal member variable name
