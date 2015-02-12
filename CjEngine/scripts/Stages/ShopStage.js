@@ -178,8 +178,15 @@ var infoText = "";
             clickFunc = wearItem;
             btnName = "wear button"
         }
+
+        if (shopStage.currentTab == "bstuff")
+        {
+
+            btnName = "equipped button";
+        }
     }
         //вкладка бустер if ()
+
 
         var btn = new CButton(0, 182 + dy, btnName);
         if (btnName == "equipped button")
@@ -208,8 +215,6 @@ var infoText = "";
             shopStage.pl.updateAppearence(true, false, null, null, null);
             shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
         }
-
-
 
         function buyItem(event)
         {

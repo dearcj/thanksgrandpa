@@ -15,10 +15,16 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.maxHp = 700;
     this.xp = 300;
     this.hp = this.maxHp;
-    this.barOffsetY = - 300;
+    this.bar.gfx.width *= 2;
+    this.barOffsetY = - 360;
     SM.inst.ol.addChild(this.gfx);
+    TweenMax.delayedCall(0.7, this.fireBullet)
 }
 
+Boss1.prototype.fireBullet = function()
+{
+
+}
 
 Boss1.prototype.showUpAnimation = function()
 {

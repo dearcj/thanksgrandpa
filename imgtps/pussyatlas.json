@@ -50,7 +50,7 @@
 },
 "b12.png":
 {
-	"frame": {"x":482,"y":1033,"w":159,"h":96},
+	"frame": {"x":630,"y":1033,"w":159,"h":96},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":159,"h":96},
@@ -58,7 +58,7 @@
 },
 "b13.png":
 {
-	"frame": {"x":304,"y":940,"w":136,"h":68},
+	"frame": {"x":791,"y":1059,"w":136,"h":68},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":136,"h":68},
@@ -66,7 +66,7 @@
 },
 "b14.png":
 {
-	"frame": {"x":643,"y":1057,"w":146,"h":71},
+	"frame": {"x":482,"y":1059,"w":146,"h":71},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":146,"h":71},
@@ -74,7 +74,7 @@
 },
 "b2.png":
 {
-	"frame": {"x":1709,"y":1074,"w":50,"h":135},
+	"frame": {"x":1926,"y":1195,"w":50,"h":135},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":135},
@@ -98,7 +98,7 @@
 },
 "b5.png":
 {
-	"frame": {"x":791,"y":940,"w":75,"h":93},
+	"frame": {"x":843,"y":951,"w":75,"h":93},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":93},
@@ -114,7 +114,7 @@
 },
 "b7.png":
 {
-	"frame": {"x":643,"y":951,"w":50,"h":101},
+	"frame": {"x":791,"y":951,"w":50,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":101},
@@ -266,7 +266,7 @@
 },
 "coin001.png":
 {
-	"frame": {"x":804,"y":1130,"w":59,"h":54},
+	"frame": {"x":304,"y":996,"w":59,"h":54},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":54},
@@ -274,7 +274,7 @@
 },
 "coin002.png":
 {
-	"frame": {"x":1710,"y":1018,"w":59,"h":54},
+	"frame": {"x":304,"y":940,"w":59,"h":54},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":54},
@@ -314,7 +314,7 @@
 },
 "coinCollect0001.png":
 {
-	"frame": {"x":1917,"y":1133,"w":105,"h":60},
+	"frame": {"x":1926,"y":1133,"w":105,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":60},
@@ -322,7 +322,7 @@
 },
 "coinCollect0002.png":
 {
-	"frame": {"x":442,"y":940,"w":105,"h":60},
+	"frame": {"x":804,"y":1129,"w":105,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":60},
@@ -514,11 +514,19 @@
 },
 "monetabg.png":
 {
-	"frame": {"x":791,"y":1074,"w":75,"h":54},
+	"frame": {"x":804,"y":1191,"w":75,"h":54},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":54},
 	"sourceSize": {"w":75,"h":54}
+},
+"phone bullet.png":
+{
+	"frame": {"x":1710,"y":1018,"w":71,"h":39},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":39},
+	"sourceSize": {"w":71,"h":39}
 },
 "powerField0001.png":
 {
@@ -602,7 +610,7 @@
 },
 "road down.png":
 {
-	"frame": {"x":865,"y":1177,"w":839,"h":45},
+	"frame": {"x":911,"y":1179,"w":839,"h":45},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":839,"h":45},
@@ -610,7 +618,7 @@
 },
 "road tile.png":
 {
-	"frame": {"x":868,"y":1057,"w":839,"h":118},
+	"frame": {"x":929,"y":1059,"w":839,"h":118},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":839,"h":118},
@@ -642,7 +650,7 @@
 },
 "tree 1.png":
 {
-	"frame": {"x":1761,"y":1091,"w":154,"h":149},
+	"frame": {"x":1770,"y":1091,"w":154,"h":149},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":154,"h":149},
@@ -695,6 +703,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:700d5d7dbd2f4798a80bd0aa52c1915f$"
+	"smartupdate": "$TexturePacker:SmartUpdate:6dc617945f475496bff4d732123d9edf$"
 }
 }

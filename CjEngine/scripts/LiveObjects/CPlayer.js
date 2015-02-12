@@ -179,7 +179,7 @@ CPlayer.prototype.onDmgAnim = function(pusher) {
     {
         this.movementTween.pause();
         var p = this;
-        new TweenMax(this, 0.6, {x: Math.max(this.x - 50,80),  onComplete: function(){
+        new TweenMax(this, 0.6, {ease: Circ.easeOut, x: Math.max(this.x - 50,60), yoyo:true, repeat: 1,  onComplete: function(){
             if (p.movementTween)
             p.movementTween.resume();
         }});

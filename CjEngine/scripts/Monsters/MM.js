@@ -14,7 +14,7 @@ MM = function() {
       //  {mons: "b", diff: 2, prob: 0.1}
     ];
 
-    this.bosses = [{class: Boss1, dist: 800}, {class: Boss1, dist: 1600}];
+    this.bosses = [{class: Boss1, dist: 30}, {class: Boss1, dist: 1600}];
     // c l z - преграды
     //s - монстр
 
