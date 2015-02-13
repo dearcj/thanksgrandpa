@@ -1,6 +1,3 @@
-/**
- * Created by KURWINDALLAS on 08.02.2015.
- */
 extend(Boss1, CMonster, true);
 
 function Boss1(in_x,in_y,animname,cr_bar){
@@ -18,12 +15,34 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.bar.gfx.width *= 2;
     this.barOffsetY = - 360;
     SM.inst.ol.addChild(this.gfx);
-    TweenMax.delayedCall(0.7, this.fireBullet)
+    var t = this;
+    this.fireDelay = 1.7;
+    TweenMax.delayedCall(this.fireDelay, function(){t.fireBullet();})
+
+    var b1 = this.gfx.skeleton.findSlot("b_bullet1");
+    var b2 = this.gfx.skeleton.findSlot("b_bullet2");
 }
 
 Boss1.prototype.fireBullet = function()
 {
-
+    var b = new CMonster(this.x,this.y - 250,"phone bullet", false);
+    b.gfx.scale.x = 0.8;
+    b.gfx.scale.y = 0.8;
+    b.maxHp = 50;
+    b.hp = b.maxHp;
+    b.xp = 5;
+    b.radius = 25;
+    b.av = 0.1*(Math.random() - 0.5);
+    b.spawnCoins= false;
+    b.gravityEnabled = true;
+    b.jumpTimeCoef = 1;
+    var pow = (1 + 0.4*(Math.random() - 0.5));
+    b.gravPower = (0.16 + Math.random()*0.1)*pow;
+    b.vy = -b.gravPower*20*pow;
+    b.allowTrackSpeed = false;
+    new TweenMax(b, 2 + Math.random()*0.3, {x: -100, ease: Linear.easeIn});
+    var t = this;
+    TweenMax.delayedCall(this.fireDelay, function(){t.fireBullet();})
 }
 
 Boss1.prototype.showUpAnimation = function()

@@ -16,6 +16,7 @@ CObj = function(in_x,in_y,filename,in_body) {
     this._sensor = false;
     this.vx = 0;
     this.vy = 0;
+    this.av = 0;
     this._body = null;
     this.baseDim = {};
     this._rotation = 0.;
@@ -161,6 +162,9 @@ CObj.prototype.collide = function(obj2){
 }
 
 CObj.prototype.process = function(){
+
+    if (this.av != 0)
+    this.rotation += this.av;
 
     if (this.vx != 0)
     this.x = this.x + this.vx;

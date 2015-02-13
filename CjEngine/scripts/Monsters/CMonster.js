@@ -14,6 +14,8 @@ function CMonster(in_x,in_y,textname,cr_bar){
     if (!CMonster.list) CMonster.list = [];
     CMonster.list.push(this);
     this.maxHp = 50;
+    this.spawnCoins = true;
+    this.coinAmount = 4;
     this.hp = this.maxHp;
     if (cr_bar == true || cr_bar == null) {
         this.bar = new CHPBar(in_x, in_y, "barHpBG");
@@ -50,11 +52,13 @@ CMonster.prototype.process = function()
 CMonster.prototype.kill = function()
 {
     if (this.prekilled) return;
+
+    if (this.spawnCoins)
     for (var i = 0; i < 5; ++i)
     {
         if (Math.random() > 0.3) continue;
 
-        CCoin.spawnCoin(this.x, this.y, 4);
+        CCoin.spawnCoin(this.x, this.y, this.coinAmount);
     }
     this.prekilled = true;
 

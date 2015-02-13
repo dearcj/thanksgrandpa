@@ -417,8 +417,10 @@ function getChar(event) {
 }
 
 GameStage.prototype.doKeyDown = function (evt) {
-
+    console.log("KEY DOWN");
     if (gameStage.state != "game") return;
+    console.log("EVENT IS = " + evt.toString() + "WINDOW.event = " + window.event);
+
     evt = evt || window.event;
     var c = getChar(evt);
 
@@ -430,6 +432,8 @@ GameStage.prototype.doKeyDown = function (evt) {
             CBooster.list[i].activate();
         }
     }
+
+    console.log("EVT.WHICH" + evt.which.toString());
 
     if (evt.which == 87)
     {

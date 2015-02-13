@@ -74,7 +74,7 @@
 },
 "b2.png":
 {
-	"frame": {"x":1926,"y":1195,"w":50,"h":135},
+	"frame": {"x":1926,"y":1133,"w":50,"h":135},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":135},
@@ -266,7 +266,7 @@
 },
 "coin001.png":
 {
-	"frame": {"x":304,"y":996,"w":59,"h":54},
+	"frame": {"x":365,"y":996,"w":59,"h":54},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":54},
@@ -274,7 +274,7 @@
 },
 "coin002.png":
 {
-	"frame": {"x":304,"y":940,"w":59,"h":54},
+	"frame": {"x":304,"y":996,"w":59,"h":54},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":54},
@@ -311,22 +311,6 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":54},
 	"sourceSize": {"w":59,"h":54}
-},
-"coinCollect0001.png":
-{
-	"frame": {"x":1926,"y":1133,"w":105,"h":60},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":60},
-	"sourceSize": {"w":105,"h":60}
-},
-"coinCollect0002.png":
-{
-	"frame": {"x":804,"y":1129,"w":105,"h":60},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":60},
-	"sourceSize": {"w":105,"h":60}
 },
 "coinCollect0003.png":
 {
@@ -514,7 +498,7 @@
 },
 "monetabg.png":
 {
-	"frame": {"x":804,"y":1191,"w":75,"h":54},
+	"frame": {"x":304,"y":940,"w":75,"h":54},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":54},
@@ -610,7 +594,7 @@
 },
 "road down.png":
 {
-	"frame": {"x":911,"y":1179,"w":839,"h":45},
+	"frame": {"x":804,"y":1179,"w":839,"h":45},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":839,"h":45},
@@ -703,6 +687,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6dc617945f475496bff4d732123d9edf$"
+	"smartupdate": "$TexturePacker:SmartUpdate:526751d10727420b8ac8c4eede8e8b59$"
 }
 }

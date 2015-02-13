@@ -141,8 +141,6 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../../img/btnlevel0002.png</filename>
-            <filename>../../img/btnlevel0001.png</filename>
             <filename>../../img/buttonlong0002.png</filename>
             <filename>../../../../Android/Graphics/barHpBG.png</filename>
             <filename>../../../../Android/Graphics/textureHP.png</filename>

@@ -80,14 +80,15 @@ CPlayer.prototype.createDedGraphics = function()
     g.state.setAnimationByName(0, "idle", true);
     this.gunBone = g.skeleton.findSlot("gun");
 
+    this.boardSlot = g.skeleton.findSlot("board");
     this.rshSlot = g.skeleton.findSlot("r_shoulder");
     this.lshSlot = g.skeleton.findSlot("l_shoulder");
     g.scale.x = 0.3;
     g.scale.y = 0.3;
 
     g.stateData.setMixByName("idle", "jump", 0.2);
-    g.stateData.setMixByName("jump", "idle", 0.4);
-    g.stateData.setMixByName("jump", "defeated", 0.72);
+    g.stateData.setMixByName("jump", "idle", 0.1);
+    g.stateData.setMixByName("jump", "defeated", 0.3);
     g.stateData.setMixByName("idle", "defeated", 0.72);
 
     this.bulletStart = 40;
@@ -212,6 +213,9 @@ CPlayer.prototype.process = function()
                 }
             }
         }
+
+        if (!this.jumping)
+            this.boardSlot.bone.rotation *= 0.66;
 
         LauncherBG.inst.verticalParallax = (this.baseY - this.y) / 100;
         gameStage.ammoico.x = this.x-80;
