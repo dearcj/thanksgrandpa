@@ -72,7 +72,7 @@ GameStage.prototype.process = function () {
     /*   if (this.doPhys)
      world.step(this.invFR*this._worldSpeed);
      */
-
+    window.focus();
     CObj.processAll();
 
     var d = Math.floor(LauncherBG.inst.distance);
@@ -333,6 +333,16 @@ GameStage.prototype.openEndWindowLoaded = function () {
     PlayerData.inst.playerItem.maxdistance = rec;
     PlayerData.inst.savePlayerData();
 
+    CObj.getById("bshare").click = function () {
+        VK.api("wall.post", {
+            owner_id: vkparams.viewerid,
+            message: "Я проехал" + rec.toString() + " метров. ",
+            attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]
+        }, function (data) {
+
+        });
+    };
+
 
     for (var i = 0; i < 5; ++i) {
         addLine(i);
@@ -355,8 +365,8 @@ GameStage.prototype.openEndWindowLoaded = function () {
                 function setClick(i, friendObject) {
                     CObj.getById("b" + (i + 1).toString()).click = function () {
                         VK.api("wall.post", {
-                            owner_id: vkparams.viewerid,
-                            message: friendObject.name + " " + friendObject.last_name + ", я тебя уделал!",
+                            owner_id: friendObject.vkapi,
+                            message: "Я проехал" + rec.toString() + " метров. " + friendObject.name + " " + friendObject.last_name + ", я тебя уделал!",
                             attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]
                         }, function (data) {
 
@@ -364,6 +374,10 @@ GameStage.prototype.openEndWindowLoaded = function () {
                     }
                 }
                 setClick(i, arr[i]);
+            } else
+            {
+
+
             }
 
         }
