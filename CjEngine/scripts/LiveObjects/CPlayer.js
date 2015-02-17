@@ -271,7 +271,7 @@ CPlayer.prototype.process = function()
 
         var bangle = Math.atan2(this.y - my, this.x - mx);
 
-        this.fireAngle = Math.PI + bangle ;
+        this.fireAngle = Math.PI + bangle - this.weapon.recoilValue/100;
         var newAngle = this.fireAngle+Math.PI / 2 + da;
        // if ((!this.handTween || !this.handTween.isActive())) {
 

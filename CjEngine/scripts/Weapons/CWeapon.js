@@ -14,6 +14,7 @@ CWeapon = function(_id, _name, _desc,  __params, __gfx, _upgrades) {
     this.desc = _desc;
     this.unlocked = false;
     this.upgrades = _upgrades;
+    this.sound = __params.sound;
     this.recoilValue = 0;
     if (!CWeapon.list) CWeapon.objects = [];
     CWeapon.objects.push(this);
@@ -35,14 +36,20 @@ CWeapon.prototype.resetParams = function()
 
 CWeapon.prototype.process = function()
 {
-    this.recoil -= 0.07;
-    if (this.recoil < 0) this.recoil = 0;
+    this.recoilValue -= 0.07;
+    if (this.recoilValue < 0) this.recoilValue = 0;
+    console.log(this.recoilValue);
 }
 
 CWeapon.prototype.shot = function()
 {
     if (!this.canShot()) return false;
     if (this.state == this.sReload) return false;
+    if (this.sound)
+        ZSound.Play(this.sound);
+
+
+
     if (this.ammo < 0)
     {
         this.reload();

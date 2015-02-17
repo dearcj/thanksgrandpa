@@ -7,6 +7,7 @@ var w_pistol = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        sound: null,
         acc: 0.05,
         recoil: 12, //recoil
     magcap: 10, //magcap
@@ -26,6 +27,7 @@ var w_rifle = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        sound: "rifle",
         life: 3,
         acc: 0.05,
         recoil: 19, //recoil
@@ -47,9 +49,10 @@ var w_pps = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        sound: "mini",
         life: 1,
         acc: 0.25,
-        recoil: 12, //recoil
+        recoil: 1.0, //recoil
         magcap: 20, //magcap
         delay: 120, //delay
         damage: 33, //damage
@@ -68,6 +71,7 @@ var w_minigun = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        sound: "mini",
         life: 2,
         acc: 0.25,
         recoil: 0.1, //recoil
@@ -88,11 +92,12 @@ var w_ak74 = new CQueueGun(
     "пистолет", //name
     "описание", //desc
     {
+        sound: "mini",
         queue: 4,
         queueDelay: 110,
         life: 1,
         acc: 0.08,
-        recoil: 12, //recoil
+        recoil: 1.3, //recoil
         magcap: 30, //magcap
         delay: 600, //delay
         damage: 18, //damage
@@ -110,6 +115,7 @@ var w_laser = new CLaser(
     "лазер", //name
     "описание", //desc
     {
+        sound: "laser",
         life: 1,
         acc: 0.08,
         recoil: 0, //recoil
