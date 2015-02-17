@@ -16,16 +16,26 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.barOffsetY = - 360;
     SM.inst.ol.addChild(this.gfx);
     var t = this;
-    this.fireDelay = 1.7;
+    this.fireDelay = 1.75;
     TweenMax.delayedCall(this.fireDelay, function(){t.fireBullet();})
 
-    var b1 = this.gfx.skeleton.findSlot("b_bullet1");
-    var b2 = this.gfx.skeleton.findSlot("b_bullet2");
+    this.b1 = this.gfx.skeleton.findSlot("b_bullet1");
+    this.b2 = this.gfx.skeleton.findSlot("b_bullet2");
 }
 
 Boss1.prototype.fireBullet = function()
 {
-    var b = new CMonster(this.x,this.y - 250,"phone bullet", false);
+    if (this.doRemove) return;
+    var slot = this.b1;
+    if (Math.random() > 0.5) slot = this.b2;
+
+//    var p = this.gfx.toGlobal({x:slot.bone.x, y: slot.bone.y});
+    var p = slot.currentSprite.toGlobal({x:0, y:0});
+    this.firePointX = p.x/SCR_SCALE;
+    this.firePointY = p.y/SCR_SCALE;
+    var b = new CMonster(this.firePointX, this.firePointY, "phone bullet", false);
+
+
     b.gfx.scale.x = 0.8;
     b.gfx.scale.y = 0.8;
     b.maxHp = 50;

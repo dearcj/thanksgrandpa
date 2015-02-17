@@ -45,6 +45,15 @@ CMonster.prototype.process = function()
         this.bar.x = this.x - this.bar.gfx.width * 0.5 - 10;
         this.bar.y = this.y - this.radius * 1.5 + this.barOffsetY;
     }
+
+    if (this.y > 470 && this.rollLeave)
+    {
+        this.av -= 0.01;
+        if (this.av < -0.2) this.av = -0.2;
+        this.gravityEnabled = false;
+        new TweenMax(this, 0.7, {vx: -20});
+        this.vy = 0;
+    }
     CLiveObj.prototype.process.call(this);
 }
 
@@ -57,7 +66,6 @@ CMonster.prototype.kill = function()
     for (var i = 0; i < 5; ++i)
     {
         if (Math.random() > 0.3) continue;
-
         CCoin.spawnCoin(this.x, this.y, this.coinAmount);
     }
     this.prekilled = true;

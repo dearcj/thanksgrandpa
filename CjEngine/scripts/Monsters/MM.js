@@ -14,7 +14,7 @@ MM = function() {
         {mons: "b", diff: 2, prob: 0.1}
     ];
 
-    this.bosses = [{class: Boss1, dist: 30}, {class: Boss1, dist: 1600}];
+    this.bosses = [{class: Boss1, dist: 600}, {class: Boss1, dist: 1800}];
     // c l z - преграды
     //s - монстр
 
@@ -157,6 +157,7 @@ MM.prototype.spawnFatty = function(xp)
 {
     var str = "enemy1";
     var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.rollLeave = true;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
     m.longJump();
@@ -169,6 +170,7 @@ MM.prototype.spawnFatty2 = function(xp)
 {
     var str = "enemy1_1";
     var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.rollLeave = true;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
     m.longJump();
@@ -182,6 +184,7 @@ MM.prototype.spawnGopnick = function(xp)
 {
     var str = "enemy3";
     var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.rollLeave = true;
     m.jumpTimeCoef = 0.7;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
@@ -193,6 +196,7 @@ MM.prototype.spawnGopnick2 = function(xp)
 {
     var str = "enemy3_3";
     var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.rollLeave = true;
     m.jumpTimeCoef = 0.6;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
@@ -206,6 +210,7 @@ MM.prototype.spawnSimpleMonster = function(xp)
     var str = "enemy2";
     if (Math.random() > 0.5) str = "enemy2_2";
     var m = new CMonster(SCR_WIDTH+100,300,str);
+    m.rollLeave = true;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
     m.longJump();

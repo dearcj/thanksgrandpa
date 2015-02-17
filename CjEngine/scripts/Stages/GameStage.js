@@ -101,6 +101,7 @@ GameStage.prototype.onHide = function (newStage) {
 
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
+    $(document).off("keypress", this.doKeyDown);
 
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
      CObj.objects.splice(inx, 1);*/
@@ -457,8 +458,15 @@ GameStage.prototype.doKeyUp = function (evt) {
 GameStage.prototype.onShow = function () {
     CustomStage.prototype.onShow.call(this);
 
-    window.addEventListener("keydown", this.doKeyDown, false);
+    var func =  this.doKeyDown;
+    $(function() {
+        $(document).on('keydown', func);
+
+    });
+
+    /*window.addEventListener("keydown", this.doKeyDown, false);
     window.addEventListener("keypress", this.doKeyDown, false);
+   */
     window.addEventListener("keyup", this.doKeyUp, false);
 
     this.state = "game";

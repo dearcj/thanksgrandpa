@@ -217,7 +217,7 @@ CPlayer.prototype.process = function()
         if (!this.jumping)
             this.boardSlot.bone.rotation *= 0.66;
 
-        LauncherBG.inst.verticalParallax = (this.baseY - this.y) / 100;
+        //LauncherBG.inst.verticalParallax = (this.baseY - this.y) / 100;
         gameStage.ammoico.x = this.x-80;
         gameStage.ammoico.y = this.y-50;
 

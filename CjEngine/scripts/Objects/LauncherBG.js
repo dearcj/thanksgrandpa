@@ -125,7 +125,7 @@ LauncherBG.prototype.process = function (fake) {
     for (var i = 0; i < t; ++i) {
 
         var l = this.levCycles[0].layers[i];
-
+/*
         if (l.clip) {
             if (i != 0) {
                 var v = 15*Math.pow(this.layersSpeed[i], 1.7);
@@ -136,6 +136,7 @@ LauncherBG.prototype.process = function (fake) {
                 }
             }
         }
+        */
         l.curDist += l.velocity;
         l.rightBound -= l.velocity;
 
