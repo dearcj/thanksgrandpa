@@ -71,7 +71,7 @@ GameStage.prototype.createCircle = function (w, x, y, r) {
 GameStage.prototype.process = function () {
     /*   if (this.doPhys)
      world.step(this.invFR*this._worldSpeed);
-     ddsdd*/
+     ddsd[d*/
     window.focus();
     CObj.processAll();
 
