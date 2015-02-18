@@ -2,9 +2,6 @@
 require 'vkapi.class.php';
 try
 {
-$pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
-                "crazyjuice","girkinLOH1");
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $api_id = 4654201;
 $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ приложения
@@ -19,8 +16,12 @@ $params = array(
 
 $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 
-print $token;
-//
+print ($token);
+
+$pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
+                "crazyjuice","girkinLOH1");
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 $statement = $pdo->prepare("select * from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
