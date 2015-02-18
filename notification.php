@@ -4,10 +4,14 @@ try
 {
 $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
                 "crazyjuice","girkinLOH1");
-$q = $pdo->query('SELECT id, vkapi FROM tb_players');
+
+$statement = $conn->prepare("SELECT id, vkapi FROM thanksdad_db.tb_players");
+    $result = $statement->execute();
+
+$q = $pdo->query('SELECT id, vkapi FROM thanksdad_db.tb_players');
 print($q[0]);
 
-foreach($q as $row) {
+foreach($result as $row) {
                         echo($row);
                     }
 }
