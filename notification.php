@@ -1,14 +1,13 @@
 
 <?php
 try
-{new PDO ("sqlsrv:server=tcp:te1gwbas4s.database.windows.net,1433;database=thanksdad_db", "crazyjuice",
-"girkinLOH1");
-$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION );
+{
+$pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
+                "crazyjuice","girkinLOH1");
 }
-catch (PDOException $e ) {
- echo( "Error connecting to SQL Server." );
-  die(print_r($e));
-  }
-
+catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
   ?>
 
