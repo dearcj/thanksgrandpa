@@ -124,6 +124,7 @@ CharStage.prototype.onShowContinue = function()
 {
     charStage.doProcess = true;
 
+    PlayerData.inst.addNotification("some msg", PlayerData.inst.playerItem.vkapi);
 
     CObj.getById("frprev").click = function() {
         charStage.skipFriends -= 5;

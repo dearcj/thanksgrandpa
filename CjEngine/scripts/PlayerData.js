@@ -33,6 +33,12 @@ PlayerData = function(pi)
    PlayerData.inst = this;
 }
 
+PlayerData.prototype.addNotification = function(message, vkapi)
+{
+   var t = window.azureclient.getTable("tb_notifications");
+   t.insert({message: message, vkapi: vkapi});
+}
+
 PlayerData.prototype.comboCheck = function()
 {
    if (this.playerItem.combodate)
