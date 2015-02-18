@@ -19,9 +19,9 @@ $result = $statement->fetchAll();
    foreach($result as $item) {
     if (ids != "")
     {
-    ids += ",";
+    ids .= ",";
     }
-    ids += $item["vkapi"];
+    ids .= $item["vkapi"];
    }
 print($ids);
 $resp = $VK->api('secure.sendNotification', array('uids'=>$id, timestamp=>time(), random=>rand(0, 999999999), $msg));
