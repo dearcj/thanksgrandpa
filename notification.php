@@ -6,7 +6,7 @@ $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
                 "crazyjuice","girkinLOH1");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$pdo->query('SELECT `id` from `tb_metrics`');
+$pdo->query('USE crazyjuice GO SELECT id from tb_metrics');
 }
 catch (PDOException $e) {
     echo("ASSSSS");
