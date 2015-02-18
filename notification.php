@@ -6,7 +6,11 @@ $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
                 "crazyjuice","girkinLOH1");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$pdo->query('SELECT id from thanksdad.tb_metrics');
+
+$statement = $pdo->prepare("select id, name, vkapi from thanksdad.tb_metrics");
+//$result = $statement->execute();
+$row = $statement->fetch();
+print $row;
 }
 catch (PDOException $e) {
     echo("ASSSSS");
@@ -15,7 +19,4 @@ catch (PDOException $e) {
 }
   ?>
 
-$statement = $pdo->prepare("select id from tb_metrics");
-//$result = $statement->execute();
-$row = $statement->fetch();
-print $row;
+
