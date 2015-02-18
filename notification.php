@@ -6,7 +6,7 @@ try
 $api_id = 4654201;
 $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ приложения
 
-$VK = new vkapi($api_id, $secret_key);
+
 
 $params = array(
 	        'client_id' => $api_id,
@@ -36,7 +36,10 @@ $result = $statement->fetchAll();
    }
    $msg = "Приветики";
 print($ids);
-$resp = $VK->api('secure.sendNotification', array('access_token'=>$token["access_token"],'user_id'=>'282617259', 'timestamp'=>time(), 'random'=>rand(0, 999999999), 'message'=>$msg));
+
+$VK = new vkapi($api_id, $secret_key);
+//'access_token'=>$token["access_token"],
+$resp = $VK->api('secure.sendNotification', array('uid'=>'282617259', 'timestamp'=>time(), 'random'=>rand(0, 999999999), 'message'=>$msg));
 $answer = json_encode($resp);
 print($answer);
 //print_r ($result);
