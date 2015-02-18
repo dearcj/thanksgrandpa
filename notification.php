@@ -22,10 +22,11 @@ $result = $statement->fetchAll();
     {
     $ids .= ",";
     }
-    $ids .= strapi;
+    $ids .= $strapi;
    }
+   $msg = "hello";
 print($ids);
-$resp = $VK->api('secure.sendNotification', array('uids'=>$id, timestamp=>time(), random=>rand(0, 999999999), $msg));
+$resp = $VK->api('secure.sendNotification', array('uids'=>$ids, 'timestamp'=>time(), 'random'=>rand(0, 999999999), 'message'=>$msg));
 $answer = json_encode($resp);
 print($answer);
 print_r ($result);
