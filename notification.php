@@ -20,7 +20,7 @@ $params = array(
 $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 
 print $token;
-
+//
 $statement = $pdo->prepare("select * from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
