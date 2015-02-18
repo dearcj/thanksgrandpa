@@ -10,6 +10,7 @@ echo "Connected to the database server OK<br />";
 }
 else
 {
+echo "ASSS";
 die("Couldn't connect");
 }
 
