@@ -5,7 +5,7 @@ try
 $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
                 "crazyjuice","girkinLOH1");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$statement = $pdo->prepare("SELECT * FROM tb_players");
+$statement = $pdo->prepare("select p.id, p.vkapi from dbo.tb_players p");
 $result = $statement->execute();
 $row = $statement->fetch();
 print $row;
