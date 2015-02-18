@@ -9,7 +9,7 @@ $statement = $pdo->prepare("select * from thanksdad.tb_notifications");
 $statement->execute();
 $result = $statement->fetchAll();
    foreach($result as $item) {
-    echo $item[message];
+    echo $item["message"];
    }
 
 
