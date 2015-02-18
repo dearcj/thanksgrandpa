@@ -11,6 +11,18 @@ $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ прил�
 
 $VK = new vkapi($api_id, $secret_key);
 
+/*if (isset($_GET['code'])) {
+	    $params = array(
+	        'client_id' => $api_id,
+	        'client_secret' => $secret_key,
+	        'code' => $_GET['code'],
+	        'redirect_uri' => $redirect_uri
+	    );
+
+	    $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
+}
+*/
+
 $statement = $pdo->prepare("select * from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
