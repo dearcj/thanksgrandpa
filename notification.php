@@ -11,7 +11,8 @@ $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ прил�
 $params = array(
 	        'client_id' => $api_id,
 	        'client_secret' => $secret_key,
-	        'grant_type' => "client_credentials"
+	        'grant_type' => 'client_credentials',
+	        'v' => "5.28"
 	    );
 
 $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
