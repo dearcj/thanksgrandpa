@@ -10,7 +10,8 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $statement = $pdo->prepare("select * from thanksdad.tb_metrics");
 $result = $statement->execute();
 $row = $statement->fetch();
-echo $result;
+
+print_r $result;
 echo $row;
 }
 catch (PDOException $e) {
