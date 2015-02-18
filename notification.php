@@ -25,10 +25,10 @@ $result = $statement->fetchAll();
    }
    $msg = "Приветики";
 print($ids);
-$resp = $VK->api('secure.sendNotification', array('uids'=>"282617259", 'timestamp'=>time(), 'random'=>rand(0, 999999999), 'message'=>$msg));
+$resp = $VK->api('secure.sendNotification', array('user_ids'=>"282617259", 'timestamp'=>time(), 'random'=>rand(0, 999999999), 'message'=>$msg));
 $answer = json_encode($resp);
 print($answer);
-print_r ($result);
+//print_r ($result);
 }
 catch (PDOException $e) {
 
