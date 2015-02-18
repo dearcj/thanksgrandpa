@@ -11,7 +11,7 @@ $VK = new vkapi($api_id, $secret_key);
 $params = array(
 	        'client_id' => $api_id,
 	        'client_secret' => $secret_key,
-	        'grant_type' => "client_credentials'
+	        'grant_type' => "client_credentials"
 	    );
 
 $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
