@@ -1,9 +1,13 @@
 
 <?php
 
-$connectionInfo = array("UID" => "crazyjuice@te1gwbas4s", "pwd" => "girkinLOH1", "Database" => "thanksdad_db", "LoginTimeout" => 30, "Encrypt" => 1);
-$serverName = "tcp:te1gwbas4s.database.windows.net,1433";
-$conn = sqlsrv_connect($serverName, $connectionInfo);
+new PDO ("sqlsrv:server = tcp:te1gwbas4s.database.windows.net,1433; Database = thanksdad_db", "crazyjuice",
+"girkinLOH1");
+$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION );
+catch (PDOException $e ) {
+ print( "Error connecting to SQL Server." );
+  die(print_r($e));
+  }
 
   ?>
 
