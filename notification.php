@@ -10,7 +10,6 @@ $statement->execute();
 $result = $statement->fetchAll();
    foreach($result as $item) {
     echo $item[message];
-    echo $item[3];
    }
 
 
@@ -22,5 +21,3 @@ catch (PDOException $e) {
     die();
 }
 ?>
-
-
