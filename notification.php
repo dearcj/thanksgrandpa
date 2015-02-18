@@ -11,14 +11,13 @@ $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ прил�
 
 $VK = new vkapi($api_id, $secret_key);
 
-
 $statement = $pdo->prepare("select * from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
 $result = $statement->fetchAll();
    foreach($result as $item) {
     $strapi = (string)$item["vkapi"];
-    if (ids != "")
+    if ($ids != "")
     {
     $ids .= ",";
     }
