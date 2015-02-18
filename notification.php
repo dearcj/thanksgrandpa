@@ -7,7 +7,7 @@ $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
 
 $statement = $pdo->prepare("SELECT id, vkapi FROM tb_players");
 $result = $statement->execute();
-print_r($result);
+print $result;
 $q = $pdo->query('SELECT id, vkapi FROM tb_players');
 
 foreach($result as $row) {
