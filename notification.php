@@ -16,7 +16,7 @@ $params = array(
 
 $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 
-print ($token);
+print (json_encode($token));
 
 $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
                 "crazyjuice","girkinLOH1");
