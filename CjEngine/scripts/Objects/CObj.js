@@ -40,7 +40,9 @@ CObj = function(in_x,in_y,filename,in_body) {
         this.gfx.anchor.y = 0.5;
    /*     if (LauncherBG.inst && LauncherBG.inst.defaultLayer)
             LauncherBG.inst.defaultLayer.addChild(this.gfx); else*/
+        if (LauncherBG.inst) LauncherBG.inst.ol.addChild(this.gfx); else
         SM.inst.ol.addChild(this.gfx);
+
     }
 
     if (in_body) {

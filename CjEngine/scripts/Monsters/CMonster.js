@@ -18,11 +18,11 @@ function CMonster(in_x,in_y,textname,cr_bar){
     this.coinAmount = 4;
     this.hp = this.maxHp;
     if (cr_bar == true || cr_bar == null) {
-        this.bar = new CHPBar(in_x, in_y, "barHpBG");
-        this.bar.upperImage = "textureHP";
+        this.bar = new CHPBar(in_x, in_y, "health bar empty");
+        this.bar.upperImage = "health bar full";
         this.bar.init();
-        this.bar.gfx.scale.x = 0.1;
-        this.bar.gfx.scale.y = 0.2;
+    //    this.bar.gfx.scale.x = 0.1;
+     //   this.bar.gfx.scale.y = 0.2;
         this.bar.prop = 1;
         this.barOffsetY = 0;
     }
@@ -78,22 +78,31 @@ CMonster.prototype.kill = function()
 
     var parent = this.gfx.parent;
     parent.removeChild(this.gfx);
-
-    this.gfx = new CObj.createMovieClip("bloodblow");
-    this.gfx.anchor.x = 0.5;
-    this.gfx.anchor.y = 0.5;
-    this.gfx.scale.x = 1.8;
-    this.gfx.scale.y = 1.8;
-    this.gfx.animationSpeed = 0.6;
-    parent.addChild(this.gfx);
-    this.gfx.loop = false;
-    this.gfx.gotoAndPlay(0);
-    var f = this;
-    this.gfx.onComplete =
-    function (){
+    var bloodgfx = pool.Pop("bloodblow");
+    if (bloodgfx) {
+        this.gfx = bloodgfx;
+        this.gfx.anchor.x = 0.5;
+        this.gfx.anchor.y = 0.5;
+        this.gfx.scale.x = 1.8;
+        this.gfx.scale.y = 1.8;
+        this.gfx.animationSpeed = 0.6;
+        this.updateGraphics();
+        parent.addChild(this.gfx);
+        this.gfx.loop = false;
+        this.gfx.gotoAndPlay(0);
+        var f = this;
+        this.gfx.onComplete =
+            function () {
+                if (f.gfx) pool.Push(f.gfx);
+                rp(f.gfx);
+                f.gfx = null;
+                CLiveObj.prototype.kill.call(f);
+            };
+    } else
         CLiveObj.prototype.kill.call(f);
-    };
+
     this.updateGraphics();
+  //
 }
 
 CMonster.prototype.destroy = function()

@@ -38,7 +38,6 @@ CWeapon.prototype.process = function()
 {
     this.recoilValue -= 0.07;
     if (this.recoilValue < 0) this.recoilValue = 0;
-    console.log(this.recoilValue);
 }
 
 CWeapon.prototype.shot = function()
@@ -68,7 +67,6 @@ CWeapon.prototype.shot = function()
     return true;
 }
 
-
 CWeapon.prototype.canShot = function()
 {
     var t = (new Date()).getTime();
@@ -87,7 +85,6 @@ CWeapon.prototype.reload = function()
 {
     var wp = this;
     wp.state = this.sReload;
-
     gameStage.reloadBar.pos = 0;
     gameStage.reloadBar.gfx.visible = true;
     gameStage.ammoico.gfx.visible = false;

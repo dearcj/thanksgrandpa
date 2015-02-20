@@ -47,7 +47,37 @@ CCoin.prototype.collide = function(obj2)
     PlayerData.inst.score += this.amount;
     gameStage.updateScore();
 
-    new TweenMax(this.gfx, 0.3, {alpha: 0, onComplete: this.destroy, scaleX: 10, scaleY: 10});
-    new TweenMax(this.gfx.scale, 0.3, {x: this.gfx.scale.x*1.3, y: this.gfx.scale.y*1.3});
+    var coinGfx = pool.Pop("coinCollect");
+    if (!coinGfx)
+        this.destroy(); else
+    {
+        rp(coinGfx);
+        rp(this.gfx);
+
+        SM.inst.fg.addChild(coinGfx);
+        this.gfx = coinGfx;
+        var coin = this;
+        coinGfx.animationSpeed = 0.6;
+        coinGfx.loop = false;
+        coinGfx.gotoAndPlay(0);
+        this.updateGraphics();
+        this.gfx.onComplete = function () {
+            setTimeout( function() {
+                if (coin.gfx) pool.Push(coin.gfx);
+                rp(coin.gfx);
+                coin.gfx = null;
+                coin.destroy();
+            }, 15, coin);
+        };
+
+    }
+  //  Coin.generateTextParticle(this);
+  //  ZSound.Play("collectMoney")
+//
+
+
+
+    //new TweenMax(this.gfx, 0.3, {alpha: 0, onComplete: this.destroy, scaleX: 10, scaleY: 10});
+    //new TweenMax(this.gfx.scale, 0.3, {x: this.gfx.scale.x*1.3, y: this.gfx.scale.y*1.3});
     //this.destroy();
 }

@@ -16,8 +16,8 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.distance = 0;
     this.incDist = 50;
     this.speedUpCoef = 0.1;
-    this.layersSpeed = [0, 0.2, 0.25, 0.72, 1];
-
+    this.layersSpeed = [0, 0.2, 0.25, 0.72, 1, 1];
+    this.ol = new PIXI.DisplayObjectContainer();
     this.defaultLayer = null;
    // this.verticalParallax = 0;
 }
@@ -58,6 +58,7 @@ LauncherBG.prototype.clear = function () {
 
 LauncherBG.prototype.destroy = function () {
     this.clear();
+    this.ol = null;
     CObj.prototype.destroy.call(this);
 }
 
@@ -169,7 +170,7 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
     var original = LevelManager.levels["levels/" + levName + ".json"];
     var dataClone = clone(original);
     var layers = [];
-    var layerNum = 5;
+    var layerNum = 6;
     for (var i = 0; i < layerNum; ++i) {
 
         var cont = new PIXI.DisplayObjectContainer();
@@ -178,7 +179,10 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
         var layer = {rightBound: SCR_WIDTH, clip: cont, curDist: SCR_WIDTH, objects: [], velocity: vel};
         layers.push(layer);
         this.gfx.addChild(layer.clip);
+    //    if (i == 5) SM.inst.fg.addChild(layer.clip);
     }
+
+    this.gfx.addChildAt(this.ol, 5);
 
 
     for (var i = 0; i < original.objects.length; ++i) {

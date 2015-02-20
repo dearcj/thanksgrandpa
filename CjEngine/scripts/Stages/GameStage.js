@@ -530,7 +530,8 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.player.gfx.pivot.y = -190;
     gameStage.player.gfx.scale.x = 0.22;
     gameStage.player.gfx.scale.y = 0.22;
-    SM.inst.fg.addChild(gameStage.player.gfx);
+    LauncherBG.inst.ol.addChild(gameStage.player.gfx);
+    //SM.inst.fg.addChild(gameStage.player.gfx);
 
     gameStage.barXP = CObj.getById("barxp");
 
@@ -642,7 +643,7 @@ GameStage.prototype.createPools = function () {
 
     if (pool.Size("coinCollect") == 0)
         pool.Fill("coinCollect", 15, function () {
-            var c = CObj.createMovieClip("coinCollect");
+            var c = CObj.createMovieClip("coinfx.png");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
             return c;
@@ -650,9 +651,9 @@ GameStage.prototype.createPools = function () {
 
 
     if (pool.Size("expl") == 0)
-        pool.Fill("expl", 5, function () {
+        pool.Fill("expl", 2, function () {
             var c = new CObj(0, 0);
-            c.gfx = CObj.createMovieClip("expl");
+            c.gfx = CObj.createMovieClip("Boom");
             c.gfx.anchor.x = 0.5;
             c.gfx.anchor.y = 0.5;
             c.gfx.scale.x = 1.55;
@@ -660,15 +661,26 @@ GameStage.prototype.createPools = function () {
             return c;
         });
 
-    if (pool.Size("chickeneffect") == 0)
-        pool.Fill("chickeneffect", 3, function () {
-            var c = CObj.createMovieClip("chickeneffect");
+    if (pool.Size("blood") == 0)
+        pool.Fill("blood", 4, function () {
+            var c = CObj.createMovieClip("blood");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
-            c.scale.x *= window.addScale;
-            c.scale.y *= window.addScale;
+            c.scale.x *= 1;
+            c.scale.y *= 1;
             return c;
         });
+
+    if (pool.Size("bloodblow") == 0)
+        pool.Fill("bloodblow", 4, function () {
+            var c = CObj.createMovieClip("bloodblow");
+            c.anchor.x = 0.5;
+            c.anchor.y = 0.5;
+            c.scale.x *= 1;
+            c.scale.y *= 1;
+            return c;
+        });
+
 }
 
 GameStage.prototype.removeFade = function () {

@@ -6,8 +6,6 @@ try
 $api_id = 4654201;
 $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ приложения
 
-
-
 $params = array(
 	        'client_id' => $api_id,
 	        'client_secret' => $secret_key,
