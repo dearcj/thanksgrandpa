@@ -17,24 +17,26 @@ function Boss1(in_x,in_y,animname,cr_bar){
     LauncherBG.inst.ol.addChild(this.gfx);
     var t = this;
     this.fireDelay = 1.75;
-    TweenMax.delayedCall(this.fireDelay, function(){t.fireBullet();})
+ //   TweenMax.delayedCall(this.fireDelay, function(){t.fireBullet();})
 
     this.b1 = this.gfx.skeleton.findSlot("b_bullet1");
     this.b2 = this.gfx.skeleton.findSlot("b_bullet2");
 
     this.gfx.stateData.setMixByName("idle", "shot", 0.2);
     this.gfx.stateData.setMixByName("shot", "idle", 0.1);
+    TweenMax.delayedCall(1, function (){t.fire()});
 }
 
 Boss1.prototype.fire = function()
 {
     this.gfx.state.setAnimationByName(0, "shot", false);
-    TweenMax.delayedCall(0.5, this.fireBullet, [1]);
-    TweenMax.delayedCall(0.5, this.fireBullet,[2]);
-    TweenMax.delayedCall(0.5, this.goIdle);
+    var t = this;
+    TweenMax.delayedCall(0.5, function () {this.fireBullet();}, [1]);
+    TweenMax.delayedCall(0.9, function () {this.fireBullet();},[2]);
+    TweenMax.delayedCall(1.1, function () {this.goIdle();});
 }
 Boss1.prototype.goIdle = function() {
-
+    this.gfx.state.setAnimationByName(0, "idle", true);
 }
 
 
