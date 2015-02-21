@@ -19,6 +19,7 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.layersSpeed = [0, 0.2, 0.25, 0.72, 1, 1];
     this.ol = new PIXI.DisplayObjectContainer();
     this.defaultLayer = null;
+    this.pixToDist = 1/ 50;
    // this.verticalParallax = 0;
 }
 
@@ -100,7 +101,7 @@ LauncherBG.prototype.process = function (fake) {
 
     if (this.levCycles.length == 0) return;
     var upper = this.levCycles[0].layers[this.levCycles[0].layers.length - 1];
-    var delta = upper.velocity / 50;
+    var delta = upper.velocity * this.pixToDist;
 
     if (!fake) {
         if (this.distance > 100 && this.distance < 120) {
@@ -161,6 +162,30 @@ LauncherBG.prototype.process = function (fake) {
             if (objStartX >= distPrev && objStartX < distLocal) {
                 var d = objStartX - distPrev;
                 this.spawnClip(l, obj, null, distLocal, d);
+            }
+        }
+
+        if (i == 4 && this.graves)
+        {
+            var gl = this.graves.length;
+            for (var n = 0; n < gl; ++n)
+            {
+                if (this.distance > this.graves[n].dist - (SCR_WIDTH + 100)*this.pixToDist)
+                {
+                    var g = crsp("grave");
+                    g.x = SCR_WIDTH + 100;
+                    g.y = 450;
+                    l.clip.addChild(g);
+
+                    var tf = CTextField.createTextField({fontFamily: "dedgamecaps", tint: "0xFFFFFFFF", text: this.graves[n].text + '\n' + this.graves[n].dist.toString() + " м.", fontSize: 30, align: "center"});
+                    tf.x = -tf.width / 2;
+                    tf.updateText();
+                    g.addChild(tf);
+
+                    this.graves.splice(n, 1);
+                    n--;
+                    gl--;
+                }
             }
         }
     }

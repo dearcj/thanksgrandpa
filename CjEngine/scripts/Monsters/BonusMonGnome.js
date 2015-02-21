@@ -7,7 +7,16 @@
 extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
-   CMonster.apply(this,[in_x,in_y,animname, cr_bar]);
+   CMonster.apply(this,[in_x,in_y,null, cr_bar]);
+    this.gfx = new PIXI.Spine("imgtps/bird.json");
+    this.gfx.state.setAnimationByName(0, "animation", true);
+    //  g.skeleton.setSkinByName('perded');
+  // this.offsetX = 50;
+    //this.gfx.pivot.x = -50;
+    this.gfx.scale.x = 0.48;
+    this.gfx.scale.y = 0.48;
+    this.updateGraphics();
+    LauncherBG.inst.ol.addChild(this.gfx);
     this.xp = 30;
     new TweenMax(this, 0.9, {y: this.y + 40, repeat: -1, yoyo: true});
 }

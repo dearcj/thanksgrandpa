@@ -508,6 +508,17 @@ GameStage.prototype.onShowContinue = function () {
     var xxx = gameStage.createCircle(20, 100, 100, 100);
     SM.inst.guiLayer.addChild(xxx);
 
+    if (vkparams.friendsIngame)
+    {
+        LauncherBG.inst.graves = [];
+        for (var i = 0; i < vkparams.friendsIngame.length; ++i)
+        {
+            LauncherBG.inst.graves.push({text: vkparams.friendsIngame[i].name + " " + vkparams.friendsIngame[i].last_name, dist: vkparams.friendsIngame[i].maxdistance});
+        }
+    } else
+        LauncherBG.inst.graves = [{text: "ПАЛАУТ", dist: 100}, {text: "ДУЛЬКИН", dist: 200}, {text: "ПСИНА", dist: 200}];
+
+
     var floorHeight = 120;
     gameStage.floor = new FloorObj(SCR_WIDTH / 2, SCR_HEIGHT - floorHeight / 2, null);
     gameStage.floor.gfx = new PIXI.DisplayObjectContainer();

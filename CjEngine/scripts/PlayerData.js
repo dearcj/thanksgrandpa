@@ -249,7 +249,7 @@ PlayerData.prototype.loadEnd = function()
    checkDb();
    if (window.dbinit && window.loaded)
    {
-      window.loadingState = "game";
+    //  window.loadingState = "game";
       assetsButSoundsLoaded();
    }
    SM.inst.openStage(charStage);

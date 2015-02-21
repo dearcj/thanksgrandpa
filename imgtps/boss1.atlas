@@ -5,7 +5,7 @@ filter: Linear,Linear
 repeat: none
 b_body
   rotate: false
-  xy: 2, 230
+  xy: 2, 227
   size: 312, 263
   orig: 312, 263
   offset: 0, 0
@@ -26,7 +26,7 @@ b_bullet2
   index: -1
 b_head
   rotate: true
-  xy: 316, 327
+  xy: 316, 324
   size: 166, 318
   orig: 166, 318
   offset: 0, 0
@@ -34,13 +34,13 @@ b_head
 b_l_arm
   rotate: true
   xy: 2, 43
-  size: 185, 288
+  size: 182, 288
   orig: 185, 288
-  offset: 0, 0
+  offset: 2, 0
   index: -1
 b_legs
   rotate: false
-  xy: 636, 314
+  xy: 636, 311
   size: 290, 179
   orig: 290, 179
   offset: 0, 0
@@ -48,14 +48,49 @@ b_legs
 b_r_arm
   rotate: true
   xy: 316, 140
-  size: 185, 288
+  size: 182, 288
   orig: 185, 288
   offset: 0, 0
   index: -1
 b_top_body
   rotate: true
-  xy: 606, 163
+  xy: 606, 160
   size: 149, 273
   orig: 149, 273
+  offset: 0, 0
+  index: -1
+disp1
+  rotate: true
+  xy: 928, 356
+  size: 134, 91
+  orig: 134, 91
+  offset: 0, 0
+  index: -1
+disp2
+  rotate: false
+  xy: 292, 47
+  size: 134, 91
+  orig: 134, 91
+  offset: 0, 0
+  index: -1
+disp3
+  rotate: false
+  xy: 428, 47
+  size: 134, 91
+  orig: 134, 91
+  offset: 0, 0
+  index: -1
+disp4
+  rotate: true
+  xy: 881, 175
+  size: 134, 91
+  orig: 134, 91
+  offset: 0, 0
+  index: -1
+disp5
+  rotate: false
+  xy: 606, 67
+  size: 134, 91
+  orig: 134, 91
   offset: 0, 0
   index: -1

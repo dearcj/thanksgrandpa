@@ -55,7 +55,7 @@ var w_pps = new CPistol(
         recoil: 1.0, //recoil
         magcap: 20, //magcap
         delay: 120, //delay
-        damage: 33, //damage
+        damage: 24, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 1200},//__reloadTime,}
     "asd",// __gfx,

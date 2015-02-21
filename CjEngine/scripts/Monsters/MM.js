@@ -2,19 +2,19 @@
 MM = function() {
     this.patterns =
     [
-       {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1, prob: 1},
-            {mons: ".l.l.l...l.l.l..", diff: 2, prob: 1},
+     /*  {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1, prob: 1},
+        {mons: ".l.l.l...l.l.l..", diff: 2, prob: 1},
         {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3, prob: 1},
         {mons: ".f..f..f..", diff: 3, prob: 1},
         {mons: ".F..l.lF..l.", diff: 4, prob: 1},
         {mons: ".f..c.flf.c.", diff: 4, prob: 1},
         {mons: ".f..c.flf.c.", diff: 4, prob: 1},
         {mons: "..ssss..s..l", diff: 4, prob: 1},
-        {mons: "..c..c..c..s..sc..sc..sc..", diff: 5, prob: 1},
-        {mons: "b", diff: 2, prob: 0.1}
+        {mons: "..c..c..c..s..sc..sc..sc..", diff: 5, prob: 1},*/
+        {mons: "b....................", diff: 2, prob: 0.1}
     ];
 
-    this.bosses = [{class: Boss1, dist: 600}, {class: Boss1, dist: 1800}];
+    this.bosses = [{class: Boss1, dist: 50}, {class: Boss1, dist: 1800}];
     // c l z - преграды
     //s - монстр
 

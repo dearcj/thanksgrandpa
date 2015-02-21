@@ -73,7 +73,6 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
 
 CPlayer.prototype.createDedGraphics = function()
 {
-
     var g = new PIXI.Spine("imgtps/skeleton.json");
 
     g.skeleton.setSkinByName('perded');
