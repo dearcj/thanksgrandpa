@@ -60,6 +60,7 @@ CMonster.prototype.process = function()
 
 CMonster.prototype.kill = function()
 {
+    if (!this) return;
     if (this.prekilled) return;
 
     if (this.spawnCoins)
@@ -74,6 +75,9 @@ CMonster.prototype.kill = function()
         new TweenMax(this.bar.gfx, 0.2, {width: this.bar.gfx.width*3, height: 0});//.width
         //this.bar.gfx.visible = false;
     }
+
+    if (!this.xp)
+    console;
     PlayerData.inst.gainExp(this.xp);
 
     var parent = this.gfx.parent;
@@ -111,7 +115,7 @@ CMonster.prototype.destroy = function()
 
     if (this.bar)
         this.bar.destroy();
-
+    this.bar = null;
     var inx = CMonster.list.indexOf(this);
     CMonster.list.splice(inx, 1);
     CObj.prototype.destroy.call(this);

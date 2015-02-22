@@ -47,6 +47,10 @@ CCoin.prototype.collide = function(obj2)
     PlayerData.inst.score += this.amount;
     gameStage.updateScore();
 
+    this.gravityEnabled = false;
+    this.vx = 0;
+    this.vy = 0;
+    this.allowTrackSpeed = false;
     var coinGfx = pool.Pop("coinCollect");
     if (!coinGfx)
         this.destroy(); else
@@ -54,12 +58,15 @@ CCoin.prototype.collide = function(obj2)
         rp(coinGfx);
         rp(this.gfx);
 
-        SM.inst.fg.addChild(coinGfx);
-        this.gfx = coinGfx;
-        var coin = this;
-        coinGfx.animationSpeed = 0.6;
         coinGfx.loop = false;
+        coinGfx.gotoAndStop(0);
         coinGfx.gotoAndPlay(0);
+        this.gfx = coinGfx;
+        this.updateGraphics();
+
+        SM.inst.fg.addChild(coinGfx);
+        var coin = this;
+        coinGfx.animationSpeed = 0.5;
         this.updateGraphics();
         this.gfx.onComplete = function () {
             setTimeout( function() {
@@ -67,7 +74,7 @@ CCoin.prototype.collide = function(obj2)
                 rp(coin.gfx);
                 coin.gfx = null;
                 coin.destroy();
-            }, 15, coin);
+            }, 0, coin);
         };
 
     }

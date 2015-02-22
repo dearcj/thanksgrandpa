@@ -18,7 +18,12 @@ function BonusMonGnome(in_x,in_y,animname,cr_bar){
     this.updateGraphics();
     LauncherBG.inst.ol.addChild(this.gfx);
     this.xp = 30;
-    new TweenMax(this, 0.9, {y: this.y + 40, repeat: -1, yoyo: true});
+  //  new TweenMax(this, 0.9, {y: this.y + 40, repeat: -1, yoyo: true});
+}
+
+BonusMonGnome.prototype.collide = function (obj2)
+{
+
 }
 
 BonusMonGnome.prototype.dealDamage = function(dmg)
@@ -26,8 +31,4 @@ BonusMonGnome.prototype.dealDamage = function(dmg)
     CMonster.prototype.dealDamage.call(this, dmg);
 
     CCoin.spawnCoin(this.x, this.y, 3);
-}
-
-BonusMonGnome.prototype.destroy = function()
-{
 }

@@ -36,7 +36,7 @@ CWeapon.prototype.resetParams = function()
 
 CWeapon.prototype.process = function()
 {
-    this.recoilValue -= 0.07;
+    this.recoilValue -= 0.25;
     if (this.recoilValue < 0) this.recoilValue = 0;
 }
 

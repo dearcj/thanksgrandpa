@@ -51,7 +51,7 @@ LauncherBG.generateProperty('maxVelocity', {
 
 LauncherBG.prototype.clear = function () {
     this.speedUpCoef = 0.1;
-    this.maxVelocity = this.nullSpeed;
+   /// this.maxVelocity = this.nullSpeed;
     this.levCycles.splice(0, this.levCycles.length);
     this.distance = 0;
     this.incDist = 50;

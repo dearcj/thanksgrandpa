@@ -50,6 +50,30 @@ CBullet.prototype.collide = function (obj2)
 {
     if (this.prevVictim != obj2) {
         obj2.dealDamage(this.dmg);
+
+        var fx = pool.Pop("blood");
+        if (fx)
+        {
+            var obj = new CObj(this.x, this.y, null);
+            fx.loop = false;
+            fx.gotoAndStop(0);
+            fx.gotoAndPlay(0);
+            obj.gfx = fx;
+            obj.updateGraphics();
+            SM.inst.fg.addChild(fx);
+
+            fx.animationSpeed = 0.55;
+            this.updateGraphics();
+            obj.gfx.onComplete = function () {
+                setTimeout( function() {
+                    if (obj.gfx) pool.Push(obj.gfx);
+                    rp(obj.gfx);
+                    obj.gfx = null;
+                    obj.destroy();
+                }, 0);
+            };
+        }
+
         this.life--;
         if (this.life <= 0)
             this.destroy();

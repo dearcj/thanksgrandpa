@@ -14,7 +14,7 @@ MM = function() {
         {mons: "b....................", diff: 2, prob: 0.1}
     ];
 
-    this.bosses = [{class: Boss1, dist: 50}, {class: Boss1, dist: 1800}];
+    this.bosses = [{class: Boss1, dist: 5000}, {class: Boss1, dist: 1800}];
     // c l z - преграды
     //s - монстр
 
@@ -146,7 +146,7 @@ MM.prototype.spawnBonusGnome = function(xp) {
     var m = new BonusMonGnome(SCR_WIDTH+100,150,str);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
-    new TweenMax(m, 25, {x: -100, onComplete: m.kill});
+    new TweenMax(m, 25, {x: -100, onComplete: function(){m.destroy();}});
     m.maxHp = 1000;
     m.hp = m.maxHp;
     m.xp = xp + LauncherBG.inst.distance*0.01;

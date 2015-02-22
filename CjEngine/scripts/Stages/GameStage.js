@@ -124,7 +124,8 @@ GameStage.prototype.onHide = function (newStage) {
         gameStage.pauseSprite = null;
     }
     gameStage.distText = null;
-    gameStage;
+    LauncherBG.inst.destroy();
+    LauncherBG.inst = null;
 }
 
 GameStage.prototype.loseGame = function () {
@@ -201,8 +202,8 @@ GameStage.prototype.updateItems = function () {
                 gameStage.curweapon = w_ak74;
             if (item.name == "Minigun")
                 gameStage.curweapon = w_minigun;
-            if (item.name == "Grenade Launcher")
-                gameStage.curweapon = w_pistol;
+            if (item.name == "Grenade launcher")
+                gameStage.curweapon = w_grenadel;
             if (item.name == "Plazma Cannon")
                 gameStage.curweapon = w_laser;
         }
@@ -655,6 +656,8 @@ GameStage.prototype.createPools = function () {
     if (pool.Size("coinCollect") == 0)
         pool.Fill("coinCollect", 15, function () {
             var c = CObj.createMovieClip("coinfx.png");
+            c.scale.x = 0.7;
+            c.scale.y = 0.7;
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
             return c;
@@ -662,23 +665,22 @@ GameStage.prototype.createPools = function () {
 
 
     if (pool.Size("expl") == 0)
-        pool.Fill("expl", 2, function () {
-            var c = new CObj(0, 0);
-            c.gfx = CObj.createMovieClip("Boom");
-            c.gfx.anchor.x = 0.5;
-            c.gfx.anchor.y = 0.5;
-            c.gfx.scale.x = 1.55;
-            c.gfx.scale.y = 1.55;
+        pool.Fill("expl", 4, function () {
+            var c = CObj.createMovieClip("Boom");
+            c.anchor.x = 0.5;
+            c.anchor.y = 0.5;
+            c.scale.x = 1;
+            c.scale.y = 1;
             return c;
         });
 
     if (pool.Size("blood") == 0)
-        pool.Fill("blood", 4, function () {
+        pool.Fill("blood", 11, function () {
             var c = CObj.createMovieClip("blood");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;
-            c.scale.x *= 1;
-            c.scale.y *= 1;
+            c.scale.x = 1;
+            c.scale.y = 1;
             return c;
         });
 

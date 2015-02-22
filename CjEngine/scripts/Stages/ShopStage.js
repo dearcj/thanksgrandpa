@@ -56,7 +56,8 @@ ShopStage.prototype.buyItem = function (event, unlock)
         shopStage.transScreen = SM.inst.addDisableWindow("ПРОВОДИТСЯ ТРАНЗАКЦИЯ" +'\n' + "ПОЖАЛУЙСТА ПОДОЖДИТЕ");
 
         if  (unlock && buyitem.pricecrys > 0)
-            PlayerData.inst.playerItem.crystals -= buyitem.pricecrys; else
+            PlayerData.inst.playerItem.crystals -= buyitem.pricecrys;
+        else
             PlayerData.inst.playerItem.money -= buyitem.price;
 
         shopStage.updateStatsPanel();
