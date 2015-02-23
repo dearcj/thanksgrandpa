@@ -38,11 +38,8 @@ CObj = function(in_x,in_y,filename,in_body) {
         this.gfx.gameobject = this;
         this.gfx.anchor.x = 0.5;
         this.gfx.anchor.y = 0.5;
-   /*     if (LauncherBG.inst && LauncherBG.inst.defaultLayer)
-            LauncherBG.inst.defaultLayer.addChild(this.gfx); else*/
         if (LauncherBG.inst) LauncherBG.inst.ol.addChild(this.gfx); else
         SM.inst.ol.addChild(this.gfx);
-
     }
 
     if (in_body) {
@@ -65,7 +62,7 @@ CObj = function(in_x,in_y,filename,in_body) {
    // return this;
 };
 
-CObj.debugView = false;
+//CObj.debugView = true;
 
 Function.prototype.generateProperty = function(name, options) {
     // internal member variable name
@@ -306,8 +303,8 @@ CObj.processAll = function(){
 
     for (var i = 0; i < len; i++) {
 
-        if ((!CObj.objects[i].gui )&&( CObj.objects[i].x > SCR_WIDTH*1.3 || CObj.objects[i].x < -SCR_WIDTH*0.3 ||
-            CObj.objects[i].y > SCR_HEIGHT*1.3 || CObj.objects[i].y < -SCR_HEIGHT*0.3 ))
+        if ((!CObj.objects[i].gui)&&(CObj.objects[i].x > SCR_WIDTH*1.8 || CObj.objects[i].x < -SCR_WIDTH*0.8 ||
+            CObj.objects[i].y > SCR_HEIGHT*1.8 || CObj.objects[i].y < -SCR_HEIGHT ))
         {
             if (CObj.checkType(CObj.objects[i], CHPBar)) continue;
             CObj.objects[i].destroy();

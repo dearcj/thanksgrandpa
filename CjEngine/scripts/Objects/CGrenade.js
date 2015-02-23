@@ -8,7 +8,7 @@ function CGrenade(in_x,in_y,textname,in_body) {
     CObj.apply(this, [in_x, in_y, null, in_body]);
     this.gfx = crsp("b_bullet04.png");
     LauncherBG.inst.ol.addChild(this.gfx);
-
+    this.radius = 35;
     if (!CBullet.list) CBullet.list = [];
     CBullet.list.push(this);
 }
@@ -16,7 +16,6 @@ function CGrenade(in_x,in_y,textname,in_body) {
 
 CGrenade.prototype.collide = function (obj2)
 {
-    if (this.prevVictim != obj2) {
 
 
         var fx = pool.Pop("expl");
@@ -50,7 +49,8 @@ CGrenade.prototype.collide = function (obj2)
             var dy = m.y - this.y;
             if (dx*dx + dy*dy < sd)
             {
-                m.dealDamage(this.dmg);
+                var d = Math.sqrt(sd);
+                m.dealDamage(this.dmg*(sd + 0.01 / 350));
             }
             if (m.doRemove)
             {
@@ -60,7 +60,7 @@ CGrenade.prototype.collide = function (obj2)
         }
 
         this.destroy();
-    }
+
 }
 
 
@@ -71,4 +71,12 @@ CGrenade.prototype.destroy = function()
 
 CGrenade.prototype.process = function() {
     CObj.prototype.process.call(this);
+
+    if (!this.doRemove && this.y > gameStage.floor.y - 60)
+    {
+        this.vy = - this.vy*0.7;
+
+        if (Math.abs(this.vy)< 5)
+        this.collide(null);
+    }
 }

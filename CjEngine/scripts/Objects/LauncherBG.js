@@ -18,6 +18,7 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.speedUpCoef = 0.1;
     this.layersSpeed = [0, 0.2, 0.25, 0.72, 1, 1];
     this.ol = new PIXI.DisplayObjectContainer();
+    this.pllayer = new PIXI.DisplayObjectContainer();
     this.defaultLayer = null;
     this.pixToDist = 1/ 50;
    // this.verticalParallax = 0;
@@ -60,6 +61,7 @@ LauncherBG.prototype.clear = function () {
 LauncherBG.prototype.destroy = function () {
     this.clear();
     this.ol = null;
+    this.pllayer = null;
     CObj.prototype.destroy.call(this);
 }
 
@@ -165,7 +167,7 @@ LauncherBG.prototype.process = function (fake) {
             }
         }
 
-        if (i == 4 && this.graves)
+        if (i == 3 && this.graves)
         {
             var gl = this.graves.length;
             for (var n = 0; n < gl; ++n)
@@ -174,7 +176,7 @@ LauncherBG.prototype.process = function (fake) {
                 {
                     var g = crsp("grave");
                     g.x = SCR_WIDTH + 100;
-                    g.y = 450;
+                    g.y = 375;
                     l.clip.addChild(g);
 
                     var tf = CTextField.createTextField({fontFamily: "dedgamecaps", tint: "0xFFFFFFFF", text: this.graves[n].text + '\n' + this.graves[n].dist.toString() + " м.", fontSize: 30, align: "center"});
@@ -208,6 +210,7 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
     }
 
     this.gfx.addChildAt(this.ol, 5);
+    this.gfx.addChildAt(this.pllayer, 6);
 
 
     for (var i = 0; i < original.objects.length; ++i) {

@@ -98,7 +98,6 @@ GameStage.prototype.onHide = function (newStage) {
     gameStage.ammobar = null;
     gameStage.ammoico = null;
 
-
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
     $(document).off("keypress", this.doKeyDown);
@@ -517,7 +516,7 @@ GameStage.prototype.onShowContinue = function () {
             LauncherBG.inst.graves.push({text: vkparams.friendsIngame[i].name + " " + vkparams.friendsIngame[i].last_name, dist: vkparams.friendsIngame[i].maxdistance});
         }
     } else
-        LauncherBG.inst.graves = [{text: "ПАЛАУТ", dist: 100}, {text: "ДУЛЬКИН", dist: 200}, {text: "ПСИНА", dist: 200}];
+        LauncherBG.inst.graves = [{text: "ПАЛАУТ", dist: 20}, {text: "ДУЛЬКИН", dist: 30}, {text: "ПСИНА", dist: 200}];
 
 
     var floorHeight = 120;
@@ -542,7 +541,7 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.player.gfx.pivot.y = -190;
     gameStage.player.gfx.scale.x = 0.22;
     gameStage.player.gfx.scale.y = 0.22;
-    LauncherBG.inst.ol.addChild(gameStage.player.gfx);
+    LauncherBG.inst.pllayer.addChild(gameStage.player.gfx);
     //SM.inst.fg.addChild(gameStage.player.gfx);
 
     gameStage.barXP = CObj.getById("barxp");

@@ -21,7 +21,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.baseY = this.y;
     this.offsetY = -20;
     this.offsetX = -25;
-    this.radius = this.gfx.width / 2 - 25;
+    this.radius = this.gfx.width / 2 - 35;
     this.sMoving = 1;
     this.sDying = 2;
     this.state = this.sMoving;
