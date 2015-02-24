@@ -459,7 +459,7 @@ function getChar(event) {
 }
 
 GameStage.prototype.doKeyDown = function (evt) {
-    console.log("KEYDOWN EVENT TYPE " + md.type.toString());
+    console.log("KEYDOWN EVENT TYPE " + evt.type.toString());
 
 
     console.log("KEY DOWN");
@@ -610,11 +610,12 @@ GameStage.prototype.onShowContinue = function () {
 
 
     var fdown = function (md) {
-        console.log("MOUSEDOWN EVENT TYPE " + md.type.toString());
+        console.log("MOUSEDOWN");
         gameStage.fireState = true;
     }
 
     var fup = function (md) {
+        console.log("MOUSEUP");
         gameStage.fireState = false;
     }
 
@@ -630,8 +631,8 @@ GameStage.prototype.onShowContinue = function () {
 
   //  stage.touchstart = fdown;
    // stage.touchend = fup;
-   // stage.mousedown = fdown;
-   // stage.mouseup = fup;
+    stage.mousedown = fdown;
+    stage.mouseup = fup;
     gameStage.updateXP();
     /*
      gameStage.muteBtn = CObj.getById("mutebtn");
