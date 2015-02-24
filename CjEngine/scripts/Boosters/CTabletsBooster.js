@@ -12,6 +12,8 @@ function CTabletsBooster(x,y,gfx) {
 
     this.activate = function()
     {
-
+    //    gameStage.slowMoCoef = 0.5;
+     //   var f = gameStage;
+     //   TweenMax.delayedCall(3, function(){f.slowMoCoef = 1})
     }
 }

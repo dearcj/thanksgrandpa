@@ -97,10 +97,10 @@ var w_ak74 = new CQueueGun(
         queueDelay: 110,
         life: 1,
         acc: 0.08,
-        recoil: 1.3, //recoil
+        recoil: 1.5, //recoil
         magcap: 30, //magcap
         delay: 600, //delay
-        damage: 18, //damage
+        damage: 44, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 2200},//__reloadTime,}
     "asd",// __gfx,

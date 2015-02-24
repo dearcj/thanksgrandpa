@@ -174,6 +174,8 @@ CPlayer.prototype.landing = function() {
 }
 
 CPlayer.prototype.onDmgAnim = function(pusher) {
+    if  (this.state == this.sDying) return;
+
     if (this.gravityEnabled)
         this.vy -= 30; else
     {
@@ -213,7 +215,11 @@ CPlayer.prototype.process = function()
             }
         }
 
-        if (!this.jumping)
+
+        if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40) {
+            this.fire();
+        }
+        if (!this.jumping && this.boardSlot)
             this.boardSlot.bone.rotation *= 0.66;
 
         //LauncherBG.inst.verticalParallax = (this.baseY - this.y) / 100;
@@ -225,9 +231,6 @@ CPlayer.prototype.process = function()
         gameStage.reloadBar.x = gameStage.ammoico.x;
         gameStage.reloadBar.y = gameStage.ammoico.y;
 
-        if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40) {
-            this.fire();
-        }
 
         if (this.weapon)
             this.weapon.process();
@@ -241,6 +244,12 @@ CPlayer.prototype.process = function()
         var dx = 0;
         var dy = 0;
         var da = 0;
+
+        if (gameStage.curweapon == w_ak74) {
+            dx = 0;
+            dy = 370;
+        }else
+
         if (gameStage.curweapon == w_rifle) {
             dx = 220;
             dy = 20;
@@ -254,7 +263,7 @@ CPlayer.prototype.process = function()
         else
         if (gameStage.curweapon == w_minigun)
         {
-            dy = 310;
+            dy = 380;
             dx = -68;
             da = Math.PI / 7.5;
         }

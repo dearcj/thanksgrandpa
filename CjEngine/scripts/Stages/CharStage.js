@@ -8,6 +8,7 @@ CharStage.prototype.onShow = function() {
     this.doProcess = false;
     charStage.skipFriends = 0;
     CustomStage.prototype.onShow.call(this);
+    charStage.icons = []
 
     LevelManager.loadLevel("levchar", function()
         {
@@ -17,6 +18,12 @@ CharStage.prototype.onShow = function() {
 }
 
 CharStage.prototype.onHide = function(newStage) {
+
+    for (var i = 0; i < charStage.icons.length; ++i)
+    {
+        charStage.icons[i].texture.destroy(true);
+    }
+    charStage.icons = null;
     charStage.pl = null;
     charStage.frp.parent.removeChild(charStage.frp);
     charStage.frp = null;
@@ -48,6 +55,18 @@ CharStage.prototype.createFriendsPanel = function() {
             }
 
             continue;
+        } else
+        {
+            friendClip.click = function () {
+                VK.api("wall.post", {
+                    owner_id: vkparams.viewerid,
+                    message: vkparams.friendsIngame[i].name + ", возвращайся в игру дружище",
+                    attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]
+                }, function (data) {
+
+                });
+            };
+
         }
 
         var setPhotoCB = function(upperClip) {
@@ -63,6 +82,7 @@ CharStage.prototype.createFriendsPanel = function() {
                         ico.anchor.x = 0.5;
                         ico.anchor.y = 0.5;
                         clip.addChild(ico);
+                        charStage.icons.push(ico);
                     }
                 };
                 setLoader(upperClip);
@@ -124,7 +144,7 @@ CharStage.prototype.onShowContinue = function()
 {
     charStage.doProcess = true;
 
-    PlayerData.inst.addNotification("some msg", PlayerData.inst.playerItem.vkapi);
+    //PlayerData.inst.addNotification("some msg", PlayerData.inst.playerItem.vkapi);
 
     CObj.getById("frprev").click = function() {
         charStage.skipFriends -= 5;

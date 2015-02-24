@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>sparrow</string>
+        <string>json</string>
         <key>textureFileName</key>
         <filename>pussyatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>pussyatlas.xml</filename>
+        <filename>pussyatlas.json</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -131,7 +131,7 @@
             <key>innerPadding</key>
             <uint>0</uint>
             <key>extrude</key>
-            <uint>0</uint>
+            <uint>1</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
@@ -145,7 +145,6 @@
             <filename>../../img/areaBeam.png</filename>
             <filename>../../img/BULLETSHOTGUN.png</filename>
             <filename>../../../../dedgame/fight screen/road tile.png</filename>
-            <filename>../../../../dedgame/fight screen/road up tile.png</filename>
             <filename>../../../../dedgame/fight screen/health dead.png</filename>
             <filename>../../../../dedgame/fight screen/health.png</filename>
             <filename>../../../../dedgame/fight screen/road down.png</filename>
@@ -258,6 +257,15 @@
             <filename>../../../../dedgame/fight screen/SW walker.png</filename>
             <filename>../../../../dedgame/fight screen/trashbox.png</filename>
             <filename>../../../../dedgame/fight screen/grave.png</filename>
+            <filename>../../../../dedgame/boss skeleton/b_bullet01.png</filename>
+            <filename>../../../../dedgame/boss skeleton/b_bullet02.png</filename>
+            <filename>../../../../dedgame/boss skeleton/b_bullet03.png</filename>
+            <filename>../../../../dedgame/boss skeleton/b_bullet04.png</filename>
+            <filename>../../../../dedgame/boss skeleton/b_bullet05.png</filename>
+            <filename>../../../../dedgame/boss skeleton/b_bullet06.png</filename>
+            <filename>../../../../dedgame/fight screen/tree shadow3.png</filename>
+            <filename>../../../../dedgame/fight screen/tree shadow.png</filename>
+            <filename>../../../../dedgame/fight screen/tree shadow2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

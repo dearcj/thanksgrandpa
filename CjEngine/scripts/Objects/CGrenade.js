@@ -36,7 +36,7 @@ CGrenade.prototype.collide = function (obj2)
                     rp(obj.gfx);
                     obj.gfx = null;
                     obj.destroy();
-                }, 0);
+                }, 15);
             };
         }
 

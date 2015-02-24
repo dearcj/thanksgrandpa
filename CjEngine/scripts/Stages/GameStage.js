@@ -146,9 +146,9 @@ GameStage.prototype.updateXP = function()
 GameStage.prototype.updateItems = function () {
     var k = 0;
 
-    var btns = [{key: "a", gfx: "1boost_button.png"},
-        {key: "s", gfx: "2boost_button.png"},
-        {key: "d", gfx: "3boost_button.png"}];
+    var btns = [{key: "A", gfx: "1boost_button.png"},
+        {key: "S", gfx: "2boost_button.png"},
+        {key: "D", gfx: "3boost_button.png"}];
 
     gameStage.curweapon = w_rifle;
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
@@ -230,7 +230,7 @@ GameStage.prototype.shAfterLife = function () {
     }
 
 
-    new TweenMax(cb, 3, {pos: 1, onComplete: openScoreWnd});
+   var failtween=  new TweenMax(cb, 3, {pos: 1, onComplete: openScoreWnd});
     var bodrtext = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost text.png"));
     bodrtext.anchor.x = 0.5;
     bodrtext.anchor.y = 0.5;
@@ -241,7 +241,10 @@ GameStage.prototype.shAfterLife = function () {
     cb.gfx.interactive = true;
 
     cb.gfx.click = function () {
-        if (PlayerData.inst.playerItem.crystals > price) {
+
+        var continueGame = function()
+        {
+            //failtween.kill( );
             TweenMax.killTweensOf(cb);
             removeafterlife();
             gameStage.removeFade();
@@ -252,8 +255,28 @@ GameStage.prototype.shAfterLife = function () {
             PlayerData.inst.savePlayerData();
 
             new TweenMax(LauncherBG.inst, 2, {maxVelocity: LauncherBG.inst.preVelocity});
-
         }
+
+        price = 1000;
+        if (PlayerData.inst.playerItem.crystals > price) {
+            continueGame();
+        } else
+        {
+            order("item5");
+            VK.orderComplete = function()
+            {
+               if (PlayerData.inst.playerItem.crystals > price)
+               {
+                   continueGame();
+               }
+            }
+            var cancel = function()
+            {
+                failtween.resume();
+            }
+            VK.orderFail = cancel;
+            VK.orderCancel = cancel;
+          }
     }
     var bsX = cb.gfx.scale.x;
     var bsY = cb.gfx.scale.y;
@@ -274,7 +297,7 @@ GameStage.prototype.shAfterLife = function () {
     gainbgsprite.y = SCR_HEIGHT / 2 + 120;
     SM.inst.guiLayer.addChild(gainbgsprite);
 
-    var price = Math.round(1 + (LauncherBG.inst.distance / 500));
+    var price = Math.round(2 + (LauncherBG.inst.distance / 250));
     var tf = CTextField.createTextField({text: price.toString(), fontSize: 22, align: "center"});
     tf.tint = 0x333333;
     tf.updateText();
@@ -436,8 +459,8 @@ GameStage.prototype.doKeyDown = function (evt) {
     if (gameStage.state != "game") return;
     console.log("EVENT IS = " + evt.toString() + "WINDOW.event = " + window.event);
 
-    evt = evt || window.event;
-    var c = getChar(evt);
+   // evt = evt || window.event;
+    var c = String.fromCharCode(event.which);
 
     if (CBooster.list)
     for (var i = 0; i < CBooster.list.length; ++i)
@@ -477,7 +500,7 @@ GameStage.prototype.onShow = function () {
         $(document).on('keydown', func);
 
     });
-
+    gameStage.slowMoCoef = 1;
     /*window.addEventListener("keydown", this.doKeyDown, false);
     window.addEventListener("keypress", this.doKeyDown, false);
    */
@@ -515,8 +538,9 @@ GameStage.prototype.onShowContinue = function () {
         {
             LauncherBG.inst.graves.push({text: vkparams.friendsIngame[i].name + " " + vkparams.friendsIngame[i].last_name, dist: vkparams.friendsIngame[i].maxdistance});
         }
-    } else
-        LauncherBG.inst.graves = [{text: "ПАЛАУТ", dist: 20}, {text: "ДУЛЬКИН", dist: 30}, {text: "ПСИНА", dist: 200}];
+    }
+    //else
+     //   LauncherBG.inst.graves = [{text: "ПАЛАУТ", dist: 20}, {text: "ДУЛЬКИН", dist: 30}, {text: "ПСИНА", dist: 200}];
 
 
     var floorHeight = 120;
@@ -588,7 +612,7 @@ GameStage.prototype.onShowContinue = function () {
         gameStage.fireState = false;
     }
 
-    stage.mousemove = stage.touchmove;
+   // stage.mousemove = stage.touchmove;
     stage.mousedown = stage.touchstart;
     stage.mouseup = stage.touchend;
     gameStage.updateXP();

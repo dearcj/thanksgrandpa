@@ -43,9 +43,16 @@ loginCallback = function(playerItem)
     })
 
     VK.api('users.get',{user_ids:vkparams.viewerid.toString()}, function(data) {
-        vkparams.first_name = data.response[0].first_name;
-        vkparams.last_name = data.response[0].last_name;
-        loaded++;
+
+        if (data.response[0].first_name)
+        vkparams.first_name = data.response[0].first_name; else
+            vkparams.first_name = "Ноунейм";
+
+        if (data.response[0].first_name)
+            vkparams.last_name = data.response[0].last_name; else
+            vkparams.last_name = "";
+
+                loaded++;
         if (loaded == 2)
         new PlayerData(playerItem);
     });

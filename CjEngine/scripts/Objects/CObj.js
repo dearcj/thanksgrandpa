@@ -163,13 +163,13 @@ CObj.prototype.collide = function(obj2){
 CObj.prototype.process = function(){
 
     if (this.av != 0)
-    this.rotation += this.av;
+    this.rotation += this.av*gameStage.slowMoCoef;
 
     if (this.vx != 0)
-    this.x = this.x + this.vx;
+    this.x = this.x + this.vx*gameStage.slowMoCoef;
 
     if (this.vy != 0)
-        this.y = this.y + this.vy;
+        this.y = this.y + this.vy*gameStage.slowMoCoef;
 
     if (CObj.debugView && this.debugGfx) {
        this.debugGfx.position.x = this.x;

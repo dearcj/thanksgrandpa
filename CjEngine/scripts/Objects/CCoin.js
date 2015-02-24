@@ -74,7 +74,7 @@ CCoin.prototype.collide = function(obj2)
                 rp(coin.gfx);
                 coin.gfx = null;
                 coin.destroy();
-            }, 0, coin);
+            }, 15, coin);
         };
 
     }
