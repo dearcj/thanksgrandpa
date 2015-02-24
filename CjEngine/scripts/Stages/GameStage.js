@@ -72,7 +72,7 @@ GameStage.prototype.process = function () {
     /*   if (this.doPhys)
      world.step(this.invFR*this._worldSpeed);u
      ddsd[d*/
-    //window.focus();
+    window.focus();
     CObj.processAll();
 
     var d = Math.floor(LauncherBG.inst.distance);
