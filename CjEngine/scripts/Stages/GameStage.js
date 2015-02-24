@@ -103,7 +103,7 @@ GameStage.prototype.onHide = function (newStage) {
 
     $(function() {
         $(document).off('keydown', this.doKeyDown);
-        $(document).off('keydown', this.doKeyUp);
+        $(document).off('keyup', this.doKeyUp);
     });
 
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
@@ -459,6 +459,9 @@ function getChar(event) {
 }
 
 GameStage.prototype.doKeyDown = function (evt) {
+    console.log("KEYDOWN EVENT TYPE " + md.type.toString());
+
+
     console.log("KEY DOWN");
     if (gameStage.state != "game") return;
     console.log("EVENT IS = " + evt.toString() + "WINDOW.event = " + window.event);
@@ -607,6 +610,7 @@ GameStage.prototype.onShowContinue = function () {
 
 
     var fdown = function (md) {
+        console.log("MOUSEDOWN EVENT TYPE " + md.type.toString());
         gameStage.fireState = true;
     }
 
