@@ -180,8 +180,8 @@ CPlayer.prototype.onDmgAnim = function(pusher) {
         this.vy -= 30; else
     {
         this.movementTween.pause();
-        var p = this;
-        new TweenMax(this, 0.6, {ease: Circ.easeOut, x: Math.max(this.x - 50,60), yoyo:true, repeat: 1,  onComplete: function(){
+        var p = this;//ease: Circ.easeOut,
+        new TweenMax(this, 0.6, {x: Math.max(this.x - 50,60), yoyo:true, repeat: 1,  onComplete: function(){
             if (p.movementTween)
             p.movementTween.resume();
         }});

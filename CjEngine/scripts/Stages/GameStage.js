@@ -498,13 +498,6 @@ GameStage.prototype.doKeyUp = function (evt) {
 GameStage.prototype.onShow = function () {
     CustomStage.prototype.onShow.call(this);
 
-    var func =  this.doKeyDown;
-    var func2 = this.doKeyUp;
-    $(function() {
-        $(document).on('keydown', func);
-        $(document).on('keyup', func2);
-
-    });
     gameStage.slowMoCoef = 1;
     /*window.addEventListener("keydown", this.doKeyDown, false);
     window.addEventListener("keypress", this.doKeyDown, false);
@@ -611,17 +604,29 @@ GameStage.prototype.onShowContinue = function () {
         LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.guiLayer);
     }
 
-    stage.touchstart = function (md) {
+
+    var fdown = function (md) {
         gameStage.fireState = true;
     }
 
-    stage.touchend = function (md) {
+    var fup = function (md) {
         gameStage.fireState = false;
     }
 
-   // stage.mousemove = stage.touchmove;
-    stage.mousedown = stage.touchstart;
-    stage.mouseup = stage.touchend;
+
+    var func =  gameStage.doKeyDown;
+    var func2 = gameStage.doKeyUp;
+    $(function() {
+        $(document).on('keydown', func);
+        $(document).on('keyup', func2);
+        $(document).mousedown(fdown);
+        $(document).mouseup(fup);
+    });
+
+  //  stage.touchstart = fdown;
+   // stage.touchend = fup;
+   // stage.mousedown = fdown;
+   // stage.mouseup = fup;
     gameStage.updateXP();
     /*
      gameStage.muteBtn = CObj.getById("mutebtn");
