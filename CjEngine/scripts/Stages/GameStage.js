@@ -103,6 +103,7 @@ GameStage.prototype.onHide = function (newStage) {
 
     $(function() {
         $(document).off('keydown', this.doKeyDown);
+        $(document).off('keydown', this.doKeyUp);
     });
 
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
@@ -462,8 +463,8 @@ GameStage.prototype.doKeyDown = function (evt) {
     if (gameStage.state != "game") return;
     console.log("EVENT IS = " + evt.toString() + "WINDOW.event = " + window.event);
 
-   // evt = evt || window.event;
-    var c = String.fromCharCode(event.which);
+    evt = evt || window.event;
+    var c = String.fromCharCode(evt.which);
 
     if (CBooster.list)
     for (var i = 0; i < CBooster.list.length; ++i)
