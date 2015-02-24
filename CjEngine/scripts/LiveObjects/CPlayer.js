@@ -26,7 +26,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.sDying = 2;
     this.state = this.sMoving;
     this.allowFlowMove = true;
-
+    this.playable = false;
     if (SM.inst.currentStage == gameStage)
     {
         this.movementTween = new TweenMax(this, 2, {ease: Sine.easeInOut, x: this.x - 50, yoyo: true, repeat: -1});
@@ -190,7 +190,7 @@ CPlayer.prototype.onDmgAnim = function(pusher) {
 
 CPlayer.prototype.process = function()
 {
-    if (SM.inst.currentStage == gameStage && gameStage.doProcess) {
+    if (this.playable) {
 
             if (this.vy > 0 && this.y > this.baseY - 30) {
                 this.jumping = false;

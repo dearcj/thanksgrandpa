@@ -57,10 +57,11 @@ CharStage.prototype.createFriendsPanel = function() {
             continue;
         } else
         {
+            username = vkparams.friendsIngame[i].name;
             friendClip.click = function () {
                 VK.api("wall.post", {
                     owner_id: vkparams.viewerid,
-                    message: vkparams.friendsIngame[i].name + ", возвращайся в игру дружище",
+                    message: username + ", возвращайся в игру дружище",
                     attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]
                 }, function (data) {
 

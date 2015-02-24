@@ -100,7 +100,10 @@ GameStage.prototype.onHide = function (newStage) {
 
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
-    $(document).off("keypress", this.doKeyDown);
+
+    $(function() {
+        $(document).off('keydown', this.doKeyDown);
+    });
 
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
      CObj.objects.splice(inx, 1);*/
@@ -257,7 +260,7 @@ GameStage.prototype.shAfterLife = function () {
             new TweenMax(LauncherBG.inst, 2, {maxVelocity: LauncherBG.inst.preVelocity});
         }
 
-        price = 1000;
+        //price = 1000;
         if (PlayerData.inst.playerItem.crystals > price) {
             continueGame();
         } else
@@ -496,15 +499,17 @@ GameStage.prototype.onShow = function () {
     CustomStage.prototype.onShow.call(this);
 
     var func =  this.doKeyDown;
+    var func2 = this.doKeyUp;
     $(function() {
         $(document).on('keydown', func);
+        $(document).on('keyup', func2);
 
     });
     gameStage.slowMoCoef = 1;
     /*window.addEventListener("keydown", this.doKeyDown, false);
     window.addEventListener("keypress", this.doKeyDown, false);
    */
-    window.addEventListener("keyup", this.doKeyUp, false);
+    //window.addEventListener("keyup", this.doKeyUp, false);
 
     this.state = "game";
     this.doProcess = false;
@@ -536,6 +541,7 @@ GameStage.prototype.onShowContinue = function () {
         LauncherBG.inst.graves = [];
         for (var i = 0; i < vkparams.friendsIngame.length; ++i)
         {
+            if (vkparams.friendsIngame[i].maxdistance > 1)
             LauncherBG.inst.graves.push({text: vkparams.friendsIngame[i].name + " " + vkparams.friendsIngame[i].last_name, dist: vkparams.friendsIngame[i].maxdistance});
         }
     }
@@ -565,6 +571,7 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.player.gfx.pivot.y = -190;
     gameStage.player.gfx.scale.x = 0.22;
     gameStage.player.gfx.scale.y = 0.22;
+    gameStage.player.playable = true;
     LauncherBG.inst.pllayer.addChild(gameStage.player.gfx);
     //SM.inst.fg.addChild(gameStage.player.gfx);
 
