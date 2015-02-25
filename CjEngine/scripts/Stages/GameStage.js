@@ -485,6 +485,8 @@ GameStage.prototype.doKeyDown = function (evt) {
         if (gameStage.player)
         gameStage.player.onJump();
     }
+
+    evt.preventDefault();
 }
 
 GameStage.prototype.doKeyUp = function (evt) {
@@ -497,6 +499,7 @@ GameStage.prototype.doKeyUp = function (evt) {
         if (gameStage.player)
         gameStage.player.jumpboost = false;
     }
+    evt.preventDefault();
 }
 
 
@@ -611,11 +614,15 @@ GameStage.prototype.onShowContinue = function () {
     var fdown = function (md) {
         console.log("MOUSEDOWN");
         gameStage.fireState = true;
+        md.preventDefault();
+        window.focus();
     }
 
     var fup = function (md) {
         console.log("MOUSEUP");
         gameStage.fireState = false;
+        md.preventDefault();
+        window.focus();
     }
 
 
