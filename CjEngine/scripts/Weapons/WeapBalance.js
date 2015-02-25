@@ -31,6 +31,8 @@ var w_rifle = new CPistol(
         life: 3,
         acc: 0.05,
         recoil: 19, //recoil
+        accIncrease: 0.02,
+        accRecoil: 0.1,
         magcap: 5, //magcap
         delay: 820, //delay
         damage: 66, //damage
@@ -51,7 +53,9 @@ var w_pps = new CPistol(
     {
         sound: "mini",
         life: 1,
-        acc: 0.25,
+        acc: 0.02,
+        accIncrease: 0.02,
+        accRecoil: 0.1,
         recoil: 3.0, //recoil
         magcap: 20, //magcap
         delay: 120, //delay
@@ -73,8 +77,10 @@ var w_minigun = new CPistol(
     {
         sound: "mini",
         life: 2,
-        acc: 0.25,
+        acc: 0.05,
         recoil: 0.1, //recoil
+        accIncrease: 0.029,
+        accRecoil: 0.127,
         magcap: 100, //magcap
         delay: 60, //delay
         damage: 18, //damage
@@ -97,6 +103,8 @@ var w_ak74 = new CQueueGun(
         queueDelay: 110,
         life: 1,
         acc: 0.08,
+        accIncrease: 0.02,
+        accRecoil: 0.1,
         recoil: 1.5, //recoil
         magcap: 30, //magcap
         delay: 600, //delay
@@ -119,6 +127,8 @@ var w_grenadel = new CGrenadeLauncher(
         sound: "laser",
         life: 1,
         acc: 0.08,
+        accIncrease: 0.0,
+        accRecoil: 0.0,
         recoil: 3, //recoil
         magcap: 3, //magcap
         delay: 400, //delay
@@ -139,6 +149,8 @@ var w_laser = new CLaser(
         sound: "laser",
         life: 1,
         acc: 0.08,
+        accIncrease: 0.0,
+        accRecoil: 0.0,
         recoil: 0, //recoil
         magcap: 60, //magcap
         delay: 150, //delay

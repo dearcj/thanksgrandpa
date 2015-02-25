@@ -16,6 +16,7 @@ CWeapon = function(_id, _name, _desc,  __params, __gfx, _upgrades) {
     this.upgrades = _upgrades;
     this.sound = __params.sound;
     this.recoilValue = 0;
+    this.acc = this.backupStats.acc;
     if (!CWeapon.list) CWeapon.objects = [];
     CWeapon.objects.push(this);
 };
@@ -38,6 +39,9 @@ CWeapon.prototype.process = function()
 {
     this.recoilValue -= 0.25;
     if (this.recoilValue < 0) this.recoilValue = 0;
+
+    this.acc -= this.backupStats.accIncrease;
+    if (this.acc < this.backupStats.acc) this.acc = this.backupStats.acc;
 }
 
 CWeapon.prototype.shot = function()
@@ -55,6 +59,8 @@ CWeapon.prototype.shot = function()
         return false;
     }
     this.lastShot = (new Date()).getTime();
+
+    this.acc += this.backupStats.accRecoil;
 
     this.recoilValue += this.recoil;
     this.ammo --;

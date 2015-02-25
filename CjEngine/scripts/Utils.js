@@ -17,6 +17,14 @@ function clone(obj) {
     return copy;*/
 }
 
+function superRand(l) {
+    var s = 0;
+    for (var i = 0; i < l; ++i)
+    {
+        s += Math.random();
+    }
+    return s / l;
+}
 function dateDiff(date, delayMin)
 {
     var nd = new Date();

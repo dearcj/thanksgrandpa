@@ -258,6 +258,8 @@
             <filename>../../../../dedgame/home screen/buy small button.png</filename>
             <filename>../../../../dedgame/fight screen/exp bar.png</filename>
             <filename>../../../../dedgame/fight screen/exp bar line.png</filename>
+            <filename>../../../../dedgame/fight screen/health bar empty.png</filename>
+            <filename>../../../../dedgame/fight screen/health bar full.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

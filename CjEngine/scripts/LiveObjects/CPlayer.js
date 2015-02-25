@@ -190,7 +190,7 @@ CPlayer.prototype.onDmgAnim = function(pusher) {
 
 CPlayer.prototype.process = function()
 {
-    if (this.playable) {
+    if (this.playable && gameStage.player) {
 
             if (this.vy > 0 && this.y > this.baseY - 30) {
                 this.jumping = false;

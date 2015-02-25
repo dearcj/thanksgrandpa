@@ -13,7 +13,7 @@ CPistol.prototype.shot = function()
 {
    var r = CWeapon.prototype.shot.call(this);
     if (!r) return;
-    var fireAngle = gameStage.player.fireAngle + Math.random()*this.backupStats.acc;
+    var fireAngle = gameStage.player.fireAngle + (superRand(6) - 0.5)*this.acc;
    var vx = Math.cos(fireAngle);
   var vy = Math.sin(fireAngle);
 

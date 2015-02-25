@@ -461,7 +461,7 @@ function getChar(event) {
 GameStage.prototype.doKeyDown = function (evt) {
     console.log("KEYDOWN EVENT TYPE " + evt.type.toString());
 
-
+    window.focus();
     console.log("KEY DOWN");
     if (gameStage.state != "game") return;
     console.log("EVENT IS = " + evt.toString() + "WINDOW.event = " + window.event);
@@ -489,6 +489,7 @@ GameStage.prototype.doKeyDown = function (evt) {
 
 GameStage.prototype.doKeyUp = function (evt) {
 
+    window.focus();
     if (gameStage.state != "game") return;
     evt = evt || window.event;
     var c = getChar(evt);
@@ -630,12 +631,14 @@ GameStage.prototype.onShowContinue = function () {
 
     window.addEventListener("keydown", gameStage.doKeyDown, false);
     window.addEventListener("keyup", gameStage.doKeyUp, false);
+    window.addEventListener("mousedown", fdown, true);
+    window.addEventListener("mouseup", fup, true);
 
-    stage.touchstart = fdown;
+ /*   stage.touchstart = fdown;
     stage.touchend = fup;
     stage.mousedown = fdown;
     stage.mouseup = fup;
-
+*/
     gameStage.updateXP();
     /*
      gameStage.muteBtn = CObj.getById("mutebtn");
