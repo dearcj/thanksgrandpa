@@ -628,19 +628,19 @@ GameStage.prototype.onShowContinue = function () {
 
     var func =  gameStage.doKeyDown;
     var func2 = gameStage.doKeyUp;
-/*    $(function() {
-    //    $(document).on('keydown', func);
-    //    $(document).on('keyup', func2);
+    $(function() {
+        $(document).on('keydown', func);
+        $(document).on('keyup', func2);
         $(document).mousedown(fdown);
         $(document).mouseup(fup);
     });
-*/
 
+/*
     window.addEventListener("keydown", gameStage.doKeyDown, false);
     window.addEventListener("keyup", gameStage.doKeyUp, false);
     window.addEventListener("mousedown", fdown, true);
     window.addEventListener("mouseup", fup, true);
-
+*/
  /*   stage.touchstart = fdown;
     stage.touchend = fup;
     stage.mousedown = fdown;
