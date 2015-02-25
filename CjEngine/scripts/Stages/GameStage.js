@@ -463,6 +463,7 @@ GameStage.prototype.doKeyDown = function (evt) {
 
     window.focus();
     console.log("KEY DOWN");
+    evt.preventDefault();
     if (gameStage.state != "game") return;
     console.log("EVENT IS = " + evt.toString() + "WINDOW.event = " + window.event);
 
@@ -486,7 +487,7 @@ GameStage.prototype.doKeyDown = function (evt) {
         gameStage.player.onJump();
     }
 
-    evt.preventDefault();
+
 }
 
 GameStage.prototype.doKeyUp = function (evt) {
