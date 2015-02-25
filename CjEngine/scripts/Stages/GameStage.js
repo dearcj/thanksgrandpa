@@ -459,14 +459,7 @@ function getChar(event) {
 }
 
 GameStage.prototype.doKeyDown = function (evt) {
-    console.log("KEYDOWN EVENT TYPE " + evt.type.toString());
-
-    window.focus();
-    console.log("KEY DOWN");
-    evt.preventDefault();
     if (gameStage.state != "game") return;
-    console.log("EVENT IS = " + evt.toString() + "WINDOW.event = " + window.event);
-
     evt = evt || window.event;
     var c = String.fromCharCode(evt.which);
 
@@ -479,28 +472,21 @@ GameStage.prototype.doKeyDown = function (evt) {
         }
     }
 
-    console.log("EVT.WHICH" + evt.which.toString());
-
-    if (evt.which == 87)
+    if (evt.which == 87||  evt.which == 17)
     {
         if (gameStage.player)
         gameStage.player.onJump();
     }
-
-
 }
 
 GameStage.prototype.doKeyUp = function (evt) {
-
-    window.focus();
     if (gameStage.state != "game") return;
     evt = evt || window.event;
     var c = getChar(evt);
-    if (evt.which == 87) {
+    if (evt.which == 87 || evt.which == 17) {
         if (gameStage.player)
         gameStage.player.jumpboost = false;
     }
-    evt.preventDefault();
 }
 
 
@@ -613,21 +599,21 @@ GameStage.prototype.onShowContinue = function () {
 
 
     var fdown = function (md) {
-        console.log("MOUSEDOWN");
+    //    document.focus();
         gameStage.fireState = true;
-        md.preventDefault();
-        window.focus();
+    //    md.preventDefault();
+    //    window.focus();
     }
 
     var fup = function (md) {
-        console.log("MOUSEUP");
+   //     document.focus();
         gameStage.fireState = false;
-        md.preventDefault();
-        window.focus();
+    //    md.preventDefault();
+    //    window.focus();
     }
 
 
-    var func =  gameStage.doKeyDown;
+  /*  var func =  gameStage.doKeyDown;
     var func2 = gameStage.doKeyUp;
     $(function() {
         $(document).on('keydown', func);
@@ -635,13 +621,13 @@ GameStage.prototype.onShowContinue = function () {
         $(document).mousedown(fdown);
         $(document).mouseup(fup);
     });
-
-/*
-    window.addEventListener("keydown", gameStage.doKeyDown, false);
-    window.addEventListener("keyup", gameStage.doKeyUp, false);
-    window.addEventListener("mousedown", fdown, true);
-    window.addEventListener("mouseup", fup, true);
 */
+
+    document.addEventListener("keydown", gameStage.doKeyDown, false);
+    document.addEventListener("keyup", gameStage.doKeyUp, false);
+    document.addEventListener("mousedown", fdown, true);
+    document.addEventListener("mouseup", fup, true);
+
  /*   stage.touchstart = fdown;
     stage.touchend = fup;
     stage.mousedown = fdown;
