@@ -4,15 +4,23 @@ MM = function() {
     [
        {mons: "....l....l....c....z...c..c...s...l..s...l", diff: 1, prob: 1},
         {mons: ".l..l..l...l..l.l..", diff: 2, prob: 1},
+        {mons: "c.g..gl", diff: 4, prob: 1},
         {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3, prob: 1},
-        {mons: ".f..f..f..", diff: 3, prob: 1},
+        {mons: ".f.z.f..f..", diff: 3, prob: 1},
+        {mons: "..d...f...f.", diff: 4, prob: 0.1}
         {mons: ".F..l.lF..l.", diff: 4, prob: 1},
         {mons: ".f..c.flf.c.", diff: 4, prob: 1},
         {mons: ".f..c.flf.c.", diff: 4, prob: 1},
         {mons: "..ssss..s..l", diff: 4, prob: 1},
         {mons: ".l.l.l...ssl.l.l.l.", diff: 4, prob: 1},
-        {mons: "..c..c..c..s..sc..sc..sc..", diff: 5, prob: 1},
-        {mons: "b", diff: 2, prob: 0.1}
+        {mons: "..c..c..z..s..sc..sc..sc..", diff: 5, prob: 1},
+        {mons: "..ggg...g..g..GGG.", diff: 5, prob: 1},
+        {mons: "..zzz.z..GGG.zzz.", diff: 5, prob: 1},
+        {mons: "..c..cz..l..g..g..g", diff: 6, prob: 1},
+        {mons: "..Fz.Fz.zFz.", diff: 8, prob: 1},
+        {mons: "b", diff: 2, prob: 0.1},
+        {mons: "b", diff: 6, prob: 0.1},
+        {mons: "..dz..d..z.z", diff: 4, prob: 0.1}
     ];
 
     this.bosses = [{class: Boss1, dist: 5000}, {class: Boss1, dist: 1800}];
@@ -114,7 +122,6 @@ MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
     this.simpleMonsterDelay = Math.random() * 1000 + 2000;
 }
 
-
 MM.prototype.spawnCoin = function(height)
 {
     for (var i = 0; i < 5; ++i) {
@@ -141,6 +148,19 @@ MM.prototype.spawnCar = function(clip, offsY, innerOffs)
     m.colGroup = 0;
 }
 
+MM.prototype.spawnDrone = function(xp) {
+    var  str = "dron";
+    var m = new CDrone(SCR_WIDTH+100,80,str);
+    m.gfx.anchor.x = 0.5;
+    m.vx = -1;
+    m.allowTrackSpeed = false;
+    m.gravityEnabled = false;
+    new TweenMax(m, 1, {y: m.y+80, ease: Sine.easeInOut, yoyo: true, repeat: 10});
+    m.maxHp = 180;
+    m.hp = m.maxHp;
+    m.barOffsetX = 10;
+    m.xp = xp + LauncherBG.inst.distance*0.01;
+}
 
 MM.prototype.spawnBonusGnome = function(xp) {
     var  str = "enemy1_1";
@@ -240,6 +260,7 @@ MM.prototype.doStep = function()
     if (s == "l") this.spawnObstacle("luke", 40, 10);
     if (s == "z") this.spawnObstacle("conus", 20, 0);
     if (s == "b") this.spawnBonusGnome(5);
+    if (s == "d") this.spawnDrone(25);
 
     /*  if (s == "z") spawnVeryRandomZomby();
       if (s == "a") spawnArmoredSimple();
@@ -290,7 +311,7 @@ MM.prototype.doStep = function()
 }
 
 MM.prototype.process = function() {
-    var d = (new Date()).getTime();
+    var d = window.time;
 
 
     /*    if (this.state == this.sNormal && d - this.lastStep > this.stepDelay)

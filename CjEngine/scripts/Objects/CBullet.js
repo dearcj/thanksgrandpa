@@ -65,12 +65,19 @@ CBullet.prototype.collide = function (obj2)
             fx.animationSpeed = 0.55;
             this.updateGraphics();
             obj.gfx.onComplete = function () {
-                setTimeout( function() {
-                    if (obj.gfx) pool.Push(obj.gfx);
-                    rp(obj.gfx);
-                    obj.gfx = null;
+              //  setTimeout( function() {
+                if (obj.gfx) {
+                   // obj.gfx.gotoAndStop(0);
+                    if (obj.gfx)
+                        pool.Push(obj.gfx);
                     obj.destroy();
-                }, 15);
+                    //  obj.gfx.parent.removeChild(obj.gfx);
+                  //  var inx = obj.gfx.parent.children.indexOf(obj.gfx);
+                  //  obj.gfx.parent.children.splice(inx, 1);
+                   // rp(obj.gfx);
+                    //obj.gfx = null;
+                }
+            //    }, 15);
             };
         }
 

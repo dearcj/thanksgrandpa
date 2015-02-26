@@ -27,6 +27,7 @@ CGrenadeLauncher.prototype.shot = function()
     TweenMax.delayedCall(0.03, function (){fx.parent.removeChild(fx);});
 
     var b = new CGrenade(xx, yy);
+    b.owner = gameStage.player;
     b.life = this.life;
     b.dmg = this.damage;
     b.rotation = Math.PI / 2 + fireAngle;

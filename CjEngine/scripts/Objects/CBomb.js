@@ -17,8 +17,9 @@ CBomb.prototype.explode = function()
     var pp2 = new vec2.create();
     ZSound.Play("rocketboom");
 
-    var not = pool.Pop("expl");
-    if (not) {
+    var gfx = pool.Pop("expl");
+    if (gfx) {
+        var not = new CObj(this.x, this.y);
         not.x = this.x;
         not.y = this.y;
         not.gfx.animationSpeed = 0.85;
@@ -34,10 +35,12 @@ CBomb.prototype.explode = function()
         SM.inst.ol.addChild(not.gfx);
 
         not.gfx.onComplete = function () {
-            setTimeout( function() {
-                not.gfx.parent.removeChild(not.gfx);
-                pool.Push(not);
-            }, 15, not);
+           // setTimeout( function() {
+                if (not.gfx) {
+                    not.destroy();
+                    pool.Push(not.gfx);
+                }
+            //}, 15, not);
         };
     }
 

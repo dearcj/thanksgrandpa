@@ -13,9 +13,10 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.bar = CObj.getById("hpbar");
     this.ammobar = gameStage.ammobar;
     this.colGroup = CG_PLAYER;
+    this.colMask = CG_MONSTER;
     this.nullPhase = 0;
     this.maxHp = 5;
-    this.hp =this.maxHp;
+    this.hp = this.maxHp;
     this.startPlayerX = this.x;
     this.y += 10;
     this.baseY = this.y;
@@ -27,11 +28,26 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.state = this.sMoving;
     this.allowFlowMove = true;
     this.playable = false;
+    this.lastUseExpl = 0;
+    this.superMode = false;
     if (SM.inst.currentStage == gameStage)
     {
         this.movementTween = new TweenMax(this, 2, {ease: Sine.easeInOut, x: this.x - 50, yoyo: true, repeat: -1});
     }
 }
+
+CPlayer.prototype.collide = function (obj2)
+{
+    if (this.prekilled || this.doRemove) return;
+    if (this.superMode && CObj.checkType(obj2, CMonster)) {
+
+        if (window.time - this.lastUseExpl > 500) {
+            this.lastUseExpl = window.time;
+            CGrenade.makeBoom((this.x + obj2.x) / 2, (this.y + obj2.y) / 2, 80, 300);
+        }
+    }
+}
+
 
 CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, overrideGun, overrideHat) {
 
@@ -176,15 +192,22 @@ CPlayer.prototype.landing = function() {
 CPlayer.prototype.onDmgAnim = function(pusher) {
     if  (this.state == this.sDying) return;
 
-    if (this.gravityEnabled)
-        this.vy -= 30; else
+    if (this.gravityEnabled) {
+        this.vy -= 30;
+    } else
     {
-        this.movementTween.pause();
+        this.jumping = true;
+        this.vy -= 15;
+        this.gravityEnabled = true;
+    }
+        //this.vy -= 30; else
+    {
+     //   this.movementTween.pause();
         var p = this;//ease: Circ.easeOut,
-        new TweenMax(this, 0.6, {x: Math.max(this.x - 50,60), yoyo:true, repeat: 1,  onComplete: function(){
+      /*  new TweenMax(this, 0.6, {x: Math.max(this.x - 50,60), yoyo:true, repeat: 1,  onComplete: function(){
             if (p.movementTween)
             p.movementTween.resume();
-        }});
+        }});*/
     }
 }
 
@@ -201,6 +224,11 @@ CPlayer.prototype.process = function()
                 this.landing();
             }
 
+
+        if (this.blink)
+        {
+            this.updateBlink();
+        }
         if (this.state != this.sDying)
         {
 
@@ -214,7 +242,6 @@ CPlayer.prototype.process = function()
                 }
             }
         }
-
 
         if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40) {
             this.fire();
@@ -296,12 +323,37 @@ CPlayer.prototype.process = function()
     CLiveObj.prototype.process.call(this);
 }
 
+CPlayer.prototype.resetBlink = function()
+{
+    var f = this.gfx;
+    for (var i = 0; i < f.skeleton.slots.length; ++i)
+    {
+        f.skeleton.slots[i].r = 1;
+        f.skeleton.slots[i].g = 1;
+        f.skeleton.slots[i].b = 1;
+    }
+
+}
+
+
+CPlayer.prototype.updateBlink = function()
+{
+    var f = this.gfx;
+    for (var i = 0; i < f.skeleton.slots.length; ++i)
+    {
+      var h = 0.5*(Math.cos(i/150 +  window.time / 400) + 1);
+      var rgb = hslToRgb(h, 1, 0.86);
+      f.skeleton.slots[i].r = rgb[0];
+      f.skeleton.slots[i].g = rgb[1];
+      f.skeleton.slots[i].b = rgb[2];
+    }
+
+}
 
 CPlayer.prototype.dealDamage = function(dmg)
 {
-    var t = new Date().getTime();
-    if (t - this.revealTime < 2000) return;
-
+    if (window.time - this.revealTime < 2000) return;
+    this.revealTime = window.time;
     if (this.invulnerable) return;
 
     for (var i = 0; i < this.gfx.skeleton.slots.length; ++i)
@@ -350,7 +402,7 @@ CPlayer.prototype.dealDamage = function(dmg)
 
 CPlayer.prototype.fire = function()
 {
-    if (!gameStage.menuBtn.over)
+    if (gameStage.menuBtn && !gameStage.menuBtn.over)
     {
         if (this.state == this.sMoving && this.weapon.shot())
         {

@@ -132,7 +132,7 @@ var w_grenadel = new CGrenadeLauncher(
         recoil: 3, //recoil
         magcap: 3, //magcap
         delay: 400, //delay
-        damage: 180, //damage
+        damage: 110, //damage
         reloadTime: 2200},//__reloadTime,}
     "asd",// __gfx,
     [

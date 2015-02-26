@@ -69,12 +69,11 @@ CCoin.prototype.collide = function(obj2)
         coinGfx.animationSpeed = 0.5;
         this.updateGraphics();
         this.gfx.onComplete = function () {
-            setTimeout( function() {
-                if (coin.gfx) pool.Push(coin.gfx);
-                rp(coin.gfx);
-                coin.gfx = null;
+            if (coin.gfx) {
+                if (coin.gfx)
+                    pool.Push(coin.gfx);
                 coin.destroy();
-            }, 15, coin);
+            }
         };
 
     }

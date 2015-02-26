@@ -33,7 +33,7 @@ GameStage.prototype.createHPBar = function (x, y, max) {
     lower.width = max * t.width;
     bar.gfx.addChild(lower);
     bar.updateGraphics();
-
+    bar.texW = t.width;
     var tupper = PIXI.Texture.fromFrame("health.png");
     var upperBar = new PIXI.TilingSprite(tupper, tupper.width - 0.5, tupper.height - 0.5);
     upperBar.height = tupper.height - 1;
@@ -43,7 +43,10 @@ GameStage.prototype.createHPBar = function (x, y, max) {
     SM.inst.fg.addChild(bar.gfx);
 
     bar.tweenProp = function (ratio) {
-        this.gfx.getChildAt(1).width = this.gfx.getChildAt(0).width * ratio;
+        if (gameStage.player) {
+            this.gfx.getChildAt(1).width = gameStage.player.maxHp * this.texW * ratio;
+            this.gfx.getChildAt(0).width = gameStage.player.maxHp * this.texW;
+        }
     }
 }
 
@@ -76,6 +79,7 @@ GameStage.prototype.process = function () {
     CObj.processAll();
 
     var d = Math.floor(LauncherBG.inst.distance);
+    if (gameStage.distText)
     gameStage.distText.text = d.toString();
     MM.inst.process();
 }
@@ -104,6 +108,8 @@ GameStage.prototype.onHide = function (newStage) {
     $(function() {
         $(document).off('keydown', this.doKeyDown);
         $(document).off('keyup', this.doKeyUp);
+        $(document).mousedown(null);
+        $(document).mouseup(null);
     });
 
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
@@ -211,6 +217,8 @@ GameStage.prototype.updateItems = function () {
                 gameStage.curweapon = w_laser;
         }
     }
+
+    gameStage.player.weapon = gameStage.curweapon;
 }
 
 GameStage.prototype.shAfterLife = function () {
@@ -532,7 +540,7 @@ GameStage.prototype.onShowContinue = function () {
         }
     }
     //else
-     //   LauncherBG.inst.graves = [{text: "ПАЛАУТ", dist: 20}, {text: "ДУЛЬКИН", dist: 30}, {text: "ПСИНА", dist: 200}];
+    //LauncherBG.inst.graves = [{text: "ПАЛАУТ", dist: 20}, {text: "ДУЛЬКИН", dist: 30}, {text: "ПСИНА", dist: 200}];
 
 
     var floorHeight = 120;
@@ -544,7 +552,6 @@ GameStage.prototype.onShowContinue = function () {
 
     gameStage.createHPBar(10, 5, 5);
 
-    gameStage.updateItems();
 
     gameStage.ammobar = CObj.getById("ammot");
     gameStage.ammoico = CObj.getById("ammoico");
@@ -560,6 +567,7 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.player.playable = true;
     LauncherBG.inst.pllayer.addChild(gameStage.player.gfx);
     //SM.inst.fg.addChild(gameStage.player.gfx);
+    gameStage.updateItems();
 
     gameStage.barXP = CObj.getById("barxp");
 
@@ -613,7 +621,7 @@ GameStage.prototype.onShowContinue = function () {
     }
 
 
-  /*  var func =  gameStage.doKeyDown;
+    var func =  gameStage.doKeyDown;
     var func2 = gameStage.doKeyUp;
     $(function() {
         $(document).on('keydown', func);
@@ -621,13 +629,13 @@ GameStage.prototype.onShowContinue = function () {
         $(document).mousedown(fdown);
         $(document).mouseup(fup);
     });
-*/
 
+/*
     document.addEventListener("keydown", gameStage.doKeyDown, false);
     document.addEventListener("keyup", gameStage.doKeyUp, false);
     document.addEventListener("mousedown", fdown, true);
     document.addEventListener("mouseup", fup, true);
-
+*/
  /*   stage.touchstart = fdown;
     stage.touchend = fup;
     stage.mousedown = fdown;
@@ -682,7 +690,7 @@ GameStage.prototype.makePause = function () {
 
 GameStage.prototype.createPools = function () {
     if (pool.Size("textParticle") == 0)
-        pool.Fill("textParticle", 20, function () {
+        pool.Fill("textParticle", 0, function () {
             var c = new CTextField(0, 0);
             c.fontFamily = 0;
             c.fontSize = 25;
@@ -694,8 +702,15 @@ GameStage.prototype.createPools = function () {
             return c;
         });
 
+    if (pool.Size("smoke") == 0)
+        pool.Fill("smoke", 20, function () {
+            var c = crsp("smoke");
+            return c;
+        });
+
+
     if (pool.Size("coinCollect") == 0)
-        pool.Fill("coinCollect", 15, function () {
+        pool.Fill("coinCollect", 10, function () {
             var c = CObj.createMovieClip("coinfx.png");
             c.scale.x = 0.7;
             c.scale.y = 0.7;
@@ -726,7 +741,7 @@ GameStage.prototype.createPools = function () {
         });
 
     if (pool.Size("bloodblow") == 0)
-        pool.Fill("bloodblow", 4, function () {
+        pool.Fill("bloodblow", 6, function () {
             var c = CObj.createMovieClip("bloodblow");
             c.anchor.x = 0.5;
             c.anchor.y = 0.5;

@@ -25,6 +25,7 @@ function CMonster(in_x,in_y,textname,cr_bar){
      //   this.bar.gfx.scale.y = 0.2;
         this.bar.prop = 1;
         this.barOffsetY = 0;
+        this.barOffsetX = 0;
     }
     this.process();
     this.dmg = 1;
@@ -35,14 +36,16 @@ CMonster.prototype.collide = function (obj2)
     if (this.prekilled || this.doRemove) return;
     if (!this.hitDone) {
         obj2.dealDamage(this.dmg);
-        if (!obj2.invulnerable)  this.hitDone = true;
+        if (!obj2.invulnerable) {
+            this.hitDone = true;
+        }
     }
 }
 
 CMonster.prototype.process = function()
 {
     if (this.bar) {
-        this.bar.x = this.x - this.bar.gfx.width * 0.5 - 10;
+        this.bar.x = this.x - this.bar.gfx.width * 0.5 - 10+ this.barOffsetX;
         this.bar.y = this.y - this.radius * 1.5 + this.barOffsetY;
     }
 
@@ -83,6 +86,7 @@ CMonster.prototype.kill = function()
     var parent = this.gfx.parent;
     parent.removeChild(this.gfx);
     var bloodgfx = pool.Pop("bloodblow");
+    var f = this;
     if (bloodgfx) {
         this.gfx = bloodgfx;
         this.gfx.anchor.x = 0.5;
@@ -94,13 +98,14 @@ CMonster.prototype.kill = function()
         parent.addChild(this.gfx);
         this.gfx.loop = false;
         this.gfx.gotoAndPlay(0);
-        var f = this;
         this.gfx.onComplete =
             function () {
-                if (f.gfx) pool.Push(f.gfx);
-                rp(f.gfx);
-                f.gfx = null;
-                CLiveObj.prototype.kill.call(f);
+                if (f.gfx) {
+                    // obj.gfx.gotoAndStop(0);
+                    if (f.gfx)
+                        pool.Push(f.gfx);
+                    f.destroy();
+                }
             };
     } else
         CLiveObj.prototype.kill.call(f);

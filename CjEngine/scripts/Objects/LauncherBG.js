@@ -16,7 +16,7 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.distance = 0;
     this.incDist = 50;
     this.speedUpCoef = 0.1;
-    this.layersSpeed = [0, 0.2, 0.25, 0.72, 1, 1];
+    this.layersSpeed = [0, 0.2, 0.25, 0.72, 0.72, 1, 1];
     this.ol = new PIXI.DisplayObjectContainer();
     this.pllayer = new PIXI.DisplayObjectContainer();
     this.defaultLayer = null;
@@ -87,7 +87,7 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
         if (spawnStart)
             g.position.x = obj.baseDim.x * obj.scaleX / 2; else
 
-            g.position.x = SCR_WIDTH + obj.baseDim.x * obj.scaleX / 2 + offs;
+            g.position.x = SCR_WIDTH + obj.baseDim.x * obj.scaleX / 2 + offs - this.maxVelocity*0.8  - 3;
     } else
         layer.rightBound += obj.baseDim.x * obj.scaleX;
 
@@ -109,7 +109,6 @@ LauncherBG.prototype.process = function (fake) {
         if (this.distance > 100 && this.distance < 120) {
             PlayerData.inst.progressAch("Gold medal 2", 1);
         }
-
         if (this.distance > 500 && this.distance < 520) {
             PlayerData.inst.progressAch("Gold medal 3", 1);
         }
@@ -167,7 +166,7 @@ LauncherBG.prototype.process = function (fake) {
             }
         }
 
-        if (i == 3 && this.graves)
+        if (i == 4 && this.graves)
         {
             var gl = this.graves.length;
             for (var n = 0; n < gl; ++n)
@@ -176,7 +175,7 @@ LauncherBG.prototype.process = function (fake) {
                 {
                     var g = crsp("grave");
                     g.x = SCR_WIDTH + 100;
-                    g.y = 375;
+                    g.y = 395;
                     l.clip.addChild(g);
 
                     var tf = CTextField.createTextField({fontFamily: "dedgamecaps", tint: "0xFFFFFFFF", text: this.graves[n].text + '\n' + this.graves[n].dist.toString() + " м.", fontSize: 30, align: "center"});
@@ -197,7 +196,7 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
     var original = LevelManager.levels["levels/" + levName + ".json"];
     var dataClone = clone(original);
     var layers = [];
-    var layerNum = 6;
+    var layerNum = 7;
     for (var i = 0; i < layerNum; ++i) {
 
         var cont = new PIXI.DisplayObjectContainer();
@@ -208,10 +207,8 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
         this.gfx.addChild(layer.clip);
     //    if (i == 5) SM.inst.fg.addChild(layer.clip);
     }
-
-    this.gfx.addChildAt(this.ol, 5);
-    this.gfx.addChildAt(this.pllayer, 6);
-
+    this.gfx.addChildAt(this.ol, 6);
+    this.gfx.addChildAt(this.pllayer, 7);
 
     for (var i = 0; i < original.objects.length; ++i) {
         layers[original.objects[i].layer - 1].objects.push(original.objects[i]);
