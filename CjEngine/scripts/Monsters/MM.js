@@ -7,7 +7,7 @@ MM = function() {
         {mons: "c.g..gl", diff: 4, prob: 1},
         {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3, prob: 1},
         {mons: ".f.z.f..f..", diff: 3, prob: 1},
-        {mons: "..d...f...f.", diff: 4, prob: 0.1}
+        {mons: "..d...f...f.", diff: 4, prob: 0.1},
         {mons: ".F..l.lF..l.", diff: 4, prob: 1},
         {mons: ".f..c.flf.c.", diff: 4, prob: 1},
         {mons: ".f..c.flf.c.", diff: 4, prob: 1},
