@@ -263,7 +263,6 @@ GameStage.prototype.shAfterLife = function () {
         var continueGame = function()
         {
             ZSound.Play("vzbodritsa");
-            //failtween.kill( );
             TweenMax.killTweensOf(cb);
             removeafterlife();
             gameStage.removeFade();
