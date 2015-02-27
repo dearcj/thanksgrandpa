@@ -2,7 +2,7 @@
 
 "BULLETSHOTGUN.png":
 {
-	"frame": {"x":1511,"y":685,"w":18,"h":32},
+	"frame": {"x":1511,"y":865,"w":18,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":32},
@@ -768,6 +768,30 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":195,"h":237},
 	"sourceSize": {"w":195,"h":237}
 },
+"firesmall0001.png":
+{
+	"frame": {"x":1511,"y":805,"w":19,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":56},
+	"sourceSize": {"w":19,"h":56}
+},
+"firesmall0002.png":
+{
+	"frame": {"x":1511,"y":745,"w":19,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":56},
+	"sourceSize": {"w":19,"h":56}
+},
+"firesmall0003.png":
+{
+	"frame": {"x":1511,"y":685,"w":19,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":56},
+	"sourceSize": {"w":19,"h":56}
+},
 "fxblink.png":
 {
 	"frame": {"x":1836,"y":1226,"w":100,"h":84},
@@ -1015,6 +1039,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f8c233ade409f90d682a3de199a3c174$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f7960ec434fa501e72163135ef7d602f$"
 }
 }

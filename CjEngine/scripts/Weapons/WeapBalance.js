@@ -98,7 +98,7 @@ var w_ak74 = new CQueueGun(
     "пистолет", //name
     "описание", //desc
     {
-        sound: "mini",
+        sound: "ochered",
         queue: 4,
         queueDelay: 110,
         life: 1,

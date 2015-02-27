@@ -5,217 +5,231 @@ filter: Linear,Linear
 repeat: none
 board
   rotate: true
-  xy: 2, 160
+  xy: 289, 778
   size: 495, 143
   orig: 495, 143
   offset: 0, 0
   index: -1
-body
+board1
   rotate: true
-  xy: 120, 676
+  xy: 434, 891
+  size: 495, 163
+  orig: 495, 163
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 1125, 1434
   size: 246, 329
   orig: 246, 329
   offset: 0, 0
   index: -1
+body1
+  rotate: false
+  xy: 2, 1275
+  size: 382, 446
+  orig: 382, 446
+  offset: 0, 0
+  index: -1
 gun0
   rotate: true
-  xy: 2, 657
+  xy: 171, 673
   size: 600, 116
   orig: 600, 116
   offset: 0, 0
   index: -1
 gun1
-  rotate: false
-  xy: 1373, 1831
+  rotate: true
+  xy: 2, 40
   size: 588, 149
   orig: 588, 149
   offset: 0, 0
   index: -1
 gun2
-  rotate: false
-  xy: 728, 1813
+  rotate: true
+  xy: 2, 630
   size: 643, 167
   orig: 643, 167
   offset: 0, 0
   index: -1
 gun3
   rotate: false
-  xy: 2, 1711
+  xy: 2, 1723
   size: 724, 269
   orig: 742, 269
   offset: 12, 0
   index: -1
 gun4
   rotate: false
-  xy: 2, 1259
-  size: 578, 221
+  xy: 1321, 1771
+  size: 576, 221
   orig: 578, 221
   offset: 0, 0
   index: -1
 gun5
   rotate: false
-  xy: 2, 1482
+  xy: 728, 1765
   size: 591, 227
   orig: 591, 227
   offset: 0, 0
   index: -1
 hat1
-  rotate: true
-  xy: 1777, 1456
+  rotate: false
+  xy: 1373, 1298
   size: 373, 241
   orig: 375, 241
   offset: 0, 0
   index: -1
 hat2
-  rotate: false
-  xy: 1439, 1542
+  rotate: true
+  xy: 820, 1214
   size: 336, 287
   orig: 336, 287
   offset: 0, 0
   index: -1
 hat3
-  rotate: true
-  xy: 368, 286
+  rotate: false
+  xy: 1373, 1541
   size: 388, 228
   orig: 388, 228
   offset: 0, 0
   index: -1
 hat4
   rotate: false
-  xy: 728, 1600
+  xy: 728, 1552
   size: 395, 211
   orig: 395, 211
   offset: 0, 0
   index: -1
 hat5
   rotate: false
-  xy: 120, 924
+  xy: 386, 1388
   size: 324, 333
   orig: 324, 333
   offset: 0, 0
   index: -1
 hat6
   rotate: true
-  xy: 147, 246
+  xy: 599, 958
   size: 428, 219
   orig: 428, 219
   offset: 0, 0
   index: -1
 head
   rotate: false
-  xy: 1125, 1544
+  xy: 820, 945
   size: 312, 267
   orig: 312, 267
   offset: 0, 0
   index: -1
 head1
   rotate: true
-  xy: 446, 945
+  xy: 1763, 1457
   size: 312, 267
   orig: 312, 267
   offset: 0, 0
   index: -1
 head2
-  rotate: false
-  xy: 451, 676
+  rotate: true
+  xy: 1748, 1143
   size: 312, 267
   orig: 312, 272
   offset: 0, 5
   index: -1
 head3
   rotate: true
-  xy: 598, 362
+  xy: 153, 316
   size: 312, 267
   orig: 312, 267
   offset: 0, 0
   index: -1
 head4
-  rotate: false
-  xy: 598, 93
+  rotate: true
+  xy: 153, 2
   size: 312, 267
   orig: 312, 267
   offset: 0, 0
   index: -1
 l_arm
-  rotate: true
-  xy: 147, 216
+  rotate: false
+  xy: 1899, 1835
   size: 28, 157
   orig: 28, 157
   offset: 0, 0
   index: -1
 r_arm
-  rotate: true
-  xy: 147, 216
+  rotate: false
+  xy: 1899, 1835
   size: 28, 157
   orig: 28, 157
   offset: 0, 0
   index: -1
 l_foot
   rotate: false
-  xy: 368, 250
+  xy: 289, 742
   size: 97, 34
   orig: 97, 34
   offset: 0, 0
   index: -1
 l_hand
-  rotate: true
-  xy: 685, 1664
+  rotate: false
+  xy: 171, 630
   size: 45, 41
   orig: 45, 41
   offset: 0, 0
   index: -1
 r_hand
-  rotate: true
-  xy: 685, 1664
+  rotate: false
+  xy: 171, 630
   size: 45, 41
   orig: 45, 41
   offset: 0, 0
   index: -1
 l_hip
-  rotate: false
-  xy: 595, 1536
+  rotate: true
+  xy: 599, 902
   size: 54, 173
   orig: 54, 173
   offset: 0, 0
   index: -1
 r_hip
-  rotate: false
-  xy: 595, 1536
+  rotate: true
+  xy: 599, 902
   size: 54, 173
   orig: 54, 173
   offset: 0, 0
   index: -1
 l_leg
   rotate: false
-  xy: 1963, 1881
+  xy: 386, 1287
   size: 37, 99
   orig: 37, 99
   offset: 0, 0
   index: -1
 r_leg
   rotate: false
-  xy: 1963, 1881
+  xy: 386, 1287
   size: 37, 99
   orig: 37, 99
   offset: 0, 0
   index: -1
 l_shoulder
-  rotate: false
-  xy: 2, 2
+  rotate: true
+  xy: 434, 852
   size: 37, 156
   orig: 37, 156
   offset: 0, 0
   index: -1
 r_shoulder
-  rotate: false
-  xy: 2, 2
+  rotate: true
+  xy: 434, 852
   size: 37, 156
   orig: 37, 156
   offset: 0, 0
   index: -1
 r_foot
-  rotate: true
-  xy: 651, 1621
+  rotate: false
+  xy: 2, 6
   size: 88, 32
   orig: 88, 34
   offset: 0, 0

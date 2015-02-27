@@ -62,6 +62,7 @@ ShopStage.prototype.buyItem = function (event, unlock)
 
         shopStage.updateStatsPanel();
 
+        ZSound.Play("buy");
         azureclient.invokeApi("buy_item", {
             body: {id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id},
             method: "post"

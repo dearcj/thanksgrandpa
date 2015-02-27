@@ -101,6 +101,16 @@ CPlayer.prototype.createDedGraphics = function()
     g.scale.x = 0.3;
     g.scale.y = 0.3;
 
+    g.skeleton.setAttachment("body", "body");
+    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
+    {
+        if (PlayerData.inst.items_enabled[i].id_item == "105A3B3C-160C-4355-AB38-9F107DB5A831")
+        {
+            g.skeleton.setAttachment("body", "body1");
+        }
+
+    }
+
     g.stateData.setMixByName("idle", "jump", 0.2);
     g.stateData.setMixByName("jump", "idle", 0.1);
     g.stateData.setMixByName("jump", "defeated", 0.3);
@@ -131,6 +141,8 @@ CPlayer.prototype.onJump = function()
         this.gfx.state.setAnimationByName(0, "jump", false);
         this.gravityEnabled = true;
         this.vy = -13;
+        ZSound.Play("jump2");
+
         this.movementTween.pause();
     }
 }
@@ -352,7 +364,7 @@ CPlayer.prototype.updateBlink = function()
 
 CPlayer.prototype.dealDamage = function(dmg)
 {
-    if (window.time - this.revealTime < 2000) return;
+    if (window.time - this.revealTime < 1000) return;
     this.revealTime = window.time;
     if (this.invulnerable) return;
 

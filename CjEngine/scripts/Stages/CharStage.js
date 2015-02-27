@@ -123,17 +123,21 @@ CharStage.prototype.openPremiumWindow = function()
 
         charStage.skipFriends = 0;
 
-        CObj.getById("buy1").click = function(){order("item1"); shopStage.updateStatsPanel();};
+        orderFunc = function(str)
+        {      ZSound.Play("buy");
+            order(str); shopStage.updateStatsPanel();
+        }
+        CObj.getById("buy1").click = function(){ orderFunc("item1") };
 
-        CObj.getById("buy2").click = function(){order("item2");shopStage.updateStatsPanel();};
+        CObj.getById("buy2").click = function(){orderFunc("item2");};
 
-        CObj.getById("buy3").click = function(){order("item3");shopStage.updateStatsPanel();};
+        CObj.getById("buy3").click = function(){orderFunc("item3");};
 
-        CObj.getById("buy4").click = function(){order("item4");shopStage.updateStatsPanel();};
+        CObj.getById("buy4").click = function(){orderFunc("item4");};
 
-        CObj.getById("buy5").click = function(){order("item5");shopStage.updateStatsPanel();};
+        CObj.getById("buy5").click = function(){orderFunc("item5");};
 
-        CObj.getById("buy6").click = function(){order("item6");shopStage.updateStatsPanel();};
+        CObj.getById("buy6").click = function(){orderFunc("item6");};
 
         CObj.getById("btnclose").click = close;
         CObj.getById("btnfree").click = close;

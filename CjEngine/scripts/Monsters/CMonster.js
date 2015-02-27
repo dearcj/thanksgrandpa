@@ -66,11 +66,13 @@ CMonster.prototype.kill = function()
     if (!this) return;
     if (this.prekilled) return;
 
-    if (this.spawnCoins)
-    for (var i = 0; i < 5; ++i)
-    {
-        if (Math.random() > 0.3) continue;
-        CCoin.spawnCoin(this.x, this.y, this.coinAmount);
+    if (this.spawnCoins) {
+        var coinCount = 5;
+        if (gameStage.player.double)coinCount = 10;
+        for (var i = 0; i < coinCount; ++i) {
+            if (Math.random() > 0.3) continue;
+            CCoin.spawnCoin(this.x, this.y, this.coinAmount);
+        }
     }
     this.prekilled = true;
 

@@ -6,15 +6,21 @@
  */
 extend(CTabletsBooster, CBooster, true);
 
+
 function CTabletsBooster(x,y,gfx) {
     CBooster.apply(this, [x,y, gfx]);
+    this.duration = 4;
+    this.key = "A";
+    this.activate = true;
 
-    this.lastUse  = 0;
-    this.delay = 20000;
-    this.activate = function()
-    {
-        if (window.time - this.lastUse < this.delay) return;
+}
+
+CTabletsBooster.prototype.onActivate = function()
+{
+    CBooster.prototype.onActivate.call(this);
         if (!gameStage.player) return;
+
+
         this.lastUse = window.time;
         gameStage.player.invulnerable = true;
         var p = gameStage.player;
@@ -22,11 +28,12 @@ function CTabletsBooster(x,y,gfx) {
         var prevVel = LauncherBG.inst.maxVelocity;
         p.superMode = true;
 
-        new TweenMax(LauncherBG.inst, 4, {maxVelocity: LauncherBG.inst.maxVelocity + 25, ease: Linear.easeOut});
-        TweenMax.delayedCall(4.3, function(){
+    var b = this;
+        new TweenMax(LauncherBG.inst, this.duration, {maxVelocity: LauncherBG.inst.maxVelocity + 25, ease: Linear.easeOut});
+        TweenMax.delayedCall(this.duration+0.3, function(){
             new TweenMax(LauncherBG.inst, 1.3, {maxVelocity: prevVel, ease: Linear.easeOut});
             TweenMax.delayedCall(0.6, function(){
-
+                b.onDeactivate();
                 p.superMode = false;
                 p.resetBlink();
                 p.invulnerable = false;
@@ -34,6 +41,7 @@ function CTabletsBooster(x,y,gfx) {
             });
         })
         //    gameStage.slowMoCoef = 0.5;
-     //   var f = gameStage;
-    }
+        //   var f = gameStage;
+
 }
+

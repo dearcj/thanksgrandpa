@@ -176,17 +176,23 @@ GameStage.prototype.updateItems = function () {
             b.gfx.scale.x = 0.3;
             b.gfx.scale.y = 0.3;
             b.updateGraphics();
-
+            b.ieid = PlayerData.inst.items_enabled[i].id;
             var icobtn;
             if (b.activate == null)
             {
                 b.gfx.tint = 0x778822;
             } else
             {
-                var x = btns.shift();
+                if (b.key == "A")
+                var x = btns[0];
+                if (b.key == "S")
+                x = btns[1];
+                if (b.key == "D")
+                x = btns[2];
+
                 if (x)
                 {
-                    b.key = x.key;
+                   // b.key = x.key;
                     icobtn = crsp(x.gfx);
                     icobtn.scale.x = 3;
                     icobtn.scale.y = 3;
@@ -256,6 +262,7 @@ GameStage.prototype.shAfterLife = function () {
 
         var continueGame = function()
         {
+            ZSound.Play("vzbodritsa");
             //failtween.kill( );
             TweenMax.killTweensOf(cb);
             removeafterlife();
@@ -440,7 +447,6 @@ GameStage.prototype.sessionEnd = function () {
 }
 
 GameStage.prototype.updateWindowLevWin = function () {
-    ZSound.Play("levelWIN");
     gameStage.doPhys = false;
 }
 
@@ -476,7 +482,7 @@ GameStage.prototype.doKeyDown = function (evt) {
     {
         if (CBooster.list[i].key == c && CBooster.list[i].activate)
         {
-            CBooster.list[i].activate();
+            CBooster.list[i].onActivate();
         }
     }
 
@@ -707,6 +713,8 @@ GameStage.prototype.createPools = function () {
             var c = crsp("smoke");
             return c;
         });
+
+
 
 
     if (pool.Size("coinCollect") == 0)

@@ -98,6 +98,7 @@ CWeapon.prototype.reload = function()
     new TweenMax(this, this.reloadTime / 1000., {ammo: wp.magCapacity});
     TweenMax.delayedCall(this.reloadTime / 1000., function ()
   {
+      if (!gameStage.player) return;
       gameStage.ammoico.gfx.visible = true;
       gameStage.reloadBar.gfx.visible = false;
       wp.state = wp.sFire;

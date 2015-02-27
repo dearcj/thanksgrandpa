@@ -29,6 +29,8 @@ BonusMonGnome.prototype.collide = function (obj2)
 BonusMonGnome.prototype.dealDamage = function(dmg)
 {
     CMonster.prototype.dealDamage.call(this, dmg);
-
-    CCoin.spawnCoin(this.x, this.y, 3);
+    if (gameStage.player.double)
+    {
+        CCoin.spawnCoin(this.x, this.y, 6);
+    } else CCoin.spawnCoin(this.x, this.y, 3);
 }

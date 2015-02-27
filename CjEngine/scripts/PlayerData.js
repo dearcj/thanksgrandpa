@@ -129,6 +129,7 @@ PlayerData.prototype.gainExp = function(amount) {
       this.playerItem.crystals += this.xpLevel[this.playerItem.lvl].crystals;
       this.playerItem.lvl++;
 
+      ZSound.Play("levelup");
 
       if (SM.inst.currentStage == gameStage) {
          this.score += this.xpLevel[this.playerItem.lvl].money;

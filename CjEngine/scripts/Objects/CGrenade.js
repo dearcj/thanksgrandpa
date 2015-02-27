@@ -40,6 +40,7 @@ CGrenade.prototype.addSmoke = function (obj2) {
 
 CGrenade.makeBoom = function (x, y, dmg, dist)
 {
+    ZSound.Play("grenade");
 
     var fx = pool.Pop("expl");
     if (fx) {
