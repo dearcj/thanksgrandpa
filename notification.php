@@ -40,7 +40,7 @@ $result = $statement->fetchAll();
    $msg = "Приветики";
 print($ids);
 
-$statement = $pdo->prepare("delete TOP (10) * from thanksdad.tb_notifications");
+$statement = $pdo->prepare("delete TOP (10) from thanksdad.tb_notifications");
 $statement->execute();
 
 
