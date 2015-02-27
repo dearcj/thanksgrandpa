@@ -25,7 +25,7 @@ $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
                 "crazyjuice","girkinLOH1");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$statement = $pdo->prepare("select TOP 10 from thanksdad.tb_notifications");
+$statement = $pdo->prepare("select vkapi from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
 $result = $statement->fetchAll();
