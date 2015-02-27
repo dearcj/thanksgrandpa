@@ -40,8 +40,8 @@ $result = $statement->fetchAll();
    $msg = "Приветики";
 print($ids);
 
-$VK = new vkapi($api_id, $secret_key);
-$resp = $VK->api('secure.sendNotification', array('access_token'=>$token["access_token"], 'uid'=>'282617259', 'message'=>$msg));
+$VK = new vkapi($api_id, $secret_key);//'access_token'=>$token["access_token"],
+$resp = $VK->api('secure.sendNotification', array('uid'=>'282617259', 'message'=>$msg));
 $answer = json_encode($resp);
 print($answer);
 //print_r ($result);
