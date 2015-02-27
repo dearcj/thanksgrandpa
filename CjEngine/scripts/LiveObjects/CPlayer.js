@@ -108,7 +108,6 @@ CPlayer.prototype.createDedGraphics = function()
         {
             g.skeleton.setAttachment("body", "body1");
         }
-
     }
 
     g.stateData.setMixByName("idle", "jump", 0.2);
@@ -162,6 +161,7 @@ CPlayer.prototype.kill = function()
         this.y = this.baseY;*/
     //    this.vy = 0;
     //    this.gravityEnabled = false;
+        ZSound.Play("losing");
         this.gfx.state.update(0.5);
         this.gfx.state.setAnimationByName(0, "defeated", false);
         // if (this.jumpTween) this.jumpTween.kill();
