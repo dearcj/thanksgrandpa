@@ -73,9 +73,10 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
         var m = CMonster.list[i];
         var dx = m.x - x;
         var dy = m.y - y;
-        if (dx*dx + dy*dy < sd)
+        var sqd = dx*dx + dy*dy;
+        if (sqd < sd)
         {
-            var d = Math.sqrt(sd);
+            var d = Math.sqrt(sqd);
             m.dealDamage(dmg*((d + 0.01) / dist));
         }
         if (m.doRemove)
