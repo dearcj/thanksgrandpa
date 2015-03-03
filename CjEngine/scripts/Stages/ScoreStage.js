@@ -39,12 +39,19 @@ ScoreStage.prototype.updateSB = function(arr)
     {
         rp(scoreStage.container.getChildAt(0));
     }
+    var clips = [];
+    var fr = "";
     for (var i = 0; i < arr.length; ++i) {
         var scoreClip = new PIXI.DisplayObjectContainer();
         var tfRank = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: (scoreStage.skip + i + 1).toString() + '.'}) ;
         var tfName = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: arr[i].name + ' ' + arr[i].last_name}) ;
         var tfScore = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: Math.round(arr[i].maxdistance).toString() + "м."}) ;
+        var clIco = crsp("buy small button");
 
+        clips.push(clIco);
+        clips[i].vkapi = arr[i].vkapi;
+        if (fr != "") fr += ",";
+        fr+= arr[i].vkapi;
         if (scoreStage.skip + i < 3)
         {
             var nameTex;
@@ -58,15 +65,46 @@ ScoreStage.prototype.updateSB = function(arr)
             bgCircle.scale.y = 0.8;
             scoreClip.addChild(bgCircle);
         }
+        clIco.y = 10;
+        clIco.x = 35;
         scoreClip.x = 20;
         scoreClip.y = 15 + 28*i;
-        tfName.x = 50;
+        tfName.x = 55;
         tfScore.x = 370;
+
+        scoreClip.addChild(clIco);
         scoreClip.addChild(tfName);
         scoreClip.addChild(tfRank);
         scoreClip.addChild(tfScore);
         scoreStage.container.addChild(scoreClip);
     }
+
+    if (VK)
+    VK.api('users.get', {user_ids: fr, fields: "photo"}, function (data) {
+
+        for (var j = 0; j < data.response.length; ++j) {
+            var purl = data.response[j].photo;
+            if (!data.response || data.response.length == 0) return;
+
+            var upperClip = clips[j];
+            upperClip.loader = new PIXI.ImageLoader(purl);
+
+            var setLoader = function (clip) {
+                clip.loader.onLoaded = function () {
+                    var ico = new PIXI.Sprite(PIXI.TextureCache[purl]);
+                    ico.anchor.x = 0.5;
+                    ico.anchor.y = 0.5;
+                    clip.addChild(ico);
+                    charStage.icons.push(ico);
+                }
+            };
+            setLoader(upperClip);
+            upperClip.loader.load();
+        }
+    });
+
+
+
 }
 
 ScoreStage.prototype.onShow = function() {
