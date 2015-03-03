@@ -77,7 +77,9 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
         if (sqd < sd)
         {
             var d = Math.sqrt(sqd);
-            m.dealDamage(dmg*((d + 0.01) / dist));
+            var totalDmg = dmg*(dist - ((d + 0.01)) / dist);
+            m.dealDamage(totalDmg);
+            console.log(totalDmg);
         }
         if (m.doRemove)
         {

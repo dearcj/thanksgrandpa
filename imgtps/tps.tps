@@ -266,6 +266,11 @@
             <filename>../../../../dedgame/fight screen/tree shadow3.png</filename>
             <filename>../../../../dedgame/fight screen/tree shadow.png</filename>
             <filename>../../../../dedgame/fight screen/tree shadow2.png</filename>
+            <filename>../../../../dedgame/fight screen/Granata.png</filename>
+            <filename>../../../../dedgame/fight screen/smoke.png</filename>
+            <filename>../../../../dedgame/animation sprites/fire/firesmall0001.png</filename>
+            <filename>../../../../dedgame/animation sprites/fire/firesmall0002.png</filename>
+            <filename>../../../../dedgame/animation sprites/fire/firesmall0003.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
