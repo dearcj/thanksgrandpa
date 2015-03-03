@@ -8,7 +8,7 @@ CharStage.prototype.onShow = function () {
     this.doProcess = false;
     charStage.skipFriends = 0;
     CustomStage.prototype.onShow.call(this);
-    charStage.icons = []
+    charStage.icons = [];
 
     LevelManager.loadLevel("levchar", function () {
             LevelManager.loadLevel("upperPanel", charStage.onShowContinue, SM.inst.ol);

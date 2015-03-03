@@ -92,9 +92,12 @@ ScoreStage.prototype.updateSB = function(arr)
             var setLoader = function (clip, url) {
                 clip.loader.onLoaded = function () {
                     var ico = new PIXI.Sprite(PIXI.TextureCache[url]);
+                    ico.scale.x = 0.5;
+                    ico.scale.y = 0.5;
                     ico.anchor.x = 0.5;
                     ico.anchor.y = 0.5;
                     clip.addChild(ico);
+                    charStage.icons.push(ico);
                 }
             };
             setLoader(upperClip, purl);
