@@ -123,6 +123,11 @@ ScoreStage.prototype.onShow = function() {
 }
 
 ScoreStage.prototype.onHide = function(newStage) {
+    while (scoreStage.container.children.length > 0)
+    {
+        rp(scoreStage.container.getChildAt(0));
+    }
+
     CustomStage.prototype.onHide.call(this, null);
     CObj.destroyAll();
     CObj.processAll();
