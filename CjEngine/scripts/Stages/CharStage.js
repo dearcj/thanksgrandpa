@@ -76,8 +76,11 @@ CharStage.prototype.createFriendsPanel = function () {
 //vkparams.friendsIngame[i].vkapi
     VK.api('users.get', {user_ids: fr, fields: "photo"}, function (data) {
 
-            var purl = data.response[0].photo;
+        for (var j = 0; j < data.response.length; ++j) {
+            var purl = data.response[j].photo;
             if (!data.response || data.response.length == 0) return;
+
+            var upperClip = clips[j];
             upperClip.loader = new PIXI.ImageLoader(purl);
 
             var setLoader = function (clip) {
@@ -91,8 +94,9 @@ CharStage.prototype.createFriendsPanel = function () {
             };
             setLoader(upperClip);
             upperClip.loader.load();
-
+        }
         });
+
     };
 
     panel.x = 215;
