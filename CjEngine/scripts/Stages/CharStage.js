@@ -84,16 +84,16 @@ CharStage.prototype.createFriendsPanel = function () {
             var upperClip = clips[j];
             upperClip.loader = new PIXI.ImageLoader(purl);
 
-            var setLoader = function (clip) {
+            var setLoader = function (clip, url) {
                 clip.loader.onLoaded = function () {
-                    var ico = new PIXI.Sprite(PIXI.TextureCache[purl]);
+                    var ico = new PIXI.Sprite(PIXI.TextureCache[url]);
                     ico.anchor.x = 0.5;
                     ico.anchor.y = 0.5;
                     clip.addChild(ico);
                     charStage.icons.push(ico);
                 }
             };
-            setLoader(upperClip);
+            setLoader(upperClip, purl);
             upperClip.loader.load();
         }
         });
