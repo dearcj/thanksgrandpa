@@ -97,7 +97,7 @@ ScoreStage.prototype.updateSB = function(arr)
                     ico.anchor.x = 0.5;
                     ico.anchor.y = 0.5;
                     clip.addChild(ico);
-                    charStage.icons.push(ico);
+                //    charStage.icons.push(ico);
                 }
             };
             setLoader(upperClip, purl);
@@ -146,11 +146,12 @@ ScoreStage.prototype.onShowContinue = function()
         {
             CObj.getById("bfriends").text = "Все очки";
             scoreStage.tab = "total";
+            scoreStage.updateTotal();
         } else {
             CObj.getById("bfriends").text = "Очки друзей";
             scoreStage.tab = "friends";
+            scoreStage.updateFriends();
         }
-        scoreStage.updateFriends();
     }
 
     CObj.getById("bfriends").click();
