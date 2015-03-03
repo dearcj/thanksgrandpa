@@ -98,7 +98,7 @@ ScoreStage.prototype.updateSB = function(arr)
                     charStage.icons.push(ico);
                 }
             };
-            setLoader(upperClip);
+            setLoader(upperClip, purl);
             upperClip.loader.load();
         }
     });
