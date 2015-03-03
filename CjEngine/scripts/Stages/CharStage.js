@@ -77,7 +77,7 @@ CharStage.prototype.createFriendsPanel = function () {
 //vkparams.friendsIngame[i].vkapi
     if (VK && fr != "")
     VK.api('users.get', {user_ids: fr, fields: "photo"}, function (data) {
-
+        if (!data.response) return;
         for (var j = 0; j < data.response.length; ++j) {
             var purl = data.response[j].photo;
             if (!data.response || data.response.length == 0) return;
@@ -499,6 +499,7 @@ CharStage.prototype.updateSB = function(arr)
     if (VK && fr != "")
         VK.api('users.get', {user_ids: fr, fields: "photo"}, function (data) {
 
+            if (!data.response) return;
             for (var j = 0; j < data.response.length; ++j) {
                 var purl = data.response[j].photo;
                 if (!data.response || data.response.length == 0) return;
