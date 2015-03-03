@@ -228,6 +228,11 @@ GameStage.prototype.updateItems = function () {
 }
 
 GameStage.prototype.shAfterLife = function () {
+    if (SM.inst.currentStage.killing)
+    {
+        return;
+    }
+
     var cb = new CircleBar(SCR_WIDTH / 2, SCR_HEIGHT / 2);
     cb.init("bodrost cover.png",  "bodrost bar.png",  "bodrost bar bg.png");
     SM.inst.guiLayer.addChild(cb.gfx);
@@ -243,6 +248,10 @@ GameStage.prototype.shAfterLife = function () {
     }
 
     openScoreWnd = function () {
+        if (SM.inst.currentStage.killing)
+        {
+            return;
+        }
         removeafterlife();
         LevelManager.loadLevel("levelgameover", gameStage.openEndWindowLoaded, SM.inst.guiLayer);
     }

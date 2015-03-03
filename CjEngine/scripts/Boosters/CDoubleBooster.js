@@ -21,6 +21,7 @@ CDoubleBooster.prototype.onActivate = function()
 
     TweenMax.delayedCall(this.duration, function(){
         gameStage.player.double = false;
+        b.onDeactivate();
     });
 
 }

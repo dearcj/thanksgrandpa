@@ -102,7 +102,7 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer)
         loader.onComplete = LevelManager.onComplete;
     } else
         LevelManager.onComplete();
-
+    return LevelManager.objs;
 }
 LevelManager.inst = new LevelManager();
 LevelManager.levels = {};

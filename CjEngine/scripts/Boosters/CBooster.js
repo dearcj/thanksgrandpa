@@ -47,9 +47,6 @@ CBooster.prototype.onActivate = function() {
     this.tf.x = this.tf.width / 2;
     this.tf.y = 12;
     this.gfx.addChild(this.tf);
-
-
-
 }
 
 CBooster.prototype.process = function()

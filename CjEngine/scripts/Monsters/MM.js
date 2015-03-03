@@ -2,7 +2,7 @@
 MM = function() {
     this.patterns =
     [
-       {mons: ".l.l...c..z..c...c..s..l..s...l", diff: 1, prob: 1},
+        {mons: ".l.l...c..z..c...c..s..l..s...l", diff: 1, prob: 1},
         {mons: ".l..l..l...l..l.l..", diff: 2, prob: 1},
         {mons: ".c.g..gl", diff: 4, prob: 1},
         {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3, prob: 1},
@@ -167,8 +167,8 @@ MM.prototype.spawnBonusGnome = function(xp) {
     var m = new BonusMonGnome(SCR_WIDTH+100,150,str);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
-    new TweenMax(m, 25, {x: -100, onComplete: function(){m.destroy();}});
-    m.maxHp = 1000;
+    //new TweenMax(m, 25, {x: -100, onComplete: function(){m.destroy();}});
+    m.maxHp = 400;
     m.hp = m.maxHp;
     m.xp = xp + LauncherBG.inst.distance*0.01;
 }

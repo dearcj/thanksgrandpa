@@ -97,6 +97,7 @@ SM.prototype.addLayersToStage = function()
 
 SM.prototype.fadeBegin = function(newStage) {
         if (this.currentStage) {
+            this.currentStage.killing = true;
             this.currentStage.onHide(newStage);
             this.currentStage.doProcess = false;
         }
@@ -138,6 +139,7 @@ SM.prototype.openStage = function(newStage, trns){
         {
             this.currentStage = newStage;
             this.currentStage.doProcess = true;
+            this.currentStage.killing = false;
             newStage.onShow();
         }
     }

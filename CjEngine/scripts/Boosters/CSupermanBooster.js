@@ -13,6 +13,7 @@ function CSupermanBooster(x,y,gfx) {
 CSupermanBooster.prototype.onActivate = function()
 {
     if (!gameStage.player) return;
+    if (gameStage.player.jumping) return;
     CBooster.prototype.onActivate.call(this);
 
     var b = this;
@@ -25,6 +26,7 @@ CSupermanBooster.prototype.onActivate = function()
     }});
     gameStage.player.jumping = true;
     gameStage.player.gravityEnabled = false;
+    gameStage.player.jumpBoost = false;
 
     TweenMax.delayedCall(this.duration, function(){
         gameStage.player.jumping = false;
@@ -63,6 +65,7 @@ CSupermanBooster.prototype.onActivate = function()
     this.fire3.loop = true;
     this.fire3.gotoAndPlay(0);
     gameStage.player.gfx.addChildAt(this.fire3,0);
+    gameStage.player.state.setAnimationByName(0, "idle", true);
 
 
 }

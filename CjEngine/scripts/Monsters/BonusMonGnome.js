@@ -18,7 +18,10 @@ function BonusMonGnome(in_x,in_y,animname,cr_bar){
     this.updateGraphics();
     LauncherBG.inst.ol.addChild(this.gfx);
     this.xp = 30;
-  //  new TweenMax(this, 0.9, {y: this.y + 40, repeat: -1, yoyo: true});
+    this.allowTrackSpeed = false;
+    var t = this;
+    new TweenMax(this, 18, {vx: -40, ease: Circ.easeIn, onComplete: function(){t.destroy();}});
+    //new TweenMax(this, 0.9, {x: -100, repeat: -1, yoyo: true});
 }
 
 BonusMonGnome.prototype.collide = function (obj2)

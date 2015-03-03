@@ -101,6 +101,14 @@ CPlayer.prototype.createDedGraphics = function()
     g.scale.x = 0.3;
     g.scale.y = 0.3;
 
+    if (!CPlayer.rhRot)
+        CPlayer.rhRot = this.rshSlot.data.boneData.rotation;
+    if (!CPlayer.lhRot)
+        CPlayer.lhRot = this.lshSlot.data.boneData.rotation;
+    this.rshSlot.data.boneData.rotation = CPlayer.rhRot;
+    this.lshSlot.data.boneData.rotation = CPlayer.lhRot;
+
+
     g.skeleton.setAttachment("body", "body");
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
     {
@@ -225,7 +233,7 @@ CPlayer.prototype.onDmgAnim = function(pusher) {
 
 CPlayer.prototype.process = function()
 {
-    if (this.playable && gameStage.player) {
+    if (SM.inst.currentStage == gameStage && this.playable && gameStage.player) {
 
             if (this.vy > 0 && this.y > this.baseY - 30) {
                 this.jumping = false;
@@ -236,7 +244,10 @@ CPlayer.prototype.process = function()
                 this.landing();
             }
 
-
+        if (gameStage.player.XXXX)
+        {
+            c = 0;
+        }
         if (this.blink)
         {
             this.updateBlink();
@@ -295,8 +306,8 @@ CPlayer.prototype.process = function()
         }
         else
         if (gameStage.curweapon == w_pps) {
-            dx = -45;
-            dy = 280;
+            dx = 330;
+            dy = 20;
             da = -Math.PI / 20;
         }
         else
@@ -325,6 +336,7 @@ CPlayer.prototype.process = function()
         if (this.state == this.sMoving) {
             this.rshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI + 25;
             this.lshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI - 10;
+            console.log("MOVING WEAPON");
         }
        // this.gunBone.data.boneData.rotation =  270 -180*newAngle / Math.PI;
         //this.dedLeftHand.rotation = newAngle + 0.13;
@@ -364,7 +376,7 @@ CPlayer.prototype.updateBlink = function()
 
 CPlayer.prototype.dealDamage = function(dmg)
 {
-    if (window.time - this.revealTime < 1000) return;
+    if (window.time - this.revealTime < 800) return;
     this.revealTime = window.time;
     if (this.invulnerable) return;
 

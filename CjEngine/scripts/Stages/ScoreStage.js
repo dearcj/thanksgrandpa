@@ -10,7 +10,7 @@ ScoreStage.prototype.updateFriends = function() {
     PlayerData.inst.savePlayerData();
 
     azureclient.invokeApi("get_scores", {
-        body: {filter: vkparams.friendsIngameIDs, take: 20, skip: scoreStage.skip},
+        body: {filter: vkparams.friendsIngameIDs, take: scoreStage.showRecords, skip: scoreStage.skip},
         method: "post"
     }).done(function (results) {
         scoreStage.updateSB(results.result);
@@ -23,7 +23,7 @@ ScoreStage.prototype.updateTotal = function() {
 
 
     azureclient.invokeApi("get_scores", {
-        body: {filter: null, take: 20, skip: scoreStage.skip},
+        body: {filter: null, take: scoreStage.showRecords, skip: scoreStage.skip},
         method: "post"
     }).done(function (results) {
         scoreStage.updateSB(results.result);
@@ -35,39 +35,51 @@ ScoreStage.prototype.updateTotal = function() {
 
 ScoreStage.prototype.updateSB = function(arr)
 {
-    scoreStage.bar.posScale = 1.67;
-    scoreStage.bar.pos = 0;
-    scoreStage.bar.clear();
-
+    while     (scoreStage.container.children.length > 0)
+    {
+        rp(scoreStage.container.getChildAt(0));
+    }
     for (var i = 0; i < arr.length; ++i) {
         var scoreClip = new PIXI.DisplayObjectContainer();
-        var tfRank = CTextField.createTextField({fontSize: 22, text: (scoreStage.skip + i + 1).toString() + '.'}) ;
-        var tfName = CTextField.createTextField({fontSize: 22, text: arr[i].name + ' ' + arr[i].last_name}) ;
-        var tfScore = CTextField.createTextField({fontSize: 22, text: Math.round(arr[i].maxdistance).toString()}) ;
+        var tfRank = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: (scoreStage.skip + i + 1).toString() + '.'}) ;
+        var tfName = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: arr[i].name + ' ' + arr[i].last_name}) ;
+        var tfScore = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: Math.round(arr[i].maxdistance).toString() + "м."}) ;
 
+        if (scoreStage.skip + i < 3)
+        {
+            var nameTex;
+            if (scoreStage.skip + i == 0) nameTex = "1st place";
+            if (scoreStage.skip + i == 1) nameTex = "2nd place";
+            if (scoreStage.skip + i == 2) nameTex = "3rd place";
+            var bgCircle = crsp(nameTex);
+            bgCircle.x = 4;
+            bgCircle.y = 10;
+            bgCircle.scale.x = 0.8;
+            bgCircle.scale.y = 0.8;
+            scoreClip.addChild(bgCircle);
+        }
         scoreClip.x = 20;
-        scoreClip.y = 15 + 50*i;
+        scoreClip.y = 15 + 28*i;
         tfName.x = 50;
         tfScore.x = 370;
         scoreClip.addChild(tfName);
         scoreClip.addChild(tfRank);
         scoreClip.addChild(tfScore);
-        scoreStage.bar.container.addChild(scoreClip);
+        scoreStage.container.addChild(scoreClip);
     }
 }
 
 ScoreStage.prototype.onShow = function() {
     CustomStage.prototype.onShow.call(this);
-
-
-        scoreStage.skip = 0;
-
+    scoreStage.skip = 0;
 
     scoreStage.tab = "total";
-    scoreStage.bar = new CScrollbar(430 ,320, "", 480, 400);
-
-    scoreStage.showRecords = 20;
+    scoreStage.showRecords = 10;
     LevelManager.loadLevel("levscore", this.onShowContinue);
+    scoreStage.container = new PIXI.DisplayObjectContainer();
+    scoreStage.container.x = 170;
+    scoreStage.container.y = 170;
+    SM.inst.ol.addChild(scoreStage.container);
 }
 
 ScoreStage.prototype.onHide = function(newStage) {
@@ -78,38 +90,36 @@ ScoreStage.prototype.onHide = function(newStage) {
 
 ScoreStage.prototype.onShowContinue = function()
 {
-   CObj.getById("tfpl").text = "ВАШ РЕКОРД " + PlayerData.inst.playerItem.maxdistance.toString() + ' МЕТРА \n' +
-    "ВАШ РАНГ " + PlayerData.inst.playerItem.rank.toString();
+   CObj.getById("tplscore").text = PlayerData.inst.playerItem.maxdistance.toString() + 'м.';
+   CObj.getById("tplace").text = PlayerData.inst.playerItem.rank.toString() + ".";
+    // '\n' +
+  //  "ВАШ РАНГ " +
 
     var current = scoreStage.skip + 1;
 
+ //   CObj.getById("tdisplayed").text =  (current).toString() + " - " + (current+ scoreStage.showRecords).toString();
 
-    CObj.getById("tdisplayed").text =  (current).toString() + " - " + (current+ scoreStage.showRecords).toString();
-
-    CObj.getById("btotal").click = function ()
-    {
-        scoreStage.skip = 0;
-
-        CObj.getById("scorestitle").text = "ВСЕ ОЧКИ";
-        scoreStage.tab = "total";
-        scoreStage.updateTotal();
-    }
     CObj.getById("bfriends").click = function ()
     {
         scoreStage.skip = 0;
-        CObj.getById("scorestitle").text = "ОЧКИ ДРУЗЕЙ";
-        scoreStage.tab = "friends";
+        if (scoreStage.tab == "friends")
+        {
+            CObj.getById("bfriends").text = "Все очки";
+            scoreStage.tab = "total";
+        } else {
+            CObj.getById("bfriends").text = "Очки друзей";
+            scoreStage.tab = "friends";
+        }
         scoreStage.updateFriends();
     }
 
-    CObj.getById("btotal").click();
+    CObj.getById("bfriends").click();
 
     CObj.getById("bforwardlist").click = function ()
     {
         scoreStage.skip += scoreStage.showRecords;
         var current = scoreStage.skip + 1;
-        CObj.getById("tdisplayed").text =  (current).toString() + " - " + (current+ scoreStage.showRecords).toString();
-        if (scoreStage.tab == "total")
+         if (scoreStage.tab == "total")
             scoreStage.updateTotal();
         if (scoreStage.tab == "friends")
             scoreStage.updateFriends();
@@ -125,8 +135,7 @@ ScoreStage.prototype.onShowContinue = function()
         scoreStage.skip -= scoreStage.showRecords;
         if (scoreStage.skip < 0) scoreStage.skip = 0;
         var current = scoreStage.skip + 1;
-        CObj.getById("tdisplayed").text =  (current).toString() + " - " + (current+ scoreStage.showRecords).toString();
-        if (scoreStage.tab == "total")
+         if (scoreStage.tab == "total")
             scoreStage.updateTotal();
         if (scoreStage.tab == "friends")
             scoreStage.updateFriends();
