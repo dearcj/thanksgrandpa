@@ -145,7 +145,7 @@ ScoreStage.prototype.onShowContinue = function()
         if (scoreStage.tab == "friends")
         {
             CObj.getById("bfriends").text = "Все очки";
-            scoreStage.tab = "total";
+            scoreStage.tab = "total";//
             scoreStage.updateTotal();
         } else {
             CObj.getById("bfriends").text = "Очки друзей";
