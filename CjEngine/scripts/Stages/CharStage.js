@@ -74,6 +74,7 @@ CharStage.prototype.createFriendsPanel = function () {
     }
 
 //vkparams.friendsIngame[i].vkapi
+    if (VK && fr != "")
     VK.api('users.get', {user_ids: fr, fields: "photo"}, function (data) {
 
         for (var j = 0; j < data.response.length; ++j) {
