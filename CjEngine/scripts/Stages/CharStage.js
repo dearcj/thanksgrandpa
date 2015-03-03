@@ -97,7 +97,6 @@ CharStage.prototype.createFriendsPanel = function () {
         }
         });
 
-    };
 
     panel.x = 215;
     panel.y = SCR_HEIGHT - 50;
