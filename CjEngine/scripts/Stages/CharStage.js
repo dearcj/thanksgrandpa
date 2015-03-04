@@ -169,28 +169,30 @@ CharStage.prototype.openEnergyWindow = function () {
             VK.orderComplete = function()
             {
                 shopStage.updateStatsPanel();
-                wnd.click();
+                close();
             }
 
         }
+        close= function()
+        {
+            rp(wnd);
+            CObj.enableButtons(true);
+
+            for (var i = 0; i < objs.length; ++i) {
+                objs[i].destroy();
+            }
+            wnd.click = null;
+        };
 
         wnd.click = function () {
             var obj = CObj.getById("energybg");
-            obj.updateGraphics();
-            obj.gfx.updateTransform();
             var bnds = obj.gfx.getBounds();
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                 window.mouseX < obj.x + obj.gfx.width / 2 &&
                 window.mouseY > obj.y - obj.gfx.height / 2 &&
                 window.mouseY < obj.y + obj.gfx.height / 2) {
             } else {
-                rp(wnd);
-                CObj.enableButtons(true);
-
-                for (var i = 0; i < objs.length; ++i) {
-                    objs[i].destroy();
-                }
-                wnd.click = null;
+              close();
             }
         }
 
@@ -244,8 +246,6 @@ CharStage.prototype.onShowContinue = function () {
 
             wnd.click = function () {
                 var obj = CObj.getById("setbg");
-                obj.updateGraphics();
-                obj.gfx.updateTransform();
                 var bnds = obj.gfx.getBounds();
                 if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                     window.mouseX < obj.x + obj.gfx.width / 2 &&
