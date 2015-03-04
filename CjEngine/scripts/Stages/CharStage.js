@@ -157,6 +157,46 @@ CharStage.prototype.openPremiumWindow = function () {
     }, SM.inst.fontLayer);
 }
 
+CharStage.prototype.openEnergyWindow = function () {
+    CObj.enableButtons(false);
+    ;
+    var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
+    wnd.interactive = true;
+    var objs = LevelManager.loadLevel("energywindow", function () {
+        CObj.getById("breplenish").click = function()
+        {
+            order("item7");
+            VK.orderComplete = function()
+            {
+                shopStage.updateStatsPanel();
+                wnd.click();
+            }
+
+        }
+
+        wnd.click = function () {
+            var obj = CObj.getById("energybg");
+            obj.updateGraphics();
+            obj.gfx.updateTransform();
+            var bnds = obj.gfx.getBounds();
+            if (window.mouseX > obj.x - obj.gfx.width / 2 &&
+                window.mouseX < obj.x + obj.gfx.width / 2 &&
+                window.mouseY > obj.y - obj.gfx.height / 2 &&
+                window.mouseY < obj.y + obj.gfx.height / 2) {
+            } else {
+                rp(wnd);
+                CObj.enableButtons(true);
+
+                for (var i = 0; i < objs.length; ++i) {
+                    objs[i].destroy();
+                }
+                wnd.click = null;
+            }
+        }
+
+    }, SM.inst.fontLayer);
+}
+
 CharStage.prototype.onShowContinue = function () {
     charStage.doProcess = true;
 
@@ -316,6 +356,8 @@ CharStage.prototype.onShowContinue = function () {
     shopStage.updateStatsPanel();
 
     charStage.frp = charStage.createFriendsPanel();
+
+    charStage.openEnergyWindow();
 }
 
 CharStage.prototype.updateEvents = function () {

@@ -70,7 +70,14 @@ if ($sig != md5($str.$secret_key)) {
                                    'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                                    'price' => 50);
       }
-       else {
+      elseif ($item == 'item7') {
+                                     $response['response'] = array(
+                                       'item_id' => 714,
+                                       'title' => '1 энергия',
+                                       'photo_url' => 'https://pp.vk.me/c622718/v622718259/265bd/SBrOAe2sxnE.jpg',
+                                       'price' => 1);
+          }
+           else {
         $response['error'] = array(
           'error_code' => 20,
           'error_msg' => 'Товара не существует.',
@@ -126,7 +133,14 @@ case 'get_item_test':
                                        'title' => '80 звезд',
                                        'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                                        'price' => 50);
-          } else {
+          }
+          elseif ($item == 'item7') {
+            $response['response'] = array(
+            'item_id' => 704,
+            'title' => '1 энергия',
+            'photo_url' => 'https://pp.vk.me/c622718/v622718259/265bd/SBrOAe2sxnE.jpg',
+            'price' => 1);
+                     }else {
         $response['error'] = array(
           'error_code' => 20,
           'error_msg' => 'Товара не существует.',
