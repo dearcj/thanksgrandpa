@@ -6,18 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/levels/energywindow.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/dedgamedesc.png" afterPath="$PROJECT_DIR$/imgtps/dedgamedesc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.png" afterPath="$PROJECT_DIR$/imgtps/guiatlas.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/dedgamedesc.xml" afterPath="$PROJECT_DIR$/imgtps/dedgamedesc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.json" afterPath="$PROJECT_DIR$/imgtps/guiatlas.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.xml" afterPath="$PROJECT_DIR$/imgtps/guiatlas.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/levels/levchar.json" afterPath="$PROJECT_DIR$/levels/levchar.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/levels/levscore.json" afterPath="$PROJECT_DIR$/levels/levscore.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/levels/upperPanel.json" afterPath="$PROJECT_DIR$/levels/upperPanel.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vk_callback.php" afterPath="$PROJECT_DIR$/vk_callback.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/levels/energywindow.json" afterPath="$PROJECT_DIR$/levels/energywindow.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -2502,7 +2491,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425423132947</updated>
     </task>
-    <option name="localTasksCounter" value="312" />
+    <task id="LOCAL-00312" summary="0">
+      <created>1425473922910</created>
+      <option name="number" value="00312" />
+      <option name="project" value="LOCAL" />
+      <updated>1425473922910</updated>
+    </task>
+    <option name="localTasksCounter" value="313" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2527,12 +2522,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1634" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5314835" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3361793" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="333" y="796" width="502" height="201" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34061137" sideWeight="0.4143401" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34061137" sideWeight="0.4143401" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3191035" sideWeight="0.5006345" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3276414" sideWeight="0.49936548" order="9" side_tool="false" content_ui="tabs" />
