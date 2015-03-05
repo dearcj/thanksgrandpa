@@ -273,7 +273,7 @@ CPlayer.prototype.process = function()
 
             if (this.jumping) {
                 if (this.jumpboost && this.vy < 0)
-                    this.vy *= this.boostPower;
+                   /// this.vy *= this.boostPower;
                 if (this.vy < this.maxBoostVel) {
                     this.jumpboost = false;
                     this.vy = this.maxBoostVel;
