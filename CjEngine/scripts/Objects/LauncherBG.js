@@ -81,13 +81,15 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
         g.alpha = 0.5;
     }
 */
+    var additional = 30;
+    if (layer.velocity == 0) additional  = 0;
     if (g) {
         layer.clip.addChild(g);
         layer.rightBound += obj.baseDim.x * obj.scaleX;
         if (spawnStart)
-            g.position.x = obj.baseDim.x * obj.scaleX / 2; else
+            g.position.x = additional + obj.baseDim.x * obj.scaleX / 2; else
 
-            g.position.x = SCR_WIDTH + obj.baseDim.x * obj.scaleX / 2 + offs - this.maxVelocity*0.8  - 3;
+            g.position.x = SCR_WIDTH + additional + obj.baseDim.x * obj.scaleX / 2 + offs - this.maxVelocity*0.8  - 3;
     } else
         layer.rightBound += obj.baseDim.x * obj.scaleX;
 

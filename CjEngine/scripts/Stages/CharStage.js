@@ -178,9 +178,7 @@ CharStage.prototype.openEnergyWindow = function () {
             rp(wnd);
             CObj.enableButtons(true);
 
-            for (var i = 0; i < objs.length; ++i) {
-                objs[i].destroy();
-            }
+            LevelManager.removeLastLevel();
             wnd.click = null;
         };
 
@@ -287,6 +285,7 @@ CharStage.prototype.onShowContinue = function () {
             var en2 = CObj.getById("energyback");
             new TweenMax(en1, 0.1, {y: en1.y - 10, repeat: 3, yoyo: true, ease: Linear.easeInOut});
             new TweenMax(en2, 0.1, {y: en2.y - 10, repeat: 3, yoyo: true, ease: Linear.easeInOut});
+            charStage.openEnergyWindow();
         }
     };
 
@@ -356,8 +355,6 @@ CharStage.prototype.onShowContinue = function () {
     shopStage.updateStatsPanel();
 
     charStage.frp = charStage.createFriendsPanel();
-
-    charStage.openEnergyWindow();
 }
 
 CharStage.prototype.updateEvents = function () {
@@ -466,10 +463,9 @@ CharStage.prototype.openScore = function()
     {
         CObj.enableButtons(true);
 
-        for (var i = 0; i < objs.length; ++i)
-        {
-            objs[i].destroy();
-        }
+        LevelManager.removeLastLevel();
+
+
         while (charStage.container.children.length > 0)
         {
             rp(charStage.container.getChildAt(0));

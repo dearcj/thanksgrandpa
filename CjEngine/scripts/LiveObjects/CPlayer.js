@@ -6,7 +6,10 @@ extend(CPlayer, CLiveObj, true);
 function CPlayer(in_x,in_y,textname,in_body){
     CLiveObj.apply(this,[in_x,in_y,null,in_body]);
 
-    this.gravPower = 0.81;
+    this.boostPower = 1.035;
+    this.maxBoostVel = -20.5;
+    this.initialJumpSpeed = -16;
+    this.gravPower = 0.93;
     this.gfx = this.createDedGraphics();
     this.fireAngle = 0;
     this.weapon = gameStage.curweapon;
@@ -147,7 +150,7 @@ CPlayer.prototype.onJump = function()
         this.jumpboost = true;
         this.gfx.state.setAnimationByName(0, "jump", false);
         this.gravityEnabled = true;
-        this.vy = -13;
+        this.vy = this.initialJumpSpeed;
         ZSound.Play("jump2");
 
         this.movementTween.pause();
@@ -257,11 +260,10 @@ CPlayer.prototype.process = function()
 
             if (this.jumping) {
                 if (this.jumpboost && this.vy < 0)
-                    this.vy *= 1.048;
-
-                if (this.vy < -17) {
+                    this.vy *= this.boostPower;
+                if (this.vy < this.maxBoostVel) {
                     this.jumpboost = false;
-                    this.vy = -17;
+                    this.vy = this.maxBoostVel;
                 }
             }
         }
@@ -336,7 +338,6 @@ CPlayer.prototype.process = function()
         if (this.state == this.sMoving) {
             this.rshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI + 25;
             this.lshSlot.data.boneData.rotation = 270 - 180 * newAngle / Math.PI - 10;
-            console.log("MOVING WEAPON");
         }
        // this.gunBone.data.boneData.rotation =  270 -180*newAngle / Math.PI;
         //this.dedLeftHand.rotation = newAngle + 0.13;

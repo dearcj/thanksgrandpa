@@ -7,6 +7,9 @@ var w_pistol = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        visualWidth: 20,
+        dw: -0.7,
+        speed: 40.5,
         sound: null,
         acc: 0.05,
         recoil: 12, //recoil
@@ -27,14 +30,17 @@ var w_rifle = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        visualWidth: 15,
+        dw: 0.3,
+        speed: 50.5,
         sound: "rifle",
         life: 3,
         acc: 0.05,
-        recoil: 19, //recoil
+        recoil: 0, //recoil
         accIncrease: 0.02,
         accRecoil: 0.1,
-        magcap: 5, //magcap
-        delay: 820, //delay
+        magcap: 6, //magcap
+        delay: 380, //delay
         damage: 66, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 1200},//__reloadTime,}
@@ -51,6 +57,9 @@ var w_pps = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        visualWidth: 20,
+        dw: -0.7,
+        speed: 40.5,
         sound: "mini",
         life: 1,
         acc: 0.02,
@@ -75,6 +84,9 @@ var w_minigun = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        visualWidth: 20,
+        dw: -0.7,
+        speed: 40.5,
         sound: "mini",
         life: 2,
         acc: 0.05,
@@ -98,6 +110,9 @@ var w_ak74 = new CQueueGun(
     "пистолет", //name
     "описание", //desc
     {
+        visualWidth: 20,
+        dw: -0.7,
+        speed: 40.5,
         sound: "ochered",
         queue: 4,
         queueDelay: 110,
@@ -124,6 +139,9 @@ var w_grenadel = new CGrenadeLauncher(
     "лазер", //name
     "описание", //desc
     {
+        visualWidth: 20,
+        dw: -0.7,
+        speed: 40.5,
         sound: "laser",
         life: 1,
         acc: 0.08,
@@ -146,6 +164,9 @@ var w_laser = new CLaser(
     "лазер", //name
     "описание", //desc
     {
+        visualWidth: 20,
+        dw: -0.7,
+        speed: 40.5,
         sound: "laser",
         life: 1,
         acc: 0.08,

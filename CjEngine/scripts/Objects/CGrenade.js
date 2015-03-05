@@ -68,7 +68,7 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
     var sd = dist*dist;
     var l = CMonster.list.length;
 
-    for (var i = 0; i < l; ++i)
+   for (var i = 0; i < l; ++i)
     {
         var m = CMonster.list[i];
         var dx = m.x - x;
@@ -103,6 +103,11 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
 
 CGrenade.prototype.collide = function (obj2)
 {
+    if (this.owner != gameStage.player )
+    {
+        if (obj2 && CObj.checkType(obj2, CMonster)) return;
+    }
+
     if (obj2 != this.owner) {
         CGrenade.makeBoom(this.x, this.y, this.dmg, 350)
         this.destroy();

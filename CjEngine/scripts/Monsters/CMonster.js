@@ -131,13 +131,19 @@ CMonster.prototype.destroy = function()
 
 CMonster.prototype.longJump = function()
 {
+    var diff = 1;
     this.gravityEnabled = true;
     this.jumpTimeCoef = 1;
-    var pow = (1 + 0.1*(Math.random() - 0.5));
-    var t = 2.2*this.jumpTimeCoef/pow;
-    this.gravPower = 0.12*pow;
-    this.vy = -this.gravPower*t*20*pow;
+    var pow = (1 + 0.2*(Math.random() - 0.5));
+  //  var t = 2*this.jumpTimeCoef/pow;
+    this.gravPower = (0.14 + 0.025*diff)*pow;
+    this.vy = -this.gravPower*40*pow;
     this.allowTrackSpeed = false;
-    new TweenMax(this, t, {x: 50, ease: Linear.easeIn});
+    this.gravityEnabled = true;
+
+    var obj = this;
+    this.vx = -12 - diff;
+    new TweenMax(this, 1.2, {vx: -6 - diff, yoyo: true, repeat: 1});
+  //  new TweenMax(this, 1.2, {y: 150, repeat: 1, yoyo:true, onComplete: function(){obj.vy = 3; obj.gravityEnabled = true;}});
   //  new TweenMax(this, 1.7*this.jumpTimeCoef, { y: this.y - 220*(this.highCoef + Math.random()*0.1), yoyo: true, repeat: 1, ease: Quad.easeInOut, onComplete: function(){x.gravityEnabled = true;}} );
 }

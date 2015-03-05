@@ -8,6 +8,9 @@ function CPistol(_id, _name, _desc,  __params,__gfx, _upgrades)
     CWeapon.apply(this, [_id, _name, _desc,  __params,__gfx, _upgrades]);
 }
 
+CPistol.prototype.mouseUp = function() {
+    this.lastShot -= this.delay*0.3;
+}
 
 CPistol.prototype.shot = function()
 {
@@ -33,8 +36,10 @@ CPistol.prototype.shot = function()
     b.life = this.life;
     b.dmg = this.damage;
     b.rotation = Math.PI / 2 + fireAngle;
-    b.vx = vx*40.5;
-    b.vy = vy*40.5;
+    b.visualWidth = this.visualWidth
+    b.dw = this.dw;
+    b.vx = vx*this.speed;
+    b.vy = vy*this.speed;
     b.colGroup = CG_BULLET;
     b.colMask = CG_MONSTER;
   return r;

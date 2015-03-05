@@ -7,7 +7,7 @@ function CBullet(in_x,in_y,textname,in_body) {
     CObj.apply(this, [in_x, in_y, null, in_body]);
     this.gfx = new PIXI.DisplayObjectContainer();
 
-    this.visualWidth = 20;
+    this.visualWidth;
     this.visualVel = 7;
     this.bhead = new PIXI.Sprite(PIXI.Texture.fromFrame("head.png"));
     this.bhead.anchor.x = 0.5;
@@ -30,6 +30,7 @@ function CBullet(in_x,in_y,textname,in_body) {
     this.gfx.addChild(this.bsheylf);
     SM.inst.ol.addChild(this.gfx);
     this.dmg = 10;
+    this.radius = 30;
     if (!CBullet.list) CBullet.list = [];
     CBullet.list.push(this);
 }
@@ -82,6 +83,7 @@ CBullet.prototype.collide = function (obj2)
         }
 
         this.life--;
+        this.dmg*=0.66;
         if (this.life <= 0)
             this.destroy();
         this.prevVictim = obj2;
@@ -100,7 +102,7 @@ CBullet.prototype.destroy = function()
 CBullet.prototype.process = function() {
 
     this.visualVel += 29.5;
-    this.visualWidth -= 0.7;
+    this.visualWidth += this.dw;
     this.updateBulletSpeed(this.visualVel);
 
     CObj.prototype.process.call(this);

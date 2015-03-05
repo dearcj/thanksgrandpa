@@ -50,7 +50,6 @@ GameStage.prototype.createHPBar = function (x, y, max) {
     }
 }
 
-
 GameStage.prototype.createCircle = function (w, x, y, r) {
     var s = new PIXI.Graphics();
 
@@ -338,8 +337,8 @@ GameStage.prototype.openEndWindowLoaded = function () {
 
     function addLine(num) {
         var l = -70;
-        var space = CObj.getById("div").y + 10;
-        var d = 44;
+        var space = CObj.getById("div").y + 20;
+        var d = 36;
         var tf1 = new CTextField(SCR_WIDTH / 2 - 100 + l, space + num * d);
         tf1.text = (num + 1).toString() + ".";
         tf1.fontSize = 18;
@@ -549,9 +548,18 @@ GameStage.prototype.onShowContinue = function () {
         LauncherBG.inst.graves = [];
         for (var i = 0; i < vkparams.friendsIngame.length; ++i)
         {
-            if (vkparams.friendsIngame[i].maxdistance > 1)
-            LauncherBG.inst.graves.push({text: vkparams.friendsIngame[i].name + " " + vkparams.friendsIngame[i].last_name, dist: vkparams.friendsIngame[i].maxdistance});
+            if (vkparams.friendsIngame[i].maxdistance > 1) {
+                LauncherBG.inst.graves.push({
+                    text: vkparams.friendsIngame[i].name + " " + vkparams.friendsIngame[i].last_name,
+                    dist: vkparams.friendsIngame[i].maxdistance
+                });
+            }
         }
+        if (PlayerData.inst.playerItem.maxdistance > 1)
+        LauncherBG.inst.graves.push({
+            text: vkparams.name + " " + vkparams.last_name,
+            dist: PlayerData.inst.playerItem.maxdistance
+        });
     }
     //else
     //LauncherBG.inst.graves = [{text: "ПАЛАУТ", dist: 20}, {text: "ДУЛЬКИН", dist: 30}, {text: "ПСИНА", dist: 200}];
@@ -603,25 +611,30 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.createPools();
     gameStage.distText = CObj.getById("dist");
 
+    gameStage.visibleAllText=  function(v)
+    {
+        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i) {
+            SM.inst.fontLayer.children[i].visible = v;
+        }
+    };
     gameStage.menuBtn = CObj.getById("menu");
     gameStage.menuBtn.click = function () {
         if (!gameStage.doProcess) return;
         if (!gameStage.doPhys) return;
-        for (var i = 0; i < SM.inst.fontLayer.children.length; ++i) {
-            SM.inst.fontLayer.children[i].visible = false;
-        }
 
         gameStage.state = "paused";
         gameStage.pause();
         gameStage.fadeScreen();
-
+        gameStage.visibleAllText(false);
         TweenMax.killTweensOf(gameStage.menuBtn, true);
-        LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.guiLayer);
+        LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.fontLayer);
     }
 
 
     var fdown = function (md) {
     //    document.focus();
+        if (gameStage.player)
+        gameStage.player.weapon.mouseUp();
         gameStage.fireState = true;
     //    md.preventDefault();
     //    window.focus();
@@ -682,6 +695,7 @@ GameStage.prototype.makePause = function () {
             gameStage.doProcess = true;
             LevelManager.removeLastLevel();
             LevelManager.objs = null;
+            gameStage.visibleAllText(true);
             gameStage.doPhys = true;
             gameStage.unpause();
             gameStage.removeFade();

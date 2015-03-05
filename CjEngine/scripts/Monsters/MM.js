@@ -6,17 +6,16 @@ MM = function() {
         {mons: ".l..l..l...l..l.l..", diff: 2, prob: 1},
         {mons: ".c.g..gl", diff: 4, prob: 1},
         {mons: "..ss..ss.s..l..ss..l.....l...s", diff: 3, prob: 1},
-        {mons: ".f.z.f..f..", diff: 3, prob: 1},
+        {mons: ".f...z...f..c.", diff: 3, prob: 1},
         {mons: "d...f...f.", diff: 4, prob: 0.1},
         {mons: "F..l.lF..l.", diff: 4, prob: 1},
-        {mons: "f..c.flf.c.", diff: 4, prob: 1},
-        {mons: "f..c.flf.c.", diff: 4, prob: 1},
+        {mons: "f..c.flf.c.", diff: 5, prob: 1},
         {mons: "..ssss..s..l", diff: 4, prob: 1},
         {mons: "l.l.l...ssl.l.l.l.", diff: 4, prob: 1},
         {mons: ".c..c..z..s..sc..sc..sc..", diff: 5, prob: 1},
         {mons: "ggg...g..g..GGG.", diff: 5, prob: 1},
         {mons: "zzz.z..GGG.zzz.", diff: 5, prob: 1},
-        {mons: ".c..cz..l..g..g..g", diff: 6, prob: 1},
+        {mons: ".c..c..l..g..g..g", diff: 6, prob: 1},
         {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
         {mons: "b", diff: 2, prob: 0.1},
         {mons: "b", diff: 6, prob: 0.1},
@@ -26,7 +25,7 @@ MM = function() {
     this.bosses = [{class: Boss1, dist: 5000}, {class: Boss1, dist: 1800}];
     // c l z - преграды
     //s - монстр
-
+    this.monY = 360;
     this.monsterQueue;
     this.sNormal = 1;
     this.sBoss = 2;
@@ -70,11 +69,14 @@ MM.prototype.generateMonsterQueue = function()
     var s = [];
     var it = 3000;
     var d = 0; // distance in dots
+    var initialD = PlayerData.inst.playerItem.lvl/2;
     for (var i = 0; i < it; ++i)
     {
         var maxd = 2.5;
-        var currDiff = ((1 + Math.sin(d / 100))*0.5)*maxd + d / 1000;
-
+        var distDiff = (d) / 100;
+        if (distDiff > 5) distDiff = 5;
+        var currDiff =1 + ((Math.sin(d / 500))*0.5)*maxd + distDiff + initialD;
+        console.log(currDiff + " . " + d.toString());
         var summ = 0;
         for (var j = 0; j < this.patterns.length; ++j)
         {
@@ -104,7 +106,7 @@ MM.prototype.generateMonsterQueue = function()
     return s;
 }
 
-MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
+MM.prototype.spawnObstacle = function(clip, offsY, innerOffs, dw)
 {
     var m = new CObstacle(SCR_WIDTH+240,450 + 2*offsY,clip, false);
     m.maxHp = 100000000;
@@ -115,7 +117,9 @@ MM.prototype.spawnObstacle = function(clip, offsY, innerOffs)
     m.gfx.anchor.y = 0.5 + offsY / (m.gfx.height /  m.gfx.scale.y);
 
     m.radius = (m.gfx.width / 2 - 20/ 2)*0.94;
-    m.offsY = -innerOffs;
+    if (dw)
+        m.radius += dw;
+        m.offsY = -innerOffs;
     m.colGroup = 0;
     m.allowTrackSpeed = true;
     this.lastSpawnSimple =(new Date()).getTime();
@@ -177,7 +181,7 @@ MM.prototype.spawnBonusGnome = function(xp) {
 MM.prototype.spawnFatty = function(xp)
 {
     var str = "enemy1";
-    var m = new CMonster(SCR_WIDTH+100,300,str);
+    var m = new CMonster(SCR_WIDTH+100,this.monY,str);
     m.rollLeave = true;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
@@ -190,7 +194,7 @@ MM.prototype.spawnFatty = function(xp)
 MM.prototype.spawnFatty2 = function(xp)
 {
     var str = "enemy1_1";
-    var m = new CMonster(SCR_WIDTH+100,300,str);
+    var m = new CMonster(SCR_WIDTH+100,this.monY,str);
     m.rollLeave = true;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
@@ -204,7 +208,7 @@ MM.prototype.spawnFatty2 = function(xp)
 MM.prototype.spawnGopnick = function(xp)
 {
     var str = "enemy3";
-    var m = new CMonster(SCR_WIDTH+100,300,str);
+    var m = new CMonster(SCR_WIDTH+100,this.monY,str);
     m.rollLeave = true;
     m.jumpTimeCoef = 0.7;
     m.gfx.scale.x = 0.8;
@@ -216,7 +220,7 @@ MM.prototype.spawnGopnick = function(xp)
 MM.prototype.spawnGopnick2 = function(xp)
 {
     var str = "enemy3_3";
-    var m = new CMonster(SCR_WIDTH+100,300,str);
+    var m = new CMonster(SCR_WIDTH+100,this.monY,str);
     m.rollLeave = true;
     m.jumpTimeCoef = 0.6;
     m.gfx.scale.x = 0.8;
@@ -230,7 +234,7 @@ MM.prototype.spawnSimpleMonster = function(xp)
 {
     var str = "enemy2";
     if (Math.random() > 0.5) str = "enemy2_2";
-    var m = new CMonster(SCR_WIDTH+100,300,str);
+    var m = new CMonster(SCR_WIDTH+100,this.monY,str);
     m.rollLeave = true;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
@@ -251,6 +255,7 @@ MM.prototype.doStep = function()
     }
     this.bonusQueue= this.bonusQueue.slice(1);
 */
+    this.diff = LauncherBG.inst.distance / 1000;
     if (s == "s") this.spawnSimpleMonster(5);
     if (s == "f") this.spawnFatty(10);
     if (s == "F") this.spawnFatty2(13);
@@ -258,7 +263,7 @@ MM.prototype.doStep = function()
     if (s == "g") this.spawnGopnick(10);
     if (s == "c") this.spawnCar("car", 40, 0);
     if (s == "l") this.spawnObstacle("luke", 40, 10);
-    if (s == "z") this.spawnObstacle("conus", 20, 0);
+    if (s == "z") this.spawnObstacle("conus", 20, 0, -5);
     if (s == "b") this.spawnBonusGnome(5);
     if (s == "d") this.spawnDrone(25);
 

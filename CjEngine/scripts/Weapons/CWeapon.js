@@ -8,6 +8,9 @@ CWeapon = function(_id, _name, _desc,  __params, __gfx, _upgrades) {
     this.clipGfx = __gfx;
     this.sReload = 1;
     this.sFire = 2;
+    this.visualWidth = __params.visualWidth;
+    this.dw = __params.dw;
+    this.speed = __params.speed;
     this.state = this.sFire;
     this.id = _id;
     this.name = _name;
@@ -21,6 +24,9 @@ CWeapon = function(_id, _name, _desc,  __params, __gfx, _upgrades) {
     CWeapon.objects.push(this);
 };
 
+CWeapon.prototype.mouseUp = function() {
+
+}
 
 CWeapon.prototype.resetParams = function()
 {
