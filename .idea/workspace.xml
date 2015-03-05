@@ -6,21 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.png" afterPath="$PROJECT_DIR$/imgtps/guiatlas.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/LauncherBG.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/LauncherBG.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.json" afterPath="$PROJECT_DIR$/imgtps/guiatlas.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.xml" afterPath="$PROJECT_DIR$/imgtps/guiatlas.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/levels/levelgameover.json" afterPath="$PROJECT_DIR$/levels/levelgameover.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -45,291 +33,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="CPlayer.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.2775974" vertical-offset="0" max-vertical-offset="8778">
+              <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CObj.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2362" max-vertical-offset="15428">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameStage.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4832" max-vertical-offset="16036">
+              <caret line="278" column="50" selection-start-line="278" selection-start-column="48" selection-end-line="278" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquery-2.1.3.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/libs/jquery-2.1.3.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="22968" max-vertical-offset="174781">
+              <caret line="1232" column="0" selection-start-line="1232" selection-start-column="0" selection-end-line="1232" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="CharStage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3012" max-vertical-offset="10868">
-              <caret line="170" column="39" selection-start-line="170" selection-start-column="37" selection-end-line="170" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1903" max-vertical-offset="8987">
-              <caret line="143" column="54" selection-start-line="143" selection-start-column="54" selection-end-line="143" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoreStage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ScoreStage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1661" max-vertical-offset="4446">
-              <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopStage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4880" max-vertical-offset="7676">
-              <caret line="336" column="45" selection-start-line="336" selection-start-column="45" selection-end-line="336" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="init.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/init.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="2147">
-              <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MM.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3943" max-vertical-offset="6726">
-              <caret line="265" column="55" selection-start-line="265" selection-start-column="55" selection-end-line="265" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMonster.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2260" max-vertical-offset="2926">
-              <caret line="139" column="32" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CDrone.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CDrone.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="779">
-              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CPlayer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6272" max-vertical-offset="8531">
-              <caret line="340" column="8" selection-start-line="340" selection-start-column="8" selection-end-line="340" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CGrenade.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1832" max-vertical-offset="2622">
-              <caret line="107" column="20" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WeapBalance.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="341" max-vertical-offset="3667">
-              <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CBooster.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CBooster.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CHeartBooster.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CHeartBooster.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="247">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CWeapon.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1037" max-vertical-offset="2603">
-              <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LevSel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/LevSel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2299">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CPistol.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="1007">
-              <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LauncherBG.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/LauncherBG.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1288" max-vertical-offset="4940">
-              <caret line="84" column="45" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CBullet.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1311" max-vertical-offset="2166">
-              <caret line="84" column="20" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vkapi.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vkapi.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1102">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vk_callback.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vk_callback.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2679" max-vertical-offset="3838">
-              <caret line="141" column="12" selection-start-line="141" selection-start-column="12" selection-end-line="141" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dbinit.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/dbinit.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3434" max-vertical-offset="9253">
-              <caret line="191" column="30" selection-start-line="191" selection-start-column="26" selection-end-line="191" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="notification.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/notification.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="513" max-vertical-offset="1216">
-              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameStage.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6125828" vertical-offset="12873" max-vertical-offset="16036">
-              <caret line="697" column="41" selection-start-line="697" selection-start-column="41" selection-end-line="697" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StageManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/StageManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1557" max-vertical-offset="3002">
-              <caret line="141" column="46" selection-start-line="141" selection-start-column="46" selection-end-line="141" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/PlayerData.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2084" max-vertical-offset="9614">
-              <caret line="120" column="12" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CLiveObj.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CLiveObj.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="258" max-vertical-offset="2280">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMagnetBooster.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CMagnetBooster.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CSupermanBooster.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1482">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pixi.dev.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libs/pixi.dev.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6642" max-vertical-offset="382071">
-              <caret line="370" column="0" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5317" max-vertical-offset="10868">
+              <caret line="291" column="0" selection-start-line="291" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -407,9 +155,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -616,6 +361,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -650,6 +398,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="583" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="full.screen.before.presentation.mode" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -669,10 +418,14 @@
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -680,10 +433,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -2625,7 +2374,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425474380663</updated>
     </task>
-    <option name="localTasksCounter" value="317" />
+    <task id="LOCAL-00317" summary="0">
+      <created>1425551675130</created>
+      <option name="number" value="00317" />
+      <option name="project" value="LOCAL" />
+      <updated>1425551675130</updated>
+    </task>
+    <option name="localTasksCounter" value="318" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2652,28 +2407,51 @@
     <frame x="54" y="-8" width="1634" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5314835" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3361793" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3191035" sideWeight="0.38007614" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12880711" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3358946" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5916575" sideWeight="0.2994924" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="333" y="796" width="502" height="201" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12083333" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18908629" sideWeight="0.49905124" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34044823" sideWeight="0.4143401" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14213198" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29213482" sideWeight="0.70050764" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3191035" sideWeight="0.5006345" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14213198" sideWeight="0.50080514" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3183315" sideWeight="0.61992383" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3276414" sideWeight="0.49936548" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="333" y="796" width="502" height="201" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.58502537" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3993644" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5314835" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3361793" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="333" y="796" width="502" height="201" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34044823" sideWeight="0.4143401" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3191035" sideWeight="0.5006345" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3276414" sideWeight="0.49936548" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.58502537" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3191035" sideWeight="0.38007614" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12880711" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18908629" sideWeight="0.49905124" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3993644" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -2713,7 +2491,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="1023" />
+      <option name="time" value="1024" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
@@ -2722,20 +2500,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/asdasd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="228">
-          <caret line="6" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imgtps/boss1.atlas">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1273">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CTextField.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.21474358" vertical-offset="1274" max-vertical-offset="2565">
@@ -2789,6 +2553,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2796,7 +2561,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="779">
           <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2804,7 +2568,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="279" max-vertical-offset="1596">
           <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2819,7 +2582,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2827,6 +2589,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2842,7 +2607,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1102">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2857,7 +2621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="257" max-vertical-offset="1216">
           <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2875,7 +2638,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CLiveObj.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="258" max-vertical-offset="2280">
+        <state vertical-scroll-proportion="0.4667697" vertical-offset="394" max-vertical-offset="3480">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
@@ -2883,7 +2646,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/StageManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1557" max-vertical-offset="3002">
+        <state vertical-scroll-proportion="2.7018929" vertical-offset="2376" max-vertical-offset="4582">
           <caret line="141" column="46" selection-start-line="141" selection-start-column="46" selection-end-line="141" selection-end-column="46" />
           <folding />
         </state>
@@ -2898,15 +2661,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/pixi.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6642" max-vertical-offset="382071">
+        <state vertical-scroll-proportion="0.47634068" vertical-offset="10138" max-vertical-offset="583161">
           <caret line="370" column="0" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.min.js">
-      <provider selected="true" editor-type-id="httpFileEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js">
@@ -2935,7 +2693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1661" max-vertical-offset="4446">
           <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2943,15 +2700,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1197" max-vertical-offset="3838">
           <caret line="141" column="12" selection-start-line="141" selection-start-column="12" selection-end-line="141" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/dbinit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3434" max-vertical-offset="9253">
+        <state vertical-scroll-proportion="0.47003156" vertical-offset="5241" max-vertical-offset="14123">
           <caret line="191" column="30" selection-start-line="191" selection-start-column="26" selection-end-line="191" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2959,7 +2714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="2147">
           <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2975,7 +2729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2983,39 +2736,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="247">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1482">
+        <state vertical-scroll-proportion="-0.8233439" vertical-offset="522" max-vertical-offset="2262">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3322034" vertical-offset="3889" max-vertical-offset="15428">
-          <caret line="215" column="5" selection-start-line="215" selection-start-column="5" selection-end-line="215" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1832" max-vertical-offset="2622">
+        <state vertical-scroll-proportion="0.47449768" vertical-offset="2796" max-vertical-offset="4002">
           <caret line="107" column="20" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="341" max-vertical-offset="3667">
+        <state vertical-scroll-proportion="0.9179811" vertical-offset="520" max-vertical-offset="5597">
           <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3029,7 +2770,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2084" max-vertical-offset="9614">
+        <state vertical-scroll-proportion="0.47160885" vertical-offset="3181" max-vertical-offset="14674">
           <caret line="120" column="12" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="12" />
           <folding />
         </state>
@@ -3039,23 +2780,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2299">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1037" max-vertical-offset="2603">
+        <state vertical-scroll-proportion="0.52208203" vertical-offset="1583" max-vertical-offset="3973">
           <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6272" max-vertical-offset="8531">
-          <caret line="340" column="8" selection-start-line="340" selection-start-column="8" selection-end-line="340" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3063,13 +2794,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
           <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/LauncherBG.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1288" max-vertical-offset="4940">
+        <state vertical-scroll-proportion="0.7413249" vertical-offset="1966" max-vertical-offset="7540">
           <caret line="84" column="45" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
           <folding />
         </state>
@@ -3083,26 +2813,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68611985" vertical-offset="2001" max-vertical-offset="3306">
+          <caret line="84" column="20" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="https://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.min.js">
+      <provider selected="true" editor-type-id="httpFileEditor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3012" max-vertical-offset="10868">
-          <caret line="170" column="39" selection-start-line="170" selection-start-column="37" selection-end-line="170" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="5146" max-vertical-offset="10868">
+          <caret line="291" column="0" selection-start-line="291" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js">
+    <entry file="http://vk.com/js/api/xd_connection.js?2">
+      <provider selected="true" editor-type-id="httpFileEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/jquery-2.1.3.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1311" max-vertical-offset="2166">
-          <caret line="84" column="20" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="22968" max-vertical-offset="174781">
+          <caret line="1232" column="0" selection-start-line="1232" selection-start-column="0" selection-end-line="1232" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2362" max-vertical-offset="15428">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6125828" vertical-offset="12873" max-vertical-offset="16036">
-          <caret line="697" column="41" selection-start-line="697" selection-start-column="41" selection-end-line="697" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4832" max-vertical-offset="16036">
+          <caret line="278" column="50" selection-start-line="278" selection-start-column="48" selection-end-line="278" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2775974" vertical-offset="0" max-vertical-offset="8778">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
           <folding />
         </state>
       </provider>

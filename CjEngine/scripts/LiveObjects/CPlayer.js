@@ -7,9 +7,9 @@ function CPlayer(in_x,in_y,textname,in_body){
     CLiveObj.apply(this,[in_x,in_y,null,in_body]);
 
     this.boostPower = 1.035;
-    this.maxBoostVel = -20.5;
+    this.maxBoostVel = -22.5;
     this.initialJumpSpeed = -16;
-    this.gravPower = 0.93;
+    this.gravPower = 0.94;
     this.gfx = this.createDedGraphics();
     this.fireAngle = 0;
     this.weapon = gameStage.curweapon;
@@ -33,9 +33,11 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.playable = false;
     this.lastUseExpl = 0;
     this.superMode = false;
+    this.jumpNumber = 0;
     if (SM.inst.currentStage == gameStage)
     {
         this.movementTween = new TweenMax(this, 2, {ease: Sine.easeInOut, x: this.x - 50, yoyo: true, repeat: -1});
+        this.landing();
     }
 }
 
@@ -144,11 +146,21 @@ CPlayer.prototype.reveal = function()
 CPlayer.prototype.onJump = function()
 {
  //   this.kill(); return;
-    if (this.state == this.sMoving
-    && !this.jumping) {
+    if (!this.jumpboost && (this.state == this.sMoving)
+    && (!this.jumping || (this.jumping && this.jumpNumber)))
+    {
+        this.jumpNumber++;
+        if (this.jumpNumber > 2) return;
         this.jumping = true;
         this.jumpboost = true;
-        this.gfx.state.setAnimationByName(0, "jump", false);
+        if (this.jumpNumber != 2)
+        {
+            this.vy = this.initialJumpSpeed;
+            this.gfx.state.setAnimationByName(0, "jump", false);
+        } else
+            this.vy += this.initialJumpSpeed / 3;
+
+    //    console.log("JUMP " + this.jumpNumber.toString());
         this.gravityEnabled = true;
         this.vy = this.initialJumpSpeed;
         ZSound.Play("jump2");
@@ -205,6 +217,7 @@ CPlayer.prototype.landing = function() {
     this.jumping = false;
     this.y = this.baseY;
     this.gravityEnabled = false;
+    this.jumpNumber = 0;
 
     if (this.state != this.sDying) {
         this.gfx.state.setAnimationByName(0, "idle", true);

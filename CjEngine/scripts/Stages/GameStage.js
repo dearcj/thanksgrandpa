@@ -338,7 +338,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
     function addLine(num) {
         var l = -70;
         var space = CObj.getById("div").y + 20;
-        var d = 36;
+        var d = 45;
         var tf1 = new CTextField(SCR_WIDTH / 2 - 100 + l, space + num * d);
         tf1.text = (num + 1).toString() + ".";
         tf1.fontSize = 18;
