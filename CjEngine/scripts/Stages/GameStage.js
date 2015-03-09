@@ -524,7 +524,7 @@ GameStage.prototype.onShow = function () {
     LauncherBG.inst = new LauncherBG(0, 0);
     LauncherBG.inst.addLevel("plantPart2");
 
-    for (var i = 0; i < 500; ++i)
+    for (var i = 0; i < 500; ++i)///
         LauncherBG.inst.process(true);
     LauncherBG.inst.distance = 0;
 
