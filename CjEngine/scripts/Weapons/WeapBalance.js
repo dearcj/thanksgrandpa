@@ -43,7 +43,7 @@ var w_rifle = new CPistol(
         delay: 380, //delay
         damage: 66, //damage
         unlockprice: 10, //unlockprice
-        reloadTime: 1200},//__reloadTime,}
+        reloadTime: 1350},//__reloadTime,}
     "asd",// __gfx,
     [
         {name: "Точный ствол", param: "recoil", valuesUpgr: [10, 20, 30, 40], level: 0},
@@ -59,18 +59,18 @@ var w_pps = new CPistol(
     {
         visualWidth: 20,
         dw: -0.7,
-        speed: 40.5,
+        speed: 38.5,
         sound: "mini",
         life: 1,
-        acc: 0.02,
+        acc: 0.022,
         accIncrease: 0.02,
         accRecoil: 0.1,
         recoil: 3.0, //recoil
         magcap: 20, //magcap
         delay: 120, //delay
-        damage: 24, //damage
+        damage: 28, //damage
         unlockprice: 10, //unlockprice
-        reloadTime: 1200},//__reloadTime,}
+        reloadTime: 900},//__reloadTime,}
     "asd",// __gfx,
     [
         {name: "Точный ствол", param: "recoil", valuesUpgr: [10, 20, 30, 40], level: 0},
@@ -111,8 +111,8 @@ var w_ak74 = new CQueueGun(
     "описание", //desc
     {
         visualWidth: 20,
-        dw: -0.7,
-        speed: 40.5,
+        dw: -0.9,
+        speed: 60.5,
         sound: "ochered",
         queue: 4,
         queueDelay: 110,
@@ -121,9 +121,9 @@ var w_ak74 = new CQueueGun(
         accIncrease: 0.02,
         accRecoil: 0.1,
         recoil: 1.5, //recoil
-        magcap: 30, //magcap
+        magcap: 50, //magcap
         delay: 600, //delay
-        damage: 44, //damage
+        damage: 55, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 2200},//__reloadTime,}
     "asd",// __gfx,
@@ -175,7 +175,7 @@ var w_laser = new CLaser(
         recoil: 0, //recoil
         magcap: 60, //magcap
         delay: 150, //delay
-        damage: 180, //damage
+        damage: 190, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 2200},//__reloadTime,}
     "asd",// __gfx,

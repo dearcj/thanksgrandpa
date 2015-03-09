@@ -10,17 +10,17 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.levCycles = [];
     this.gfx = new PIXI.DisplayObjectContainer();
     SM.inst.bg.addChild(this.gfx);
-    this.nullSpeed = 8;
+    this.nullSpeed = 7.4;
    //  var inx = CObj.objects.indexOf(this);
     //  CObj.objects.splice(inx);
     this.distance = 0;
     this.incDist = 50;
-    this.speedUpCoef = 0.1;
-    this.layersSpeed = [0, 0.2, 0.25, 0.72, 0.72, 1, 1];
+    this.speedUpCoef = 0.08;
+    this.layersSpeed = [0, 0.1, 0.14, 0.65, 0.65, 1, 1];
     this.ol = new PIXI.DisplayObjectContainer();
     this.pllayer = new PIXI.DisplayObjectContainer();
     this.defaultLayer = null;
-    this.pixToDist = 1/ 50;
+    this.pixToDist = 1 / 50;
    // this.verticalParallax = 0;
 }
 
@@ -51,7 +51,7 @@ LauncherBG.generateProperty('maxVelocity', {
 });
 
 LauncherBG.prototype.clear = function () {
-    this.speedUpCoef = 0.1;
+    this.speedUpCoef = 0.08;
    /// this.maxVelocity = this.nullSpeed;
     this.levCycles.splice(0, this.levCycles.length);
     this.distance = 0;
@@ -120,10 +120,13 @@ LauncherBG.prototype.process = function (fake) {
 
         if (Math.floor(this.distance / this.incDist) != Math.floor((this.distance + delta) / this.incDist)) {
 
-            this.speedUpCoef *= 0.98;
             this.maxVelocity += this.speedUpCoef;
+            this.speedUpCoef *= 0.95;
+            console.log("SPEED " + this.maxVelocity.toString());
         }
     }
+
+    if (!MM.inst.currentBoss)
     this.distance += delta;
 
     var t = this.levCycles[0].layers.length;

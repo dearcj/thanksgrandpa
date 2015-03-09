@@ -120,7 +120,6 @@ CLaser.prototype.process = function()
             }
         }
 
-
         //COLLISION WITH CIRCLES
             //RENDER LASER
             //CHECK LASER

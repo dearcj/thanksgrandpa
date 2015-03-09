@@ -52,6 +52,7 @@ CCoin.prototype.collide = function(obj2)
     this.vy = 0;
     this.allowTrackSpeed = false;
     var coinGfx = pool.Pop("coinCollect");
+    ZSound.Play("coin")
     if (!coinGfx)
         this.destroy(); else
     {

@@ -48,6 +48,7 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
         fx.loop = false;
       //  fx.gotoAndStop(0);
         fx.gotoAndPlay(0);
+        obj.allowTrackSpeed = true;
         obj.gfx = fx;
         obj.updateGraphics();
         SM.inst.fg.addChild(fx);
@@ -71,13 +72,14 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
    for (var i = 0; i < l; ++i)
     {
         var m = CMonster.list[i];
+        if (m.doRemove) continue;
         var dx = m.x - x;
         var dy = m.y - y;
         var sqd = dx*dx + dy*dy;
         if (sqd < sd)
         {
             var d = Math.sqrt(sqd);
-            var totalDmg = dmg*(dist - ((d + 0.01)) / dist);
+            var totalDmg = dmg*((dist - (d + 0.01)) / dist);
             m.dealDamage(totalDmg);
             console.log(totalDmg);
         }

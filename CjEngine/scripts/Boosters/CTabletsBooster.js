@@ -32,7 +32,7 @@ CTabletsBooster.prototype.onActivate = function()
         new TweenMax(LauncherBG.inst, this.duration, {maxVelocity: LauncherBG.inst.maxVelocity + 25, ease: Linear.easeOut});
         TweenMax.delayedCall(this.duration+0.3, function(){
             new TweenMax(LauncherBG.inst, 1.3, {maxVelocity: prevVel, ease: Linear.easeOut});
-            TweenMax.delayedCall(0.6, function(){
+            TweenMax.delayedCall(0.9, function(){
                 b.onDeactivate();
                 p.superMode = false;
                 p.resetBlink();

@@ -7,6 +7,12 @@ var CG_MONSTER = 2;
 var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
+
+function getRand(obj) {
+    return obj[Math.floor(Math.random() * obj.length)];
+}
+
+
 function clone(obj) {
     return JSON.parse( JSON.stringify(obj ) );
     /*if (null == obj || "object" != typeof obj) return obj;

@@ -30,8 +30,8 @@ Boss1.prototype.fire = function()
 {
     this.gfx.state.setAnimationByName(0, "shot", false);
     var t = this;
-    TweenMax.delayedCall(0.5, function () {t.fireBullet(1);});
-    TweenMax.delayedCall(1.3, function () {t.fireBullet(2);});
+    TweenMax.delayedCall(0.5, function () {t.fireBullet(1);t.fireBullet(1);t.fireBullet(1);});
+    TweenMax.delayedCall(1.3, function () {t.fireBullet(2);t.fireBullet(2);t.fireBullet(2);});
     TweenMax.delayedCall(1.7, function () {t.goIdle();});
 }
 Boss1.prototype.goIdle = function() {
@@ -56,7 +56,9 @@ Boss1.prototype.fireBullet = function(b)
     this.firePointY = p.y/SCR_SCALE;
     var b = new CMonster(this.firePointX, this.firePointY, null, false);
     b.gfx = CObj.createMovieClip("b_bullet");
-    b.gfx.animationSpeed = 0.5;
+    b.gfx.anchor.x = 0.5;
+    b.gfx.anchor.y = 0.5;
+    b.gfx.animationSpeed = 0.33;
     b.gfx.play();
     LauncherBG.inst.ol.addChild(b.gfx);
     b.gfx.scale.x = 0.8;
@@ -73,7 +75,7 @@ Boss1.prototype.fireBullet = function(b)
     b.gravPower = (0.16 + Math.random()*0.1)*pow;
     b.vy = -b.gravPower*20*pow;
     b.allowTrackSpeed = false;
-    new TweenMax(b, 2 + Math.random()*0.3, {x: -100, ease: Linear.easeIn});
+    new TweenMax(b, 1.6 + Math.random()*0.5, {x: -100, ease: Linear.easeIn});
     var t = this;
    // TweenMax.delayedCall(this.fireDelay, function(){t.fireBullet();})
 }

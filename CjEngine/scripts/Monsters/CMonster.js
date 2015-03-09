@@ -81,8 +81,6 @@ CMonster.prototype.kill = function()
         //this.bar.gfx.visible = false;
     }
 
-    if (!this.xp)
-    console;
     PlayerData.inst.gainExp(this.xp);
 
     var parent = this.gfx.parent;
@@ -128,22 +126,22 @@ CMonster.prototype.destroy = function()
     CObj.prototype.destroy.call(this);
 }
 
-
-CMonster.prototype.longJump = function()
+CMonster.prototype.longJump = function(diff, gravPower, slowSpeed, fastSpeed, easeTime, powRand)
 {
     var diff = 1;
     this.gravityEnabled = true;
     this.jumpTimeCoef = 1;
-    var pow = (1 + 0.2*(Math.random() - 0.5));
+    if (!powRand) powRand = 0;
+    var pow = (1 + powRand);
   //  var t = 2*this.jumpTimeCoef/pow;
-    this.gravPower = (0.14 + 0.025*diff)*pow;
+    this.gravPower = (gravPower + 0.025*diff)*pow;
     this.vy = -this.gravPower*40*pow;
     this.allowTrackSpeed = false;
     this.gravityEnabled = true;
 
     var obj = this;
-    this.vx = -12 - diff;
-    new TweenMax(this, 1.2, {vx: -6 - diff, yoyo: true, repeat: 1});
+    this.vx = fastSpeed - diff;
+    new TweenMax(this, easeTime, {vx: slowSpeed - diff, yoyo: true, repeat: 1});
   //  new TweenMax(this, 1.2, {y: 150, repeat: 1, yoyo:true, onComplete: function(){obj.vy = 3; obj.gravityEnabled = true;}});
   //  new TweenMax(this, 1.7*this.jumpTimeCoef, { y: this.y - 220*(this.highCoef + Math.random()*0.1), yoyo: true, repeat: 1, ease: Quad.easeInOut, onComplete: function(){x.gravityEnabled = true;}} );
 }

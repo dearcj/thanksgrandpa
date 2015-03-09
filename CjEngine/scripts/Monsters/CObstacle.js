@@ -2,7 +2,7 @@
 extend(CObstacle, CMonster, true);
 
 function CObstacle(in_x,in_y,animname,cr_bar){
-    CMonster.apply(this,[in_x,in_y,animname, false]);
+    CMonster.apply(this,[in_x,in_y,animname, cr_bar]);
 }
 
 CObstacle.prototype.dealDamage = function(dmg)

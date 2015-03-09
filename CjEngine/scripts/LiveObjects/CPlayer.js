@@ -8,7 +8,7 @@ function CPlayer(in_x,in_y,textname,in_body){
 
     this.boostPower = 1.035;
     this.maxBoostVel = -22.5;
-    this.initialJumpSpeed = -16;
+    this.initialJumpSpeed = -19.5;
     this.gravPower = 0.94;
     this.gfx = this.createDedGraphics();
     this.fireAngle = 0;
@@ -158,7 +158,7 @@ CPlayer.prototype.onJump = function()
             this.vy = this.initialJumpSpeed;
             this.gfx.state.setAnimationByName(0, "jump", false);
         } else
-            this.vy += this.initialJumpSpeed / 3;
+            this.vy += this.initialJumpSpeed / 5;
 
     //    console.log("JUMP " + this.jumpNumber.toString());
         this.gravityEnabled = true;
@@ -285,7 +285,10 @@ CPlayer.prototype.process = function()
             this.fire();
         }
         if (!this.jumping && this.boardSlot)
-            this.boardSlot.bone.rotation *= 0.66;
+        {
+            this.boardSlot.bone.rotation *= 0.5;//.06;
+            if (this.boardSlot.bone.rotation < 0.02) this.boardSlot.bone.rotation = 0.02;
+        }   //this.boardSlot.bone.rotation *= 0.66;
 
         //LauncherBG.inst.verticalParallax = (this.baseY - this.y) / 100;
         gameStage.ammoico.x = this.x-80;
@@ -309,10 +312,14 @@ CPlayer.prototype.process = function()
         var dx = 0;
         var dy = 0;
         var da = 0;
+        if (gameStage.curweapon == w_laser) {
+            dx = 0;
+            dy = 200;
+        }else
 
         if (gameStage.curweapon == w_ak74) {
             dx = 0;
-            dy = 370;
+            dy = 0;
         }else
 
         if (gameStage.curweapon == w_rifle) {

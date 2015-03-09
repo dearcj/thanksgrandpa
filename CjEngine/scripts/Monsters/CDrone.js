@@ -22,8 +22,8 @@ CDrone.prototype.spawnGrenade = function()
     b.vx = -3;
     b.gfx.tint = 0xff0000;
     b.gravityEnabled = true;
-    b.colGroup = CG_BULLET;
-    b.colMask = CG_MONSTER;
+    b.colGroup = CG_GROUND;
+    b.colMask = CG_PLAYER;
 
     var t = this;
     new TweenMax.delayedCall(1, function(){t.spawnGrenade();});

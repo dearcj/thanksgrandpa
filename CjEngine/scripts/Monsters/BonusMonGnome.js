@@ -18,6 +18,7 @@ function BonusMonGnome(in_x,in_y,animname,cr_bar){
     this.updateGraphics();
     LauncherBG.inst.ol.addChild(this.gfx);
     this.xp = 30;
+    this.lastDrop = 0;
     this.allowTrackSpeed = false;
     var t = this;
     new TweenMax(this, 18, {vx: -40, ease: Circ.easeIn, onComplete: function(){t.destroy();}});
@@ -32,8 +33,10 @@ BonusMonGnome.prototype.collide = function (obj2)
 BonusMonGnome.prototype.dealDamage = function(dmg)
 {
     CMonster.prototype.dealDamage.call(this, dmg);
-    if (gameStage.player.double)
-    {
-        CCoin.spawnCoin(this.x, this.y, 6);
-    } else CCoin.spawnCoin(this.x, this.y, 3);
+    if (window.time - this.lastDrop > 200) {
+        this.lastDrop = window.time;
+        if (gameStage.player.double) {
+            CCoin.spawnCoin(this.x, this.y, 6);
+        } else CCoin.spawnCoin(this.x, this.y, 3);
+    }
 }

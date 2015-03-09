@@ -49,7 +49,7 @@ CBullet.prototype.updateBulletSpeed = function()
 
 CBullet.prototype.collide = function (obj2)
 {
-    if (this.prevVictim != obj2) {
+    if (obj2 && this.prevVictim != obj2) {
         obj2.dealDamage(this.dmg);
 
         var fx = pool.Pop("blood");

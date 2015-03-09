@@ -22,7 +22,15 @@ FloorObj.prototype.process = function()
                     o.destroy();
                 }
             }
-            if (CObj.checkType(o, CCoin) && o.y + o.radius / 2 > floorLine - 50) {
+
+            if (CObj.checkType(o, JumpMon) && o.y + o.radius / 2 > floorLine - 50) {
+                if (o.vy > 0)
+                {    o.vy = -o.vy*0.8;
+                    o.av = 0.1*Math.random();
+                }
+            }
+
+            if (CObj.checkType(o, CCoin) && o.y + o.radius / 2 > floorLine - 58) {
                 if (o.vy > 0)
                 o.vy = -o.vy*0.5;
             }

@@ -513,7 +513,7 @@ GameStage.prototype.doKeyUp = function (evt) {
 
 GameStage.prototype.onShow = function () {
     CustomStage.prototype.onShow.call(this);
-
+    gameStage.killing = false;
     gameStage.slowMoCoef = 1;
     //window.addEventListener("keypress", this.doKeyDown, false);
 
@@ -524,7 +524,7 @@ GameStage.prototype.onShow = function () {
     LauncherBG.inst = new LauncherBG(0, 0);
     LauncherBG.inst.addLevel("plantPart2");
 
-    for (var i = 0; i < 2500; ++i)
+    for (var i = 0; i < 500; ++i)
         LauncherBG.inst.process(true);
     LauncherBG.inst.distance = 0;
 
@@ -599,7 +599,7 @@ GameStage.prototype.onShowContinue = function () {
         if (gameStage.player)
             gameStage.player.gfx.skeleton.setAttachment("head", "head1");
     });
-
+    gameStage.player.weapon.ammo =  gameStage.player.weapon.magCapacity;
     gameStage.player.weapon.updateAmmo();
 
     gameStage.player.process();
