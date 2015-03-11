@@ -61,4 +61,4 @@ CBooster.prototype.process = function()
         }
         this.tf.x = -this.tf.width / 2;
     }
-}
+};

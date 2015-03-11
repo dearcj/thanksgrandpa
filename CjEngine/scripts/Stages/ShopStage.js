@@ -395,4 +395,4 @@ ShopStage.prototype.process = function() {
    }
 
     CObj.processAll();
-}
+};

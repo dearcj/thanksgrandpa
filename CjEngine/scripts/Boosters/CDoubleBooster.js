@@ -17,11 +17,11 @@ CDoubleBooster.prototype.onActivate = function()
 
     var b = this;
 
-    gameStage.player.double = true;
+    gameStage.player.doubleBooster = true;
 
     TweenMax.delayedCall(this.duration, function(){
-        gameStage.player.double = false;
+        gameStage.player.doubleBooster = false;
         b.onDeactivate();
     });
 
-}
+};

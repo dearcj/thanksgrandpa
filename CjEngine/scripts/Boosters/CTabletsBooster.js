@@ -1,9 +1,3 @@
-/**
- * Created by KURWINDALLAS on 21.01.2015.
- */
-/**
- * Created by KURWINDALLAS on 21.01.2015.
- */
 extend(CTabletsBooster, CBooster, true);
 
 
@@ -40,8 +34,5 @@ CTabletsBooster.prototype.onActivate = function()
                 p.blink = false;
             });
         })
-        //    gameStage.slowMoCoef = 0.5;
-        //   var f = gameStage;
-
-}
+};
 

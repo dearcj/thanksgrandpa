@@ -57,4 +57,4 @@ CNotArrow.prototype.init = function()
        curviness:1,
        values:objList
    },  ease: Linear.easeNone, repeat: -1, yoyo: true});
-}
+};

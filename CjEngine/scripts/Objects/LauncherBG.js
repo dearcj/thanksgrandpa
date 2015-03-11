@@ -257,5 +257,4 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
     this.levCycles.push({layers: layers, dist: distance});
 
     this.maxVelocity = this.nullSpeed;
-}
-
+};

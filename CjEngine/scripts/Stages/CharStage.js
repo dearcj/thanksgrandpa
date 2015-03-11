@@ -645,4 +645,4 @@ CharStage.prototype.updateSB = function(arr)
 
 
 
-}
+};

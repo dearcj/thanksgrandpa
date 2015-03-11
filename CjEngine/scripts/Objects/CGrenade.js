@@ -130,4 +130,4 @@ CGrenade.prototype.process = function() {
         if (Math.abs(this.vy)< 5)
         this.collide(null);
     }
-}
+};

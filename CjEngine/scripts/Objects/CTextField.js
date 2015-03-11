@@ -127,4 +127,4 @@ CTextField.prototype.init = function(){
     this.updateGraphics();
 
     SM.inst.fontLayer.addChild(this.gfx);
-}
+};

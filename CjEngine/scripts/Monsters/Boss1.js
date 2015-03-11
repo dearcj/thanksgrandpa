@@ -106,4 +106,4 @@ Boss1.prototype.destroy = function()
     CMonster.prototype.destroy.call(this);
 
     MM.inst.currentBoss = null;
-}
+};

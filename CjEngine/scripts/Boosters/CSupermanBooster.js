@@ -66,7 +66,5 @@ CSupermanBooster.prototype.onActivate = function()
     this.fire3.gotoAndPlay(0);
     gameStage.player.gfx.addChildAt(this.fire3,0);
     gameStage.player.state.setAnimationByName(0, "idle", true);
-
-
-}
+};
 

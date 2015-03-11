@@ -84,5 +84,4 @@ MainMenu.prototype.process = function() {
 
   //  if (CObj.getById("totalscore"))
    // CObj.getById("totalscore").text = window.innerWidth+ " / " + window.innerHeight.toString();
-}
-
+};

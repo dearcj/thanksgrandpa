@@ -89,4 +89,4 @@ CCoin.prototype.collide = function(obj2)
     //new TweenMax(this.gfx, 0.3, {alpha: 0, onComplete: this.destroy, scaleX: 10, scaleY: 10});
     //new TweenMax(this.gfx.scale, 0.3, {x: this.gfx.scale.x*1.3, y: this.gfx.scale.y*1.3});
     //this.destroy();
-}
+};

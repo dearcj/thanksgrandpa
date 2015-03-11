@@ -182,4 +182,4 @@ CButton.prototype.init = function(){
     if (!this.addToSameLayer)
     SM.inst.fontLayer.addChild(this.textField); else
     this.gfx.addChild(this.textField);
-}
+};

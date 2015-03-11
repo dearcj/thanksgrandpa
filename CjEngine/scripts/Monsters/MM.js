@@ -47,11 +47,10 @@ MM = function () {
         ];
 
 
-    this.bosses = [{class: Boss2, dist: 10}, {class: Boss2, dist: 2000}];
+    this.bosses = [{cls: Boss2, dist: 10}, {cls: Boss2, dist: 2000}];
     // c l z - преграды
     //s - монстр
     this.monY = 360;
-    this.monsterQueue;
     this.sNormal = 1;
     this.sBoss = 2;
     this.lastStep = 0;
@@ -382,7 +381,7 @@ MM.prototype.process = function () {
     if (st != this.prevS) {
         if (!this.currentBoss && this.bosses.length > 0 && (this.prevS * dd - this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist)) {
             var b = this.bosses.shift();
-            this.currentBoss = new b.class(SCR_WIDTH + 200, 500, "imgtps/boss1.json");
+            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps/boss1.json");
             this.currentBoss.showUpAnimation();
         } else {
             if (this.currentBoss) {
@@ -395,4 +394,4 @@ MM.prototype.process = function () {
     }
 
     this.prevS = st;
-}
+};

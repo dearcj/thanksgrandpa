@@ -35,4 +35,4 @@ FloorObj.prototype.process = function()
                 o.vy = -o.vy*0.5;
             }
     }
-}
+};

@@ -447,7 +447,6 @@ CObj.DeserializeArray = function(data){
             if (a.creationIndex > b.creationIndex) return 1.; else return -1.;
         }
         else if (a.layer > b.layer) return 1.; else return -1.;
-        return -1;
     }
 
 
@@ -456,7 +455,7 @@ var objs = [];
     for (i = 0; i < count; i++) {
     var obj = CObj.DeserializeCObj(data.objects[i]);
         obj.creationIndex = i;
-        obj.layer ;;//= parseInt();
+    ///    obj.layer ;;//= parseInt();
       objs.push(obj);
    }
     objs.sort(sortlayers);
@@ -566,139 +565,6 @@ CObj.setBodyMass = function (b, density)
     b.mass = area * density / 50;
 }
 
-CObj.getBodyFromJSON = function (d)
-{
-    return null;
-    var isStatic  = false;
-
-    if (!CObj.steelMaterialHiFriction) {
-        CObj.steelMaterialHiFriction = new p2.Material();
-        CObj.mediumRestitution = new p2.Material();
-        CObj.strongRestitution = new p2.Material();
-        world.cgSTATIC = Math.pow(2,0);
-        world.cgDYNAMIC = Math.pow(2,1);
-
-
-        world.materials = [CObj.steelMaterialHiFriction, CObj.mediumRestitution, CObj.strongRestitution];
-        world.defaultContactMaterial.friction = 0.5;
-        world.setGlobalStiffness(50);
-        world.defaultContactMaterial.stiffness = 50;
-
-        world.addContactMaterial(
-            new p2.ContactMaterial(CObj.mediumRestitution, CObj.mediumRestitution, {
-                friction :2.5//,
-                ///restitution : 1.2//,//,//,//,
-               ,relaxation:70
-            }));
-
-
-        world.addContactMaterial(
-            new p2.ContactMaterial(CObj.steelMaterialHiFriction, CObj.steelMaterialHiFriction, {
-                friction : 3.4
-                ,relaxation:4
-                ,stiffness: 30000
-            }));
-
-
-        world.addContactMaterial(
-            new p2.ContactMaterial(CObj.steelMaterialHiFriction, CObj.mediumRestitution, {
-                friction : 0.4,
-                stiffness: 1000,
-                restitution : 0.4//,//,//,
-             //   relaxation:50,
-             //   stiffness: 100000
-            }));
-
-        world.addContactMaterial(
-            new p2.ContactMaterial(CObj.steelMaterialHiFriction, CObj.strongRestitution, {
-                restitution : 0.5,
-                friction: 0.5//,
-            }));
-
-        world.addContactMaterial(
-            new p2.ContactMaterial(CObj.mediumRestitution, CObj.strongRestitution, {
-                restitution : 1.0,
-                friction: 0.5//,
-            }));
-    }
-    switch (d.body.type) {
-        case "DYNAMIC" : isStatic = false; break;
-        case "STATIC" : isStatic = true; break;
-    }
-
-
-
-    var ms = d.density;
-    if (d.cls == "Chicken")
-    {
-        d.elasticity = 0.5;
-        d.density = 1;
-    }
-    if (isStatic) ms = 0;
-    var b = new p2.Body(
-        {
-            mass: ms,
-            fixedRotation: !d.allowRotation
-        }
-    );
-    b.motionState = isStatic?p2.Body.STATIC:p2.Body.DYNAMIC;
-
-    var sCount = d.body.shapes.length;
-    if (sCount != 0) {
-        for (var i = 0; i < sCount; i++) {
-
-            switch (d.body.shapes[i].type) {
-                case "CIRCLE": {
-                    var c  = new p2.Circle(d.body.shapes[i].radius);
-                    break;
-                }
-                case "POLYGON": {
-                    var verts  = d.body.shapes[i].localVerts;
-                    var innerVerts = [];
-                    for (j = 0; j < verts.length; j++) {
-                        innerVerts.push([verts[j].x, verts[j].y]);
-                    }
-                    c = new p2.Convex(innerVerts);
-
-
-                    break;
-                }
-            }
-
-           /* if (isStatic)
-            c.collisionGroup = world.cgSTATIC; else
-            c.collisionGroup = world.cgDYNAMIC;
-
-            c.collisionMask = world.cgSTATIC | world.cgDYNAMIC;
-*/
-             //shapesToAdd.push(c);
-            if (c) b.addShape(c);
-
-            if (o.elasticity < 0.2)
-            {
-                c.material = CObj.steelMaterialHiFriction;
-            } else
-            if (o.elasticity <= 0.5)
-            {
-                c.material = CObj.mediumRestitution;
-            } else
-                c.material = CObj.strongRestitution;
-
-        }
-
-
-    }//else trace("Warning. Body without shapes!");
-
-
-    CObj.setDefaultCG(b);
-
-
-    //b.mass = b.getArea() * d.density / 50;
-    CObj.setBodyMass(b, d.density);
-
-    return b;
-}
-
 CObj.setDefaultCG = function (b)
 {
     if (b.motionState == p2.Body.STATIC || b.mass == 0)
@@ -752,10 +618,10 @@ CObj.DeserializeCObj = function (d, dontCreateClips){
     o.id = d.id;
     var i;
     var GLOBAL_MASS_COEF = 60.5;
-    if (d.body) {
+  /*  if (d.body) {
         o.body = CObj.getBodyFromJSON(d);
 
-    }
+    }*/
 
     if (d.baseDim) {
         o.baseDim.x = d.baseDim.x;
@@ -804,4 +670,4 @@ function Deserialize(d) {
             }
          }
     return o;
-}
+};

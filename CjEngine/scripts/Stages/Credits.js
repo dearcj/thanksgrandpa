@@ -104,8 +104,4 @@ Credits.prototype.process = function() {
             CObj.objects[i].setElectricity(CObj.objects[i].sElectricity);
     }
     CObj.processAll();
-}
-
-/**
- * Created by KURWINDALLAS on 14.07.2014.
- */
+};

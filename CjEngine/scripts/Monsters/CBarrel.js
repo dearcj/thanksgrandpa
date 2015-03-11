@@ -11,4 +11,4 @@ CBarrel.prototype.kill = function () {
     if (this.doRemove) return;
     this.destroy();
     CGrenade.makeBoom(this.x, this.y, this.dmgExpl, 350);
-}
+};

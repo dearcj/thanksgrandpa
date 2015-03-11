@@ -16,4 +16,4 @@ JumpMon.prototype.process = function()
 
 
     CMonster.prototype.process.call(this);
-}
+};

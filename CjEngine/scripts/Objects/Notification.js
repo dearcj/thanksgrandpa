@@ -92,4 +92,4 @@ Notification.prototype.init = function(){
     new TweenMax(this, 0.7, {rotation: 0.05, ease: Linear.easeNone, yoyo: true, repeat: -1});
     new TweenMax(this.gfx.scale, 0.7, {x: this.gfx.scale.x + 0.06, y: this.gfx.scale.y + 0.06, yoyo: true, repeat: -1});
 
-}
+};

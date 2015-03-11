@@ -104,13 +104,13 @@ GameStage.prototype.onHide = function (newStage) {
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
 
-    $(function() {
+  /*  $(function() {
         $(document).off('keydown', this.doKeyDown);
         $(document).off('keyup', this.doKeyUp);
         $(document).mousedown(null);
         $(document).mouseup(null);
     });
-
+*/
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
      CObj.objects.splice(inx, 1);*/
     CObj.destroyAll();
@@ -238,8 +238,6 @@ GameStage.prototype.shAfterLife = function () {
 
 
     removeafterlife = function () {
-        if (!gainbgsprite)
-        console;
         gainbgsprite.parent.removeChild(gainbgsprite);
         bodrtext.parent.removeChild(bodrtext);
         tf.parent.removeChild(tf);
@@ -558,7 +556,7 @@ GameStage.prototype.onShowContinue = function () {
         }
         if (PlayerData.inst.playerItem.maxdistance > 1)
         LauncherBG.inst.graves.push({
-            text: vkparams.name + " " + vkparams.last_name,
+            text: vkparams.first_name + " " + vkparams.last_name,
             dist: PlayerData.inst.playerItem.maxdistance
         });
     }
@@ -600,6 +598,8 @@ GameStage.prototype.onShowContinue = function () {
         if (gameStage.player)
             gameStage.player.gfx.skeleton.setAttachment("head", "head1");
     });
+    gameStage.player.weapon.state = gameStage.player.weapon.sFire;
+    gameStage.player.weapon.recoilValue = 0;
     gameStage.player.weapon.ammo =  gameStage.player.weapon.magCapacity;
     gameStage.player.weapon.updateAmmo();
 
@@ -634,8 +634,7 @@ GameStage.prototype.onShowContinue = function () {
 
     var fdown = function (md) {
     //    document.focus();
-        if (gameStage.player)
-        gameStage.player.weapon.mouseUp();
+
         gameStage.fireState = true;
     //    md.preventDefault();
     //    window.focus();
@@ -643,6 +642,9 @@ GameStage.prototype.onShowContinue = function () {
 
     var fup = function (md) {
    //     document.focus();
+        if (gameStage.player)
+            gameStage.player.weapon.mouseUp();
+
         gameStage.fireState = false;
     //    md.preventDefault();
     //    window.focus();
@@ -651,13 +653,13 @@ GameStage.prototype.onShowContinue = function () {
 
     var func =  gameStage.doKeyDown;
     var func2 = gameStage.doKeyUp;
-    $(function() {
+ /*   $(function() {
         $(document).on('keydown', func);
         $(document).on('keyup', func2);
         $(document).mousedown(fdown);
         $(document).mouseup(fup);
     });
-
+*/
 /*
     document.addEventListener("keydown", gameStage.doKeyDown, false);
     document.addEventListener("keyup", gameStage.doKeyUp, false);
@@ -837,4 +839,4 @@ GameStage.prototype.updateSoundBtn = function (btn) {
     if (ZSound.available)
         btn.gfx.gotoAndStop(0); else
         btn.gfx.gotoAndStop(1);
-}
+};

@@ -134,7 +134,7 @@ if (this.joint != null) {
 */
 b1 = null;
 b2 = null;
-}
+};
 
 /*
 public function get rate():Number

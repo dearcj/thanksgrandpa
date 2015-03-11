@@ -38,5 +38,4 @@ CGrenadeLauncher.prototype.shot = function()
     b.colGroup = CG_BULLET;
     b.colMask = CG_MONSTER;
     return r;
-}
-
+};

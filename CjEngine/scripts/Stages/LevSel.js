@@ -108,8 +108,4 @@ LevSel.prototype.onHide = function(newStage) {
 
 LevSel.prototype.process = function() {
     CObj.processAll();
-}
-
-/**
- * Created by KURWINDALLAS on 14.07.2014.
- */
+};

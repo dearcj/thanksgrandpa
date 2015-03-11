@@ -1,9 +1,4 @@
-/**
- * Created by Михаил on 24.06.2014.
- */
-
-
-var SM = function() {
+function SM() {
     this.fg = new PIXI.DisplayObjectContainer();
     this.bg = new PIXI.DisplayObjectContainer();
     this.ol = new PIXI.DisplayObjectContainer();
@@ -43,13 +38,9 @@ var SM = function() {
     }
     document.addEventListener("mousewheel", mouseWheelHandler, false);
     document.addEventListener("DOMMouseScroll", mouseWheelHandler, false);
-
-
 }
 
 SM.inst = new SM();
-
-
 
 SM.prototype.addDisableWindow = function(title, layer)
 {
@@ -142,11 +133,4 @@ SM.prototype.openStage = function(newStage, trns){
             this.currentStage.killing = false;
             newStage.onShow();
         }
-    }
-
-SM.prototype.deleteMC = function(_do) {
-        _do.dispose();
-        if (_do.parent)
-            _do.parent.removeChild(_do);
-        }
-
+    };

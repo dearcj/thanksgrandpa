@@ -6,8 +6,6 @@ extend(CBullet, CObj, true);
 function CBullet(in_x,in_y,textname,in_body) {
     CObj.apply(this, [in_x, in_y, null, in_body]);
     this.gfx = new PIXI.DisplayObjectContainer();
-
-    this.visualWidth;
     this.visualVel = 7;
     this.bhead = new PIXI.Sprite(PIXI.Texture.fromFrame("head.png"));
     this.bhead.anchor.x = 0.5;
@@ -106,4 +104,4 @@ CBullet.prototype.process = function() {
     this.updateBulletSpeed(this.visualVel);
 
     CObj.prototype.process.call(this);
-}
+};

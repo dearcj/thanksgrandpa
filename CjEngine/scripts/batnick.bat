@@ -1,14 +1,7 @@
 copy /b ^
-..\..\libs\vec2.min.js + ^
-..\..\libs\jquery.mousewheel.js + ^
-..\..\libs\jquery-2.1.3.js + ^
-..\..\libs\GreenSock\easing\EasePack.js + ^
-..\..\libs\GreenSock\TweenMax.min.js + ^
-..\..\libs\pixi.dev.js + ^
-..\..\libs\soundjs-0.5.2.min.js + ^
-ZSound.js + ^
-LevelManager.js + ^
-Utils.js + ^
+Utils\Utils.js + ^
+Utils\ZSound.js + ^
+Utils\LevelManager.js + ^
 Stages\StageManager.js + ^
 Stages\CustomStage.js + ^
 Stages\MainMenu.js + ^
@@ -20,13 +13,12 @@ Stages\AchStage.js + ^
 Stages\CharStage.js + ^
 Stages\ShopStage.js + ^
 Stages\ScoreStage.js + ^
-ZPool.js + ^
+Utils\ZPool.js + ^
 Objects\CObj.js + ^
 Objects\CBomb.js + ^
 Objects\CButton.js + ^
 Objects\ZCJoint.js + ^
 Objects\CTextField.js + ^
-Objects\Notification.js + ^
 Objects\CNotArrow.js + ^
 Objects\CHPBar.js + ^
 LiveObjects\CLiveObj.js + ^
@@ -48,7 +40,7 @@ Monsters\BonusMonGnome.js + ^
 Objects\CCoin.js + ^
 Objects\CScrollbar.js + ^
 Objects\CircleBar.js + ^
-CEActionGUI.js + ^
+Utils\CEActionGUI.js + ^
 Weapons\CWeapon.js + ^
 Weapons\CPistol.js + ^
 Weapons\CQueueGun.js + ^
@@ -61,10 +53,9 @@ Boosters\CHeartBooster.js + ^
 Boosters\CMagnetBooster.js + ^
 Boosters\CSupermanBooster.js + ^
 Boosters\CTabletsBooster.js + ^
-PlayerData.js + ^
-dbinit.js + ^
-init.js + ^
-resizeend.coffee.js + ^
-gamefile.js ^
+Utils\PlayerData.js + ^
+Utils\dbinit.js + ^
+Utils\init.js + ^
+Main\gamefile.js ^
 all.js
-java -jar compiler.jar --js all.js --js_output_file all.min.js
+java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS all.js --process_jquery_primitives --create_source_map source.map > all.min.js

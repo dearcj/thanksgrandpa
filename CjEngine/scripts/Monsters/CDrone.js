@@ -33,4 +33,4 @@ CDrone.prototype.process = function()
 
 
     CMonster.prototype.process.call(this);
-}
+};

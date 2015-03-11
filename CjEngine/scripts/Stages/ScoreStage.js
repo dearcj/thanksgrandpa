@@ -225,4 +225,4 @@ ScoreStage.prototype.onShowContinue = function()
 
 ScoreStage.prototype.process = function() {
     CObj.processAll();
-}
+};

@@ -35,8 +35,8 @@ BonusMonGnome.prototype.dealDamage = function(dmg)
     CMonster.prototype.dealDamage.call(this, dmg);
     if (window.time - this.lastDrop > 200) {
         this.lastDrop = window.time;
-        if (gameStage.player.double) {
+        if (gameStage.player.doubleBooster) {
             CCoin.spawnCoin(this.x, this.y, 6);
         } else CCoin.spawnCoin(this.x, this.y, 3);
     }
-}
+};

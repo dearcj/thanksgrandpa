@@ -28,5 +28,3 @@ CPlane.generateProperty('alpha', {
         this.shleif2.alpha = 1 - value;
     }
 });
-
-

@@ -21,4 +21,4 @@ CObstacle.prototype.collide = function (obj2)
         this.collided = true;
         gameStage.player.onDmgAnim(this);
     }
-}
+};

@@ -271,6 +271,10 @@
             <filename>../../../../dedgame/animation sprites/fire/firesmall0001.png</filename>
             <filename>../../../../dedgame/animation sprites/fire/firesmall0002.png</filename>
             <filename>../../../../dedgame/animation sprites/fire/firesmall0003.png</filename>
+            <filename>../../../../dedgame/fight screen/plane_trace1.png</filename>
+            <filename>../../../../dedgame/fight screen/plane_trace2.png</filename>
+            <filename>../../../../dedgame/fight screen/plane.png</filename>
+            <filename>../../../../dedgame/fight screen/barrel.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

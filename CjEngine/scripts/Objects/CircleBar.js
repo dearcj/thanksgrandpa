@@ -95,4 +95,4 @@ CircleBar.prototype.init = function(cover, barup, bardown)
     this.progressfore.mask = this.mask;
     this.pos = 0;
     this.updateGraphics();
-}
+};

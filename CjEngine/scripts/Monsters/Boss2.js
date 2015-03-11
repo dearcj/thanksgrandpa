@@ -9,5 +9,5 @@ function Boss2(in_x,in_y,animname,cr_bar){
     this.gfx.skeleton.setAttachment("b_body", "b_body1");
     this.gfx.skeleton.setAttachment("b_head", "b_head1");
     this.gfx.skeleton.setAttachment("b_top_body", "b_top_body1");
-}
+};
 

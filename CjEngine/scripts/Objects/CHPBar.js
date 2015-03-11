@@ -74,4 +74,4 @@ CHPBar.prototype.init = function()
     this.updateGraphics();
   //  new TweenMax(this, 10.8, {prop: 0., repeat:-1, ease: Linear.easeNone});
     CObj.prototype.init.call(this);
-}
+};

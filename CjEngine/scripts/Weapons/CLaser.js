@@ -166,7 +166,7 @@ CLaser.prototype.shot = function()
     b.colMask = CG_MONSTER;
     return r;
     */
-}
+};
 
 
 

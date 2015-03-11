@@ -26,4 +26,4 @@ CMagnetBooster.prototype.process = function()
             }
         }
     }
-}
+};

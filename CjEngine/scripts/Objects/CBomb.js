@@ -76,4 +76,4 @@ CBomb.prototype.setElectricity = function(state)
 {
     CObj.prototype.setElectricity.call(this)
     if (state)this.explode();
-}
+};

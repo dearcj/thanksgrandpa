@@ -68,7 +68,7 @@ CMonster.prototype.kill = function()
 
     if (this.spawnCoins) {
         var coinCount = 5;
-        if (gameStage.player.double)coinCount = 10;
+        if (gameStage.player.doubleBooster)coinCount = 10;
         for (var i = 0; i < coinCount; ++i) {
             if (Math.random() > 0.3) continue;
             CCoin.spawnCoin(this.x, this.y, this.coinAmount);
@@ -149,4 +149,4 @@ CMonster.prototype.longJump = function(diff, gravPower, slowSpeed, fastSpeed, ea
     new TweenMax(this, easeTime, {vx: slowSpeed - diff, yoyo: true, repeat: 1});
   //  new TweenMax(this, 1.2, {y: 150, repeat: 1, yoyo:true, onComplete: function(){obj.vy = 3; obj.gravityEnabled = true;}});
   //  new TweenMax(this, 1.7*this.jumpTimeCoef, { y: this.y - 220*(this.highCoef + Math.random()*0.1), yoyo: true, repeat: 1, ease: Quad.easeInOut, onComplete: function(){x.gravityEnabled = true;}} );
-}
+};

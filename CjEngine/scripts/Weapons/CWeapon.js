@@ -128,4 +128,4 @@ CWeapon.prototype.applyUpgrades = function(upgrds)
         var upgr = upgrds[i];
         this[upgr.param] += upgr.value;
     }
-}
+};

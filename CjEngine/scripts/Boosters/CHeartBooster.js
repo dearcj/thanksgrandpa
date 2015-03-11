@@ -5,4 +5,4 @@ function CHeartBooster(x,y,gfx) {
 
     gameStage.player.maxHp++;
     gameStage.player.hp++;
-}
+};

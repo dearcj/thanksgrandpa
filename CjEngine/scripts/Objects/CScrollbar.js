@@ -179,4 +179,4 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
     this.posScale = 1;
     this.x = in_x;
     this.y = in_y;
-}
+};

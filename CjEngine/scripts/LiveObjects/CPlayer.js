@@ -6,8 +6,8 @@ extend(CPlayer, CLiveObj, true);
 function CPlayer(in_x,in_y,textname,in_body){
     CLiveObj.apply(this,[in_x,in_y,null,in_body]);
 
-    this.boostPower = 1.035;
-    this.maxBoostVel = -22.5;
+    /*this.boostPower = 1.035;
+    this.maxBoostVel = -22.5;*/
     this.initialJumpSpeed = -19.5;
     this.gravPower = 0.94;
     this.gfx = this.createDedGraphics();
@@ -17,7 +17,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.ammobar = gameStage.ammobar;
     this.colGroup = CG_PLAYER;
     this.colMask = CG_MONSTER;
-    this.nullPhase = 0;
+   // this.nullPhase = 0;
     this.maxHp = 5;
     this.hp = this.maxHp;
      this.y += 10;
@@ -29,7 +29,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.sMoving = 1;
     this.sDying = 2;
     this.state = this.sMoving;
-    this.allowFlowMove = true;
+   // this.allowFlowMove = true;
     this.playable = false;
     this.lastUseExpl = 0;
     this.superMode = false;
@@ -449,4 +449,4 @@ CPlayer.prototype.fire = function()
              new TweenMax(this.dedRightHand, time, { rotation: this.dedRightHand.rotation-0.04, yoyo: true, repeat: 1});
              */  }
     }
-}
+};
