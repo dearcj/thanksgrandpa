@@ -40,6 +40,7 @@ CBooster.prototype.removeBoosterItem = function() {
 
 CBooster.prototype.onActivate = function() {
     this.activate = false;
+    PlayerData.inst.progressAch("Gold medal 5", 1, false);
 
     this.startTime = window.time;
     this.lastTick = 0;

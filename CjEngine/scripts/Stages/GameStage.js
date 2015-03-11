@@ -534,6 +534,7 @@ GameStage.prototype.onShow = function () {
 }
 
 
+
 //NO "THIS" IN CURRENT CONTEXT
 GameStage.prototype.onShowContinue = function () {
     gameStage.doProcess = true;
@@ -669,6 +670,7 @@ GameStage.prototype.onShowContinue = function () {
     stage.mouseup = fup;
 */
     gameStage.updateXP();
+
     /*
      gameStage.muteBtn = CObj.getById("mutebtn");
      gameStage.updateSoundBtn(gameStage.muteBtn);

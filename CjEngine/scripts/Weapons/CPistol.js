@@ -31,7 +31,7 @@ CPistol.prototype.shot = function()
     SM.inst.fg.addChild(fx);
 
     TweenMax.delayedCall(0.03, function (){fx.parent.removeChild(fx);});
-
+    gameStage.player.vx = -0.5;
     var b = new CBullet(xx, yy, "bomb1");
     b.life = this.life;
     b.dmg = this.damage;

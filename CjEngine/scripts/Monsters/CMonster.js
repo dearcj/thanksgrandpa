@@ -81,6 +81,11 @@ CMonster.prototype.kill = function()
         //this.bar.gfx.visible = false;
     }
 
+
+    PlayerData.inst.progressAch("Gold medal 10", 1/100, false);
+    PlayerData.inst.progressAch("Gold medal 11", 1/200, false);
+
+
     PlayerData.inst.gainExp(this.xp);
 
     var parent = this.gfx.parent;

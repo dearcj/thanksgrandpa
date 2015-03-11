@@ -58,7 +58,7 @@ var dbobj =
                     desc: "Заглянуть в интернет",
                     name: "event4",
                     delay_min: 24*60,
-                    xp_gain: 1000,
+                    xp_gain: 600,
                     money_gain: 0,
                     crystal_gain: 0,
                     gfx: "action 4.png",
@@ -91,7 +91,7 @@ var dbobj =
                     desc: "Позвонить внуку",
                     name: "event7",
                     delay_min: 24*60,
-                    xp_gain: 1500,
+                    xp_gain: 900,
                     money_gain: 0,
                     crystal_gain: 0,
                     gfx: "action 7.png",
@@ -113,7 +113,7 @@ var dbobj =
                     desc: "Подремать",
                     name: "event9",
                     delay_min: 6*60,
-                    xp_gain: 300,
+                    xp_gain: 200,
                     money_gain: 0,
                     crystal_gain: 0,
                     gfx: "action 9.png",
@@ -172,7 +172,7 @@ var dbobj =
                     name: "event14",
                     desc: "Покормить кота",
                     delay_min: 6*60,
-                    xp_gain: 600,
+                    xp_gain: 0,
                     money_gain: 1000,
                     crystal_gain: 0,
                     gfx: "action 14.png",
@@ -194,27 +194,27 @@ var dbobj =
                 {
                     name: "Gold medal 2",
                     desc: "Долгий путь 100м", //+
-                    gfx: "orden.png"
+                    gfx: "orden6.png"
                 },
                 {
                     name: "Gold medal 3",
                     desc: "Долгий путь 500м", //+
-                    gfx: "orden.png"
+                    gfx: "orden10.png"
                 },
                 {
                     name: "Gold medal 4",
                     desc: "Долгий путь 1000м",// +
-                    gfx: "orden.png"
+                    gfx: "orden11.png"
                 },
                 {
                     name: "Gold medal 5",
                     desc: "Использовать бустер",
-                    gfx: "orden.png"
+                    gfx: "orden5.png"
                 },
                 {
                     name: "Gold medal 6",
                     desc: "10 раз помянул друзей",
-                    gfx: "orden.png"
+                    gfx: "orden2.png"
                 },
                 {
                     name: "Gold medal 7",
@@ -224,14 +224,26 @@ var dbobj =
                 ,
                 {
                     name: "Gold medal 8",
-                    desc: "5 дней без перерыва", //+
-                    gfx: "orden.png"
+                    desc: "3 дня без перерыва", //+
+                    gfx: "orden7.png"
                 }
                 ,
                 {
                     name: "Gold medal 9",
                     desc: "10 дней без перерыва", //+
-                    gfx: "orden.png"
+                    gfx: "orden2.png"
+                }
+                ,
+                {
+                    name: "Gold medal 10",
+                    desc: "Убить 100 школьников", //+
+                    gfx: "orden6.png"
+                }
+                ,
+                {
+                    name: "Gold medal 11",
+                    desc: "Убить 200 школьников", //+
+                    gfx: "orden12.png"
                 }
             ]
     },

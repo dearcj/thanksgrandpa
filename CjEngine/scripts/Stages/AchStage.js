@@ -1,6 +1,4 @@
-function AchStage() {
-    CustomStage.apply(this);
-}
+function AchStage() {CustomStage.apply(this)}
 
 extend(AchStage, CustomStage);
 
@@ -57,9 +55,11 @@ AchStage.prototype.updateAchievements = function()
         }
 
         var ach = PlayerData.inst.achs[j];
-        achObject = new PIXI.Sprite(PIXI.Texture.fromFrame(ach.gfx));
         if (PlayerData.inst.achs_progress[i].progress < 1)
-        achObject.tint = 0x332299;
+            achObject = crsp("empty orden"); else
+        achObject = crsp(ach.gfx);
+
+        //    achObject.tint = 0x332299;
         achObject.x = 95 + (i % numColumns)*200;
         achObject.y = 120+Math.floor(i / numColumns)*220;
         achObject.width = 90;
@@ -69,7 +69,7 @@ AchStage.prototype.updateAchievements = function()
         achObject.interactive = true;
 
 
-        var txtName = CTextField.createTextField({text: ach.desc, align: "center", fontSize: "20"});
+        var txtName = CTextField.createTextField({text: ach.desc, align: "center", fontSize: "17"});
         txtName.x = achObject.x - txtName.width / 2;
         txtName.y = achObject.y + 100;//-bg.height / 2;
         achStage.bar.container.addChild(txtName);
@@ -98,8 +98,6 @@ AchStage.prototype.onShowContinue = function()
     achStage.updateAchievements();
 }
 
-
-
 AchStage.prototype.process = function() {
     CObj.processAll();
   //  if (achStage.desc.visible)
@@ -107,4 +105,4 @@ AchStage.prototype.process = function() {
     //    achStage.desc.position.x = window.mouseX;
      //  achStage.desc.position.y = window.mouseY;
    // }
-}
+};

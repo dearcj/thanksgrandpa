@@ -5,91 +5,119 @@ filter: Linear,Linear
 repeat: none
 b_body
   rotate: false
-  xy: 2, 227
+  xy: 588, 247
   size: 312, 263
   orig: 312, 263
   offset: 0, 0
   index: -1
-b_bullet1
+b_body1
   rotate: false
-  xy: 2, 2
+  xy: 303, 193
+  size: 283, 317
+  orig: 283, 353
+  offset: 0, 12
+  index: -1
+b_bullet1
+  rotate: true
+  xy: 1177, 271
   size: 71, 39
   orig: 71, 39
   offset: 0, 0
   index: -1
 b_bullet2
-  rotate: false
-  xy: 2, 2
+  rotate: true
+  xy: 1177, 271
   size: 71, 39
   orig: 71, 39
   offset: 0, 0
   index: -1
 b_head
   rotate: true
-  xy: 316, 324
+  xy: 902, 344
   size: 166, 318
   orig: 166, 318
   offset: 0, 0
   index: -1
+b_head1
+  rotate: false
+  xy: 2, 179
+  size: 299, 331
+  orig: 300, 331
+  offset: 1, 0
+  index: -1
 b_l_arm
   rotate: true
-  xy: 2, 43
+  xy: 1514, 328
   size: 182, 288
   orig: 185, 288
   offset: 2, 0
   index: -1
 b_legs
   rotate: false
-  xy: 636, 311
+  xy: 1222, 331
   size: 290, 179
   orig: 290, 179
   offset: 0, 0
   index: -1
+b_legs1
+  rotate: false
+  xy: 2, 2
+  size: 332, 175
+  orig: 332, 179
+  offset: 0, 0
+  index: -1
 b_r_arm
   rotate: true
-  xy: 316, 140
+  xy: 336, 9
   size: 182, 288
   orig: 185, 288
   offset: 0, 0
   index: -1
 b_top_body
   rotate: true
-  xy: 606, 160
+  xy: 902, 193
   size: 149, 273
   orig: 149, 273
   offset: 0, 0
   index: -1
-disp1
+b_top_body1
   rotate: true
-  xy: 928, 356
+  xy: 626, 97
+  size: 148, 267
+  orig: 149, 285
+  offset: 0, 1
+  index: -1
+disp1
+  rotate: false
+  xy: 1804, 419
   size: 134, 91
   orig: 134, 91
   offset: 0, 0
   index: -1
 disp2
   rotate: false
-  xy: 292, 47
+  xy: 1804, 326
   size: 134, 91
   orig: 134, 91
   offset: 0, 0
   index: -1
 disp3
-  rotate: false
-  xy: 428, 47
+  rotate: true
+  xy: 1940, 376
   size: 134, 91
   orig: 134, 91
   offset: 0, 0
   index: -1
 disp4
-  rotate: true
-  xy: 881, 175
+  rotate: false
+  xy: 626, 4
   size: 134, 91
   orig: 134, 91
   offset: 0, 0
   index: -1
 disp5
   rotate: false
-  xy: 606, 67
+  xy: 762, 4
   size: 134, 91
   orig: 134, 91
   offset: 0, 0

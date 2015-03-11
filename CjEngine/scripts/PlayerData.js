@@ -9,15 +9,21 @@ PlayerData = function(pi)
    this.xpLevel = [
       {crystals: 1, money: 25, xp: 0},
       {crystals: 1, money: 50, xp: 250},
-      {crystals: 1, money: 100, xp: 400},
-      {crystals: 1, money: 200, xp: 500},
-      {crystals: 2, money: 400, xp: 1000},
-      {crystals: 2, money: 800, xp: 1800},
-      {crystals: 2, money: 1000, xp: 3300},
-      {crystals: 2, money: 1500, xp: 6000},
-      {crystals: 3, money: 2000, xp: 10000},
+      {crystals: 1, money: 100, xp: 500},
+      {crystals: 1, money: 200, xp: 1000},
+      {crystals: 2, money: 400, xp: 2000},
+      {crystals: 2, money: 800, xp: 2500},
+      {crystals: 2, money: 1000, xp: 3500},
+      {crystals: 2, money: 1500, xp: 7000},
+      {crystals: 3, money: 2000, xp: 12000},
       {crystals: 3, money: 2500, xp: 18000},
-      {crystals: 3, money: 3000, xp: 25000}];
+      {crystals: 3, money: 3000, xp: 25000},
+      {crystals: 3, money: 3000, xp: 30000},
+      {crystals: 3, money: 3000, xp: 35000},
+      {crystals: 3, money: 3000, xp: 47000},
+      {crystals: 3, money: 3000, xp: 55000},
+      {crystals: 3, money: 3000, xp: 60000},
+      {crystals: 3, money: 3000, xp: 75000}];
 
    this.items = {};
    this.achs = {};
@@ -55,7 +61,7 @@ PlayerData.prototype.comboCheck = function()
          d /= 1000;//secs
          d /= 60; //minutes
          var dayminutes = 24*60;
-         if (d > dayminutes*5)
+         if (d > dayminutes*3)
          this.progressAch("Gold medal 8", 1, false);
 
          if (d > dayminutes*10)
@@ -131,11 +137,29 @@ PlayerData.prototype.gainExp = function(amount) {
 
       ZSound.Play("levelup");
 
-      if (SM.inst.currentStage == gameStage) {
-         this.score += this.xpLevel[this.playerItem.lvl].money;
+      this.score += this.xpLevel[this.playerItem.lvl].money;
 
-         gameStage.updateScore();
-         gameStage.pause();
+         if (SM.inst.currentStage == charStage)
+         {
+            if (charStage.closeEventsWnd)
+            charStage.closeEventsWnd();
+
+            CObj.enableButtons(false);
+            var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
+            wnd.interactive = true;
+
+            charStage.closeEventsWnd = function()
+            {
+               wnd.parent.removeChild(wnd);
+               CObj.enableButtons(true);
+            }
+
+         }
+         if (SM.inst.currentStage == gameStage)
+         {
+            gameStage.updateScore();
+            gameStage.pause();
+         }
 
          LevelManager.loadLevel("levelup",
              function () {
@@ -150,18 +174,20 @@ PlayerData.prototype.gainExp = function(amount) {
                    if (SM.inst.currentStage == gameStage) {
                       gameStage.unpause();
                    } else {
+                      charStage.closeEventsWnd();
                       charStage.updateStatsPanel();
                    }
                 };
 
 
              }
-             , SM.inst.guiLayer);
-      } else {
+             , SM.inst.fontLayer);
+     /* }
+      else {
          this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
          this.savePlayerData();
          charStage.updateStatsPanel();
-      }
+      }*/
    }
 
    if (SM.inst.currentStage == gameStage) {
@@ -444,6 +470,7 @@ PlayerData.prototype.loadData = function(cb)
        function (results) {
           PlayerData.inst.eventsplayer = results;
           PlayerData.inst.loadCount ++;
+
           if (PlayerData.inst.loadCount == totalLoads && cb) cb();
        }, function (res) {}
    );
@@ -474,21 +501,26 @@ PlayerData.prototype.savePlayerAchs = function()
 }
 
 
-PlayerData.prototype.savePlayerEvents = function()
+PlayerData.prototype.savePlayerEvents = function(onlyOne)
 {
-   for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i)
+   for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
+      if (onlyOne && onlyOne.id != PlayerData.inst.eventsplayer[i].id) continue;
+
       window.azureclient.getTable("tb_edevent_player").update(PlayerData.inst.eventsplayer[i]).done(function (result) {
       }, function (err) {
       });
+   }
 }
 
 
-PlayerData.prototype.savePlayerItems = function()
+PlayerData.prototype.savePlayerItems = function(onlyOne)
 {
-   for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
-   window.azureclient.getTable("tb_item_player").update(PlayerData.inst.items_enabled[i]).done(function (result) {
-   }, function (err) {
-   });
+   for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
+      if (onlyOne && onlyOne.id != PlayerData.inst.items_enabled[i].id) continue;
+      window.azureclient.getTable("tb_item_player").update(PlayerData.inst.items_enabled[i]).done(function (result) {
+      }, function (err) {
+      });
+   }
 }
 
 

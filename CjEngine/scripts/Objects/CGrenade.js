@@ -1,7 +1,6 @@
 /**
  * Created by KURWINDALLAS on 22.02.2015.
  */
-
 extend(CGrenade, CBullet, true);
 
 function CGrenade(in_x,in_y,textname,in_body) {
@@ -101,7 +100,6 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
         }
     }
 }
-
 
 CGrenade.prototype.collide = function (obj2)
 {

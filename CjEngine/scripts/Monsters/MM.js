@@ -47,7 +47,7 @@ MM = function () {
         ];
 
 
-    this.bosses = [{class: Boss1, dist: 1000}, {class: Boss1, dist: 2000}];
+    this.bosses = [{class: Boss2, dist: 10}, {class: Boss2, dist: 2000}];
     // c l z - преграды
     //s - монстр
     this.monY = 360;
@@ -55,7 +55,7 @@ MM = function () {
     this.sNormal = 1;
     this.sBoss = 2;
     this.lastStep = 0;
-
+    this.lastSpawnPlane = 0;
     this.currentBoss = null;
 
     this.state = this.sNormal;
@@ -91,6 +91,26 @@ MM.prototype.init = function () {
      }*/
 }
 
+
+MM.prototype.spawnPlane = function () {
+    var x = -200;
+    var r;
+    if (Math.random() > 0.5)
+    {
+        r  = (Math.random() - 0.5)*Math.PI / 12;
+        x = - 200;
+    } else
+    {
+        r  = Math.PI + (Math.random() - 0.5)*Math.PI / 12;
+        x = SCR_WIDTH + 200;
+    }
+    var p = new CPlane(x, 50 + Math.random()*150, "plane");
+    rp(p.gfx);
+    LauncherBG.inst.planeLayer.addChild(p.gfx);
+    p.rotation = r;
+    p.vx = Math.cos(p.rotation) / 8;
+    p.vy = Math.sin(p.rotation) / 8;
+}
 
 MM.prototype.generateMonsterQueue = function () {
     var s = [];
@@ -155,7 +175,7 @@ MM.prototype.spawnCoin = function (height) {
     //if (!height)
     height = 428;
     //  for (var i = 0; i < 5; ++i) {
-    var c = new CCoin(SCR_WIDTH + 50, height, 1);
+    var c = new CCoin(SCR_WIDTH + 240, height, 1);
 
     c.vy = 0;
     c.gravityEnabled = false;
@@ -167,7 +187,7 @@ MM.prototype.spawnBarrel = function (clip, offsY, innerOffs) {
     var m = new CBarrel(SCR_WIDTH + 240, 450 + 2 * offsY, clip, true);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
-    m.maxHp = 100;
+    m.maxHp = 70;
     m.hp = m.maxHp;
     m.gfx.anchor.y = 0.5 + offsY / (m.gfx.height / m.gfx.scale.y);
     m.dmgExpl = 250;
@@ -323,6 +343,8 @@ MM.prototype.doStep = function () {
      }
      this.bonusQueue= this.bonusQueue.slice(1);
      */
+
+
     this.diff = LauncherBG.inst.distance / 1000;
     if (s == "s") this.spawnSimpleMonster(5);
     if (s == "f") this.spawnFatty();
@@ -352,6 +374,11 @@ MM.prototype.process = function () {
 
     var dd = 4;
     var st = Math.floor(LauncherBG.inst.distance / dd);
+
+    if (Math.floor(LauncherBG.inst.distance) % 250 == 0 && Math.random() < 0.5 && d - this.lastSpawnPlane > 60000) {
+        this.spawnPlane();
+        this.lastSpawnPlane = d;
+    }
     if (st != this.prevS) {
         if (!this.currentBoss && this.bosses.length > 0 && (this.prevS * dd - this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist)) {
             var b = this.bosses.shift();
@@ -367,5 +394,5 @@ MM.prototype.process = function () {
             this.doStep();
     }
 
-    this.prevS = Math.floor(LauncherBG.inst.distance / dd);
+    this.prevS = st;
 }

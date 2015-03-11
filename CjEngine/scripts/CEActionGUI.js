@@ -25,37 +25,73 @@ CEActionGUI.prototype.process= function()
 
 CEActionGUI.prototype.startAction = function()
 {
+    if (this.acting) return;
     this.acting = true;
 
     this.progressbg.visible = true;
     this.progressfore.visible = true;
     this.pos = 0;
-    new TweenMax(this, this.event.exectime, {pos: 1, onComplete: this.endAction, onCompleteParams: [this]});
+    this.startTime = window.time;
+    this.execTime = this.event.exectime*1000;
+    //new TweenMax(this, /*this.event.exectime*/0.5, {pos: 1, onComplete: this.endAction, onCompleteParams: [this]});
 }
 
-CEActionGUI.prototype.endAction = function(p)
+CEActionGUI.prototype.takeReward = function()
 {
-    p.progressbg.visible = false;
-    p.progressfore.visible = false;
+    this.progressbg.visible = false;
+    this.progressfore.visible = false;
 
-    p.eventpl.lastused = new Date();
-    if (p.event.money_gain)
-        PlayerData.inst.playerItem.money += p.event.money_gain;
-    if (p.event.xp_gain)
-        PlayerData.inst.playerItem.xp += p.event.xp_gain;
+    this.eventpl.reward_ready = false;
+    this.eventpl.lastused = new Date();
+    if (this.event.money_gain)
+        PlayerData.inst.playerItem.money += this.event.money_gain;
 
-    if (p.event.crystal_gain)
-        PlayerData.inst.playerItem.xp += p.event.crystal_gain;
+    if (this.event.crystal_gain)
+        PlayerData.inst.playerItem.crystals += this.event.crystal_gain;
 
-    incMetric("USED EVENT " + p.event.name);
+    if (this.event.xp_gain)
+        PlayerData.inst.gainExp(this.event.xp_gain);
 
-    PlayerData.inst.savePlayerEvents();
+    incMetric("USED EVENT " + this.event.name);
+
+    if (this.event.name == "event1")
+    {
+        PlayerData.inst.progressAch("Gold medal 6", 1 / 10, false);
+    }
+    this.btnReward.destroy();
+    PlayerData.inst.savePlayerEvents(this.eventpl);
     PlayerData.inst.savePlayerData();
     shopStage.updateStatsPanel();
 
-    p.acting = false;
+    this.acting = false;
 }
 
+CEActionGUI.prototype.endAction = function()
+{
+    this.progressbg.visible = false;
+    this.progressfore.visible = false;
+    this.acting = false;
+    this.eventpl.reward_ready = true;
+    PlayerData.inst.savePlayerEvents(this.eventpl);
+    this.addRewardButton();
+}
+
+
+CEActionGUI.prototype.addRewardButton = function() {
+    this.btnReward = new CButton(230, -3, "buy_button");
+    this.btnReward.fontSize = 17;
+    this.btnReward.gfx.scale.x = 0.8;
+    this.btnReward.gfx.scale.y = 0.8;
+    rp(this.btnReward.gfx);
+    this.btnReward.hover = false;
+    var p = this;
+    this.btnReward.click = function () {
+        p.takeReward();
+    };
+    this.btnReward.init();
+    this.btnReward.gfx.interactive = true;
+    this.gfx.addChild(this.btnReward.gfx);
+}
 
 CEActionGUI.prototype.updateRecharge= function()
 {
@@ -116,22 +152,22 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     var gainbgsprite = new PIXI.Sprite(PIXI.Texture.fromFrame(gainbg));
     gainbgsprite.anchor.x = 0.5;
     gainbgsprite.anchor.y = 0.5;
-    gainbgsprite.x = 140;
-    gainbgsprite.y = 12 + 8;
+    gainbgsprite.x = 120;
+    gainbgsprite.y = 12 - 14;
     this.gfx.addChild(gainbgsprite);
 
     this.timeleft = CTextField.createTextField({tint: "0x333333", text: "", fontSize: 17, align: "center"});
     this.timeleft.x = 50;
-    this.timeleft.y = -28;
+    this.timeleft.y = 27;
     this.gfx.addChild(this.timeleft);
 
     var tf = CTextField.createTextField({tint: "0x333333", text: gain.toString(), fontSize: 16, align: "center"});
-    tf.x = 140;
-    tf.y = 3 + 8;
+    tf.x = 120;
+    tf.y = 3 -14;
     this.gfx.addChild(tf);
 
     var edeventgui = this;
-    //this.gfx.interactive = true;
+   // this.gfx.interactive = true;
     var gf = this.ico;
     gf.interactive = true;
     var bsX = gf.scale.x;
@@ -151,7 +187,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
 
     gf.click = function()
     {
-        if (edeventgui.ready)
+        if (edeventgui.ready && !pledevent.reward_ready)
         {
             edeventgui.startAction();
         }
@@ -170,6 +206,12 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     tf.y = -55;
     this.gfx.addChild(tf);
 
+
+    if (this.eventpl.reward_ready)
+        this.addRewardButton();
+
     this.progressbg.visible = false;
     this.progressfore.visible = false;
+
+
 }

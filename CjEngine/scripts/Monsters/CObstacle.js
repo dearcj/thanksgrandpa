@@ -14,10 +14,10 @@ CObstacle.prototype.collide = function (obj2)
 {
     var preHp = obj2.hp;
 
-   CMonster.prototype.collide.call(this, obj2);
-
-    if (!this.collided && obj2 == gameStage.player && obj2.y < this.y)
+//&& obj2.y < this.y
+    if (!this.collided && obj2 == gameStage.player )
     {
+        CMonster.prototype.collide.call(this, obj2);
         this.collided = true;
         gameStage.player.onDmgAnim(this);
     }

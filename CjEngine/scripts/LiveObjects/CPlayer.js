@@ -20,9 +20,9 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.nullPhase = 0;
     this.maxHp = 5;
     this.hp = this.maxHp;
-    this.startPlayerX = this.x;
-    this.y += 10;
+     this.y += 10;
     this.baseY = this.y;
+    this.baseX = this.x;
     this.offsetY = -20;
     this.offsetX = -25;
     this.radius = this.gfx.width / 2 - 35;
@@ -155,6 +155,9 @@ CPlayer.prototype.onJump = function()
         this.jumpboost = true;
         if (this.jumpNumber != 2)
         {
+             //   this.vx = 7 * (1 - Math.abs(this.x - this.baseX)/40);
+            if (!this.prevX)
+            this.prevX = this.x;
             this.vy = this.initialJumpSpeed;
             this.gfx.state.setAnimationByName(0, "jump", false);
         } else
@@ -218,10 +221,12 @@ CPlayer.prototype.landing = function() {
     this.y = this.baseY;
     this.gravityEnabled = false;
     this.jumpNumber = 0;
+    console.log("landing");
 
     if (this.state != this.sDying) {
         this.gfx.state.setAnimationByName(0, "idle", true);
-        this.movementTween.resume();
+
+            this.movementTween.resume();
     }
 }
 
@@ -229,26 +234,17 @@ CPlayer.prototype.onDmgAnim = function(pusher) {
     if  (this.state == this.sDying) return;
 
     if (this.gravityEnabled) {
-        this.vy -= 30;
+        this.vy = Math.max(-20, this.vy - 20);
     } else
     {
-        this.jumping = true;
-        this.vy -= 15;
         this.gravityEnabled = true;
-    }
-        //this.vy -= 30; else
-    {
-     //   this.movementTween.pause();
-        var p = this;//ease: Circ.easeOut,
-      /*  new TweenMax(this, 0.6, {x: Math.max(this.x - 50,60), yoyo:true, repeat: 1,  onComplete: function(){
-            if (p.movementTween)
-            p.movementTween.resume();
-        }});*/
+        this.vy -= 15;
     }
 }
 
 CPlayer.prototype.process = function()
 {
+   // console.log(this.gravityEnabled);
     if (SM.inst.currentStage == gameStage && this.playable && gameStage.player) {
 
             if (this.vy > 0 && this.y > this.baseY - 30) {
@@ -260,30 +256,23 @@ CPlayer.prototype.process = function()
                 this.landing();
             }
 
-        if (gameStage.player.XXXX)
-        {
-            c = 0;
-        }
         if (this.blink)
         {
             this.updateBlink();
         }
-        if (this.state != this.sDying)
+        if (this.state != this.sDying && !this.jumping)
         {
-
-            if (this.jumping) {
-                if (this.jumpboost && this.vy < 0)
-                   /// this.vy *= this.boostPower;
-                if (this.vy < this.maxBoostVel) {
-                    this.jumpboost = false;
-                    this.vy = this.maxBoostVel;
-                }
-            }
+            var d = (this.baseX - this.x ) / 45;
+          //  console.log(d);
+            this.x += d;
         }
+        this.vx *= 0.9;
 
         if (gameStage.fireState && window.mouseY < SCR_HEIGHT - 40) {
             this.fire();
         }
+
+
         if (!this.jumping && this.boardSlot)
         {
             this.boardSlot.bone.rotation *= 0.5;//.06;

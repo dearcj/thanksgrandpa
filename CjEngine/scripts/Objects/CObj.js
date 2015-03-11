@@ -62,7 +62,7 @@ CObj = function(in_x,in_y,filename,in_body) {
    // return this;
 };
 
-CObj.debugView = true;
+CObj.debugView = false;
 
 Function.prototype.generateProperty = function(name, options) {
     // internal member variable name

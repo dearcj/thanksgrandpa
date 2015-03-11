@@ -19,6 +19,7 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.layersSpeed = [0, 0.1, 0.14, 0.65, 0.65, 1, 1];
     this.ol = new PIXI.DisplayObjectContainer();
     this.pllayer = new PIXI.DisplayObjectContainer();
+    this.planeLayer= new PIXI.DisplayObjectContainer();
     this.defaultLayer = null;
     this.pixToDist = 1 / 50;
    // this.verticalParallax = 0;
@@ -62,6 +63,7 @@ LauncherBG.prototype.destroy = function () {
     this.clear();
     this.ol = null;
     this.pllayer = null;
+    this.planeLayer = null;
     CObj.prototype.destroy.call(this);
 }
 
@@ -212,8 +214,10 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
         this.gfx.addChild(layer.clip);
     //    if (i == 5) SM.inst.fg.addChild(layer.clip);
     }
-    this.gfx.addChildAt(this.ol, 6);
-    this.gfx.addChildAt(this.pllayer, 7);
+    this.gfx.addChildAt(this.planeLayer, 1);
+
+    this.gfx.addChildAt(this.ol, 7);
+    this.gfx.addChildAt(this.pllayer, 8);
 
     for (var i = 0; i < original.objects.length; ++i) {
         layers[original.objects[i].layer - 1].objects.push(original.objects[i]);

@@ -11,6 +11,8 @@ function CCoin(in_x,in_y,amount) {
     this.gravPower = 0.7;
     this.radius = 15;
     this.gfx = CObj.createMovieClip("coin");
+    this.gfx.anchor.x = 0.5;
+    this.gfx.anchor.y = 0.5;
     this.gfx.scale.x = 0.7;
     this.gfx.scale.y = 0.7;
     this.gfx.animationSpeed = 0.25;

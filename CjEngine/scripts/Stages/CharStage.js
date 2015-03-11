@@ -21,6 +21,24 @@ CharStage.prototype.onHide = function (newStage) {
     for (var i = 0; i < charStage.icons.length; ++i) {
         charStage.icons[i].texture.destroy(true);
     }
+
+
+
+    charStage.eventsArray = [];
+    for (var i = 0; i < CObj.objects.length; ++i) {
+        if (CObj.checkType(CObj.objects[i], CEActionGUI)) {
+            charStage.eventsArray.push(
+                {
+                    id: CObj.objects[i].eventpl.id,
+                    acting: CObj.objects[i].acting,
+                    startTime: CObj.objects[i].startTime,
+                    execTime: CObj.objects[i].execTime,
+                    pos: CObj.objects[i].pos
+                }
+            );
+        }
+    }
+
     charStage.icons = null;
     charStage.pl = null;
     charStage.frp.parent.removeChild(charStage.frp);
@@ -197,6 +215,7 @@ CharStage.prototype.openEnergyWindow = function () {
     }, SM.inst.fontLayer);
 }
 
+
 CharStage.prototype.onShowContinue = function () {
     charStage.doProcess = true;
 
@@ -205,6 +224,11 @@ CharStage.prototype.onShowContinue = function () {
 
     charStage.tab = "total";
     charStage.showRecords = 10;
+
+
+    PlayerData.inst.eventsplayer.sort(function(a, b) {
+        return PlayerData.inst.getEventById(a.id_edevent).reqlvl - PlayerData.inst.getEventById(b.id_edevent).reqlvl;
+    });
 
     //PlayerData.inst.addNotification("some msg", PlayerData.inst.playerItem.vkapi);
 
@@ -241,6 +265,14 @@ CharStage.prototype.onShowContinue = function () {
                 window.location.href = "mailto:thanksgrandpa@gmail.com";
                 window.open('mailto:thanksgrandpa@gmail.com', 'mail');
             }
+            CObj.getById("bmusic").click = function()
+            {
+                if (ZSound.available)
+                    ZSound.Mute(); else
+                    ZSound.UnMute();
+            }
+
+
 
             wnd.click = function () {
                 var obj = CObj.getById("setbg");
@@ -301,14 +333,25 @@ CharStage.prototype.onShowContinue = function () {
     CObj.getById("bsofa").click = function () {
         CObj.enableButtons(false);
 
-        //CObj.getById("bsofa").textField.visible = false;
         var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
         wnd.interactive = true;
+
+        for (var i = 0; i < CObj.objects.length; ++i) {
+            if (CObj.checkType(CObj.objects[i], CEActionGUI) && CObj.objects[i].btnReward) {
+                CObj.objects[i].btnReward.gfx.interactive = true;
+            }
+        }
+
+        charStage.closeEventsWnd = function()
+        {
+            wnd.parent.removeChild(wnd);
+            CObj.enableButtons(true);
+            charStage.bar.gfx.visible = false;
+        }
+
         wnd.click = function () {
             if (!charStage.bar.gfx.getBounds().contains(window.mouseX, window.mouseY)) {
-                wnd.parent.removeChild(wnd);
-                CObj.enableButtons(true);
-                charStage.bar.gfx.visible = false;
+                charStage.closeEventsWnd();
             }
         }
         charStage.bar.gfx.parent.removeChild(charStage.bar.gfx);
@@ -348,7 +391,6 @@ CharStage.prototype.onShowContinue = function () {
 
     charStage.bar.gfx.scale.x = 0.7;
     charStage.bar.gfx.scale.y = 0.7;
-    //charStage.bar.bg.alpha = 0.6;
     charStage.bar.gfx.visible = false;
     charStage.updateEvents();
 
@@ -366,6 +408,23 @@ CharStage.prototype.updateEvents = function () {
         //if (!event) continue;
         o.init(PlayerData.inst.eventsplayer[i], event, event.gfx, "progress fore.png", "progress bg.png");
         o.updateGraphics();
+        if (charStage.eventsArray) {
+            var x = findByProp(charStage.eventsArray, "id", PlayerData.inst.eventsplayer[i].id);
+            if (x)
+            {
+                o.acting = x.acting;
+                o.startTime = x.startTime;
+                o.execTime = x.execTime;
+                o.pos = x.pos;
+
+                if (o.acting)
+                {
+                    o.progressbg.visible = true;
+                    o.progressfore.visible = true;
+                }
+            }
+            console.log(x);
+        }
         charStage.bar.container.addChild(o.gfx);
     }
 
@@ -383,6 +442,29 @@ CharStage.prototype.process = function () {
         CObj.getById("tfdelay").text = "";
     }
     CObj.processAll();
+
+    var c = 0;
+    for (var i = 0; i < CObj.objects.length; ++i)
+    {
+        if  (CObj.checkType(CObj.objects[i], CEActionGUI))
+        {
+            if (CObj.objects[i].acting)
+            {
+                var p = (window.time - CObj.objects[i].startTime) / CObj.objects[i].execTime;
+                if (p >= 1) {
+                    p = 1;
+                    CObj.objects[i].pos = 1;
+                    CObj.objects[i].endAction();
+                } else
+                CObj.objects[i].pos = p;
+                c++;
+
+            }
+        }
+    //    console.log(c);
+
+    }
+
 }
 
 

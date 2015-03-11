@@ -8,6 +8,19 @@ var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
 
+function findByProp(array, prop, value)
+{
+    var len = array.length;
+    for (var i = 0; i < len; ++i)
+    {
+        if (array[i][prop] == value)
+        {
+            return array[i];
+        }
+    }
+    return null;
+}
+
 function getRand(obj) {
     return obj[Math.floor(Math.random() * obj.length)];
 }

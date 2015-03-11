@@ -22,6 +22,11 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.b1 = this.gfx.skeleton.findSlot("b_bullet1");
     this.b2 = this.gfx.skeleton.findSlot("b_bullet2");
 
+    this.gfx.skeleton.setAttachment("b_legs", "b_legs");
+    this.gfx.skeleton.setAttachment("b_body", "b_body");
+    this.gfx.skeleton.setAttachment("b_head", "b_head");
+    this.gfx.skeleton.setAttachment("b_top_body", "b_top_body");
+
     this.gfx.stateData.setMixByName("idle", "shot", 0.2);
     this.gfx.stateData.setMixByName("shot", "idle", 0.1);
 }
@@ -36,6 +41,7 @@ Boss1.prototype.fire = function()
 }
 Boss1.prototype.goIdle = function() {
     var t = this;
+    if (!this.gfx) return;
     this.gfx.state.setAnimationByName(0, "idle", true);
     var dname = "disp" + (1 + Math.floor(Math.random()*5)).toString();
     this.gfx.skeleton.setAttachment("disp1", dname);
@@ -66,13 +72,13 @@ Boss1.prototype.fireBullet = function(b)
     b.maxHp = 10;
     b.hp = b.maxHp;
     b.xp = 5;
-    b.radius = 25;
+    b.radius = 35;
     b.av = 0.1*(Math.random() - 0.5);
     b.spawnCoins= false;
     b.gravityEnabled = true;
     b.jumpTimeCoef = 1;
-    var pow = (1 + 0.4*(Math.random() - 0.5));
-    b.gravPower = (0.16 + Math.random()*0.1)*pow;
+    var pow = (0.8 + 0.4*(Math.random() - 0.5));
+    b.gravPower = (0.14 + Math.random()*0.1)*pow;
     b.vy = -b.gravPower*20*pow;
     b.allowTrackSpeed = false;
     new TweenMax(b, 1.6 + Math.random()*0.5, {x: -100, ease: Linear.easeIn});
@@ -87,6 +93,12 @@ Boss1.prototype.showUpAnimation = function()
     {
         new TweenMax(t, 5, {x: t.x + 80, yoyo: true, repeat: -1});
     }});
+}
+
+Boss1.prototype.kill = function()
+{
+    CMonster.prototype.kill.call(this);
+    PlayerData.inst.progressAch("Gold medal 7", 1, false);
 }
 
 Boss1.prototype.destroy = function()
