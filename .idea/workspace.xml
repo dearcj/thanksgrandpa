@@ -6,65 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CBooster.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CDoubleBooster.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CHeartBooster.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CMagnetBooster.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CSupermanBooster.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CTabletsBooster.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\LiveObjects\CLiveObj.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\LiveObjects\CPlayer.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Main\gamefile.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\BonusMonGnome.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\Boss1.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\Boss2.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\CBarrel.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\CDrone.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\CMonster.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\CObstacle.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\JumpMon.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\MM.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CBomb.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CBullet.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CButton.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CCoin.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CGrenade.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CHPBar.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CNotArrow.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CObj.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CPlane.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CScrollbar.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CTextField.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CircleBar.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\FloorObj.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\LauncherBG.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\Notification.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\ZCJoint.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\AchStage.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\CharStage.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\Credits.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\CustomStage.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\GameStage.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\LevSel.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\MainMenu.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\ScoreStage.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\ShopStage.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\StageManager.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\CEActionGUI.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\LevelManager.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\PlayerData.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\Utils.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\ZPool.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\ZSound.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\dbinit.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\init.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\resizeend.coffee.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CGrenadeLauncher.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CLaser.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CPistol.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CQueueGun.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CWeapon.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\WeapBalance.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -2291,7 +2232,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426084589742</updated>
     </task>
-    <option name="localTasksCounter" value="325" />
+    <task id="LOCAL-00325" summary="0">
+      <created>1426085050430</created>
+      <option name="number" value="00325" />
+      <option name="project" value="LOCAL" />
+      <updated>1426085050430</updated>
+    </task>
+    <option name="localTasksCounter" value="326" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
