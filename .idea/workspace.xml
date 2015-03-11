@@ -5,77 +5,67 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="0">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.obf.js" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CLoader.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\WinGame.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\asdasd" afterPath="" />
-      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\localization.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/compiler.jar" afterPath="$PROJECT_DIR$/CjEngine/scripts/compiler.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss1.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss2.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CBarrel.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CBarrel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CBomb.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CBomb.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CBooster.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CBooster.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CButton.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CButton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CCoin.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CCoin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CDoubleBooster.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CDoubleBooster.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CDrone.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CDrone.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CGrenadeLauncher.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CGrenadeLauncher.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CHPBar.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CHPBar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CHeartBooster.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CHeartBooster.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CLaser.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CLaser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CMagnetBooster.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CMagnetBooster.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CNotArrow.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CNotArrow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CObstacle.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/CObstacle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CPlane.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CPlane.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CQueueGun.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CQueueGun.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CScrollbar.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CScrollbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CTabletsBooster.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Boosters/CTabletsBooster.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CTextField.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CTextField.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/CircleBar.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/CircleBar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/Credits.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/Credits.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/FloorObj.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/FloorObj.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/JumpMon.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/JumpMon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/LauncherBG.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/LauncherBG.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/LevSel.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/LevSel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/MainMenu.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/MainMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/Notification.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/Notification.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/ScoreStage.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/ScoreStage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Stages/StageManager.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Stages/StageManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/Objects/ZCJoint.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Objects/ZCJoint.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/batnick.bat" afterPath="$PROJECT_DIR$/CjEngine/scripts/batnick.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.tps" afterPath="$PROJECT_DIR$/imgtps/guiatlas.tps" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/pixi.dev.js" afterPath="$PROJECT_DIR$/libs/pixi.dev.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/pixi.js" afterPath="$PROJECT_DIR$/libs/pixi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/tps.tps" afterPath="$PROJECT_DIR$/imgtps/tps.tps" />
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CBooster.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CDoubleBooster.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CHeartBooster.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CMagnetBooster.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CSupermanBooster.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Boosters\CTabletsBooster.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\LiveObjects\CLiveObj.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\LiveObjects\CPlayer.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Main\gamefile.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\BonusMonGnome.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\Boss1.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\Boss2.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\CBarrel.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\CDrone.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\CMonster.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\CObstacle.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\JumpMon.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Monsters\MM.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CBomb.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CBullet.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CButton.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CCoin.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CGrenade.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CHPBar.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CNotArrow.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CObj.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CPlane.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CScrollbar.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CTextField.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\CircleBar.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\FloorObj.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\LauncherBG.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\Notification.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects\ZCJoint.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\AchStage.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\CharStage.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\Credits.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\CustomStage.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\GameStage.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\LevSel.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\MainMenu.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\ScoreStage.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\ShopStage.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Stages\StageManager.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\CEActionGUI.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\LevelManager.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\PlayerData.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\Utils.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\ZPool.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\ZSound.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\dbinit.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\init.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils\resizeend.coffee.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CGrenadeLauncher.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CLaser.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CPistol.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CQueueGun.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\CWeapon.js" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Weapons\WeapBalance.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\CEActionGUI.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/CEActionGUI.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\LevelManager.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/LevelManager.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\PlayerData.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Utils.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/Utils.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\ZPool.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/ZPool.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\ZSound.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/ZSound.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\dbinit.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\gamefile.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\init.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/init.js" />
-      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\resizeend.coffee.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/Utils/resizeend.coffee.js" />
     </list>
     <ignored path="thanksgrandpa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -107,213 +97,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CPlayer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="589" max-vertical-offset="8702">
-              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZSound.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/ZSound.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1030" max-vertical-offset="1615">
-              <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Boss1.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss1.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1667" max-vertical-offset="2166">
-              <caret line="108" column="2" selection-start-line="108" selection-start-column="2" selection-end-line="108" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Notification.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/Notification.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="739" max-vertical-offset="1900">
-              <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="7218" max-vertical-offset="10146">
-              <caret line="393" column="26" selection-start-line="393" selection-start-column="26" selection-end-line="393" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainMenu.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/MainMenu.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1748">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoreStage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ScoreStage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3941" max-vertical-offset="4427">
-              <caret line="227" column="2" selection-start-line="227" selection-start-column="2" selection-end-line="227" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopStage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="7171" max-vertical-offset="7657">
-              <caret line="397" column="2" selection-start-line="397" selection-start-column="2" selection-end-line="397" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StageManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/StageManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="209" max-vertical-offset="2679">
-              <caret line="39" column="74" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CScrollbar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CScrollbar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1211" max-vertical-offset="3553">
-              <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CGrenadeLauncher.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CGrenadeLauncher.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="874">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CLaser.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CLaser.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2991" max-vertical-offset="6555">
-              <caret line="168" column="2" selection-start-line="168" selection-start-column="2" selection-end-line="168" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CPistol.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="969">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LevelManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/LevelManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1368" max-vertical-offset="1634">
-              <caret line="72" column="29" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CQueueGun.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CQueueGun.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1319" max-vertical-offset="1805">
-              <caret line="89" column="2" selection-start-line="89" selection-start-column="2" selection-end-line="89" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CWeapon.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2085" max-vertical-offset="2584">
-              <caret line="130" column="2" selection-start-line="130" selection-start-column="2" selection-end-line="130" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WeapBalance.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3031" max-vertical-offset="3629">
-              <caret line="185" column="7" selection-start-line="185" selection-start-column="7" selection-end-line="185" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6311189" vertical-offset="0" max-vertical-offset="2090">
-              <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utils.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/Utils.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3306" max-vertical-offset="4047">
-              <caret line="175" column="2" selection-start-line="175" selection-start-column="2" selection-end-line="175" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gamefile.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4093" max-vertical-offset="6802">
-              <caret line="215" column="2" selection-start-line="215" selection-start-column="2" selection-end-line="215" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MM.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="988" max-vertical-offset="7638">
-              <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+            <state vertical-scroll-proportion="-0.61709404" vertical-offset="684" max-vertical-offset="2090">
+              <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -329,34 +117,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="init.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/init.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1448" max-vertical-offset="2033">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dbinit.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="8123" max-vertical-offset="9405">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/init.js" root0="SKIP_INSPECTION" />
   </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
@@ -456,24 +220,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Utils">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -2539,7 +2285,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426032695879</updated>
     </task>
-    <option name="localTasksCounter" value="324" />
+    <task id="LOCAL-00324" summary="0">
+      <created>1426084589742</created>
+      <option name="number" value="00324" />
+      <option name="project" value="LOCAL" />
+      <updated>1426084589742</updated>
+    </task>
+    <option name="localTasksCounter" value="325" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -2564,14 +2316,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="0" width="1634" height="1066" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.58502537" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33483145" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46179774" sideWeight="0.2994924" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12083333" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15862945" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15862945" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32601535" sideWeight="0.5006345" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14213198" sideWeight="0.50080514" order="1" side_tool="true" content_ui="tabs" />
@@ -2581,7 +2334,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="333" y="796" width="502" height="201" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.58502537" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2659,174 +2411,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7715431" vertical-offset="2123" max-vertical-offset="2622">
-          <caret line="132" column="2" selection-start-line="132" selection-start-column="2" selection-end-line="132" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CCoin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7715431" vertical-offset="1344" max-vertical-offset="1843">
-          <caret line="91" column="2" selection-start-line="91" selection-start-column="2" selection-end-line="91" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CButton.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7654321" vertical-offset="3124" max-vertical-offset="3610">
-          <caret line="184" column="2" selection-start-line="184" selection-start-column="2" selection-end-line="184" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBomb.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7654321" vertical-offset="1110" max-vertical-offset="1596">
-          <caret line="78" column="2" selection-start-line="78" selection-start-column="2" selection-end-line="78" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7654321" vertical-offset="11921" max-vertical-offset="12407">
-          <caret line="647" column="2" selection-start-line="647" selection-start-column="2" selection-end-line="647" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/AchStage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7715431" vertical-offset="1648" max-vertical-offset="2147">
-          <caret line="107" column="2" selection-start-line="107" selection-start-column="2" selection-end-line="107" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CustomStage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53306615" vertical-offset="0" max-vertical-offset="499">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/JumpMon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68537074" vertical-offset="0" max-vertical-offset="499">
-          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1667" max-vertical-offset="2166">
-          <caret line="108" column="2" selection-start-line="108" selection-start-column="2" selection-end-line="108" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/MainMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1748">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ScoreStage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3941" max-vertical-offset="4427">
-          <caret line="227" column="2" selection-start-line="227" selection-start-column="2" selection-end-line="227" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7171" max-vertical-offset="7657">
-          <caret line="397" column="2" selection-start-line="397" selection-start-column="2" selection-end-line="397" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CGrenadeLauncher.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="912">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CLaser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2991" max-vertical-offset="6555">
-          <caret line="168" column="2" selection-start-line="168" selection-start-column="2" selection-end-line="168" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CQueueGun.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1319" max-vertical-offset="1805">
-          <caret line="89" column="2" selection-start-line="89" selection-start-column="2" selection-end-line="89" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2085" max-vertical-offset="2584">
-          <caret line="130" column="2" selection-start-line="130" selection-start-column="2" selection-end-line="130" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7218" max-vertical-offset="10146">
-          <caret line="393" column="26" selection-start-line="393" selection-start-column="26" selection-end-line="393" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="456" max-vertical-offset="8702">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CDoubleBooster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="627">
-          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/Notification.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="739" max-vertical-offset="1900">
-          <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CScrollbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1211" max-vertical-offset="3553">
-          <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libs/pixi.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12991454" vertical-offset="0" max-vertical-offset="585">
@@ -2843,14 +2427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1760" max-vertical-offset="16093">
-          <caret line="115" column="22" selection-start-line="115" selection-start-column="22" selection-end-line="115" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/source.map">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="557">
@@ -2860,40 +2436,6 @@
       </provider>
       <provider editor-type-id="sourcemapFileViewerProvider">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0837607" vertical-offset="10618" max-vertical-offset="12882">
-          <caret line="623" column="7" selection-start-line="623" selection-start-column="7" selection-end-line="623" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2128">
-          <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70234114" vertical-offset="150" max-vertical-offset="912">
-          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42564103" vertical-offset="1081" max-vertical-offset="2983">
-          <caret line="70" column="42" selection-start-line="70" selection-start-column="42" selection-end-line="70" selection-end-column="42" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/jquery-2.1.3.js">
@@ -2913,90 +2455,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9405">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2033">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3580" max-vertical-offset="6802">
-          <caret line="215" column="2" selection-start-line="215" selection-start-column="2" selection-end-line="215" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="722" max-vertical-offset="7638">
-          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/LevelManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1634">
-          <caret line="72" column="29" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/ZSound.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1030" max-vertical-offset="1615">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3130" max-vertical-offset="3629">
-          <caret line="185" column="7" selection-start-line="185" selection-start-column="7" selection-end-line="185" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2642857" vertical-offset="398700" max-vertical-offset="566694">
           <caret line="20992" column="10" selection-start-line="20992" selection-start-column="10" selection-end-line="20992" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/Utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3306" max-vertical-offset="4047">
-          <caret line="175" column="2" selection-start-line="175" selection-start-column="2" selection-end-line="175" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="371" max-vertical-offset="969">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/StageManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="209" max-vertical-offset="2679">
-          <caret line="39" column="74" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3058,8 +2520,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6311189" vertical-offset="0" max-vertical-offset="2090">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+        <state vertical-scroll-proportion="-0.61709404" vertical-offset="684" max-vertical-offset="2090">
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
           <folding />
         </state>
       </provider>
