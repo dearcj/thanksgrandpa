@@ -6205,7 +6205,7 @@ Boss1.prototype.fire = function()
             t.goIdle();
         });
     }
-}MM = function () {
+};MM = function () {
     this.patterns =
         [
                {mons: "f..f00szf..000", diff: 1, prob: 1},
