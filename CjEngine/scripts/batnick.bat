@@ -28,9 +28,11 @@ Objects\FloorObj.js + ^
 Objects\LauncherBG.js + ^
 Objects\CGrenade.js + ^
 Objects\CPlane.js + ^
+Objects\CKey.js + ^
 Monsters\CMonster.js + ^
 Monsters\JumpMon.js + ^
 Monsters\CDrone.js + ^
+Monsters\CDrone2.js + ^
 Monsters\CObstacle.js + ^
 Monsters\CBarrel.js + ^
 Monsters\Boss1.js + ^
@@ -56,6 +58,7 @@ Boosters\CTabletsBooster.js + ^
 Utils\PlayerData.js + ^
 Utils\dbinit.js + ^
 Utils\init.js + ^
+Utils\PauseTimer.js + ^
 Main\gamefile.js ^
 all.js
 java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS all.js --process_jquery_primitives --create_source_map source.map > all.min.js

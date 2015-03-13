@@ -785,6 +785,7 @@ GameStage.prototype.process = function () {
     /*   if (this.doPhys)
      world.step(this.invFR*this._worldSpeed);u
      ddsd[d*/
+
     window.focus();
     CObj.processAll();
 
@@ -815,13 +816,13 @@ GameStage.prototype.onHide = function (newStage) {
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
 
-  /*  $(function() {
+    $(function() {
         $(document).off('keydown', this.doKeyDown);
         $(document).off('keyup', this.doKeyUp);
         $(document).mousedown(null);
         $(document).mouseup(null);
     });
-*/
+
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
      CObj.objects.splice(inx, 1);*/
     CObj.destroyAll();
@@ -1214,8 +1215,8 @@ GameStage.prototype.doKeyUp = function (evt) {
     evt = evt || window.event;
     var c = getChar(evt);
     if (evt.which == 87 || evt.which == 17) {
-        if (gameStage.player)
-        gameStage.player.jumpboost = false;
+    //    if (gameStage.player)
+    //    gameStage.player.jumpboost = false;
     }
 }
 
@@ -1225,7 +1226,7 @@ GameStage.prototype.onShow = function () {
     gameStage.killing = false;
     gameStage.slowMoCoef = 1;
     //window.addEventListener("keypress", this.doKeyDown, false);
-
+    gameStage.rightReleased = true;
 
     this.state = "game";
     this.doProcess = false;
@@ -1345,18 +1346,31 @@ GameStage.prototype.onShowContinue = function () {
 
     var fdown = function (md) {
     //    document.focus();
-
+        if (md.which == 1)
         gameStage.fireState = true;
-    //    md.preventDefault();
+
+        if (md.which == 3) {
+            if (gameStage.rightReleased) {
+                gameStage.rightReleased =false;
+                gameStage.player.onJump();
+            }
+        //    gameStage.player.jumpboost = false;
+        }
+        //    md.preventDefault();
     //    window.focus();
     }
 
     var fup = function (md) {
    //     document.focus();
-        if (gameStage.player)
-            gameStage.player.weapon.mouseUp();
+        if (md.which == 3)
+        gameStage.rightReleased = true;
 
-        gameStage.fireState = false;
+
+        if (md.which == 1) {
+            gameStage.fireState = false;
+            if (gameStage.player)
+                gameStage.player.weapon.mouseUp();
+        }
     //    md.preventDefault();
     //    window.focus();
     }
@@ -1364,13 +1378,13 @@ GameStage.prototype.onShowContinue = function () {
 
     var func =  gameStage.doKeyDown;
     var func2 = gameStage.doKeyUp;
- /*   $(function() {
+    $(function() {
         $(document).on('keydown', func);
         $(document).on('keyup', func2);
         $(document).mousedown(fdown);
         $(document).mouseup(fup);
     });
-*/
+
 /*
     document.addEventListener("keydown", gameStage.doKeyDown, false);
     document.addEventListener("keyup", gameStage.doKeyUp, false);
@@ -1452,6 +1466,15 @@ GameStage.prototype.createPools = function () {
         });
 
 
+    if (pool.Size("fxsmallblink") == 0)
+        pool.Fill("fxsmallblink", 10, function () {
+            var c = CObj.createMovieClip("fxsmallblink");
+            c.scale.x = 1.8;
+            c.scale.y = 1.8;
+            c.anchor.x = 0.5;
+            c.anchor.y = 0.5;
+            return c;
+        });
 
 
     if (pool.Size("coinCollect") == 0)
@@ -1529,8 +1552,9 @@ GameStage.prototype.unpause = function () {
     if (gameStage.player)
         gameStage.player.gfx.autoUpdate = true;
 
-    window.focus();
-    TweenMax.resumeAll();
+    //window.focus();
+    PauseTimer.resume();
+   // TweenMax.resumeAll();
 }
 
 GameStage.prototype.pause = function () {
@@ -1541,7 +1565,7 @@ GameStage.prototype.pause = function () {
     if (gameStage.player)
         gameStage.player.gfx.autoUpdate = false;
 
-    TweenMax.pauseAll();
+    PauseTimer.pause();
 }
 
 GameStage.prototype.updateSoundBtn = function (btn) {
@@ -2041,7 +2065,6 @@ CharStage.prototype.onShowContinue = function () {
 
             wnd.click = function () {
                 var obj = CObj.getById("setbg");
-                var bnds = obj.gfx.getBounds();
                 if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                     window.mouseX < obj.x + obj.gfx.width / 2 &&
                     window.mouseY > obj.y - obj.gfx.height / 2 &&
@@ -2115,10 +2138,16 @@ CharStage.prototype.onShowContinue = function () {
         }
 
         wnd.click = function () {
-            if (!charStage.bar.gfx.getBounds().contains(window.mouseX, window.mouseY)) {
+            var obj = charStage.bar;
+            if (window.mouseX > obj.x - obj.gfx.width / 2 &&
+                window.mouseX < obj.x + obj.gfx.width / 2 &&
+                window.mouseY > obj.y - obj.gfx.height / 2 &&
+                window.mouseY < obj.y + obj.gfx.height / 2) {
+            } else {
                 charStage.closeEventsWnd();
             }
         }
+
         charStage.bar.gfx.parent.removeChild(charStage.bar.gfx);
         SM.inst.fontLayer.addChild(charStage.bar.gfx);
         charStage.bar.gfx.visible = true;
@@ -2188,7 +2217,6 @@ CharStage.prototype.updateEvents = function () {
                     o.progressfore.visible = true;
                 }
             }
-            console.log(x);
         }
         charStage.bar.container.addChild(o.gfx);
     }
@@ -2539,7 +2567,6 @@ ShopStage.prototype.createItemBtn = function(item)
         var tf =
         CObj.getById("tfdescd");
         tf.setTextSafe(desctext);
-        console.log("MOUSE IN");
         tf.item = item;
     }
 
@@ -2554,7 +2581,6 @@ ShopStage.prototype.createItemBtn = function(item)
         if (f.currentFrame)
             f.gotoAndStop(1);
         new TweenMax(f.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut} );
-        console.log("MOUSE OUT");
     }
 
     var owned = this.checkOwned(item);
@@ -3125,6 +3151,7 @@ CObj = function(in_x,in_y,filename,in_body) {
         this.body.position[1] = in_y;
     }
 
+    this.bornTime = PauseTimer.getTimer();
     //this.hitTestCircles = null;
     this.colMask = 0;
     this.colGroup = 0;
@@ -3134,8 +3161,6 @@ CObj = function(in_x,in_y,filename,in_body) {
     this.radius = 1;
     this.rotation = 0;
     this.gravityEnabled = false;
-
-   // return this;
 };
 
 CObj.debugView = false;
@@ -3255,7 +3280,11 @@ CObj.prototype.process = function(){
     if (this.gravityEnabled)
     {
         this.vy += this.gravPower;
+    }
 
+    if (this.lifeTime && this.bornTime - PauseTimer.getTimer() > this.lifeTime)
+    {
+        this.destroy();
     }
 
     if (this.allowTrackSpeed)
@@ -3278,7 +3307,13 @@ CObj.prototype._destroy = function(){
 }
 
 CObj.prototype.destroy = function(){
-    if (this.poolName) return;
+   // if (this.poolName) return;
+    if (!this.doRemove)
+        if (this.return2Pool) {
+            pool.Push(this.return2Pool);
+            this.return2Pool = null;
+        }
+
     this.doRemove = true;
 };
 
@@ -4770,13 +4805,13 @@ CPlayer.prototype.reveal = function()
 CPlayer.prototype.onJump = function()
 {
  //   this.kill(); return;
-    if (!this.jumpboost && (this.state == this.sMoving)
+    if ((this.state == this.sMoving)
     && (!this.jumping || (this.jumping && this.jumpNumber)))
     {
         this.jumpNumber++;
         if (this.jumpNumber > 2) return;
         this.jumping = true;
-        this.jumpboost = true;
+
         if (this.jumpNumber != 2)
         {
              //   this.vx = 7 * (1 - Math.abs(this.x - this.baseX)/40);
@@ -4845,7 +4880,6 @@ CPlayer.prototype.landing = function() {
     this.y = this.baseY;
     this.gravityEnabled = false;
     this.jumpNumber = 0;
-    console.log("landing");
 
     if (this.state != this.sDying) {
         this.gfx.state.setAnimationByName(0, "idle", true);
@@ -5126,36 +5160,30 @@ CBullet.prototype.collide = function (obj2)
     if (obj2 && this.prevVictim != obj2) {
         obj2.dealDamage(this.dmg);
 
-        var fx = pool.Pop("blood");
+        if (obj2.metall) {
+            var fx = pool.Pop("fxsmallblink");
+            if (fx)
+            fx.animationSpeed = 0.45;
+        }
+        else {
+            fx = pool.Pop("blood");
+            if (fx)
+                fx.animationSpeed = 0.55;
+        }
+
         if (fx)
         {
             var obj = new CObj(this.x, this.y, null);
             fx.loop = false;
-            fx.gotoAndStop(0);
             fx.gotoAndPlay(0);
             obj.gfx = fx;
             obj.updateGraphics();
             SM.inst.fg.addChild(fx);
 
-            fx.animationSpeed = 0.55;
-            this.updateGraphics();
-            obj.gfx.onComplete = function () {
-              //  setTimeout( function() {
-                if (obj.gfx) {
-                   // obj.gfx.gotoAndStop(0);
-                    if (obj.gfx)
-                        pool.Push(obj.gfx);
-                    obj.destroy();
-                    //  obj.gfx.parent.removeChild(obj.gfx);
-                  //  var inx = obj.gfx.parent.children.indexOf(obj.gfx);
-                  //  obj.gfx.parent.children.splice(inx, 1);
-                   // rp(obj.gfx);
-                    //obj.gfx = null;
-                }
-            //    }, 15);
-            };
+            obj.return2Pool = obj.gfx;
+            obj.gfx.lifeTime = 800;
+            obj.gfx.onComplete = function () {obj.destroy();}
         }
-
         this.life--;
         this.dmg*=0.66;
         if (this.life <= 0)
@@ -5189,7 +5217,7 @@ function FloorObj(in_x,in_y,textname,in_body) {
     CObj.apply(this, [in_x, in_y, textname, in_body]);
     if (this.gfx) {
         this.gfx.parent.removeChild(this.gfx);
-        SM.inst.ol.addChildAt(this.gfx, 0);
+        SM.inst.ol.addChildAt(this.gfx, 0);//
     }
 }
 
@@ -5212,7 +5240,7 @@ FloorObj.prototype.process = function()
                 }
             }
 
-            if (CObj.checkType(o, CCoin) && o.y + o.radius / 2 > floorLine - 58) {
+            if ((CObj.checkType(o, CCoin) || CObj.checkType(o, CKey)) && o.y + o.radius / 2 > floorLine - 58) {
                 if (o.vy > 0)
                 o.vy = -o.vy*0.5;
             }
@@ -5343,7 +5371,7 @@ LauncherBG.prototype.process = function (fake) {
 
             this.maxVelocity += this.speedUpCoef;
             this.speedUpCoef *= 0.95;
-            console.log("SPEED " + this.maxVelocity.toString());
+           // console.log("SPEED " + this.maxVelocity.toString());
         }
     }
 
@@ -5507,15 +5535,18 @@ CGrenade.prototype.addSmoke = function (obj2) {
     o.updateGraphics();
     fx.alpha = 1;
     LauncherBG.inst.ol.addChild(o.gfx);
+
+
+    o.return2Pool = o.gfx;
+    o.gfx.lifeTime = 800;
+
     new TweenMax(o.gfx, 0.2, {alpha: 0, onComplete: function(){
-        if (o.gfx) {
-            pool.Push(o.gfx);
             o.destroy();
-        }
     }});
 }
 
-CGrenade.makeBoom = function (x, y, dmg, dist)
+
+CGrenade.makeBoom = function (x, y, dmg, dist, owner)
 {
     ZSound.Play("grenade");
 
@@ -5532,16 +5563,15 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
         obj.rotation = (Math.random() - 0.5);
         fx.animationSpeed = 0.85;
         obj.updateGraphics();
+
+        obj.return2Pool = obj.gfx;
+        obj.gfx.lifeTime = 800;
+
         obj.gfx.onComplete = function () {
-            if (obj.gfx) {
-                // obj.gfx.gotoAndStop(0);
-                if (obj.gfx) {
-                    pool.Push(obj.gfx);
                     obj.destroy();
-                }
             }
         };
-    }
+
 
     var sd = dist*dist;
     var l = CMonster.list.length;
@@ -5550,6 +5580,7 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
     {
         var m = CMonster.list[i];
         if (m.doRemove) continue;
+        if (m == owner) continue;
         var dx = m.x - x;
         var dy = m.y - y;
         var sqd = dx*dx + dy*dy;
@@ -5558,7 +5589,6 @@ CGrenade.makeBoom = function (x, y, dmg, dist)
             var d = Math.sqrt(sqd);
             var totalDmg = dmg*((dist - (d + 0.01)) / dist);
             m.dealDamage(totalDmg);
-            console.log(totalDmg);
         }
         if (m.doRemove)
         {
@@ -5587,7 +5617,7 @@ CGrenade.prototype.collide = function (obj2)
     }
 
     if (obj2 != this.owner) {
-        CGrenade.makeBoom(this.x, this.y, this.dmg, 350)
+        CGrenade.makeBoom(this.x, this.y, this.dmg, 350, this.owner);
         this.destroy();
     }
 }
@@ -5638,6 +5668,101 @@ CPlane.generateProperty('alpha', {
         this.shleif2.alpha = 1 - value;
     }
 });/**
+ * Created by KURWINDALLAS on 23.11.2014.
+ */
+extend(CKey, CObj, true);
+
+function CKey(in_x,in_y,amount) {
+    CObj.apply(this, [in_x, in_y, null, null]);
+    this.gravityEnabled = true;
+    this.colGroup = 1;
+    this.colMask = CG_PLAYER;
+    this.gravPower = 0.7;
+    this.radius = 15;
+    this.gfx = crsp("key.png");
+    this.gfx.anchor.x = 0.5;
+    this.gfx.anchor.y = 0.5;
+    this.gfx.scale.x = 0.7;
+    this.gfx.scale.y = 0.7;
+    SM.inst.ol.addChild(this.gfx);
+    this.updateGraphics();
+
+    this.allowTrackSpeed = true;
+}
+
+CKey.prototype.process = function ()
+{
+    CObj.prototype.process.call(this);
+
+    if (this.gravityEnabled)
+        this.vx = -7;
+}
+
+CKey.spawnKey = function(x, y, a)
+{
+    var c = new CKey(x, y, a);
+    c.vx = 20 + Math.random()*10;
+    c.vy = -20*(Math.random());
+}
+
+CKey.prototype.collide = function(obj2)
+{
+    if (this.isCollected) return;
+
+    this.isCollected = true;
+    if (!PlayerData.inst.playerItem.keys) PlayerData.inst.playerItem.keys = 0;
+
+    PlayerData.inst.playerItem.keys ++;
+    PlayerData.inst.savePlayerData();
+    var tfKeys = CTextField.createTextField({fontFamily: "dedgamecaps", fontSize: 25, text: "СОБРАНО " + PlayerData.inst.playerItem.keys.toString() + " КЛЮЧЕЙ"}) ;
+    tfKeys.updateText();
+    tfKeys.x = this.x;
+    tfKeys.y = this.y;
+    SM.inst.fg.addChild(tfKeys);
+    new TweenMax(tfKeys, 0.9, {y: tfKeys.y - 100, ease: Sine.easeIn, onComplete: function(){rp(tfKeys);}});
+    gameStage.updateScore();
+
+    this.gravityEnabled = false;
+    this.vx = 0;
+    this.vy = 0;
+    this.allowTrackSpeed = false;
+    var coinGfx = pool.Pop("coinCollect");
+    ZSound.Play("coin")
+    if (!coinGfx)
+        this.destroy(); else
+    {
+        rp(coinGfx);
+        rp(this.gfx);
+
+        coinGfx.loop = false;
+        coinGfx.gotoAndStop(0);
+        coinGfx.gotoAndPlay(0);
+        this.gfx = coinGfx;
+        this.updateGraphics();
+
+        SM.inst.fg.addChild(coinGfx);
+        var coin = this;
+        coinGfx.animationSpeed = 0.5;
+        this.updateGraphics();
+        var obj = this;
+        obj.return2Pool = obj.gfx;
+        obj.gfx.lifeTime = 800;
+
+        obj.gfx.onComplete = function () {
+            obj.destroy();
+        }
+
+    }
+    //  Coin.generateTextParticle(this);
+    //  ZSound.Play("collectMoney")
+//
+
+
+
+    //new TweenMax(this.gfx, 0.3, {alpha: 0, onComplete: this.destroy, scaleX: 10, scaleY: 10});
+    //new TweenMax(this.gfx.scale, 0.3, {x: this.gfx.scale.x*1.3, y: this.gfx.scale.y*1.3});
+    //this.destroy();
+};/**
  * Created by KURWINDALLAS on 18.11.2014.
  */
 extend(CMonster, CLiveObj, true);
@@ -5729,7 +5854,8 @@ CMonster.prototype.kill = function()
 
     var parent = this.gfx.parent;
     parent.removeChild(this.gfx);
-    var bloodgfx = pool.Pop("bloodblow");
+
+    bloodgfx = pool.Pop("bloodblow");
     var f = this;
     if (bloodgfx) {
         this.gfx = bloodgfx;
@@ -5742,15 +5868,10 @@ CMonster.prototype.kill = function()
         parent.addChild(this.gfx);
         this.gfx.loop = false;
         this.gfx.gotoAndPlay(0);
-        this.gfx.onComplete =
-            function () {
-                if (f.gfx) {
-                    // obj.gfx.gotoAndStop(0);
-                    if (f.gfx)
-                        pool.Push(f.gfx);
-                    f.destroy();
-                }
-            };
+        var o = this;
+        this.return2Pool = this.gfx;
+        this.gfx.lifeTime = 800;
+        this.gfx.onComplete = function () {o.destroy();}
     } else
         CLiveObj.prototype.kill.call(f);
 
@@ -5770,8 +5891,9 @@ CMonster.prototype.destroy = function()
     CObj.prototype.destroy.call(this);
 }
 
-CMonster.prototype.longJump = function(diff, gravPower, slowSpeed, fastSpeed, easeTime, powRand)
+CMonster.prototype.longJump = function(diff, gravPower, slowSpeed, fastSpeed, easeTime, powRand, gravToSpeed)
 {
+    if (!gravToSpeed) gravToSpeed = 40;
     var diff = 1;
     this.gravityEnabled = true;
     this.jumpTimeCoef = 1;
@@ -5779,7 +5901,7 @@ CMonster.prototype.longJump = function(diff, gravPower, slowSpeed, fastSpeed, ea
     var pow = (1 + powRand);
   //  var t = 2*this.jumpTimeCoef/pow;
     this.gravPower = (gravPower + 0.025*diff)*pow;
-    this.vy = -this.gravPower*40*pow;
+    this.vy = -this.gravPower*gravToSpeed*pow;
     this.allowTrackSpeed = false;
     this.gravityEnabled = true;
 
@@ -5811,6 +5933,7 @@ extend(CDrone, CMonster, true);
 
 function CDrone(in_x,in_y,animname,cr_bar){
     CMonster.apply(this,[in_x,in_y,animname, cr_bar]);
+    this.metall = true;
 
     var t = this;
     new TweenMax.delayedCall(1, function(){t.spawnGrenade();});
@@ -5841,7 +5964,14 @@ CDrone.prototype.process = function()
 
 
     CMonster.prototype.process.call(this);
-};
+};extend(CDrone2, CMonster, true);
+
+function CDrone2(in_x,in_y,animname,cr_bar){
+    CMonster.apply(this,[in_x,in_y,animname, cr_bar]);
+    this.metall = true;
+    var t = this;
+}
+
 extend(CObstacle, CMonster, true);
 
 function CObstacle(in_x,in_y,animname,cr_bar){
@@ -5872,6 +6002,7 @@ extend(CBarrel, CObstacle, true);
 
 function CBarrel(in_x,in_y,animname,cr_bar){
     CObstacle.apply(this,[in_x,in_y,animname,true]);
+    this.metall = true;
 }
 
 CBarrel.prototype.kill = function () {
@@ -5890,7 +6021,7 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.gfx.scale.x = 0.48;
     this.gfx.scale.y = 0.48;
     this.updateGraphics();
-    this.maxHp = 800;
+    this.maxHp = 1000;
     this.xp = 300;
     this.hp = this.maxHp;
     this.bar.gfx.width *= 2;
@@ -5903,6 +6034,8 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.b1 = this.gfx.skeleton.findSlot("b_bullet1");
     this.b2 = this.gfx.skeleton.findSlot("b_bullet2");
 
+    this.gfx.skeleton.setAttachment("b_low_arm", "b_low_arm");
+
     this.gfx.skeleton.setAttachment("b_legs", "b_legs");
     this.gfx.skeleton.setAttachment("b_body", "b_body");
     this.gfx.skeleton.setAttachment("b_head", "b_head");
@@ -5910,6 +6043,9 @@ function Boss1(in_x,in_y,animname,cr_bar){
 
     this.gfx.stateData.setMixByName("idle", "shot", 0.2);
     this.gfx.stateData.setMixByName("shot", "idle", 0.1);
+    this.gfx.skeleton.setAttachment("disp1", "disp1");
+    this.gfx.skeleton.setAttachment("b_bomb", null);
+
 }
 
 Boss1.prototype.fire = function()
@@ -5920,12 +6056,20 @@ Boss1.prototype.fire = function()
     TweenMax.delayedCall(1.3, function () {t.fireBullet(2);t.fireBullet(2);t.fireBullet(2);});
     TweenMax.delayedCall(1.7, function () {t.goIdle();});
 }
+
+Boss1.prototype.setRandDisp = function() {
+
+    var x = (1 + Math.floor(Math.random()*5)).toString();
+    console.log("set disp " + dname.toString());
+    var dname = "disp" + x;
+    this.gfx.skeleton.setAttachment("disp1", dname);
+}
+
 Boss1.prototype.goIdle = function() {
     var t = this;
     if (!this.gfx) return;
     this.gfx.state.setAnimationByName(0, "idle", true);
-    var dname = "disp" + (1 + Math.floor(Math.random()*5)).toString();
-    this.gfx.skeleton.setAttachment("disp1", dname);
+    this.setRandDisp();
 
     TweenMax.delayedCall(1, function (){t.fire()});
 }
@@ -5994,36 +6138,99 @@ extend(Boss2, Boss1, true);
 
 function Boss2(in_x,in_y,animname,cr_bar){
     Boss1.apply(this,[in_x,in_y,animname,null]);
+
+    this.maxHp = 1600;
+    this.hp = this.maxHp;
+    this.xp = 700;
     this.gfx.skeleton.setAttachment("b_legs", "b_legs1");
     this.gfx.skeleton.setAttachment("b_body", "b_body1");
     this.gfx.skeleton.setAttachment("b_head", "b_head1");
     this.gfx.skeleton.setAttachment("b_top_body", "b_top_body1");
+    this.gfx.skeleton.setAttachment("b_low_arm", "b_low_arm1");
+
+    this.gfx.skeleton.setAttachment("b_low_arm", "b_low_arm1");
+    this.gfx.skeleton.setAttachment("b_bomb", "b_bomb");
+    this.setRandDisp();
+
 };
 
-MM = function () {
+Boss2.prototype.setRandDisp = function() {
+    var x = (1 + Math.floor(Math.random()*5)).toString();
+    var dname = "disp" + x + x;
+    console.log("set disp " + dname.toString());
+    this.gfx.skeleton.setAttachment("disp1", dname);
+}
+
+Boss2.prototype.fireGrenade = function() {
+
+    var slot = this.gfx.skeleton.findSlot("b_bomb");
+    var p = slot.currentSprite.toGlobal({x:0, y:0});
+    var firePointX = p.x/SCR_SCALE;
+    var firePointY = p.y/SCR_SCALE;
+    this.colGroup = CG_MONSTER;
+    this.colMask = CG_PLAYER;
+    this.gfx.state.setAnimationByName(0, "drop bomb", false);
+    var t = this;
+    TweenMax.delayedCall(0.15, function(){
+    var b = new CGrenade(firePointX, firePointY);
+        b.vy = 15;
+        b.owner = t;
+    b.life = 10;
+    b.dmg = 40;
+    b.rotation = Math.PI / 2;
+    b.av = 0.2;
+    b.vx = -3;
+    b.gfx.tint = 0xff0000;
+    b.gravityEnabled = true;
+    b.colGroup = CG_GROUND;
+    b.colMask = CG_PLAYER;
+    });
+}
+
+
+Boss1.prototype.fire = function()
+{
+    this.gfx.state.setAnimationByName(0, "shot", false);
+    var t = this;
+    TweenMax.delayedCall(0.5, function () {t.fireBullet(1);t.fireBullet(1);t.fireBullet(1);});
+    TweenMax.delayedCall(1.3, function () {t.fireBullet(2);t.fireBullet(2);t.fireBullet(2);});
+    if (Math.random() < 0.5) {
+        TweenMax.delayedCall(1.7, function () {
+            t.goIdle();
+        });
+    } else
+    {
+        TweenMax.delayedCall(2, function () {t.fireGrenade()});
+        TweenMax.delayedCall(2.3, function () {
+            t.goIdle();
+        });
+    }
+}MM = function () {
     this.patterns =
         [
+               {mons: "f..f00szf..000", diff: 1, prob: 1},
+                {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
                 {mons: ".s..s..s..c", diff: 1, prob: 1},
                 {mons: ".s00z00s..z", diff: 1, prob: 1},
                 {mons: ".b..b..c..b.b.", diff: 1, prob: 1},
                 {mons: ".ss..ss.s..l...ss..l.l..s", diff: 1, prob: 1},
-                {mons: ".z...c.s.s.sc..", diff: 2, prob: 1},
                 {mons: ".l..zz.ss.c.", diff: 1, prob: 1},
                 {mons: ".c.gc..", diff: 1, prob: 1},
-                {mons: ".c..c..o000s.s", diff: 1, prob: 1},
+                {mons: ".c..c..o000s.s.", diff: 1, prob: 1},
+                {mons: ".z...c.s.s.sc..", diff: 2, prob: 1},
                 {mons: ".z...c.z..", diff: 2, prob: 1},
                 {mons: "j", diff: 2, prob: 0.1},
                 {mons: ".lbb..c.", diff: 2, prob: 1},
-                {mons: ".c..x.x.x.", diff: 2, prob: 1},
+                {mons: ".c..?.?.?.", diff: 2, prob: 1},
                 {mons: ".f...z...f..c.", diff: 2, prob: 1},
                 {mons: ".l.lz..c..z..c...c..s..l..s.l", diff: 2, prob: 1},
                 {mons: ".lsslss0000l00l.l..", diff: 3, prob: 1},
                 {mons: ".o..lo..l..", diff: 3, prob: 1},
                 {mons: ".c.g..gl", diff: 3, prob: 1},
                 {mons: "..f..f.z.o..f..", diff: 3, prob: 1},
-                {mons: "jd..df...f.", diff: 4, prob: 0.1},
-                {mons: "..dz..d..z.z", diff: 4, prob: 0.1},
+                {mons: "jd..df...f.", diff: 4, prob: 1},
+                {mons: "..dz..d..z.z", diff: 4, prob: 1},
                 {mons: ".F..l.l.F..l.", diff: 4, prob: 1},
                 {mons: ".b.bf..", diff: 4, prob: 0.1},
                 {mons: "..s.sss..s..l", diff: 4, prob: 1},
@@ -6035,21 +6242,25 @@ MM = function () {
                 {mons: "gg.g...g..g..G.GG.", diff: 5, prob: 1},
                 {mons: "zzz.z..G.GG.zzz.", diff: 5, prob: 1},
                 {mons: "..ss..ss.s..lll.ss..l...l...s", diff: 6, prob: 1}, //+
-                {mons: ".b.bf.x.", diff: 6, prob: 0.1},
+                {mons: ".b.bf.?.", diff: 6, prob: 0.1},
                 {mons: ".c..c.l..g.g00g", diff: 6, prob: 1},
                 {mons: ".c..c..l..g..g..g", diff: 6, prob: 1},
                 {mons: "j", diff: 6, prob: 0.1},
                 {mons: "..s..s..dss", diff: 6, prob: 0.1},
+                {mons: "h.llH.lzh..H.l.l", diff: 7, prob: 1},
                 {mons: ".b..bbb..bbbbb000bbbbbbb..", diff: 7, prob: 0.1},
+                {mons: ".o.H.H..l..", diff: 7, prob: 1},
                 {mons: ".z..zz...zzz...zzzz.", diff: 7, prob: 1},
                 {mons: ".czgG.gFl...", diff: 7, prob: 1},
+                {mons: "h..c.hsh.?.", diff: 8, prob: 1},
                 {mons: ".c.b.cbb..lb.gG.Gg..g.", diff: 8, prob: 1},
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
-                {mons: "Fz.Fz.zFz.", diff: 8, prob: 1}
+                {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
+                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}
         ];
 
 
-    this.bosses = [{cls: Boss2, dist: 10}, {cls: Boss2, dist: 2000}];
+    this.bosses = [{cls: Boss2, dist: 1000}, {cls: Boss2, dist: 2000}];
     // c l z - преграды
     //s - монстр
     this.monY = 360;
@@ -6114,40 +6325,100 @@ MM.prototype.spawnPlane = function () {
 }
 
 MM.prototype.generateMonsterQueue = function () {
+    MM.debugArray = [];
+    var diffs = []
+    for (var i = 1; i <= 9; ++i)
+    {
+        diffs.push({diff: i, prob0:0, prob1: 0});
+    }
     var s = [];
     var it = 3000;
     var d = 0; // distance in dots
     var initialD = PlayerData.inst.playerItem.lvl / 4.5 - 0.5;
+    var prevPatern;
+
     for (var i = 0; i < it; ++i) {
         var maxd = 1;
-        var distDiff = (d) / 500;
-        if (distDiff > 9) distDiff = 9;
+        var distDiff = (d) / 200;
+        if (distDiff > diffs.length) distDiff = diffs.length;
         var currDiff = ((Math.sin(d / 50))) * (1 + distDiff * 0.05) + distDiff + initialD;
         var summ = 0;
-        for (var j = 0; j < this.patterns.length; ++j) {
-            var p = 1 / (Math.abs(this.patterns[j].diff - currDiff) + 1) * this.patterns[j].prob;
-            p = Math.pow(p, 1.6);
+
+        for (var j = 0; j < diffs.length; ++j) {
+
+            var p = (1 / (Math.abs(diffs[j].diff - currDiff) + 1));
+            p = Math.pow(p, 1.7);
             if (j > 0) {
-                this.patterns[j].prob1 = this.patterns[j - 1].prob1 + p;
-                this.patterns[j].prob0 = this.patterns[j - 1].prob1;
+                diffs[j].prob1 = diffs[j - 1].prob1 + p;
+                diffs[j].prob0 = diffs[j - 1].prob1;
             } else {
-                this.patterns[j].prob1 = p;
-                this.patterns[j].prob0 = 0;
+                diffs[j].prob1 = p;
+                diffs[j].prob0 = 0;
             }
             summ += p;
         }
 
         var r = Math.random() * summ;
+        for (var j = 0; j < diffs.length; ++j) {
+            if (r > diffs[j].prob0 && r <= diffs[j].prob1) break;
+        }
+
+        summ = 0;
+        var choosenDiff = diffs[j].diff;
+        var choosenDiffProb= diffs[j].prob1 - diffs[j].prob0;
+        //diffs[j].diff => difficulty
         for (var j = 0; j < this.patterns.length; ++j) {
+            if (this.patterns[j].diff != choosenDiff) continue;
+
+            var p = this.patterns[j].prob;
+            //p = Math.pow(p, 1.7);
+            if (prevPatern) {
+                this.patterns[j].prob1 = prevPatern.prob1 + p;
+                this.patterns[j].prob0 = prevPatern.prob1;
+            } else {
+                this.patterns[j].prob1 = p;
+                this.patterns[j].prob0 = 0;
+            }
+            prevPatern = this.patterns[j];
+            summ += p;
+        }
+        prevPatern = null;
+        var r = Math.random() * summ;
+        for (var j = 0; j < this.patterns.length; ++j) {
+            if (this.patterns[j].diff != choosenDiff) continue;
             if (r > this.patterns[j].prob0 && r <= this.patterns[j].prob1) break;
         }
 
         var inx = j;
         s += this.patterns[inx].mons;
-        var ppp = this.patterns[inx].prob1 - this.patterns[inx].prob0;
-        console.log(currDiff + " / " + d.toString() + " choose pattern with diff = " + this.patterns[inx].diff.toString() + " with p = " + ppp.toString());
-
+        var ppp = (this.patterns[inx].prob1 - this.patterns[inx].prob0) / summ;
+        //  console.log(currDiff + " / " + d.toString() + " choose pattern with diff = " + this.patterns[inx].diff.toString() + " with p = " + ppp.toString());
+        MM.debugArray.push({diff: this.patterns[inx].diff, start: d, prob: ppp, probDiff: choosenDiffProb});
         d += this.patterns[inx].mons.length;
+
+        //this.patterns[j] => choosen pattern
+
+        /*   for (var j = 0; j < this.patterns.length; ++j) {
+               if (this.patterns[j].diff == 7)
+               console;
+               var p = (1 / (Math.abs(this.patterns[j].diff - currDiff) + 1)) * this.patterns[j].prob;
+               p = Math.pow(p, 1.7);
+               if (j > 0) {
+                   this.patterns[j].prob1 = this.patterns[j - 1].prob1 + p;
+                   this.patterns[j].prob0 = this.patterns[j - 1].prob1;
+               } else {
+                   this.patterns[j].prob1 = p;
+                   this.patterns[j].prob0 = 0;
+               }
+               summ += p;
+           }
+
+           var r = Math.random() * summ;
+           for (var j = 0; j < this.patterns.length; ++j) {
+               if (r > this.patterns[j].prob0 && r <= this.patterns[j].prob1) break;
+           }
+
+         */
     }
 
     return s;
@@ -6230,6 +6501,24 @@ MM.prototype.spawnDrone = function (xp) {
     m.xp = 25 + LauncherBG.inst.distance * 0.01;
 }
 
+MM.prototype.spawnDrone2 = function (dh) {
+    var str = "dron2";
+    var m = new CDrone2(SCR_WIDTH + 100, dh, str);
+    m.gfx.anchor.x = 0.5;
+    m.vx = -4;
+    m.allowTrackSpeed = false;
+    m.gravityEnabled = false;
+    new TweenMax(m, 1, {y: m.y + 30, ease: Sine.easeInOut, yoyo: true, repeat: 10});
+    new TweenMax(m, 0.6, {vx: -12, ease: Sine.easeInOut, yoyo:true, repeat: 5});
+    m.maxHp = 100;
+    m.hp = m.maxHp;
+    m.barOffsetX = 10;
+    m.xp = 25 + LauncherBG.inst.distance * 0.01;
+}
+
+
+
+
 MM.prototype.spawnBonusGnome = function (xp) {
     var str = "enemy1_1";
     var m = new BonusMonGnome(SCR_WIDTH + 100, 150, str);
@@ -6243,7 +6532,7 @@ MM.prototype.spawnBonusGnome = function (xp) {
 
 
 MM.prototype.spawnJumpMon = function () {
-    var str = "enemy1";
+    var str = "enemy1_2";
     var m = new JumpMon(SCR_WIDTH + 120, this.monY-200, str);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
@@ -6289,10 +6578,10 @@ MM.prototype.spawnGopnick = function (xp) {
     m.jumpTimeCoef = 0.7;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
-    m.maxHp = 70;
+    m.maxHp = 60;
     m.hp = m.maxHp;
     new TweenMax(m, 1.2, {rotation: -Math.PI / 15});
-    m.longJump(1, 0.13, -5 - Math.random() * 2, -16 - Math.random() * 2, 0.95);
+    m.longJump(1, 0.2, -5 - Math.random() * 2, -16 - Math.random() * 2, 1.1, 0, 38);
     m.xp = 11 + LauncherBG.inst.distance * 0.01;
 }
 
@@ -6303,10 +6592,10 @@ MM.prototype.spawnGopnick2 = function (xp) {
     m.jumpTimeCoef = 0.6;
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
-    m.maxHp = 120;
+    m.maxHp = 80;
     m.hp = m.maxHp;
     new TweenMax(m, 1.2, {rotation: -Math.PI / 15})
-    m.longJump(1, 0.13, -5 - Math.random() * 2, -16 - Math.random() * 2, 0.95);
+    m.longJump(1, 0.2, -8 - Math.random() * 2, -21 - Math.random() * 2, 0.8, 0, 30);
     m.xp = 17 + LauncherBG.inst.distance * 0.01;
 }
 
@@ -6344,7 +6633,15 @@ MM.prototype.doStep = function () {
      }
      this.bonusQueue= this.bonusQueue.slice(1);
      */
-
+    if (!MM.totalD) MM.totalD = 0;
+    MM.totalD++;
+    for (var i = 0; i < MM.debugArray.length; ++i)
+    {
+        if (MM.debugArray[i].start == MM.totalD)
+        {
+            console.log("PAT WITH DIFF " + MM.debugArray[i].diff.toString() + " WITH P = " + MM.debugArray[i].prob.toString() + " DIFF P = " + MM.debugArray[i].probDiff.toString());
+        }
+    }
 
     this.diff = LauncherBG.inst.distance / 1000;
     if (s == "s") this.spawnSimpleMonster(5);
@@ -6354,11 +6651,13 @@ MM.prototype.doStep = function () {
     if (s == "g") this.spawnGopnick();
     if (s == "c") this.spawnCar("car", 40, 0);
     if (s == "l") this.spawnObstacle("luke", 40, 10);
-    if (s == "z") this.spawnObstacle("conus", 20, 0, -5);
+    if (s == "z") this.spawnObstacle("conus", 20, 0, -9);
     if (s == "j") this.spawnBonusGnome(5);
     if (s == "d") this.spawnDrone();
+    if (s == "h") this.spawnDrone2(120);
+    if (s == "H") this.spawnDrone2(330);
     if (s == "b") this.spawnBarrel("barrel", 20, 0, -5);
-    if (s == "x") this.spawnRandomMonster();
+    if (s == "?") this.spawnRandomMonster();
     if (s == "0") this.spawnCoin(440);
     if (s == "o") this.spawnJumpMon();
     var p = 0.014;
@@ -6370,7 +6669,7 @@ MM.prototype.doStep = function () {
 }
 
 MM.prototype.process = function () {
-    var d = window.time;
+    var d = PauseTimer.getTimer();
 
 
     var dd = 4;
@@ -6431,8 +6730,8 @@ BonusMonGnome.prototype.collide = function (obj2)
 BonusMonGnome.prototype.dealDamage = function(dmg)
 {
     CMonster.prototype.dealDamage.call(this, dmg);
-    if (window.time - this.lastDrop > 200) {
-        this.lastDrop = window.time;
+    if (PauseTimer.getTimer() - this.lastDrop > 200) {
+        this.lastDrop = PauseTimer.getTimer();
         if (gameStage.player.doubleBooster) {
             CCoin.spawnCoin(this.x, this.y, 6);
         } else CCoin.spawnCoin(this.x, this.y, 3);
@@ -6511,13 +6810,10 @@ CCoin.prototype.collide = function(obj2)
         var coin = this;
         coinGfx.animationSpeed = 0.5;
         this.updateGraphics();
-        this.gfx.onComplete = function () {
-            if (coin.gfx) {
-                if (coin.gfx)
-                    pool.Push(coin.gfx);
-                coin.destroy();
-            }
-        };
+        var obj = this;
+        obj.return2Pool = obj.gfx;
+        obj.gfx.lifeTime = 800;
+        obj.gfx.onComplete = function () {obj.destroy();}
 
     }
   //  Coin.generateTextParticle(this);
@@ -7897,9 +8193,9 @@ CBooster.prototype.onActivate = function() {
 
     this.startTime = window.time;
     this.lastTick = 0;
-    this.tf = CTextField.createTextField({tint: "0x333333", text: "AAASA", fontSize: 48, align: "center"});
+    this.tf = CTextField.createTextField({tint: "0xFFFFFF", text: "AAASA", fontSize: 80, align: "center"});
     this.tf.x = this.tf.width / 2;
-    this.tf.y = 12;
+    this.tf.y = -40;
     this.gfx.addChild(this.tf);
 }
 
@@ -7909,6 +8205,7 @@ CBooster.prototype.process = function()
         if (window.time - this.lastTick > 1000) {
             this.lastTick = window.time;
             var secs = Math.round(this.duration - (window.time - this.startTime) / 1000);
+            if (secs < 0) secs = 0;
             this.tf.text = secs.toString();
             this.tf.updateText();
         }
@@ -8004,7 +8301,7 @@ CSupermanBooster.prototype.onActivate = function()
     }});
     gameStage.player.jumping = true;
     gameStage.player.gravityEnabled = false;
-    gameStage.player.jumpBoost = false;
+   // gameStage.player.jumpBoost = false;
 
     TweenMax.delayedCall(this.duration, function(){
         gameStage.player.jumping = false;
@@ -8207,7 +8504,6 @@ PlayerData.prototype.equipItem = function(item)
 
 
 PlayerData.prototype.gainExp = function(amount) {
-   console.log("XP " + amount.toString());
    this.playerItem.xp += amount;
    var c = this.playerItem.xp;
    var needed = this.xpLevel[this.playerItem.lvl].xp;
@@ -8346,7 +8642,7 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
 
    if (complete)
    {
-      this.savePlayerAchs();
+      this.savePlayerAchs(this.achs_progress[j]);
       this.showAch(this.achs[i]);
    }
    return complete;
@@ -8388,7 +8684,7 @@ PlayerData.prototype.updateEnergy = function()
       shopStage.updateStatsPanel();
 
    }
-   console.log("UPD ENERGY");
+
    var t = this;
    setTimeout(function(){t.updateEnergy();}, this.delayEnergyMS);
 }
@@ -8537,10 +8833,7 @@ PlayerData.prototype.loadData = function(cb)
                     equipped: eq
                  }
              );
-
-
-
-             PlayerData.inst.savePlayerItems();
+            // PlayerData.inst.savePlayerItems();
           }
 
           PlayerData.inst.loadCount ++;
@@ -8574,12 +8867,14 @@ PlayerData.prototype.savePlayerData = function()
    this.savePlayerAchs();
 }
 
-PlayerData.prototype.savePlayerAchs = function()
+PlayerData.prototype.savePlayerAchs = function(onlyOne)
 {
-   for (var i = 0; i < PlayerData.inst.achs_progress.length; ++i)
+   for (var i = 0; i < PlayerData.inst.achs_progress.length; ++i) {
+      if (onlyOne && onlyOne.id != PlayerData.inst.achs_progress[i].id) continue;
       window.azureclient.getTable("tb_ach_player").update(PlayerData.inst.achs_progress[i]).done(function (result) {
       }, function (err) {
       });
+   }
 }
 
 
@@ -9202,7 +9497,38 @@ dbInit = function() {
         loginCallback(results.result);
     }, function(error) {
     });
-};var loadingState = "prepreload";
+};PauseTimer = function()
+{
+}
+
+PauseTimer.paused = false;
+PauseTimer.pauseStartedAt = 0;
+PauseTimer.totalPauseTime = 0;
+
+PauseTimer.getTimer = function()
+{
+    return window.time - PauseTimer.totalPauseTime;
+}
+PauseTimer.isPaused = function()
+{
+    return PauseTimer.paused;
+}
+
+PauseTimer.pause = function()
+{
+    PauseTimer.pauseStartedAt = PauseTimer.getTimer();
+    TweenMax.pauseAll();
+    PauseTimer.paused = true;
+}
+
+PauseTimer.resume = function()
+{
+    if (!PauseTimer.paused) return;
+    PauseTimer.totalPauseTime = PauseTimer.totalPauseTime + (window.time - PauseTimer.pauseStartedAt);
+    TweenMax.resumeAll();
+    PauseTimer.paused = false;
+}
+var loadingState = "prepreload";
 
 window.openSponsorWindow = null;
 window.focus();
@@ -9223,6 +9549,7 @@ window.SCR_SCALE = 1.0;
 window.FRAME_RATE = 60;
 window.renderer = new PIXI.autoDetectRenderer(SCR_WIDTH, SCR_HEIGHT);
 
+$(document).bind('contextmenu', function (){return false;});
 
 VK.init({apiId: 4654201}, function () {
     console.log("INIT OK");

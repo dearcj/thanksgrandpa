@@ -275,6 +275,18 @@
             <filename>../../../../dedgame/fight screen/plane_trace2.png</filename>
             <filename>../../../../dedgame/fight screen/plane.png</filename>
             <filename>../../../../dedgame/fight screen/barrel.png</filename>
+            <filename>../../../../dedgame/fight screen/key.png</filename>
+            <filename>../../../../dedgame/fight screen/enemies/dron2.png</filename>
+            <filename>../../../../dedgame/fight screen/enemies/enemy1_2.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0002.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0003.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0004.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0005.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0006.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0007.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0008.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0009.png</filename>
+            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0001.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
