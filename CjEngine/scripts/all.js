@@ -5257,12 +5257,12 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.levCycles = [];
     this.gfx = new PIXI.DisplayObjectContainer();
     SM.inst.bg.addChild(this.gfx);
-    this.nullSpeed = 7.4;
+    this.nullSpeed = 10.4;
    //  var inx = CObj.objects.indexOf(this);
     //  CObj.objects.splice(inx);
     this.distance = 0;
     this.incDist = 50;
-    this.speedUpCoef = 0.08;
+    this.speedUpCoef = 0.14;
     this.layersSpeed = [0, 0.1, 0.14, 0.65, 0.65, 1, 1];
     this.ol = new PIXI.DisplayObjectContainer();
     this.pllayer = new PIXI.DisplayObjectContainer();
@@ -5371,7 +5371,7 @@ LauncherBG.prototype.process = function (fake) {
 
             this.maxVelocity += this.speedUpCoef;
             this.speedUpCoef *= 0.95;
-           // console.log("SPEED " + this.maxVelocity.toString());
+            console.log("SPEED " + this.maxVelocity.toString());
         }
     }
 
@@ -6208,7 +6208,7 @@ Boss1.prototype.fire = function()
 };MM = function () {
     this.patterns =
         [
-               {mons: "f..f00szf..000", diff: 1, prob: 1},
+             {mons: "f..f00szf..000", diff: 1, prob: 1},
                 {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
                 {mons: ".s..s..s..c", diff: 1, prob: 1},
@@ -6260,7 +6260,7 @@ Boss1.prototype.fire = function()
         ];
 
 
-    this.bosses = [{cls: Boss2, dist: 1000}, {cls: Boss2, dist: 2000}];
+    this.bosses = [{cls: Boss1, dist: 1000}, {cls: Boss2, dist: 2000}];
     // c l z - преграды
     //s - монстр
     this.monY = 360;
@@ -6327,7 +6327,15 @@ MM.prototype.spawnPlane = function () {
 MM.prototype.generateMonsterQueue = function () {
     MM.debugArray = [];
     var diffs = []
-    for (var i = 1; i <= 9; ++i)
+    var maxDiff = 0;
+    for (var i = 0 ;i < this.patterns.length; ++i)
+    {
+        if (this.patterns[i].diff > maxDiff)
+        {
+            maxDiff = this.patterns[i].diff;
+        }
+    }
+    for (var i = 1; i <= maxDiff; ++i)
     {
         diffs.push({diff: i, prob0:0, prob1: 0});
     }
@@ -6660,7 +6668,7 @@ MM.prototype.doStep = function () {
     if (s == "?") this.spawnRandomMonster();
     if (s == "0") this.spawnCoin(440);
     if (s == "o") this.spawnJumpMon();
-    var p = 0.014;
+
     var d = 5000;
 
     if (this.monsterQueue.length == 0) {
@@ -6669,16 +6677,16 @@ MM.prototype.doStep = function () {
 }
 
 MM.prototype.process = function () {
+
     var d = PauseTimer.getTimer();
-
-
-    var dd = 4;
+    var dd = 4.5;
     var st = Math.floor(LauncherBG.inst.distance / dd);
 
     if (Math.floor(LauncherBG.inst.distance) % 250 == 0 && Math.random() < 0.5 && d - this.lastSpawnPlane > 60000) {
         this.spawnPlane();
         this.lastSpawnPlane = d;
     }
+
     if (st != this.prevS) {
         if (!this.currentBoss && this.bosses.length > 0 && (this.prevS * dd - this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist)) {
             var b = this.bosses.shift();
