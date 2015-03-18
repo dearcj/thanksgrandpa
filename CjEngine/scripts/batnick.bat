@@ -13,6 +13,7 @@ Stages\AchStage.js + ^
 Stages\CharStage.js + ^
 Stages\ShopStage.js + ^
 Stages\ScoreStage.js + ^
+Stages\ComixStage.js + ^
 Utils\ZPool.js + ^
 Objects\CObj.js + ^
 Objects\CBomb.js + ^

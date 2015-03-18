@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>json</string>
+        <string>sparrow</string>
         <key>textureFileName</key>
         <filename>pussyatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>pussyatlas.json</filename>
+        <filename>pussyatlas.xml</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -287,6 +287,9 @@
             <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0008.png</filename>
             <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0009.png</filename>
             <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0001.png</filename>
+            <filename>../../../../dedgame/fight screen/sauron.png</filename>
+            <filename>../../../MountainSpaghetti/img/Mountain/mon20002.png</filename>
+            <filename>../../../MountainSpaghetti/img/Mountain/mon20001.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -1320,8 +1320,7 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.scoreObj = CObj.getById("score");
     gameStage.updateScore();
     gameStage.worldSpeed = 1;
-
-    gameStage.createPools();
+     gameStage.createPools();
     gameStage.distText = CObj.getById("dist");
 
     gameStage.visibleAllText=  function(v)
@@ -1397,6 +1396,9 @@ GameStage.prototype.onShowContinue = function () {
     stage.mouseup = fup;
 */
     gameStage.updateXP();
+    LauncherBG.inst.maxVelocity = 0.1;
+
+    new TweenMax(LauncherBG.inst, 3, {maxVelocity: 10, ease: Sine.easeIn});
 
     /*
      gameStage.muteBtn = CObj.getById("mutebtn");
@@ -3059,6 +3061,170 @@ ScoreStage.prototype.onShowContinue = function()
 
 
 ScoreStage.prototype.process = function() {
+    CObj.processAll();
+};function ComixStage() {
+    CustomStage.apply(this);
+}
+
+extend(ComixStage, CustomStage);
+
+ComixStage.prototype.onShow = function () {
+    comixStage.comixContainer = new PIXI.DisplayObjectContainer();
+    SM.inst.ol.addChild(comixStage.comixContainer);
+
+    this.buttonNext = new CButton(SCR_WIDTH - 60, SCR_HEIGHT - 60, "next button");
+    this.buttonNext.gfx.width = 80;
+    this.buttonNext.gfx.scale.y =  this.buttonNext.gfx.scale.x;
+    this.buttonNext.fontSize = 17;
+
+    this.buttonNext.hover = false;
+
+    this.buttonNext.click = function () {
+        comixStage.goNext();
+    };
+    this.buttonNext.init();
+    this.buttonNext.gfx.interactive = true;
+
+    this.comixData = [
+        {
+        frame: "ded clicking",
+        duration: 5.5,
+        objects:
+        [
+            {tex: "1top_frame.png", s1: [1.5, 1.5], s2: [1, 1], rot1: -0.05, rot2: 0, vx: 0, vy: -0.1, p1: [SCR_WIDTH/2, 15 + SCR_HEIGHT/4 - 450], p2: [SCR_WIDTH/2, 15 + SCR_HEIGHT/4], delay: 0.1, tweenTime: 0.4, ease: Back.easeOut},
+            {tex: "1buttom_frame.png", s1: [1.5, 1.5], s2: [1, 1], rot1: 0.05, rot2: 0, vx: 0.0, vy: -0.05, p1: [SCR_WIDTH/2- SCR_WIDTH, 0.75*SCR_HEIGHT- 20 + 400], p2: [SCR_WIDTH/2 - 25, 0.75*SCR_HEIGHT - 20], delay: 1.1, tweenTime: 0.55, ease: Sine.easeIn},
+            {tex: "1buttom_click.png", rot1: -1, rot2: 0, vx: 0.0, vy: -0.08, s1: [0.1, 0.1],s2:[1,1],p1: [550, 300], p2: [550, 300 - 10], delay: 1.9, alphaHide: 1,  tweenTime: 0.15, ease: Sine.easeIn},
+            {tex: "1buttom_click.png", rot1: -1, rot2: 0, vx: 0.0, vy: -0.08, s1: [0.1, 0.1],s2:[1,1],p1: [480, 360], p2: [480, 360 - 10], delay: 2, alphaHide: 1, tweenTime: 0.15, ease: Sine.easeIn},
+            {tex: "1buttom_click.png", rot1: -1, rot2: 0, vx: 0.0, vy: -0.08, s1: [0.1, 0.1],s2:[1,1],p1: [520, 390], p2: [520, 390 - 10], delay: 2.34, alphaHide: 1, tweenTime: 0.15, ease: Sine.easeIn},
+            {tex: "1top_bubble.png", vx: 0.0, vy: -0.08, s1: [0.1, 0.1],s2:[1,1],p1: [540, 80], p2: [540, 80 - 10], delay: 3, alphaHide: 2.5, tweenTime: 0.15, ease: Sine.easeIn}
+        ]},
+        {
+            frame: "screen",
+            duration: 5.5,
+            objects:
+                [
+                    {tex: "2frame.png", s1: [1.2, 1.2], s2: [1.1,1.1], vx: 0, vy: -0.2, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 15], delay: 0., tweenTime: 0.6, ease: Back.easeOut},
+                    {tex: "2frame_comment1.png", vx: 0, vy: -0.1, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + 110+ 150], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 110], delay: 1.4, tweenTime: 0.4, ease: Back.easeOut},
+                    {tex: "2frame_comment2.png", vx: 0, vy: -0.1, p1: [SCR_WIDTH/2 + 20, SCR_HEIGHT/2 + 155+ 150], p2: [SCR_WIDTH/2 + 20, SCR_HEIGHT/2 + 155], delay: 1.88, tweenTime: 0.4, ease: Back.easeOut},
+                    {tex: "2frame_comment3.png", vx: 0, vy: -0.1, p1: [SCR_WIDTH/2 + 20, SCR_HEIGHT/2 + 200+ 150], p2: [SCR_WIDTH/2 + 20, SCR_HEIGHT/2 + 200], delay: 2.3, tweenTime: 0.35, ease: Back.easeOut}
+                ]},
+        {
+            frame: "anger",
+            duration: 5.5,
+            objects:
+                [
+                    {tex: "StoryBackground.png", vx: 0, vy: 0, s1: [150,150], p1: [SCR_WIDTH/2, SCR_HEIGHT/2+ SCR_HEIGHT*1.3], p2: [SCR_WIDTH/2, SCR_HEIGHT/2], delay: 0., tweenTime: 0.3, ease: Sine.easeIn},
+                    {tex: "3frame_top.png", rot1: 2, rot2: 0, vx:0, vy: 0.15, p1: [SCR_WIDTH/2 + 600, SCR_HEIGHT/2 - SCR_HEIGHT/4+700], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 - 120], delay: 0.45, tweenTime: 0.6, ease: Back.easeOut},
+                    {tex: "3top_frame_signs.png", va: -0.0004, rot1: -2, rot2: 0, vx:0, vy: -0.15, p1: [SCR_WIDTH/2 + 600, SCR_HEIGHT/2 - SCR_HEIGHT/4+700], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 - 120], delay: 0.45, tweenTime: 0.6, ease: Back.easeOut},
+                    {tex: "3frame_bottom.png", rot1: 0.05, rot2: 0, vx: 0, vy: -0.15, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 - SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 138], delay: 2.7, tweenTime: 0.33, ease: Back.easeOut}
+                    /* {tex: "2frame_comment2.png", vx: 0, vy: -0.1, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 15], delay: 0., tweenTime: 0.6, ease: Back.easeOut},
+                     {tex: "2frame_comment3.png", vx: 0, vy: -0.1, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 15], delay: 0., tweenTime: 0.6, ease: Back.easeOut},*/
+                ]},
+        {
+            frame: "way of war",
+            duration: 5.5,
+            objects:
+                [
+                    {tex: "StoryBackground.png", vx: 0, vy: 0, s1: [150,150], p1: [SCR_WIDTH/2, SCR_HEIGHT/2+ SCR_HEIGHT*1.3], p2: [SCR_WIDTH/2, SCR_HEIGHT/2], delay: 0., tweenTime: 0.3, ease: Sine.easeIn},
+                    {tex: "4top_frame2.png", rot1: 0.5, vx:0, vy: 0.05, s1: [3,3], s2: [1,1], p1: [600+500, 160-600], p2: [600+5, 160], delay: 0.2, tweenTime: 0.45, ease: Back.easeOut},
+                    {tex: "4top_frame1.png", vx:0, vy: 0.07,  s1: [3,3], s2: [1,1], p1: [230+500, 180-600], p2: [230-5, 180], delay: 2, tweenTime: 0.45, ease: Back.easeOut},
+                    {tex: "4frame_bottom.png", s1: [2, 2], s2: [0.99, 0.99], vx: 0, vy: -0.05, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 138], delay:3.3, tweenTime: 0.5, ease: Sine.easeOut}
+                    /* {tex: "2frame_comment2.png", vx: 0, vy: -0.1, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 15], delay: 0., tweenTime: 0.6, ease: Back.easeOut},
+                     {tex: "2frame_comment3.png", vx: 0, vy: -0.1, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 15], delay: 0., tweenTime: 0.6, ease: Back.easeOut},*/
+                ]}
+    ];
+    comixStage.goNext();
+}
+
+ComixStage.prototype.goNext = function () {
+    if (comixStage.dcNext) comixStage.dcNext.kill();
+
+  /*  while (this.comixContainer.children.length > 0)
+    {
+        rp(this.comixContainer.children[0]);
+    }
+*/
+    TweenMax.killAll(true, true, true);
+    var p = this.comixData.shift();
+    if (!p)
+    {
+        SM.inst.openStage(charStage);
+    }
+    comixStage.dcNext = TweenMax.delayedCall(p.duration, function(){comixStage.goNext()});
+    for (var i = 0; i < p.objects.length;++i)
+    {
+        var obj = p.objects[i];
+        var spr = crsp(obj.tex);
+        comixStage.comixContainer.addChild(spr);
+        spr.visible = false;
+
+        if (!obj.rot1) obj.rot1 = 0;
+        if (!obj.rot2) obj.rot2 = 0;
+
+        if (!obj.p1) obj.p1 = [0,0];
+        if (!obj.p2) obj.p2 = obj.p1;
+        if (!obj.s1) obj.s1 = [1,1];
+        if (!obj.s2) obj.s2 = obj.s1;
+        var scaleCoef = 0.55;
+        spr.scale.x = obj.s1[0]*scaleCoef;
+        spr.scale.y = obj.s1[1]*scaleCoef;
+        spr.rotation = obj.rot1;
+        spr.x = obj.p1[0];
+        spr.y = obj.p1[1];
+        spr.vx = 0;
+        spr.vy = 0;
+        spr.va = 0;
+
+        if (!obj.ease) obj.ease = Sine.easeOut;
+        new TweenMax(spr.scale, obj.tweenTime, {x: obj.s2[0]*scaleCoef, y: obj.s2[1]*scaleCoef, delay: obj.delay});
+
+        function tween2(clip, objInner)
+        {
+            new TweenMax(clip, objInner.tweenTime, {ease: objInner.ease, rotation: objInner.rot2 , x: objInner.p2[0], y: objInner.p2[1], delay: objInner.delay, onComplete: function()
+            {
+                clip.vx = objInner.vx;
+                clip.vy = objInner.vy;
+                clip.va = objInner.va;
+            }});
+
+        }
+        tween2(spr, obj);
+        if (!obj.delay) obj.delay = 0;
+
+        {
+            setVisible = function(x)
+            {
+                if (obj.alphaHide)
+                new TweenMax(x, 0.1, {delay: obj.alphaHide + obj.delay, alpha: 0.})
+
+                TweenMax.delayedCall(obj.delay, function(){x.visible = true;})
+            }
+            setVisible(spr);
+            //TweenMax.delayedCall(obj.delay, function(spr){spr.visible = true;})
+        }
+    }
+}
+
+    ComixStage.prototype.onHide = function (newStage) {
+    var x = PIXI.TextureCache["2frame.png"];
+    x.destroy(true);
+
+    rp (comixStage.comixContainer);
+    comixStage.comixContainer = null;
+        CObj.destroyAll();
+}
+
+ComixStage.prototype.process = function () {
+
+    for (var i = 0; i < this.comixContainer.children.length; ++i)
+    {
+        this.comixContainer.children[i].x +=this.comixContainer.children[i].vx;
+        this.comixContainer.children[i].y +=this.comixContainer.children[i].vy;
+        this.comixContainer.children[i].rotation +=this.comixContainer.children[i].va;
+        this.comixContainer.children[i].vx *= 0.986;
+        this.comixContainer.children[i].vy *= 0.986;
+        this.comixContainer.children[i].va *= 0.986;
+    }
     CObj.processAll();
 };ZPool = function () {
     this.objects = {};
@@ -8666,7 +8832,13 @@ PlayerData.prototype.loadEnd = function()
     //  window.loadingState = "game";
       assetsButSoundsLoaded();
    }
-   SM.inst.openStage(charStage);
+
+    SM.inst.openStage(comixStage);
+   /*if (vkparams.registered)
+   SM.inst.openStage(charStage); else
+   SM.inst.openStage(comixStage);
+   */
+
 }
 
 PlayerData.prototype.updateEnergy = function()
@@ -9498,7 +9670,8 @@ dbInit = function() {
         method: "post"
     }).done(function (results) {
         var message = results.result;
-        PlayerData.pid = results.result.userId.split(':')[1];;
+        vkparams.registered = results.result.registered;
+        PlayerData.pid = results.result.userId.split(':')[1];
 
         azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
         vkparams.id = results.result.id;
@@ -9647,6 +9820,7 @@ function preloaderLoaded() {
         "levels/levchar.json",
         "levels/levscore.json",
         "levels/upperPanel.json",
+        "imgtps/comix.json",
         "imgtps/bg.json",
         "imgtps/guiatlas.json",
         "imgtps/pussyatlas.json",
@@ -9665,6 +9839,7 @@ function preloaderLoaded() {
 
     PIXI.scaleModes.DEFAULT = 0;
 
+    window.comixStage = new ComixStage();
     window.scoreStage = new ScoreStage();
     window.gameStage = new GameStage();
     window.mainMenu = new MainMenu();
