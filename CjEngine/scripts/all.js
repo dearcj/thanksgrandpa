@@ -3126,8 +3126,8 @@ ComixStage.prototype.onShow = function () {
             objects:
                 [
                     {tex: "StoryBackground.png", vx: 0, vy: 0, s1: [150,150], p1: [SCR_WIDTH/2, SCR_HEIGHT/2+ SCR_HEIGHT*1.3], p2: [SCR_WIDTH/2, SCR_HEIGHT/2], delay: 0., tweenTime: 0.3, ease: Sine.easeIn},
-                    {tex: "4top_frame2.png", rot1: 0.5, vx:0, vy: 0.05, s1: [3,3], s2: [1,1], p1: [600+500, 160-600], p2: [600-5, 160], delay: 0.2, tweenTime: 0.45, ease: Back.easeOut},
-                    {tex: "4top_frame1.png", vx:0, vy: 0.07,  s1: [3,3], s2: [1,1], p1: [230+500, 180-600], p2: [230+5, 180], delay: 2, tweenTime: 0.45, ease: Back.easeOut},
+                    {tex: "4top_frame2.png", rot1: 0.5, vx:0, vy: 0.05, s1: [3,3], s2: [1,1], p1: [600+500, 160-600], p2: [600+5, 160], delay: 0.2, tweenTime: 0.45, ease: Back.easeOut},
+                    {tex: "4top_frame1.png", vx:0, vy: 0.07,  s1: [3,3], s2: [1,1], p1: [230+500, 180-600], p2: [230-5, 180], delay: 2, tweenTime: 0.45, ease: Back.easeOut},
                     {tex: "4frame_bottom.png", s1: [2, 2], s2: [0.99, 0.99], vx: 0, vy: -0.05, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 138], delay:3.3, tweenTime: 0.5, ease: Sine.easeOut},
                     {tex: "4bottom_bubble.png", s1: [2, 2], s2: [1.05,1.05], vx: 0, vy: -0.05, p1: [SCR_WIDTH/2 - 50, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2 - 50, SCR_HEIGHT/2 + 138], delay:3.36, tweenTime: 0.5, ease: Sine.easeOut}
                     /* {tex: "2frame_comment2.png", vx: 0, vy: -0.1, p1: [SCR_WIDTH/2, SCR_HEIGHT/2 + SCR_HEIGHT], p2: [SCR_WIDTH/2, SCR_HEIGHT/2 + 15], delay: 0., tweenTime: 0.6, ease: Back.easeOut},
@@ -3151,7 +3151,7 @@ ComixStage.prototype.goNext = function () {
     {
         SM.inst.openStage(charStage);
     }
-    comixStage.dcNext = TweenMax.delayedCall(p.duration, function(){comixStage.goNext()});
+  //  comixStage.dcNext = TweenMax.delayedCall(p.duration, function(){comixStage.goNext()});
     for (var i = 0; i < p.objects.length;++i)
     {
         var obj = p.objects[i];
@@ -3166,7 +3166,7 @@ ComixStage.prototype.goNext = function () {
         if (!obj.p2) obj.p2 = obj.p1;
         if (!obj.s1) obj.s1 = [1,1];
         if (!obj.s2) obj.s2 = obj.s1;
-        var scaleCoef = 1;
+        var scaleCoef = 1.1;
         spr.scale.x = obj.s1[0]*scaleCoef;
         spr.scale.y = obj.s1[1]*scaleCoef;
         spr.rotation = obj.rot1;
@@ -4834,8 +4834,8 @@ function CPlayer(in_x,in_y,textname,in_body){
 
     /*this.boostPower = 1.035;
     this.maxBoostVel = -22.5;*/
-    this.initialJumpSpeed = -19.5;
-    this.gravPower = 0.94;
+    this.initialJumpSpeed = -21.5;
+    this.gravPower = 1.3;
     this.gfx = this.createDedGraphics();
     this.fireAngle = 0;
     this.weapon = gameStage.curweapon;
