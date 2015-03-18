@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:af00bf2b7d737f59e80c639bf4e39670$ -->
+<TextureAtlas imagePath="comix.png">
+    <SubTexture name="1buttom_click" x="2870" y="650" width="219" height="140"/>
+    <SubTexture name="1buttom_frame" x="1607" y="3" width="1513" height="643"/>
+    <SubTexture name="1top_bubble" x="3124" y="329" width="895" height="326"/>
+    <SubTexture name="1top_frame" x="3" y="1697" width="1428" height="576"/>
+    <SubTexture name="2frame" x="3" y="623" width="1430" height="1070"/>
+    <SubTexture name="2frame_comment1" x="2865" y="1923" width="590" height="97"/>
+    <SubTexture name="2frame_comment2" x="2869" y="1239" width="656" height="84"/>
+    <SubTexture name="2frame_comment3" x="2869" y="1825" width="645" height="94"/>
+    <SubTexture name="3frame_bottom" x="1435" y="1865" width="1426" height="579"/>
+    <SubTexture name="3frame_top" x="1437" y="1234" width="1428" height="627"/>
+    <SubTexture name="3top_frame_signs" x="3" y="3" width="1600" height="616"/>
+    <SubTexture name="4bottom_bubble" x="3124" y="3" width="960" height="322"/>
+    <SubTexture name="4frame_bottom" x="1437" y="650" width="1429" height="580"/>
+    <SubTexture name="4top_frame1" x="3093" y="659" width="767" height="576"/>
+    <SubTexture name="4top_frame2" x="2869" y="1327" width="655" height="494"/>
+    <SubTexture name="head" x="3529" y="1239" width="312" height="267"/>
+    <SubTexture name="next button" x="2870" y="794" width="190" height="118"/>
+</TextureAtlas>
