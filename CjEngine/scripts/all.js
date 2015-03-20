@@ -9727,10 +9727,10 @@ uploadPhoto = function(id){
 
     },function(r)
     {
-
+        var uplurl = r.response.upload_url.replace('http://','https://');
         $.ajax({
             type: "POST",
-            url: r.response.upload_url,
+            url: uplurl,
             data: {photo: s},
             success: function(res)
             {
