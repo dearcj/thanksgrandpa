@@ -6,16 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/pussyatlas.png" afterPath="$PROJECT_DIR$/imgtps/pussyatlas.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/batnick.bat" afterPath="$PROJECT_DIR$/CjEngine/scripts/batnick.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.tps" afterPath="$PROJECT_DIR$/imgtps/guiatlas.tps" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/levels/levelgameover.json" afterPath="$PROJECT_DIR$/levels/levelgameover.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/pussyatlas.json" afterPath="$PROJECT_DIR$/imgtps/pussyatlas.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/pussyatlas.xml" afterPath="$PROJECT_DIR$/imgtps/pussyatlas.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/tps.tps" afterPath="$PROJECT_DIR$/imgtps/tps.tps" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -61,7 +51,7 @@
       <file leaf-file-name="GameStage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16587">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1558" max-vertical-offset="16587">
               <caret line="82" column="49" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
               <folding />
             </state>
@@ -91,7 +81,7 @@
       <file leaf-file-name="dbinit.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9424">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3021" max-vertical-offset="9424">
               <caret line="159" column="31" selection-start-line="159" selection-start-column="31" selection-end-line="159" selection-end-column="31" />
               <folding />
             </state>
@@ -111,7 +101,7 @@
       <file leaf-file-name="PhotoUploader.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="380">
+            <state vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="380">
               <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
               <folding />
             </state>
@@ -121,8 +111,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72727275" vertical-offset="0" max-vertical-offset="2185">
-              <caret line="32" column="43" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.18181819" vertical-offset="418" max-vertical-offset="2185">
+              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -261,9 +251,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -478,6 +465,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -531,10 +521,14 @@
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -542,10 +536,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:63342/thanksgrandpa/index.html">
@@ -586,12 +576,6 @@
       <created>1417091906056</created>
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
-    </task>
-    <task id="LOCAL-00290" summary="0">
-      <created>1425037753708</created>
-      <option name="number" value="00290" />
-      <option name="project" value="LOCAL" />
-      <updated>1425037753708</updated>
     </task>
     <task id="LOCAL-00291" summary="0">
       <created>1425038358565</created>
@@ -881,7 +865,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426857645408</updated>
     </task>
-    <option name="localTasksCounter" value="339" />
+    <task id="LOCAL-00339" summary="0">
+      <created>1426887367407</created>
+      <option name="number" value="00339" />
+      <option name="project" value="LOCAL" />
+      <updated>1426887367408</updated>
+    </task>
+    <option name="localTasksCounter" value="340" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -913,22 +903,22 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46179774" sideWeight="0.2994924" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12083333" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1818766" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3021978" sideWeight="0.5006345" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1844473" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14213198" sideWeight="0.50080514" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.326257" sideWeight="0.5006345" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32601535" sideWeight="0.49936548" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="962" y="168" width="502" height="201" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3021978" sideWeight="0.5006345" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.58502537" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3993644" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1124,13 +1114,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/source.map">
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9655173" vertical-offset="0" max-vertical-offset="266">
           <caret line="6" column="7401" selection-start-line="6" selection-start-column="7401" selection-end-line="6" selection-end-column="7401" />
         </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js">
@@ -1144,7 +1134,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2033" max-vertical-offset="7619">
           <caret line="128" column="13" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1243,7 +1232,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1140" max-vertical-offset="1843">
           <caret line="70" column="1" selection-start-line="70" selection-start-column="1" selection-end-line="73" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1251,7 +1239,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="417" max-vertical-offset="1007">
           <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1259,7 +1246,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3249">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1307,7 +1293,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0450237" vertical-offset="87" max-vertical-offset="1349">
           <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1345,8 +1330,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72727275" vertical-offset="0" max-vertical-offset="2185">
-          <caret line="32" column="43" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.18181819" vertical-offset="418" max-vertical-offset="2185">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
           <folding />
         </state>
       </provider>
