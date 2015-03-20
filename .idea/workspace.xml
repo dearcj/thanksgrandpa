@@ -94,7 +94,7 @@
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.35225955" vertical-offset="0" max-vertical-offset="1178">
-              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+              <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -570,12 +570,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00304" summary="0">
-      <created>1425419117217</created>
-      <option name="number" value="00304" />
-      <option name="project" value="LOCAL" />
-      <updated>1425419117217</updated>
-    </task>
     <task id="LOCAL-00305" summary="0">
       <created>1425419553948</created>
       <option name="number" value="00305" />
@@ -864,7 +858,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426892438257</updated>
     </task>
-    <option name="localTasksCounter" value="353" />
+    <task id="LOCAL-00353" summary="0">
+      <created>1426893282596</created>
+      <option name="number" value="00353" />
+      <option name="project" value="LOCAL" />
+      <updated>1426893282596</updated>
+    </task>
+    <option name="localTasksCounter" value="354" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1134,6 +1134,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="125930" max-vertical-offset="191539">
           <caret line="6638" column="16" selection-start-line="6638" selection-start-column="16" selection-end-line="6638" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1324,7 +1325,7 @@
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35225955" vertical-offset="0" max-vertical-offset="1178">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
           <folding />
         </state>
       </provider>
