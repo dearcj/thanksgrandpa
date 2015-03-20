@@ -9718,7 +9718,7 @@ dbInit = function() {
 
 uploadPhoto = function(id){
 
-    VK.api('photos.getWallUploadServer',{ uid:  id},function (resp){
+    VK.api('photos.getUploadServer',{ uid:  id},function (resp){
         console.log("GET WALL UPLOAD SERV");
 
     },function(err)
