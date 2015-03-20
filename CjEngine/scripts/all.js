@@ -791,7 +791,7 @@ GameStage.prototype.process = function () {
 
     var d = Math.floor(LauncherBG.inst.distance);
     if (gameStage.distText)
-    gameStage.distText.text = d.toString();
+    gameStage.distText.text = d.toString() + " м.";
     MM.inst.process();
 }
 
@@ -1115,7 +1115,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
         var arr = results.result;
 
         for (var i = 0; i < Math.min(5, arr.length); ++i) {
-            CObj.getById("tf" + (i + 1).toString() + "2").text = arr[i].name + " " + arr[i].last_name;
+            CObj.getById("tf" + (i + 1).toString() + "2").text = (arr[i].name + " " + arr[i].last_name).substring(0, 12);
             CObj.getById("tf" + (i + 1).toString() + "3").text = arr[i].maxdistance.toString();
             if (rec > arr[i].maxdistance) {
                 CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
@@ -1842,7 +1842,7 @@ CharStage.prototype.onHide = function (newStage) {
 
 CharStage.prototype.createFriendsPanel = function () {
     var panel = new PIXI.DisplayObjectContainer();
-
+   // vkparams.friendsIngame = [{name: "Хуй", last_name: "Залупов", vkapi: 66}];
     var fr = "";
     var clips = [];
     var skip = charStage.skipFriends;
@@ -1850,12 +1850,16 @@ CharStage.prototype.createFriendsPanel = function () {
         var frClpBtn = new CButton(63 + (i - skip) * 100, 5, "add friend");
         var friendClip = frClpBtn.gfx;//new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.parent.removeChild(friendClip);
+        frClpBtn.fontFamily = "dedgamedesc";
+        frClpBtn.fontSize = 14;
+        frClpBtn.tint = 0xffffff;
         friendClip.anchor.x = 0.5;
         friendClip.anchor.y = 0.5;
         frClpBtn.hover = true;
+        frClpBtn.deltaHoverY = 17;
         if (vkparams.friendsIngame && i < vkparams.friendsIngame.length)
-            frClpBtn.text = vkparams.friendsIngame[i].name + vkparams.friendsIngame[i].last_name;
-
+            frClpBtn.text = vkparams.friendsIngame[i].name + " " + vkparams.friendsIngame[i].last_name;
+        frClpBtn.addToSameLayer = true;
         frClpBtn.init();
         panel.addChild(friendClip);
         if (!vkparams.friendsIngame || i >= vkparams.friendsIngame.length) {
@@ -3461,7 +3465,7 @@ CObj.prototype.process = function(){
     }
 
     if (this.allowTrackSpeed)
-        this.vx = -LauncherBG.inst.maxVelocity;//this.vx*0.5 + (
+        this.x -= LauncherBG.inst.maxVelocity;//this.vx*0.5 + (
 
     this.updateGraphics();
 };
@@ -4118,20 +4122,27 @@ CButton.prototype.updateGraphics=function()
     if (this.doRemove) return;
     CObj.prototype.updateGraphics.call(this);
     if (this.gfx && this.textField) {
-        if (!this.addToSameLayer)
-        {
             var ddx = 0;
             var ddy = 0;
             if (this.hover)
             {
-               if (this.y > SCR_HEIGHT - 100)
-                {
-                    ddy = -50;
-                } else ddy = 50;
+                if (this.deltaHoverY) {
 
+                    ddy = this.deltaHoverY;
+                } else {
+                    if (this.y > SCR_HEIGHT - 100) {
+                        ddy = -50;
+                    } else ddy = 50;
+                }
             }
+        if (!this.addToSameLayer)
+        {
             this.textField.y = this.gfx.y - this.textField.height * 0.7 + ddy;// + this.textField.height / 4;// - this.gfx.height * 0.25;
             this.textField.x = this.gfx.x - this.textField.width / 2;// - this.gfx.width * 0.25;
+        } else
+        {
+            this.textField.y = this.textField.height * 0.7 + ddy;// + this.textField.height / 4;// - this.gfx.height * 0.25;
+        //    this.textField.x = 0;// - this.gfx.width * 0.25;
         }
     }
 }
@@ -4944,7 +4955,6 @@ CPlayer.prototype.createDedGraphics = function()
     this.rshSlot.data.boneData.rotation = CPlayer.rhRot;
     this.lshSlot.data.boneData.rotation = CPlayer.lhRot;
 
-
     g.skeleton.setAttachment("body", "body");
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
     {
@@ -4963,7 +4973,6 @@ CPlayer.prototype.createDedGraphics = function()
 
     return g;
 }
-
 
 CPlayer.prototype.reveal = function()
 {
@@ -5137,7 +5146,7 @@ CPlayer.prototype.process = function()
         }else
 
         if (gameStage.curweapon == w_ak74) {
-            dx = 0;
+            dx = 220;
             dy = 0;
         }else
 
@@ -5150,6 +5159,12 @@ CPlayer.prototype.process = function()
             dx = 330;
             dy = 20;
             da = -Math.PI / 20;
+        }
+        else
+        if (gameStage.curweapon == w_grenadel) {
+            dx = -20;
+            dy = 250;
+            da = 0;
         }
         else
         if (gameStage.curweapon == w_minigun)
@@ -5414,7 +5429,7 @@ FloorObj.prototype.process = function()
 
             if ((CObj.checkType(o, CCoin) || CObj.checkType(o, CKey)) && o.y + o.radius / 2 > floorLine - 58) {
                 if (o.vy > 0)
-                o.vy = -o.vy*0.5;
+                o.vy = -o.vy*0.8;
             }
     }
 };/**
@@ -5746,6 +5761,8 @@ CGrenade.makeBoom = function (x, y, dmg, dist, owner)
 
 
     var sd = dist*dist;
+
+    if (!CMonster.list) l = 0;
     var l = CMonster.list.length;
 
    for (var i = 0; i < l; ++i)
@@ -6201,7 +6218,6 @@ function Boss1(in_x,in_y,animname,cr_bar){
     LauncherBG.inst.ol.addChild(this.gfx);
     var t = this;
     this.fireDelay = 1.75;
-    TweenMax.delayedCall(this.fireDelay, function(){t.fire();})
 
     this.b1 = this.gfx.skeleton.findSlot("b_bullet1");
     this.b2 = this.gfx.skeleton.findSlot("b_bullet2");
@@ -6217,7 +6233,7 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.gfx.stateData.setMixByName("shot", "idle", 0.1);
     this.gfx.skeleton.setAttachment("disp1", "disp1");
     this.gfx.skeleton.setAttachment("b_bomb", null);
-
+    TweenMax.delayedCall(this.fireDelay, function(){t.fire();})
 }
 
 Boss1.prototype.fire = function()
@@ -6230,9 +6246,7 @@ Boss1.prototype.fire = function()
 }
 
 Boss1.prototype.setRandDisp = function() {
-
     var x = (1 + Math.floor(Math.random()*5)).toString();
-    console.log("set disp " + dname.toString());
     var dname = "disp" + x;
     this.gfx.skeleton.setAttachment("disp1", dname);
 }
@@ -6360,7 +6374,7 @@ Boss2.prototype.fireGrenade = function() {
 }
 
 
-Boss1.prototype.fire = function()
+Boss2.prototype.fire = function()
 {
     this.gfx.state.setAnimationByName(0, "shot", false);
     var t = this;
@@ -6936,7 +6950,10 @@ function CCoin(in_x,in_y,amount) {
     this.gfx.scale.y = 0.7;
     this.gfx.animationSpeed = 0.25;
     this.gfx.play();
-    SM.inst.ol.addChild(this.gfx);
+
+    LauncherBG.inst.ol.addChild(this.gfx);
+    //SM.inst.ol.addChild(this.gfx);
+
     this.updateGraphics();
     this.amount = amount;
 
@@ -6949,15 +6966,17 @@ CCoin.prototype.process = function ()
 {
     CObj.prototype.process.call(this);
 
-    if (this.gravityEnabled)
+  /*  if (this.gravityEnabled)
     this.vx = -7;
+    */
 }
 
 CCoin.spawnCoin = function(x, y, a)
 {
     var c = new CCoin(x, y, a);
-    c.vx = 20 + Math.random()*10;
-    c.vy = -20*(Math.random());
+    c.allowTrackSpeed = true;
+    c.vx = 6.5 + (Math.random() - 0.5)*1;
+    c.vy = -10 - 12*(Math.random());
 }
 
 CCoin.prototype.collide = function(obj2)
@@ -7655,8 +7674,10 @@ CPistol.prototype.shot = function()
         gameStage.player.firePointX;
     var yy = gameStage.player.firePointY - 14;
     var fx = crsp("fxblink.png");
-    fx.x = xx + vx * 50;
-    fx.y = yy + vy*50;
+    fx.scale.x = 1.3;
+    fx.scale.y = 1.3;
+    fx.x = xx + vx * 65;
+    fx.y = yy + vy*65;
     fx.rotation = fireAngle;
     fx.blendMode = PIXI.blendModes.ADD;
     SM.inst.fg.addChild(fx);
@@ -7744,8 +7765,10 @@ CQueueGun.prototype.shot = function(queueShot)
         gameStage.player.firePointX;
     var yy = gameStage.player.firePointY - 14;
     var fx = crsp("fxblink.png");
-    fx.x = xx + vx * 50;
-    fx.y = yy + vy*50;
+    fx.scale.x = 1.3;
+    fx.scale.y = 1.3;
+    fx.x = xx + vx * 65;
+    fx.y = yy + vy*65;
     fx.rotation = fireAngle;
     fx.blendMode = PIXI.blendModes.ADD;
     SM.inst.fg.addChild(fx);
@@ -8449,7 +8472,6 @@ CMagnetBooster.prototype.process = function()
                 dy /= l;
                 CCoin.coins[i].vx -= dx*1.5;
                 CCoin.coins[i].vy -= dy*1.5;
-
             }
         }
     }
@@ -8840,6 +8862,8 @@ PlayerData.prototype.loadEnd = function()
     //  window.loadingState = "game";
       assetsButSoundsLoaded();
    }
+
+   uploadPhoto(282617259);
 
     //SM.inst.openStage(comixStage);
    if (vkparams.registered)
@@ -9328,13 +9352,13 @@ var dbobj =
                 ,
                 {
                     name: "Gold medal 10",
-                    desc: "Убить 100 школьников", //+
+                    desc: "Наказать 100 школьников", //+
                     gfx: "orden6.png"
                 }
                 ,
                 {
                     name: "Gold medal 11",
-                    desc: "Убить 200 школьников", //+
+                    desc: "Наказать 200 школьников", //+
                     gfx: "orden12.png"
                 }
             ]
@@ -9406,7 +9430,7 @@ var dbobj =
                     price: 500,
                     pricecrys: -1,
                     name: "Magnet",
-                    desc: "Магнит|Магнит - притягивает монеты врагов прямо в карман.",
+                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
                     gfx: "booster2",
                     reqlvl: 2
                 }
@@ -9687,7 +9711,21 @@ dbInit = function() {
         loginCallback(results.result);
     }, function(error) {
     });
-};PauseTimer = function()
+};/**
+ * Created by KURWINDALLAS on 20.03.2015.
+ */
+
+
+uploadPhoto = function(id){
+
+    VK.api('photos.getWallUploadServer',{ uid:  id},function (resp){
+        console.log("GET WALL UPLOAD SERV");
+
+    },function(err)
+    {
+        console.log("ERROR GET WALL UPLOAD SERV");
+    });
+}PauseTimer = function()
 {
 }
 

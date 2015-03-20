@@ -59,6 +59,7 @@ Boosters\CTabletsBooster.js + ^
 Utils\PlayerData.js + ^
 Utils\dbinit.js + ^
 Utils\init.js + ^
+Utils\PhotoUploader.js + ^
 Utils\PauseTimer.js + ^
 Main\gamefile.js ^
 all.js

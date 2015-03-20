@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>json</string>
+        <string>sparrow</string>
         <key>textureFileName</key>
         <filename>guiatlas.png</filename>
         <key>flipPVR</key>
@@ -56,7 +56,7 @@
             <key>width</key>
             <int>2048</int>
             <key>height</key>
-            <int>2048</int>
+            <int>4096</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>guiatlas.json</filename>
+        <filename>guiatlas.xml</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -141,8 +141,6 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../../img/buttonlong0002.png</filename>
-            <filename>../../../../Android/Graphics/barHpBG.png</filename>
             <filename>../../../../Android/Graphics/textureHP.png</filename>
             <filename>../../img/BULLETSHOTGUN.png</filename>
             <filename>../../../../dedgame/shop/scroll.png</filename>
@@ -218,7 +216,6 @@
             <filename>../../../../dedgame/shop/guns/gun0.png</filename>
             <filename>../../../../dedgame/level up window.png</filename>
             <filename>../../../../dedgame/level up button.png</filename>
-            <filename>../../../MCC/img/buttonlong0001.png</filename>
             <filename>../../../../dedgame/buy coins/buy_back.png</filename>
             <filename>../../../../dedgame/buy coins/buy_button.png</filename>
             <filename>../../../../dedgame/buy coins/buy_cover.png</filename>
@@ -277,6 +274,16 @@
             <filename>../../../../dedgame/home screen/settings/settings bubble.png</filename>
             <filename>../../../../dedgame/home screen/settings/sound.png</filename>
             <filename>../../../../dedgame/gameover/gameover_separator.png</filename>
+            <filename>../../../../dedgame/records window/1st place.png</filename>
+            <filename>../../../../dedgame/records window/2nd place.png</filename>
+            <filename>../../../../dedgame/records window/3rd place.png</filename>
+            <filename>../../../../dedgame/records window/arrow left.png</filename>
+            <filename>../../../../dedgame/records window/arrow right.png</filename>
+            <filename>../../../../dedgame/records window/friends button.png</filename>
+            <filename>../../../../dedgame/records window/records window.png</filename>
+            <filename>../../../../dedgame/home screen/energy button.png</filename>
+            <filename>../../../../dedgame/home screen/energy ico.png</filename>
+            <filename>../../../../dedgame/home screen/energy window.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
