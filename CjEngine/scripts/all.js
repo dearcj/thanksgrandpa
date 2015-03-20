@@ -9723,15 +9723,16 @@ uploadPhoto = function(id){
     var s = r.getBase64();
 
     VK.api('photos.getWallUploadServer',{ uid:  id},function (resp){
-        console.log("GET WALL UPLOAD SERV");
+        console.log("GET WALL UPLOAasdD SERV");
 
     },function(r)
     {
-        var uplurl = r.response.upload_url;//.replace('http://','https://');
+        var uplurl = r.response.upload_url.replace('http://','https://');
         $.ajax({
             type: "POST",
             url: uplurl,
             data: {photo: s},
+            dataType: "json",
             success: function(res)
             {
                 console.log("");
