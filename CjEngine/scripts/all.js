@@ -9721,14 +9721,25 @@ uploadPhoto = function(id){
     var r = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
     r.render(SM.inst.superStage);
     var s = r.getBase64();
-    
+
     VK.api('photos.getWallUploadServer',{ uid:  id},function (resp){
         console.log("GET WALL UPLOAD SERV");
 
-    },function(err)
+    },function(r)
     {
-        var x = PIXI.TextureCache["enemy1.png"];
-        console.log("ERROR GET WALL UPLOAD SERV");
+
+        $.ajax({
+            type: "POST",
+            url: r.response.upload_url,
+            data: {photo: s},
+            success: function(res)
+            {
+                console.log("");
+            }
+        });
+
+        //post(r.response.upload_url, {photo: s}, "post");
+        //console.log("ERROR GET WALL UPLOAD SERV");
     });
 };
 
