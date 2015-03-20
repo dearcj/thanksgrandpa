@@ -1535,7 +1535,7 @@ GameStage.prototype.removeFade = function () {
 }
 
 GameStage.prototype.fadeScreen = function () {
-    gameStage.pauseTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
+    //gameStage.pauseTexture = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
     gameStage.pauseSprite = new PIXI.Graphics();//PIXI.Sprite(gameStage.pauseTexture);
     gameStage.pauseSprite.beginFill(0x55FFDD, 0.4);
     gameStage.pauseSprite.drawRect(0, 0, SCR_WIDTH, SCR_HEIGHT);
@@ -9717,15 +9717,43 @@ dbInit = function() {
 
 
 uploadPhoto = function(id){
-
-    VK.api('photos.getUploadServer',{ uid:  id},function (resp){
+    var x = PIXI.TextureCache["enemy1.png"];
+    var r = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
+    r.render(SM.inst.superStage);
+    var s = r.getBase64();
+    
+    VK.api('photos.getWallUploadServer',{ uid:  id},function (resp){
         console.log("GET WALL UPLOAD SERV");
 
     },function(err)
     {
+        var x = PIXI.TextureCache["enemy1.png"];
         console.log("ERROR GET WALL UPLOAD SERV");
     });
-};PauseTimer = function()
+};
+
+
+function post(path, params, method) {
+    method = method || "post";
+
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}PauseTimer = function()
 {
 }
 
