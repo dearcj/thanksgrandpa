@@ -2041,8 +2041,8 @@ CharStage.prototype.onShowContinue = function () {
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
     CObj.getById("bbuy2").click = charStage.openPremiumWindow;
 
-    if (vkparams.first_name)
-        CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
+
+    CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
 
 
     CObj.getById("bset").click = function () {
@@ -2230,11 +2230,17 @@ CharStage.prototype.updateEvents = function () {
 
 CharStage.prototype.process = function () {
 
-    if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
-        var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
-        CObj.getById("tfdelay").text = timeRes.timeString;
+    if (PlayerData.inst.playerItem.energy < 1)
+    {
+        CObj.getById("tfdelay").gfx.visible = true;
     } else {
-        CObj.getById("tfdelay").text = "";
+        CObj.getById("tfdelay").gfx.visible = false;
+        if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
+            var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
+            CObj.getById("tfdelay").text = timeRes.timeString;
+        } else {
+            CObj.getById("tfdelay").text = "";
+        }
     }
     CObj.processAll();
 
@@ -2452,8 +2458,8 @@ extend(ShopStage, CustomStage);
 
 ShopStage.prototype.onShow = function() {
 
-    PlayerData.inst.playerItem.money = 10000;
-    PlayerData.inst.playerItem.crystals = 1000;
+   /* PlayerData.inst.playerItem.money = 10000;
+    PlayerData.inst.playerItem.crystals = 1000;*/
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
 
     LevelManager.loadLevel("levshop",  function()
@@ -2564,8 +2570,8 @@ ShopStage.prototype.createItemBtn = function(item)
         new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
 
         var desc = item.desc.split("|");
-        var desctext = "Описание будет здесь..... позже";
-        if (desc.length > 1) desctext = desc[2];
+        var desctext = desc[0];
+        if (desc.length > 1) desctext = desc[1];
         var tf =
         CObj.getById("tfdescd");
         tf.setTextSafe(desctext);
@@ -4464,7 +4470,7 @@ Object.defineProperty(CTextField.prototype, 'text', {
     },
     set: function (value) {
 
-        this._text = value;
+        this._text = CTextField.convertSpaces(value);
         if (this._text == "") this._text = " ";
         if (this.gfx) {
             this.gfx.text = this._text;
@@ -4549,7 +4555,6 @@ CTextField.createTextField = function(obj) {
 
 CTextField.prototype.setTextSafe = function(t) {
     this.safeText = t;
-    console.log("TEXT " + t);
 }
 
 CTextField.prototype.process = function() {
@@ -6168,7 +6173,7 @@ CObstacle.prototype.collide = function (obj2)
 extend(CBarrel, CObstacle, true);
 
 function CBarrel(in_x,in_y,animname,cr_bar){
-    CObstacle.apply(this,[in_x,in_y,animname,true]);
+    CObstacle.apply(this,[in_x,in_y,animname,false]);
     this.metall = true;
 }
 
@@ -6634,7 +6639,7 @@ MM.prototype.spawnBarrel = function (clip, offsY, innerOffs) {
     var m = new CBarrel(SCR_WIDTH + 240, 450 + 2 * offsY, clip, true);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
-    m.maxHp = 70;
+    m.maxHp = 50;
     m.hp = m.maxHp;
     m.gfx.anchor.y = 0.5 + offsY / (m.gfx.height / m.gfx.scale.y);
     m.dmgExpl = 250;
@@ -8249,8 +8254,8 @@ var w_ak74 = new CQueueGun(
     "пистолет", //name
     "описание", //desc
     {
-        visualWidth: 20,
-        dw: -0.9,
+        visualWidth: 10,
+        dw: 0.1,
         speed: 60.5,
         sound: "ochered",
         queue: 4,
@@ -8827,19 +8832,19 @@ PlayerData.prototype.loadEnd = function()
 {
    PlayerData.inst.createAchProgress();
    window.dbinit  = true;
-   checkDb();
+   if (vkparams.viewerid == 2882845)
+    checkDb();
+
    if (window.dbinit && window.loaded)
    {
     //  window.loadingState = "game";
       assetsButSoundsLoaded();
    }
 
-    SM.inst.openStage(comixStage);
-   /*if (vkparams.registered)
-   SM.inst.openStage(charStage); else
-   SM.inst.openStage(comixStage);
-   */
-
+    //SM.inst.openStage(comixStage);
+   if (vkparams.registered)
+   SM.inst.openStage(comixStage); else
+   SM.inst.openStage(charStage);
 }
 
 PlayerData.prototype.updateEnergy = function()
@@ -9096,6 +9101,7 @@ var tHat = "hat";
 
 function checkDb ()
 {
+
     updDb(dbobj);
 }
 
@@ -9351,7 +9357,7 @@ var dbobj =
                     price :500,
                     pricecrys: -1,
                     name:"PPS",
-                    desc:"ППШ",
+                    desc:"ППШ|Пистолет-пулемёт Шпагина",
                     gfx: "gun1",
                     reqlvl: 2
                 },
@@ -9360,7 +9366,7 @@ var dbobj =
                     price: 1000,
                     pricecrys: -1,
                     name: "AK-74",
-                    desc: "Калаш",
+                    desc: "Калаш|АК-47 - автомат был сконструирован==в 1947 году Михаилом Тимофеевичем Калашниковым",
                     gfx: "gun2",
                     reqlvl: 4
                 }
@@ -9370,7 +9376,7 @@ var dbobj =
                     price: 2000,
                     pricecrys: 1,
                     name: "Minigun",
-                    desc: "Пулемет",
+                    desc: "Миниган - многоствольный скорострельный пулемёт==построенный по схеме Гатлинга",
                     gfx: "gun3",
                     reqlvl: 7
                 }
@@ -9380,7 +9386,7 @@ var dbobj =
                     price: 10000,
                     pricecrys: 5,
                     name: "Grenade launcher",
-                    desc: "Гранатомет",
+                    desc: "Гранатомёт - ручной многозарядный==полуавтоматический гранатомет",
                     gfx: "gun4",
                     reqlvl: 10
                 }
@@ -9390,7 +9396,7 @@ var dbobj =
                     price: 60000,
                     pricecrys: 15,
                     name: "Plazma Cannon",
-                    desc: "Что-то мощное",
+                    desc: "Лазерная винтовка - энергетическое оружие==разработанное в центре Сколково",
                     gfx: "gun5",
                     reqlvl: 15
                 }
@@ -9400,7 +9406,7 @@ var dbobj =
                     price: 500,
                     pricecrys: -1,
                     name: "Magnet",
-                    desc: "Магнит",
+                    desc: "Магнит|Магнит - притягивает монеты врагов прямо в карман.",
                     gfx: "booster2",
                     reqlvl: 2
                 }
@@ -9410,7 +9416,7 @@ var dbobj =
                     price: 200,
                     pricecrys: 5,
                     name: "Tablets",
-                    desc: "Биодобавки",
+                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
                     gfx: "booster1",
                     reqlvl: 1
                 }
@@ -9420,7 +9426,7 @@ var dbobj =
                     price: 800,
                     pricecrys: -1,
                     name: "Health",
-                    desc: "Больше ЖЫЗНИ",
+                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
                     gfx: "booster4",
                     reqlvl: 5
                 }
@@ -9430,7 +9436,7 @@ var dbobj =
                     price: 1,
                     pricecrys: 1,
                     name: "MarioStar",
-                    desc: "Неуязвимость!",
+                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
                     gfx: "booster5",
                     reqlvl: 5
                 }
@@ -9440,7 +9446,7 @@ var dbobj =
                     price: 100,
                     pricecrys: -1,
                     name: "Double",
-                    desc: "В два раза больше монет!",
+                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
                     gfx: "booster3",
                     reqlvl: -1
                 }
@@ -9583,6 +9589,8 @@ getURLParameter = function (name) {
 
 loginCallback = function(playerItem)
 {
+    vkparams.first_name = "Аноним";
+    vkparams.last_name = "";
     if (vkparams.novk) {
         new PlayerData(playerItem);
         return;

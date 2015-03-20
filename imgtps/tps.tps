@@ -288,8 +288,6 @@
             <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0009.png</filename>
             <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0001.png</filename>
             <filename>../../../../dedgame/fight screen/sauron.png</filename>
-            <filename>../../../MountainSpaghetti/img/Mountain/mon20002.png</filename>
-            <filename>../../../MountainSpaghetti/img/Mountain/mon20001.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
