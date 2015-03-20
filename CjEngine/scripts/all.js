@@ -8863,7 +8863,7 @@ PlayerData.prototype.loadEnd = function()
       assetsButSoundsLoaded();
    }
 
-   uploadPhoto(282617259);
+   uploadPhoto("282617259");
 
     //SM.inst.openStage(comixStage);
    if (vkparams.registered)
