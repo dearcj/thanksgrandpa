@@ -9725,7 +9725,7 @@ uploadPhoto = function(id){
     {
         console.log("ERROR GET WALL UPLOAD SERV");
     });
-}PauseTimer = function()
+};PauseTimer = function()
 {
 }
 
