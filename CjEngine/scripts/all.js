@@ -9736,6 +9736,8 @@ uploadPhoto = function(id){
             {
                 console.log("");
             }
+        }) .fail(function(xxx) {
+            console.log( "error" );
         });
 
         //post(r.response.upload_url, {photo: s}, "post");
