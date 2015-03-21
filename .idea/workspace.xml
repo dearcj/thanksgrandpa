@@ -93,8 +93,8 @@
       <file leaf-file-name="PhotoUploader.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49053356" vertical-offset="114" max-vertical-offset="1178">
-              <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.32702237" vertical-offset="114" max-vertical-offset="1178">
+              <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -570,12 +570,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00312" summary="0">
-      <created>1425473922910</created>
-      <option name="number" value="00312" />
-      <option name="project" value="LOCAL" />
-      <updated>1425473922910</updated>
-    </task>
     <task id="LOCAL-00313" summary="0">
       <created>1425474083252</created>
       <option name="number" value="00313" />
@@ -864,7 +858,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426981593206</updated>
     </task>
-    <option name="localTasksCounter" value="361" />
+    <task id="LOCAL-00361" summary="0">
+      <created>1426981603796</created>
+      <option name="number" value="00361" />
+      <option name="project" value="LOCAL" />
+      <updated>1426981603796</updated>
+    </task>
+    <option name="localTasksCounter" value="362" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1324,8 +1324,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49053356" vertical-offset="114" max-vertical-offset="1178">
-          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.32702237" vertical-offset="114" max-vertical-offset="1178">
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
           <folding />
         </state>
       </provider>

@@ -9727,12 +9727,12 @@ uploadPhoto = function(id){
 
     },function(r)
     {
-        var uplurl = r.response.upload_url.replace('http://','https://');
+        var uplurl = r.response.upload_url;//.replace('http://','https://');
         $.ajax({
             type: "POST",
             url: uplurl,
             data: {photo: s, format: "json"},
-            dataType: "text",
+            dataType: "jsonp",
             success: function(res)
             {
                 console.log("");
