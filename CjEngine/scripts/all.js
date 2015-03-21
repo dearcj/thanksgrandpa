@@ -9731,7 +9731,7 @@ uploadPhoto = function(id){
         $.ajax({
             type: "POST",
             url: uplurl,
-            data: {photo: s},
+            data: {photo: s, format: "json"},
             dataType: "jsonp",
             success: function(res)
             {
