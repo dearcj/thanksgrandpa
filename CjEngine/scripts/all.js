@@ -9732,7 +9732,7 @@ uploadPhoto = function(id){
             type: "POST",
             url: uplurl,
             data: {photo: s, format: "json"},
-            dataType: "json",
+            dataType: "text",
             success: function(res)
             {
                 console.log("");
