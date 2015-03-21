@@ -9727,7 +9727,7 @@ uploadPhoto = function(id){
 
     },function(r)
     {
-        var uplurl = r.response.upload_url;//.replace('http://','https://');
+        var uplurl = r.response.upload_url.replace('http://','https://');
         $.ajax({
             type: "POST",
             url: uplurl,
@@ -9736,9 +9736,11 @@ uploadPhoto = function(id){
             success: function(res)
             {
                 console.log("");
+            },
+            error: function(res)
+            {
+                console.log("");
             }
-        }) .fail(function(xxx) {
-            console.log( "error" );
         });
 
         //post(r.response.upload_url, {photo: s}, "post");
