@@ -9727,7 +9727,7 @@ uploadPhoto = function(id){
 
     },function(r)
     {
-        var uplurl = r.response.upload_url;//.replace('http://','https://');
+        var uplurl = r.response.upload_url.replace('http://','https://');
         $.ajax({
             type: "POST",
             url: uplurl,
