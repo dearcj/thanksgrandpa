@@ -9716,18 +9716,26 @@ dbInit = function() {
  */
 uploadPhoto = function(id){
     var x = PIXI.TextureCache["enemy1.png"];
-    var r = new PIXI.RenderTexture(10, 10);
+    var r = new PIXI.RenderTexture(15, 15);
     r.render(stage);
     renderer.render(stage);
     var str = r.getBase64();
-    var s = str;//sadasdwindow.atob(str);
 
+    var blobBin = atob(str.split(',')[1]);
+    var array = [];
+    for(var i = 0; i < blobBin.length; i++) {
+        array.push(blobBin.charCodeAt(i));
+    }
+    var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
+
+    var s = str;//sadasdwindow.atob(str);
+  //  window.location =str;
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
         $.ajax({
             type: "POST",
             url: 'upload.php',
-            data: {uploadUrl: uplurl, photo: s},
+            data: {uploadUrl: uplurl, photo: blobBin},
             dataType: "text"
 
         }).success(function(res)
