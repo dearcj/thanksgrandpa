@@ -9728,15 +9728,14 @@ uploadPhoto = function(id){
             type: "POST",
             url: 'upload.php',
             data: {uploadUrl: uplurl},
-            dataType: "json",
-            success: function(res)
-            {
-                console.log("");
-            },
-            error: function(res)
-            {
-                console.log("");
-            }
+            dataType: "json"
+
+        }).success(function(res)
+        {
+            console.log("");
+        }).error(function(res)
+        {
+            console.log("");
         });
 
         //post(r.response.upload_url, {photo: s}, "post");
