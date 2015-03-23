@@ -1,5 +1,7 @@
 <?php
 header("Content-Type: application/json; encoding=utf-8");
+echo get_include_path();  
+
 require_once 'Zend/Http/Client.php';
 $input = $_POST;
 
