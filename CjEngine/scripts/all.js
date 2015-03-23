@@ -9717,8 +9717,10 @@ dbInit = function() {
 uploadPhoto = function(id){
     var x = PIXI.TextureCache["enemy1.png"];
     var r = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
-    r.render(SM.inst.superStage);
-    var s = window.atob(r.getBase64());
+    r.render(SM.inst.stage);
+    renderer.render(stage);
+    var str = r.getBase64();
+    var s = window.atob(str);
 
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
