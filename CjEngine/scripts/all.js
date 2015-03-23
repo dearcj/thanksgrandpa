@@ -9728,7 +9728,7 @@ uploadPhoto = function(id){
             type: "POST",
             url: 'upload.php',
             data: {uploadUrl: uplurl},
-            dataType: "json"
+            dataType: "text"
 
         }).success(function(res)
         {
