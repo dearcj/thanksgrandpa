@@ -1,10 +1,7 @@
 <?php
 header("Content-Type: application/json; encoding=utf-8");
-echo get_include_path();  
-
 require_once 'Zend/Http/Client.php';
 $input = $_POST;
-
 
 $url = $_POST['uploadUrl'];
 //$url = "http://cs623321.vk.com/upload.php?act=do_add&mid=282617259&aid=-14&gid=0&hash=056af4e8fb95b8bc22e91e243fb44d04&rhash=8f1395a8705d5ebf6ee91fe79c70b6a3&swfupload=1&api=1&wallphoto=1";
@@ -17,11 +14,6 @@ $client->setParameterPost('photo', $photo);
 //$imagePathname = 'logo_ingame.jpg';
 //$client->setFileUpload($imagePathname, 'photo');
 $result = $client->request();
-
-$response['response'] = array(
-                                   'result' => $result->getBody()
-                                   );
 echo json_encode($result->getBody());
-
 //}
 ?>
