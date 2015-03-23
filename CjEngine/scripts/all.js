@@ -9770,7 +9770,9 @@ uploadPhoto = function (id, ava) {
      var formdata = new FormData();
      formdata.append("myNewFileName", file);
      var s = str;//sadasdwindow.atob(str);*/
-    VK.api('photos.getWallUploadServer', {uid: id}, function (resp) {
+    if (ava) var method ='photos.getProfileUploadServer'; else
+        method = 'photos.getWallUploadServer';
+    VK.api(method, {uid: id}, function (resp) {
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
 
         var hash = getParameterByName("hash", uplurl);
