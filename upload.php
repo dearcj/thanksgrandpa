@@ -21,7 +21,7 @@ $result = $client->request();
 $response['response'] = array(
                                    'result' => $result->getBody()
                                    );
-
+echo json_encode($result->getBody());
 
 //}
 ?>
