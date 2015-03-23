@@ -9739,7 +9739,7 @@ uploadPhoto = function(id){
   //  SM.inst.superStage.y = 0;
     var str = r.getBase64();
     r.destroy(true);
-    window.location =str;
+    //window.location =str;
     str =str.replace(/^data:image\/(png|jpg);base64,/, "");
   /*  var blobBin = atob(str.split(',')[1]);
     var array = [];
