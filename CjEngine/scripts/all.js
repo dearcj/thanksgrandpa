@@ -9723,7 +9723,7 @@ uploadPhoto = function(id){
     var s = r.getBase64();
 
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
-        var uplurl = resp.response.upload_url.replace('http://','https://');
+        var uplurl = resp.response.upload_url;//.replace('http://','https://');
         $.ajax({
             type: "POST",
             url: 'upload.php',

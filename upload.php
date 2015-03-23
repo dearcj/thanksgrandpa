@@ -6,7 +6,9 @@ $input = $_POST;
 
 if (isset($_POST['uploadUrl'])) {
 // создаем объект клиента
-$client = new Zend_Http_Client($_POST['uploadUrl']);
+$url = $_POST['uploadUrl'];
+
+$client = new Zend_Http_Client($url);
 $client->setMethod(Zend_Http_Client::POST);
 $imagePathname = APPLICATION_PATH . 'logo_ingame.jpg';
 $client->setFileUpload($imagePathname, 'photo');
