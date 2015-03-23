@@ -9721,13 +9721,14 @@ uploadPhoto = function(id){
     renderer.render(stage);
     var str = r.getBase64();
 
-    var blobBin = atob(str);
+    var blobBin = atob(str.split(',')[1]);
     var array = [];
     for(var i = 0; i < blobBin.length; i++) {
         array.push(blobBin.charCodeAt(i));
     }
     var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
-
+    var formdata = new FormData();
+    formdata.append("myNewFileName", file);
     var s = str;//sadasdwindow.atob(str);
   //  window.location =str;
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
@@ -9735,7 +9736,7 @@ uploadPhoto = function(id){
         $.ajax({
             type: "POST",
             url: 'upload.php',
-            data: {uploadUrl: uplurl, photo: blobBin},
+            data: {uploadUrl: uplurl, photo: formdata},
             dataType: "text"
 
         }).success(function(res)
