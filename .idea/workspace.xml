@@ -6,7 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/upload.php" afterPath="$PROJECT_DIR$/upload.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -82,8 +81,18 @@
       <file leaf-file-name="PhotoUploader.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.50711745" vertical-offset="57" max-vertical-offset="1615">
-              <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.30427048" vertical-offset="0" max-vertical-offset="1615">
+              <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pixi.dev.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/libs/pixi.dev.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="337134" max-vertical-offset="384940">
+              <caret line="17766" column="41" selection-start-line="17766" selection-start-column="32" selection-end-line="17766" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -391,12 +400,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00386" summary="0">
-      <created>1427115335323</created>
-      <option name="number" value="00386" />
-      <option name="project" value="LOCAL" />
-      <updated>1427115335324</updated>
-    </task>
     <task id="LOCAL-00387" summary="0">
       <created>1427115425051</created>
       <option name="number" value="00387" />
@@ -685,7 +688,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427123462947</updated>
     </task>
-    <option name="localTasksCounter" value="435" />
+    <task id="LOCAL-00435" summary="0">
+      <created>1427123551865</created>
+      <option name="number" value="00435" />
+      <option name="project" value="LOCAL" />
+      <updated>1427123551865</updated>
+    </task>
+    <option name="localTasksCounter" value="436" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -773,7 +782,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="1104" />
+      <option name="time" value="1105" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
@@ -1111,14 +1120,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/pixi.dev.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16782007" vertical-offset="337134" max-vertical-offset="384940">
-          <caret line="17759" column="22" selection-start-line="17759" selection-start-column="22" selection-end-line="17759" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6859">
@@ -1143,10 +1144,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/libs/pixi.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="337134" max-vertical-offset="384940">
+          <caret line="17766" column="41" selection-start-line="17766" selection-start-column="32" selection-end-line="17766" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50711745" vertical-offset="57" max-vertical-offset="1615">
-          <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.30427048" vertical-offset="0" max-vertical-offset="1615">
+          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
           <folding />
         </state>
       </provider>
