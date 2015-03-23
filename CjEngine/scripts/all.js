@@ -9759,13 +9759,21 @@ uploadPhoto = function(id){
                 uid: vkparams.viewerid,
                 server: obj.server,
                 photo: obj.photo,
-                hash: obj.hash,
-                message: message
+                hash: obj.hash
             }, function (data) {
                 if (data.response) {
-                 //   VK.addCallback('onWallPostSave', app.onWallPost);
+
+                   var pid =  data.response[0].pid;//   VK.addCallback('onWallPostSave', app.onWallPost);
                   //  VK.addCallback('onWallPostCancel', app.onWallPost);
-                    VK.callMethod('saveWallPost', data.response.post_hash);
+                    VK.callMethod('wall.post',
+                        {
+                            owner_id: vkparams.viewerid,
+                            message: "ХУЙ ЗАЛУПА",
+                            attachments: "photo"+vkparams.viewerid.toString() +"_" + pid.toString()
+                }, function (data) {
+
+                            console.log("SSS");
+                        });
                 }
             });
 
