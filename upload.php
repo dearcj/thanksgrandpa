@@ -14,6 +14,6 @@ $client->setParameterPost('photo', $photo);
 //$imagePathname = 'logo_ingame.jpg';
 //$client->setFileUpload($imagePathname, 'photo');
 $result = $client->request();
-echo json_encode($result->getBody());
+echo $result->getBody();
 //}
 ?>
