@@ -9745,15 +9745,15 @@ uploadPhoto = function(id){
 
             var message = 'Ку-Ку';
             VK.api('wall.savePost', {
-                wall_id: VK.params.viewer_id,
+                wall_id: vkparams.viewerid,
                 server: obj.server,
                 photo: obj.photo,
                 hash: obj.hash,
                 message: message
             }, function (data) {
                 if (data.response) {
-                    VK.addCallback('onWallPostSave', app.onWallPost);
-                    VK.addCallback('onWallPostCancel', app.onWallPost);
+                 //   VK.addCallback('onWallPostSave', app.onWallPost);
+                  //  VK.addCallback('onWallPostCancel', app.onWallPost);
                     VK.callMethod('saveWallPost', data.response.post_hash);
                 }
             });
