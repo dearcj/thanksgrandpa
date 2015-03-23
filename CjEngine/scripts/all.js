@@ -9756,10 +9756,10 @@ uploadPhoto = function(id){
 
             var message = 'Ку-Ку';
             VK.api('wall.savePost', {
-                wall_id: vkparams.viewerid,
+                uid: vkparams.viewerid,
                 server: obj.server,
                 photo: obj.photo,
-                hash: hash,
+                hash: obj.hash,
                 message: message
             }, function (data) {
                 if (data.response) {
