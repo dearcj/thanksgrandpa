@@ -9720,7 +9720,7 @@ uploadPhoto = function(id){
     r.render(stage);
     renderer.render(stage);
     var str = r.getBase64();
-
+    str =str.replace(/^data:image\/(png|jpg);base64,/, "");
   /*  var blobBin = atob(str.split(',')[1]);
     var array = [];
     for(var i = 0; i < blobBin.length; i++) {
