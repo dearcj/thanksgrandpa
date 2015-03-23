@@ -2796,7 +2796,9 @@ ShopStage.prototype.onShowContinue = function()
 {
     CustomStage.prototype.onShow.call(this);
     CObj.getById("photo").click = function()
-    {uploadPhoto(vkparams.viewerid);}
+    {uploadPhoto(vkparams.viewerid, false);}
+    CObj.getById("ava").click = function()
+    {uploadPhoto(vkparams.viewerid, true);}
 
     shopStage.bar = new CScrollbar(610,335, "", 380, 524);
     shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
