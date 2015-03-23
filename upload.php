@@ -15,7 +15,7 @@ $client->setMethod(Zend_Http_Client::POST);
 $client->setParameterPost('photo', $photo);
 //$imagePathname = 'http://www.dedgame.ru/logo_ingame.png';
 //$client->setFileUpload($imagePathname, 'photo');
-//$client->setFileUpload(NULL, 'photo', $photo, 'text/plain');
+$client->setFileUpload("15x15.png", 'photo', $photodecoded, 'image/png');
 //$client->setRawData($photodecoded, 'text/xml')->request('POST');
 
 $result = $client->request();
