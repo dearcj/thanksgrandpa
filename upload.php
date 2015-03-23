@@ -13,7 +13,7 @@ $url = "http://cs623321.vk.com/upload.php?act=do_add&mid=282617259&aid=-14&gid=0
 // создаем объект клиента
 $client = new Zend_Http_Client($url);
 $client->setMethod(Zend_Http_Client::POST);
-$imagePathname = APPLICATION_PATH . 'logo_ingame.jpg';
+$imagePathname = 'logo_ingame.jpg';
 $client->setFileUpload($imagePathname, 'photo');
 $result = $client->request();
 if ($result->isError()) {
