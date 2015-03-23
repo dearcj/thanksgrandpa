@@ -9763,17 +9763,21 @@ uploadPhoto = function(id){
             }, function (data) {
                 if (data.response) {
 
-                   var pid =  data.response[0].pid;//   VK.addCallback('onWallPostSave', app.onWallPost);
+                   var pid =  data.response[0].id;//   VK.addCallback('onWallPostSave', app.onWallPost);
                   //  VK.addCallback('onWallPostCancel', app.onWallPost);
-                    VK.callMethod('wall.post',
+                    VK.api('wall.post',
                         {
                             owner_id: vkparams.viewerid,
                             message: "ХУЙ ЗАЛУПА",
-                            attachments: "photo"+vkparams.viewerid.toString() +"_" + pid.toString()
+                            attachments: pid
                 }, function (data) {
 
                             console.log("SSS");
-                        });
+                        },
+                    function (err)
+                    {
+                        console.log("SSS");
+                    });
                 }
             });
 
