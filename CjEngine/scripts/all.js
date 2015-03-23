@@ -9721,7 +9721,7 @@ uploadPhoto = function(id){
     renderer.render(stage);
     var str = r.getBase64();
 
-    var blobBin = atob(str.split(',')[1]);
+    var blobBin = atob(str);
     var array = [];
     for(var i = 0; i < blobBin.length; i++) {
         array.push(blobBin.charCodeAt(i));
