@@ -17764,7 +17764,7 @@
      */
     PIXI.RenderTexture.prototype.getBase64 = function()
     {
-        return this.getCanvas().toDataURL();
+        return this.getCanvas().toDataURL("image/png");
     };
 
     /**
