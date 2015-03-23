@@ -9714,6 +9714,14 @@ dbInit = function() {
 };/**
  * Created by KURWINDALLAS on 20.03.2015.
  */
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 uploadPhoto = function(id){
     var x = PIXI.TextureCache["enemy1.png"];
     var r = new PIXI.RenderTexture(15, 15);
@@ -9733,6 +9741,9 @@ uploadPhoto = function(id){
   //  window.location =str;
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
+
+        var hash = getParameterByName("hash");
+        var rhash = getParameterByName("rhash");
         $.ajax({
             type: "POST",
             url: 'upload.php',
@@ -9748,7 +9759,7 @@ uploadPhoto = function(id){
                 wall_id: vkparams.viewerid,
                 server: obj.server,
                 photo: obj.photo,
-                hash: obj.hash,
+                hash: hash,
                 message: message
             }, function (data) {
                 if (data.response) {
