@@ -6,7 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/upload.php" afterPath="$PROJECT_DIR$/upload.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -369,12 +368,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00336" summary="0">
-      <created>1426678672153</created>
-      <option name="number" value="00336" />
-      <option name="project" value="LOCAL" />
-      <updated>1426678672153</updated>
-    </task>
     <task id="LOCAL-00337" summary="0">
       <created>1426699003383</created>
       <option name="number" value="00337" />
@@ -663,7 +656,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427115081220</updated>
     </task>
-    <option name="localTasksCounter" value="385" />
+    <task id="LOCAL-00385" summary="0">
+      <created>1427115275281</created>
+      <option name="number" value="00385" />
+      <option name="project" value="LOCAL" />
+      <updated>1427115275281</updated>
+    </task>
+    <option name="localTasksCounter" value="386" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
