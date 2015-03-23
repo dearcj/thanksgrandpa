@@ -1528,10 +1528,11 @@ GameStage.prototype.removeFade = function () {
     gameStage.pauseSprite = null;
 
     PIXI.Texture.removeTextureFromCache(gameStage.pauseTexture);
-    gameStage.pauseTexture.destroy();
-    gameStage.pauseTexture = null;
 
-
+    if (gameStage.pauseTexture) {
+        gameStage.pauseTexture.destroy();
+        gameStage.pauseTexture = null;
+    }
 }
 
 GameStage.prototype.fadeScreen = function () {
@@ -2246,6 +2247,9 @@ CharStage.prototype.process = function () {
             CObj.getById("tfdelay").text = "";
         }
     }
+
+
+
     CObj.processAll();
 
     var c = 0;
@@ -2461,6 +2465,7 @@ function ShopStage() {
 extend(ShopStage, CustomStage);
 
 ShopStage.prototype.onShow = function() {
+
 
    /* PlayerData.inst.playerItem.money = 10000;
     PlayerData.inst.playerItem.crystals = 1000;*/
@@ -2790,6 +2795,9 @@ ShopStage.prototype.updateStatsPanel = function() {
 ShopStage.prototype.onShowContinue = function()
 {
     CustomStage.prototype.onShow.call(this);
+    CObj.getById("photo").click = function()
+    {uploadPhoto(vkparams.viewerid);}
+
     shopStage.bar = new CScrollbar(610,335, "", 380, 524);
     shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
     SM.inst.ol.addChildAt( shopStage.bar.gfx,1);
@@ -2837,12 +2845,7 @@ ShopStage.prototype.onHide = function(newStage) {
 }
 
 ShopStage.prototype.process = function() {
-   if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
-       var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
-       CObj.getById("tfdelay").text = timeRes.timeString;
-   } else {
-       CObj.getById("tfdelay").text = "";
-   }
+
 
     CObj.processAll();
 };
@@ -8863,7 +8866,7 @@ PlayerData.prototype.loadEnd = function()
       assetsButSoundsLoaded();
    }
 
-   uploadPhoto("282617259");
+
 
     //SM.inst.openStage(comixStage);
    if (vkparams.registered)
@@ -9723,11 +9726,20 @@ function getParameterByName(name, url) {
 }
 
 uploadPhoto = function(id){
-    var x = PIXI.TextureCache["enemy1.png"];
-    var r = new PIXI.RenderTexture(15, 15);
-    r.render(stage);
-    renderer.render(stage);
+    var r = new PIXI.RenderTexture(SCR_WIDTH/2, SCR_HEIGHT);
+  // SM.inst.superStage.x =  - SCR_WIDTH / 2;
+   // SM.inst.superStage.y = 0;
+   // r.render(stage);
+
+    renderer.render(stage, true);
+    r.render(SM.inst.superStage);
+
+
+ //   SM.inst.superStage.x = 0;
+  //  SM.inst.superStage.y = 0;
     var str = r.getBase64();
+    r.destroy(true);
+    window.location =str;
     str =str.replace(/^data:image\/(png|jpg);base64,/, "");
   /*  var blobBin = atob(str.split(',')[1]);
     var array = [];
@@ -9738,7 +9750,6 @@ uploadPhoto = function(id){
     var formdata = new FormData();
     formdata.append("myNewFileName", file);
     var s = str;//sadasdwindow.atob(str);*/
-  //  window.location =str;
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
 
