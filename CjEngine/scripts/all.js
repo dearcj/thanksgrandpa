@@ -9732,6 +9732,10 @@ uploadPhoto = function(id){
             success: function(res)
             {
                 console.log("");
+            },
+            error: function(res)
+            {
+                console.log("");
             }
         });
 
