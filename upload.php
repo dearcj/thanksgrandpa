@@ -2,7 +2,7 @@
 header("Content-Type: application/json; encoding=utf-8");
 $input = $_POST;
 
- require_once 'Zend/Http/Client.php';
+
 $url = $_POST['uploadUrl'];
 $url = "http://cs623321.vk.com/upload.php?act=do_add&mid=282617259&aid=-14&gid=0&hash=056af4e8fb95b8bc22e91e243fb44d04&rhash=8f1395a8705d5ebf6ee91fe79c70b6a3&swfupload=1&api=1&wallphoto=1";
 
