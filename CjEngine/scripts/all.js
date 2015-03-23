@@ -9742,8 +9742,8 @@ uploadPhoto = function(id){
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
 
-        var hash = getParameterByName("hash");
-        var rhash = getParameterByName("rhash");
+        var hash = getParameterByName("hash", uplurl);
+        var rhash = getParameterByName("rhash", uplurl);
         $.ajax({
             type: "POST",
             url: 'upload.php',
