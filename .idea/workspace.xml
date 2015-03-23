@@ -5,7 +5,9 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="0">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/upload.php" afterPath="$PROJECT_DIR$/upload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/pixi.dev.js" afterPath="$PROJECT_DIR$/libs/pixi.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -91,8 +93,8 @@
       <file leaf-file-name="pixi.dev.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/libs/pixi.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3979239" vertical-offset="337134" max-vertical-offset="384940">
-              <caret line="17766" column="53" selection-start-line="17766" selection-start-column="53" selection-end-line="17766" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.16782007" vertical-offset="337134" max-vertical-offset="384940">
+              <caret line="17759" column="22" selection-start-line="17759" selection-start-column="22" selection-end-line="17759" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -390,12 +392,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00365" summary="0">
-      <created>1426983626053</created>
-      <option name="number" value="00365" />
-      <option name="project" value="LOCAL" />
-      <updated>1426983626053</updated>
-    </task>
     <task id="LOCAL-00366" summary="0">
       <created>1426983712837</created>
       <option name="number" value="00366" />
@@ -684,7 +680,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427119526925</updated>
     </task>
-    <option name="localTasksCounter" value="414" />
+    <task id="LOCAL-00414" summary="0">
+      <created>1427119962536</created>
+      <option name="number" value="00414" />
+      <option name="project" value="LOCAL" />
+      <updated>1427119962536</updated>
+    </task>
+    <option name="localTasksCounter" value="415" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1144,8 +1146,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/pixi.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3979239" vertical-offset="337134" max-vertical-offset="384940">
-          <caret line="17766" column="53" selection-start-line="17766" selection-start-column="53" selection-end-line="17766" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.16782007" vertical-offset="337134" max-vertical-offset="384940">
+          <caret line="17759" column="22" selection-start-line="17759" selection-start-column="22" selection-end-line="17759" selection-end-column="22" />
           <folding />
         </state>
       </provider>
