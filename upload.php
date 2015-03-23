@@ -8,9 +8,9 @@ $photo = $_POST['photo'];
 
 $client = new Zend_Http_Client($url);
 $client->setMethod(Zend_Http_Client::POST);
-echo 'PHOTO' . $photodecoded;
 $photodecoded = base64_decode($photo);
-echo $photodecoded;
+echo 'PHOTO' . $photodecoded;
+//echo $photodecoded;
 $client->setParameterPost('photo', $photodecoded);
 //$imagePathname = 'http://www.dedgame.ru/logo_ingame.png';
 //$client->setFileUpload($imagePathname, 'photo');
