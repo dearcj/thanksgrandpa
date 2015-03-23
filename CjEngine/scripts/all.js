@@ -9758,8 +9758,8 @@ getDedImage = function (ava) {
 
 uploadPhoto = function (id, ava) {
 
-    var str = getDedImage(false);
-    window.location = str;
+    var str = getDedImage(ava);
+   //window.location = str;
     str = str.replace(/^data:image\/(png|jpg);base64,/, "");
     /*  var blobBin = atob(str.split(',')[1]);
      var array = [];
