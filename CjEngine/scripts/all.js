@@ -9714,13 +9714,11 @@ dbInit = function() {
 };/**
  * Created by KURWINDALLAS on 20.03.2015.
  */
-
-
 uploadPhoto = function(id){
     var x = PIXI.TextureCache["enemy1.png"];
     var r = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
     r.render(SM.inst.superStage);
-    var s = r.getBase64();
+    var s = window.atob(r.getBase64());
 
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
@@ -9733,6 +9731,22 @@ uploadPhoto = function(id){
         }).success(function(res)
         {
             var obj = JSON.parse(res);
+
+            var message = 'Ку-Ку';
+            VK.api('wall.savePost', {
+                wall_id: VK.params.viewer_id,
+                server: obj.server,
+                photo: obj.photo,
+                hash: obj.hash,
+                message: message
+            }, function (data) {
+                if (data.response) {
+                    VK.addCallback('onWallPostSave', app.onWallPost);
+                    VK.addCallback('onWallPostCancel', app.onWallPost);
+                    VK.callMethod('saveWallPost', data.response.post_hash);
+                }
+            });
+
             console.log("");
         }).error(function(res)
         {
