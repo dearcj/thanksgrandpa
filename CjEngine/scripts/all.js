@@ -9725,32 +9725,50 @@ function getParameterByName(name, url) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-uploadPhoto = function(id){
-    var r = new PIXI.RenderTexture(SCR_WIDTH/2, SCR_HEIGHT);
-  // SM.inst.superStage.x =  - SCR_WIDTH / 2;
-   // SM.inst.superStage.y = 0;
-   // r.render(stage);
+getDedImage = function (ava) {
+    if (ava) {
+        var w = 300;
+        var h = 365;
+        var ox = -55;
+        var oy = -150;
+    } else {
+        w = SCR_WIDTH / 2;
+        h = SCR_HEIGHT;
+        ox = 0;
+        oy = 0;
+    }
+    var r = new PIXI.RenderTexture(w, h);
 
+    if (ava)
+        CObj.getById("bgshopded").gfx.visible = false;
     renderer.render(stage, true);
-    r.render(SM.inst.superStage);
 
+    var _matrix = new PIXI.Matrix();
+    _matrix.translate(ox, oy);
+    r.render(SM.inst.superStage, _matrix);
 
- //   SM.inst.superStage.x = 0;
-  //  SM.inst.superStage.y = 0;
     var str = r.getBase64();
     r.destroy(true);
-    //window.location =str;
-    str =str.replace(/^data:image\/(png|jpg);base64,/, "");
-  /*  var blobBin = atob(str.split(',')[1]);
-    var array = [];
-    for(var i = 0; i < blobBin.length; i++) {
-        array.push(blobBin.charCodeAt(i));
-    }
-    var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
-    var formdata = new FormData();
-    formdata.append("myNewFileName", file);
-    var s = str;//sadasdwindow.atob(str);*/
-    VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
+    CObj.getById("bgshopded").gfx.visible = true;
+    return str;
+}
+
+
+uploadPhoto = function (id, ava) {
+
+    var str = getDedImage(false);
+    window.location = str;
+    str = str.replace(/^data:image\/(png|jpg);base64,/, "");
+    /*  var blobBin = atob(str.split(',')[1]);
+     var array = [];
+     for(var i = 0; i < blobBin.length; i++) {
+     array.push(blobBin.charCodeAt(i));
+     }
+     var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
+     var formdata = new FormData();
+     formdata.append("myNewFileName", file);
+     var s = str;//sadasdwindow.atob(str);*/
+    VK.api('photos.getWallUploadServer', {uid: id}, function (resp) {
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
 
         var hash = getParameterByName("hash", uplurl);
@@ -9761,40 +9779,52 @@ uploadPhoto = function(id){
             data: {uploadUrl: uplurl, photo: str},
             dataType: "text"
 
-        }).success(function(res)
-        {
+        }).success(function (res) {
             var obj = JSON.parse(res);
 
-            var message = 'Ку-Ку';
-            VK.api('photos.saveWallPhoto', {
-                uid: vkparams.viewerid,
-                server: obj.server,
-                photo: obj.photo,
-                hash: obj.hash
-            }, function (data) {
-                if (data.response) {
 
-                   var pid =  data.response[0].id;//   VK.addCallback('onWallPostSave', app.onWallPost);
-                  //  VK.addCallback('onWallPostCancel', app.onWallPost);
-                    VK.api('wall.post',
-                        {
-                            owner_id: vkparams.viewerid,
-                            message: "ХУЙ ЗАЛУПА",
-                            attachments: pid
-                }, function (data) {
-
-                            console.log("SSS");
-                        },
-                    function (err)
+            if (ava) {
+                VK.api('photos.saveProfilePhoto',
                     {
+                        server: obj.server,
+                        photo: obj.photo,
+                        hash: obj.hash
+                    }, function (data) {
+
+                        console.log("SSS");
+                    },
+                    function (err) {
                         console.log("SSS");
                     });
-                }
-            });
+            } else {
+                VK.api('photos.saveWallPhoto', {
+                    uid: vkparams.viewerid,
+                    server: obj.server,
+                    photo: obj.photo,
+                    hash: obj.hash
+                }, function (data) {
+                    if (data.response) {
 
+                        var pid = data.response[0].id;//   VK.addCallback('onWallPostSave', app.onWallPost);
+                        //  VK.addCallback('onWallPostCancel', app.onWallPost);
+
+                        VK.api('wall.post',
+                            {
+                                owner_id: vkparams.viewerid,
+                                message: "Спасибо деду за селфи",
+                                attachments: pid
+                            }, function (data) {
+
+                                console.log("SSS");
+                            },
+                            function (err) {
+                                console.log("SSS");
+                            });
+                    }
+                });
+            }
             console.log("");
-        }).error(function(res)
-        {
+        }).error(function (res) {
             console.log("");
         });
 
@@ -9811,8 +9841,8 @@ function post(path, params, method) {
     form.setAttribute("method", method);
     form.setAttribute("action", path);
 
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
+    for (var key in params) {
+        if (params.hasOwnProperty(key)) {
             var hiddenField = document.createElement("input");
             hiddenField.setAttribute("type", "hidden");
             hiddenField.setAttribute("name", key);
