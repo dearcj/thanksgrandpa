@@ -9715,10 +9715,10 @@ dbInit = function() {
  * Created by KURWINDALLAS on 20.03.2015.
  */
 
-function getParameterByName(name) {
+function getParameterByName(name, url) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
+        results = regex.exec(url);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 

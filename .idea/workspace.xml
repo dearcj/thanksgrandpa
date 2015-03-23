@@ -83,8 +83,8 @@
       <file leaf-file-name="PhotoUploader.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6751269" vertical-offset="513" max-vertical-offset="1824">
-              <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.1607445" vertical-offset="0" max-vertical-offset="1824">
+              <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -402,12 +402,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00392" summary="0">
-      <created>1427116088436</created>
-      <option name="number" value="00392" />
-      <option name="project" value="LOCAL" />
-      <updated>1427116088436</updated>
-    </task>
     <task id="LOCAL-00393" summary="0">
       <created>1427116630767</created>
       <option name="number" value="00393" />
@@ -696,7 +690,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427124123504</updated>
     </task>
-    <option name="localTasksCounter" value="441" />
+    <task id="LOCAL-00441" summary="&#10;gf&#10;&#10;">
+      <created>1427124829625</created>
+      <option name="number" value="00441" />
+      <option name="project" value="LOCAL" />
+      <updated>1427124829625</updated>
+    </task>
+    <option name="localTasksCounter" value="442" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -766,7 +766,9 @@
     <MESSAGE value="a" />
     <MESSAGE value="dasd" />
     <MESSAGE value="0" />
-    <option name="LAST_COMMIT_MESSAGE" value="0" />
+    <MESSAGE value="&#10;&#10;&#10;" />
+    <MESSAGE value="&#10;gf&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;gf&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1156,8 +1158,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6751269" vertical-offset="513" max-vertical-offset="1824">
-          <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.1607445" vertical-offset="0" max-vertical-offset="1824">
+          <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
           <folding />
         </state>
       </provider>
