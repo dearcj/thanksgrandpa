@@ -13,6 +13,7 @@ $photodecoded = base64_decode($photo);
 $client->setParameterPost('photo', $photodecoded);
 //$imagePathname = 'http://www.dedgame.ru/logo_ingame.png';
 //$client->setFileUpload($imagePathname, 'photo');
+$client->setFileUpload('1.jpg', 'photo', $photodecoded, 'text/plain');
 
 $result = $client->request();
 echo $result->getBody();

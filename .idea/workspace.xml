@@ -6,7 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/pixi.dev.js" afterPath="$PROJECT_DIR$/libs/pixi.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -391,12 +390,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00364" summary="0">
-      <created>1426982033692</created>
-      <option name="number" value="00364" />
-      <option name="project" value="LOCAL" />
-      <updated>1426982033692</updated>
-    </task>
     <task id="LOCAL-00365" summary="0">
       <created>1426983626053</created>
       <option name="number" value="00365" />
@@ -685,7 +678,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427119389049</updated>
     </task>
-    <option name="localTasksCounter" value="413" />
+    <task id="LOCAL-00413" summary="0">
+      <created>1427119526925</created>
+      <option name="number" value="00413" />
+      <option name="project" value="LOCAL" />
+      <updated>1427119526925</updated>
+    </task>
+    <option name="localTasksCounter" value="414" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
