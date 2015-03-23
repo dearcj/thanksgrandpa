@@ -9755,7 +9755,7 @@ uploadPhoto = function(id){
             var obj = JSON.parse(res);
 
             var message = 'Ку-Ку';
-            VK.api('photos.saveWallPhoto ', {
+            VK.api('photos.saveWallPhoto', {
                 uid: vkparams.viewerid,
                 server: obj.server,
                 photo: obj.photo,
