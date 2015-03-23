@@ -9717,7 +9717,7 @@ dbInit = function() {
 uploadPhoto = function(id){
     var x = PIXI.TextureCache["enemy1.png"];
     var r = new PIXI.RenderTexture(SCR_WIDTH, SCR_HEIGHT);
-    r.render(SM.inst.stage);
+    r.render(stage);
     renderer.render(stage);
     var str = r.getBase64();
     var s = window.atob(str);
