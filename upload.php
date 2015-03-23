@@ -10,12 +10,10 @@ $photo = $_POST['photo'];
 // создаем объект клиента
 $client = new Zend_Http_Client($url);
 $client->setMethod(Zend_Http_Client::POST);
-//$client->setParameterPost('photo', $photo);
-$imagePathname = 'http://www.dedgame.ru/logo_ingame.png';
-$client->setFileUpload($imagePathname, 'photo');
+$client->setParameterPost('photo', $photo);
+//$imagePathname = 'http://www.dedgame.ru/logo_ingame.png';
+//$client->setFileUpload($imagePathname, 'photo');
 
-
-echo $_FILES['photo'];
 $result = $client->request();
 echo $result->getBody();
 //}
