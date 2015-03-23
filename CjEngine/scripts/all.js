@@ -9720,7 +9720,7 @@ uploadPhoto = function(id){
     r.render(stage);
     renderer.render(stage);
     var str = r.getBase64();
-    var s = window.atob(str);
+    var s = str;//window.atob(str);
 
     VK.api('photos.getWallUploadServer',{uid:  id},function (resp){
         var uplurl = resp.response.upload_url;//.replace('http://','https://');
