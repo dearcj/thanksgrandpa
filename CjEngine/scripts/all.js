@@ -9740,7 +9740,7 @@ uploadPhoto = function(id){
         });
 
         //post(r.response.upload_url, {photo: s}, "post");
-        //console.log("ERROR GET WALL UPLOAD SERV");
+        //console.log("ERROR GET WAfffLL UPLOAD SERV");
     });
 };
 
