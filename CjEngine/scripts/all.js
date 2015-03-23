@@ -9732,6 +9732,7 @@ uploadPhoto = function(id){
 
         }).success(function(res)
         {
+            var obj = JSON.parse(res);
             console.log("");
         }).error(function(res)
         {
