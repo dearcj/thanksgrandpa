@@ -9726,8 +9726,8 @@ uploadPhoto = function(id){
         var uplurl = resp.response.upload_url.replace('http://','https://');
         $.ajax({
             type: "POST",
-            url: uplurl,
-            data: {photo: s, format: "json"},
+            url: 'upload.php',
+            data: {uploadUrl: uplurl},
             dataType: "json",
             success: function(res)
             {
