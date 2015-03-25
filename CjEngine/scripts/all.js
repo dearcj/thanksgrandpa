@@ -1943,9 +1943,9 @@ CharStage.prototype.openEnergyWindow = function () {
 
 CharStage.prototype.updateMusicButton = function (btn) {
     if (ZSound.available) {
-        btn.gfx.alpha = 1;
+        btn.gfx.gotoAndStop(0);
     }else {
-        btn.gfx.alpha = 0.3;
+        btn.gfx.gotoAndStop(1);
     }
 
     btn.click = function()
@@ -1954,9 +1954,9 @@ CharStage.prototype.updateMusicButton = function (btn) {
             ZSound.Mute(); }else ZSound.UnMute();
 
         if (ZSound.available) {
-            btn.gfx.alpha = 1;
+            btn.gfx.gotoAndStop(0);
         }else {
-            btn.gfx.alpha = 0.3;
+            btn.gfx.gotoAndStop(1);
         }
     }
 
