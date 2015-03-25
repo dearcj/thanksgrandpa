@@ -1360,10 +1360,10 @@ GameStage.prototype.makePause = function () {
             gameStage.removeFade();
         }
 
-     CObj.getById("brestart").click = function () {
+    /* CObj.getById("brestart").click = function () {
         removePause();
         SM.inst.openStage(gameStage);
-     };
+     };*/
 
     CObj.getById("bresume").click = function () {
         removePause();
@@ -1940,6 +1940,27 @@ CharStage.prototype.openEnergyWindow = function () {
     }, SM.inst.fontLayer);
 }
 
+CharStage.prototype.updateMusicButton = function (btn) {
+    if (ZSound.available) {
+        btn.gfx.alpha = 1;
+    }else {
+        btn.gfx.alpha = 0.3;
+    }
+
+    btn.click = function()
+    {
+        if (ZSound.available) {
+            ZSound.Mute(); }else ZSound.UnMute();
+
+        if (ZSound.available) {
+            btn.gfx.alpha = 1;
+        }else {
+            btn.gfx.alpha = 0.3;
+        }
+    }
+
+}
+
 
 CharStage.prototype.onShowContinue = function () {
     charStage.doProcess = true;
@@ -1990,16 +2011,8 @@ CharStage.prototype.onShowContinue = function () {
                 window.location.href = "mailto:thanksgrandpa@gmail.com";
                 window.open('mailto:thanksgrandpa@gmail.com', 'mail');
             }
-            CObj.getById("bmusic").click = function()
-            {
-                if (ZSound.available) {
-                    CObj.getById("bmusic").gfx.alpha = 0.3;
-                    ZSound.Mute();
-                }else {
-                    CObj.getById("bmusic").gfx.alpha = 1;
-                    ZSound.UnMute();
-                }
-            }
+
+            charStage.updateMusicButton(CObj.getById("bmusic"));
 
 
 
@@ -9544,7 +9557,6 @@ function preloaderLoaded() {
         "levels/levelup.json",
         "levels/levach.json",
         "levels/levshop.json",
-        "levels/mainmenu.json",
         "levels/hud.json",
         "levels/plantPart1.json",
         "levels/plantPart2.json",
@@ -9581,7 +9593,6 @@ function preloaderLoaded() {
     window.comixStage = new ComixStage();
     window.scoreStage = new ScoreStage();
     window.gameStage = new GameStage();
-    window.mainMenu = new MainMenu();
     window.credStage = new Credits();
     //window.winGameStage = new WinGame();
     window.achStage = new AchStage();
