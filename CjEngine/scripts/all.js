@@ -10368,7 +10368,7 @@ function showADs()
 {
     var div = document.createElement('div');
     div.id = "vk_ads_55316";
-    div.setAttribute("style", "position:absolute;left:50%;top:50%;margin-left: -160px;");
+    div.setAttribute("style", "position:absolute;left:0%;top:0;margin-left: -160px;");
 
 //Вставляем на страницу
     document.body.appendChild(div);
@@ -10471,7 +10471,7 @@ function preloaderLoaded() {
     loader.onComplete = function()
     {
         window.loaded = true;
-    //    window.gfxLoaded = true;
+        window.gfxLoaded = true;
         onAssetsLoaded();
     };
     loader.load();
