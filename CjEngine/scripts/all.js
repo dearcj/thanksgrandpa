@@ -10362,6 +10362,29 @@ VK.addCallback('onOrderCancel', function () {
     }
 });
 
+function showADs()
+{
+setTimeout(function() {
+    var adsParams = {"ad_unit_id":55316,"ad_unit_hash":"d4685898a5210c69b772bf2ab6fb0571"};
+    function vkAdsInit() {
+        VK.Widgets.Ads('vk_ads_55316', {}, adsParams);
+    }
+    if (window.VK && VK.Widgets) {
+        vkAdsInit();
+    } else {
+        if (!window.vkAsyncInitCallbacks) window.vkAsyncInitCallbacks = [];
+        vkAsyncInitCallbacks.push(vkAdsInit);
+        var protocol = ((location.protocol === 'https:') ? 'https:' : 'http:');
+        var adsElem = document.getElementById('vk_ads_55316');
+        var scriptElem = document.createElement('script');
+        scriptElem.type = 'text/javascript';
+        scriptElem.async = true;
+        scriptElem.src = protocol + '//vk.com/js/api/openapi.js?116';
+        adsElem.parentNode.insertBefore(scriptElem, adsElem.nextSibling);
+    }
+}, 0);
+}
+
 function preloaderLoaded() {
 
     window.stage = new PIXI.Stage(0xffffff);
