@@ -4,7 +4,6 @@ Utils\ZSound.js + ^
 Utils\LevelManager.js + ^
 Stages\StageManager.js + ^
 Stages\CustomStage.js + ^
-Stages\MainMenu.js + ^
 Stages\LevSel.js + ^
 Stages\GameStage.js + ^
 Stages\Credits.js + ^
