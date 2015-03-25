@@ -72,7 +72,7 @@
       <file leaf-file-name="gamefile.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44562647" vertical-offset="3214" max-vertical-offset="7239">
+            <state vertical-scroll-proportion="0.3108747" vertical-offset="3328" max-vertical-offset="7239">
               <caret line="189" column="4" selection-start-line="189" selection-start-column="4" selection-end-line="189" selection-end-column="4" />
               <folding />
             </state>
@@ -523,12 +523,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00430" summary="0">
-      <created>1427123292427</created>
-      <option name="number" value="00430" />
-      <option name="project" value="LOCAL" />
-      <updated>1427123292427</updated>
-    </task>
     <task id="LOCAL-00431" summary="0">
       <created>1427123347395</created>
       <option name="number" value="00431" />
@@ -817,7 +811,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427300911161</updated>
     </task>
-    <option name="localTasksCounter" value="479" />
+    <task id="LOCAL-00479" summary="&#10;gf&#10;&#10;">
+      <created>1427300970263</created>
+      <option name="number" value="00479" />
+      <option name="project" value="LOCAL" />
+      <updated>1427300970263</updated>
+    </task>
+    <option name="localTasksCounter" value="480" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1305,7 +1305,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44562647" vertical-offset="3214" max-vertical-offset="7239">
+        <state vertical-scroll-proportion="0.3108747" vertical-offset="3328" max-vertical-offset="7239">
           <caret line="189" column="4" selection-start-line="189" selection-start-column="4" selection-end-line="189" selection-end-column="4" />
           <folding />
         </state>
