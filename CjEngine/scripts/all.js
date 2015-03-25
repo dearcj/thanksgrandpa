@@ -10372,6 +10372,9 @@ function showADs()
 //Вставляем на страницу
     document.body.appendChild(div);
 
+    setTimeout(function() {
+
+
     var adsParams = {"ad_unit_id":55316,"ad_unit_hash":"d4685898a5210c69b772bf2ab6fb0571"};
     function vkAdsInit() {
         VK.Widgets.Ads('vk_ads_55316', {}, adsParams);
@@ -10389,7 +10392,7 @@ function showADs()
         scriptElem.src = protocol + '//vk.com/js/api/openapi.js?116';
         adsElem.parentNode.insertBefore(scriptElem, adsElem.nextSibling);
     }
-
+}, 0);
 }
 
 function preloaderLoaded() {
