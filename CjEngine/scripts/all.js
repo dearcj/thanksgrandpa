@@ -10403,7 +10403,7 @@ function preloaderLoaded() {
     SM.inst.superStage.addChild(preloaderBg);
     SM.inst.superStage.addChild(loadingScreen);
     requestAnimFrame(animate);
-    showADs();
+
     window.loadingState = "loading";
     window.assetsToLoader = [
         "levels/energywindow.json",
@@ -10465,7 +10465,7 @@ function preloaderLoaded() {
     window.lastLoop = 0;
 
     assetsButSoundsLoaded();
-
+    showADs();
     loader.onComplete = function()
     {
         window.loaded = true;
