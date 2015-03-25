@@ -10441,7 +10441,7 @@ function preloaderLoaded() {
     window.prevH = window.innerHeight;
 
     window.loader = new PIXI.AssetLoader(assetsToLoader);
-    document.body.appendChild(renderer.view);
+   // document.body.appendChild(renderer.view);
 
     PIXI.scaleModes.DEFAULT = 0;
 
@@ -10469,7 +10469,7 @@ function preloaderLoaded() {
     loader.onComplete = function()
     {
         window.loaded = true;
-        window.gfxLoaded = true;
+    //    window.gfxLoaded = true;
         onAssetsLoaded();
     };
     loader.load();
