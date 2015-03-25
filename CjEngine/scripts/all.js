@@ -1360,6 +1360,7 @@ GameStage.prototype.makePause = function () {
             gameStage.removeFade();
         }
 
+    charStage.updateMusicButton(CObj.getById("bmute"));
     /* CObj.getById("brestart").click = function () {
         removePause();
         SM.inst.openStage(gameStage);
@@ -5930,6 +5931,106 @@ CKey.prototype.collide = function(obj2)
     //new TweenMax(this.gfx, 0.3, {alpha: 0, onComplete: this.destroy, scaleX: 10, scaleY: 10});
     //new TweenMax(this.gfx.scale, 0.3, {x: this.gfx.scale.x*1.3, y: this.gfx.scale.y*1.3});
     //this.destroy();
+};
+extend(CBoosterBox, CObj, true);
+
+function CBoosterBox(in_x,in_y,amount) {
+    CObj.apply(this, [in_x, in_y, null, null]);
+    this.gravityEnabled = true;
+    this.colGroup = 1;
+    this.colMask = CG_PLAYER;
+    this.gravPower = 0.46;
+    this.radius = 15;
+    this.gfx = crsp("booster box");
+
+    LauncherBG.inst.ol.addChild(this.gfx);
+
+    this.updateGraphics();
+
+    this.allowTrackSpeed = true;
+}
+
+CBoosterBox.prototype.getBooster = function()
+{
+    var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
+        {name: "Double", cls: CDoubleBooster}];
+    var boost = {name: "MarioStar", cls: CSupermanBooster};//getRand(boosters);
+
+    if (CBooster.list)
+    for (var i = 0; i < CBooster.list.length; ++i)
+    {
+        if (CObj.checkType(CBooster.list[i], boost.cls))
+        {
+            var replaceObj = CBooster.list[i];
+            break;
+        }
+    }
+
+
+    for (var i =0;i < PlayerData.inst.items.length;++i)
+    {
+        if (PlayerData.inst.items[i].name == boost.name)
+        break;
+    }
+    var b = new boost.cls(SCR_WIDTH / 2, SCR_HEIGHT / 2);
+    if (replaceObj)
+    {
+        var inx = CBooster.list.indexOf(b);
+        if (inx >= 0)
+            CBooster.list.splice(inx, 1);
+    }
+    b.gfx = crsp(PlayerData.inst.items[i].gfx);
+
+    b.gfx.scale.x = 0.3;
+    b.gfx.scale.y = 0.3;
+    b.updateGraphics();
+    new TweenMax(b.gfx.scale, 0.3, {x: 0.6, y: 0.6, repeat: 2, yoyo: true});
+    if (replaceObj) {
+        px = replaceObj.x;
+        replaceObj.duration += b.duration;
+    }
+    var px = 35 + 50*(CBooster.list.length - 1);
+    new TweenMax(b, 0.7, {delay: 0.8, x: px, y: 100});
+    var final = function(){b.onActivate();}
+    if (replaceObj) final = function(){b.destroy();}
+    new TweenMax(b.gfx.scale, 0.7, {delay: 0.8, x: 0.3, y: 0.3, onComplete: final});
+    SM.inst.guiLayer.addChild(b.gfx);
+}
+
+CBoosterBox.prototype.collide = function(obj2)
+{
+    if (this.isCollected) return;
+
+    this.isCollected = true;
+
+    this.gravityEnabled = false;
+    this.vx = 0;
+    this.vy = 0;
+    this.allowTrackSpeed = false;
+    var coinGfx = pool.Pop("coinCollect");
+    ZSound.Play("coin")
+    if (!coinGfx)
+        this.destroy(); else
+    {
+        this.getBooster();
+        rp(coinGfx);
+        rp(this.gfx);
+
+        coinGfx.loop = false;
+        coinGfx.gotoAndStop(0);
+        coinGfx.gotoAndPlay(0);
+        this.gfx = coinGfx;
+        this.updateGraphics();
+
+        SM.inst.fg.addChild(coinGfx);
+        var coin = this;
+        this.updateGraphics();
+        var obj = this;
+        obj.return2Pool = obj.gfx;
+        obj.gfx.lifeTime = 800;
+        obj.gfx.onComplete = function () {obj.destroy();}
+    }
+
 };/**
  * Created by KURWINDALLAS on 18.11.2014.
  */
@@ -6933,6 +7034,58 @@ BonusMonGnome.prototype.dealDamage = function(dmg)
     }
 };
 /**
+ * Created by KURWINDALLAS on 24.03.2015.
+ */
+
+extend(CBoosterDrone, CMonster, true);
+
+function CBoosterDrone(in_x,in_y,animname,cr_bar){
+    CMonster.apply(this,[in_x,in_y,animname, cr_bar]);
+    this.metall = true;
+
+    var t = this;
+  //  new TweenMax.delayedCall(1, function(){t.spawnGrenade();});
+}
+
+CBoosterDrone.prototype.kill = function()
+{
+    CMonster.prototype.kill.call(this);
+    var c = new CBoosterBox(this.x, this.y);
+    c.allowTrackSpeed = true;
+    c.vx = 6.5;
+    c.vy = -10;
+    return c;
+
+}
+
+/*
+CDrone.prototype.spawnGrenade = function()
+{
+    if (this.doRemove) return;
+
+
+    var b = new CGrenade(this.x, this.y + 60);
+    b.owner = this;
+    b.life = 10;
+    b.dmg = 40;
+    b.rotation = Math.PI / 2;
+    b.av = 0.2;
+    b.vx = -3;
+    b.gfx.tint = 0xff0000;
+    b.gravityEnabled = true;
+    b.colGroup = CG_GROUND;
+    b.colMask = CG_PLAYER;
+
+    var t = this;
+    new TweenMax.delayedCall(1, function(){t.spawnGrenade();});
+}
+CDrone.prototype.process = function()
+{
+
+
+    CMonster.prototype.process.call(this);
+};
+    *//**
  * Created by KURWINDALLAS on 23.11.2014.
  */
 extend(CCoin, CObj, true);
