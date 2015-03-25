@@ -8646,7 +8646,7 @@ CSupermanBooster.prototype.process = function()
         gameStage.player.vy = Math.cos(window.time / 1000)*0.7;
     }
     CBooster.prototype.process.call(this);
-}extend(CTabletsBooster, CBooster, true);
+};extend(CTabletsBooster, CBooster, true);
 
 
 function CTabletsBooster(x,y,gfx) {
