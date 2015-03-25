@@ -791,7 +791,7 @@ GameStage.prototype.process = function () {
 
     var d = Math.floor(LauncherBG.inst.distance);
     if (gameStage.distText)
-    gameStage.distText.text = d.toString() + " м.";
+    gameStage.distText.text = d.toString() + " M";
     MM.inst.process();
 }
 
@@ -819,8 +819,10 @@ GameStage.prototype.onHide = function (newStage) {
     $(function() {
         $(document).off('keydown', this.doKeyDown);
         $(document).off('keyup', this.doKeyUp);
-        $(document).mousedown(null);
-        $(document).mouseup(null);
+        $(document).off('mousedown', this.fdown);
+        $(document).off('mouseup', this.fup);
+    //    $(document).mousedown(this.fdown);
+     //   $(document).mouseup(this.fup);
     });
 
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
@@ -839,8 +841,10 @@ GameStage.prototype.onHide = function (newStage) {
 
     if (gameStage.pauseSprite) {
         gameStage.pauseSprite.parent.removeChild(gameStage.pauseSprite);
-        gameStage.pauseTexture.destroy(true);
-        gameStage.pauseTexture = null;
+        if (gameStage.pauseTexture) {
+            gameStage.pauseTexture.destroy(true);
+            gameStage.pauseTexture = null;
+        }
         gameStage.pauseSprite = null;
     }
     gameStage.distText = null;
@@ -866,7 +870,7 @@ GameStage.prototype.updateXP = function()
 
 GameStage.prototype.updateItems = function () {
     var k = 0;
-
+/*
     var btns = [{key: "A", gfx: "1boost_button.png"},
         {key: "S", gfx: "2boost_button.png"},
         {key: "D", gfx: "3boost_button.png"}];
@@ -874,6 +878,7 @@ GameStage.prototype.updateItems = function () {
     gameStage.curweapon = w_rifle;
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
+        if (item.name.indexOf('$') >= 0) continue;
         if (item.type == tBoost) {
             var boostClass;
             if (item.name == "Double") boostClass = CDoubleBooster;
@@ -881,7 +886,7 @@ GameStage.prototype.updateItems = function () {
             if (item.name == "Magnet") boostClass = CMagnetBooster;
             if (item.name == "MarioStar") boostClass = CSupermanBooster;
             if (item.name == "Tablets") boostClass = CTabletsBooster;
-            var b = new boostClass(30 + 50*k, SCR_HEIGHT - 40, null);
+            var b = new boostClass(30 + 50*k, 100, null);
 
             b.gfx = crsp(item.gfx);
             b.gfx.scale.x = 0.3;
@@ -917,7 +922,9 @@ GameStage.prototype.updateItems = function () {
             SM.inst.guiLayer.addChild(b.gfx);
             k++;
         }
-
+*/
+    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
+        var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
         if (item.type == tWeapon && PlayerData.inst.items_enabled[i].equipped)
         {
             if (item.name == "Rifle")
@@ -947,7 +954,6 @@ GameStage.prototype.shAfterLife = function () {
     var cb = new CircleBar(SCR_WIDTH / 2, SCR_HEIGHT / 2);
     cb.init("bodrost cover.png",  "bodrost bar.png",  "bodrost bar bg.png");
     SM.inst.guiLayer.addChild(cb.gfx);
-
 
     removeafterlife = function () {
         gainbgsprite.parent.removeChild(gainbgsprite);
@@ -986,7 +992,9 @@ GameStage.prototype.shAfterLife = function () {
             gameStage.removeFade();
             gameStage.unpause();
             gameStage.state = "game";
-            PlayerData.inst.playerItem.crystals -= price;
+            incMetric("USED REVEAL");
+            PlayerData.inst.playerItem.crystals -= gameStage.revealPrice;
+            gameStage.revealPrice *= 2;
             gameStage.player.reveal();
             PlayerData.inst.savePlayerData();
 
@@ -1033,7 +1041,6 @@ GameStage.prototype.shAfterLife = function () {
     gainbgsprite.y = SCR_HEIGHT / 2 + 120;
     SM.inst.guiLayer.addChild(gainbgsprite);
 
-    var price = Math.round(2 + (LauncherBG.inst.distance / 250));
     var tf = CTextField.createTextField({text: price.toString(), fontSize: 22, align: "center"});
     tf.tint = 0x333333;
     tf.updateText();
@@ -1160,6 +1167,9 @@ GameStage.prototype.sessionEnd = function () {
         gameStage.pause();
         gameStage.fadeScreen();
         gameStage.shAfterLife();
+
+        var pattern = MM.inst.patterns[MM.inst.currentPattern.pid].mons;
+        incMetric("DIED on pattern=" + pattern);
     }
 }
 
@@ -1222,6 +1232,8 @@ GameStage.prototype.doKeyUp = function (evt) {
 
 
 GameStage.prototype.onShow = function () {
+    ZSound.PlayMusic("m_ded");
+
     CustomStage.prototype.onShow.call(this);
     gameStage.killing = false;
     gameStage.slowMoCoef = 1;
@@ -1230,6 +1242,8 @@ GameStage.prototype.onShow = function () {
 
     this.state = "game";
     this.doProcess = false;
+
+    gameStage.revealPrice = 2;
 
     LauncherBG.inst = new LauncherBG(0, 0);
     LauncherBG.inst.addLevel("plantPart2");
@@ -1243,6 +1257,36 @@ GameStage.prototype.onShow = function () {
     LevelManager.loadLevel("hud", gameStage.onShowContinue, SM.inst.guiLayer);
 }
 
+GameStage.prototype.fdown = function (md) {
+    //    document.focus();
+    if (md.which == 1)
+        gameStage.fireState = true;
+
+    if (md.which == 3) {
+        if (gameStage.rightReleased) {
+            gameStage.rightReleased =false;
+            gameStage.player.onJump();
+        }
+        //    gameStage.player.jumpboost = false;
+    }
+    //    md.preventDefault();
+    //    window.focus();
+}
+
+GameStage.prototype.fup = function (md) {
+    //     document.focus();
+    if (md.which == 3)
+        gameStage.rightReleased = true;
+
+
+    if (md.which == 1) {
+        gameStage.fireState = false;
+        if (gameStage.player)
+            gameStage.player.weapon.mouseUp();
+    }
+    //    md.preventDefault();
+    //    window.focus();
+}
 
 
 //NO "THIS" IN CURRENT CONTEXT
@@ -1343,36 +1387,6 @@ GameStage.prototype.onShowContinue = function () {
     }
 
 
-    var fdown = function (md) {
-    //    document.focus();
-        if (md.which == 1)
-        gameStage.fireState = true;
-
-        if (md.which == 3) {
-            if (gameStage.rightReleased) {
-                gameStage.rightReleased =false;
-                gameStage.player.onJump();
-            }
-        //    gameStage.player.jumpboost = false;
-        }
-        //    md.preventDefault();
-    //    window.focus();
-    }
-
-    var fup = function (md) {
-   //     document.focus();
-        if (md.which == 3)
-        gameStage.rightReleased = true;
-
-
-        if (md.which == 1) {
-            gameStage.fireState = false;
-            if (gameStage.player)
-                gameStage.player.weapon.mouseUp();
-        }
-    //    md.preventDefault();
-    //    window.focus();
-    }
 
 
     var func =  gameStage.doKeyDown;
@@ -1380,8 +1394,8 @@ GameStage.prototype.onShowContinue = function () {
     $(function() {
         $(document).on('keydown', func);
         $(document).on('keyup', func2);
-        $(document).mousedown(fdown);
-        $(document).mouseup(fup);
+        $(document).mousedown(gameStage.fdown);
+        $(document).mouseup(gameStage.fup);
     });
 
 /*
@@ -1801,6 +1815,7 @@ CharStage.prototype.onShow = function () {
     charStage.skipFriends = 0;
     CustomStage.prototype.onShow.call(this);
     charStage.icons = [];
+    ZSound.PlayMusic("m_room");
 
     LevelManager.loadLevel("levchar", function () {
             LevelManager.loadLevel("upperPanel", charStage.onShowContinue, SM.inst.ol);
@@ -2063,9 +2078,13 @@ CharStage.prototype.onShowContinue = function () {
             }
             CObj.getById("bmusic").click = function()
             {
-                if (ZSound.available)
-                    ZSound.Mute(); else
+                if (ZSound.available) {
+                    CObj.getById("bmusic").gfx.alpha = 0.3;
+                    ZSound.Mute();
+                }else {
+                    CObj.getById("bmusic").gfx.alpha = 1;
                     ZSound.UnMute();
+                }
             }
 
 
@@ -2464,92 +2483,93 @@ function ShopStage() {
 
 extend(ShopStage, CustomStage);
 
-ShopStage.prototype.onShow = function() {
+ShopStage.prototype.onShow = function () {
 
 
-   /* PlayerData.inst.playerItem.money = 10000;
-    PlayerData.inst.playerItem.crystals = 1000;*/
+    /* PlayerData.inst.playerItem.money = 10000;
+     PlayerData.inst.playerItem.crystals = 1000;*/
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
 
-    LevelManager.loadLevel("levshop",  function()
-    {
+    LevelManager.loadLevel("levshop", function () {
         LevelManager.loadLevel("upperPanel", shopStage.onShowContinue, SM.inst.ol);
     });
 }
 
-ShopStage.prototype.checkEq = function(item)
-{
-    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
-    {
+ShopStage.prototype.checkEq = function (item) {
+    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         if (PlayerData.inst.items_enabled[i].id_item == item.id && PlayerData.inst.items_enabled[i].equipped == true) return true;
     }
     return false;
 }
 
-ShopStage.prototype.checkOwned = function(item)
-{
-    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
-    {
+ShopStage.prototype.checkOwned = function (item) {
+    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         if (item.id == PlayerData.inst.items_enabled[i].id_item) return true;
     }
     return false;
 }
 
-ShopStage.prototype.unequipAll = function() {
+ShopStage.prototype.unequipAll = function () {
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         if (PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item).type == shopStage.currentFilter)
             PlayerData.inst.items_enabled[i].equipped = false;
     }
 }
 
-ShopStage.prototype.buyItem = function (event, unlock)
-{
-    var buyitem =  event.target.btn.item;
+ShopStage.prototype.buyItem = function (event, unlock) {
+    var buyitem = event.target.btn.item;
     if ((!unlock && buyitem.price > 0 && PlayerData.inst.playerItem.money >= buyitem.price) ||
-        (unlock && buyitem.pricecrys> 0 && PlayerData.inst.playerItem.crystals >= buyitem.pricecrys))
-    {
+        (unlock && buyitem.pricecrys > 0 && PlayerData.inst.playerItem.crystals >= buyitem.pricecrys)) {
 
         // shopStage.unequipAll();
-        shopStage.transScreen = SM.inst.addDisableWindow("ПРОВОДИТСЯ ТРАНЗАКЦИЯ" +'\n' + "ПОЖАЛУЙСТА ПОДОЖДИТЕ");
+        shopStage.transScreen = SM.inst.addDisableWindow("ПРОВОДИТСЯ ТРАНЗАКЦИЯ" + '\n' + "ПОЖАЛУЙСТА ПОДОЖДИТЕ");
 
-        if  (unlock && buyitem.pricecrys > 0)
+        if (unlock && buyitem.pricecrys > 0)
             PlayerData.inst.playerItem.crystals -= buyitem.pricecrys;
         else
             PlayerData.inst.playerItem.money -= buyitem.price;
 
-        shopStage.updateStatsPanel();
 
         ZSound.Play("buy");
         azureclient.invokeApi("buy_item", {
             body: {id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id},
             method: "post"
         }).done(function (results) {
+            shopStage.updateStatsPanel();
+            PlayerData.inst.savePlayerData(function () {
+                PlayerData.inst.loadData(function () {
+                    incMetric("BUY ITEM" + buyitem.name);
+                    PlayerData.inst.equipItem(buyitem);
+                    shopStage.pl.updateAppearence(true, false, null, null, null);
 
-            PlayerData.inst.loadData(function()
-            {
-                PlayerData.inst.equipItem(buyitem);
-                shopStage.pl.updateAppearence(true, false, null, null, null);
-
-                shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
-                shopStage.updateStatsPanel();
+                    shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
+                    shopStage.updateStatsPanel();
+                    shopStage.transScreen.parent.removeChild(shopStage.transScreen);
+                    shopStage.transScreen = null;
+                });
+            }, function (error) {
                 shopStage.transScreen.parent.removeChild(shopStage.transScreen);
                 shopStage.transScreen = null;
             });
-        }, function(error) {
-            shopStage.transScreen.parent.removeChild(shopStage.transScreen);
-            shopStage.transScreen = null;
         });
-    } else
-    {
+    } else {
         charStage.openPremiumWindow();
     }
 }
 
-ShopStage.prototype.createItemBtn = function(item)
-{
+ShopStage.prototype.createItemBtn = function (item) {
     var g = new PIXI.DisplayObjectContainer();
+    var isBooster = shopStage.currentTab == "bstuff";
 
-    var ico = crsp(item.gfx)//;new PIXI.Sprite(PIXI.Texture.fromFrame(item.gfx+".png"));
+    if (isBooster) {
+        var upgrObj = PlayerData.inst.getUpgrade(item);
+        var upgr = upgrObj.upgr;
+        if (upgrObj.id)
+            item = PlayerData.inst.getItemById(upgrObj.id);
+
+    }
+
+    var ico = crsp(item.gfx)
     ico.x = 0;
     var bsX = 0.5;
     var bsY = 0.5;
@@ -2557,7 +2577,6 @@ ShopStage.prototype.createItemBtn = function(item)
     ico.scale.y = bsY;
     ico.y = ico.height / 2;
     g.addChild(ico);
-
     ico.interactive = true;
     var f = ico;
     ico.mouseover = function (evt) {
@@ -2575,38 +2594,51 @@ ShopStage.prototype.createItemBtn = function(item)
         }
         TweenMax.killTweensOf(f.scale);
         f.tint = CButton.tintColor;
-        new TweenMax(f.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
-        new TweenMax(f.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
+        new TweenMax(f.scale, 0.6, {y: bsY + 0.05, ease: Elastic.easeOut});
+        new TweenMax(f.scale, 0.4, {x: bsX + 0.05, ease: Elastic.easeOut});
 
         var desc = item.desc.split("|");
         var desctext = desc[0];
         if (desc.length > 1) desctext = desc[1];
         var tf =
-        CObj.getById("tfdescd");
+            CObj.getById("tfdescd");
         tf.setTextSafe(desctext);
         tf.item = item;
     }
-
     ico.mouseout = function (evt) {
         var tf = CObj.getById("tfdescd");
         if (tf.item == item)
-        tf.setTextSafe("");
+            tf.setTextSafe("");
         if (item.type == tWeapon || item.type == tApp + tHat) {
             shopStage.pl.updateAppearence(true, false, null, null, null);
         }
         f.tint = 0xffffff;
         if (f.currentFrame)
             f.gotoAndStop(1);
-        new TweenMax(f.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut} );
+        new TweenMax(f.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut});
     }
+
+    if (isBooster)
+        for (var i = 0; i < 5; ++i) {
+            if (i < upgr)
+                var x = crsp("improve point on"); else
+                x = crsp("improve point off");
+            x.x = (i - 2) * 25;
+            x.scale.x = 0.8;
+            x.scale.y = 0.8;
+            x.y = 3;
+            g.addChild(x);
+        }
+
 
     var owned = this.checkOwned(item);
     var equipped = this.checkEq(item);
 
     tftext = "";
-     if (!owned) {
+
+    if (isBooster && upgr == 5) tftext = ""; else if (!owned || isBooster) {
         if (item.pricecrys < 0 && item.price < 0)
-        tftext = ""; else {
+            tftext = ""; else {
             if (item.pricecrys > 0)
                 tftext = item.pricecrys.toString(); else
                 tftext = item.price.toString();
@@ -2614,74 +2646,76 @@ ShopStage.prototype.createItemBtn = function(item)
     }
 
     var clickFunc;
-var infoText = "";
+    var infoText = "";
     var dy = 0;
     var btnName = "buy button";
-    if (!owned) {
-        if (item.reqlvl > PlayerData.inst.playerItem.lvl) {
-            clickFunc = unlockItem;
-            btnName = "unlock button";
-            infoText = "МИН " + item.reqlvl.toString() + " УР.";
+
+
+    if (!owned || isBooster) {
+
+        if (isBooster && upgr == 5) {
+            btnName = "equipped button";
         } else {
-            clickFunc = buyItem;
-            btnName = "buy button";
-            dy = -15;
+            if (item.reqlvl > PlayerData.inst.playerItem.lvl) {
+                clickFunc = unlockItem;
+                btnName = "unlock button";
+                infoText = "МИН " + item.reqlvl.toString() + " УР.";
+            } else {
+                clickFunc = buyItem;
+                btnName = "buy button";
+                //   dy = -15;
+            }
         }
-    } else
-    {
-        dy = -45;
+    } else {
         if (equipped == true)
-        btnName = "equipped button"; else {
+            btnName = "equipped button"; else {
             clickFunc = wearItem;
             btnName = "wear button"
         }
-
-        if (shopStage.currentTab == "bstuff")
-        {
-
-            btnName = "equipped button";
-        }
     }
-        //вкладка бустер if ()
+    dy = -15;
+    //вкладка бустер if ()
 
 
-        var btn = new CButton(0, 182 + dy, btnName);
-        if (btnName == "equipped button")
-        {
-            btn.gfx.mouseout = null;
-            btn.gfx.mouseover = null;
-        };
-        btn.fontSize = 33;
-        btn.addToSameLayer = true;
-        btn.gfx.anchor.x = 0.5;
-        btn.gfx.anchor.y = 0.5;
-        btn.gfx.scale.x = 0.8;
-        btn.gfx.scale.y = 0.8;
-        btn.init();
-        btn.gfx.parent.removeChild(btn.gfx);
+    var btn = new CButton(0, 144 + dy, btnName);
+    if (btnName == "equipped button") {
+        btn.gfx.mouseout = null;
+        btn.gfx.mouseover = null;
+    }
+    ;
+    btn.fontSize = 33;
+    btn.addToSameLayer = true;
+    btn.gfx.anchor.x = 0.5;
+    btn.gfx.anchor.y = 0.5;
+    btn.gfx.scale.x = 0.8;
+    btn.gfx.scale.y = 0.8;
+    btn.init();
+    btn.gfx.parent.removeChild(btn.gfx);
+
+    if (isBooster)
+        btn.item = PlayerData.inst.getItemById(upgrObj.idNext); else
         btn.item = item;
-        btn.gfx.btn = btn;
-        btn.click = clickFunc;
+    btn.gfx.btn = btn;
+    btn.click = clickFunc;
 
-        function unlockItem(event) {
-            shopStage.buyItem(event, true);
-        }
+    function unlockItem(event) {
+        shopStage.buyItem(event, true);
+    }
 
-        function wearItem(event) {
-            PlayerData.inst.equipItem(item);
-            shopStage.pl.updateAppearence(true, false, null, null, null);
-            shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
-        }
+    function wearItem(event) {
+        PlayerData.inst.equipItem(item);
+        shopStage.pl.updateAppearence(true, false, null, null, null);
+        shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
+    }
 
-        function buyItem(event)
-        {
-            shopStage.buyItem(event, false);
-        }
+    function buyItem(event) {
+        shopStage.buyItem(event, false);
+    }
 
 
-        g.addChild(btn.gfx);
+    g.addChild(btn.gfx);
     if (btn.text)
-    btn.text = btn.text;
+        btn.text = btn.text;
     g.btn = btn;
 
     if (tftext) {
@@ -2691,9 +2725,11 @@ var infoText = "";
             bgSprite = "price star.png";
 
         if (bgSprite) {
-            var tfBg =crsp(bgSprite);
+            var tfBg = crsp(bgSprite);
             tfBg.x = 0;
-            tfBg.y = 110;
+            tfBg.y = 80;
+            tfBg.scale.x = 0.75;
+            tfBg.scale.y = 0.75;
             g.addChild(tfBg);
         }
     }
@@ -2713,18 +2749,17 @@ var infoText = "";
 
     var priceTF = new CTextField();
     priceTF.tint = "0x333333";
-    priceTF.fontSize = 17;
-    priceTF.align = "left";
+    priceTF.fontSize = 15;
+    priceTF.align = "center";
     priceTF.text = tftext;
     priceTF.init();
     g.tfprice = priceTF;
-    priceTF.x = 2;
-    priceTF.y = 100;
+    priceTF.x = 10;
+    priceTF.y = 70;
     priceTF.gfx.parent.removeChild(priceTF.gfx);
     g.addChild(priceTF.gfx);
     priceTF.text = priceTF.text;
-    g.destroy = function()
-    {
+    g.destroy = function () {
         g.tfprice.destroy();
         if (g.btn) {
             g.btn.destroy();
@@ -2733,12 +2768,11 @@ var infoText = "";
         g.tfprice = null;
         g.parent.removeChild(g);
     }
-  //  btn.updateGraphics();
+    //  btn.updateGraphics();
     return g;
 }
 
-ShopStage.prototype.updateBar = function(tab, filter, baroffset)
-{
+ShopStage.prototype.updateBar = function (tab, filter, baroffset) {
     shopStage.updateStatsPanel();
     shopStage.currentTab = tab;
     shopStage.currentFilter = filter;
@@ -2749,15 +2783,13 @@ ShopStage.prototype.updateBar = function(tab, filter, baroffset)
 
     CObj.getById(tab).gfx.alpha = 1;
 
-    for (var i = 0; i < this.bar.container.children.length; ++i)
-    {
+    for (var i = 0; i < this.bar.container.children.length; ++i) {
         this.bar.container.children[i].destroy();
         i--;
     }
 
     var numColumns = 2;
-    if (tab == "bweap")
-    {
+    if (tab == "bweap") {
         numColumns = 2;
     }
     var d = this.bar.gfx.width / numColumns - 6;
@@ -2765,9 +2797,11 @@ ShopStage.prototype.updateBar = function(tab, filter, baroffset)
     for (var i = 0; i < PlayerData.inst.items.length; ++i) {
         if (PlayerData.inst.items[i].type.indexOf(filter) < 0) continue;
 
+
+        if (PlayerData.inst.items[i].name.indexOf('$') >= 0)  continue;
         var g = shopStage.createItemBtn(PlayerData.inst.items[i]);
-        g.x = d / 2 + (l % numColumns)*(d);
-        g.y = 40+Math.floor(l / numColumns)*220;
+        g.x = d / 2 + (l % numColumns) * (d);
+        g.y = 40 + Math.floor(l / numColumns) * 170;
         this.bar.container.addChild(g);
         l++;
     }
@@ -2775,7 +2809,7 @@ ShopStage.prototype.updateBar = function(tab, filter, baroffset)
     this.bar.pos = baroffset;
 }
 
-ShopStage.prototype.updateStatsPanel = function() {
+ShopStage.prototype.updateStatsPanel = function () {
     var b = CObj.getById("bar");
     b.gfx.width = 200;
     var xp = PlayerData.inst.playerItem.xp;
@@ -2783,8 +2817,8 @@ ShopStage.prototype.updateStatsPanel = function() {
     b.prop = xp / needed;
     CObj.getById("tflev").text = PlayerData.inst.playerItem.lvl.toString();
     if (!CObj.getById("bar").gfx.parent) {
-             SM.inst.fg.addChild(CObj.getById("bar").gfx);
-        }
+        SM.inst.fg.addChild(CObj.getById("bar").gfx);
+    }
     CObj.getById("tfexp").text = Math.floor(xp).toString() + " / " + Math.floor(needed).toString();
 
     CObj.getById("tfmoney").text = PlayerData.inst.playerItem.money.toString();
@@ -2792,30 +2826,31 @@ ShopStage.prototype.updateStatsPanel = function() {
     CObj.getById("tfenergy").text = Math.floor(PlayerData.inst.playerItem.energy).toString();
 }
 
-ShopStage.prototype.onShowContinue = function()
-{
+ShopStage.prototype.onShowContinue = function () {
     CustomStage.prototype.onShow.call(this);
-    CObj.getById("photo").click = function()
-    {uploadPhoto(vkparams.viewerid, false);}
-    CObj.getById("ava").click = function()
-    {uploadPhoto(vkparams.viewerid, true);}
+    CObj.getById("photo").click = function () {
+        uploadPhoto(vkparams.viewerid, false);
+    }
+    CObj.getById("ava").click = function () {
+        uploadPhoto(vkparams.viewerid, true);
+    }
 
-    shopStage.bar = new CScrollbar(610,335, "", 380, 524);
+    shopStage.bar = new CScrollbar(610, 335, "", 380, 524);
     shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
-    SM.inst.ol.addChildAt( shopStage.bar.gfx,1);
+    SM.inst.ol.addChildAt(shopStage.bar.gfx, 1);
     shopStage.updateStatsPanel();
 
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
     CObj.getById("bbuy2").click = charStage.openPremiumWindow;
 
-    CObj.getById("bback").click = function() {
+    CObj.getById("bback").click = function () {
         SM.inst.openStage(charStage);
     }
 
-    CObj.getById("bstuff").click = function() {
+    CObj.getById("bstuff").click = function () {
         shopStage.updateBar("bstuff", tBoost);
     }
-    CObj.getById("bweap").click = function() {
+    CObj.getById("bweap").click = function () {
         shopStage.updateBar("bweap", tWeapon);
     }
 
@@ -2833,12 +2868,12 @@ ShopStage.prototype.onShowContinue = function()
     SM.inst.ol.addChild(pl.gfx);
 }
 
-function levelClick(evt){
+function levelClick(evt) {
     gameStage.currentLevel = evt.target.levelNum;
     SM.inst.openStage(gameStage);
 }
 
-ShopStage.prototype.onHide = function(newStage) {
+ShopStage.prototype.onHide = function (newStage) {
 
     shopStage.pl = null;
     CustomStage.prototype.onHide.call(this, null);
@@ -2846,8 +2881,20 @@ ShopStage.prototype.onHide = function(newStage) {
     CObj.processAll();
 }
 
-ShopStage.prototype.process = function() {
+ShopStage.prototype.process = function () {
 
+    var tf = CObj.getById("tfdelay")
+    if (tf && PlayerData.inst.playerItem.energy < 1) {
+        tf.gfx.visible = true;
+    } else {
+        tf.gfx.visible = false;
+        if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
+            var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
+            tf.text = timeRes.timeString;
+        } else {
+            tf.text = "";
+        }
+    }
 
     CObj.processAll();
 };
@@ -5432,7 +5479,7 @@ FloorObj.prototype.process = function()
                 }
             }
 
-            if ((CObj.checkType(o, CCoin) || CObj.checkType(o, CKey)) && o.y + o.radius / 2 > floorLine - 58) {
+            if ((CObj.checkType(o, CBoosterBox) || CObj.checkType(o, CCoin) || CObj.checkType(o, CKey)) && o.y + o.radius / 2 > floorLine - 58) {
                 if (o.vy > 0)
                 o.vy = -o.vy*0.8;
             }
@@ -6399,7 +6446,8 @@ Boss2.prototype.fire = function()
 };MM = function () {
     this.patterns =
         [
-             {mons: "f..f00szf..000", diff: 1, prob: 1},
+            {mons: "+.........+....+...+...+", diff: 1, prob: 1},
+            /*{mons: "f..f00szf..000", diff: 1, prob: 1},
                 {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
                 {mons: ".s..s..s..c", diff: 1, prob: 1},
@@ -6447,9 +6495,9 @@ Boss2.prototype.fire = function()
                 {mons: ".c.b.cbb..lb.gG.Gg..g.", diff: 8, prob: 1},
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
                 {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
-                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}
+                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}*/
         ];
-
+    this.carClips = ["car","car1","car2"]
 
     this.bosses = [{cls: Boss1, dist: 1000}, {cls: Boss2, dist: 2000}];
     // c l z - преграды
@@ -6516,7 +6564,7 @@ MM.prototype.spawnPlane = function () {
 }
 
 MM.prototype.generateMonsterQueue = function () {
-    MM.debugArray = [];
+    this.debugArray = [];
     var diffs = []
     var maxDiff = 0;
     for (var i = 0 ;i < this.patterns.length; ++i)
@@ -6592,7 +6640,7 @@ MM.prototype.generateMonsterQueue = function () {
         s += this.patterns[inx].mons;
         var ppp = (this.patterns[inx].prob1 - this.patterns[inx].prob0) / summ;
         //  console.log(currDiff + " / " + d.toString() + " choose pattern with diff = " + this.patterns[inx].diff.toString() + " with p = " + ppp.toString());
-        MM.debugArray.push({diff: this.patterns[inx].diff, start: d, prob: ppp, probDiff: choosenDiffProb});
+        this.debugArray.push({pid: inx, diff: this.patterns[inx].diff, start: d, prob: ppp, probDiff: choosenDiffProb});
         d += this.patterns[inx].mons.length;
 
         //this.patterns[j] => choosen pattern
@@ -6619,6 +6667,8 @@ MM.prototype.generateMonsterQueue = function () {
 
          */
     }
+
+    this.currentPattern = this.debugArray[0];
 
     return s;
 }
@@ -6671,6 +6721,8 @@ MM.prototype.spawnBarrel = function (clip, offsY, innerOffs) {
 
 
 MM.prototype.spawnCar = function (clip, offsY, innerOffs) {
+    var clip = getRand(this.carClips);
+
     var m = new CObstacle(SCR_WIDTH + 240, 450 + 2 * offsY, clip, false);
     m.gfx.scale.x = 0.8;
     m.gfx.scale.y = 0.8;
@@ -6695,6 +6747,22 @@ MM.prototype.spawnDrone = function (xp) {
     m.gravityEnabled = false;
     new TweenMax(m, 1, {y: m.y + 80, ease: Sine.easeInOut, yoyo: true, repeat: 10});
     m.maxHp = 190;
+    m.hp = m.maxHp;
+    m.barOffsetX = 10;
+    m.xp = 25 + LauncherBG.inst.distance * 0.01;
+}
+
+
+MM.prototype.spawnBoosterDrone = function()
+{
+    var str = "booster dron";
+    var m = new CBoosterDrone(SCR_WIDTH + 100, 80, str);
+    m.gfx.anchor.x = 0.5;
+    m.vx = -1;
+    m.allowTrackSpeed = false;
+    m.gravityEnabled = false;
+    new TweenMax(m, 1, {y: m.y + 80, ease: Sine.easeInOut, yoyo: true, repeat: 10});
+    m.maxHp = 80;
     m.hp = m.maxHp;
     m.barOffsetX = 10;
     m.xp = 25 + LauncherBG.inst.distance * 0.01;
@@ -6832,13 +6900,13 @@ MM.prototype.doStep = function () {
      }
      this.bonusQueue= this.bonusQueue.slice(1);
      */
-    if (!MM.totalD) MM.totalD = 0;
-    MM.totalD++;
-    for (var i = 0; i < MM.debugArray.length; ++i)
+    if (!this.totalD) this.totalD = 0;
+    this.totalD++;
+    for (var i = 0; i < this.debugArray.length; ++i)
     {
-        if (MM.debugArray[i].start == MM.totalD)
+        if (this.debugArray[i].start == MM.totalD)
         {
-            console.log("PAT WITH DIFF " + MM.debugArray[i].diff.toString() + " WITH P = " + MM.debugArray[i].prob.toString() + " DIFF P = " + MM.debugArray[i].probDiff.toString());
+            this.currentPattern = this.debugArray[i];
         }
     }
 
@@ -6859,6 +6927,7 @@ MM.prototype.doStep = function () {
     if (s == "?") this.spawnRandomMonster();
     if (s == "0") this.spawnCoin(440);
     if (s == "o") this.spawnJumpMon();
+    if (s == "+") this.spawnBoosterDrone();
 
     var d = 5000;
 
@@ -6967,14 +7036,7 @@ function CCoin(in_x,in_y,amount) {
     if (!CCoin.coins) CCoin.coins = [];
     CCoin.coins.push(this);
 }
-CCoin.prototype.process = function ()
-{
-    CObj.prototype.process.call(this);
 
-  /*  if (this.gravityEnabled)
-    this.vx = -7;
-    */
-}
 
 CCoin.spawnCoin = function(x, y, a)
 {
@@ -6982,6 +7044,7 @@ CCoin.spawnCoin = function(x, y, a)
     c.allowTrackSpeed = true;
     c.vx = 6.5 + (Math.random() - 0.5)*1;
     c.vy = -10 - 12*(Math.random());
+    return c;
 }
 
 CCoin.prototype.collide = function(obj2)
@@ -7583,13 +7646,12 @@ CWeapon.prototype.shot = function()
         ZSound.Play(this.sound);
 
 
-
     if (this.ammo < 0)
     {
         this.reload();
         return false;
     }
-    this.lastShot = (new Date()).getTime();
+    this.lastShot = window.time;
 
     this.acc += this.backupStats.accRecoil;
 
@@ -7606,7 +7668,7 @@ CWeapon.prototype.shot = function()
 
 CWeapon.prototype.canShot = function()
 {
-    var t = (new Date()).getTime();
+    var t = window.time;
     if (this.state == this.sReload) return false;
 
     if (t - this.lastShot >= this.delay) return true; else
@@ -7665,6 +7727,7 @@ function CPistol(_id, _name, _desc,  __params,__gfx, _upgrades)
 
 CPistol.prototype.mouseUp = function() {
     this.lastShot -= this.delay*0.3;
+    console.log("MUP");
 }
 
 CPistol.prototype.shot = function()
@@ -7688,6 +7751,7 @@ CPistol.prototype.shot = function()
     SM.inst.fg.addChild(fx);
 
     TweenMax.delayedCall(0.03, function (){fx.parent.removeChild(fx);});
+    if (gameStage.player.gravityEnabled)
     gameStage.player.vx = -0.5;
     var b = new CBullet(xx, yy, "bomb1");
     b.life = this.life;
@@ -8366,19 +8430,32 @@ function CBooster(x,y,gfx) {
     if (!CBooster.list)
     CBooster.list = [];
     CBooster.list.push(this);
-    this.activate = null;
+    this.activate = true;
   //  this.removeBoosterItem();
 }
 
 CBooster.prototype.destroy = function()
 {
+    if (this.doRemove) return;
+    CBooster.list.push(this);
+    var inx = CBooster.list.indexOf(this);
+    if (inx >= 0)
+    CBooster.list.splice(inx, 1);
     CObj.prototype.destroy.call(this);
 }
 
 CBooster.prototype.onDeactivate = function() {
     rp(this.tf);
     this.tf = null;
-    this.gfx.alpha = 0.5;
+    //this.gfx.alpha = 0.5;
+    this.activate = false;
+    var inx = CBooster.list.indexOf(this);
+    if (inx >= 0)
+        CBooster.list.splice(inx, 1);
+
+    var t = this;
+    new TweenMax(this.gfx, 0.5, {alpha: 0, onComplete: function(){t.destroy();}});
+    //this.destroy();
 }
 CBooster.prototype.removeBoosterItem = function() {
 
@@ -8396,12 +8473,12 @@ CBooster.prototype.removeBoosterItem = function() {
 }
 
 CBooster.prototype.onActivate = function() {
-    this.activate = false;
+    this.activate = true;
     PlayerData.inst.progressAch("Gold medal 5", 1, false);
 
     this.startTime = window.time;
     this.lastTick = 0;
-    this.tf = CTextField.createTextField({tint: "0xFFFFFF", text: "AAASA", fontSize: 80, align: "center"});
+    this.tf = CTextField.createTextField({fontFamily: "dedgamecaps", tint: "0xFFFFFF", text: "", fontSize: 80, align: "center"});
     this.tf.x = this.tf.width / 2;
     this.tf.y = -40;
     this.gfx.addChild(this.tf);
@@ -8409,6 +8486,8 @@ CBooster.prototype.onActivate = function() {
 
 CBooster.prototype.process = function()
 {
+    if (!this.activate) return;
+    if (this.doRemove) return;
     if (this.tf) {
         if (window.time - this.lastTick > 1000) {
             this.lastTick = window.time;
@@ -8419,6 +8498,11 @@ CBooster.prototype.process = function()
         }
         this.tf.x = -this.tf.width / 2;
     }
+
+    if (this.startTime && window.time - this.startTime > this.duration*1000)
+    {
+        this.onDeactivate();
+    }
 };/**
  * Created by KURWINDALLAS on 21.01.2015.
  */
@@ -8427,8 +8511,6 @@ extend(CDoubleBooster, CBooster, true);
 function CDoubleBooster(x,y,gfx) {
     CBooster.apply(this, [x,y,gfx]);
     this.duration = 30;
-    this.key = "D";
-    this.activate = true;
 }
 
 CDoubleBooster.prototype.onActivate = function()
@@ -8436,24 +8518,31 @@ CDoubleBooster.prototype.onActivate = function()
     if (!gameStage.player) return;
     CBooster.prototype.onActivate.call(this);
 
-    var b = this;
-
     gameStage.player.doubleBooster = true;
-
-    TweenMax.delayedCall(this.duration, function(){
-        gameStage.player.doubleBooster = false;
-        b.onDeactivate();
-    });
-
 };
+
+
+CDoubleBooster.prototype.onDeactivate = function()
+{
+   gameStage.player.doubleBooster = false;
+   CBooster.prototype.onDeactivate.call(this);
+}
 extend(CHeartBooster, CBooster, true);
 
 function CHeartBooster(x,y,gfx) {
     CBooster.apply(this, [x,y,gfx]);
+    this.duration = 0.1;
+};
+
+
+CHeartBooster.prototype.onActivate = function() {
 
     gameStage.player.maxHp++;
     gameStage.player.hp++;
-};/**
+
+    if (!gameStage.player) return;
+    CBooster.prototype.onActivate.call(this);
+}/**
  * Created by KURWINDALLAS on 21.01.2015.
  */
 extend(CMagnetBooster, CBooster, true);
@@ -8461,6 +8550,7 @@ extend(CMagnetBooster, CBooster, true);
 function CMagnetBooster(x,y,gfx) {
     CBooster.apply(this, [x,y,gfx]);
     CMagnetBooster.mindist = 300*300;
+    this.duration = 50;
 }
 
 CMagnetBooster.prototype.process = function()
@@ -8480,6 +8570,8 @@ CMagnetBooster.prototype.process = function()
             }
         }
     }
+
+    CBooster.prototype.process.call(this);
 };/**
  * Created by KURWINDALLAS on 21.01.2015.
  */
@@ -8487,40 +8579,22 @@ extend(CSupermanBooster, CBooster, true);
 
 function CSupermanBooster(x,y,gfx) {
     CBooster.apply(this, [x,y,gfx]);
-    this.duration = 15;
-    this.key = "S";
-    this.activate = true;
+    this.duration = 3;
 }
 
 CSupermanBooster.prototype.onActivate = function()
 {
     if (!gameStage.player) return;
-    if (gameStage.player.jumping) return;
+    //if (gameStage.player.jumping) return;
     CBooster.prototype.onActivate.call(this);
+    gameStage.player.gfx.skeleton.setAttachment("body", "body1");
 
-    var b = this;
-    new TweenMax(gameStage.player, 0.84, {y: 200, ease: Linear.easeOut, onComplete: function()
-    {
-        gameStage.player.vy = -2;
-        var ticks = 24;
-        new TweenMax(gameStage.player, b.duration/ticks, {vy: 2, yoyo:true, repeat: ticks, ease: Sine.easeInOut});
-
-    }});
+    new TweenMax(gameStage.player, 0.6, {y: 200, ease: Linear.easeOut});
     gameStage.player.jumping = true;
     gameStage.player.gravityEnabled = false;
    // gameStage.player.jumpBoost = false;
 
-    TweenMax.delayedCall(this.duration, function(){
-        gameStage.player.jumping = false;
-        gameStage.player.gravityEnabled = true;
-        rp(b.fire1);
-        rp(b.fire2);
-        rp(b.fire3);
-        b.fire1 = null;
-        b.fire2 = null;
-        b.fire3 = null;
-        b.onDeactivate();
-    });
+
 
     this.fire1 = CObj.createMovieClip("firesmall");
     this.fire1.x = -314;
@@ -8547,18 +8621,38 @@ CSupermanBooster.prototype.onActivate = function()
     this.fire3.loop = true;
     this.fire3.gotoAndPlay(0);
     gameStage.player.gfx.addChildAt(this.fire3,0);
-    gameStage.player.state.setAnimationByName(0, "idle", true);
+    gameStage.player.gfx.state.setAnimationByName(0, "idle", true);
 };
 
-extend(CTabletsBooster, CBooster, true);
+CSupermanBooster.prototype.onDeactivate = function()
+{
+    var b = this;
+    gameStage.player.jumping = false;
+    gameStage.player.gravityEnabled = true;
+    rp(b.fire1);
+    rp(b.fire2);
+    rp(b.fire3);
+    b.fire1 = null;
+    b.fire2 = null;
+    b.fire3 = null;
+    CBooster.prototype.onDeactivate.call(this);
+}
+
+CSupermanBooster.prototype.process = function()
+{
+    if (!this.activate) return;
+    if (gameStage.player)
+    {
+        gameStage.player.vy = Math.cos(window.time / 1000)*0.7;
+    }
+    CBooster.prototype.process.call(this);
+}extend(CTabletsBooster, CBooster, true);
 
 
 function CTabletsBooster(x,y,gfx) {
     CBooster.apply(this, [x,y, gfx]);
     this.duration = 4;
-    this.key = "A";
     this.activate = true;
-
 }
 
 CTabletsBooster.prototype.onActivate = function()
@@ -8679,6 +8773,42 @@ PlayerData.prototype.getType = function (item_player)
          return PlayerData.inst.items[i].type;
    }
    return null;
+}
+
+
+PlayerData.prototype.getUpgrade = function(item)
+{
+    var nm = item.name;
+    var upgrIds = [];
+    for (var i = 0; i < this.items.length; ++i)
+    {
+        if (this.items[i].name.indexOf(nm + '$') >= 0) upgrIds.push({id: this.items[i].id, name: this.items[i].name});
+    }
+    upgrIds.sort(function(a, b) {
+        return b.name.localeCompare(a.name);
+    });
+
+    var baseBuyed = false;
+    for (var i = 0; i < upgrIds.length; ++i)
+    {
+
+        for (var k= 0; k < PlayerData.inst.items_enabled.length; ++k) {
+            if (PlayerData.inst.items_enabled[k].id_item == item.id)
+            {
+
+                baseBuyed = true;
+            }
+
+                if (PlayerData.inst.items_enabled[k].id_item == upgrIds[i].id)
+            {
+                if (i > 0) var idNext = upgrIds[i - 1].id; else idNext = null;
+                return {upgr: 5 - i, id: upgrIds[i].id, idNext: idNext};
+            }
+
+        }
+    }
+    if (baseBuyed)
+    return     {upgr: 1, id: item.id, idNext: upgrIds[upgrIds.length - 1].id}; else return {upgr: 0, id: null, idNext: item.id};
 }
 
 
@@ -8837,8 +8967,9 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
             this.achs_progress[j].progress = progress;
          } else {
             if (this.achs_progress[j].progress < 1 &&
-                this.achs_progress[j].progress + progress >= 1)
-               complete = true;
+                this.achs_progress[j].progress + progress >= 1) {
+                complete = true;
+            }
             this.achs_progress[j].progress += progress;
          }
             break;
@@ -8851,6 +8982,7 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
    {
       this.savePlayerAchs(this.achs_progress[j]);
       this.showAch(this.achs[i]);
+      incMetric("ACH GAINED " + this.achs[i].name);
    }
    return complete;
 }
@@ -8996,6 +9128,10 @@ PlayerData.prototype.loadData = function(cb)
    window.azureclient.getTable("tb_items").read().done(
        function (results) {
           PlayerData.inst.items = results;
+           PlayerData.inst.items.sort(function(a, b) {
+               return a.reqlvl - b.reqlvl;
+           });
+
           PlayerData.inst.loadCount ++;
           if (PlayerData.inst.loadCount == totalLoads && cb) cb();
        }, function (res) {}
@@ -9116,10 +9252,11 @@ PlayerData.prototype.savePlayerItems = function(onlyOne)
 }
 
 
-PlayerData.prototype.savePlayerData = function()
+PlayerData.prototype.savePlayerData = function(cb)
 {
    window.azureclient.getTable("tb_players").update(PlayerData.inst.playerItem).done(function (result) {
       PlayerData.inst.playerItem = result;
+       if (cb) cb();
    }, function (err) {
    });
 };var tWeapon = "weap";
@@ -9131,7 +9268,7 @@ var tHat = "hat";
 function checkDb ()
 {
 
-    updDb(dbobj);
+ //   updDb(dbobj);
 }
 
 var dbobj =
@@ -9372,7 +9509,8 @@ var dbobj =
         tbname: "tb_items",
 
         items:
-            [ {
+            [
+                {
                 type: tWeapon,
                 price :-1,
                 pricecrys: -1,
@@ -9398,8 +9536,7 @@ var dbobj =
                     desc: "Калаш|АК-47 - автомат был сконструирован==в 1947 году Михаилом Тимофеевичем Калашниковым",
                     gfx: "gun2",
                     reqlvl: 4
-                }
-                ,
+                },
                 {
                     type: tWeapon,
                     price: 2000,
@@ -9408,8 +9545,7 @@ var dbobj =
                     desc: "Миниган - многоствольный скорострельный пулемёт==построенный по схеме Гатлинга",
                     gfx: "gun3",
                     reqlvl: 7
-                }
-                ,
+                },
                 {
                     type: tWeapon,
                     price: 10000,
@@ -9418,8 +9554,7 @@ var dbobj =
                     desc: "Гранатомёт - ручной многозарядный==полуавтоматический гранатомет",
                     gfx: "gun4",
                     reqlvl: 10
-                }
-                ,
+                },
                 {
                     type: tWeapon,
                     price: 60000,
@@ -9428,18 +9563,52 @@ var dbobj =
                     desc: "Лазерная винтовка - энергетическое оружие==разработанное в центре Сколково",
                     gfx: "gun5",
                     reqlvl: 15
-                }
-                ,
+                },
                 {
                     type: tBoost,
-                    price: 500,
+                    price: 100,
                     pricecrys: -1,
                     name: "Magnet",
                     desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
                     gfx: "booster2",
                     reqlvl: 2
-                }
-                ,
+                },
+                {
+                    type: tBoost,
+                    price: 500,
+                    pricecrys: -1,
+                    name: "Magnet$1",
+                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
+                    gfx: "booster2",
+                    reqlvl: 2
+                },
+                {
+                    type: tBoost,
+                    price: 1000,
+                    pricecrys: -1,
+                    name: "Magnet$2",
+                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
+                    gfx: "booster2",
+                    reqlvl: 2
+                },
+                {
+                    type: tBoost,
+                    price: 2000,
+                    pricecrys: -1,
+                    name: "Magnet$3",
+                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
+                    gfx: "booster2",
+                    reqlvl: 2
+                },
+                {
+                    type: tBoost,
+                    price: 5000,
+                    pricecrys: -1,
+                    name: "Magnet$4",
+                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
+                    gfx: "booster2",
+                    reqlvl: 2
+                },
                 {
                     type: tBoost,
                     price: 200,
@@ -9448,8 +9617,43 @@ var dbobj =
                     desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
                     gfx: "booster1",
                     reqlvl: 1
-                }
-                ,
+                },
+                {
+                    type: tBoost,
+                    price: 200,
+                    pricecrys: 5,
+                    name: "Tablets$1",
+                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
+                    gfx: "booster1",
+                    reqlvl: 1
+                },
+                {
+                    type: tBoost,
+                    price: 200,
+                    pricecrys: 5,
+                    name: "Tablets$2",
+                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
+                    gfx: "booster1",
+                    reqlvl: 1
+                },
+                {
+                    type: tBoost,
+                    price: 200,
+                    pricecrys: 5,
+                    name: "Tablets$3",
+                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
+                    gfx: "booster1",
+                    reqlvl: 1
+                },
+                {
+                    type: tBoost,
+                    price: 200,
+                    pricecrys: 5,
+                    name: "Tablets$4",
+                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
+                    gfx: "booster1",
+                    reqlvl: 1
+                },
                 {
                     type: tBoost,
                     price: 800,
@@ -9458,8 +9662,43 @@ var dbobj =
                     desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
                     gfx: "booster4",
                     reqlvl: 5
-                }
-                ,
+                },
+                {
+                    type: tBoost,
+                    price: 800,
+                    pricecrys: -1,
+                    name: "Health$1",
+                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
+                    gfx: "booster4",
+                    reqlvl: 5
+                },
+                {
+                    type: tBoost,
+                    price: 800,
+                    pricecrys: -1,
+                    name: "Health$2",
+                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
+                    gfx: "booster4",
+                    reqlvl: 5
+                },
+                {
+                    type: tBoost,
+                    price: 800,
+                    pricecrys: -1,
+                    name: "Health$3",
+                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
+                    gfx: "booster4",
+                    reqlvl: 5
+                },
+                {
+                    type: tBoost,
+                    price: 800,
+                    pricecrys: -1,
+                    name: "Health$4",
+                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
+                    gfx: "booster4",
+                    reqlvl: 5
+                },
                 {
                     type: tBoost,
                     price: 1,
@@ -9468,8 +9707,43 @@ var dbobj =
                     desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
                     gfx: "booster5",
                     reqlvl: 5
-                }
-                ,
+                },
+                {
+                    type: tBoost,
+                    price: 1,
+                    pricecrys: 1,
+                    name: "MarioStar$1",
+                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
+                    gfx: "booster5",
+                    reqlvl: 5
+                },
+                {
+                    type: tBoost,
+                    price: 1,
+                    pricecrys: 1,
+                    name: "MarioStar$2",
+                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
+                    gfx: "booster5",
+                    reqlvl: 5
+                },
+                {
+                    type: tBoost,
+                    price: 1,
+                    pricecrys: 1,
+                    name: "MarioStar$3",
+                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
+                    gfx: "booster5",
+                    reqlvl: 5
+                },
+                {
+                    type: tBoost,
+                    price: 1,
+                    pricecrys: 1,
+                    name: "MarioStar$4",
+                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
+                    gfx: "booster5",
+                    reqlvl: 5
+                },
                 {
                     type: tBoost,
                     price: 100,
@@ -9478,8 +9752,43 @@ var dbobj =
                     desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
                     gfx: "booster3",
                     reqlvl: -1
-                }
-                ,
+                },
+                {
+                    type: tBoost,
+                    price: 100,
+                    pricecrys: -1,
+                    name: "Double$1",
+                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
+                    gfx: "booster3",
+                    reqlvl: -1
+                },
+                {
+                    type: tBoost,
+                    price: 100,
+                    pricecrys: -1,
+                    name: "Double$2",
+                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
+                    gfx: "booster3",
+                    reqlvl: -1
+                },
+                {
+                    type: tBoost,
+                    price: 100,
+                    pricecrys: -1,
+                    name: "Double$3",
+                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
+                    gfx: "booster3",
+                    reqlvl: -1
+                },
+                {
+                    type: tBoost,
+                    price: 100,
+                    pricecrys: -1,
+                    name: "Double$4",
+                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
+                    gfx: "booster3",
+                    reqlvl: -1
+                },
                 {
                     type: tApp + tHat,
                     price: 100,
@@ -9488,8 +9797,7 @@ var dbobj =
                     desc: "Шляпа 1",
                     gfx: "hat1",
                     reqlvl: -1
-                }
-                ,
+                },
                 {
                     type: tApp + tHat,
                     price: 200,
@@ -9507,8 +9815,7 @@ var dbobj =
                     desc: "Шляпа 3",
                     gfx: "hat3",
                     reqlvl: -1
-                }
-                ,
+                },
                 {
                     type: tApp + tHat,
                     price: 400,
@@ -9526,8 +9833,7 @@ var dbobj =
                     desc: "Шляпа 5",
                     gfx: "hat5",
                     reqlvl: -1
-                }
-                ,
+                },
                 {
                     type: tApp + tHat,
                     price: 600,
@@ -9538,7 +9844,6 @@ var dbobj =
                     reqlvl: -1
                 }
             ]
-
     }
 ];
 
@@ -10071,6 +10376,8 @@ function assetsButSoundsLoaded() {
 
     //onAssetsLoaded();
     ZSound.Init([
+        {id: "m_ded", src: "Dedushka.ogg"},
+        {id: "m_room", src: "PostRoom.ogg"},
         {id: "CLICK", src: "CLICK2.ogg"},
         {id: "jump", src: "jump.ogg"},
         {id: "jump2", src: "jump2.ogg"},

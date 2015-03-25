@@ -5,9 +5,21 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;gf&#10;&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/snd/Dedushka.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/snd/Dedushka.ogg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/snd/PostRoom.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/snd/PostRoom.ogg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.png" afterPath="$PROJECT_DIR$/imgtps/guiatlas.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/pussyatlas.png" afterPath="$PROJECT_DIR$/imgtps/pussyatlas.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/batnick.bat" afterPath="$PROJECT_DIR$/CjEngine/scripts/batnick.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.json" afterPath="$PROJECT_DIR$/imgtps/guiatlas.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.xml" afterPath="$PROJECT_DIR$/imgtps/guiatlas.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/pussyatlas.json" afterPath="$PROJECT_DIR$/imgtps/pussyatlas.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/pussyatlas.xml" afterPath="$PROJECT_DIR$/imgtps/pussyatlas.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -40,92 +52,175 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GameStage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
+      <file leaf-file-name="CBoosterBox.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBoosterBox.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="16028" max-vertical-offset="16606">
-              <caret line="823" column="5" selection-start-line="823" selection-start-column="5" selection-end-line="823" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="2109">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="33" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CSupermanBooster.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="827" max-vertical-offset="1520">
+              <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
+      <file leaf-file-name="CHeartBooster.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CHeartBooster.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5071" max-vertical-offset="10260">
-              <caret line="280" column="0" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PhotoUploader.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33274022" vertical-offset="744" max-vertical-offset="2812">
-              <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="all.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="169136" max-vertical-offset="194788">
-              <caret line="8912" column="0" selection-start-line="8912" selection-start-column="0" selection-end-line="8912" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CharStage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="8224" max-vertical-offset="12730">
-              <caret line="442" column="0" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gamefile.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6224" max-vertical-offset="6859">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Boss1.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss1.js">
+      <file leaf-file-name="CMagnetBooster.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CMagnetBooster.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="988" max-vertical-offset="2356">
-              <caret line="52" column="4" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CDoubleBooster.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CDoubleBooster.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CBooster.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CBooster.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1112" max-vertical-offset="1710">
+              <caret line="67" column="31" selection-start-line="67" selection-start-column="31" selection-end-line="67" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CPlayer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8759">
+              <caret line="38" column="84" selection-start-line="38" selection-start-column="81" selection-end-line="38" selection-end-column="84" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.178571" vertical-offset="1622" max-vertical-offset="2185">
-              <caret line="93" column="77" selection-start-line="93" selection-start-column="77" selection-end-line="93" selection-end-column="77" />
+            <state vertical-scroll-proportion="0.6294326" vertical-offset="1678" max-vertical-offset="2242">
+              <caret line="107" column="4" selection-start-line="107" selection-start-column="4" selection-end-line="107" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ShopStage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js">
+      <file leaf-file-name="CPistol.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6267" max-vertical-offset="7638">
-              <caret line="344" column="12" selection-start-line="344" selection-start-column="12" selection-end-line="344" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1045">
+              <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbinit.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="278" max-vertical-offset="2071">
+              <caret line="341" column="7" selection-start-line="341" selection-start-column="7" selection-end-line="341" selection-end-column="7" />
+              <folding>
+                <element signature="e#168#5412#0" expanded="false" />
+                <element signature="e#227#5405#0" expanded="false" />
+                <element signature="e#245#602#0" expanded="false" />
+                <element signature="e#620#970#0" expanded="false" />
+                <element signature="e#988#1338#0" expanded="false" />
+                <element signature="e#1356#1711#0" expanded="false" />
+                <element signature="e#1729#2074#0" expanded="false" />
+                <element signature="e#2092#2437#0" expanded="false" />
+                <element signature="e#2455#2804#0" expanded="false" />
+                <element signature="e#2822#3178#0" expanded="false" />
+                <element signature="e#3196#3539#0" expanded="false" />
+                <element signature="e#3557#3911#0" expanded="false" />
+                <element signature="e#3929#4277#0" expanded="false" />
+                <element signature="e#4295#4645#0" expanded="false" />
+                <element signature="e#4663#5023#0" expanded="false" />
+                <element signature="e#5041#5391#0" expanded="false" />
+                <element signature="e#5418#7411#0" expanded="false" />
+                <element signature="e#5474#7405#0" expanded="false" />
+                <element signature="e#5492#5630#0" expanded="false" />
+                <element signature="e#5648#5797#0" expanded="false" />
+                <element signature="e#5815#5965#0" expanded="false" />
+                <element signature="e#5983#6134#0" expanded="false" />
+                <element signature="e#6152#6300#0" expanded="false" />
+                <element signature="e#6318#6468#0" expanded="false" />
+                <element signature="e#6486#6632#0" expanded="false" />
+                <element signature="e#6667#6818#0" expanded="false" />
+                <element signature="e#6853#7006#0" expanded="false" />
+                <element signature="e#7041#7198#0" expanded="false" />
+                <element signature="e#7233#7391#0" expanded="false" />
+                <element signature="e#7493#7716#0" expanded="false" />
+                <element signature="e#7734#8007#0" expanded="false" />
+                <element signature="e#8025#8363#0" expanded="false" />
+                <element signature="e#8381#8710#0" expanded="false" />
+                <element signature="e#8728#9054#0" expanded="false" />
+                <element signature="e#9072#9406#0" expanded="false" />
+                <element signature="e#9424#9733#0" expanded="false" />
+                <element signature="e#9751#10062#0" expanded="false" />
+                <element signature="e#10080#10392#0" expanded="false" />
+                <element signature="e#10410#10722#0" expanded="false" />
+                <element signature="e#10740#11052#0" expanded="false" />
+                <element signature="e#11070#11403#0" expanded="false" />
+                <element signature="e#11421#11756#0" expanded="false" />
+                <element signature="e#11774#12109#0" expanded="false" />
+                <element signature="e#12127#12462#0" expanded="false" />
+                <element signature="e#12480#12815#0" expanded="false" />
+                <element signature="e#12833#13132#0" expanded="false" />
+                <element signature="e#13150#13451#0" expanded="false" />
+                <element signature="e#13469#13770#0" expanded="false" />
+                <element signature="e#13788#14089#0" expanded="false" />
+                <element signature="e#14107#14408#0" expanded="false" />
+                <element signature="e#14784#15126#0" expanded="false" />
+                <element signature="e#15144#15486#0" expanded="false" />
+                <element signature="e#15504#15846#0" expanded="false" />
+                <element signature="e#15864#16206#0" expanded="false" />
+                <element signature="e#16224#16559#0" expanded="false" />
+                <element signature="e#16577#16914#0" expanded="false" />
+                <element signature="e#16932#17269#0" expanded="false" />
+                <element signature="e#17287#17624#0" expanded="false" />
+                <element signature="e#17642#17979#0" expanded="false" />
+                <element signature="e#17997#18268#0" expanded="false" />
+                <element signature="e#18286#18557#0" expanded="false" />
+                <element signature="e#18575#18846#0" expanded="false" />
+                <element signature="e#18864#19135#0" expanded="false" />
+                <element signature="e#19153#19424#0" expanded="false" />
+                <element signature="e#19442#19713#0" expanded="false" />
+                <element signature="e#19773#20506#0" expanded="false" />
+                <element signature="e#20891#20959#0" expanded="false" />
+                <element signature="e#21181#21291#0" expanded="false" />
+                <element signature="e#21297#21359#0" expanded="false" />
+                <element signature="e#21377#21435#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,8 +239,6 @@
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/PauseTimer.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CBooster.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/LauncherBG.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/CComixStage.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/all.js" />
@@ -156,28 +249,36 @@
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CTextField.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/CBarrel.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CButton.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/FloorObj.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CCoin.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CMagnetBooster.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Weapons/CQueueGun.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss1.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss2.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/photoUploader.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/batnick.bat" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js" />
         <option value="$PROJECT_DIR$/libs/pixi.dev.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CCoin.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/batnick.bat" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/FloorObj.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/CBoosterDrone.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CTabletsBooster.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CDoubleBooster.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CHeartBooster.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CMagnetBooster.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CBoosterBox.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CBooster.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -268,7 +369,57 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="res/snd">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Weapons">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Utils">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -304,7 +455,93 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Objects">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Monsters">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="Main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="LiveObjects">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Boosters">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT=".idea">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -349,11 +586,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\res\snd" />
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts" />
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps" />
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects" />
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa" />
-      <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\libs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Main" />
@@ -364,10 +601,14 @@
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -375,10 +616,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:63342/thanksgrandpa/index.html">
@@ -419,12 +656,6 @@
       <created>1417091906056</created>
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
-    </task>
-    <task id="LOCAL-00410" summary="0">
-      <created>1427119101912</created>
-      <option name="number" value="00410" />
-      <option name="project" value="LOCAL" />
-      <updated>1427119101912</updated>
     </task>
     <task id="LOCAL-00411" summary="0">
       <created>1427119377291</created>
@@ -714,7 +945,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427148695199</updated>
     </task>
-    <option name="localTasksCounter" value="459" />
+    <task id="LOCAL-00459" summary="&#10;gf&#10;&#10;">
+      <created>1427148859131</created>
+      <option name="number" value="00459" />
+      <option name="project" value="LOCAL" />
+      <updated>1427148859131</updated>
+    </task>
+    <option name="localTasksCounter" value="460" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -743,25 +980,25 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33483145" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="739" y="537" width="788" height="387" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30214205" sideWeight="0.5006345" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.326257" sideWeight="0.5006345" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14213198" sideWeight="0.50080514" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32601535" sideWeight="0.49936548" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.58502537" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46179774" sideWeight="0.2994924" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="871" y="290" width="782" height="381" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12083333" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19123253" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18996188" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3018018" sideWeight="0.5006345" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14213198" sideWeight="0.50080514" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.326257" sideWeight="0.5006345" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32601535" sideWeight="0.49936548" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.58502537" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3993644" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -804,7 +1041,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="1107" />
+      <option name="time" value="1113" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
@@ -813,65 +1050,9 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CDrone2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="247">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CLiveObj.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2280">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/ZPool.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="874">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="836" max-vertical-offset="2014">
-          <caret line="58" column="17" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CKey.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1282" max-vertical-offset="1919">
-          <caret line="77" column="23" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PauseTimer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="703">
-          <caret line="0" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="874">
-          <caret line="36" column="45" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libs/pixi.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="437">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CDrone.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="798">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
@@ -880,27 +1061,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1596">
           <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CBooster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="755" max-vertical-offset="1330">
-          <caret line="58" column="35" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="2926">
-          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/LevSel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2204">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -952,13 +1112,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/source.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9655173" vertical-offset="0" max-vertical-offset="266">
           <caret line="6" column="7401" selection-start-line="6" selection-start-column="7401" selection-end-line="6" selection-end-column="7401" />
         </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/WeapBalance.js">
@@ -972,13 +1132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2546">
           <caret line="18" column="52" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1385" max-vertical-offset="2090">
-          <caret line="83" column="8" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -996,45 +1149,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/FloorObj.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="227" max-vertical-offset="817">
-          <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="549" max-vertical-offset="13053">
           <caret line="40" column="67" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CCoin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1881">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CTabletsBooster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="1444">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CMagnetBooster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="627">
-          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -1045,24 +1163,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="417" max-vertical-offset="1007">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ComixStage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3249">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5370" max-vertical-offset="8759">
-          <caret line="322" column="19" selection-start-line="322" selection-start-column="19" selection-end-line="322" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1077,29 +1181,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="1520">
           <caret line="61" column="49" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="9576">
-          <caret line="55" column="41" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/batnick.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0450237" vertical-offset="87" max-vertical-offset="1349">
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2083" max-vertical-offset="9424">
-          <caret line="159" column="31" selection-start-line="159" selection-start-column="31" selection-end-line="159" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -1120,66 +1201,315 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.js">
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="169136" max-vertical-offset="194788">
-          <caret line="8912" column="0" selection-start-line="8912" selection-start-column="0" selection-end-line="8912" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="744" max-vertical-offset="2812">
+          <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/AchStage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5071" max-vertical-offset="10260">
-          <caret line="280" column="0" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="398" max-vertical-offset="2147">
+          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/Utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6224" max-vertical-offset="6859">
+        <state vertical-scroll-proportion="0.33293977" vertical-offset="79" max-vertical-offset="4047">
+          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CDrone.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="798">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/batnick.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.32" vertical-offset="0" max-vertical-offset="1387">
+          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/FloorObj.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="817">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CCoin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1767">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CBoosterDrone.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1102">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/init.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2090">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.178571" vertical-offset="1622" max-vertical-offset="2185">
-          <caret line="93" column="77" selection-start-line="93" selection-start-column="77" selection-end-line="93" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9994">
+          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="14703" max-vertical-offset="16606">
-          <caret line="823" column="5" selection-start-line="823" selection-start-column="5" selection-end-line="823" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2106" max-vertical-offset="2926">
+          <caret line="124" column="1" selection-start-line="124" selection-start-column="1" selection-end-line="125" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CWeapon.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="8224" max-vertical-offset="12730">
-          <caret line="442" column="0" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="620" max-vertical-offset="2565">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CTabletsBooster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="798">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6267" max-vertical-offset="7638">
-          <caret line="344" column="12" selection-start-line="344" selection-start-column="12" selection-end-line="344" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="7141" max-vertical-offset="8170">
+          <caret line="387" column="18" selection-start-line="387" selection-start-column="18" selection-end-line="387" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js">
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33274022" vertical-offset="744" max-vertical-offset="2812">
-          <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="38263" max-vertical-offset="194788">
+          <caret line="2024" column="32" selection-start-line="2024" selection-start-column="32" selection-end-line="2024" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8091" max-vertical-offset="11077">
+          <caret line="438" column="26" selection-start-line="438" selection-start-column="26" selection-end-line="438" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3135" max-vertical-offset="6897">
+          <caret line="183" column="20" selection-start-line="183" selection-start-column="20" selection-end-line="183" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/LevSel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="2204">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9421" max-vertical-offset="16872">
+          <caret line="526" column="24" selection-start-line="526" selection-start-column="24" selection-end-line="526" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4918" max-vertical-offset="12825">
+          <caret line="278" column="56" selection-start-line="278" selection-start-column="56" selection-end-line="278" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBoosterBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="2109">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CHeartBooster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CDoubleBooster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="827" max-vertical-offset="1520">
+          <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CMagnetBooster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="92" max-vertical-offset="684">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Boosters/CBooster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1112" max-vertical-offset="1710">
+          <caret line="67" column="31" selection-start-line="67" selection-start-column="31" selection-end-line="67" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8759">
+          <caret line="38" column="84" selection-start-line="38" selection-start-column="81" selection-end-line="38" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CPistol.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1045">
+          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="278" max-vertical-offset="2071">
+          <caret line="341" column="7" selection-start-line="341" selection-start-column="7" selection-end-line="341" selection-end-column="7" />
+          <folding>
+            <element signature="e#168#5412#0" expanded="false" />
+            <element signature="e#227#5405#0" expanded="false" />
+            <element signature="e#245#602#0" expanded="false" />
+            <element signature="e#620#970#0" expanded="false" />
+            <element signature="e#988#1338#0" expanded="false" />
+            <element signature="e#1356#1711#0" expanded="false" />
+            <element signature="e#1729#2074#0" expanded="false" />
+            <element signature="e#2092#2437#0" expanded="false" />
+            <element signature="e#2455#2804#0" expanded="false" />
+            <element signature="e#2822#3178#0" expanded="false" />
+            <element signature="e#3196#3539#0" expanded="false" />
+            <element signature="e#3557#3911#0" expanded="false" />
+            <element signature="e#3929#4277#0" expanded="false" />
+            <element signature="e#4295#4645#0" expanded="false" />
+            <element signature="e#4663#5023#0" expanded="false" />
+            <element signature="e#5041#5391#0" expanded="false" />
+            <element signature="e#5418#7411#0" expanded="false" />
+            <element signature="e#5474#7405#0" expanded="false" />
+            <element signature="e#5492#5630#0" expanded="false" />
+            <element signature="e#5648#5797#0" expanded="false" />
+            <element signature="e#5815#5965#0" expanded="false" />
+            <element signature="e#5983#6134#0" expanded="false" />
+            <element signature="e#6152#6300#0" expanded="false" />
+            <element signature="e#6318#6468#0" expanded="false" />
+            <element signature="e#6486#6632#0" expanded="false" />
+            <element signature="e#6667#6818#0" expanded="false" />
+            <element signature="e#6853#7006#0" expanded="false" />
+            <element signature="e#7041#7198#0" expanded="false" />
+            <element signature="e#7233#7391#0" expanded="false" />
+            <element signature="e#7493#7716#0" expanded="false" />
+            <element signature="e#7734#8007#0" expanded="false" />
+            <element signature="e#8025#8363#0" expanded="false" />
+            <element signature="e#8381#8710#0" expanded="false" />
+            <element signature="e#8728#9054#0" expanded="false" />
+            <element signature="e#9072#9406#0" expanded="false" />
+            <element signature="e#9424#9733#0" expanded="false" />
+            <element signature="e#9751#10062#0" expanded="false" />
+            <element signature="e#10080#10392#0" expanded="false" />
+            <element signature="e#10410#10722#0" expanded="false" />
+            <element signature="e#10740#11052#0" expanded="false" />
+            <element signature="e#11070#11403#0" expanded="false" />
+            <element signature="e#11421#11756#0" expanded="false" />
+            <element signature="e#11774#12109#0" expanded="false" />
+            <element signature="e#12127#12462#0" expanded="false" />
+            <element signature="e#12480#12815#0" expanded="false" />
+            <element signature="e#12833#13132#0" expanded="false" />
+            <element signature="e#13150#13451#0" expanded="false" />
+            <element signature="e#13469#13770#0" expanded="false" />
+            <element signature="e#13788#14089#0" expanded="false" />
+            <element signature="e#14107#14408#0" expanded="false" />
+            <element signature="e#14784#15126#0" expanded="false" />
+            <element signature="e#15144#15486#0" expanded="false" />
+            <element signature="e#15504#15846#0" expanded="false" />
+            <element signature="e#15864#16206#0" expanded="false" />
+            <element signature="e#16224#16559#0" expanded="false" />
+            <element signature="e#16577#16914#0" expanded="false" />
+            <element signature="e#16932#17269#0" expanded="false" />
+            <element signature="e#17287#17624#0" expanded="false" />
+            <element signature="e#17642#17979#0" expanded="false" />
+            <element signature="e#17997#18268#0" expanded="false" />
+            <element signature="e#18286#18557#0" expanded="false" />
+            <element signature="e#18575#18846#0" expanded="false" />
+            <element signature="e#18864#19135#0" expanded="false" />
+            <element signature="e#19153#19424#0" expanded="false" />
+            <element signature="e#19442#19713#0" expanded="false" />
+            <element signature="e#19773#20506#0" expanded="false" />
+            <element signature="e#20891#20959#0" expanded="false" />
+            <element signature="e#21181#21291#0" expanded="false" />
+            <element signature="e#21297#21359#0" expanded="false" />
+            <element signature="e#21377#21435#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6294326" vertical-offset="1678" max-vertical-offset="2242">
+          <caret line="107" column="4" selection-start-line="107" selection-start-column="4" selection-end-line="107" selection-end-column="4" />
           <folding />
         </state>
       </provider>

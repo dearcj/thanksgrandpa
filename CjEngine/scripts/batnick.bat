@@ -30,6 +30,7 @@ Objects\LauncherBG.js + ^
 Objects\CGrenade.js + ^
 Objects\CPlane.js + ^
 Objects\CKey.js + ^
+Objects\CBoosterBox + ^
 Monsters\CMonster.js + ^
 Monsters\JumpMon.js + ^
 Monsters\CDrone.js + ^
@@ -40,6 +41,7 @@ Monsters\Boss1.js + ^
 Monsters\Boss2.js + ^
 Monsters\MM.js + ^
 Monsters\BonusMonGnome.js + ^
+Monsters\CBoosterDrone + ^
 Objects\CCoin.js + ^
 Objects\CScrollbar.js + ^
 Objects\CircleBar.js + ^
