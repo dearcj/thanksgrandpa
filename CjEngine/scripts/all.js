@@ -10362,6 +10362,8 @@ VK.addCallback('onOrderCancel', function () {
     }
 });
 
+showADs();
+
 function showADs()
 {
 setTimeout(function() {
