@@ -10224,9 +10224,6 @@ uploadPhoto = function (id, ava, endCB) {
         });
         //post(r.response.upload_url, {photo: s}, "post");
         //console.log("ERROR GET WAfffLL UPLOAD SERV");
-    }, function fail()
-    {
-        if (endCB)endCB();
     });
 };
 
@@ -10529,7 +10526,8 @@ function onAssetsLoaded() {
     loadingState = "game";
     setTimeout("window.scrollTo(0, 1)", 10);
 
-
+    var div = document.getElementById('vk_ads_55316');
+    div.parentNode.removeChild(div);
 
 
 
