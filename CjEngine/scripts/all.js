@@ -10367,6 +10367,13 @@ VK.addCallback('onOrderCancel', function () {
 function showADs()
 {
 setTimeout(function() {
+
+    var div = document.createElement('div');
+    div.id = "vk_ads_55316";
+
+//Вставляем на страницу
+    document.body.appendChild(div);
+
     var adsParams = {"ad_unit_id":55316,"ad_unit_hash":"d4685898a5210c69b772bf2ab6fb0571"};
     function vkAdsInit() {
         VK.Widgets.Ads('vk_ads_55316', {}, adsParams);
