@@ -222,8 +222,11 @@ ZSound.Init = function(manifest) {
     {
         ZSound.loaded++;
         if ( ZSound.loaded == manifest.length) {
-            if (ZSound.soundLoadedFunction) ZSound.soundLoadedFunction();
-            ZSound.loaded = true;
+            if (ZSound.soundLoadedFunction) {
+                ZSound.loaded = true;
+                ZSound.soundLoadedFunction();
+            }
+
         }
     }
     createjs.Sound.addEventListener("fileload", handleLoad); // call handleLoad when each sound loads
@@ -856,7 +859,7 @@ GameStage.prototype.updateItems = function () {
         }
     }
 
-    gameStage.player.weapon = gameStage.curweapon;
+    gameStage.player.weapon = w_ak74;//gameStage.curweapon;
 }
 
 GameStage.prototype.shAfterLife = function () {
@@ -1959,9 +1962,7 @@ CharStage.prototype.updateMusicButton = function (btn) {
             btn.gfx.gotoAndStop(1);
         }
     }
-
 }
-
 
 CharStage.prototype.onShowContinue = function () {
     charStage.doProcess = true;
@@ -2339,7 +2340,7 @@ CharStage.prototype.updateSB = function(arr)
         var tfRank = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: (charStage.skip + i + 1).toString() + '.'}) ;
         var tfName = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: arr[i].name + ' ' + arr[i].last_name}) ;
         var tfScore = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: Math.round(arr[i].maxdistance).toString() + "м."}) ;
-        var clIco = crsp("buy small button");
+        var clIco = crsp("ava cover");
 
         clips.push(clIco);
         clips[i].vkapi = arr[i].vkapi;
@@ -2669,7 +2670,7 @@ ShopStage.prototype.createItemBtn = function (item) {
     infoTF.init();
     g.infoTF = infoTF;
     infoTF.x = 0;
-    infoTF.y = 133;
+    infoTF.y = 158;
     infoTF.gfx.parent.removeChild(infoTF.gfx);
     infoTF.text = infoText;
     g.addChild(infoTF.gfx);
@@ -2729,7 +2730,7 @@ ShopStage.prototype.updateBar = function (tab, filter, baroffset) {
         if (PlayerData.inst.items[i].name.indexOf('$') >= 0)  continue;
         var g = shopStage.createItemBtn(PlayerData.inst.items[i]);
         g.x = d / 2 + (l % numColumns) * (d);
-        g.y = 40 + Math.floor(l / numColumns) * 170;
+        g.y = 40 + Math.floor(l / numColumns) * 195;
         this.bar.container.addChild(g);
         l++;
     }
@@ -2757,10 +2758,28 @@ ShopStage.prototype.updateStatsPanel = function () {
 ShopStage.prototype.onShowContinue = function () {
     CustomStage.prototype.onShow.call(this);
     CObj.getById("photo").click = function () {
-        uploadPhoto(vkparams.viewerid, false);
+        if (vkparams.novk) return;
+        CObj.enableButtons(false);
+        shopStage.transScreen = SM.inst.addDisableWindow("ФОТОГРАФИРУЕМ... ОЖИДАЙТЕ");
+        var removeTint = function()
+        {
+            CObj.enableButtons(true);
+            rp(shopStage.transScreen);
+            shopStage.transScreen = null;
+        }
+        uploadPhoto(vkparams.viewerid, false, removeTint);
     }
     CObj.getById("ava").click = function () {
-        uploadPhoto(vkparams.viewerid, true);
+        if (vkparams.novk) return;
+        CObj.enableButtons(false);
+        shopStage.transScreen = SM.inst.addDisableWindow("ФОТОГРАФИРУЕМ... ОЖИДАЙТЕ");
+        var removeTint = function()
+        {
+            CObj.enableButtons(true);
+            rp(shopStage.transScreen);
+            shopStage.transScreen = null;
+        }
+        uploadPhoto(vkparams.viewerid, true, removeTint);
     }
 
     shopStage.bar = new CScrollbar(610, 335, "", 380, 524);
@@ -7040,22 +7059,31 @@ BonusMonGnome.prototype.dealDamage = function(dmg)
 extend(CBoosterDrone, CMonster, true);
 
 function CBoosterDrone(in_x,in_y,animname,cr_bar){
-    CMonster.apply(this,[in_x,in_y,animname, cr_bar]);
+    CMonster.apply(this,[in_x,in_y,animname, false]);
     this.metall = true;
 
     var t = this;
   //  new TweenMax.delayedCall(1, function(){t.spawnGrenade();});
 }
 
-CBoosterDrone.prototype.kill = function()
+CBoosterDrone.prototype.collide = function (obj2)
 {
-    CMonster.prototype.kill.call(this);
-    var c = new CBoosterBox(this.x, this.y);
-    c.allowTrackSpeed = true;
-    c.vx = 6.5;
-    c.vy = -10;
-    return c;
 
+}
+
+CBoosterDrone.prototype.dealDamage = function()
+{
+    if (!this.spawned) {
+        var c = new CBoosterBox(this.x, this.y);
+        c.allowTrackSpeed = true;
+        c.vx = 6.5;
+        c.vy = -10;
+        this.vy = -3;
+        TweenMax.killTweensOf(this);
+        this.vx *= 4.4;
+        this.spawned = true;
+    }
+    CLiveObj.prototype.dealDamage.call(this);
 }
 
 /*
@@ -7831,7 +7859,7 @@ CPistol.prototype.shot = function()
     SM.inst.fg.addChild(fx);
 
     TweenMax.delayedCall(0.03, function (){fx.parent.removeChild(fx);});
-    if (gameStage.player.gravityEnabled)
+    if (Math.abs(gameStage.player.y - gameStage.player.baseY) < 50)
     gameStage.player.vx = -0.5;
     var b = new CBullet(xx, yy, "bomb1");
     b.life = this.life;
@@ -7862,7 +7890,7 @@ CQueueGun.prototype.reload = function()
 {
     this.canFireQueue = false;
     CWeapon.prototype.reload.call(this);
-    this.queueLife = this.queue;
+    this.queueLife = this.queue + 1;
 }
 
 CQueueGun.prototype.process = function()
@@ -7893,17 +7921,19 @@ CQueueGun.prototype.shot = function(queueShot)
     var r = CWeapon.prototype.shot.call(this);
     if (!r) return;
 
-    if (this._sound && this.queue == this.queueLife)
+    if (!queueShot) {
+        this.canFireQueue = true;
+        if (this.queueLife > 0) return; else
+        if (this.queueLife == 0 && !queueShot)
+            this.queueLife = this.queue;
+    }
+
+
+    if (this.ammo > 0 && this._sound && this.queueLife == this.queue)
         ZSound.Play(this._sound);
 
 
-    if (this.queueLife > 0) this.queueLife--;
-
-    if (!queueShot) {
-        this.canFireQueue = true;
-        if (this.queueLife > 0) return; else if (this.queueLife == 0 && !queueShot)
-            this.queueLife = this.queue;
-    }
+    this.queueLife--;
 
     var fireAngle = -this.recoilValue / 200 + gameStage.player.fireAngle + Math.random()*this.backupStats.acc;
     var vx = Math.cos(fireAngle);
@@ -8430,13 +8460,13 @@ var w_ak74 = new CQueueGun(
         dw: 0.1,
         speed: 60.5,
         sound: "ochered",
-        queue: 4,
+        queue: 5,
         queueDelay: 110,
         life: 1,
-        acc: 0.08,
-        accIncrease: 0.02,
-        accRecoil: 0.1,
-        recoil: 1.5, //recoil
+        acc: 0.17,
+        accIncrease: 0.05,
+        accRecoil: 0.12,
+        recoil: 2.5, //recoil
         magcap: 50, //magcap
         delay: 600, //delay
         damage: 55, //damage
@@ -9069,22 +9099,10 @@ PlayerData.prototype.loadEnd = function()
 {
    PlayerData.inst.createAchProgress();
    window.dbinit  = true;
-   //if (vkparams.viewerid == 2882845)
-    //checkDb();
 
-   if (window.dbinit && window.loaded)
-   {
-    //  window.loadingState = "game";
-      assetsButSoundsLoaded();
-   }
-
-
-
-    //SM.inst.openStage(comixStage);
-   if (vkparams.registered)
-   SM.inst.openStage(comixStage); else
-   SM.inst.openStage(charStage);
+    onAssetsLoaded();
 }
+
 
 PlayerData.prototype.updateEnergy = function()
 {
@@ -10137,20 +10155,11 @@ getDedImage = function (ava) {
 }
 
 
-uploadPhoto = function (id, ava) {
+uploadPhoto = function (id, ava, endCB) {
 
     var str = getDedImage(ava);
    //window.location = str;
     str = str.replace(/^data:image\/(png|jpg);base64,/, "");
-    /*  var blobBin = atob(str.split(',')[1]);
-     var array = [];
-     for(var i = 0; i < blobBin.length; i++) {
-     array.push(blobBin.charCodeAt(i));
-     }
-     var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
-     var formdata = new FormData();
-     formdata.append("myNewFileName", file);
-     var s = str;//sadasdwindow.atob(str);*/
     if (ava) var method ='photos.getProfileUploadServer'; else
         method = 'photos.getWallUploadServer';
     VK.api(method, {uid: id}, function (resp) {
@@ -10166,8 +10175,6 @@ uploadPhoto = function (id, ava) {
 
         }).success(function (res) {
             var obj = JSON.parse(res);
-
-
             if (ava) {
                 VK.api('photos.saveProfilePhoto',
                     {
@@ -10179,6 +10186,7 @@ uploadPhoto = function (id, ava) {
                         console.log("SSS");
                     },
                     function (err) {
+                        if (endCB)endCB();
                         console.log("SSS");
                     });
             } else {
@@ -10199,10 +10207,11 @@ uploadPhoto = function (id, ava) {
                                 message: "Спасибо деду за селфи",
                                 attachments: pid
                             }, function (data) {
-
+                                if (endCB)endCB();
                                 console.log("SSS");
                             },
                             function (err) {
+                                if (endCB)endCB();
                                 console.log("SSS");
                             });
                     }
@@ -10211,10 +10220,13 @@ uploadPhoto = function (id, ava) {
             console.log("");
         }).error(function (res) {
             console.log("");
+            if (endCB)endCB();
         });
-
         //post(r.response.upload_url, {photo: s}, "post");
         //console.log("ERROR GET WAfffLL UPLOAD SERV");
+    }, function fail()
+    {
+        if (endCB)endCB();
     });
 };
 
@@ -10331,7 +10343,9 @@ VK.addCallback('onOrderSuccess', function (order_id) {
     if (window.currentOrder == "item7") {
         PlayerData.inst.playerItem.energy += 1;
     }
+
     PlayerData.inst.savePlayerData();
+    shopStage.updateStatsPanel();
     if (VK.orderComplete)
         VK.orderComplete();
 });
@@ -10418,16 +10432,13 @@ function preloaderLoaded() {
     onWindowResize();
     window.lastLoop = 0;
 
+    assetsButSoundsLoaded();
 
     loader.onComplete = function()
     {
         window.loaded = true;
-
-        if (window.dbinit && window.loaded)
-        {
-            //    window.loadingState = "game";
-            assetsButSoundsLoaded();
-        }
+        window.gfxLoaded = true;
+        onAssetsLoaded();
     };
     loader.load();
     loader.onProgress = onAssetsProgress;
@@ -10469,6 +10480,8 @@ function assetsButSoundsLoaded() {
 }
 
 function onAssetsLoaded() {
+    if (!window.dbinit || ZSound.loaded != true || !window.gfxLoaded) return;
+
     SM.inst.superStage.removeChild(loadingScreen);
     loadingScreen = null;
     preloaderBg.texture.destroy(true);
@@ -10477,34 +10490,19 @@ function onAssetsLoaded() {
     gameStage.currentLevel = 1;
     var tex = PIXI.Texture.fromImage("preloader.png");
     tex.destroy(true);
-
-   /* $(function() {
-        var toolbox = $('body'),
-            height = toolbox.height(),
-            scrollHeight = toolbox.get(0).scrollHeight;
-
-        toolbox.bind('mousewheel', function(e, d) {
-            e.preventDefault();
-        });
-
-    });
-*/
     window.addEventListener("orientationchange", orientchange, false);
     orientchange();
     loadingState = "game";
-
-    /*window.txtFps = new PIXI.Text("FPS:", {
-        fill: "white",
-        font: "bold 40px Arial",
-        strokeThickness: 8,
-        stroke: "black"
-    });
-    window.txtFps.position.y = SCR_HEIGHT - 24;
-    window.txtFps.scale.x = 0.5;
-    window.txtFps.scale.y = 0.5;
-    SM.inst.fontLayer.addChild(window.txtFps);
-*/
     setTimeout("window.scrollTo(0, 1)", 10);
+
+
+
+
+
+        if (vkparams.registered)
+            SM.inst.openStage(comixStage); else
+            SM.inst.openStage(charStage);
+
 }
 
 function orientchange() {
