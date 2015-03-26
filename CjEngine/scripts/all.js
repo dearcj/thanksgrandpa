@@ -2223,6 +2223,7 @@ CharStage.prototype.updateEvents = function () {
 CharStage.prototype.process = function () {
 
     console.log(window.callbacksResults);
+
     if (PlayerData.inst.playerItem.energy < 1)
     {
         CObj.getById("tfdelay").gfx.visible = true;
