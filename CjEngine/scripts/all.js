@@ -1918,8 +1918,9 @@ CharStage.prototype.openEnergyWindow = function () {
         CObj.getById("breplenish").click = function()
         {
             order("item7");
-            VK.orderComplete = function()
+            VK.orderComplete = function(order_id)
             {
+
                 shopStage.updateStatsPanel();
                 close();
             }
@@ -2002,7 +2003,11 @@ CharStage.prototype.onShowContinue = function () {
 
     CObj.getById("boffer").click = function()
     {
-        VK.callMethod("showOrderBox", {type: "offers"});
+        VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
+        VK.orderComplete = function(oid)
+        {
+            var soid;
+        }
     };
 
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
@@ -10338,35 +10343,48 @@ function order(item) {
     VK.callMethod('showOrderBox', params);
 }
 
-VK.addCallback('onOrderSuccess', function (order_id) {
+function orderSuccess(order_id)
+{
     var amount = 0;
     if (window.currentOrder == "item1") {
+        window.currentOrder == null;
         PlayerData.inst.playerItem.money += 100;
     }
     if (window.currentOrder == "item2") {
+        window.currentOrder == null;
         PlayerData.inst.playerItem.money += 1200;
     }
     if (window.currentOrder == "item3") {
+        window.currentOrder == null;
         PlayerData.inst.playerItem.money += 7000;
     }
     if (window.currentOrder == "item4") {
+        window.currentOrder == null;
         PlayerData.inst.playerItem.crystals += 3;
     }
     if (window.currentOrder == "item5") {
+        window.currentOrder == null;
         PlayerData.inst.playerItem.crystals += 15;
     }
     if (window.currentOrder == "item6") {
+        window.currentOrder == null;
         PlayerData.inst.playerItem.crystals += 80;
     }
     if (window.currentOrder == "item7") {
+        window.currentOrder == null;
         PlayerData.inst.playerItem.energy += 1;
     }
 
     PlayerData.inst.savePlayerData();
+
     shopStage.updateStatsPanel();
+
     if (VK.orderComplete)
-        VK.orderComplete();
-});
+        VK.orderComplete(order_id);
+}
+
+VK.addCallback('onOrderSuccess', orderSuccess);
+
 VK.addCallback('onOrderFail', function () {
     if (VK.orderFail) {
         VK.orderFail();
