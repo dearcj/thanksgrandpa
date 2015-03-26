@@ -2007,6 +2007,7 @@ CharStage.prototype.onShowContinue = function () {
         VK.orderComplete = function(oid)
         {
             var soid;
+            var x = oid + 1;
         }
     };
 
