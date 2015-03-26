@@ -13,6 +13,7 @@ $str = '';
 foreach ($input as $k => $v) {
   $str .= $k.'='.$v;
 }
+error_log("PENIS", 3 ,"/var/tmp/my-errors.log");
 
 if ($sig != md5($str.$secret_key)) {
   $response['error'] = array(
@@ -36,8 +37,7 @@ error_log($input . $input['notification_type'], 3 ,"/var/tmp/my-errors.log");
           'item_price' =>  $input['item_price'],
         );
 		
-	} elseif
-    if ($item == 'item1') {
+	} elseif($item == 'item1') {
         $response['response'] = array(
           'item_id' => 611,
           'title' => '100 монет',
