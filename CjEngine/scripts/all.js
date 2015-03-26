@@ -2015,10 +2015,19 @@ CharStage.prototype.onShowContinue = function () {
 
             });
 */
-
-
-        window.callbacksResults = document.createElement('callbacks');
         VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
+
+        VK.addCallback('onOrderSuccess', function (r)
+        {
+            console();
+        });
+
+        VK.addCallback('onOrderFail', function (r) {
+            console();
+        });
+        VK.addCallback('onOrderCancel', function (r) {
+            console();
+        });
 
 
         VK.orderComplete = function(oid)
@@ -2222,7 +2231,6 @@ CharStage.prototype.updateEvents = function () {
 
 CharStage.prototype.process = function () {
 
-    console.log(window.callbacksResults);
 
     if (PlayerData.inst.playerItem.energy < 1)
     {
