@@ -396,6 +396,7 @@ LevelManager.levels = {};function SM() {
     {
         e.stopPropagation();
         e.stopImmediatePropagation();
+        e.preventDefault();
         if (CObj.objects)
         for (var i = 0; i < CObj.objects.length; ++i)
         {
