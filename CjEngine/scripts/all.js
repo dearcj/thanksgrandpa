@@ -2003,7 +2003,7 @@ CharStage.prototype.onShowContinue = function () {
 
     CObj.getById("boffer").click = function()
     {
-        VK.api('account.getActiveOffers', {}, function (data) {
+        /*VK.api('account.getActiveOffers', {}, function (data) {
             if (!data.response) {
                 return;
             }
@@ -2014,7 +2014,12 @@ CharStage.prototype.onShowContinue = function () {
                 }
 
             });
-        
+*/
+
+
+        var callbacksResults = document.getElementById('callbacks');
+        VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
+
 
         VK.orderComplete = function(oid)
         {
