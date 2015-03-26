@@ -2006,6 +2006,7 @@ CharStage.prototype.onShowContinue = function () {
         VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
         VK.orderComplete = function(oid)
         {
+            console.log("PENIS");
             var soid;
             var x = oid + 1;
         }
