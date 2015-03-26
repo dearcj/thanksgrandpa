@@ -13,7 +13,8 @@ $str = '';
 foreach ($input as $k => $v) {
   $str .= $k.'='.$v;
 }
-error_log("PENIS", 3 ,"/var/tmp/my-errors.log");
+
+error_log($input . $input['notification_type'], 3 ,"/var/tmp/my-errors.log");
 
 if ($sig != md5($str.$secret_key)) {
   $response['error'] = array(
