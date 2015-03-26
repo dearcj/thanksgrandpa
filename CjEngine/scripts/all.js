@@ -2002,7 +2002,7 @@ CharStage.prototype.onShowContinue = function () {
 
     CObj.getById("boffer").click = function()
     {
-
+        VK.callMethod("showOrderBox", {type: "offers"});
     };
 
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
