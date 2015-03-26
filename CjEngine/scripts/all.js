@@ -21,7 +21,10 @@ function getRand(obj) {
     return obj[Math.floor(Math.random() * obj.length)];
 }
 
-
+function OpenInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+}
 function clone(obj) {
     return JSON.parse( JSON.stringify(obj ) );
     /*if (null == obj || "object" != typeof obj) return obj;
@@ -784,6 +787,8 @@ GameStage.prototype.updateXP = function()
 {
     gameStage.barXP.prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].xp;
 }
+
+
 
 GameStage.prototype.updateItems = function () {
     var k = 0;
@@ -1781,7 +1786,7 @@ CharStage.prototype.createFriendsPanel = function () {
     var clips = [];
     var skip = charStage.skipFriends;
     for (var i = 0 + skip; i < 5 + skip; ++i) {
-        var frClpBtn = new CButton(63 + (i - skip) * 100, 5, "add friend");
+        var frClpBtn = new CButton(91 + (i - skip) * 95, 5, "add friend");
         var friendClip = frClpBtn.gfx;//new PIXI.Sprite(PIXI.Texture.fromFrame("add friend.png"));
         friendClip.parent.removeChild(friendClip);
         frClpBtn.fontFamily = "dedgamedesc";
@@ -1995,14 +2000,25 @@ CharStage.prototype.onShowContinue = function () {
         charStage.frp = charStage.createFriendsPanel();
     }
 
+    CObj.getById("boffer").click = function()
+    {
+
+    };
+
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
     CObj.getById("bbuy2").click = charStage.openPremiumWindow;
 
 
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
 
+    CObj.getById("bpubl").click = function()
+    {
+        OpenInNewTab("https://vk.com/thanksgradpa");
+    };
 
-    CObj.getById("bset").click = function () {
+    charStage.updateMusicButton(CObj.getById("bmusic"));
+
+   /* CObj.getById("bset").click = function () {
         CObj.enableButtons(false);
         ;
         var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
@@ -2014,7 +2030,6 @@ CharStage.prototype.onShowContinue = function () {
                 window.open('mailto:thanksgrandpa@gmail.com', 'mail');
             }
 
-            charStage.updateMusicButton(CObj.getById("bmusic"));
 
 
 
@@ -2036,7 +2051,7 @@ CharStage.prototype.onShowContinue = function () {
             }
 
         }, SM.inst.fontLayer);
-    }
+    }*/
 
     CObj.getById("bshop").click = function () {
         SM.inst.openStage(shopStage);
@@ -6491,10 +6506,11 @@ Boss2.prototype.fire = function()
         });
     }
 };MM = function () {
+    var bonusProb = 0.1;
     this.patterns =
         [
-            {mons: "+.........+....+...+...+", diff: 1, prob: 1},
-            /*{mons: "f..f00szf..000", diff: 1, prob: 1},
+                {mons: "+.", diff: 1, prob: bonusProb},
+                {mons: "f..f00szf..000", diff: 1, prob: 1},
                 {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
                 {mons: ".s..s..s..c", diff: 1, prob: 1},
@@ -6506,6 +6522,7 @@ Boss2.prototype.fire = function()
                 {mons: ".c..c..o000s.s.", diff: 1, prob: 1},
                 {mons: ".z...c.s.s.sc..", diff: 2, prob: 1},
                 {mons: ".z...c.z..", diff: 2, prob: 1},
+                {mons: "+.", diff: 2, prob: bonusProb},
                 {mons: "j", diff: 2, prob: 0.1},
                 {mons: ".lbb..c.", diff: 2, prob: 1},
                 {mons: ".c..?.?.?.", diff: 2, prob: 1},
@@ -6517,12 +6534,14 @@ Boss2.prototype.fire = function()
                 {mons: "..f..f.z.o..f..", diff: 3, prob: 1},
                 {mons: "jd..df...f.", diff: 4, prob: 1},
                 {mons: "..dz..d..z.z", diff: 4, prob: 1},
+                {mons: "+.", diff: 3, prob: bonusProb},
                 {mons: ".F..l.l.F..l.", diff: 4, prob: 1},
                 {mons: ".b.bf..", diff: 4, prob: 0.1},
                 {mons: "..s.sss..s..l", diff: 4, prob: 1},
                 {mons: "l.l.l...ssl.lbl.l.", diff: 4, prob: 1},
                 {mons: "f..c.flf.c00", diff: 5, prob: 1},
                 {mons: ".c..c..z..s..sc..sc..sc..", diff: 5, prob: 1},
+                {mons: "+.", diff: 5, prob: bonusProb},
                 {mons: ".f.ffc..c..", diff: 5, prob: 1},
                 {mons: ".b..bbb..bbbbbbb..", diff: 5, prob: 0.1},
                 {mons: "gg.g...g..g..G.GG.", diff: 5, prob: 1},
@@ -6533,6 +6552,7 @@ Boss2.prototype.fire = function()
                 {mons: ".c..c..l..g..g..g", diff: 6, prob: 1},
                 {mons: "j", diff: 6, prob: 0.1},
                 {mons: "..s..s..dss", diff: 6, prob: 0.1},
+                {mons: "+.", diff: 6, prob: bonusProb},
                 {mons: "h.llH.lzh..H.l.l", diff: 7, prob: 1},
                 {mons: ".b..bbb..bbbbb000bbbbbbb..", diff: 7, prob: 0.1},
                 {mons: ".o.H.H..l..", diff: 7, prob: 1},
@@ -6540,11 +6560,12 @@ Boss2.prototype.fire = function()
                 {mons: ".czgG.gFl...", diff: 7, prob: 1},
                 {mons: "h..c.hsh.?.", diff: 8, prob: 1},
                 {mons: ".c.b.cbb..lb.gG.Gg..g.", diff: 8, prob: 1},
+                {mons: "+.", diff: 8, prob: bonusProb},
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
                 {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
-                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}*/
+                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}
         ];
-    this.carClips = ["car","car1","car2"]
+    this.carClips = ["car","car1","car2"];
 
     this.bosses = [{cls: Boss1, dist: 1000}, {cls: Boss2, dist: 2000}];
     // c l z - преграды
@@ -10529,12 +10550,9 @@ function onAssetsLoaded() {
     var div = document.getElementById('vk_ads_55316');
     div.parentNode.removeChild(div);
 
-
-
         if (vkparams.registered)
             SM.inst.openStage(comixStage); else
             SM.inst.openStage(charStage);
-
 }
 
 function orientchange() {
