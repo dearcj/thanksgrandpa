@@ -964,7 +964,7 @@ GameStage.prototype.shAfterLife = function () {
     gainbgsprite.y = SCR_HEIGHT / 2 + 120;
     SM.inst.guiLayer.addChild(gainbgsprite);
 
-    var tf = CTextField.createTextField({text: price.toString(), fontSize: 22, align: "center"});
+    var tf = CTextField.createTextField({text: gameStage.revealPrice.toString(), fontSize: 22, align: "center"});
     tf.tint = 0x333333;
     tf.updateText();
     tf.x = 8 + SCR_WIDTH / 2;
@@ -1045,7 +1045,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
         var arr = results.result;
 
         for (var i = 0; i < Math.min(5, arr.length); ++i) {
-            CObj.getById("tf" + (i + 1).toString() + "2").text = (arr[i].name + " " + arr[i].last_name).substring(0, 12);
+            CObj.getById("tf" + (i + 1).toString() + "2").text = (arr[i].name + " " + arr[i].last_name).substring(0, 16);
             CObj.getById("tf" + (i + 1).toString() + "3").text = arr[i].maxdistance.toString();
             if (rec > arr[i].maxdistance) {
                 CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
@@ -1627,6 +1627,7 @@ extend(AchStage, CustomStage);
 
 AchStage.prototype.onShow = function() {
     this.doProcess = false;
+    charStage.unreadAch = false;
     CustomStage.prototype.onShow.call(this);
 
     LevelManager.loadLevel("levach", this.onShowContinue);
@@ -1735,6 +1736,8 @@ AchStage.prototype.process = function() {
 extend(CharStage, CustomStage);
 
 CharStage.prototype.onShow = function () {
+    this.unreadAch = false;
+    this.unreadActions = false;
     this.doProcess = false;
     charStage.skipFriends = 0;
     CustomStage.prototype.onShow.call(this);
@@ -1971,9 +1974,22 @@ CharStage.prototype.updateMusicButton = function (btn) {
     }
 }
 
+CharStage.prototype.updateNotifications = function () {
+    if (this.unreadAch)
+    {
+        CObj.getById("notach").gfx.visible = true;
+    } else     CObj.getById("notach").gfx.visible = false;
+
+    if (this.unreadActions)
+    {
+        CObj.getById("notaction").gfx.visible = true;
+    } else     CObj.getById("notaction").gfx.visible = false;
+}
+
+
 CharStage.prototype.onShowContinue = function () {
     charStage.doProcess = true;
-
+    charStage.updateNotifications();
 
     charStage.skip = 0;
 
@@ -2155,6 +2171,8 @@ CharStage.prototype.onShowContinue = function () {
         charStage.bar.gfx.parent.removeChild(charStage.bar.gfx);
         SM.inst.fontLayer.addChild(charStage.bar.gfx);
         charStage.bar.gfx.visible = true;
+        charStage.unreadActions = false;
+        charStage.updateNotifications();
     }
 
     PlayerData.inst.comboCheck();
@@ -2262,6 +2280,8 @@ CharStage.prototype.process = function () {
                     p = 1;
                     CObj.objects[i].pos = 1;
                     CObj.objects[i].endAction();
+                    this.unreadActions = true;
+                    this.updateNotifications();
                 } else
                 CObj.objects[i].pos = p;
                 c++;
@@ -4901,6 +4921,7 @@ function CPlayer(in_x,in_y,textname,in_body){
     this.maxBoostVel = -22.5;*/
     this.initialJumpSpeed = -21.5;
     this.gravPower = 1.3;
+    this.pickupBooster = true;
     this.gfx = this.createDedGraphics();
     this.fireAngle = 0;
     this.weapon = gameStage.curweapon;
@@ -5026,7 +5047,8 @@ CPlayer.prototype.createDedGraphics = function()
 CPlayer.prototype.reveal = function()
 {
     this.hp = 2;
-    this.invulnerable = false;
+    this.pickupBooster = true;
+    this.invulnerable = 0;
     this.state = this.sMoving;
     this.revealTime = new Date().getTime();
     this.gfx.state.setAnimationByName(0, "idle", true);
@@ -5064,23 +5086,17 @@ CPlayer.prototype.onJump = function()
 
 CPlayer.prototype.kill = function()
 {
-    //this.destroy();
     if (this.state == this.sMoving) {
         this.state = this.sDying;
-        this.invulnerable = true;
+        this.pickupBooster = false;
+        for (var i = 0; i < CBooster.list.length; ++i) CBooster.list[i].onDeactivate();
+        this.invulnerable++;
         var lbg = LauncherBG.inst;
         lbg.preVelocity = lbg.maxVelocity;
-     /*   this.gravityEnabled = false;
-        this.jumping = false;
-        this.vy = 0;
-        this.y = this.baseY;*/
-    //    this.vy = 0;
-    //    this.gravityEnabled = false;
+        this.gravityEnabled = true;
         ZSound.Play("losing");
         this.gfx.state.update(0.5);
         this.gfx.state.setAnimationByName(0, "defeated", false);
-        // if (this.jumpTween) this.jumpTween.kill();
-    //    new TweenMax(this, 0.4, {y: this.baseY});
 
         new TweenMax(lbg, 2, {maxVelocity: 0.5});
         TweenMax.delayedCall(2.57, gameStage.sessionEnd);
@@ -5151,7 +5167,6 @@ CPlayer.prototype.process = function()
         if (this.state != this.sDying && !this.jumping)
         {
             var d = (this.baseX - this.x ) / 45;
-          //  console.log(d);
             this.x += d;
         }
         this.vx *= 0.9;
@@ -5179,12 +5194,6 @@ CPlayer.prototype.process = function()
 
         if (this.weapon)
             this.weapon.process();
-
-      /*  if (this.allowFlowMove && (!this.jumpTween || !this.jumpTween.isActive())) {
-            this.freq = 800;
-            this.nullPhase += 22;
-            this.x = this.startPlayerX + Math.sin((this.nullPhase) / this.freq) * 30;
-        }*/
 
         var dx = 0;
         var dy = 0;
@@ -5282,7 +5291,7 @@ CPlayer.prototype.dealDamage = function(dmg)
 {
     if (window.time - this.revealTime < 800) return;
     this.revealTime = window.time;
-    if (this.invulnerable) return;
+    if (this.invulnerable > 0) return;
 
     for (var i = 0; i < this.gfx.skeleton.slots.length; ++i)
     {
@@ -6021,6 +6030,7 @@ function CBoosterBox(in_x,in_y,amount) {
 
 CBoosterBox.prototype.getBooster = function()
 {
+    if (!gameStage.player.pickupBooster) return;
     var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
         {name: "Double", cls: CDoubleBooster}];
     var boost = {name: "MarioStar", cls: CSupermanBooster};//getRand(boosters);
@@ -6036,32 +6046,37 @@ CBoosterBox.prototype.getBooster = function()
     }
 
 
-    for (var i =0;i < PlayerData.inst.items.length;++i)
+    for (var i = 0;i < PlayerData.inst.items.length;++i)
     {
         if (PlayerData.inst.items[i].name == boost.name)
         break;
     }
+
     var b = new boost.cls(SCR_WIDTH / 2, SCR_HEIGHT / 2);
+    if (replaceObj) {
+        px = replaceObj.x;
+        replaceObj.duration += b.duration;
+        b.destroy();
+        return;
+    }
     if (replaceObj)
     {
         var inx = CBooster.list.indexOf(b);
         if (inx >= 0)
             CBooster.list.splice(inx, 1);
     }
+
     b.gfx = crsp(PlayerData.inst.items[i].gfx);
 
     b.gfx.scale.x = 0.3;
     b.gfx.scale.y = 0.3;
     b.updateGraphics();
     new TweenMax(b.gfx.scale, 0.3, {x: 0.6, y: 0.6, repeat: 2, yoyo: true});
-    if (replaceObj) {
-        px = replaceObj.x;
-        replaceObj.duration += b.duration;
-    }
+
     var px = 35 + 50*(CBooster.list.length - 1);
     new TweenMax(b, 0.7, {delay: 0.8, x: px, y: 100});
-    var final = function(){b.onActivate();}
-    if (replaceObj) final = function(){b.destroy();}
+    var final = function(){b.onActivate();};
+    if (replaceObj) final = function(){b.destroy();};
     new TweenMax(b.gfx.scale, 0.7, {delay: 0.8, x: 0.3, y: 0.3, onComplete: final});
     SM.inst.guiLayer.addChild(b.gfx);
 }
@@ -6129,7 +6144,6 @@ function CMonster(in_x,in_y,textname,cr_bar){
         this.barOffsetY = 0;
         this.barOffsetX = 0;
     }
-    this.process();
     this.dmg = 1;
 }
 
@@ -6138,7 +6152,7 @@ CMonster.prototype.collide = function (obj2)
     if (this.prekilled || this.doRemove) return;
     if (!this.hitDone) {
         obj2.dealDamage(this.dmg);
-        if (!obj2.invulnerable) {
+        if (!(obj2.invulnerable > 0)) {
             this.hitDone = true;
         }
     }
@@ -6544,7 +6558,8 @@ Boss2.prototype.fire = function()
     var bonusProb = 0.1;
     this.patterns =
         [
-                {mons: "+.", diff: 1, prob: bonusProb},
+            {mons: "+...+++. hhhh.. HH..", diff: 1, prob: bonusProb}
+            /*{mons: "+.", diff: 1, prob: bonusProb},
                 {mons: "f..f00szf..000", diff: 1, prob: 1},
                 {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
@@ -6598,7 +6613,7 @@ Boss2.prototype.fire = function()
                 {mons: "+.", diff: 8, prob: bonusProb},
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
                 {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
-                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}
+                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}*/
         ];
     this.carClips = ["car","car1","car2"];
 
@@ -7115,9 +7130,13 @@ BonusMonGnome.prototype.dealDamage = function(dmg)
 extend(CBoosterDrone, CMonster, true);
 
 function CBoosterDrone(in_x,in_y,animname,cr_bar){
+    this.bdy = 67;
+    this.bdx = 2;
+    this.boosterBox = new CBoosterBox(this.x, this.y + this.bdy);
+    this.boosterBox.allowTrackSpeed = false;
+    this.boosterBox.gravityEnabled = false;
     CMonster.apply(this,[in_x,in_y,animname, false]);
     this.metall = true;
-
     var t = this;
   //  new TweenMax.delayedCall(1, function(){t.spawnGrenade();});
 }
@@ -7130,14 +7149,15 @@ CBoosterDrone.prototype.collide = function (obj2)
 CBoosterDrone.prototype.dealDamage = function()
 {
     if (!this.spawned) {
-        var c = new CBoosterBox(this.x, this.y);
-        c.allowTrackSpeed = true;
-        c.vx = 6.5;
-        c.vy = -10;
-        this.vy = -3;
-        TweenMax.killTweensOf(this);
-        this.vx *= 4.4;
+        this.boosterBox.gravityEnabled = true;
+        this.boosterBox.allowTrackSpeed = true;
+        this.boosterBox.vx = 6.5;
+        this.boosterBox.vy = -10;
+        this.boosterBox=  null;
         this.spawned = true;
+        TweenMax.killTweensOf(this);
+        this.vy = -3;
+        this.vx *= 4.4;
     }
     CLiveObj.prototype.dealDamage.call(this);
 }
@@ -7162,14 +7182,17 @@ CDrone.prototype.spawnGrenade = function()
 
     var t = this;
     new TweenMax.delayedCall(1, function(){t.spawnGrenade();});
-}
-CDrone.prototype.process = function()
+}*/
+
+CBoosterDrone.prototype.process = function()
 {
-
-
+    if (this.boosterBox) {
+        this.boosterBox.x = this.x + this.bdx;
+        this.boosterBox.y = this.y + this.bdy;
+    }
     CMonster.prototype.process.call(this);
 };
-    *//**
+/**
  * Created by KURWINDALLAS on 23.11.2014.
  */
 extend(CCoin, CObj, true);
@@ -8603,7 +8626,6 @@ function CBooster(x,y,gfx) {
 CBooster.prototype.destroy = function()
 {
     if (this.doRemove) return;
-    CBooster.list.push(this);
     var inx = CBooster.list.indexOf(this);
     if (inx >= 0)
     CBooster.list.splice(inx, 1);
@@ -8745,7 +8767,7 @@ extend(CSupermanBooster, CBooster, true);
 
 function CSupermanBooster(x,y,gfx) {
     CBooster.apply(this, [x,y,gfx]);
-    this.duration = 3;
+    this.duration = 15;
 }
 
 CSupermanBooster.prototype.onActivate = function()
@@ -8801,12 +8823,15 @@ CSupermanBooster.prototype.onDeactivate = function()
     b.fire1 = null;
     b.fire2 = null;
     b.fire3 = null;
+    gameStage.player.invulnerable++;
+    var p = gameStage.player;
+    TweenMax.delayedCall(1, function(){p.invulnerable--;});
     CBooster.prototype.onDeactivate.call(this);
 }
 
 CSupermanBooster.prototype.process = function()
 {
-    if (!this.activate) return;
+    if (!this.activate || this.doRemove) return;
     if (gameStage.player)
     {
         gameStage.player.vy = Math.cos(window.time / 1000)*0.7;
@@ -8828,7 +8853,7 @@ CTabletsBooster.prototype.onActivate = function()
 
 
         this.lastUse = window.time;
-        gameStage.player.invulnerable = true;
+        gameStage.player.invulnerable++;
         var p = gameStage.player;
         p.blink = true;
         var prevVel = LauncherBG.inst.maxVelocity;
@@ -8842,7 +8867,7 @@ CTabletsBooster.prototype.onActivate = function()
                 b.onDeactivate();
                 p.superMode = false;
                 p.resetBlink();
-                p.invulnerable = false;
+                p.invulnerable--;
                 p.blink = false;
             });
         })
@@ -9135,6 +9160,7 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
             if (this.achs_progress[j].progress < 1 &&
                 this.achs_progress[j].progress + progress >= 1) {
                 complete = true;
+                charStage.unreadAch = true;
             }
             this.achs_progress[j].progress += progress;
          }
@@ -10183,6 +10209,8 @@ function getParameterByName(name, url) {
 }
 
 getDedImage = function (ava) {
+
+    if (shopStage.transScreen) shopStage.transScreen.visible = false;
     if (ava) {
         var w = 300;
         var h = 365;
@@ -10207,6 +10235,7 @@ getDedImage = function (ava) {
     var str = r.getBase64();
     r.destroy(true);
     CObj.getById("bgshopded").gfx.visible = true;
+    if (shopStage.transScreen) shopStage.transScreen.visible = true;
     return str;
 }
 
