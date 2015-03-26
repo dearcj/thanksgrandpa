@@ -864,7 +864,7 @@ GameStage.prototype.updateItems = function () {
         }
     }
 
-    gameStage.player.weapon = w_ak74;//gameStage.curweapon;
+    gameStage.player.weapon = gameStage.curweapon;
 }
 
 GameStage.prototype.shAfterLife = function () {
