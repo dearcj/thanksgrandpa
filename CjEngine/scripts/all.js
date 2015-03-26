@@ -2017,7 +2017,7 @@ CharStage.prototype.onShowContinue = function () {
 */
 
 
-        var callbacksResults = document.getElementById('callbacks');
+        window.callbacksResults = document.getElementById('callbacks');
         VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
 
 
@@ -2222,6 +2222,7 @@ CharStage.prototype.updateEvents = function () {
 
 CharStage.prototype.process = function () {
 
+    console.log(window.callbacksResults);
     if (PlayerData.inst.playerItem.energy < 1)
     {
         CObj.getById("tfdelay").gfx.visible = true;
