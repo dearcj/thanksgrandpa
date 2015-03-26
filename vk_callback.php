@@ -14,7 +14,7 @@ foreach ($input as $k => $v) {
   $str .= $k.'='.$v;
 }
 
-error_log(implode("|",$input), 3 ,"/var/tmp/my-errors.log");
+error_log(http_build_query ($input), 3 ,"/var/tmp/my-errors.log");
 
 if ($sig != md5($str.$secret_key)) {
   $response['error'] = array(
