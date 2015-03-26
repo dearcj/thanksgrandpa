@@ -2017,7 +2017,7 @@ CharStage.prototype.onShowContinue = function () {
 */
 
 
-        window.callbacksResults = document.getElementById('callbacks');
+        window.callbacksResults = document.createElement('callbacks');
         VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
 
 
