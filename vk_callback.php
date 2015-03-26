@@ -21,10 +21,23 @@ if ($sig != md5($str.$secret_key)) {
     'critical' => true
   );
 } else {
-  // Подпись правильная
+	
+	
   switch ($input['notification_type']) {
     case 'get_item':
       $item = $input['item']; // наименование товара
+	  
+	  
+	if (strpos($item, "offer"))
+	{
+		  $response['response'] = array(
+          'item' => $item,
+          'item_currency_amount' => $input['item_currency_amount'],
+          'item_price' =>  $input['item_price'],
+          'price' => 1
+        );
+		
+	} elseif
     if ($item == 'item1') {
         $response['response'] = array(
           'item_id' => 611,
@@ -153,7 +166,6 @@ case 'order_status_change':
       // Изменение статуса заказа
       if ($input['status'] == 'chargeable') {
         $order_id = intval($input['order_id']);
-
 
 // Код проверки товара, включая его стоимость
         $app_order_id = 1; // Получающийся у вас идентификатор заказа.
