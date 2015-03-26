@@ -22,7 +22,7 @@ if ($sig != md5($str.$secret_key)) {
   );
 } else {
 	
-	
+error_log($input . $input['notification_type'], 3 ,"/var/tmp/my-errors.log");
   switch ($input['notification_type']) {
     case 'get_item':
       $item = $input['item']; // наименование товара
@@ -34,7 +34,6 @@ if ($sig != md5($str.$secret_key)) {
           'item' => $item,
           'item_currency_amount' => $input['item_currency_amount'],
           'item_price' =>  $input['item_price'],
-          'price' => 1
         );
 		
 	} elseif
