@@ -14,7 +14,7 @@ foreach ($input as $k => $v) {
   $str .= $k.'='.$v;
 }
 
-error_log($input . $input['notification_type'], 3 ,"/var/tmp/my-errors.log");
+error_log($input['notification_type'], 3 ,"/var/tmp/my-errors.log");
 
 if ($sig != md5($str.$secret_key)) {
   $response['error'] = array(
@@ -24,7 +24,7 @@ if ($sig != md5($str.$secret_key)) {
   );
 } else {
 	
-error_log($input . $input['notification_type'], 3 ,"/var/tmp/my-errors.log");
+error_log($input['notification_type'], 3 ,"/var/tmp/my-errors.log");
   switch ($input['notification_type']) {
     case 'get_item':
       $item = $input['item']; // наименование товара
