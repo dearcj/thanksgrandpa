@@ -2003,7 +2003,19 @@ CharStage.prototype.onShowContinue = function () {
 
     CObj.getById("boffer").click = function()
     {
-        VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
+        VK.api('account.getActiveOffers', {}, function (data) {
+            if (!data.response) {
+                return;
+            }
+                var i,l,offers = data.response;
+
+                for (i = 1, l = offers.length; i < l; i += 1) {
+                    VK.callMethod("showOrderBox", {offer_id: offers[i].id, type: "offers", currency: "true"});
+                }
+
+            });
+        
+
         VK.orderComplete = function(oid)
         {
             console.log("PENIS");
