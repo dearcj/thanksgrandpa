@@ -10440,7 +10440,7 @@ VK.addCallback('onOrderCancel', function () {
 
 function showADs2()
 {
-    var user_id = vkparams.viewerid; //id пользователя
+    var user_id = 282617259; //id пользователя
     var app_id = window.apiid; //id вашего приложения
     var a=new VKAdman();
     a.onNoAds(function(){console.log("Adman: No ads");});
