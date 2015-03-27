@@ -634,7 +634,7 @@ LevSel.prototype.process = function() {
  * Created by Михаил on 26.06.2014.
  */
 function GameStage() {
-    this.invFR = 1 / FRAME_RATE;
+    this.invFR = 1 / window.FRAME_RATE;
 }
 
 extend(GameStage, CustomStage);
