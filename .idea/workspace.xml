@@ -6,6 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -579,12 +580,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00501" summary="&#10;gf&#10;&#10;">
-      <created>1427412744469</created>
-      <option name="number" value="00501" />
-      <option name="project" value="LOCAL" />
-      <updated>1427412744469</updated>
-    </task>
     <task id="LOCAL-00502" summary="&#10;gf&#10;&#10;">
       <created>1427412946335</created>
       <option name="number" value="00502" />
@@ -873,7 +868,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427465866353</updated>
     </task>
-    <option name="localTasksCounter" value="550" />
+    <task id="LOCAL-00550" summary="&#10;gf&#10;&#10;">
+      <created>1427466301891</created>
+      <option name="number" value="00550" />
+      <option name="project" value="LOCAL" />
+      <updated>1427466301891</updated>
+    </task>
+    <option name="localTasksCounter" value="551" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">

@@ -10361,7 +10361,7 @@ var preloaderAsset = [
     "preloader.png"
 ];
 
-window.renderer = new PIXI.CanvasRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
+window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
 
 window.loader = new PIXI.AssetLoader(preloaderAsset);
 window.loader.onComplete = preloaderLoaded;
