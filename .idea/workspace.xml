@@ -575,12 +575,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00475" summary="&#10;gf&#10;&#10;">
-      <created>1427300681939</created>
-      <option name="number" value="00475" />
-      <option name="project" value="LOCAL" />
-      <updated>1427300681939</updated>
-    </task>
     <task id="LOCAL-00476" summary="&#10;gf&#10;&#10;">
       <created>1427300773570</created>
       <option name="number" value="00476" />
@@ -869,7 +863,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427453386938</updated>
     </task>
-    <option name="localTasksCounter" value="524" />
+    <task id="LOCAL-00524" summary="&#10;gf&#10;&#10;">
+      <created>1427453497886</created>
+      <option name="number" value="00524" />
+      <option name="project" value="LOCAL" />
+      <updated>1427453497886</updated>
+    </task>
+    <option name="localTasksCounter" value="525" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -894,7 +894,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1634" height="1066" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.58502537" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
