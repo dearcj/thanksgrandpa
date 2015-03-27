@@ -10368,7 +10368,7 @@ window.addScale = 1;
 
 window.SCR_SCALE = 1.0;
 window.FRAME_RATE = 60;
-window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
+window.renderer = new PIXI.CanvasRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
 
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
