@@ -10367,11 +10367,11 @@ window.renderer = new PIXI.autoDetectRenderer(SCR_WIDTH, SCR_HEIGHT);
 
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
-VK.init({apiId: 4654201}, function () {
-    console.log("INIT OK");
-   // showADs2();
+VK.init({apiId: window.apiid}, function () {
+
+    showADs2();
 }, function () {
-    console.log("INIT FAILED");
+
 }, '5.27');
 
 function order(item) {
@@ -10440,7 +10440,7 @@ VK.addCallback('onOrderCancel', function () {
 
 function showADs2()
 {
-    var user_id = 282617259; //id пользователя
+    var user_id = vkparams.viewerid; //id пользователя
     var app_id = window.apiid; //id вашего приложения
     var a=new VKAdman();
     a.onNoAds(function(){console.log("Adman: No ads");});
@@ -10557,7 +10557,7 @@ function preloaderLoaded() {
     window.lastLoop = 0;
 
     assetsButSoundsLoaded();
-    showADs2();
+    //showADs2();
     loader.onComplete = function()
     {
         window.loaded = true;
