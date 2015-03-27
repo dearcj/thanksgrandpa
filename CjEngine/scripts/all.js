@@ -2036,14 +2036,14 @@ CharStage.prototype.onShowContinue = function () {
 
         VK.addCallback('onOrderSuccess', function (r)
         {
-            console();
+            console.log("SUCCESS");
         });
 
         VK.addCallback('onOrderFail', function (r) {
-            console();
+            console.log("FAYL");
         });
         VK.addCallback('onOrderCancel', function (r) {
-            console();
+            console.log("CANCEL");
         });
 
 
