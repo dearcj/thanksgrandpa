@@ -10372,11 +10372,11 @@ window.renderer = new PIXI.autoDetectRenderer(SCR_WIDTH, SCR_HEIGHT);
 
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
-VK.init(function () {
+VK.init({apiId: window.apiid}, function () {
 
     showADs2();
 }, function () {
-}, '5.27');
+});
 
 function order(item) {
     var params = {
