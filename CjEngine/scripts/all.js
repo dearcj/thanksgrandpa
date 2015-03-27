@@ -10369,6 +10369,7 @@ $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
 VK.init({apiId: 4654201}, function () {
     console.log("INIT OK");
+    showADs2();
 }, function () {
     console.log("INIT FAILED");
 }, '5.27');
@@ -10556,7 +10557,7 @@ function preloaderLoaded() {
     window.lastLoop = 0;
 
     assetsButSoundsLoaded();
-    showADs2();
+  //  showADs2();
     loader.onComplete = function()
     {
         window.loaded = true;
@@ -10619,6 +10620,7 @@ function onAssetsLoaded() {
     setTimeout("window.scrollTo(0, 1)", 10);
 
     var div = document.getElementById('vk_ads_55316');
+    if (div)
     div.parentNode.removeChild(div);
 
         if (vkparams.registered)
