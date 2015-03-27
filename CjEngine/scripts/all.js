@@ -10349,10 +10349,11 @@ PauseTimer.resume = function()
 };
 window.SCR_WIDTH = 800;
 window.SCR_HEIGHT = 600;
+window.SCR_SCALE = 1.0;
+window.FRAME_RATE = 60;
 
 var loadingState = "prepreload";
 
-window.openSponsorWindow = null;
 window.focus();
 var assetsLoaded = 0;
 
@@ -10367,10 +10368,7 @@ window.loader.onComplete = preloaderLoaded;
 window.loader.load();
 dbInit();
 
-window.addScale = 1;
 
-window.SCR_SCALE = 1.0;
-window.FRAME_RATE = 60;
 
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
