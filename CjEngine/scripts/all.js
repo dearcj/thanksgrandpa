@@ -2033,26 +2033,6 @@ CharStage.prototype.onShowContinue = function () {
             });
 */
         VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
-
-        VK.addCallback('onOrderSuccess', function (r)
-        {
-            console.log("SUCCESS");
-        });
-
-        VK.addCallback('onOrderFail', function (r) {
-            console.log("FAYL");
-        });
-        VK.addCallback('onOrderCancel', function (r) {
-            console.log("CANCEL");
-        });
-
-
-        VK.orderComplete = function(oid)
-        {
-            console.log("PENIS");
-            var soid;
-            var x = oid + 1;
-        }
     };
 
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
@@ -10386,7 +10366,7 @@ window.FRAME_RATE = 60;
 window.renderer = new PIXI.autoDetectRenderer(SCR_WIDTH, SCR_HEIGHT);
 
 $(document).bind('contextmenu', function (){return false;});
-
+window.apiid = 4654201;
 VK.init({apiId: 4654201}, function () {
     console.log("INIT OK");
 }, function () {
@@ -10457,6 +10437,20 @@ VK.addCallback('onOrderCancel', function () {
     }
 });
 
+function showADs2()
+{
+    var user_id = vkparams.viewerid; //id пользователя
+    var app_id = window.apiid; //id вашего приложения
+    var a=new VKAdman();
+    a.onNoAds(function(){console.log("Adman: No ads");});
+    a.onStarted(function(){console.log("Adman: Started");});
+    a.onCompleted(function(){console.log("Adman: Completed");});
+    a.onSkipped(function(){console.log("Adman: Skipped");});
+    a.onClicked(function(){console.log("Adman: Clicked");});
+// a.setupPreroll(app_id, {preview: 8}); //для проверки корректности работы рекламы
+    a.setupPreroll(app_id);
+    admanStat(app_id, user_id);
+}
 
 
 function showADs()
