@@ -170,7 +170,6 @@ case 'order_status_change':
 // Код проверки товара, включая его стоимость
         $app_order_id = 1; // Получающийся у вас идентификатор заказа.
 
-	if (strpos($item, "offer") >= 0) $order_id = 900;
 
 $response['response'] = array(
           'order_id' => $order_id,
@@ -191,8 +190,6 @@ case 'order_status_change_test':
         $order_id = intval($input['order_id']);
 
 $app_order_id = 1; // Тут фактического заказа может не быть - тестовый режим.
-
-	if (strpos($item, "offer") >= 0) $order_id = 900;
 
 	$response['response'] = array(
           'order_id' => $order_id,
