@@ -6010,6 +6010,8 @@ function CBoosterBox(in_x,in_y,amount) {
 
 CBoosterBox.prototype.getBooster = function()
 {
+
+    ///
     if (!gameStage.player.pickupBooster) return;
     var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
         {name: "Double", cls: CDoubleBooster}];
