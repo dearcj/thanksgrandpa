@@ -10373,8 +10373,6 @@ window.renderer = new PIXI.autoDetectRenderer(SCR_WIDTH, SCR_HEIGHT);
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
 VK.init({apiId: window.apiid}, function () {
-
-    showADs2();
 }, function () {
 });
 
@@ -10561,7 +10559,7 @@ function preloaderLoaded() {
     window.lastLoop = 0;
 
     assetsButSoundsLoaded();
-    //showADs2();
+    showADs2();
     loader.onComplete = function()
     {
         window.loaded = true;
