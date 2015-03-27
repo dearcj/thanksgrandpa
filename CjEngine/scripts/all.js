@@ -6013,7 +6013,7 @@ CBoosterBox.prototype.getBooster = function()
     if (!gameStage.player.pickupBooster) return;
     var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
         {name: "Double", cls: CDoubleBooster}];
-    var boost = {name: "MarioStar", cls: CSupermanBooster};//getRand(boosters);
+    var boost = getRand(boosters);
 
     if (CBooster.list)
     for (var i = 0; i < CBooster.list.length; ++i)
@@ -6538,8 +6538,7 @@ Boss2.prototype.fire = function()
     var bonusProb = 0.1;
     this.patterns =
         [
-            {mons: "+...+++. hhhh.. HH..", diff: 1, prob: bonusProb}
-            /*{mons: "+.", diff: 1, prob: bonusProb},
+            {mons: "+.", diff: 1, prob: bonusProb},
                 {mons: "f..f00szf..000", diff: 1, prob: 1},
                 {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
@@ -6593,7 +6592,7 @@ Boss2.prototype.fire = function()
                 {mons: "+.", diff: 8, prob: bonusProb},
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
                 {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
-                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}*/
+                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}
         ];
     this.carClips = ["car","car1","car2"];
 
@@ -10345,6 +10344,9 @@ PauseTimer.resume = function()
     TweenMax.resumeAll();
     PauseTimer.paused = false;
 }
+window.SCR_WIDTH = 800;
+window.SCR_HEIGHT = 600;
+
 var loadingState = "prepreload";
 
 window.openSponsorWindow = null;
@@ -10360,8 +10362,7 @@ window.loader.load();
 dbInit();
 
 window.addScale = 1;
-window.SCR_WIDTH = 800;
-window.SCR_HEIGHT = 600;
+
 window.SCR_SCALE = 1.0;
 window.FRAME_RATE = 60;
 window.renderer = new PIXI.autoDetectRenderer(SCR_WIDTH, SCR_HEIGHT);
@@ -10732,7 +10733,7 @@ function animate() {
          loadingScreen.drawRect(SCR_WIDTH / 2 - 90, SCR_HEIGHT / 2 + 193, 240, 32);
          loadingScreen.endFill();*/
         loadingScreen.beginFill(0xFF7777);
-        loadingScreen.drawRect(SCR_WIDTH / 2 - 92 + 2, SCR_HEIGHT / 2 + 193 + 2, (240 - 4) * p, 32 - 4);
+        loadingScreen.drawRect(window.SCR_WIDTH / 2 - 92 + 2, window.SCR_HEIGHT / 2 + 193 + 2, (240 - 4) * p, 32 - 4);
         loadingScreen.endFill();
     } else
     if (loadingState == "game") {
