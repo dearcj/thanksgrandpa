@@ -23,18 +23,19 @@ if ($sig != md5($str.$secret_key)) {
     'critical' => true
   );
 } else {
+ $item = $input['item']; // наименование товара
 	
   switch ($input['notification_type']) {
     case 'get_item':
-      $item = $input['item']; // наименование товара
+      
 	  
-	  
-	if (strpos($item, "offer"))
+	if (strpos($item, "offer") >= 0)
 	{
 		  $response['response'] = array(
+          'item_id' => 900,
           'item' => $item,
           'item_currency_amount' => $input['item_currency_amount'],
-          'item_price' =>  $input['item_price'],
+          'price' =>  $input['item_currency_amount'],
         );
 		
 	} elseif($item == 'item1') {
@@ -169,6 +170,8 @@ case 'order_status_change':
 // Код проверки товара, включая его стоимость
         $app_order_id = 1; // Получающийся у вас идентификатор заказа.
 
+	if (strpos($item, "offer") >= 0) $order_id = 900;
+
 $response['response'] = array(
           'order_id' => $order_id,
           'app_order_id' => $app_order_id,
@@ -189,7 +192,9 @@ case 'order_status_change_test':
 
 $app_order_id = 1; // Тут фактического заказа может не быть - тестовый режим.
 
-$response['response'] = array(
+	if (strpos($item, "offer") >= 0) $order_id = 900;
+
+	$response['response'] = array(
           'order_id' => $order_id,
           'app_order_id' => $app_order_id,
         );
