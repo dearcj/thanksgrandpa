@@ -10368,8 +10368,6 @@ window.loader.onComplete = preloaderLoaded;
 window.loader.load();
 dbInit();
 
-
-
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
 VK.init({apiId: window.apiid}, function () {
