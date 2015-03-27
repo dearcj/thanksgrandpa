@@ -6354,7 +6354,7 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.gfx.scale.y = 0.48;
     this.updateGraphics();
     this.maxHp = 1000;
-    this.xp = 300;
+    this.xp = 250;
     this.hp = this.maxHp;
     this.bar.gfx.width *= 2;
     this.barOffsetY = - 360;
@@ -6470,7 +6470,7 @@ function Boss2(in_x,in_y,animname,cr_bar){
 
     this.maxHp = 1600;
     this.hp = this.maxHp;
-    this.xp = 700;
+    this.xp = 400;
     this.gfx.skeleton.setAttachment("b_legs", "b_legs1");
     this.gfx.skeleton.setAttachment("b_body", "b_body1");
     this.gfx.skeleton.setAttachment("b_head", "b_head1");
@@ -6614,6 +6614,7 @@ Boss2.prototype.fire = function()
 MM.inst = new MM();
 
 MM.prototype.init = function () {
+    this.distXP = 0.005;
     this.simpleRandomSpawn = [this.spawnCoin, this.spawnDrone,
         this.spawnFatty, this.spawnFatty2,
         this.spawnGopnick, this.spawnGopnick2,
@@ -6847,7 +6848,7 @@ MM.prototype.spawnDrone = function (xp) {
     m.maxHp = 190;
     m.hp = m.maxHp;
     m.barOffsetX = 10;
-    m.xp = 25 + LauncherBG.inst.distance * 0.01;
+    m.xp = 15 + LauncherBG.inst.distance * this.distXP;
 }
 
 
@@ -6863,7 +6864,7 @@ MM.prototype.spawnBoosterDrone = function()
     m.maxHp = 80;
     m.hp = m.maxHp;
     m.barOffsetX = 10;
-    m.xp = 25 + LauncherBG.inst.distance * 0.01;
+    m.xp = 5 + LauncherBG.inst.distance * this.distXP;
 }
 
 MM.prototype.spawnDrone2 = function (dh) {
@@ -6878,7 +6879,7 @@ MM.prototype.spawnDrone2 = function (dh) {
     m.maxHp = 100;
     m.hp = m.maxHp;
     m.barOffsetX = 10;
-    m.xp = 25 + LauncherBG.inst.distance * 0.01;
+    m.xp = 10 + LauncherBG.inst.distance * this.distXP;
 }
 
 
@@ -6892,7 +6893,7 @@ MM.prototype.spawnBonusGnome = function (xp) {
     //new TweenMax(m, 25, {x: -100, onComplete: function(){m.destroy();}});
     m.maxHp = 400;
     m.hp = m.maxHp;
-    m.xp = xp + LauncherBG.inst.distance * 0.01;
+    m.xp = xp + LauncherBG.inst.distance * this.distXP;
 }
 
 
@@ -6905,7 +6906,7 @@ MM.prototype.spawnJumpMon = function () {
     m.longJump(1, 0.25, -1, -3, 1.2);
     m.maxHp = 170;
     m.hp = m.maxHp;
-    m.xp = 10 + LauncherBG.inst.distance * 0.01;
+    m.xp = 6 + LauncherBG.inst.distance * this.distXP;
 }
 
 MM.prototype.spawnFatty = function () {
@@ -6919,7 +6920,7 @@ MM.prototype.spawnFatty = function () {
     new TweenMax(m, 1.2, {rotation: -Math.PI / 15});
     m.maxHp = 100;
     m.hp = m.maxHp;
-    m.xp = 10 + LauncherBG.inst.distance * 0.01;
+    m.xp = 5 + LauncherBG.inst.distance * this.distXP;
 }
 
 MM.prototype.spawnFatty2 = function (xp) {
@@ -6932,7 +6933,7 @@ MM.prototype.spawnFatty2 = function (xp) {
     new TweenMax(m, 1.2, {rotation: -Math.PI / 15});
     m.maxHp = 100;
     m.hp = m.maxHp;
-    m.xp = 17 + LauncherBG.inst.distance * 0.01;
+    m.xp = 6 + LauncherBG.inst.distance * this.distXP;
 }
 
 
@@ -6947,7 +6948,7 @@ MM.prototype.spawnGopnick = function (xp) {
     m.hp = m.maxHp;
     new TweenMax(m, 1.2, {rotation: -Math.PI / 15});
     m.longJump(1, 0.2, -5 - Math.random() * 2, -16 - Math.random() * 2, 1.1, 0, 38);
-    m.xp = 11 + LauncherBG.inst.distance * 0.01;
+    m.xp = 7 + LauncherBG.inst.distance * this.distXP;
 }
 
 MM.prototype.spawnGopnick2 = function (xp) {
@@ -6961,7 +6962,7 @@ MM.prototype.spawnGopnick2 = function (xp) {
     m.hp = m.maxHp;
     new TweenMax(m, 1.2, {rotation: -Math.PI / 15})
     m.longJump(1, 0.2, -8 - Math.random() * 2, -21 - Math.random() * 2, 0.8, 0, 30);
-    m.xp = 17 + LauncherBG.inst.distance * 0.01;
+    m.xp = 8 + LauncherBG.inst.distance * this.distXP;
 }
 
 MM.prototype.spawnRandomMonster = function (xp) {
@@ -6983,7 +6984,7 @@ MM.prototype.spawnSimpleMonster = function (xp) {
 //fastSpeed = -12
 //easeTime = 1.2
     m.longJump(1, 0.14, -6, -12, 1.2 - Math.random() * 0.15);
-    m.xp = xp + LauncherBG.inst.distance * 0.01;
+    m.xp = 4 + LauncherBG.inst.distance * this.distXP;
 }
 
 MM.prototype.doStep = function () {
@@ -7080,7 +7081,7 @@ function BonusMonGnome(in_x,in_y,animname,cr_bar){
     this.gfx.scale.y = 0.48;
     this.updateGraphics();
     LauncherBG.inst.ol.addChild(this.gfx);
-    this.xp = 30;
+    this.xp = 20;
     this.lastDrop = 0;
     this.allowTrackSpeed = false;
     var t = this;
