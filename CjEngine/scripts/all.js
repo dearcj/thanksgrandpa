@@ -5069,7 +5069,8 @@ CPlayer.prototype.kill = function()
     if (this.state == this.sMoving) {
         this.state = this.sDying;
         this.pickupBooster = false;
-        for (var i = 0; i < CBooster.list.length; ++i) CBooster.list[i].onDeactivate();
+        if (CBooster.list)
+            for (var i = 0; i < CBooster.list.length; ++i) CBooster.list[i].onDeactivate();
         this.invulnerable++;
         var lbg = LauncherBG.inst;
         lbg.preVelocity = lbg.maxVelocity;
@@ -10345,7 +10346,7 @@ PauseTimer.resume = function()
     PauseTimer.totalPauseTime = PauseTimer.totalPauseTime + (window.time - PauseTimer.pauseStartedAt);
     TweenMax.resumeAll();
     PauseTimer.paused = false;
-}
+};
 window.SCR_WIDTH = 800;
 window.SCR_HEIGHT = 600;
 
