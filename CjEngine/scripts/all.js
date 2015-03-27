@@ -10371,7 +10371,7 @@ VK.init({apiId: window.apiid}, function () {
 
     showADs2();
 }, function () {
-
+    showADs2();
 }, '5.27');
 
 function order(item) {
