@@ -10369,7 +10369,7 @@ $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
 VK.init({apiId: 4654201}, function () {
     console.log("INIT OK");
-    showADs2();
+   // showADs2();
 }, function () {
     console.log("INIT FAILED");
 }, '5.27');
@@ -10557,7 +10557,7 @@ function preloaderLoaded() {
     window.lastLoop = 0;
 
     assetsButSoundsLoaded();
-  //  showADs2();
+    showADs2();
     loader.onComplete = function()
     {
         window.loaded = true;
