@@ -10556,7 +10556,7 @@ function preloaderLoaded() {
     window.lastLoop = 0;
 
     assetsButSoundsLoaded();
-    showADs();
+    showADs2();
     loader.onComplete = function()
     {
         window.loaded = true;
