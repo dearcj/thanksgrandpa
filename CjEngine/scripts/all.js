@@ -1166,7 +1166,7 @@ GameStage.prototype.onShow = function () {
     this.state = "game";
     this.doProcess = false;
 
-    gameStage.revealPrice = 2;
+    gameStage.revealPrice = 1;
 
     LauncherBG.inst = new LauncherBG(0, 0);
     LauncherBG.inst.addLevel("plantPart2");
@@ -10359,6 +10359,9 @@ var assetsLoaded = 0;
 var preloaderAsset = [
     "preloader.png"
 ];
+
+window.renderer = new PIXI.CanvasRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
+
 window.loader = new PIXI.AssetLoader(preloaderAsset);
 window.loader.onComplete = preloaderLoaded;
 window.loader.load();
@@ -10368,7 +10371,6 @@ window.addScale = 1;
 
 window.SCR_SCALE = 1.0;
 window.FRAME_RATE = 60;
-window.renderer = new PIXI.CanvasRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
 
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
@@ -10461,13 +10463,8 @@ function showADs()
     var div = document.createElement('div');
     div.id = "vk_ads_55316";
     div.setAttribute("style", "position:absolute;left:0%;top:0%;");
-
-//Вставляем на страницу
     document.body.appendChild(div);
-
     setTimeout(function() {
-
-
     var adsParams = {"ad_unit_id":55316,"ad_unit_hash":"d4685898a5210c69b772bf2ab6fb0571"};
     function vkAdsInit() {
         VK.Widgets.Ads('vk_ads_55316', {}, adsParams);
@@ -10496,7 +10493,6 @@ function preloaderLoaded() {
     SM.inst.addLayersToStage();
     SM.inst.superStage.addChild(preloaderBg);
     SM.inst.superStage.addChild(loadingScreen);
-    requestAnimFrame(animate);
 
     window.loadingState = "loading";
     window.assetsToLoader = [
@@ -10543,7 +10539,6 @@ function preloaderLoaded() {
     window.scoreStage = new ScoreStage();
     window.gameStage = new GameStage();
     window.credStage = new Credits();
-    //window.winGameStage = new WinGame();
     window.achStage = new AchStage();
     window.levSel = new LevSel();
     window.shopStage = new ShopStage();
@@ -10569,7 +10564,7 @@ function preloaderLoaded() {
     loader.load();
     loader.onProgress = onAssetsProgress;
 
-    var soundLoadedFunction = null;
+    requestAnimFrame(animate);
 }
 
 
@@ -10655,12 +10650,12 @@ function removeRotationText() {
 function addRotationText() {
     if (window.icorotate) return;
 
-    window.rotatebg = document.createElement("img")
-    window.rotatebg.setAttribute("src", "rotatebg.png")
+    window.rotatebg = document.createElement("img");
+    window.rotatebg.setAttribute("src", "rotatebg.png");
     document.body.appendChild(window.rotatebg);
 
-    window.icorotate = document.createElement("img")
-    window.icorotate.setAttribute("src", "rotatescreen.png")
+    window.icorotate = document.createElement("img");
+    window.icorotate.setAttribute("src", "rotatescreen.png");
     document.body.appendChild(window.icorotate);
     rescale();
 }
@@ -10694,8 +10689,6 @@ function rescale() {
     renderer.resize(SCR_WIDTH * SCR_SCALE, SCR_HEIGHT * SCR_SCALE);
 
     if (SM.inst.superStage) {
-        //    stage.scale.x = SCR_SCALE;
-        // stage.scale.y = SCR_SCALE;
         SM.inst.superStage.scale.x = SCR_SCALE;
         SM.inst.superStage.scale.y = SCR_SCALE;
     }
@@ -10724,11 +10717,11 @@ function onWindowResize() {
 
 function animate() {
     requestAnimFrame(animate);
-    window.time = (new Date()).getTime();
+    time = (new Date()).getTime();
     if (loadingState == "prepreload") {
     } else
     if (loadingState == "loading") {
-        var p = (assetsLoaded / window.assetsToLoader.length);//*0.5 + 0.5*(ZSound.loaded / ZSound.total) + 0.07;
+        var p = (assetsLoaded / assetsToLoader.length);//*0.5 + 0.5*(ZSound.loaded / ZSound.total) + 0.07;
         if (p > 1) p = 1;
         /*  loadingScreen.beginFill(0xAA4444);
          loadingScreen.drawRect(SCR_WIDTH / 2 - 90, SCR_HEIGHT / 2 + 193, 240, 32);
@@ -10743,9 +10736,8 @@ function animate() {
         var thisLoop = new Date;
       //  fps = 1000 / (thisLoop - lastLoop);
         lastLoop = thisLoop;
-      //  txtFps.setText("FPS: " + parseInt(fps));
     }
-    //   applyRatio(stage, SCR_SCALE);
+
     renderer.render(stage);
-    //  applyRatio(stage, 1.0 / (SCR_SCALE));
+
 }
