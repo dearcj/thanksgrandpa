@@ -1165,6 +1165,8 @@ GameStage.prototype.doKeyUp = function (evt) {
 GameStage.prototype.onShow = function () {
     ZSound.PlayMusic("m_ded");
 
+    PlayerData.inst.score = 0;
+
     CustomStage.prototype.onShow.call(this);
     gameStage.killing = false;
     gameStage.slowMoCoef = 1;
@@ -10564,7 +10566,7 @@ function preloaderLoaded() {
     window.lastLoop = 0;
 
     assetsButSoundsLoaded();
-    //showADs2();
+    showADs2();
     loader.onComplete = function()
     {
         window.loaded = true;
