@@ -906,9 +906,11 @@ GameStage.prototype.shAfterLife = function () {
     cb.gfx.interactive = true;
 
     cb.gfx.click = function () {
+        failtween.pause();
 
         var continueGame = function()
         {
+            failtween.resume();
             ZSound.Play("vzbodritsa");
             TweenMax.killTweensOf(cb);
             removeafterlife();
