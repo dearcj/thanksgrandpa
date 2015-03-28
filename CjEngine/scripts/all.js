@@ -218,7 +218,7 @@ ZSound.Init = function(manifest) {
     if (!ZSound.available) return;
 
     var audioPath = "res/snd/";
-    createjs.Sound.alternateExtensions = ["mp3"];
+  //  createjs.Sound.alternateExtensions = ["mp3"];
     ZSound.loaded = 0;
     ZSound.total = manifest.length;
     var handleLoad = function()
@@ -925,11 +925,17 @@ GameStage.prototype.shAfterLife = function () {
         }
 
         //price = 1000;
-        if (PlayerData.inst.playerItem.crystals > price) {
+        if (PlayerData.inst.playerItem.crystals > gameStage.revealPrice) {
             continueGame();
         } else
         {
-            order("item5");
+            var needed = gameStage.revealPrice  - PlayerData.inst.playerItem.crystals;
+            if (needed <= 3)
+                order("item4");else
+            if (needed <= 15)
+            order("item5"); else
+                order("item6");
+
             VK.orderComplete = function()
             {
                if (PlayerData.inst.playerItem.crystals > price)
@@ -5270,7 +5276,7 @@ CPlayer.prototype.updateBlink = function()
 
 CPlayer.prototype.dealDamage = function(dmg)
 {
-    if (window.time - this.revealTime < 800) return;
+    if (window.time - this.revealTime < 550) return;
     this.revealTime = window.time;
     if (this.invulnerable > 0) return;
 
@@ -10350,27 +10356,24 @@ PauseTimer.resume = function()
 window.SCR_WIDTH = 800;
 window.SCR_HEIGHT = 600;
 
+window.SCR_SCALE = 1.0;
+window.FRAME_RATE = 60;
+
 var loadingState = "prepreload";
 
 window.openSponsorWindow = null;
 window.focus();
 var assetsLoaded = 0;
-
 var preloaderAsset = [
     "preloader.png"
 ];
-
-window.renderer = new PIXI.CanvasRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
+window.addScale = 1;
+window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
 
 window.loader = new PIXI.AssetLoader(preloaderAsset);
 window.loader.onComplete = preloaderLoaded;
 window.loader.load();
 dbInit();
-
-window.addScale = 1;
-
-window.SCR_SCALE = 1.0;
-window.FRAME_RATE = 60;
 
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
@@ -10559,7 +10562,7 @@ function preloaderLoaded() {
     window.lastLoop = 0;
 
     assetsButSoundsLoaded();
-    showADs2();
+    //showADs2();
     loader.onComplete = function()
     {
         window.loaded = true;
