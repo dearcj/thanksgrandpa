@@ -1143,8 +1143,7 @@ GameStage.prototype.doKeyDown = function (evt) {
             CBooster.list[i].onActivate();
         }
     }
-
-    if (evt.which == 87||  evt.which == 17)
+    if (evt.which == 87||  evt.which == 17 || evt.which == 32)
     {
         if (gameStage.player)
         gameStage.player.onJump();
@@ -1161,6 +1160,9 @@ GameStage.prototype.doKeyUp = function (evt) {
     //    if (gameStage.player)
     //    gameStage.player.jumpboost = false;
     }
+
+
+
     evt.preventDefault();
 }
 
