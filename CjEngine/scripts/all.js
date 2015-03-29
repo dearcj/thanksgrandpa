@@ -1149,6 +1149,8 @@ GameStage.prototype.doKeyDown = function (evt) {
         if (gameStage.player)
         gameStage.player.onJump();
     }
+
+    evt.preventDefault();
 }
 
 GameStage.prototype.doKeyUp = function (evt) {
@@ -1159,6 +1161,7 @@ GameStage.prototype.doKeyUp = function (evt) {
     //    if (gameStage.player)
     //    gameStage.player.jumpboost = false;
     }
+    evt.preventDefault();
 }
 
 GameStage.prototype.showTutorial = function () {
@@ -1197,7 +1200,7 @@ GameStage.prototype.showTutorial = function () {
     TweenMax.delayedCall(43, function()
     {
         gameStage.tutComplete = true;
-        SM.inst.openStage(gameStage);
+        SM.inst.openStage(charStage);
     });
 }
 
@@ -3243,7 +3246,7 @@ ComixStage.prototype.goNext = function () {
     var p = this.comixData.shift();
     if (!p)
     {
-        SM.inst.openStage(charStage);
+        SM.inst.openStage(gameStage);
     }
   //  comixStage.dcNext = TweenMax.delayedCall(p.duration, function(){comixStage.goNext()});
     for (var i = 0; i < p.objects.length;++i)
