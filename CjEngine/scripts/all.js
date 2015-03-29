@@ -895,7 +895,7 @@ GameStage.prototype.shAfterLife = function () {
     }
 
 
-   var failtween=  new TweenMax(cb, 3, {pos: 1, onComplete: openScoreWnd});
+   var failtween=  new TweenMax(cb, 3, {pos: 1, onComplete: openScoreWnd, ease: Circ.easeOut});
     var bodrtext = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost text.png"));
     bodrtext.anchor.x = 0.5;
     bodrtext.anchor.y = 0.5;
@@ -1161,11 +1161,54 @@ GameStage.prototype.doKeyUp = function (evt) {
     }
 }
 
+GameStage.prototype.showTutorial = function () {
+
+    showText = function(s, x, y)
+    {
+        var c = new CTextField(x,y);
+        c.text = s;
+        c.fontFamily = "dedgamecaps";
+        c.align = "center";
+        c.fontSize = 27;
+        c.init();
+        c.gfx.scale.x = 1.3;
+        c.gfx.alpha = 0;
+        TweenMax.delayedCall(4.8, function()
+        {
+            new TweenMax(c.gfx.scale, 0.2, {x: 1.3});
+            new TweenMax(c.gfx, 0.2, {alpha: 0});
+        });
+        TweenMax.delayedCall(5, function(){
+            c.destroy();
+        })
+        new TweenMax(c.gfx.scale, 0.2, {x: 1});
+        new TweenMax(c.gfx, 0.2, {alpha: 1});
+    }
+
+    var prevQ =     MM.inst.monsterQueue;
+    MM.inst.monsterQueue = "........l..l..l..l.l........s...s...s....0000000........c...c...c.....+....+...+.......ss...s.s.s.g.g.s.s.c";
+    TweenMax.delayedCall(3, showText, ["ДЕДУЛЬ, ЖМИ 'W' ИЛИ ПКМ==ЧТОБЫ ПРЫГАТЬ", SCR_WIDTH / 2, 140]);
+    TweenMax.delayedCall(10, showText, ["КЛИКАЙ ЧТОБЫ СТРЕЛЯТЬ", SCR_WIDTH / 2, 140]);
+    TweenMax.delayedCall(16, showText, ["СОБИРАЙ МОНЕТЫ", SCR_WIDTH / 2, 140]);
+    TweenMax.delayedCall(22, showText, ["НАЖМИ 'W' ДВАЖДЫ==ЧТОБЫ ПРЫГНУТЬ ВЫШЕ", SCR_WIDTH / 2, 140]);
+    TweenMax.delayedCall(28, showText, ["ВЫСТРЕЛИ В ДРОНА==ЧТОБЫ ЗАБРАТЬ БУСТЕР", SCR_WIDTH / 2, 140]);
+    TweenMax.delayedCall(38, showText, ["ПОЗДРАВЛЯЮ, ТВОЕ ОБУЧЕНИЕ ОКОНЧЕНО", SCR_WIDTH / 2, 140]);
+
+    TweenMax.delayedCall(43, function()
+    {
+        gameStage.tutComplete = true;
+        SM.inst.openStage(gameStage);
+    });
+}
+
+
 
 GameStage.prototype.onShow = function () {
     ZSound.PlayMusic("m_ded");
 
     PlayerData.inst.score = 0;
+
+    if (vkparams.registered) gameStage.tutorial = true; else gameStage.tutorial = false;
 
     CustomStage.prototype.onShow.call(this);
     gameStage.killing = false;
@@ -1276,6 +1319,11 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.player.gfx.scale.y = 0.22;
     gameStage.player.playable = true;
     LauncherBG.inst.pllayer.addChild(gameStage.player.gfx);
+
+    if (PlayerData.inst.getUpgrade(null, "Health").upgr == 5) {
+        gameStage.player.maxHp += 1;
+        gameStage.player.hp += 1;
+    }
     //SM.inst.fg.addChild(gameStage.player.gfx);
     gameStage.updateItems();
 
@@ -1347,22 +1395,8 @@ GameStage.prototype.onShowContinue = function () {
 
     new TweenMax(LauncherBG.inst, 3, {maxVelocity: 10, ease: Sine.easeIn});
 
-    /*
-     gameStage.muteBtn = CObj.getById("mutebtn");
-     gameStage.updateSoundBtn(gameStage.muteBtn);
-
-
-     gameStage.muteBtn.click = function () {
-     if (ZSound.available)
-     ZSound.Mute(); else
-     ZSound.UnMute();
-
-     dataStorage.soundEnabled = ZSound.available;
-     updateDS();
-     gameStage.updateSoundBtn(gameStage.muteBtn);
-     }
-     */
-    //  gameStage.sessionEnd();
+    gameStage.tutorial = true;
+    if (gameStage.tutorial && !gameStage.tutComplete ) gameStage.showTutorial();
 }
 
 GameStage.prototype.makePause = function () {
@@ -1893,6 +1927,12 @@ CharStage.prototype.openPremiumWindow = function () {
             order(str);
             shopStage.updateStatsPanel();
         }
+
+        CObj.getById("btnfree").click = function () {
+            VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
+        };
+
+
         CObj.getById("buy1").click = function () {
             orderFunc("item1")
         };
@@ -2028,22 +2068,6 @@ CharStage.prototype.onShowContinue = function () {
         charStage.frp = charStage.createFriendsPanel();
     }
 
-    CObj.getById("boffer").click = function()
-    {
-        /*VK.api('account.getActiveOffers', {}, function (data) {
-            if (!data.response) {
-                return;
-            }
-                var i,l,offers = data.response;
-
-                for (i = 1, l = offers.length; i < l; i += 1) {
-                    VK.callMethod("showOrderBox", {offer_id: offers[i].id, type: "offers", currency: "true"});
-                }
-
-            });
-*/
-        VK.callMethod("showOrderBox", {type: "offers", currency: "true"});
-    };
 
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
     CObj.getById("bbuy2").click = charStage.openPremiumWindow;
@@ -2474,7 +2498,8 @@ extend(ShopStage, CustomStage);
 
 ShopStage.prototype.onShow = function () {
 
-
+    PlayerData.inst.playerItem.money = 10000;
+    PlayerData.inst.playerItem.crystals = 1000;
     /* PlayerData.inst.playerItem.money = 10000;
      PlayerData.inst.playerItem.crystals = 1000;*/
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
@@ -4909,6 +4934,7 @@ function CPlayer(in_x,in_y,textname,in_body){
 
     /*this.boostPower = 1.035;
     this.maxBoostVel = -22.5;*/
+    this.invulnerable = 0;
     this.initialJumpSpeed = -21.5;
     this.gravPower = 1.3;
     this.pickupBooster = true;
@@ -5016,13 +5042,13 @@ CPlayer.prototype.createDedGraphics = function()
     this.lshSlot.data.boneData.rotation = CPlayer.lhRot;
 
     g.skeleton.setAttachment("body", "body");
-    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
+ /*   for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
     {
         if (PlayerData.inst.items_enabled[i].id_item == "105A3B3C-160C-4355-AB38-9F107DB5A831")
         {
             g.skeleton.setAttachment("body", "body1");
         }
-    }
+    }*/
 
     g.stateData.setMixByName("idle", "jump", 0.2);
     g.stateData.setMixByName("jump", "idle", 0.1);
@@ -5281,8 +5307,8 @@ CPlayer.prototype.updateBlink = function()
 CPlayer.prototype.dealDamage = function(dmg)
 {
     if (window.time - this.revealTime < 550) return;
-    this.revealTime = window.time;
     if (this.invulnerable > 0) return;
+    this.revealTime = window.time;
 
     for (var i = 0; i < this.gfx.skeleton.slots.length; ++i)
     {
@@ -6026,6 +6052,7 @@ CBoosterBox.prototype.getBooster = function()
     if (!gameStage.player.pickupBooster) return;
     var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
         {name: "Double", cls: CDoubleBooster}];
+    if (gameStage.tutorial) boosters = [{name: "Tablets", cls: CTabletsBooster}];
     var boost = getRand(boosters);
 
     if (CBooster.list)
@@ -6045,7 +6072,11 @@ CBoosterBox.prototype.getBooster = function()
         break;
     }
 
-    var b = new boost.cls(SCR_WIDTH / 2, SCR_HEIGHT / 2);
+    var b = new boost.cls(SCR_WIDTH / 2, SCR_HEIGHT / 2,PlayerData.inst.getUpgrade(PlayerData.inst.items[i]).upgr);
+    b.name = boost.name;
+    b.item_id = PlayerData.inst.items[i].id;
+
+
     if (replaceObj) {
         px = replaceObj.x;
         replaceObj.duration += b.duration;
@@ -6177,7 +6208,7 @@ CMonster.prototype.kill = function()
 
     if (this.spawnCoins) {
         var coinCount = 5;
-        if (gameStage.player.doubleBooster)coinCount = 10;
+        if (gameStage.player.doubleBooster)coinCount *= gameStage.player.doubleBooster;
         for (var i = 0; i < coinCount; ++i) {
             if (Math.random() > 0.3) continue;
             CCoin.spawnCoin(this.x, this.y, this.coinAmount);
@@ -6548,10 +6579,11 @@ Boss2.prototype.fire = function()
         });
     }
 };MM = function () {
-    var bonusProb = 0.1;
+    var bonusProb = 0.6;
+    var moneyCrowProb = 0.4;
     this.patterns =
         [
-            {mons: "+.", diff: 1, prob: bonusProb},
+                {mons: "+.", diff: 1, prob: bonusProb},
                 {mons: "f..f00szf..000", diff: 1, prob: 1},
                 {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
@@ -6565,7 +6597,7 @@ Boss2.prototype.fire = function()
                 {mons: ".z...c.s.s.sc..", diff: 2, prob: 1},
                 {mons: ".z...c.z..", diff: 2, prob: 1},
                 {mons: "+.", diff: 2, prob: bonusProb},
-                {mons: "j", diff: 2, prob: 0.1},
+                {mons: "j", diff: 2, prob: moneyCrowProb},
                 {mons: ".lbb..c.", diff: 2, prob: 1},
                 {mons: ".c..?.?.?.", diff: 2, prob: 1},
                 {mons: ".f...z...f..c.", diff: 2, prob: 1},
@@ -6592,7 +6624,7 @@ Boss2.prototype.fire = function()
                 {mons: ".b.bf.?.", diff: 6, prob: 0.1},
                 {mons: ".c..c.l..g.g00g", diff: 6, prob: 1},
                 {mons: ".c..c..l..g..g..g", diff: 6, prob: 1},
-                {mons: "j", diff: 6, prob: 0.1},
+                {mons: "j", diff: 6, prob: moneyCrowProb},
                 {mons: "..s..s..dss", diff: 6, prob: 0.1},
                 {mons: "+.", diff: 6, prob: bonusProb},
                 {mons: "h.llH.lzh..H.l.l", diff: 7, prob: 1},
@@ -7111,9 +7143,11 @@ BonusMonGnome.prototype.dealDamage = function(dmg)
     CMonster.prototype.dealDamage.call(this, dmg);
     if (PauseTimer.getTimer() - this.lastDrop > 200) {
         this.lastDrop = PauseTimer.getTimer();
-        if (gameStage.player.doubleBooster) {
-            CCoin.spawnCoin(this.x, this.y, 6);
-        } else CCoin.spawnCoin(this.x, this.y, 3);
+        var am = 3;
+        if (gameStage.player.doubleBooster) am *= gameStage.player.doubleBooster;
+        {
+            CCoin.spawnCoin(this.x, this.y, am);
+        }
     }
 };
 /**
@@ -8606,14 +8640,20 @@ var w_laser = new CLaser(
  */
 extend(CBooster, CObj, true);
 
-function CBooster(x,y,gfx) {
+function CBooster(x,y,gfx,upgr) {
     CObj.apply(this, [x,y, gfx, null]);
-
+    this.upgr = upgr;
     if (!CBooster.list)
     CBooster.list = [];
     CBooster.list.push(this);
     this.activate = true;
   //  this.removeBoosterItem();
+}
+
+CBooster.prototype.getUpgrade = function()
+{
+
+
 }
 
 CBooster.prototype.destroy = function()
@@ -8689,9 +8729,9 @@ CBooster.prototype.process = function()
  */
 extend(CDoubleBooster, CBooster, true);
 
-function CDoubleBooster(x,y,gfx) {
-    CBooster.apply(this, [x,y,gfx]);
-    this.duration = 30;
+function CDoubleBooster(x,y,gfx,upgr) {
+    CBooster.apply(this, [x,y,gfx,upgr]);
+    this.duration = 20 + 5*upgr;
 }
 
 CDoubleBooster.prototype.onActivate = function()
@@ -8699,27 +8739,30 @@ CDoubleBooster.prototype.onActivate = function()
     if (!gameStage.player) return;
     CBooster.prototype.onActivate.call(this);
 
-    gameStage.player.doubleBooster = true;
+    gameStage.player.doubleBooster = 2 + 0.25*this.upgr;
 };
 
 
 CDoubleBooster.prototype.onDeactivate = function()
 {
-   gameStage.player.doubleBooster = false;
+   gameStage.player.doubleBooster = null;
    CBooster.prototype.onDeactivate.call(this);
 }
 extend(CHeartBooster, CBooster, true);
 
-function CHeartBooster(x,y,gfx) {
-    CBooster.apply(this, [x,y,gfx]);
+function CHeartBooster(x,y,gfx,upgr) {
+    CBooster.apply(this, [x,y,gfx,upgr]);
     this.duration = 0.1;
+
 };
 
 
 CHeartBooster.prototype.onActivate = function() {
 
-    gameStage.player.maxHp++;
-    gameStage.player.hp++;
+    var upgrHP = [1, 2, 3, 5, 10];
+    if (this.upgr) {
+        gameStage.player.hp += this.upgr;
+    }
 
     if (!gameStage.player) return;
     CBooster.prototype.onActivate.call(this);
@@ -8728,10 +8771,11 @@ CHeartBooster.prototype.onActivate = function() {
  */
 extend(CMagnetBooster, CBooster, true);
 
-function CMagnetBooster(x,y,gfx) {
-    CBooster.apply(this, [x,y,gfx]);
-    CMagnetBooster.mindist = 300*300;
-    this.duration = 50;
+function CMagnetBooster(x,y,gfx,upgr) {
+    CBooster.apply(this, [x,y,gfx,upgr]);
+    var d = 250 + 20*upgr;
+    CMagnetBooster.mindist = d*d;
+    this.duration = 40 + 10*upgr;
 }
 
 CMagnetBooster.prototype.process = function()
@@ -8758,9 +8802,9 @@ CMagnetBooster.prototype.process = function()
  */
 extend(CSupermanBooster, CBooster, true);
 
-function CSupermanBooster(x,y,gfx) {
-    CBooster.apply(this, [x,y,gfx]);
-    this.duration = 15;
+function CSupermanBooster(x,y,gfx,upgr) {
+    CBooster.apply(this, [x,y,gfx,upgr]);
+    this.duration = 15+ 3*upgr;
 }
 
 CSupermanBooster.prototype.onActivate = function()
@@ -8833,10 +8877,9 @@ CSupermanBooster.prototype.process = function()
 };extend(CTabletsBooster, CBooster, true);
 
 
-function CTabletsBooster(x,y,gfx) {
-    CBooster.apply(this, [x,y, gfx]);
-    this.duration = 4;
-    this.activate = true;
+function CTabletsBooster(x,y,gfx,upgr) {
+    CBooster.apply(this, [x,y, gfx,upgr]);
+    this.duration = 4 + upgr;
 }
 
 CTabletsBooster.prototype.onActivate = function()
@@ -8849,22 +8892,29 @@ CTabletsBooster.prototype.onActivate = function()
         gameStage.player.invulnerable++;
         var p = gameStage.player;
         p.blink = true;
-        var prevVel = LauncherBG.inst.maxVelocity;
+        this.prevVel = LauncherBG.inst.maxVelocity;
         p.superMode = true;
 
     var b = this;
-        new TweenMax(LauncherBG.inst, this.duration, {maxVelocity: LauncherBG.inst.maxVelocity + 25, ease: Linear.easeOut});
-        TweenMax.delayedCall(this.duration+0.3, function(){
-            new TweenMax(LauncherBG.inst, 1.3, {maxVelocity: prevVel, ease: Linear.easeOut});
-            TweenMax.delayedCall(0.9, function(){
-                b.onDeactivate();
-                p.superMode = false;
-                p.resetBlink();
-                p.invulnerable--;
-                p.blink = false;
-            });
-        })
+        new TweenMax(LauncherBG.inst, 1.5, {maxVelocity: LauncherBG.inst.maxVelocity + 25, ease: Linear.easeOut});
+
+
+
 };
+
+
+CTabletsBooster.prototype.onDeactivate = function()
+{
+
+    new TweenMax(LauncherBG.inst, 0.3, {maxVelocity: this.prevVel, ease: Linear.easeOut});
+
+    CBooster.prototype.onDeactivate.call(this);
+    var p = gameStage.player;
+    p.superMode = false;
+    p.resetBlink();
+    p.invulnerable--;
+    p.blink = false;
+}
 
 PlayerData = function(pi)
 {
@@ -8960,8 +9010,21 @@ PlayerData.prototype.getType = function (item_player)
 }
 
 
-PlayerData.prototype.getUpgrade = function(item)
+PlayerData.prototype.getUpgrade = function(item, itemName)
 {
+    if (itemName)
+    {
+        for (var i = 0; i < this.items.length; ++i)
+        {
+            if (this.items[i].name == itemName)
+            {
+                item =    this.items[i];
+                break;
+            }
+        }
+
+    }
+
     var nm = item.name;
     var upgrIds = [];
     for (var i = 0; i < this.items.length; ++i)
@@ -9252,6 +9315,7 @@ PlayerData.prototype.getEventById = function(id)
 
 PlayerData.prototype.loadData = function(cb)
 {
+    //checkDb();
    this.loadCount = 0;
 
    var totalLoads = 7;
@@ -9439,616 +9503,616 @@ var tHat = "hat";
 function checkDb ()
 {
 
- //   updDb(dbobj);
+    updDb(dbobj);
 }
 
 var dbobj =
-[
-    {
-        tbname: "tb_edevent",
-        items:
-            [
-                {
-                    desc: "Помянуть боевых товарищей",
-                    name: "event1",
-                    delay_min: 24*60,
-                    xp_gain: 0,
-                    money_gain: 0,
-                    crystal_gain: 2,
-                    gfx: "action 1.png",
-                    reqlvl: 2,
-                    exectime: 30
-                },
-                {
-                    desc: "Получить пенсию",
-                    name: "event2",
-                    delay_min: 48*60,
-                    xp_gain: 0,
-                    money_gain: 500,
-                    crystal_gain: 0,
-                    gfx: "action 2.png",
-                    reqlvl: 1,
-                    exectime: 120
-                },
-                {
-                    desc: "Посмотреть новости",
-                    name: "event3",
-                    delay_min: 6*60,
-                    xp_gain: 50,
-                    money_gain: 0,
-                    crystal_gain: 0,
-                    gfx: "action 3.png",
-                    reqlvl: 1,
-                    exectime: 30
-                },
-                {
-                    desc: "Заглянуть в интернет",
-                    name: "event4",
-                    delay_min: 24*60,
-                    xp_gain: 600,
-                    money_gain: 0,
-                    crystal_gain: 0,
-                    gfx: "action 4.png",
-                    reqlvl: 4,
-                    exectime: 140
-                },
-                {
-                    desc: "Постирать мундир",
-                    name: "event5",
-                    delay_min: 2,
-                    xp_gain: 0,
-                    money_gain: 0,
-                    crystal_gain: 8,
-                    gfx: "action 5.png",
-                    reqlvl: 5,
-                    exectime: 120
-                },
-                {
-                    desc: "Доесть ужин",
-                    name: "event6",
-                    delay_min: 24*60,
-                    xp_gain: 100,
-                    money_gain: 0,
-                    crystal_gain: 0,
-                    gfx: "action 6.png",
-                    reqlvl: 1,
-                    exectime: 10
-                },
-                {
-                    desc: "Позвонить внуку",
-                    name: "event7",
-                    delay_min: 24*60,
-                    xp_gain: 900,
-                    money_gain: 0,
-                    crystal_gain: 0,
-                    gfx: "action 7.png",
-                    reqlvl: 5,
-                    exectime: 80
-                },
-                {
-                    desc: "Помочь бабке по хозяйству",
-                    name: "event8",
-                    delay_min: 4*60,
-                    xp_gain: 0,
-                    money_gain: 0,
-                    crystal_gain: 3,
-                    gfx: "action 8.png",
-                    reqlvl: 4,
-                    exectime: 50
-                },
-                {
-                    desc: "Подремать",
-                    name: "event9",
-                    delay_min: 6*60,
-                    xp_gain: 200,
-                    money_gain: 0,
-                    crystal_gain: 0,
-                    gfx: "action 9.png",
-                    reqlvl: 3,
-                    exectime: 120
-                },
-                {
-                    desc: "Посмотреть фотографии",
-                    name: "event10",
-                    delay_min: 60,
-                    xp_gain: 50,
-                    money_gain: 0,
-                    crystal_gain: 0,
-                    gfx: "action 10.png",
-                    reqlvl: 1,
-                    exectime: 10
+    [
+        {
+            tbname: "tb_edevent",
+            items:
+                [
+                    {
+                        desc: "Помянуть боевых товарищей",
+                        name: "event1",
+                        delay_min: 24*60,
+                        xp_gain: 0,
+                        money_gain: 0,
+                        crystal_gain: 2,
+                        gfx: "action 1.png",
+                        reqlvl: 2,
+                        exectime: 30
+                    },
+                    {
+                        desc: "Получить пенсию",
+                        name: "event2",
+                        delay_min: 48*60,
+                        xp_gain: 0,
+                        money_gain: 500,
+                        crystal_gain: 0,
+                        gfx: "action 2.png",
+                        reqlvl: 1,
+                        exectime: 120
+                    },
+                    {
+                        desc: "Посмотреть новости",
+                        name: "event3",
+                        delay_min: 6*60,
+                        xp_gain: 50,
+                        money_gain: 0,
+                        crystal_gain: 0,
+                        gfx: "action 3.png",
+                        reqlvl: 1,
+                        exectime: 30
+                    },
+                    {
+                        desc: "Заглянуть в интернет",
+                        name: "event4",
+                        delay_min: 24*60,
+                        xp_gain: 600,
+                        money_gain: 0,
+                        crystal_gain: 0,
+                        gfx: "action 4.png",
+                        reqlvl: 4,
+                        exectime: 140
+                    },
+                    {
+                        desc: "Постирать мундир",
+                        name: "event5",
+                        delay_min: 2,
+                        xp_gain: 0,
+                        money_gain: 0,
+                        crystal_gain: 8,
+                        gfx: "action 5.png",
+                        reqlvl: 5,
+                        exectime: 120
+                    },
+                    {
+                        desc: "Доесть ужин",
+                        name: "event6",
+                        delay_min: 24*60,
+                        xp_gain: 100,
+                        money_gain: 0,
+                        crystal_gain: 0,
+                        gfx: "action 6.png",
+                        reqlvl: 1,
+                        exectime: 10
+                    },
+                    {
+                        desc: "Позвонить внуку",
+                        name: "event7",
+                        delay_min: 24*60,
+                        xp_gain: 900,
+                        money_gain: 0,
+                        crystal_gain: 0,
+                        gfx: "action 7.png",
+                        reqlvl: 5,
+                        exectime: 80
+                    },
+                    {
+                        desc: "Помочь бабке по хозяйству",
+                        name: "event8",
+                        delay_min: 4*60,
+                        xp_gain: 0,
+                        money_gain: 0,
+                        crystal_gain: 3,
+                        gfx: "action 8.png",
+                        reqlvl: 4,
+                        exectime: 50
+                    },
+                    {
+                        desc: "Подремать",
+                        name: "event9",
+                        delay_min: 6*60,
+                        xp_gain: 200,
+                        money_gain: 0,
+                        crystal_gain: 0,
+                        gfx: "action 9.png",
+                        reqlvl: 3,
+                        exectime: 120
+                    },
+                    {
+                        desc: "Посмотреть фотографии",
+                        name: "event10",
+                        delay_min: 60,
+                        xp_gain: 50,
+                        money_gain: 0,
+                        crystal_gain: 0,
+                        gfx: "action 10.png",
+                        reqlvl: 1,
+                        exectime: 10
 
-                },
-                {
-                    desc: "Почитать книгу",
-                    name: "event11",
-                    delay_min: 4*60,
-                    xp_gain: 0,
-                    money_gain: 0,
-                    crystal_gain: 1,
-                    gfx: "action 11.png",
-                    reqlvl: 3,
-                    exectime: 60
+                    },
+                    {
+                        desc: "Почитать книгу",
+                        name: "event11",
+                        delay_min: 4*60,
+                        xp_gain: 0,
+                        money_gain: 0,
+                        crystal_gain: 1,
+                        gfx: "action 11.png",
+                        reqlvl: 3,
+                        exectime: 60
 
-                },
-                {
-                    desc: "Почистить ордена",
-                    name: "event12",
-                    delay_min: 24*60,
-                    xp_gain: 0,
-                    money_gain: 0,
-                    crystal_gain: 2,
-                    gfx: "action 12.png",
-                    reqlvl: 1,
-                    exectime: 1
+                    },
+                    {
+                        desc: "Почистить ордена",
+                        name: "event12",
+                        delay_min: 24*60,
+                        xp_gain: 0,
+                        money_gain: 0,
+                        crystal_gain: 2,
+                        gfx: "action 12.png",
+                        reqlvl: 1,
+                        exectime: 1
 
-                },
-                {
-                    desc: "Сходить в поликлинику",
-                    name: "event13",
-                    delay_min: 48*60,
-                    xp_gain: 0,
-                    money_gain: 1000,
-                    crystal_gain: 3,
-                    gfx: "action 13.png",
-                    reqlvl: 2,
-                    exectime: 200
+                    },
+                    {
+                        desc: "Сходить в поликлинику",
+                        name: "event13",
+                        delay_min: 48*60,
+                        xp_gain: 0,
+                        money_gain: 1000,
+                        crystal_gain: 3,
+                        gfx: "action 13.png",
+                        reqlvl: 2,
+                        exectime: 200
 
-                },
-                {
-                    name: "event14",
-                    desc: "Покормить кота",
-                    delay_min: 6*60,
-                    xp_gain: 0,
-                    money_gain: 1000,
-                    crystal_gain: 0,
-                    gfx: "action 14.png",
-                    reqlvl: 5,
-                    exectime: 30
-                }
-            ]
+                    },
+                    {
+                        name: "event14",
+                        desc: "Покормить кота",
+                        delay_min: 6*60,
+                        xp_gain: 0,
+                        money_gain: 1000,
+                        crystal_gain: 0,
+                        gfx: "action 14.png",
+                        reqlvl: 5,
+                        exectime: 30
+                    }
+                ]
 
-    },
-    {
-        tbname: "tb_achs",
-        items:
-            [
-                {
-                    name: "Gold medal 1",
-                    desc: "Первый бой",
-                    gfx: "orden.png"
-                },
-                {
-                    name: "Gold medal 2",
-                    desc: "Долгий путь 100м", //+
-                    gfx: "orden6.png"
-                },
-                {
-                    name: "Gold medal 3",
-                    desc: "Долгий путь 500м", //+
-                    gfx: "orden10.png"
-                },
-                {
-                    name: "Gold medal 4",
-                    desc: "Долгий путь 1000м",// +
-                    gfx: "orden11.png"
-                },
-                {
-                    name: "Gold medal 5",
-                    desc: "Использовать бустер",
-                    gfx: "orden5.png"
-                },
-                {
-                    name: "Gold medal 6",
-                    desc: "10 раз помянул друзей",
-                    gfx: "orden2.png"
-                },
-                {
-                    name: "Gold medal 7",
-                    desc: "Убил первого босса",
-                    gfx: "orden.png"
-                }
-                ,
-                {
-                    name: "Gold medal 8",
-                    desc: "3 дня без перерыва", //+
-                    gfx: "orden7.png"
-                }
-                ,
-                {
-                    name: "Gold medal 9",
-                    desc: "10 дней без перерыва", //+
-                    gfx: "orden2.png"
-                }
-                ,
-                {
-                    name: "Gold medal 10",
-                    desc: "Наказать 100 школьников", //+
-                    gfx: "orden6.png"
-                }
-                ,
-                {
-                    name: "Gold medal 11",
-                    desc: "Наказать 200 школьников", //+
-                    gfx: "orden12.png"
-                }
-            ]
-    },
-    {
-        tbname: "tb_items",
+        },
+        {
+            tbname: "tb_achs",
+            items:
+                [
+                    {
+                        name: "Gold medal 1",
+                        desc: "Первый бой",
+                        gfx: "orden.png"
+                    },
+                    {
+                        name: "Gold medal 2",
+                        desc: "Долгий путь 100м", //+
+                        gfx: "orden6.png"
+                    },
+                    {
+                        name: "Gold medal 3",
+                        desc: "Долгий путь 500м", //+
+                        gfx: "orden10.png"
+                    },
+                    {
+                        name: "Gold medal 4",
+                        desc: "Долгий путь 1000м",// +
+                        gfx: "orden11.png"
+                    },
+                    {
+                        name: "Gold medal 5",
+                        desc: "Использовать бустер",
+                        gfx: "orden5.png"
+                    },
+                    {
+                        name: "Gold medal 6",
+                        desc: "10 раз помянул друзей",
+                        gfx: "orden2.png"
+                    },
+                    {
+                        name: "Gold medal 7",
+                        desc: "Победил первого босса",
+                        gfx: "orden.png"
+                    }
+                    ,
+                    {
+                        name: "Gold medal 8",
+                        desc: "3 дня без перерыва", //+
+                        gfx: "orden7.png"
+                    }
+                    ,
+                    {
+                        name: "Gold medal 9",
+                        desc: "10 дней без перерыва", //+
+                        gfx: "orden2.png"
+                    }
+                    ,
+                    {
+                        name: "Gold medal 10",
+                        desc: "Наказать 100 школьников", //+
+                        gfx: "orden6.png"
+                    }
+                    ,
+                    {
+                        name: "Gold medal 11",
+                        desc: "Наказать 200 школьников", //+
+                        gfx: "orden12.png"
+                    }
+                ]
+        },
+        {
+            tbname: "tb_items",
 
-        items:
-            [
-                {
-                type: tWeapon,
-                price :-1,
-                pricecrys: -1,
-                name:"Rifle",
-                desc:"Ружьишко",
-                gfx: "gun0",
-                reqlvl: -1
-            },
-                {
-                    type: tWeapon,
-                    price :500,
-                    pricecrys: -1,
-                    name:"PPS",
-                    desc:"ППШ|Пистолет-пулемёт Шпагина",
-                    gfx: "gun1",
-                    reqlvl: 2
-                },
-                {
-                    type: tWeapon,
-                    price: 1000,
-                    pricecrys: -1,
-                    name: "AK-74",
-                    desc: "Калаш|АК-47 - автомат был сконструирован==в 1947 году Михаилом Тимофеевичем Калашниковым",
-                    gfx: "gun2",
-                    reqlvl: 4
-                },
-                {
-                    type: tWeapon,
-                    price: 2000,
-                    pricecrys: 1,
-                    name: "Minigun",
-                    desc: "Миниган - многоствольный скорострельный пулемёт==построенный по схеме Гатлинга",
-                    gfx: "gun3",
-                    reqlvl: 7
-                },
-                {
-                    type: tWeapon,
-                    price: 10000,
-                    pricecrys: 5,
-                    name: "Grenade launcher",
-                    desc: "Гранатомёт - ручной многозарядный==полуавтоматический гранатомет",
-                    gfx: "gun4",
-                    reqlvl: 10
-                },
-                {
-                    type: tWeapon,
-                    price: 60000,
-                    pricecrys: 15,
-                    name: "Plazma Cannon",
-                    desc: "Лазерная винтовка - энергетическое оружие==разработанное в центре Сколково",
-                    gfx: "gun5",
-                    reqlvl: 15
-                },
-                {
-                    type: tBoost,
-                    price: 100,
-                    pricecrys: -1,
-                    name: "Magnet",
-                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
-                    gfx: "booster2",
-                    reqlvl: 2
-                },
-                {
-                    type: tBoost,
-                    price: 500,
-                    pricecrys: -1,
-                    name: "Magnet$1",
-                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
-                    gfx: "booster2",
-                    reqlvl: 2
-                },
-                {
-                    type: tBoost,
-                    price: 1000,
-                    pricecrys: -1,
-                    name: "Magnet$2",
-                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
-                    gfx: "booster2",
-                    reqlvl: 2
-                },
-                {
-                    type: tBoost,
-                    price: 2000,
-                    pricecrys: -1,
-                    name: "Magnet$3",
-                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
-                    gfx: "booster2",
-                    reqlvl: 2
-                },
-                {
-                    type: tBoost,
-                    price: 5000,
-                    pricecrys: -1,
-                    name: "Magnet$4",
-                    desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.",
-                    gfx: "booster2",
-                    reqlvl: 2
-                },
-                {
-                    type: tBoost,
-                    price: 200,
-                    pricecrys: 5,
-                    name: "Tablets",
-                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
-                    gfx: "booster1",
-                    reqlvl: 1
-                },
-                {
-                    type: tBoost,
-                    price: 200,
-                    pricecrys: 5,
-                    name: "Tablets$1",
-                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
-                    gfx: "booster1",
-                    reqlvl: 1
-                },
-                {
-                    type: tBoost,
-                    price: 200,
-                    pricecrys: 5,
-                    name: "Tablets$2",
-                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
-                    gfx: "booster1",
-                    reqlvl: 1
-                },
-                {
-                    type: tBoost,
-                    price: 200,
-                    pricecrys: 5,
-                    name: "Tablets$3",
-                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
-                    gfx: "booster1",
-                    reqlvl: 1
-                },
-                {
-                    type: tBoost,
-                    price: 200,
-                    pricecrys: 5,
-                    name: "Tablets$4",
-                    desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на некоторое время.",
-                    gfx: "booster1",
-                    reqlvl: 1
-                },
-                {
-                    type: tBoost,
-                    price: 800,
-                    pricecrys: -1,
-                    name: "Health",
-                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
-                    gfx: "booster4",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 800,
-                    pricecrys: -1,
-                    name: "Health$1",
-                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
-                    gfx: "booster4",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 800,
-                    pricecrys: -1,
-                    name: "Health$2",
-                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
-                    gfx: "booster4",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 800,
-                    pricecrys: -1,
-                    name: "Health$3",
-                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
-                    gfx: "booster4",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 800,
-                    pricecrys: -1,
-                    name: "Health$4",
-                    desc: "Больше ЖЫЗНИ|Сердце==Дополнительный слот жизни",
-                    gfx: "booster4",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 1,
-                    pricecrys: 1,
-                    name: "MarioStar",
-                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
-                    gfx: "booster5",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 1,
-                    pricecrys: 1,
-                    name: "MarioStar$1",
-                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
-                    gfx: "booster5",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 1,
-                    pricecrys: 1,
-                    name: "MarioStar$2",
-                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
-                    gfx: "booster5",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 1,
-                    pricecrys: 1,
-                    name: "MarioStar$3",
-                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
-                    gfx: "booster5",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 1,
-                    pricecrys: 1,
-                    name: "MarioStar$4",
-                    desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение некоторого времени.",
-                    gfx: "booster5",
-                    reqlvl: 5
-                },
-                {
-                    type: tBoost,
-                    price: 100,
-                    pricecrys: -1,
-                    name: "Double",
-                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
-                    gfx: "booster3",
-                    reqlvl: -1
-                },
-                {
-                    type: tBoost,
-                    price: 100,
-                    pricecrys: -1,
-                    name: "Double$1",
-                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
-                    gfx: "booster3",
-                    reqlvl: -1
-                },
-                {
-                    type: tBoost,
-                    price: 100,
-                    pricecrys: -1,
-                    name: "Double$2",
-                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
-                    gfx: "booster3",
-                    reqlvl: -1
-                },
-                {
-                    type: tBoost,
-                    price: 100,
-                    pricecrys: -1,
-                    name: "Double$3",
-                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
-                    gfx: "booster3",
-                    reqlvl: -1
-                },
-                {
-                    type: tBoost,
-                    price: 100,
-                    pricecrys: -1,
-                    name: "Double$4",
-                    desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.",
-                    gfx: "booster3",
-                    reqlvl: -1
-                },
-                {
-                    type: tApp + tHat,
-                    price: 100,
-                    pricecrys: -1,
-                    name: "Appearence.Hat1",
-                    desc: "Шляпа 1",
-                    gfx: "hat1",
-                    reqlvl: -1
-                },
-                {
-                    type: tApp + tHat,
-                    price: 200,
-                    pricecrys: -1,
-                    name: "Appearence.Hat2",
-                    desc: "Шляпа 2",
-                    gfx: "hat2",
-                    reqlvl: -1
-                },
-                {
-                    type: tApp + tHat,
-                    price: 300,
-                    pricecrys: -1,
-                    name: "Appearence.Hat3",
-                    desc: "Шляпа 3",
-                    gfx: "hat3",
-                    reqlvl: -1
-                },
-                {
-                    type: tApp + tHat,
-                    price: 400,
-                    pricecrys: -1,
-                    name: "Appearence.Hat4",
-                    desc: "Шляпа 4",
-                    gfx: "hat4",
-                    reqlvl: -1
-                },
-                {
-                    type: tApp + tHat,
-                    price: 500,
-                    pricecrys: -1,
-                    name: "Appearence.Hat5",
-                    desc: "Шляпа 5",
-                    gfx: "hat5",
-                    reqlvl: -1
-                },
-                {
-                    type: tApp + tHat,
-                    price: 600,
-                    pricecrys: -1,
-                    name: "Appearence.Hat6",
-                    desc: "Шляпа 6",
-                    gfx: "hat6",
-                    reqlvl: -1
-                }
-            ]
-    }
-];
+            items:
+                [
+                    {
+                        type: tWeapon,
+                        price :-1,
+                        pricecrys: -1,
+                        name:"Rifle",
+                        desc:"Старое дедовское ружьишко",
+                        gfx: "gun0",
+                        reqlvl: -1
+                    },
+                    {
+                        type: tWeapon,
+                        price :600,
+                        pricecrys: 12,
+                        name:"PPS",
+                        desc:"ППШ|Пистолет-пулемёт Шпагина==магазин 35 патронов",
+                        gfx: "gun1",
+                        reqlvl: 2
+                    },
+                    {
+                        type: tWeapon,
+                        price: 1300,
+                        pricecrys: 26,
+                        name: "AK-74",
+                        desc: "Калаш|АК-47 - автомат был сконструирован==в 1947 году Михаилом Тимофеевичем Калашниковым==магазин 35 патронов",
+                        gfx: "gun2",
+                        reqlvl: 4
+                    },
+                    {
+                        type: tWeapon,
+                        price: 2400,
+                        pricecrys: 48,
+                        name: "Minigun",
+                        desc: "Миниган - многоствольный скорострельный пулемёт==построенный по схеме Гатлинга==магазин 100 патронов",
+                        gfx: "gun3",
+                        reqlvl: 7
+                    },
+                    {
+                        type: tWeapon,
+                        price: 8000,
+                        pricecrys: 160,
+                        name: "Grenade launcher",
+                        desc: "Гранатомёт - ручной многозарядный==полуавтоматический гранатомет==6 снарядов",
+                        gfx: "gun4",
+                        reqlvl: 10
+                    },
+                    {
+                        type: tWeapon,
+                        price: 30000,
+                        pricecrys: 600,
+                        name: "Plazma Cannon",
+                        desc: "Лазерная винтовка - энергетическое оружие==разработанное в центре Сколково",
+                        gfx: "gun5",
+                        reqlvl: 15
+                    },
+                    {
+                        type: tBoost,
+                        price: 100,
+                        pricecrys: -1,
+                        name: "Magnet",
+                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 5 секунд.",
+                        gfx: "booster2",
+                        reqlvl: 1
+                    },
+                    {
+                        type: tBoost,
+                        price: 200,
+                        pricecrys: 4,
+                        name: "Magnet$1",
+                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 10 секунд.",
+                        gfx: "booster2",
+                        reqlvl: 2
+                    },
+                    {
+                        type: tBoost,
+                        price: 400,
+                        pricecrys: 8,
+                        name: "Magnet$2",
+                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 15 секунд.",
+                        gfx: "booster2",
+                        reqlvl: 4
+                    },
+                    {
+                        type: tBoost,
+                        price: 800,
+                        pricecrys: 16,
+                        name: "Magnet$3",
+                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 20 секунд.",
+                        gfx: "booster2",
+                        reqlvl: 6
+                    },
+                    {
+                        type: tBoost,
+                        price: 2000,
+                        pricecrys: 40,
+                        name: "Magnet$4",
+                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 30 секунд.",
+                        gfx: "booster2",
+                        reqlvl: 8
+                    },
+                    {
+                        type: tBoost,
+                        price: 150,
+                        pricecrys: -1,
+                        name: "Tablets",
+                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 5 секунд.",
+                        gfx: "booster1",
+                        reqlvl: 1
+                    },
+                    {
+                        type: tBoost,
+                        price: 300,
+                        pricecrys: 6,
+                        name: "Tablets$1",
+                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 6 секунд.",
+                        gfx: "booster1",
+                        reqlvl: 3
+                    },
+                    {
+                        type: tBoost,
+                        price: 600,
+                        pricecrys: 12,
+                        name: "Tablets$2",
+                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 7 секунд.",
+                        gfx: "booster1",
+                        reqlvl: 6
+                    },
+                    {
+                        type: tBoost,
+                        price: 1200,
+                        pricecrys: 24,
+                        name: "Tablets$3",
+                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 8 секунд.",
+                        gfx: "booster1",
+                        reqlvl: 9
+                    },
+                    {
+                        type: tBoost,
+                        price: 3000,
+                        pricecrys: 60,
+                        name: "Tablets$4",
+                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 10 секунд.",
+                        gfx: "booster1",
+                        reqlvl: 12
+                    },
+                    {
+                        type: tBoost,
+                        price: 500,
+                        pricecrys: -1,
+                        name: "Health",
+                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==лечение +2 к здоровью.",
+                        gfx: "booster4",
+                        reqlvl: 1
+                    },
+                    {
+                        type: tBoost,
+                        price: 1000,
+                        pricecrys: 20,
+                        name: "Health$1",
+                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==лечение +3 к здоровью.",
+                        gfx: "booster4",
+                        reqlvl: 4
+                    },
+                    {
+                        type: tBoost,
+                        price: 2000,
+                        pricecrys: 40,
+                        name: "Health$2",
+                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==лечение +4 к здоровью.",
+                        gfx: "booster4",
+                        reqlvl: 8
+                    },
+                    {
+                        type: tBoost,
+                        price: 4000,
+                        pricecrys: 80,
+                        name: "Health$3",
+                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==лечение +5 к здоровью.",
+                        gfx: "booster4",
+                        reqlvl: 12
+                    },
+                    {
+                        type: tBoost,
+                        price: 10000,
+                        pricecrys: 200,
+                        name: "Health$4",
+                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==Восстанавливает здоровье==+Дополнительный слот жизни навсегда.",
+                        gfx: "booster4",
+                        reqlvl: 15
+                    },
+                    {
+                        type: tBoost,
+                        price: 300,
+                        pricecrys: -1,
+                        name: "MarioStar",
+                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 10 секунд.",
+                        gfx: "booster5",
+                        reqlvl: 1
+                    },
+                    {
+                        type: tBoost,
+                        price: 600,
+                        pricecrys: 8,
+                        name: "MarioStar$1",
+                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 12 секунд.",
+                        gfx: "booster5",
+                        reqlvl: 3
+                    },
+                    {
+                        type: tBoost,
+                        price: 1200,
+                        pricecrys: 16,
+                        name: "MarioStar$2",
+                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 15 секунд.",
+                        gfx: "booster5",
+                        reqlvl: 5
+                    },
+                    {
+                        type: tBoost,
+                        price: 2400,
+                        pricecrys: 32,
+                        name: "MarioStar$3",
+                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 20 секунд.",
+                        gfx: "booster5",
+                        reqlvl: 7
+                    },
+                    {
+                        type: tBoost,
+                        price: 5000,
+                        pricecrys: 100,
+                        name: "MarioStar$4",
+                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 30 секунд.",
+                        gfx: "booster5",
+                        reqlvl: 10
+                    },
+                    {
+                        type: tBoost,
+                        price: 600,
+                        pricecrys: -1,
+                        name: "Double",
+                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 5 секунд.",
+                        gfx: "booster3",
+                        reqlvl: -1
+                    },
+                    {
+                        type: tBoost,
+                        price: 1200,
+                        pricecrys: 24,
+                        name: "Double$1",
+                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 8 секунд.",
+                        gfx: "booster3",
+                        reqlvl: 4
+                    },
+                    {
+                        type: tBoost,
+                        price: 2200,
+                        pricecrys: 44,
+                        name: "Double$2",
+                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 10 секунд.",
+                        gfx: "booster3",
+                        reqlvl: 8
+                    },
+                    {
+                        type: tBoost,
+                        price: 4400,
+                        pricecrys: 88,
+                        name: "Double$3",
+                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 15 секунд.",
+                        gfx: "booster3",
+                        reqlvl: 10
+                    },
+                    {
+                        type: tBoost,
+                        price: 9000,
+                        pricecrys: 180,
+                        name: "Double$4",
+                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 20 секунд.",
+                        gfx: "booster3",
+                        reqlvl: 15
+                    },
+                    {
+                        type: tApp + tHat,
+                        price: 1500,
+                        pricecrys: -1,
+                        name: "Appearence.Hat1",
+                        desc: "Старая добрая ушаночка.",
+                        gfx: "hat1",
+                        reqlvl: -1
+                    },
+                    {
+                        type: tApp + tHat,
+                        price: 3200,
+                        pricecrys: -1,
+                        name: "Appearence.Hat2",
+                        desc: "Боевая каска.==Осталась со времён войны.",
+                        gfx: "hat2",
+                        reqlvl: -1
+                    },
+                    {
+                        type: tApp + tHat,
+                        price: 5300,
+                        pricecrys: -1,
+                        name: "Appearence.Hat3",
+                        desc: "Вязаная шапка.==Сделана бабкой с любовью.",
+                        gfx: "hat3",
+                        reqlvl: -1
+                    },
+                    {
+                        type: tApp + tHat,
+                        price: 8500,
+                        pricecrys: -1,
+                        name: "Appearence.Hat4",
+                        desc: "Молодёжная кепка.==Внучок оставил однажды и забыл забрать.",
+                        gfx: "hat4",
+                        reqlvl: -1
+                    },
+                    {
+                        type: tApp + tHat,
+                        price: 10000,
+                        pricecrys: -1,
+                        name: "Appearence.Hat5",
+                        desc: "Подарок от старого товарища Брюса.",
+                        gfx: "hat5",
+                        reqlvl: -1
+                    },
+                    {
+                        type: tApp + tHat,
+                        price: 13000,
+                        pricecrys: -1,
+                        name: "Appearence.Hat6",
+                        desc: "Ковбойская шляпа.==Сын привёз из командировки в Америку.",
+                        gfx: "hat6",
+                        reqlvl: -1
+                    }
+                ]
+        }
+    ];
 
 
 function updDb(o, onlyRead)
 {
     /*
-    function makeid()
-    {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+     function makeid()
+     {
+     var text = "";
+     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-        for( var i=0; i < 5; i++ )
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
+     for( var i=0; i < 5; i++ )
+     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-        return text;
-    }
+     return text;
+     }
 
 
-    for (var i =0; i < 1000; ++i) {
+     for (var i =0; i < 1000; ++i) {
 
-        var obj = {
-            name: makeid(),
-            last_name: makeid(),
-            vkapi: Math.floor((Math.random()*50000000)).toString(),
-            money: 0,
-            crystals: 0,
-            xp: 0,
-            lvl: Math.floor(Math.random()*20),
-            energy: 0,
-            maxdistance: Math.random()*10000
-        }
+     var obj = {
+     name: makeid(),
+     last_name: makeid(),
+     vkapi: Math.floor((Math.random()*50000000)).toString(),
+     money: 0,
+     crystals: 0,
+     xp: 0,
+     lvl: Math.floor(Math.random()*20),
+     energy: 0,
+     maxdistance: Math.random()*10000
+     }
 
-        azureclient.getTable("tb_players").insert(obj);
-    }
-*/
+     azureclient.getTable("tb_players").insert(obj);
+     }
+     */
 
     for (var i = 0; i < o.length; ++i)
     {
@@ -10060,26 +10124,26 @@ function updDb(o, onlyRead)
             function xx(someobj, table)
             {
                 var whereobj;
-                    if (o[i].items[j].id)
+                if (o[i].items[j].id)
                     whereobj ={
                         id: o[i].items[j].id
                     }; else
-                whereobj ={
-                    name: o[i].items[j].name
-                };
+                    whereobj ={
+                        name: o[i].items[j].name
+                    };
 
                 table.where(whereobj).read().done(function(results)
-            {
-                if (results.length > 0) {
-                    someobj.id = results[0].id;
-                    table.update(someobj);
-                } else {
-                    table.insert(someobj);
-                }}, function (err) {
-                console.log("Error: " + err);
+                {
+                    if (results.length > 0) {
+                        someobj.id = results[0].id;
+                        table.update(someobj);
+                    } else {
+                        table.insert(someobj);
+                    }}, function (err) {
+                    console.log("Error: " + err);
 
-        });
-        }
+                });
+            }
             xx(s, t);
         }
     }
