@@ -10468,31 +10468,31 @@ function orderSuccess(order_id)
     var amount = 0;
     if (window.currentOrder == "item1") {
         window.currentOrder == null;
-        PlayerData.inst.playerItem.money += 100;
+        PlayerData.inst.playerItem.money += 1200;
     }
     if (window.currentOrder == "item2") {
         window.currentOrder == null;
-        PlayerData.inst.playerItem.money += 1200;
+        PlayerData.inst.playerItem.money += 6000;
     }
     if (window.currentOrder == "item3") {
         window.currentOrder == null;
-        PlayerData.inst.playerItem.money += 7000;
+        PlayerData.inst.playerItem.money += 32000;
     }
     if (window.currentOrder == "item4") {
         window.currentOrder == null;
-        PlayerData.inst.playerItem.crystals += 3;
+        PlayerData.inst.playerItem.crystals += 12;
     }
     if (window.currentOrder == "item5") {
         window.currentOrder == null;
-        PlayerData.inst.playerItem.crystals += 15;
+        PlayerData.inst.playerItem.crystals += 60;
     }
     if (window.currentOrder == "item6") {
         window.currentOrder == null;
-        PlayerData.inst.playerItem.crystals += 80;
+        PlayerData.inst.playerItem.crystals += 320;
     }
     if (window.currentOrder == "item7") {
         window.currentOrder == null;
-        PlayerData.inst.playerItem.energy += 1;
+        PlayerData.inst.playerItem.energy += 10;
     }
 
     PlayerData.inst.savePlayerData();

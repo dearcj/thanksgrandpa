@@ -43,7 +43,7 @@ if ($sig != md5($str.$secret_key)) {
           'item_id' => 611,
           'title' => '100 монет',
           'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
-          'price' => 1
+          'price' => 3
         );
       }
       elseif ($item == 'item2') {
@@ -67,7 +67,7 @@ if ($sig != md5($str.$secret_key)) {
                        'item_id' => 711,
                        'title' => '3 звезд',
                        'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
-                       'price' => 1
+                       'price' => 3
                      );}
       elseif ($item == 'item5') {
                            $response['response'] = array(
@@ -88,7 +88,7 @@ if ($sig != md5($str.$secret_key)) {
                                        'item_id' => 714,
                                        'title' => '1 энергия',
                                        'photo_url' => 'https://pp.vk.me/c622718/v622718259/265bd/SBrOAe2sxnE.jpg',
-                                       'price' => 1);
+                                       'price' => 2);
           }
            else {
         $response['error'] = array(
@@ -107,7 +107,7 @@ case 'get_item_test':
               'item_id' => 601,
               'title' => '100 монет',
               'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
-              'price' => 1
+              'price' => 3
             );
           }
           elseif ($item == 'item2') {
@@ -131,7 +131,7 @@ case 'get_item_test':
                            'item_id' => 701,
                            'title' => '3 звезд',
                            'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
-                           'price' => 1
+                           'price' => 3
                          );}
           elseif ($item == 'item5') {
                                $response['response'] = array(
@@ -152,7 +152,7 @@ case 'get_item_test':
             'item_id' => 704,
             'title' => '1 энергия',
             'photo_url' => 'https://pp.vk.me/c622718/v622718259/265bd/SBrOAe2sxnE.jpg',
-            'price' => 1);
+            'price' => 2);
                      }else {
         $response['error'] = array(
           'error_code' => 20,
