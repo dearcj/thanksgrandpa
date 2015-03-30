@@ -2,7 +2,7 @@
 
 "1boost_button.png":
 {
-	"frame": {"x":759,"y":870,"w":35,"h":33},
+	"frame": {"x":759,"y":911,"w":35,"h":33},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
@@ -207,6 +207,14 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":23,"h":36},
 	"sourceSize": {"w":23,"h":36}
+},
+"ava cover.png":
+{
+	"frame": {"x":759,"y":870,"w":37,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":37},
+	"sourceSize": {"w":37,"h":37}
 },
 "ava icon.png":
 {
@@ -1199,6 +1207,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6a9e941b61d6322207e6e5073a9bc6ff$"
+	"smartupdate": "$TexturePacker:SmartUpdate:795bba78c37c467ba9a8b5795355e5d1$"
 }
 }

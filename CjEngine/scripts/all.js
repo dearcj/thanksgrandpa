@@ -8770,7 +8770,7 @@ CHeartBooster.prototype.onActivate = function() {
 
     var upgrHP = [1, 2, 3, 5, 10];
     if (this.upgr) {
-        gameStage.player.hp += this.upgr;
+        gameStage.player.hp += this.upgr + 1;
     }
 
     if (!gameStage.player) return;
@@ -10290,8 +10290,11 @@ getDedImage = function (ava) {
     }
     var r = new PIXI.RenderTexture(w, h);
 
-    if (ava)
+    if (ava) {
+        CObj.getById("bback").gfx.visible = false;
+        CObj.getById("ava").gfx.visible = false;
         CObj.getById("bgshopded").gfx.visible = false;
+    }
     renderer.render(stage, true);
 
     var _matrix = new PIXI.Matrix();
@@ -10300,7 +10303,11 @@ getDedImage = function (ava) {
 
     var str = r.getBase64();
     r.destroy(true);
-    CObj.getById("bgshopded").gfx.visible = true;
+    if (ava) {
+        CObj.getById("bgshopded").gfx.visible = true;
+        CObj.getById("bback").gfx.visible = true;
+        CObj.getById("ava").gfx.visible = true;
+    }
     if (shopStage.transScreen) shopStage.transScreen.visible = true;
     return str;
 }
