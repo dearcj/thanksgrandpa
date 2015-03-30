@@ -1031,10 +1031,12 @@ GameStage.prototype.openEndWindowLoaded = function () {
     PlayerData.inst.savePlayerData();
 
     CObj.getById("bshare").click = function () {
+
+        //ПОХВАСТАТЬСЯ
         VK.api("wall.post", {
             owner_id: vkparams.viewerid,
-            message: "Я проехал" + rec.toString() + " метров. ",
-            attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]
+            message: "Я проехал " + rec.toString() + " метров." +'\n' + "https://vk.com/app4654201",
+            attachments: ["photo282617259_360326326", "https://vk.com/app4654201"]
         }, function (data) {
 
         });
@@ -1059,12 +1061,13 @@ GameStage.prototype.openEndWindowLoaded = function () {
                 CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
                 CObj.getById("b" + (i + 1).toString()).text = "Я тебя уделал";
 
+                //Я ТЕБЯ УДЕЛАЛ
                 function setClick(i, friendObject) {
                     CObj.getById("b" + (i + 1).toString()).click = function () {
                         VK.api("wall.post", {
                             owner_id: friendObject.vkapi,
-                            message: "Я проехал" + rec.toString() + " метров. " + friendObject.name + " " + friendObject.last_name + ", я тебя уделал!",
-                            attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]
+                            message: "Я проехал" + rec.toString() + " метров. " + friendObject.name + " " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!"+'\n' + "https://vk.com/app4654201",
+                            attachments: ["photo282617259_360326329", "https://vk.com/app4654201"]
                         }, function (data) {
 
                         });
@@ -1400,8 +1403,10 @@ GameStage.prototype.onShowContinue = function () {
 
     new TweenMax(LauncherBG.inst, 3, {maxVelocity: 10, ease: Sine.easeIn});
 
-    gameStage.tutorial = true;
-    if (gameStage.tutorial && !gameStage.tutComplete ) gameStage.showTutorial();
+    if (gameStage.tutorial && !gameStage.tutComplete ) gameStage.showTutorial(); else
+    {
+        PlayerData.inst.progressAch("Gold medal 1", 1, false);
+    }
 }
 
 GameStage.prototype.makePause = function () {
@@ -2035,7 +2040,7 @@ CharStage.prototype.updateNotifications = function () {
         CObj.getById("notach").gfx.visible = true;
     } else     CObj.getById("notach").gfx.visible = false;
 
-    if (this.unreadActions)
+    if (this.unreadActions && (!charStage.bar || charStage.bar.gfx.visible == false))
     {
         CObj.getById("notaction").gfx.visible = true;
     } else     CObj.getById("notaction").gfx.visible = false;
@@ -2838,7 +2843,7 @@ ShopStage.prototype.updateStatsPanel = function () {
     if (!CObj.getById("bar").gfx.parent) {
         SM.inst.fg.addChild(CObj.getById("bar").gfx);
     }
-    CObj.getById("tfexp").text = Math.floor(xp).toString() + " / " + Math.floor(needed).toString();
+    CObj.getById("tfexp").text = Math.floor(xp).toString() + "/" + Math.floor(needed).toString();
 
     CObj.getById("tfmoney").text = PlayerData.inst.playerItem.money.toString();
     CObj.getById("tfcry").text = PlayerData.inst.playerItem.crystals.toString();
@@ -2897,7 +2902,7 @@ ShopStage.prototype.onShowContinue = function () {
 
     shopStage.updateBar("bstuff", tBoost);
 
-    var pl = new CPlayer(180, 430);
+    var pl = new CPlayer(180, 400);
     shopStage.pl = pl;
     shopStage.pl.updateAppearence(true, false, "breath", null, null);
     pl.gfx.scale.x = 0.4;
@@ -5380,10 +5385,11 @@ CPlayer.prototype.fire = function()
  */
 extend(CBullet, CObj, true);
 
-function CBullet(in_x,in_y,textname,in_body) {
+function CBullet(in_x,in_y,textname,in_body, vw) {
     CObj.apply(this, [in_x, in_y, null, in_body]);
     this.gfx = new PIXI.DisplayObjectContainer();
     this.visualVel = 7;
+    this.visualWidth = vw;
     this.bhead = new PIXI.Sprite(PIXI.Texture.fromFrame("head.png"));
     this.bhead.anchor.x = 0.5;
     this.bhead.anchor.y = 0.5;
@@ -5448,7 +5454,7 @@ CBullet.prototype.collide = function (obj2)
             SM.inst.fg.addChild(fx);
 
             obj.return2Pool = obj.gfx;
-            obj.gfx.lifeTime = 800;
+            obj.lifeTime = 800;
             obj.gfx.onComplete = function () {obj.destroy();}
         }
         this.life--;
@@ -5471,6 +5477,7 @@ CBullet.prototype.destroy = function()
 CBullet.prototype.process = function() {
 
     this.visualVel += 29.5;
+    if (this.dw)
     this.visualWidth += this.dw;
     this.updateBulletSpeed(this.visualVel);
 
@@ -5805,7 +5812,7 @@ CGrenade.prototype.addSmoke = function (obj2) {
 
 
     o.return2Pool = o.gfx;
-    o.gfx.lifeTime = 800;
+    o.lifeTime = 800;
 
     new TweenMax(o.gfx, 0.2, {alpha: 0, onComplete: function(){
             o.destroy();
@@ -5832,7 +5839,7 @@ CGrenade.makeBoom = function (x, y, dmg, dist, owner)
         obj.updateGraphics();
 
         obj.return2Pool = obj.gfx;
-        obj.gfx.lifeTime = 800;
+        obj.lifeTime = 800;
 
         obj.gfx.onComplete = function () {
                     obj.destroy();
@@ -6015,7 +6022,7 @@ CKey.prototype.collide = function(obj2)
         this.updateGraphics();
         var obj = this;
         obj.return2Pool = obj.gfx;
-        obj.gfx.lifeTime = 800;
+        obj.lifeTime = 800;
 
         obj.gfx.onComplete = function () {
             obj.destroy();
@@ -6077,7 +6084,8 @@ CBoosterBox.prototype.getBooster = function()
         break;
     }
 
-    var b = new boost.cls(SCR_WIDTH / 2, SCR_HEIGHT / 2,PlayerData.inst.getUpgrade(PlayerData.inst.items[i]).upgr);
+    var up = PlayerData.inst.getUpgrade(PlayerData.inst.items[i]).upgr;
+    var b = new boost.cls(SCR_WIDTH / 2, SCR_HEIGHT / 2, null, up);
     b.name = boost.name;
     b.item_id = PlayerData.inst.items[i].id;
 
@@ -6104,9 +6112,9 @@ CBoosterBox.prototype.getBooster = function()
 
     var px = 35 + 50*(CBooster.list.length - 1);
     new TweenMax(b, 0.7, {delay: 0.8, x: px, y: 100});
-    var final = function(){b.onActivate();};
-    if (replaceObj) final = function(){b.destroy();};
-    new TweenMax(b.gfx.scale, 0.7, {delay: 0.8, x: 0.3, y: 0.3, onComplete: final});
+    var fnl = function(){b.onActivate();};
+    if (replaceObj) fnl = function(){b.destroy();};
+    new TweenMax(b.gfx.scale, 0.7, {delay: 0.8, x: 0.3, y: 0.3, onComplete: fnl});
     SM.inst.guiLayer.addChild(b.gfx);
 }
 
@@ -6121,7 +6129,7 @@ CBoosterBox.prototype.collide = function(obj2)
     this.vy = 0;
     this.allowTrackSpeed = false;
     var coinGfx = pool.Pop("coinCollect");
-    ZSound.Play("coin")
+    ZSound.Play("coin");
     if (!coinGfx)
         this.destroy(); else
     {
@@ -6140,7 +6148,7 @@ CBoosterBox.prototype.collide = function(obj2)
         this.updateGraphics();
         var obj = this;
         obj.return2Pool = obj.gfx;
-        obj.gfx.lifeTime = 800;
+        obj.lifeTime = 800;
         obj.gfx.onComplete = function () {obj.destroy();}
     }
 
@@ -6251,7 +6259,7 @@ CMonster.prototype.kill = function()
         this.gfx.gotoAndPlay(0);
         var o = this;
         this.return2Pool = this.gfx;
-        this.gfx.lifeTime = 800;
+        this.lifeTime = 800;
         this.gfx.onComplete = function () {o.destroy();}
     } else
         CLiveObj.prototype.kill.call(f);
@@ -7263,6 +7271,7 @@ CCoin.spawnCoin = function(x, y, a)
     c.allowTrackSpeed = true;
     c.vx = 6.5 + (Math.random() - 0.5)*1;
     c.vy = -10 - 12*(Math.random());
+
     return c;
 }
 
@@ -7298,7 +7307,8 @@ CCoin.prototype.collide = function(obj2)
         this.updateGraphics();
         var obj = this;
         obj.return2Pool = obj.gfx;
-        obj.gfx.lifeTime = 800;
+        //obj.rotation = Math.random()*Math.PI*2;
+        obj.lifeTime = 800;
         obj.gfx.onComplete = function () {obj.destroy();}
 
     }
@@ -7669,10 +7679,10 @@ CEActionGUI.prototype.endAction = function()
 
 
 CEActionGUI.prototype.addRewardButton = function() {
-    this.btnReward = new CButton(230, -3, "buy_button");
+    this.btnReward = new CButton(230, -3, "take reward");
     this.btnReward.fontSize = 17;
-    this.btnReward.gfx.scale.x = 0.8;
-    this.btnReward.gfx.scale.y = 0.8;
+    this.btnReward.gfx.scale.x = 1.1;
+    this.btnReward.gfx.scale.y = 1.1;
     rp(this.btnReward.gfx);
     this.btnReward.hover = false;
     var p = this;
@@ -7972,11 +7982,10 @@ CPistol.prototype.shot = function()
     TweenMax.delayedCall(0.03, function (){fx.parent.removeChild(fx);});
     if (Math.abs(gameStage.player.y - gameStage.player.baseY) < 50)
     gameStage.player.vx = -0.5;
-    var b = new CBullet(xx, yy, "bomb1");
+    var b = new CBullet(xx, yy, null, null, this.visualWidth);
     b.life = this.life;
     b.dmg = this.damage;
     b.rotation = Math.PI / 2 + fireAngle;
-    b.visualWidth = this.visualWidth
     b.dw = this.dw;
     b.vx = vx*this.speed;
     b.vy = vy*this.speed;
@@ -8065,11 +8074,10 @@ CQueueGun.prototype.shot = function(queueShot)
 
     TweenMax.delayedCall(0.03, function (){fx.parent.removeChild(fx);});
 
-    var b = new CBullet(xx, yy, "bomb1");
+    var b = new CBullet(xx, yy, null, null, this.visualWidth);
     b.life = this.life;
     b.dmg = this.damage;
     b.rotation = Math.PI / 2 + fireAngle;
-    b.visualWidth = this.visualWidth
     b.dw = this.dw;
     b.vx = vx*this.speed;
     b.vy = vy*this.speed;
@@ -8736,7 +8744,7 @@ extend(CDoubleBooster, CBooster, true);
 
 function CDoubleBooster(x,y,gfx,upgr) {
     CBooster.apply(this, [x,y,gfx,upgr]);
-    this.duration = 20 + 5*upgr;
+    this.duration = 15 + 3*upgr;
 }
 
 CDoubleBooster.prototype.onActivate = function()
@@ -8809,7 +8817,7 @@ extend(CSupermanBooster, CBooster, true);
 
 function CSupermanBooster(x,y,gfx,upgr) {
     CBooster.apply(this, [x,y,gfx,upgr]);
-    this.duration = 15+ 3*upgr;
+    this.duration = 9 + 2*upgr;
 }
 
 CSupermanBooster.prototype.onActivate = function()
@@ -9807,7 +9815,7 @@ var dbobj =
                         price: 100,
                         pricecrys: -1,
                         name: "Magnet",
-                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 5 секунд.",
+                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 5 секунд==Дистанция подбора увеличена.",
                         gfx: "booster2",
                         reqlvl: 1
                     },
@@ -9816,7 +9824,7 @@ var dbobj =
                         price: 200,
                         pricecrys: 4,
                         name: "Magnet$1",
-                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 10 секунд.",
+                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 10 секунд==Дистанция подбора увеличена.",
                         gfx: "booster2",
                         reqlvl: 2
                     },
@@ -9825,7 +9833,7 @@ var dbobj =
                         price: 400,
                         pricecrys: 8,
                         name: "Magnet$2",
-                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 15 секунд.",
+                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 15 секунд==Дистанция подбора увеличена.",
                         gfx: "booster2",
                         reqlvl: 4
                     },
@@ -9834,7 +9842,7 @@ var dbobj =
                         price: 800,
                         pricecrys: 16,
                         name: "Magnet$3",
-                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 20 секунд.",
+                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 20 секунд==Дистанция подбора увеличена.",
                         gfx: "booster2",
                         reqlvl: 6
                     },
@@ -9843,7 +9851,7 @@ var dbobj =
                         price: 2000,
                         pricecrys: 40,
                         name: "Magnet$4",
-                        desc: "Магнит|Магнит==притягивает монеты врагов прямо в карман.==Действует 30 секунд.",
+                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 25 секунд==Дистанция подбора увеличена.",
                         gfx: "booster2",
                         reqlvl: 8
                     },
@@ -9852,7 +9860,7 @@ var dbobj =
                         price: 150,
                         pricecrys: -1,
                         name: "Tablets",
-                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 5 секунд.",
+                        desc: "Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 1 секунда.",
                         gfx: "booster1",
                         reqlvl: 1
                     },
@@ -9861,7 +9869,7 @@ var dbobj =
                         price: 300,
                         pricecrys: 6,
                         name: "Tablets$1",
-                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 6 секунд.",
+                        desc: "Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 2 секунды.",
                         gfx: "booster1",
                         reqlvl: 3
                     },
@@ -9870,25 +9878,25 @@ var dbobj =
                         price: 600,
                         pricecrys: 12,
                         name: "Tablets$2",
-                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 7 секунд.",
+                        desc: "Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 3 секунды.",
                         gfx: "booster1",
                         reqlvl: 6
                     },
                     {
                         type: tBoost,
-                        price: 1200,
+                        price: 1800,
                         pricecrys: 24,
                         name: "Tablets$3",
-                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 8 секунд.",
+                        desc: "Биодобавки|Таблетка: ускоряет деда==и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 4 секунда.",
                         gfx: "booster1",
                         reqlvl: 9
                     },
                     {
                         type: tBoost,
-                        price: 3000,
+                        price: 3500,
                         pricecrys: 60,
                         name: "Tablets$4",
-                        desc: "Биодобавки|Таблетка - ускоряет деда==и делает его неуязвимым на 10 секунд.",
+                        desc: "Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 5 секунд.",
                         gfx: "booster1",
                         reqlvl: 12
                     },
@@ -9897,7 +9905,7 @@ var dbobj =
                         price: 500,
                         pricecrys: -1,
                         name: "Health",
-                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==лечение +2 к здоровью.",
+                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 2 жизни",
                         gfx: "booster4",
                         reqlvl: 1
                     },
@@ -9906,7 +9914,7 @@ var dbobj =
                         price: 1000,
                         pricecrys: 20,
                         name: "Health$1",
-                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==лечение +3 к здоровью.",
+                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 3 жизни",
                         gfx: "booster4",
                         reqlvl: 4
                     },
@@ -9915,7 +9923,7 @@ var dbobj =
                         price: 2000,
                         pricecrys: 40,
                         name: "Health$2",
-                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==лечение +4 к здоровью.",
+                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь.==[Улучшение]==Лечит на 4 жизни.",
                         gfx: "booster4",
                         reqlvl: 8
                     },
@@ -9924,7 +9932,7 @@ var dbobj =
                         price: 4000,
                         pricecrys: 80,
                         name: "Health$3",
-                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==лечение +5 к здоровью.",
+                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 5 жизней",
                         gfx: "booster4",
                         reqlvl: 12
                     },
@@ -9933,7 +9941,7 @@ var dbobj =
                         price: 10000,
                         pricecrys: 200,
                         name: "Health$4",
-                        desc: "Больше ЖЫЗНИ|Сердце[Улучшение]==Восстанавливает здоровье==+Дополнительный слот жизни навсегда.",
+                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==Восстанавливает здоровье==+Дополнительный слот жизни навсегда.",
                         gfx: "booster4",
                         reqlvl: 15
                     },
@@ -9942,7 +9950,7 @@ var dbobj =
                         price: 300,
                         pricecrys: -1,
                         name: "MarioStar",
-                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 10 секунд.",
+                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 2 секунды.",
                         gfx: "booster5",
                         reqlvl: 1
                     },
@@ -9951,7 +9959,7 @@ var dbobj =
                         price: 600,
                         pricecrys: 8,
                         name: "MarioStar$1",
-                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 12 секунд.",
+                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 4 секунды.",
                         gfx: "booster5",
                         reqlvl: 3
                     },
@@ -9960,7 +9968,7 @@ var dbobj =
                         price: 1200,
                         pricecrys: 16,
                         name: "MarioStar$2",
-                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 15 секунд.",
+                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 6 секунды.",
                         gfx: "booster5",
                         reqlvl: 5
                     },
@@ -9969,7 +9977,7 @@ var dbobj =
                         price: 2400,
                         pricecrys: 32,
                         name: "MarioStar$3",
-                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 20 секунд.",
+                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 8 секунды.",
                         gfx: "booster5",
                         reqlvl: 7
                     },
@@ -9978,7 +9986,7 @@ var dbobj =
                         price: 5000,
                         pricecrys: 100,
                         name: "MarioStar$4",
-                        desc: "Неуязвимость!|Глушитель от «Волги»==позволяет деду летать в течение 30 секунд.",
+                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 10 секунды.",
                         gfx: "booster5",
                         reqlvl: 10
                     },
@@ -9987,7 +9995,7 @@ var dbobj =
                         price: 600,
                         pricecrys: -1,
                         name: "Double",
-                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 5 секунд.",
+                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 3 секунды.==+225% золота.",
                         gfx: "booster3",
                         reqlvl: -1
                     },
@@ -9996,7 +10004,7 @@ var dbobj =
                         price: 1200,
                         pricecrys: 24,
                         name: "Double$1",
-                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 8 секунд.",
+                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 6 секунд.==+250% золота.",
                         gfx: "booster3",
                         reqlvl: 4
                     },
@@ -10005,7 +10013,7 @@ var dbobj =
                         price: 2200,
                         pricecrys: 44,
                         name: "Double$2",
-                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 10 секунд.",
+                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 9 секунд.== +275% золота.",
                         gfx: "booster3",
                         reqlvl: 8
                     },
@@ -10014,7 +10022,7 @@ var dbobj =
                         price: 4400,
                         pricecrys: 88,
                         name: "Double$3",
-                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 15 секунд.",
+                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 12 секунд.== +300% золота",
                         gfx: "booster3",
                         reqlvl: 10
                     },
@@ -10023,7 +10031,7 @@ var dbobj =
                         price: 9000,
                         pricecrys: 180,
                         name: "Double$4",
-                        desc: "В два раза больше монет|Счастливая монетка== увеличивает количество монет в игре.==Действует 20 секунд.",
+                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 15 секунд.== +325% золота",
                         gfx: "booster3",
                         reqlvl: 15
                     },
@@ -10438,7 +10446,7 @@ window.openSponsorWindow = null;
 window.focus();
 var assetsLoaded = 0;
 var preloaderAsset = [
-    "preloader.png"
+    "imgtps/preloader.json"
 ];
 window.addScale = 1;
 window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
@@ -10570,10 +10578,42 @@ function preloaderLoaded() {
 
     window.stage = new PIXI.Stage(0xffffff);
 
+    window.px = SCR_WIDTH;
+    window.py = SCR_HEIGHT;
     window.loadingScreen = new PIXI.Graphics();
-    window.preloaderBg = PIXI.Sprite.fromImage("preloader.png");
+    window.preloaderBg = new PIXI.DisplayObjectContainer();
+    var fg = crsp("1st plan");
+    fg.x = SCR_WIDTH / 2;
+    fg.y = SCR_HEIGHT / 2;
+    fg.scale.x = 1.1;
+    fg.scale.y = 1.1;
+    var bg = crsp("background");
+    bg.x = SCR_WIDTH / 2;
+    bg.y = SCR_HEIGHT/ 2;
+    bg.scale.x = 1.1;
+    bg.scale.y = 1.1;
+    preloaderBg.addChild(bg);
+    preloaderBg.addChild(fg);
+
+    var bgBar = crsp("loading bar");
+    bgBar.x = SCR_WIDTH / 2;
+    bgBar.y = SCR_HEIGHT/ 2 + 160;
+    preloaderBg.addChild(bgBar);
     SM.inst.addLayersToStage();
     SM.inst.superStage.addChild(preloaderBg);
+    var barLine = crsp("loading bar line");
+    barLine.x = SCR_WIDTH / 2;
+    barLine.y = SCR_HEIGHT/ 2 + 160;
+    window.pbWidth  = barLine.width;
+    barLine.mask = new PIXI.Graphics();
+    barLine.mask.x = -pbWidth / 2;
+    window.progressMask = barLine.mask;
+    barLine.addChild(barLine.mask);
+    preloaderBg.addChild(barLine);
+   // barLine.addChild(barLine.mask);
+    SM.inst.addLayersToStage();
+
+
     SM.inst.superStage.addChild(loadingScreen);
     requestAnimFrame(animate);
 
@@ -10605,6 +10645,7 @@ function preloaderLoaded() {
         "imgtps/pussyatlas.json",
         "imgtps/dedgamedesc.xml",
         "imgtps/dedgamecaps.xml",
+        "imgtps/dedgameXP.xml",
         "imgtps/skeleton.json",
         "imgtps/boss1.json",
         "imgtps/bird.json"
@@ -10685,17 +10726,22 @@ function assetsButSoundsLoaded() {
 function onAssetsLoaded() {
     if (!window.dbinit || ZSound.loaded != true || !window.gfxLoaded) return;
 
-    SM.inst.superStage.removeChild(loadingScreen);
+    rp(preloaderBg);
+
+    loadingState = "game";
+    rp(loadingScreen);
     loadingScreen = null;
-    preloaderBg.texture.destroy(true);
-    SM.inst.superStage.removeChild(preloaderBg);
+
     preloaderBg = null;
     gameStage.currentLevel = 1;
-    var tex = PIXI.Texture.fromImage("preloader.png");
-    tex.destroy(true);
+
+    var x = PIXI.TextureCache["1st plan.png"];
+    x.destroy(true);
+    window.progressMask = null;
+    /*var tex = PIXI.Texture.fromImage("preloader.png");
+    tex.destroy(true);*/
     window.addEventListener("orientationchange", orientchange, false);
     orientchange();
-    loadingState = "game";
     setTimeout("window.scrollTo(0, 1)", 10);
 
     var div = document.getElementById('vk_ads_55316');
@@ -10810,9 +10856,18 @@ function animate() {
         /*  loadingScreen.beginFill(0xAA4444);
          loadingScreen.drawRect(SCR_WIDTH / 2 - 90, SCR_HEIGHT / 2 + 193, 240, 32);
          loadingScreen.endFill();*/
-        loadingScreen.beginFill(0xFF7777);
-        loadingScreen.drawRect(window.SCR_WIDTH / 2 - 92 + 2, window.SCR_HEIGHT / 2 + 193 + 2, (240 - 4) * p, 32 - 4);
-        loadingScreen.endFill();
+
+        var px = Math.cos(window.time / 2000)*5;
+        var py = Math.sin(window.time / 1600)*5;
+        window.preloaderBg.children[0].x = SCR_WIDTH / 2 + px;
+        window.preloaderBg.children[0].y = SCR_HEIGHT / 2 - py / 3;
+
+        window.preloaderBg.children[1].x = SCR_WIDTH / 2 - px;
+        window.preloaderBg.children[1].y = SCR_HEIGHT / 2 - py;
+
+        window.progressMask.beginFill(0xFF7777);
+        window.progressMask.drawRect(0, -16, (window.pbWidth + 1) * p, 32 - 4);
+        window.progressMask.endFill();
     } else
     if (loadingState == "game") {
         if (SM.inst)
