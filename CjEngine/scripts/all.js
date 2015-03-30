@@ -1968,8 +1968,6 @@ CharStage.prototype.openPremiumWindow = function () {
         };
 
         CObj.getById("btnclose").click = close;
-        CObj.getById("btnfree").click = close;
-
     }, SM.inst.fontLayer);
 }
 
@@ -2508,8 +2506,6 @@ extend(ShopStage, CustomStage);
 
 ShopStage.prototype.onShow = function () {
 
-    PlayerData.inst.playerItem.money = 10000;
-    PlayerData.inst.playerItem.crystals = 1000;
     /* PlayerData.inst.playerItem.money = 10000;
      PlayerData.inst.playerItem.crystals = 1000;*/
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
@@ -9779,7 +9775,7 @@ var dbobj =
                         price: 1300,
                         pricecrys: 26,
                         name: "AK-74",
-                        desc: "Калаш|АК-47 - автомат был сконструирован==в 1947 году Михаилом Тимофеевичем Калашниковым==магазин 35 патронов",
+                        desc: "Калаш|АК-47 - автомат был сконструирован==в 1947 году Михаилом Тимофеевичем Калашниковым==Увеличенный магазин: 50 патронов",
                         gfx: "gun2",
                         reqlvl: 4
                     },
@@ -9797,7 +9793,7 @@ var dbobj =
                         price: 8000,
                         pricecrys: 160,
                         name: "Grenade launcher",
-                        desc: "Гранатомёт - ручной многозарядный==полуавтоматический гранатомет==6 снарядов",
+                        desc: "Гранатомёт - ручной многозарядный==полуавтоматический гранатомет==3 снаряда",
                         gfx: "gun4",
                         reqlvl: 10
                     },
@@ -10285,7 +10281,7 @@ getDedImage = function (ava) {
         var w = 300;
         var h = 365;
         var ox = -55;
-        var oy = -150;
+        var oy = -120;
     } else {
         w = SCR_WIDTH / 2;
         h = SCR_HEIGHT;
