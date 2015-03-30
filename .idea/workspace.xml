@@ -6,17 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.png" afterPath="$PROJECT_DIR$/imgtps/guiatlas.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/pussyatlas.png" afterPath="$PROJECT_DIR$/imgtps/pussyatlas.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.obf.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.obf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.json" afterPath="$PROJECT_DIR$/imgtps/guiatlas.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.xml" afterPath="$PROJECT_DIR$/imgtps/guiatlas.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/levels/levshop.json" afterPath="$PROJECT_DIR$/levels/levshop.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/pussyatlas.json" afterPath="$PROJECT_DIR$/imgtps/pussyatlas.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/levels/upperPanel.json" afterPath="$PROJECT_DIR$/levels/upperPanel.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -160,8 +149,8 @@
       <file leaf-file-name="all.min.obf.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.min.obf.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869">
-              <caret line="0" column="115187" selection-start-line="0" selection-start-column="115187" selection-end-line="0" selection-end-column="115187" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="868">
+              <caret line="0" column="115182" selection-start-line="0" selection-start-column="115181" selection-end-line="0" selection-end-column="115182" />
               <folding />
             </state>
           </provider>
@@ -639,12 +628,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00520" summary="&#10;gf&#10;&#10;">
-      <created>1427452722405</created>
-      <option name="number" value="00520" />
-      <option name="project" value="LOCAL" />
-      <updated>1427452722405</updated>
-    </task>
     <task id="LOCAL-00521" summary="&#10;gf&#10;&#10;">
       <created>1427452856995</created>
       <option name="number" value="00521" />
@@ -933,7 +916,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427645214415</updated>
     </task>
-    <option name="localTasksCounter" value="569" />
+    <task id="LOCAL-00569" summary="&#10;gf&#10;&#10;">
+      <created>1427733268775</created>
+      <option name="number" value="00569" />
+      <option name="project" value="LOCAL" />
+      <updated>1427733268777</updated>
+    </task>
+    <option name="localTasksCounter" value="570" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -960,6 +949,7 @@
     <frame x="54" y="-8" width="1634" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32527474" sideWeight="0.5844981" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33483145" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46179774" sideWeight="0.2994924" order="6" side_tool="false" content_ui="tabs" />
@@ -975,7 +965,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="895" y="406" width="758" height="357" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32527474" sideWeight="0.5844981" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1438,8 +1427,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.min.obf.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869">
-          <caret line="0" column="115187" selection-start-line="0" selection-start-column="115187" selection-end-line="0" selection-end-column="115187" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="868">
+          <caret line="0" column="115182" selection-start-line="0" selection-start-column="115181" selection-end-line="0" selection-end-column="115182" />
           <folding />
         </state>
       </provider>
