@@ -2429,9 +2429,9 @@ CharStage.prototype.updateSB = function(arr)
     var fr = "";
     for (var i = 0; i < arr.length; ++i) {
         var scoreClip = new PIXI.DisplayObjectContainer();
-        var tfRank = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: (charStage.skip + i + 1).toString() + '.'}) ;
-        var tfName = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: arr[i].name + ' ' + arr[i].last_name}) ;
-        var tfScore = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: Math.round(arr[i].maxdistance).toString() + "м."}) ;
+        var tfRank = CTextField.createTextField({tint: 0x333333, fontSize: 17, text: (charStage.skip + i + 1).toString() + '.'}) ;
+        var tfName = CTextField.createTextField({tint: 0x333333, fontSize: 17, text: arr[i].name + ' ' + arr[i].last_name}) ;
+        var tfScore = CTextField.createTextField({tint: 0x333333, fontSize: 17, text: Math.round(arr[i].maxdistance).toString() + "м."}) ;
         var clIco = crsp("ava cover");
 
         clips.push(clIco);
