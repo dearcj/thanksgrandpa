@@ -6,6 +6,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/snd/buy.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgtps/dedgameXP.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/snd/ditch.pkf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgtps/preloader.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/snd/PostRoom.xmp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgtps/dedgameXP.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgtps/preloader.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgtps/preloader.tps" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -150,7 +158,7 @@
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.min.obf.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="868">
-              <caret line="0" column="115182" selection-start-line="0" selection-start-column="115181" selection-end-line="0" selection-end-column="115182" />
+              <caret line="0" column="115149" selection-start-line="0" selection-start-column="115149" selection-end-line="0" selection-end-column="115149" />
               <folding />
             </state>
           </provider>
@@ -338,6 +346,34 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="libs">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="levels">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="imgtps">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -628,12 +664,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00521" summary="&#10;gf&#10;&#10;">
-      <created>1427452856995</created>
-      <option name="number" value="00521" />
-      <option name="project" value="LOCAL" />
-      <updated>1427452856995</updated>
-    </task>
     <task id="LOCAL-00522" summary="&#10;gf&#10;&#10;">
       <created>1427452910151</created>
       <option name="number" value="00522" />
@@ -922,7 +952,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427733268777</updated>
     </task>
-    <option name="localTasksCounter" value="570" />
+    <task id="LOCAL-00570" summary="&#10;gf&#10;&#10;">
+      <created>1427733280928</created>
+      <option name="number" value="00570" />
+      <option name="project" value="LOCAL" />
+      <updated>1427733280928</updated>
+    </task>
+    <option name="localTasksCounter" value="571" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1428,7 +1464,7 @@
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.min.obf.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="868">
-          <caret line="0" column="115182" selection-start-line="0" selection-start-column="115181" selection-end-line="0" selection-end-column="115182" />
+          <caret line="0" column="115149" selection-start-line="0" selection-start-column="115149" selection-end-line="0" selection-end-column="115149" />
           <folding />
         </state>
       </provider>

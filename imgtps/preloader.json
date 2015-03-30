@@ -1,0 +1,44 @@
+{"frames": {
+
+"1st plan.png":
+{
+	"frame": {"x":3,"y":607,"w":800,"h":600},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":600},
+	"sourceSize": {"w":800,"h":600}
+},
+"background.png":
+{
+	"frame": {"x":3,"y":3,"w":800,"h":600},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":600},
+	"sourceSize": {"w":800,"h":600}
+},
+"loading bar line.png":
+{
+	"frame": {"x":281,"y":1211,"w":240,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":240,"h":24},
+	"sourceSize": {"w":240,"h":24}
+},
+"loading bar.png":
+{
+	"frame": {"x":3,"y":1211,"w":274,"h":58},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":274,"h":58},
+	"sourceSize": {"w":274,"h":58}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "preloader.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:209182852185258a7b6b9655217d6c35$"
+}
+}
