@@ -6617,7 +6617,6 @@ Boss2.prototype.fire = function()
     this.patterns =
         [
 
-/*
 
             {mons: "+.", diff: 1, prob: bonusProb},
                 {mons: "f..f00szf..000", diff: 1, prob: 1},
@@ -6674,7 +6673,7 @@ Boss2.prototype.fire = function()
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
                 {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
                 {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1},
-                {mons: ".c.chH..h..H..000000", diff: 10, prob: 1}*/
+                {mons: ".c.chH..h..H..000000", diff: 10, prob: 1}
         ];
     this.carClips = ["car","car1","car2"];
 
