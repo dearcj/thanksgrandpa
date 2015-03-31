@@ -1878,8 +1878,8 @@ CharStage.prototype.createFriendsPanel = function () {
             friendClip.click = function () {
                 VK.api("wall.post", {
                     owner_id: vkparams.viewerid,
-                    message: username + ", возвращайся в игру дружище",
-                    attachments: ["photo2882845_347400805", "https://vk.com/app4654201"]
+                    message: username + ", возвращайся в игру, дружище" + '\n' + "https://vk.com/app4654201",
+                    attachments: ["photo282617259_360326325", "https://vk.com/app4654201"]
                 }, function (data) {
 
                 });
@@ -5198,7 +5198,7 @@ CPlayer.prototype.process = function()
    // console.log(this.gravityEnabled);
     if (SM.inst.currentStage == gameStage && this.playable && gameStage.player) {
 
-            if (this.vy > 0 && this.y > this.baseY - 30) {
+            if (this.vy > 0 && this.y > this.baseY - 50) {
                 this.jumping = false;
             }
 
@@ -6616,7 +6616,10 @@ Boss2.prototype.fire = function()
     var moneyCrowProb = 0.4;
     this.patterns =
         [
-                {mons: "+.", diff: 1, prob: bonusProb},
+
+/*
+
+            {mons: "+.", diff: 1, prob: bonusProb},
                 {mons: "f..f00szf..000", diff: 1, prob: 1},
                 {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
@@ -6670,7 +6673,8 @@ Boss2.prototype.fire = function()
                 {mons: "+.", diff: 8, prob: bonusProb},
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
                 {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
-                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1}
+                {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1},
+                {mons: ".c.chH..h..H..000000", diff: 10, prob: 1}*/
         ];
     this.carClips = ["car","car1","car2"];
 
@@ -8929,7 +8933,7 @@ CTabletsBooster.prototype.onActivate = function()
         p.superMode = true;
 
     var b = this;
-        new TweenMax(LauncherBG.inst, 1.5, {maxVelocity: LauncherBG.inst.maxVelocity + 25, ease: Linear.easeOut});
+        new TweenMax(LauncherBG.inst, 1.5, {maxVelocity: LauncherBG.inst.maxVelocity + 15, ease: Linear.easeOut});
 
 
 
@@ -8945,7 +8949,7 @@ CTabletsBooster.prototype.onDeactivate = function()
     var p = gameStage.player;
     p.superMode = false;
     p.resetBlink();
-    p.invulnerable--;
+    TweenMax.delayedCall(0.7, function(){p.invulnerable--;});
     p.blink = false;
 }
 
