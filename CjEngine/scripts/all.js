@@ -1074,7 +1074,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
                     CObj.getById("b" + (i + 1).toString()).click = function () {
                         VK.api("wall.post", {
                             owner_id: friendObject.vkapi,
-                            message: "Я проехал" + rec.toString() + " метров. " + friendObject.name + " " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!"+'\n' + "https://vk.com/app4654201",
+                            message: "Я проехал " + rec.toString() + " метров. " + friendObject.name + " " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!"+'\n' + "https://vk.com/app4654201",
                             attachments: ["photo282617259_360326329", "https://vk.com/app4654201"]
                         }, function (data) {
 
@@ -1877,7 +1877,7 @@ CharStage.prototype.createFriendsPanel = function () {
             username = vkparams.friendsIngame[i].name;
             friendClip.click = function () {
                 VK.api("wall.post", {
-                    owner_id: vkparams.viewerid,
+                    owner_id: vkparams.friendsIngame[i].vkapi ,
                     message: username + ", возвращайся в игру, дружище" + '\n' + "https://vk.com/app4654201",
                     attachments: ["photo282617259_360326325", "https://vk.com/app4654201"]
                 }, function (data) {
@@ -6612,14 +6612,16 @@ Boss2.prototype.fire = function()
         });
     }
 };MM = function () {
-    var bonusProb = 0.6;
+    var bonusProb = 0.8;
     var moneyCrowProb = 0.4;
     this.patterns =
         [
 
 
             {mons: "+.", diff: 1, prob: bonusProb},
-                {mons: "f..f00szf..000", diff: 1, prob: 1},
+            {mons: "s..000l00..s.", diff: 1, prob: 1},
+            {mons: "f..000..c.", diff: 1, prob: 1},
+            {mons: "f..f00szf..000", diff: 1, prob: 1},
                 {mons: "s.s..ssc..ss000", diff: 1, prob: 1},
                 {mons: ".g..s.gs.l.l.", diff: 1, prob: 1},
                 {mons: ".s..s..s..c", diff: 1, prob: 1},
@@ -6665,7 +6667,7 @@ Boss2.prototype.fire = function()
                 {mons: "h.llH.lzh..H.l.l", diff: 7, prob: 1},
                 {mons: ".b..bbb..bbbbb000bbbbbbb..", diff: 7, prob: 0.1},
                 {mons: ".o.H.H..l..", diff: 7, prob: 1},
-                {mons: ".z..zz...zzz...zzzz.", diff: 7, prob: 1},
+                {mons: ".z..zz...zz.z...zz.zz.", diff: 7, prob: 1},
                 {mons: ".czgG.gFl...", diff: 7, prob: 1},
                 {mons: "h..c.hsh.?.", diff: 8, prob: 1},
                 {mons: ".c.b.cbb..lb.gG.Gg..g.", diff: 8, prob: 1},
@@ -6673,7 +6675,10 @@ Boss2.prototype.fire = function()
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
                 {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
                 {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1},
-                {mons: ".c.chH..h..H..000000", diff: 10, prob: 1}
+                {mons: ".c.chH..h..H..000000", diff: 10, prob: 1},
+                {mons: "ss...ssss..b.l..c", diff: 10, prob: 1},
+                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1}
+
         ];
     this.carClips = ["car","car1","car2"];
 
@@ -8733,7 +8738,7 @@ CBooster.prototype.onActivate = function() {
     this.activate = true;
     PlayerData.inst.progressAch("Gold medal 5", 1, false);
 
-    this.startTime = window.time;
+    this.startTime = PauseTimer.getTimer();
     this.lastTick = 0;
     this.tf = CTextField.createTextField({fontFamily: "dedgamecaps", tint: "0xFFFFFF", text: "", fontSize: 80, align: "center"});
     this.tf.x = this.tf.width / 2;
@@ -8746,9 +8751,9 @@ CBooster.prototype.process = function()
     if (!this.activate) return;
     if (this.doRemove) return;
     if (this.tf) {
-        if (window.time - this.lastTick > 1000) {
-            this.lastTick = window.time;
-            var secs = Math.round(this.duration - (window.time - this.startTime) / 1000);
+        if (PauseTimer.getTimer() - this.lastTick > 1000) {
+            this.lastTick = PauseTimer.getTimer();
+            var secs = Math.round(this.duration - (PauseTimer.getTimer() - this.startTime) / 1000);
             if (secs < 0) secs = 0;
             this.tf.text = secs.toString();
             this.tf.updateText();
@@ -8756,7 +8761,7 @@ CBooster.prototype.process = function()
         this.tf.x = -this.tf.width / 2;
     }
 
-    if (this.startTime && window.time - this.startTime > this.duration*1000)
+    if (this.startTime && PauseTimer.getTimer() - this.startTime > this.duration*1000)
     {
         this.onDeactivate();
     }
@@ -8907,7 +8912,7 @@ CSupermanBooster.prototype.process = function()
     if (!this.activate || this.doRemove) return;
     if (gameStage.player)
     {
-        gameStage.player.vy = Math.cos(window.time / 1000)*0.7;
+        gameStage.player.vy = Math.cos(PauseTimer.getTimer() / 1000)*0.7;
     }
     CBooster.prototype.process.call(this);
 };extend(CTabletsBooster, CBooster, true);
@@ -8924,7 +8929,6 @@ CTabletsBooster.prototype.onActivate = function()
         if (!gameStage.player) return;
 
 
-        this.lastUse = window.time;
         gameStage.player.invulnerable++;
         var p = gameStage.player;
         p.blink = true;
