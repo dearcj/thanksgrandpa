@@ -4,6 +4,13 @@ var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
 
+function extractName(obj)
+{
+    if (!obj.name) return "Аноним"; else
+    return (obj.name + ' ' + obj.last_name).substring(0, 16);
+
+}
+
 function findByProp(array, prop, value)
 {
     var len = array.length;
@@ -324,6 +331,7 @@ LevelManager.removeLastLevel = function()
         LevelManager.objs[0].destroy();
         LevelManager.objs.splice(0, 1);
     }
+    objs = null;
 }
 
 LevelManager.loadLevel = function(str, onCompleteFunction, layer)
@@ -1055,7 +1063,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
         var arr = results.result;
 
         for (var i = 0; i < Math.min(5, arr.length); ++i) {
-            CObj.getById("tf" + (i + 1).toString() + "2").text = (arr[i].name + " " + arr[i].last_name).substring(0, 16);
+            CObj.getById("tf" + (i + 1).toString() + "2").text = extractName(arr[i]);
             CObj.getById("tf" + (i + 1).toString() + "3").text = arr[i].maxdistance.toString();
             if (rec > arr[i].maxdistance) {
                 CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
@@ -2076,7 +2084,16 @@ CharStage.prototype.onShowContinue = function () {
         charStage.frp = charStage.createFriendsPanel();
     }
 
+   /* $(function() {
+        $(document).on('keyup', function(evt)
+        {
+            if (evt.which == 87||  evt.which == 17 || evt.which == 32) {
+                PlayerData.inst.gainExp(500);
+            }
+        });
+    });
 
+*/
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
     CObj.getById("bbuy2").click = charStage.openPremiumWindow;
 
@@ -2437,7 +2454,7 @@ CharStage.prototype.updateSB = function(arr)
     for (var i = 0; i < arr.length; ++i) {
         var scoreClip = new PIXI.DisplayObjectContainer();
         var tfRank = CTextField.createTextField({tint: 0x333333, fontSize: 17, text: (charStage.skip + i + 1).toString() + '.'}) ;
-        var tfName = CTextField.createTextField({tint: 0x333333, fontSize: 17, text: arr[i].name + ' ' + arr[i].last_name}) ;
+        var tfName = CTextField.createTextField({tint: 0x333333, fontSize: 17, text: extractName(arr[i])}) ;
         var tfScore = CTextField.createTextField({tint: 0x333333, fontSize: 17, text: Math.round(arr[i].maxdistance).toString() + "м."}) ;
         var clIco = crsp("ava cover");
 
@@ -9108,6 +9125,7 @@ PlayerData.prototype.gainExp = function(amount) {
    var c = this.playerItem.xp;
    var needed = this.xpLevel[this.playerItem.lvl].xp;
 
+   var ingame = SM.inst.currentStage == gameStage;
    if (c >= needed && this.playerItem.lvl + 1 < this.xpLevel.length) ///levelup
    {
       this.playerItem.xp -= this.xpLevel[this.playerItem.lvl].xp;
@@ -9115,12 +9133,14 @@ PlayerData.prototype.gainExp = function(amount) {
       this.playerItem.lvl++;
 
       ZSound.Play("levelup");
-
-      this.score += this.xpLevel[this.playerItem.lvl].money;
-
-         if (SM.inst.currentStage == charStage)
+       if (ingame)
+           this.score += this.xpLevel[this.playerItem.lvl].money; else {
+           this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
+           shopStage.updateStatsPanel();
+       }
+       if (!ingame)
          {
-            if (charStage.closeEventsWnd)
+         /*   if (charStage.closeEventsWnd)
             charStage.closeEventsWnd();
 
             CObj.enableButtons(false);
@@ -9132,9 +9152,9 @@ PlayerData.prototype.gainExp = function(amount) {
                wnd.parent.removeChild(wnd);
                CObj.enableButtons(true);
             }
-
+*/
          }
-         if (SM.inst.currentStage == gameStage)
+         if (ingame)
          {
             gameStage.updateScore();
             gameStage.pause();
@@ -9146,15 +9166,13 @@ PlayerData.prototype.gainExp = function(amount) {
                 CObj.getById("crystalstf").text = PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].crystals.toString();
                 CObj.getById("levnum").text = PlayerData.inst.playerItem.lvl.toString();
                 CObj.getById("btnclose").click = function () {
-                   for (var i = 0; i < LevelManager.objs.length; ++i) {
-                      LevelManager.objs[i].destroy();
-                   }
-                   LevelManager.objs = null;
-                   if (SM.inst.currentStage == gameStage) {
+                    LevelManager.removeLastLevel();
+                   if (ingame) {
                       gameStage.unpause();
                    } else {
-                      charStage.closeEventsWnd();
-                      charStage.updateStatsPanel();
+                       shopStage.updateStatsPanel();
+                       charStage.closeEventsWnd();
+                       PlayerData.inst.savePlayerData();
                    }
                 };
 
