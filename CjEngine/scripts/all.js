@@ -2357,8 +2357,14 @@ CharStage.prototype.openScore = function()
     charStage.container.y = 170;
     SM.inst.fontLayer.addChild(charStage.container);
 
-    CObj.getById("tplscore").text = PlayerData.inst.playerItem.maxdistance.toString() + 'м.';
-    CObj.getById("tplace").text = PlayerData.inst.playerItem.rank.toString() + ".";
+    var d = "0";
+    if (PlayerData.inst.playerItem.maxdistance) d = PlayerData.inst.playerItem.maxdistance.toString();
+
+    var r = "";
+    if (PlayerData.inst.playerItem.rank) r = PlayerData.inst.playerItem.rank.toString() + ".";
+
+    CObj.getById("tplscore").text = d + 'м.';
+    CObj.getById("tplace").text = r;
 
     var current = charStage.skip + 1;
     //   CObj.getById("tdisplayed").text =  (current).toString() + " - " + (current+ scoreStage.showRecords).toString();
@@ -2378,6 +2384,7 @@ CharStage.prototype.openScore = function()
         }
     }
 
+    charStage.tab = "friends";
     CObj.getById("bfriends").click();
 
     CObj.getById("bforwardlist").click = function ()

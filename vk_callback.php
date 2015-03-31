@@ -27,18 +27,9 @@ if ($sig != md5($str.$secret_key)) {
 	
   switch ($input['notification_type']) {
     case 'get_item':
-      
+      $item = $input['item'];
 	  
-	if (strpos($item, "offer") >= 0)
-	{
-		  $response['response'] = array(
-          'item_id' => 900,
-          'item' => $item,
-          'item_currency_amount' => $input['item_currency_amount'],
-          'price' =>  $input['item_currency_amount'],
-        );
-		
-	} elseif($item == 'item1') {
+	if($item == 'item1') {
         $response['response'] = array(
           'item_id' => 611,
           'title' => '100 монет',
@@ -167,7 +158,6 @@ case 'order_status_change':
       if ($input['status'] == 'chargeable') {
         $order_id = intval($input['order_id']);
 
-// Код проверки товара, включая его стоимость
         $app_order_id = 1; // Получающийся у вас идентификатор заказа.
 
 
