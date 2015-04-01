@@ -400,24 +400,31 @@ LevelManager.levels = {};function SM() {
     this.transTime = 600;
     this.doTrans = false;
 
-    var mouseWheelHandler = function(e)
-    {
+    $(window).mousewheel(function(event, delta, deltaX, deltaY){
+        //if (delta < 0) page.scrollTop(page.scrollTop() + 65);
+        //else if (delta > 0) page.scrollTop(page.scrollTop() - 65);
         if (CObj.objects)
-        for (var i = 0; i < CObj.objects.length; ++i)
-        {
-            if (CObj.checkType(CObj.objects[i], CScrollbar),
-                    CObj.objects[i].mover)
+            for (var i = 0; i < CObj.objects.length; ++i)
             {
-                CObj.objects[i].onWheel(e);
-            }
+                if (CObj.checkType(CObj.objects[i], CScrollbar),
+                        CObj.objects[i].mover)
+                {
+                    CObj.objects[i].onWheel(e, delta, deltaX, deltaY);
+                }
 
-        }
+            }
         e.stopPropagation();
         e.stopImmediatePropagation();
         e.preventDefault();
+    });
+
+    /*var mouseWheelHandler = function(e)
+    {
+
     }
     //document.addEventListener("mousewheel", mouseWheelHandler, false);
     document.addEventListener("DOMMouseScroll", mouseWheelHandler, false);
+    */
 }
 
 SM.inst = new SM();
@@ -7427,11 +7434,11 @@ CScrollbar.prototype.destroy = function()
 }
 
 
-CScrollbar.prototype.onWheel = function(e)
+CScrollbar.prototype.onWheel = function(e, delta, dx, dy)
 {
     e.stopPropagation();
     e.stopImmediatePropagation();
-    this.pos += e.deltaY / 3;
+    this.pos += delta / 3;
 }
 
 function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrolltoucher, dw) {
