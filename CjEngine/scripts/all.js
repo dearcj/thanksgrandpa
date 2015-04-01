@@ -222,10 +222,12 @@ PIXI.HueTexure = function(texture, hue) {
 
 ZSound.Init = function(manifest) {
     ZSound.available = createjs.Sound.initializeDefaultPlugins();
-    if (!ZSound.available) return;
-
+    if (!ZSound.available) {
+        ZSound.loaded = true;
+        return;
+    }
     var audioPath = "res/snd/";
-  //  createjs.Sound.alternateExtensions = ["mp3"];
+    createjs.Sound.alternateExtensions = ["mp3"];
     ZSound.loaded = 0;
     ZSound.total = manifest.length;
     var handleLoad = function()
@@ -241,7 +243,7 @@ ZSound.Init = function(manifest) {
     }
     createjs.Sound.addEventListener("fileload", handleLoad); // call handleLoad when each sound loads
 
-    createjs.Sound.registerManifest(manifest, "res/snd/");
+    createjs.Sound.registerSounds(manifest, "res/snd/");
 }
 
 ZSound.PlayMusic = function(snd) {
@@ -10918,6 +10920,7 @@ function animate() {
         window.preloaderBg.children[1].x = SCR_WIDTH / 2 - px;
         window.preloaderBg.children[1].y = SCR_HEIGHT / 2 - py;
 
+        window.progressMask.clear();
         window.progressMask.beginFill(0xFF7777);
         window.progressMask.drawRect(0, -16, (window.pbWidth + 1) * p, 32 - 4);
         window.progressMask.endFill();
