@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require 'vkapi.class.php';
 try
 {
@@ -37,7 +37,7 @@ $result = $statement->fetchAll();
     }
     $ids .= $strapi;
    }
-   $msg = "Приветики";
+   $msg = "Скорее возвращайся в игру! https://vk.com/app4654201";
 print($ids);
 
 $statement = $pdo->prepare("delete TOP (".$n.") from thanksdad.tb_notifications");
