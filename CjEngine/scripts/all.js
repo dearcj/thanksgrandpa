@@ -1876,9 +1876,10 @@ CharStage.prototype.createFriendsPanel = function () {
         } else {
            var username = vkparams.friendsIngame[i].name;
             var userAPI = vkparams.friendsIngame[i].vkapi;
-            function setClick(uname, uapi)
+            function setClick(uname, uapi, fc)
             {
-                friendClip.click = function () {
+                console.log(uname.toString() + " / " + uapi.toString());
+                fc.click = function () {
                     VK.api("wall.post", {
                         owner_id: uapi,
                         message: uname + ", возвращайся в игру, дружище" + '\n' + "https://vk.com/app4654201",
@@ -1889,7 +1890,7 @@ CharStage.prototype.createFriendsPanel = function () {
                 };
             }
 
-            setClick(username, userAPI)
+            setClick(username, userAPI, friendClip)
 
 
         }
