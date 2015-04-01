@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>sparrow</string>
+        <string>json</string>
         <key>textureFileName</key>
         <filename>guiatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>guiatlas.xml</filename>
+        <filename>guiatlas.json</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -284,6 +284,14 @@
             <filename>../../../../dedgame/home screen/energy button.png</filename>
             <filename>../../../../dedgame/home screen/energy ico.png</filename>
             <filename>../../../../dedgame/home screen/energy window.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/mute02.png</filename>
+            <filename>../../../../dedgame/fight screen/menu/mute01.png</filename>
+            <filename>../../../../dedgame/home screen/public.png</filename>
+            <filename>../../../../dedgame/home screen/notification.png</filename>
+            <filename>../../../../dedgame/shop/boosters/improve point off.png</filename>
+            <filename>../../../../dedgame/shop/boosters/improve point on.png</filename>
+            <filename>../../../../dedgame/everyday actions/take reward.png</filename>
+            <filename>../../../../dedgame/records window/ava cover.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

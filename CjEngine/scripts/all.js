@@ -1874,10 +1874,11 @@ CharStage.prototype.createFriendsPanel = function () {
 
             continue;
         } else {
-            username = vkparams.friendsIngame[i].name;
+           var username = vkparams.friendsIngame[i].name;
+            var userAPI = vkparams.friendsIngame[i].vkapi;
             friendClip.click = function () {
                 VK.api("wall.post", {
-                    owner_id: vkparams.friendsIngame[i].vkapi ,
+                    owner_id: userAPI,
                     message: username + ", возвращайся в игру, дружище" + '\n' + "https://vk.com/app4654201",
                     attachments: ["photo282617259_360326325", "https://vk.com/app4654201"]
                 }, function (data) {
@@ -2530,7 +2531,7 @@ extend(ShopStage, CustomStage);
 
 ShopStage.prototype.onShow = function () {
 
-    /* PlayerData.inst.playerItem.money = 10000;
+    /*PlayerData.inst.playerItem.money = 10000;
      PlayerData.inst.playerItem.crystals = 1000;*/
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
 
@@ -2608,9 +2609,12 @@ ShopStage.prototype.createItemBtn = function (item) {
     if (isBooster) {
         var upgrObj = PlayerData.inst.getUpgrade(item);
         var upgr = upgrObj.upgr;
-        if (upgrObj.id)
+        if (upgrObj.id && upgrObj.idNext)
+            item = PlayerData.inst.getItemById(upgrObj.idNext); else
+        {
+            var boosterFullUpgr = true;
             item = PlayerData.inst.getItemById(upgrObj.id);
-
+        }
     }
 
     var ico = crsp(item.gfx)
@@ -2680,12 +2684,15 @@ ShopStage.prototype.createItemBtn = function (item) {
 
     tftext = "";
 
-    if (isBooster && upgr == 5) tftext = ""; else if (!owned || isBooster) {
+    if (isBooster)
+    { if (boosterFullUpgr) tftext = "";
+        else if (!owned) {
         if (item.pricecrys < 0 && item.price < 0)
             tftext = ""; else {
             if (item.pricecrys > 0)
                 tftext = item.pricecrys.toString(); else
                 tftext = item.price.toString();
+            }
         }
     }
 
@@ -2693,8 +2700,7 @@ ShopStage.prototype.createItemBtn = function (item) {
     var infoText = "";
     var dy = 0;
     var btnName = "buy button";
-
-
+    var bgSprite;
     if (!owned || isBooster) {
 
         if (isBooster && upgr == 5) {
@@ -2704,10 +2710,13 @@ ShopStage.prototype.createItemBtn = function (item) {
                 clickFunc = unlockItem;
                 btnName = "unlock button";
                 infoText = "МИН " + item.reqlvl.toString() + " УР.";
+                bgSprite = "price star.png";
+                tftext = item.pricecrys.toString();
             } else {
-                clickFunc = buyItem;
+            clickFunc = buyItem;
+                bgSprite = "price coin.png";
                 btnName = "buy button";
-                //   dy = -15;
+                tftext = item.price.toString();
             }
         }
     } else {
@@ -2718,8 +2727,6 @@ ShopStage.prototype.createItemBtn = function (item) {
         }
     }
     dy = -15;
-    //вкладка бустер if ()
-
 
     var btn = new CButton(0, 144 + dy, btnName);
     if (btnName == "equipped button") {
@@ -2763,11 +2770,6 @@ ShopStage.prototype.createItemBtn = function (item) {
     g.btn = btn;
 
     if (tftext) {
-        if (item.price > 0)
-            var bgSprite = "price coin.png";
-        if (item.pricecrys > 0)
-            bgSprite = "price star.png";
-
         if (bgSprite) {
             var tfBg = crsp(bgSprite);
             tfBg.x = 0;
@@ -6616,8 +6618,6 @@ Boss2.prototype.fire = function()
     var moneyCrowProb = 0.4;
     this.patterns =
         [
-
-
             {mons: "+.", diff: 1, prob: bonusProb},
             {mons: "s..000l00..s.", diff: 1, prob: 1},
             {mons: "f..000..c.", diff: 1, prob: 1},
@@ -7707,7 +7707,7 @@ CEActionGUI.prototype.endAction = function()
 
 
 CEActionGUI.prototype.addRewardButton = function() {
-    this.btnReward = new CButton(230, -3, "take reward");
+    this.btnReward = new CButton(268, -3, "take reward");
     this.btnReward.fontSize = 17;
     this.btnReward.gfx.scale.x = 1.1;
     this.btnReward.gfx.scale.y = 1.1;
@@ -7781,9 +7781,14 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     var gainbgsprite = new PIXI.Sprite(PIXI.Texture.fromFrame(gainbg));
     gainbgsprite.anchor.x = 0.5;
     gainbgsprite.anchor.y = 0.5;
-    gainbgsprite.x = 120;
+    gainbgsprite.x = 170;
     gainbgsprite.y = 12 - 14;
     this.gfx.addChild(gainbgsprite);
+
+    this.rewText = CTextField.createTextField({tint: "0x333333", text: "Награда", fontSize: 18, align: "center"});
+    this.rewText.x = 50;
+    this.rewText.y = -12;
+    this.gfx.addChild(this.rewText);
 
     this.timeleft = CTextField.createTextField({tint: "0x333333", text: "", fontSize: 17, align: "center"});
     this.timeleft.x = 50;
@@ -7791,7 +7796,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     this.gfx.addChild(this.timeleft);
 
     var tf = CTextField.createTextField({tint: "0x333333", text: gain.toString(), fontSize: 16, align: "center"});
-    tf.x = 120;
+    tf.x = 170;
     tf.y = 3 -14;
     this.gfx.addChild(tf);
 
@@ -8643,7 +8648,7 @@ var w_grenadel = new CGrenadeLauncher(
         recoil: 3, //recoil
         magcap: 3, //magcap
         delay: 400, //delay
-        damage: 110, //damage
+        damage: 135, //damage
         reloadTime: 2200},//__reloadTime,}
     "asd",// __gfx,
     [
@@ -8800,10 +8805,10 @@ function CHeartBooster(x,y,gfx,upgr) {
 
 CHeartBooster.prototype.onActivate = function() {
 
-    var upgrHP = [1, 2, 3, 5, 10];
-    if (this.upgr) {
-        gameStage.player.hp += this.upgr + 1;
-    }
+    var upgrHP = [1, 2, 3, 4, 5, 10];
+    if (this.upgr >= 0) {
+        gameStage.player.hp += upgrHP[this.upgr];
+    } else gameStage.player.hp += 1;
 
     if (!gameStage.player) return;
     CBooster.prototype.onActivate.call(this);

@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>sparrow</string>
+        <string>json</string>
         <key>textureFileName</key>
         <filename>pussyatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>pussyatlas.xml</filename>
+        <filename>pussyatlas.json</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -290,6 +290,8 @@
             <filename>../../../../dedgame/fight screen/sauron.png</filename>
             <filename>../../../../dedgame/fight screen/car2.png</filename>
             <filename>../../../../dedgame/fight screen/car1.png</filename>
+            <filename>../../../../dedgame/fight screen/booster dron.png</filename>
+            <filename>../../../../dedgame/fight screen/booster box.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
