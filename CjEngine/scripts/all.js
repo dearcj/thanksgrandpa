@@ -1876,15 +1876,21 @@ CharStage.prototype.createFriendsPanel = function () {
         } else {
            var username = vkparams.friendsIngame[i].name;
             var userAPI = vkparams.friendsIngame[i].vkapi;
-            friendClip.click = function () {
-                VK.api("wall.post", {
-                    owner_id: userAPI,
-                    message: username + ", возвращайся в игру, дружище" + '\n' + "https://vk.com/app4654201",
-                    attachments: ["photo282617259_360326325", "https://vk.com/app4654201"]
-                }, function (data) {
+            function setClick(uname, uapi)
+            {
+                friendClip.click = function () {
+                    VK.api("wall.post", {
+                        owner_id: uapi,
+                        message: uname + ", возвращайся в игру, дружище" + '\n' + "https://vk.com/app4654201",
+                        attachments: ["photo282617259_360326325", "https://vk.com/app4654201"]
+                    }, function (data) {
 
-                });
-            };
+                    });
+                };
+            }
+
+            setClick(username, userAPI)
+
 
         }
         if (fr != "") fr += ",";
