@@ -2616,7 +2616,7 @@ ShopStage.prototype.createItemBtn = function (item) {
     if (isBooster) {
         var upgrObj = PlayerData.inst.getUpgrade(item);
         var upgr = upgrObj.upgr;
-        if (upgrObj.id && upgrObj.idNext)
+        if (upgrObj.idNext)
             item = PlayerData.inst.getItemById(upgrObj.idNext); else
         {
             var boosterFullUpgr = true;
