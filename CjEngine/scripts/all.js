@@ -416,8 +416,8 @@ LevelManager.levels = {};function SM() {
         e.stopImmediatePropagation();
         e.preventDefault();
     }
-    document.addEventListener("mousewheel", mouseWheelHandler, false);
-    //document.addEventListener("DOMMouseScroll", mouseWheelHandler, false);
+    //document.addEventListener("mousewheel", mouseWheelHandler, false);
+    document.addEventListener("DOMMouseScroll", mouseWheelHandler, false);
 }
 
 SM.inst = new SM();
