@@ -402,9 +402,6 @@ LevelManager.levels = {};function SM() {
 
     var mouseWheelHandler = function(e)
     {
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        e.preventDefault();
         if (CObj.objects)
         for (var i = 0; i < CObj.objects.length; ++i)
         {
@@ -415,10 +412,12 @@ LevelManager.levels = {};function SM() {
             }
 
         }
-
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        e.preventDefault();
     }
     document.addEventListener("mousewheel", mouseWheelHandler, false);
-    document.addEventListener("DOMMouseScroll", mouseWheelHandler, false);
+    //document.addEventListener("DOMMouseScroll", mouseWheelHandler, false);
 }
 
 SM.inst = new SM();
