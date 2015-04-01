@@ -8568,15 +8568,15 @@ var w_pps = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
-        visualWidth: 20,
-        dw: -0.7,
-        speed: 38.5,
+        visualWidth: 25,
+        dw: -1.2,
+        speed: 45.5,
         sound: "mini",
         life: 1,
         acc: 0.022,
         accIncrease: 0.02,
         accRecoil: 0.1,
-        recoil: 3.0, //recoil
+        recoil: 1.0, //recoil
         magcap: 20, //magcap
         delay: 120, //delay
         damage: 28, //damage
