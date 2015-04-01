@@ -221,6 +221,12 @@ PIXI.HueTexure = function(texture, hue) {
 };
 
 ZSound.Init = function(manifest) {
+
+    createjs.FlashAudioPlugin.swfPath = "res/snd/"; // Initialize the base path from this document to the Flash Plugin
+
+    createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
+
+
     ZSound.available = createjs.Sound.initializeDefaultPlugins();
     if (!ZSound.available) {
         ZSound.loaded = true;
@@ -243,7 +249,7 @@ ZSound.Init = function(manifest) {
     }
     createjs.Sound.addEventListener("fileload", handleLoad); // call handleLoad when each sound loads
 
-    createjs.Sound.registerSounds(manifest, "res/snd/");
+    createjs.Sound.registerSounds(manifest, audioPath);
 }
 
 ZSound.PlayMusic = function(snd) {
