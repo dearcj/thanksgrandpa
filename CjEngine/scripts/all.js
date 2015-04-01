@@ -400,7 +400,7 @@ LevelManager.levels = {};function SM() {
     this.transTime = 600;
     this.doTrans = false;
 
-    $(window).mousewheel(function(event, delta, deltaX, deltaY){
+    $(document).mousewheel(function(event, delta, deltaX, deltaY){
         //if (delta < 0) page.scrollTop(page.scrollTop() + 65);
         //else if (delta > 0) page.scrollTop(page.scrollTop() - 65);
         if (CObj.objects)
@@ -409,7 +409,7 @@ LevelManager.levels = {};function SM() {
                 if (CObj.checkType(CObj.objects[i], CScrollbar),
                         CObj.objects[i].mover)
                 {
-                    CObj.objects[i].onWheel(e, delta, deltaX, deltaY);
+                    CObj.objects[i].onWheel(event, delta, deltaX, deltaY);
                 }
 
             }
@@ -7438,7 +7438,7 @@ CScrollbar.prototype.onWheel = function(e, delta, dx, dy)
 {
     e.stopPropagation();
     e.stopImmediatePropagation();
-    this.pos += delta / 3;
+    this.pos -= delta*25;
 }
 
 function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrolltoucher, dw) {
