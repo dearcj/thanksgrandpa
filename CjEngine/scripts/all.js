@@ -229,6 +229,7 @@ ZSound.Init = function(manifest) {
 
     ZSound.available = createjs.Sound.initializeDefaultPlugins();
     if (!ZSound.available) {
+        console.log("ZSound loaded without plugins [NO SOUND]");
         ZSound.loaded = true;
         return;
     }
@@ -241,6 +242,7 @@ ZSound.Init = function(manifest) {
         ZSound.loaded++;
         if ( ZSound.loaded == manifest.length) {
             if (ZSound.soundLoadedFunction) {
+                console.log("ZSound loaded " + ZSound.loaded.toString() + " / " + manifest.length.toString());
                 ZSound.loaded = true;
                 ZSound.soundLoadedFunction();
             }
@@ -8985,7 +8987,9 @@ CTabletsBooster.prototype.onDeactivate = function()
 
 PlayerData = function(pi)
 {
-   this.maxEnergy = 10;
+    console.log("PlayerData init");
+
+    this.maxEnergy = 10;
    this.epm = 0.2;
    this.delayEnergyMS = (1 / this.epm)*60000;
    this.xpLevel = [
@@ -9305,8 +9309,8 @@ PlayerData.prototype.loadEnd = function()
 {
    PlayerData.inst.createAchProgress();
    window.dbinit  = true;
-
-    onAssetsLoaded();
+   console.log("DB intialized");
+   onAssetsLoaded();
 }
 
 
@@ -9385,13 +9389,15 @@ PlayerData.prototype.loadData = function(cb)
 {
     //checkDb();
    this.loadCount = 0;
+    console.log("PlayerData.loadData");
 
-   var totalLoads = 7;
+    var totalLoads = 7;
    window.azureclient.getTable("tb_players").read().done(
    function (results) {
       PlayerData.inst.playerItem = results[0];
+       console.log("PlayerData.get player record");
 
-      PlayerData.inst.playerItem.name = vkparams.first_name;
+       PlayerData.inst.playerItem.name = vkparams.first_name;
       PlayerData.inst.playerItem.last_name = vkparams.last_name;
 
       PlayerData.inst.updateEnergy();
@@ -10231,9 +10237,12 @@ loginCallback = function(playerItem)
         return;
     }
     var loaded = 0;
+    console.log("Gettin vk friends");
     VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000, fields: "domain"}, function(data) {
         vkparams.friends = data.response;
         vkparams.friendsids = new Array();
+        console.log("VK friends+");
+
         for (var i = 0; i < vkparams.friends.length; ++i)
         {
             vkparams.friendsids.push(vkparams.friends[i].uid);
@@ -10255,6 +10264,7 @@ loginCallback = function(playerItem)
             if (loaded == 2)
                 new PlayerData(playerItem);
         }, function(error) {
+            console.log("no VK friends");
         });
 
     })
@@ -10292,6 +10302,8 @@ createAchs = function(uid)
 */
 
 dbInit = function() {
+    console.log("dbInit start. Connecting to azure");
+
     window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
     window.vkparams = {};
     vkparams.userid = getURLParameter("user_id");
@@ -10309,18 +10321,23 @@ dbInit = function() {
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
+    console.log("login / register user");
     azureclient.invokeApi("login", {
         body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},
         method: "post"
     }).done(function (results) {
         var message = results.result;
         vkparams.registered = results.result.registered;
+
+        if (!vkparams.registered)console.log("user logged in"); else
+            console.log("user registered");
         PlayerData.pid = results.result.userId.split(':')[1];
 
         azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
         vkparams.id = results.result.id;
         loginCallback(results.result);
     }, function(error) {
+        console.log("ERROR in login");
     });
 };/**
  * Created by KURWINDALLAS on 20.03.2015.
