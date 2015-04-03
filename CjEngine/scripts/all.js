@@ -421,9 +421,9 @@ LevelManager.levels = {};function SM() {
                 }
 
             }
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        e.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        event.preventDefault();
     });
 
     /*var mouseWheelHandler = function(e)
@@ -474,7 +474,8 @@ SM.prototype.addLayersToStage = function()
     this.superStage.addChild(this.superGuiLayer);
     this.superStage.addChild(this.fontLayer);
     window.stage.addChild(this.superStage);
-
+    window.mouseX = SCR_WIDTH / 2;
+    window.mouseY = SCR_HEIGHT / 2;
     this.bg.mousemove = function(md){
         window.mouseX = md.global.x/SCR_SCALE;
         window.mouseY = md.global.y/SCR_SCALE;
@@ -3294,7 +3295,7 @@ ComixStage.prototype.goNext = function () {
 */
     TweenMax.killAll(true, true, true);
     var p = this.comixData.shift();
-    if (!p)
+    if (!p || !p.objects)
     {
         SM.inst.openStage(gameStage);
     }
@@ -10495,9 +10496,14 @@ PauseTimer.resume = function()
     TweenMax.resumeAll();
     PauseTimer.paused = false;
 };
-window.SCR_WIDTH = 800;
-window.SCR_HEIGHT = 600;
-
+if (window.MOBILE) {
+    window.SCR_WIDTH = 1024;
+    window.SCR_HEIGHT = 576;
+} else
+{
+    window.SCR_WIDTH = 800;
+    window.SCR_HEIGHT = 600;
+}
 window.SCR_SCALE = 1.0;
 window.FRAME_RATE = 60;
 
@@ -10643,16 +10649,18 @@ function preloaderLoaded() {
     window.py = SCR_HEIGHT;
     window.loadingScreen = new PIXI.Graphics();
     window.preloaderBg = new PIXI.DisplayObjectContainer();
+    var init_scale = 1.1;
+    if (window.MOBILE) init_scale = 1.3;
     var fg = crsp("1st plan");
     fg.x = SCR_WIDTH / 2;
     fg.y = SCR_HEIGHT / 2;
-    fg.scale.x = 1.1;
-    fg.scale.y = 1.1;
+    fg.scale.x = init_scale;
+    fg.scale.y = init_scale;
     var bg = crsp("background");
     bg.x = SCR_WIDTH / 2;
     bg.y = SCR_HEIGHT/ 2;
-    bg.scale.x = 1.1;
-    bg.scale.y = 1.1;
+    bg.scale.x = init_scale;
+    bg.scale.y = init_scale;
     preloaderBg.addChild(bg);
     preloaderBg.addChild(fg);
 
