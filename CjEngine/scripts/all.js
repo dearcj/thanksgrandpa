@@ -1824,7 +1824,7 @@ CharStage.prototype.onShow = function () {
     ZSound.PlayMusic("m_room");
 
     LevelManager.loadLevel("levchar", function () {
-            LevelManager.loadLevel("upperPanel", charStage.onShowContinue, SM.inst.ol);
+        shopStage.createStatsPanel(charStage.onShowContinue);
         }
         , SM.inst.ol);
 }
@@ -2550,6 +2550,56 @@ function ShopStage() {
 
 extend(ShopStage, CustomStage);
 
+
+
+ShopStage.prototype.createStatsPanel = function (cb) {
+
+    setHover = function (obj, text)
+    {
+        obj.gfx.interactive = true;
+        var t = text;
+        obj.gfx.mouseover = function (evt) {
+                var dp = CObj.getById("descpanel");
+                if (dp)
+                {
+                    var t = text;
+                    setTimeout(function(){
+                        dp.text = t;
+                        CObj.getById("descbg").gfx.visible = true;
+                    }, 50);
+                }
+        }
+
+        obj.gfx.mouseout = function (evt) {
+
+                var dp = CObj.getById("descpanel");
+                if (dp)
+                {
+                    setTimeout(function(){
+                        dp.text = " ";
+                        CObj.getById("descbg").gfx.visible = false;
+                    }, 0);
+                }
+        }
+    }
+
+    LevelManager.loadLevel("upperPanel",
+        function()
+        {
+            CObj.getById("descbg").gfx.visible = false;
+            CObj.getById("descpanel").text = " ";
+
+            setHover(CObj.getById("xpback"), "Шкала уважения ветеранов. Больше уважения - выше уровень деда");
+            setHover(CObj.getById("moneyback"), "Монеты. Нужны для покупки новых вещей");
+            setHover(CObj.getById("energyback"), "Биодобавки нужны деду, чтобы воевать");
+            setHover(CObj.getById("starback"), "Звезды. Они облегчают игровой процесс");
+
+
+
+            cb();
+        }, SM.inst.ol);
+
+}
 ShopStage.prototype.onShow = function () {
 
     /*PlayerData.inst.playerItem.money = 10000;
@@ -2557,7 +2607,7 @@ ShopStage.prototype.onShow = function () {
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
 
     LevelManager.loadLevel("levshop", function () {
-        LevelManager.loadLevel("upperPanel", shopStage.onShowContinue, SM.inst.ol);
+        shopStage.createStatsPanel(shopStage.onShowContinue);
     });
 }
 
@@ -4336,8 +4386,19 @@ CButton.prototype.init = function(){
                new TweenMax(tf.scale, 0.6, {y: 1 + 0.1, ease: Elastic.easeOut});
                new TweenMax(tf.scale, 0.4, {x: 1 + 0.1, ease: Elastic.easeOut});
            }
+
            if (obj.hover)
            {
+               var dp = CObj.getById("descpanel");
+               if (dp)
+               {
+                   var t = obj.text;
+                   setTimeout(function(){
+                       dp.text = t;
+                       CObj.getById("descbg").gfx.visible = true;
+                   }, 100);
+                   return;
+               } else
                obj.textField.alpha = 1;
            //    if (gameStage.state == "paused")
            //    obj.updateGraphics();
@@ -4347,10 +4408,7 @@ CButton.prototype.init = function(){
 
     this.gfx.mouseout = function (evt) {
         obj.over = false;
-        if (obj.hover)
-        {
-            obj.textField.alpha = 0;
-        }
+
         f.tint = 0xffffff;
         if (f.currentFrame)
         f.gotoAndStop(1);
@@ -4358,6 +4416,20 @@ CButton.prototype.init = function(){
 
         if (tf.visible && tf.text != "") {
             new TweenMax(tf.scale, 0.3, {x: 1, y: 1, ease: Elastic.easeOut});
+        }
+
+        if (obj.hover)
+        {
+            var dp = CObj.getById("descpanel");
+            if (dp)
+            {
+                setTimeout(function(){
+                    dp.text = " ";
+                    CObj.getById("descbg").gfx.visible = false;
+                }, 0);
+                return;
+            } else
+                obj.textField.alpha = 0;
         }
     }
 
