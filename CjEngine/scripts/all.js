@@ -9025,6 +9025,11 @@ PlayerData = function(pi)
    PlayerData.inst = this;
 }
 
+
+
+
+
+
 PlayerData.prototype.addNotification = function(message, vkapi)
 {
    var t = window.azureclient.getTable("tb_notifications");
@@ -9568,6 +9573,118 @@ PlayerData.prototype.savePlayerData = function(cb)
        if (cb) cb();
    }, function (err) {
    });
+};
+
+
+getURLParameter = function (name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
+}
+
+
+PlayerData.getVKuserData = function(playerItem)
+{
+    VK.api('users.get',{user_ids:vkparams.viewerid.toString()}, function(data) {
+        if (!data.response || data.response.length == 0) {
+            PlayerData.getVKuserData(playerItem);
+            return;
+        }
+        if (data.response[0].first_name)
+            vkparams.first_name = data.response[0].first_name; else
+            vkparams.first_name = "Ноунейм";
+
+        if (data.response[0].first_name)
+            vkparams.last_name = data.response[0].last_name; else
+            vkparams.last_name = "";
+
+        new PlayerData(playerItem);
+    });
+}
+
+PlayerData.getVKfriends = function(playerItem)
+{
+    vkparams.first_name = "Аноним";
+    vkparams.last_name = "";
+    if (vkparams.novk) {
+        new PlayerData(playerItem);
+        return;
+    }
+    console.log("Gettin vk friends");
+
+    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000, fields: "domain"}, function(data) {
+
+        if (!data.response || !data.response.length)
+        {
+            PlayerData.getVKfriends(playerItem);
+            return;
+        }
+
+        vkparams.friends = data.response;
+        vkparams.friendsids = [];
+        console.log("VK friends+");
+
+        for (var i = 0; i < vkparams.friends.length; ++i)
+        {
+            vkparams.friendsids.push(vkparams.friends[i].uid);
+        }
+
+        azureclient.invokeApi("get_scores", {
+            body: {filter: vkparams.friendsids},
+            method: "post"
+        }).done(function (results) {
+
+            vkparams.friendsIngame = results.result;
+            vkparams.friendsIngameIDs = [];
+            if (!results.result) return;
+            for (var i = 0; i < results.result.length; ++i)
+            {
+                vkparams.friendsIngameIDs.push(results.result[i].vkapi);
+            }
+
+           PlayerData.getVKuserData(playerItem);
+        }, function(error) {
+        });
+
+    });
+};
+
+PlayerData.dbInit = function() {
+    console.log("dbInit start. Connecting to azure");
+
+    window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
+    window.vkparams = {};
+    vkparams.userid = getURLParameter("user_id");
+    vkparams.sid = getURLParameter("sid");
+    vkparams.viewerid = getURLParameter("viewer_id");
+
+    //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
+    if (!vkparams.viewerid)
+    {
+        vkparams.viewerid = 2882845;
+        vkparams.novk = true;
+    }
+
+    vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
+    vkparams.auth_key = getURLParameter("auth_key");
+    vkparams.refferer = getURLParameter("referrer");
+    vkparams.accesstoken = getURLParameter("access_token");
+    console.log("login / register user");
+    azureclient.invokeApi("login", {
+        body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},
+        method: "post"
+    }).done(function (results) {
+        var message = results.result;
+        vkparams.registered = results.result.registered;
+
+        if (!vkparams.registered)console.log("user logged in"); else
+            console.log("user registered");
+        PlayerData.pid = results.result.userId.split(':')[1];
+
+        azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
+        vkparams.id = results.result.id;
+        PlayerData.getVKfriends(results.result);
+    }, function(error) {
+        console.log("ERROR in login");
+    });
 };var tWeapon = "weap";
 var tPerk = "perk";
 var tBoost = "boost";
@@ -10224,122 +10341,7 @@ function updDb(o, onlyRead)
 
 
 };
-getURLParameter = function (name) {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
-}
-
-loginCallback = function(playerItem)
-{
-    vkparams.first_name = "Аноним";
-    vkparams.last_name = "";
-    if (vkparams.novk) {
-        new PlayerData(playerItem);
-        return;
-    }
-    var loaded = 0;
-    console.log("Gettin vk friends");
-    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000, fields: "domain"}, function(data) {
-        vkparams.friends = data.response;
-        vkparams.friendsids = new Array();
-        console.log("VK friends+");
-
-        for (var i = 0; i < vkparams.friends.length; ++i)
-        {
-            vkparams.friendsids.push(vkparams.friends[i].uid);
-        }
-        azureclient.invokeApi("get_scores", {
-            body: {filter: vkparams.friendsids},
-            method: "post"
-        }).done(function (results) {
-            loaded ++;
-
-            vkparams.friendsIngame = results.result;
-            vkparams.friendsIngameIDs = new Array();
-            if (!results.result) return;
-            for (var i = 0; i < results.result.length; ++i)
-            {
-                vkparams.friendsIngameIDs.push(results.result[i].vkapi);
-            }
-
-            if (loaded == 2)
-                new PlayerData(playerItem);
-        }, function(error) {
-            console.log("no VK friends");
-        });
-
-    })
-
-    VK.api('users.get',{user_ids:vkparams.viewerid.toString()}, function(data) {
-
-        if (data.response[0].first_name)
-        vkparams.first_name = data.response[0].first_name; else
-            vkparams.first_name = "Ноунейм";
-
-        if (data.response[0].first_name)
-            vkparams.last_name = data.response[0].last_name; else
-            vkparams.last_name = "";
-
-                loaded++;
-        if (loaded == 2)
-        new PlayerData(playerItem);
-    });
-}
-/*
-createAchs = function(uid)
-{
-    azureclient.getTable('tb_achs').read().done(
-        function (results) {
-            for (var i = 0; i < results.length; ++i)
-            {
-                var plach = {id_ach: results[i].id, id_player: uid, progress: 0};
-                azureclient.getTable('tb_ach_player').insert(plach);
-            }
-            console.log();
-        }, function (err) {
-            console.log("Error: " + err);
-        });
-}
-*/
-
-dbInit = function() {
-    console.log("dbInit start. Connecting to azure");
-
-    window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
-    window.vkparams = {};
-    vkparams.userid = getURLParameter("user_id");
-    vkparams.sid = getURLParameter("sid");
-    vkparams.viewerid = getURLParameter("viewer_id");
-
-    //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
-    if (!vkparams.viewerid)
-    {
-        vkparams.viewerid = 2882845;
-        vkparams.novk = true;
-    }
-
-    vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
-    vkparams.auth_key = getURLParameter("auth_key");
-    vkparams.refferer = getURLParameter("referrer");
-    vkparams.accesstoken = getURLParameter("access_token");
-    console.log("login / register user");
-    azureclient.invokeApi("login", {
-        body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},
-        method: "post"
-    }).done(function (results) {
-        var message = results.result;
-        vkparams.registered = results.result.registered;
-
-        if (!vkparams.registered)console.log("user logged in"); else
-            console.log("user registered");
-        PlayerData.pid = results.result.userId.split(':')[1];
-
-        azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
-        vkparams.id = results.result.id;
-        loginCallback(results.result);
-    }, function(error) {
-        console.log("ERROR in login");
-    });
-};/**
+/**
  * Created by KURWINDALLAS on 20.03.2015.
  */
 
@@ -10538,7 +10540,7 @@ window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGH
 window.loader = new PIXI.AssetLoader(preloaderAsset);
 window.loader.onComplete = preloaderLoaded;
 window.loader.load();
-dbInit();
+PlayerData.dbInit();
 
 $(document).bind('contextmenu', function (){return false;});
 window.apiid = 4654201;
