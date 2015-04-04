@@ -2008,8 +2008,8 @@ CharStage.prototype.openPremiumWindow = function () {
 CharStage.prototype.openEnergyWindow = function () {
     CObj.enableButtons(false);
 
-    var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
-    wnd.interactive = true;
+    charStage.disableWnd  = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
+    charStage.disableWnd.interactive = true;
     var objs = LevelManager.loadLevel("energywindow", function () {
         CObj.getById("breplenish").click = function()
         {
@@ -2024,14 +2024,14 @@ CharStage.prototype.openEnergyWindow = function () {
         }
         close= function()
         {
-            rp(wnd);
+            rp(charStage.disableWnd);
             CObj.enableButtons(true);
 
             LevelManager.removeLastLevel();
-            wnd.click = null;
+            charStage.disableWnd.click = null;
         };
 
-        wnd.click = function () {
+        charStage.disableWnd.click = function () {
             var obj = CObj.getById("energybg");
             var bnds = obj.gfx.getBounds();
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
@@ -2110,16 +2110,16 @@ CharStage.prototype.onShowContinue = function () {
         charStage.frp = charStage.createFriendsPanel();
     }
 
-   /* $(function() {
+    /*$(function() {
         $(document).on('keyup', function(evt)
         {
             if (evt.which == 87||  evt.which == 17 || evt.which == 32) {
                 PlayerData.inst.gainExp(500);
             }
         });
-    });
+    });*/
 
-*/
+
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
     CObj.getById("bbuy2").click = charStage.openPremiumWindow;
 
@@ -2206,8 +2206,8 @@ CharStage.prototype.onShowContinue = function () {
     CObj.getById("bsofa").click = function () {
         CObj.enableButtons(false);
 
-        var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
-        wnd.interactive = true;
+        charStage.disableWnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
+        charStage.disableWnd.interactive = true;
 
         for (var i = 0; i < CObj.objects.length; ++i) {
             if (CObj.checkType(CObj.objects[i], CEActionGUI) && CObj.objects[i].btnReward) {
@@ -2217,12 +2217,12 @@ CharStage.prototype.onShowContinue = function () {
 
         charStage.closeEventsWnd = function()
         {
-            wnd.parent.removeChild(wnd);
+            rp(charStage.disableWnd);
             CObj.enableButtons(true);
             charStage.bar.gfx.visible = false;
         }
 
-        wnd.click = function () {
+        charStage.disableWnd.click = function () {
             var obj = charStage.bar;
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                 window.mouseX < obj.x + obj.gfx.width / 2 &&
@@ -2386,7 +2386,7 @@ CharStage.prototype.updateTotal = function() {
 CharStage.prototype.openScore = function()
 {
     CObj.enableButtons(false);
-    var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
+    charStage.disableWnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
 
     var objs = LevelManager.loadLevel("levscore", function()
 {
@@ -2449,7 +2449,7 @@ CharStage.prototype.openScore = function()
         }
 
         rp(charStage.container);
-       rp(wnd);
+       rp(charStage.disableWnd);
         charStage.container = null;
     }
     CObj.getById("bbacklist").click = function ()
@@ -7702,6 +7702,8 @@ CEActionGUI.prototype.takeReward = function()
     if (this.event.xp_gain)
         PlayerData.inst.gainExp(this.event.xp_gain);
 
+
+
     incMetric("USED EVENT " + this.event.name);
 
     if (this.event.name == "event1")
@@ -9001,13 +9003,22 @@ PlayerData = function(pi)
       {crystals: 2, money: 1500, xp: 7000},
       {crystals: 3, money: 2000, xp: 12000},
       {crystals: 3, money: 2500, xp: 18000},
+      {crystals: 3, money: 3000, xp: 19000},
+      {crystals: 3, money: 3000, xp: 20000},
+      {crystals: 3, money: 3000, xp: 21000},
+      {crystals: 3, money: 3000, xp: 22000},
+      {crystals: 3, money: 3000, xp: 23000},
+      {crystals: 3, money: 3000, xp: 24000},
       {crystals: 3, money: 3000, xp: 25000},
-      {crystals: 3, money: 3000, xp: 30000},
-      {crystals: 3, money: 3000, xp: 35000},
-      {crystals: 3, money: 3000, xp: 47000},
-      {crystals: 3, money: 3000, xp: 55000},
-      {crystals: 3, money: 3000, xp: 60000},
-      {crystals: 3, money: 3000, xp: 75000}];
+       {crystals: 3, money: 3000, xp: 26000},
+       {crystals: 3, money: 3000, xp: 27000},
+       {crystals: 3, money: 3000, xp: 28000},
+       {crystals: 3, money: 3000, xp: 29000},
+       {crystals: 3, money: 3000, xp: 31000},
+       {crystals: 3, money: 3000, xp: 32000},
+       {crystals: 3, money: 3000, xp: 33000},
+       {crystals: 3, money: 3000, xp: 34000},
+       {crystals: 3, money: 3000, xp: 35000}];
 
    this.items = {};
    this.achs = {};
@@ -9650,6 +9661,27 @@ PlayerData.getVKfriends = function(playerItem)
     });
 };
 
+PlayerData.azureLogin = function()
+{
+    azureclient.invokeApi("login", {
+        body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},
+        method: "post"
+    }).done(function (results) {
+        var message = results.result;
+        vkparams.registered = results.result.registered;
+
+        if (!vkparams.registered)console.log("user logged in"); else
+            console.log("user registered");
+        PlayerData.pid = results.result.userId.split(':')[1];
+
+        azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
+        vkparams.id = results.result.id;
+        PlayerData.getVKfriends(results.result);
+    }, function(error) {
+        PlayerData.azureLogin();
+    });
+}
+
 PlayerData.dbInit = function() {
     console.log("dbInit start. Connecting to azure");
 
@@ -9671,23 +9703,7 @@ PlayerData.dbInit = function() {
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("login / register user");
-    azureclient.invokeApi("login", {
-        body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},
-        method: "post"
-    }).done(function (results) {
-        var message = results.result;
-        vkparams.registered = results.result.registered;
-
-        if (!vkparams.registered)console.log("user logged in"); else
-            console.log("user registered");
-        PlayerData.pid = results.result.userId.split(':')[1];
-
-        azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
-        vkparams.id = results.result.id;
-        PlayerData.getVKfriends(results.result);
-    }, function(error) {
-        console.log("ERROR in login");
-    });
+    PlayerData.azureLogin();
 };var tWeapon = "weap";
 var tPerk = "perk";
 var tBoost = "boost";
