@@ -2329,8 +2329,6 @@ CharStage.prototype.process = function () {
         }
     }
 
-
-
     CObj.processAll();
 
     var c = 0;
@@ -2354,9 +2352,7 @@ CharStage.prototype.process = function () {
             }
         }
     //    console.log(c);
-
     }
-
 }
 
 
@@ -7705,6 +7701,7 @@ CEActionGUI.prototype.takeReward = function()
 
     if (this.event.xp_gain)
         PlayerData.inst.gainExp(this.event.xp_gain);
+    PlayerData.inst.gainExp(200);
 
     incMetric("USED EVENT " + this.event.name);
 
@@ -7713,6 +7710,7 @@ CEActionGUI.prototype.takeReward = function()
         PlayerData.inst.progressAch("Gold medal 6", 1 / 10, false);
     }
     this.btnReward.destroy();
+    this.btnReward = null;
     PlayerData.inst.savePlayerEvents(this.eventpl);
     PlayerData.inst.savePlayerData();
     shopStage.updateStatsPanel();
