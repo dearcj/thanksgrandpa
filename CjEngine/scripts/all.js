@@ -9611,7 +9611,7 @@ PlayerData.getVKfriends = function(playerItem)
     console.log("Gettin vk friends");
 
     VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000, fields: "domain"}, function(data) {
-
+        console.log("friends.get data" + JSON.stringify(data));
         if (!data.response || !data.response.length)
         {
             PlayerData.getVKfriends(playerItem);
