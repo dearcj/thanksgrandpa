@@ -1061,7 +1061,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
         VK.api("wall.post", {
             owner_id: vkparams.viewerid,
             message: "Я проехал " + rec.toString() + " метров." +'\n' + "https://vk.com/app4654201",
-            attachments: ["photo282617259_360326326", "https://vk.com/app4654201"]
+            attachments: ["photo90523698_359515843", "https://vk.com/app4654201"]
         }, function (data) {
 
         });
@@ -1091,8 +1091,8 @@ GameStage.prototype.openEndWindowLoaded = function () {
                     CObj.getById("b" + (i + 1).toString()).click = function () {
                         VK.api("wall.post", {
                             owner_id: friendObject.vkapi,
-                            message: "Я проехал " + rec.toString() + " метров. " + friendObject.name + " " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!"+'\n' + "https://vk.com/app4654201",
-                            attachments: ["photo282617259_360326329", "https://vk.com/app4654201"]
+                            message: "Я проехал " + rec.toString() + " метров. *id"+friendObject.vkapi.toString() +"(" + friendObject.name + ") " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!" + '\n' + "https://vk.com/app4654201",
+                            attachments: ["photo90523698_359515827", "https://vk.com/app4654201"]
                         }, function (data) {
 
                         });
@@ -1899,7 +1899,7 @@ CharStage.prototype.createFriendsPanel = function () {
                     VK.api("wall.post", {
                         owner_id: uapi,
                         message: uname + ", возвращайся в игру, дружище" + '\n' + "https://vk.com/app4654201",
-                        attachments: ["photo282617259_360326325", "https://vk.com/app4654201"]
+                        attachments: ["photo90523698_359515858", "https://vk.com/app4654201"]
                     }, function (data) {
 
                     });
@@ -1954,14 +1954,14 @@ CharStage.prototype.createFriendsPanel = function () {
 
 CharStage.prototype.openPremiumWindow = function () {
     CObj.enableButtons(false);
-    var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
+    charStage.disableWnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
 
     LevelManager.loadLevel("levelpremium", function () {
         close = function () {
             LevelManager.removeLastLevel();
 
             CObj.enableButtons(true);
-            wnd.parent.removeChild(wnd);
+            charStage.disableWnd.parent.removeChild(charStage.disableWnd);
         };
 
         charStage.skipFriends = 0;
@@ -2007,7 +2007,7 @@ CharStage.prototype.openPremiumWindow = function () {
 
 CharStage.prototype.openEnergyWindow = function () {
     CObj.enableButtons(false);
-    ;
+
     var wnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
     wnd.interactive = true;
     var objs = LevelManager.loadLevel("energywindow", function () {
@@ -7701,7 +7701,6 @@ CEActionGUI.prototype.takeReward = function()
 
     if (this.event.xp_gain)
         PlayerData.inst.gainExp(this.event.xp_gain);
-    PlayerData.inst.gainExp(200);
 
     incMetric("USED EVENT " + this.event.name);
 
@@ -9182,6 +9181,11 @@ PlayerData.prototype.gainExp = function(amount) {
        }
        if (!ingame)
          {
+
+             if (charStage.disableWnd)
+             {
+                 charStage.disableWnd.interactive = false;
+             }
          /*   if (charStage.closeEventsWnd)
             charStage.closeEventsWnd();
 
