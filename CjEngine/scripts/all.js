@@ -2315,19 +2315,7 @@ CharStage.prototype.updateEvents = function () {
 
 CharStage.prototype.process = function () {
 
-
-    if (PlayerData.inst.playerItem.energy < 1)
-    {
-        CObj.getById("tfdelay").gfx.visible = true;
-    } else {
-        CObj.getById("tfdelay").gfx.visible = false;
-        if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
-            var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
-            CObj.getById("tfdelay").text = timeRes.timeString;
-        } else {
-            CObj.getById("tfdelay").text = "";
-        }
-    }
+    shopStage.updateEnergyText();
 
     CObj.processAll();
 
@@ -2550,8 +2538,6 @@ function ShopStage() {
 
 extend(ShopStage, CustomStage);
 
-
-
 ShopStage.prototype.createStatsPanel = function (cb) {
 
     setHover = function (obj, text)
@@ -2566,7 +2552,7 @@ ShopStage.prototype.createStatsPanel = function (cb) {
                     setTimeout(function(){
                         dp.text = t;
                         CObj.getById("descbg").gfx.visible = true;
-                    }, 50);
+                    }, 100);
                 }
         }
 
@@ -2593,8 +2579,6 @@ ShopStage.prototype.createStatsPanel = function (cb) {
             setHover(CObj.getById("moneyback"), "Монеты. Нужны для покупки новых вещей");
             setHover(CObj.getById("energyback"), "Биодобавки нужны деду, чтобы воевать");
             setHover(CObj.getById("starback"), "Звезды. Они облегчают игровой процесс");
-
-
 
             cb();
         }, SM.inst.ol);
@@ -3016,21 +3000,24 @@ ShopStage.prototype.onHide = function (newStage) {
     CObj.processAll();
 }
 
-ShopStage.prototype.process = function () {
-
-    var tf = CObj.getById("tfdelay")
+ShopStage.prototype.updateEnergyText = function () {
+    var tf = CObj.getById("tfdelay");
     if (tf && PlayerData.inst.playerItem.energy < 1) {
-        tf.gfx.visible = true;
-    } else {
-        tf.gfx.visible = false;
         if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
             var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
             tf.text = timeRes.timeString;
         } else {
             tf.text = "";
         }
+        tf.gfx.visible = true;
+    } else {
+        tf.gfx.visible = false;
     }
+}
 
+ShopStage.prototype.process = function () {
+
+    this.updateEnergyText();
     CObj.processAll();
 };
 function ScoreStage() {
@@ -4389,16 +4376,7 @@ CButton.prototype.init = function(){
 
            if (obj.hover)
            {
-               var dp = CObj.getById("descpanel");
-               if (dp)
-               {
-                   var t = obj.text;
-                   setTimeout(function(){
-                       dp.text = t;
-                       CObj.getById("descbg").gfx.visible = true;
-                   }, 100);
-                   return;
-               } else
+
                obj.textField.alpha = 1;
            //    if (gameStage.state == "paused")
            //    obj.updateGraphics();
@@ -4420,15 +4398,7 @@ CButton.prototype.init = function(){
 
         if (obj.hover)
         {
-            var dp = CObj.getById("descpanel");
-            if (dp)
-            {
-                setTimeout(function(){
-                    dp.text = " ";
-                    CObj.getById("descbg").gfx.visible = false;
-                }, 0);
-                return;
-            } else
+
                 obj.textField.alpha = 0;
         }
     }
@@ -6172,6 +6142,13 @@ function CBoosterBox(in_x,in_y,amount) {
     this.allowTrackSpeed = true;
 }
 
+CBoosterBox.prototype.destroy = function()
+{
+    this.drone = null;
+    CObj.prototype.destroy.call(this);
+}
+
+
 CBoosterBox.prototype.getBooster = function()
 {
 
@@ -6179,7 +6156,9 @@ CBoosterBox.prototype.getBooster = function()
     if (!gameStage.player.pickupBooster) return;
     var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
         {name: "Double", cls: CDoubleBooster}];
-    if (gameStage.tutorial) boosters = [{name: "Tablets", cls: CTabletsBooster}];
+
+    //if (gameStage.tutorial)
+        boosters = [{name: "Tablets", cls: CTabletsBooster}];
     var boost = getRand(boosters);
 
     if (CBooster.list)
@@ -6249,6 +6228,10 @@ CBoosterBox.prototype.collide = function(obj2)
         this.destroy(); else
     {
         this.getBooster();
+        if (this.drone) {
+            this.drone.flyAway();
+            this.drone = null;
+        }
         rp(coinGfx);
         rp(this.gfx);
 
@@ -6711,7 +6694,8 @@ Boss2.prototype.fire = function()
     var moneyCrowProb = 0.4;
     this.patterns =
         [
-            {mons: "+.", diff: 1, prob: bonusProb},
+            {mons: "+........", diff: 1, prob: bonusProb}
+            /*{mons: "+.", diff: 1, prob: bonusProb},
             {mons: "s..000l00..s.", diff: 1, prob: 1},
             {mons: "f..000..c.", diff: 1, prob: 1},
             {mons: "f..f00szf..000", diff: 1, prob: 1},
@@ -6770,7 +6754,7 @@ Boss2.prototype.fire = function()
                 {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1},
                 {mons: ".c.chH..h..H..000000", diff: 10, prob: 1},
                 {mons: "ss...ssss..b.l..c", diff: 10, prob: 1},
-                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1}
+                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1}*/
 
         ];
     this.carClips = ["car","car1","car2"];
@@ -7038,7 +7022,7 @@ MM.prototype.spawnBoosterDrone = function()
     m.vx = -1;
     m.allowTrackSpeed = false;
     m.gravityEnabled = false;
-    new TweenMax(m, 1, {y: m.y + 80, ease: Sine.easeInOut, yoyo: true, repeat: 10});
+    new TweenMax(m, 1, {y: m.y + 80, ease: Sine.easeInOut, yoyo: true, repeat: 15});
     m.maxHp = 80;
     m.hp = m.maxHp;
     m.barOffsetX = 10;
@@ -7296,6 +7280,7 @@ function CBoosterDrone(in_x,in_y,animname,cr_bar){
     this.boosterBox = new CBoosterBox(this.x, this.y + this.bdy);
     this.boosterBox.allowTrackSpeed = false;
     this.boosterBox.gravityEnabled = false;
+    this.boosterBox.drone = this;
     CMonster.apply(this,[in_x,in_y,animname, false]);
     this.metall = true;
     var t = this;
@@ -7307,6 +7292,13 @@ CBoosterDrone.prototype.collide = function (obj2)
 
 }
 
+CBoosterDrone.prototype.flyAway = function()
+{
+    TweenMax.killTweensOf(this);
+    this.vy = -3;
+    this.vx *= 4.4;
+}
+
 CBoosterDrone.prototype.dealDamage = function()
 {
     if (!this.spawned) {
@@ -7315,10 +7307,9 @@ CBoosterDrone.prototype.dealDamage = function()
         this.boosterBox.vx = 6.5;
         this.boosterBox.vy = -10;
         this.boosterBox=  null;
+        this.boosterBox.drone = null;
         this.spawned = true;
-        TweenMax.killTweensOf(this);
-        this.vy = -3;
-        this.vx *= 4.4;
+        this.flyAway();
     }
     CLiveObj.prototype.dealDamage.call(this);
 }
@@ -8862,7 +8853,9 @@ CBooster.prototype.process = function()
         this.tf.x = -this.tf.width / 2;
     }
 
-    if (this.startTime && PauseTimer.getTimer() - this.startTime > this.duration*1000)
+    var d = PauseTimer.getTimer() - this.startTime;
+    console.log(PauseTimer.totalPauseTime.toString());
+    if (this.startTime && d > this.duration*1000)
     {
         this.onDeactivate();
     }
@@ -9029,7 +9022,6 @@ CTabletsBooster.prototype.onActivate = function()
     CBooster.prototype.onActivate.call(this);
         if (!gameStage.player) return;
 
-
         gameStage.player.invulnerable++;
         var p = gameStage.player;
         p.blink = true;
@@ -9038,22 +9030,19 @@ CTabletsBooster.prototype.onActivate = function()
 
     var b = this;
         new TweenMax(LauncherBG.inst, 1.5, {maxVelocity: LauncherBG.inst.maxVelocity + 15, ease: Linear.easeOut});
-
-
-
 };
 
 
 CTabletsBooster.prototype.onDeactivate = function()
 {
+    var p = gameStage.player;
+    TweenMax.delayedCall(0.7, function(){p.invulnerable--;});
 
     new TweenMax(LauncherBG.inst, 0.3, {maxVelocity: this.prevVel, ease: Linear.easeOut});
 
     CBooster.prototype.onDeactivate.call(this);
-    var p = gameStage.player;
     p.superMode = false;
     p.resetBlink();
-    TweenMax.delayedCall(0.7, function(){p.invulnerable--;});
     p.blink = false;
 }
 
@@ -9478,7 +9467,8 @@ PlayerData.prototype.getEventById = function(id)
 
 PlayerData.prototype.loadData = function(cb)
 {
-    //checkDb();
+  /*  if (checkDb)
+    checkDb();*/
    this.loadCount = 0;
     console.log("PlayerData.loadData");
 
@@ -9784,8 +9774,7 @@ var tHat = "hat";
 
 function checkDb ()
 {
-
-    updDb(dbobj);
+   updDb(dbobj);
 }
 
 var dbobj =
@@ -10039,7 +10028,7 @@ var dbobj =
                         price :600,
                         pricecrys: 12,
                         name:"PPS",
-                        desc:"ППШ|Пистолет-пулемёт Шпагина==магазин 35 патронов",
+                        desc:"ППШ|Пистолет-пулемёт Шпагина==магазин 20 патронов",
                         gfx: "gun1",
                         reqlvl: 2
                     },
@@ -10048,7 +10037,7 @@ var dbobj =
                         price: 1300,
                         pricecrys: 26,
                         name: "AK-74",
-                        desc: "Калаш|АК-47 - автомат был сконструирован==в 1947 году Михаилом Тимофеевичем Калашниковым==Увеличенный магазин: 50 патронов",
+                        desc: "Калаш|АК-47 - автомат был сконструирован==Михаилом Тимофеевичем Калашниковым==Увеличенный магазин: 50 патронов",
                         gfx: "gun2",
                         reqlvl: 4
                     },
@@ -10594,7 +10583,7 @@ PauseTimer.isPaused = function()
 
 PauseTimer.pause = function()
 {
-    PauseTimer.pauseStartedAt = PauseTimer.getTimer();
+    PauseTimer.pauseStartedAt = window.time;
     TweenMax.pauseAll();
     PauseTimer.paused = true;
 }
@@ -10602,7 +10591,7 @@ PauseTimer.pause = function()
 PauseTimer.resume = function()
 {
     if (!PauseTimer.paused) return;
-    PauseTimer.totalPauseTime = PauseTimer.totalPauseTime + (window.time - PauseTimer.pauseStartedAt);
+    PauseTimer.totalPauseTime += (window.time - PauseTimer.pauseStartedAt);
     TweenMax.resumeAll();
     PauseTimer.paused = false;
 };

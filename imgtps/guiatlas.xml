@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:7a9fa0c27517803d7e53eea2d97e9ace$ -->
+<!-- $TexturePacker:SmartUpdate:803f88d233cfb0cfd3a495116dee62ef$ -->
 <TextureAtlas imagePath="guiatlas.png">
-    <SubTexture name="1boost_button" x="164" y="1461" width="35" height="33"/>
+    <SubTexture name="1boost_button" x="2008" y="1829" width="35" height="33"/>
     <SubTexture name="1st place" x="1562" y="938" width="40" height="36"/>
     <SubTexture name="2boost_button" x="1568" y="858" width="35" height="33"/>
     <SubTexture name="2nd place" x="1562" y="895" width="40" height="39"/>
     <SubTexture name="3boost_button" x="1568" y="821" width="35" height="33"/>
-    <SubTexture name="3rd place" x="1430" y="1464" width="42" height="38"/>
-    <SubTexture name="action 1" x="770" y="1500" width="97" height="89"/>
-    <SubTexture name="action 10" x="685" y="1403" width="97" height="89"/>
-    <SubTexture name="action 11" x="669" y="1500" width="97" height="89"/>
-    <SubTexture name="action 12" x="584" y="1403" width="97" height="89"/>
-    <SubTexture name="action 13" x="568" y="1500" width="97" height="89"/>
-    <SubTexture name="action 14" x="483" y="1403" width="97" height="89"/>
-    <SubTexture name="action 2" x="467" y="1500" width="97" height="89"/>
-    <SubTexture name="action 3" x="382" y="1403" width="97" height="89"/>
-    <SubTexture name="action 4" x="366" y="1500" width="97" height="89"/>
-    <SubTexture name="action 5" x="281" y="1403" width="97" height="89"/>
-    <SubTexture name="action 6" x="265" y="1500" width="97" height="89"/>
-    <SubTexture name="action 7" x="164" y="1500" width="97" height="89"/>
+    <SubTexture name="3rd place" x="1962" y="1829" width="42" height="38"/>
+    <SubTexture name="action 1" x="1057" y="1496" width="97" height="89"/>
+    <SubTexture name="action 10" x="1049" y="1403" width="97" height="89"/>
+    <SubTexture name="action 11" x="956" y="1496" width="97" height="89"/>
+    <SubTexture name="action 12" x="948" y="1403" width="97" height="89"/>
+    <SubTexture name="action 13" x="855" y="1496" width="97" height="89"/>
+    <SubTexture name="action 14" x="847" y="1403" width="97" height="89"/>
+    <SubTexture name="action 2" x="754" y="1496" width="97" height="89"/>
+    <SubTexture name="action 3" x="746" y="1403" width="97" height="89"/>
+    <SubTexture name="action 4" x="645" y="1403" width="97" height="89"/>
+    <SubTexture name="action 5" x="311" y="1494" width="97" height="89"/>
+    <SubTexture name="action 6" x="398" y="1401" width="97" height="89"/>
+    <SubTexture name="action 7" x="158" y="932" width="97" height="89"/>
     <SubTexture name="action 8" x="1945" y="924" width="97" height="89"/>
     <SubTexture name="action 9" x="1945" y="831" width="97" height="89"/>
     <SubTexture name="add friend" x="1962" y="39" width="73" height="63"/>
@@ -28,108 +28,108 @@
     <SubTexture name="arrow right" x="1962" y="130" width="67" height="57"/>
     <SubTexture name="arrow" x="1355" y="928" width="23" height="36"/>
     <SubTexture name="ava cover" x="1945" y="694" width="37" height="37"/>
-    <SubTexture name="ava icon" x="1184" y="1389" width="44" height="38"/>
+    <SubTexture name="ava icon" x="1989" y="1787" width="44" height="38"/>
     <SubTexture name="awards" x="1387" y="885" width="171" height="145"/>
-    <SubTexture name="back button" x="1502" y="1460" width="91" height="36"/>
-    <SubTexture name="background color" x="1319" y="1878" width="164" height="157"/>
-    <SubTexture name="battle button" x="970" y="1403" width="162" height="172"/>
+    <SubTexture name="back button" x="521" y="830" width="91" height="36"/>
+    <SubTexture name="background color" x="815" y="1878" width="164" height="157"/>
+    <SubTexture name="battle button" x="152" y="1056" width="162" height="172"/>
     <SubTexture name="bodrost bar bg" x="157" y="1894" width="150" height="150"/>
     <SubTexture name="bodrost bar" x="3" y="1894" width="150" height="150"/>
     <SubTexture name="bodrost cover" x="618" y="426" width="183" height="172"/>
-    <SubTexture name="bodrost star" x="1502" y="1403" width="91" height="53"/>
+    <SubTexture name="bodrost star" x="164" y="875" width="91" height="53"/>
     <SubTexture name="bodrost text" x="1392" y="482" width="219" height="34"/>
-    <SubTexture name="booster1" x="1487" y="1878" width="164" height="156"/>
-    <SubTexture name="booster2" x="785" y="1240" width="164" height="156"/>
-    <SubTexture name="booster3" x="617" y="1240" width="164" height="156"/>
-    <SubTexture name="booster4" x="449" y="1240" width="164" height="156"/>
-    <SubTexture name="booster5" x="281" y="1240" width="164" height="156"/>
+    <SubTexture name="booster1" x="1655" y="1878" width="164" height="156"/>
+    <SubTexture name="booster2" x="1487" y="1878" width="164" height="156"/>
+    <SubTexture name="booster3" x="1319" y="1878" width="164" height="156"/>
+    <SubTexture name="booster4" x="1151" y="1878" width="164" height="156"/>
+    <SubTexture name="booster5" x="983" y="1878" width="164" height="156"/>
     <SubTexture name="bottom separator" x="2007" y="645" width="38" height="86"/>
     <SubTexture name="bullet counter" x="2008" y="534" width="19" height="32"/>
-    <SubTexture name="buy button" x="1283" y="1500" width="143" height="57"/>
+    <SubTexture name="buy button" x="164" y="1524" width="143" height="57"/>
     <SubTexture name="buy small button" x="1355" y="834" width="32" height="30"/>
     <SubTexture name="buy_back" x="3" y="376" width="611" height="450"/>
     <SubTexture name="buy_button" x="1918" y="1091" width="126" height="50"/>
-    <SubTexture name="buy_cover" x="1119" y="1240" width="145" height="145"/>
+    <SubTexture name="buy_cover" x="3" y="943" width="145" height="145"/>
     <SubTexture name="buy_cover_crystals" x="1899" y="1452" width="145" height="145"/>
     <SubTexture name="coins home" x="1918" y="1284" width="119" height="47"/>
     <SubTexture name="coins" x="1962" y="362" width="58" height="53"/>
     <SubTexture name="cross" x="1962" y="419" width="56" height="56"/>
     <SubTexture name="ded back" x="618" y="669" width="178" height="197"/>
-    <SubTexture name="desc bg" x="544" y="892" width="250" height="33"/>
-    <SubTexture name="empty orden" x="1502" y="1601" width="134" height="273"/>
-    <SubTexture name="energy button" x="311" y="838" width="155" height="50"/>
-    <SubTexture name="energy home" x="417" y="956" width="111" height="62"/>
-    <SubTexture name="energy ico" x="260" y="830" width="47" height="60"/>
-    <SubTexture name="energy window" x="3" y="1240" width="274" height="217"/>
-    <SubTexture name="equipped button" x="1136" y="1500" width="143" height="57"/>
+    <SubTexture name="desc bg" x="3" y="830" width="514" height="41"/>
+    <SubTexture name="empty orden" x="507" y="1240" width="134" height="273"/>
+    <SubTexture name="energy button" x="3" y="875" width="155" height="50"/>
+    <SubTexture name="energy home" x="1778" y="1463" width="111" height="62"/>
+    <SubTexture name="energy ico" x="462" y="1529" width="47" height="60"/>
+    <SubTexture name="energy window" x="521" y="870" width="274" height="217"/>
+    <SubTexture name="equipped button" x="164" y="1463" width="143" height="57"/>
     <SubTexture name="exp bar line" x="1355" y="1054" width="151" height="6"/>
-    <SubTexture name="exp bar" x="580" y="870" width="151" height="10"/>
+    <SubTexture name="exp bar" x="3" y="929" width="151" height="10"/>
     <SubTexture name="floor" x="820" y="3" width="800" height="199"/>
     <SubTexture name="free coins" x="1392" y="520" width="214" height="37"/>
-    <SubTexture name="friends button" x="1430" y="1506" width="131" height="44"/>
-    <SubTexture name="game over ded" x="544" y="929" width="237" height="41"/>
+    <SubTexture name="friends button" x="311" y="1002" width="131" height="44"/>
+    <SubTexture name="game over ded" x="513" y="1529" width="237" height="41"/>
     <SubTexture name="game over home" x="1918" y="1145" width="125" height="108"/>
     <SubTexture name="game over screen" x="1606" y="963" width="308" height="413"/>
-    <SubTexture name="gameover_separator" x="311" y="830" width="296" height="4"/>
+    <SubTexture name="gameover_separator" x="162" y="1588" width="296" height="4"/>
     <SubTexture name="gun0" x="1607" y="803" width="334" height="156"/>
     <SubTexture name="gun1" x="1607" y="643" width="334" height="156"/>
     <SubTexture name="gun2" x="1615" y="483" width="334" height="156"/>
     <SubTexture name="gun3" x="1624" y="323" width="334" height="156"/>
     <SubTexture name="gun4" x="1624" y="163" width="334" height="156"/>
     <SubTexture name="gun5" x="1624" y="3" width="334" height="156"/>
-    <SubTexture name="hat1" x="1151" y="1878" width="164" height="157"/>
-    <SubTexture name="hat2" x="983" y="1878" width="164" height="157"/>
-    <SubTexture name="hat3" x="815" y="1878" width="164" height="157"/>
-    <SubTexture name="hat4" x="647" y="1878" width="164" height="157"/>
-    <SubTexture name="hat5" x="479" y="1878" width="164" height="157"/>
-    <SubTexture name="hat6" x="311" y="1878" width="164" height="157"/>
+    <SubTexture name="hat1" x="647" y="1878" width="164" height="157"/>
+    <SubTexture name="hat2" x="479" y="1878" width="164" height="157"/>
+    <SubTexture name="hat3" x="311" y="1878" width="164" height="157"/>
+    <SubTexture name="hat4" x="339" y="1240" width="164" height="157"/>
+    <SubTexture name="hat5" x="171" y="1240" width="164" height="157"/>
+    <SubTexture name="hat6" x="3" y="1240" width="164" height="157"/>
     <SubTexture name="health bar empty" x="1962" y="118" width="68" height="8"/>
     <SubTexture name="health bar full" x="1962" y="106" width="68" height="8"/>
-    <SubTexture name="health dead" x="1182" y="1561" width="42" height="36"/>
-    <SubTexture name="health" x="1136" y="1561" width="42" height="36"/>
-    <SubTexture name="home button" x="885" y="1400" width="49" height="50"/>
+    <SubTexture name="health dead" x="412" y="1534" width="42" height="36"/>
+    <SubTexture name="health" x="412" y="1494" width="42" height="36"/>
+    <SubTexture name="home button" x="462" y="1002" width="49" height="50"/>
     <SubTexture name="improve point off" x="1355" y="898" width="28" height="26"/>
     <SubTexture name="improve point on" x="1355" y="868" width="28" height="26"/>
-    <SubTexture name="item back" x="953" y="1240" width="162" height="156"/>
+    <SubTexture name="item back" x="1823" y="1878" width="162" height="156"/>
     <SubTexture name="level up button" x="1392" y="407" width="222" height="71"/>
     <SubTexture name="level up window" x="800" y="834" width="551" height="402"/>
     <SubTexture name="locker" x="3" y="1601" width="253" height="289"/>
     <SubTexture name="music" x="1562" y="1021" width="39" height="39"/>
     <SubTexture name="mute01" x="1953" y="589" width="50" height="49"/>
-    <SubTexture name="mute02" x="1268" y="1240" width="48" height="48"/>
-    <SubTexture name="notification" x="1268" y="1388" width="44" height="44"/>
+    <SubTexture name="mute02" x="259" y="1002" width="48" height="48"/>
+    <SubTexture name="notification" x="1989" y="1697" width="44" height="44"/>
     <SubTexture name="notifiction cover" x="1598" y="1380" width="297" height="79"/>
-    <SubTexture name="orden" x="1364" y="1601" width="134" height="273"/>
-    <SubTexture name="orden10" x="1226" y="1601" width="134" height="273"/>
-    <SubTexture name="orden11" x="1088" y="1601" width="134" height="273"/>
-    <SubTexture name="orden12" x="950" y="1601" width="134" height="273"/>
-    <SubTexture name="orden2" x="812" y="1601" width="134" height="273"/>
-    <SubTexture name="orden3" x="674" y="1601" width="134" height="273"/>
-    <SubTexture name="orden4" x="536" y="1601" width="134" height="273"/>
-    <SubTexture name="orden5" x="398" y="1601" width="134" height="273"/>
-    <SubTexture name="orden6" x="260" y="1601" width="134" height="273"/>
-    <SubTexture name="orden7" x="279" y="956" width="134" height="273"/>
-    <SubTexture name="orden8" x="141" y="957" width="134" height="273"/>
-    <SubTexture name="orden9" x="3" y="957" width="134" height="273"/>
+    <SubTexture name="orden" x="1778" y="1601" width="134" height="273"/>
+    <SubTexture name="orden10" x="1640" y="1601" width="134" height="273"/>
+    <SubTexture name="orden11" x="1502" y="1601" width="134" height="273"/>
+    <SubTexture name="orden12" x="1364" y="1601" width="134" height="273"/>
+    <SubTexture name="orden2" x="1226" y="1601" width="134" height="273"/>
+    <SubTexture name="orden3" x="1088" y="1601" width="134" height="273"/>
+    <SubTexture name="orden4" x="950" y="1601" width="134" height="273"/>
+    <SubTexture name="orden5" x="812" y="1601" width="134" height="273"/>
+    <SubTexture name="orden6" x="674" y="1601" width="134" height="273"/>
+    <SubTexture name="orden7" x="536" y="1601" width="134" height="273"/>
+    <SubTexture name="orden8" x="398" y="1601" width="134" height="273"/>
+    <SubTexture name="orden9" x="260" y="1601" width="134" height="273"/>
     <SubTexture name="ordena background 1 px" x="2038" y="275" width="2" height="2"/>
     <SubTexture name="ordena top" x="820" y="307" width="800" height="96"/>
-    <SubTexture name="pause button" x="885" y="1454" width="42" height="39"/>
-    <SubTexture name="photo icon" x="1136" y="1389" width="44" height="38"/>
+    <SubTexture name="pause button" x="1916" y="1829" width="42" height="39"/>
+    <SubTexture name="photo icon" x="1989" y="1745" width="44" height="38"/>
     <SubTexture name="podlozhka actions" x="1392" y="561" width="211" height="256"/>
     <SubTexture name="price coin" x="1945" y="783" width="99" height="44"/>
     <SubTexture name="price longer" x="1962" y="314" width="63" height="44"/>
     <SubTexture name="price star" x="1945" y="735" width="99" height="44"/>
-    <SubTexture name="price xp" x="1565" y="1500" width="86" height="44"/>
-    <SubTexture name="progress bg" x="871" y="1500" width="95" height="88"/>
-    <SubTexture name="progress fore" x="786" y="1403" width="95" height="88"/>
+    <SubTexture name="price xp" x="1502" y="1403" width="86" height="44"/>
+    <SubTexture name="progress bg" x="1249" y="1240" width="95" height="88"/>
+    <SubTexture name="progress fore" x="1150" y="1403" width="95" height="88"/>
     <SubTexture name="public" x="1953" y="534" width="51" height="51"/>
-    <SubTexture name="recharge icon bar" x="1268" y="1340" width="45" height="44"/>
-    <SubTexture name="recharge icon" x="1268" y="1292" width="45" height="44"/>
+    <SubTexture name="recharge icon bar" x="1989" y="1649" width="45" height="44"/>
+    <SubTexture name="recharge icon" x="1989" y="1601" width="45" height="44"/>
     <SubTexture name="records window" x="806" y="407" width="582" height="423"/>
     <SubTexture name="records" x="1962" y="479" width="51" height="51"/>
     <SubTexture name="replay button" x="1953" y="642" width="50" height="48"/>
     <SubTexture name="respect bar line" x="1355" y="1034" width="90" height="16"/>
-    <SubTexture name="respect bar" x="259" y="894" width="281" height="58"/>
+    <SubTexture name="respect bar" x="113" y="1401" width="281" height="58"/>
     <SubTexture name="score cover" x="618" y="602" width="181" height="63"/>
     <SubTexture name="scroll actions" x="2033" y="207" width="7" height="64"/>
     <SubTexture name="scroll line actions" x="2031" y="275" width="3" height="366"/>
@@ -141,15 +141,15 @@
     <SubTexture name="share button" x="618" y="376" width="184" height="46"/>
     <SubTexture name="shop back" x="1355" y="1064" width="239" height="335"/>
     <SubTexture name="shop marker" x="1918" y="1017" width="127" height="70"/>
-    <SubTexture name="sofa" x="3" y="830" width="252" height="123"/>
+    <SubTexture name="sofa" x="260" y="875" width="252" height="123"/>
     <SubTexture name="sound" x="1562" y="978" width="39" height="39"/>
-    <SubTexture name="stars home" x="470" y="838" width="106" height="50"/>
+    <SubTexture name="stars home" x="3" y="1403" width="106" height="50"/>
     <SubTexture name="start button" x="1918" y="1335" width="113" height="113"/>
     <SubTexture name="take reward" x="1962" y="3" width="80" height="32"/>
     <SubTexture name="textureHP" x="2008" y="570" width="15" height="44"/>
     <SubTexture name="top cover" x="820" y="206" width="800" height="97"/>
-    <SubTexture name="unlock button" x="1136" y="1436" width="143" height="57"/>
+    <SubTexture name="unlock button" x="3" y="1153" width="143" height="57"/>
     <SubTexture name="wall" x="3" y="3" width="813" height="369"/>
-    <SubTexture name="wear button" x="1316" y="1403" width="143" height="57"/>
+    <SubTexture name="wear button" x="3" y="1092" width="143" height="57"/>
     <SubTexture name="write button" x="1918" y="1257" width="120" height="23"/>
 </TextureAtlas>
