@@ -142,7 +142,6 @@
         <key>fileList</key>
         <array>
             <filename>../../../../Android/Graphics/textureHP.png</filename>
-            <filename>../../img/BULLETSHOTGUN.png</filename>
             <filename>../../../../dedgame/shop/scroll.png</filename>
             <filename>../../../../dedgame/shop/shop back.png</filename>
             <filename>../../../../dedgame/shop/shop marker.png</filename>
@@ -292,6 +291,7 @@
             <filename>../../../../dedgame/shop/boosters/improve point on.png</filename>
             <filename>../../../../dedgame/everyday actions/take reward.png</filename>
             <filename>../../../../dedgame/records window/ava cover.png</filename>
+            <filename>../../../../dedgame/home screen/desc bg.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
