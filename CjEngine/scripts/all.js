@@ -6157,7 +6157,7 @@ CBoosterBox.prototype.getBooster = function()
     var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
         {name: "Double", cls: CDoubleBooster}];
 
-    //if (gameStage.tutorial)
+    if (gameStage.tutorial)
         boosters = [{name: "Tablets", cls: CTabletsBooster}];
     var boost = getRand(boosters);
 

@@ -6,6 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -121,8 +123,8 @@
       <file leaf-file-name="CBoosterBox.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBoosterBox.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44556677" vertical-offset="249" max-vertical-offset="2527">
-              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.27497193" vertical-offset="249" max-vertical-offset="2527">
+              <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -561,12 +563,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00565" summary="&#10;gf&#10;&#10;">
-      <created>1427642511049</created>
-      <option name="number" value="00565" />
-      <option name="project" value="LOCAL" />
-      <updated>1427642511049</updated>
-    </task>
     <task id="LOCAL-00566" summary="&#10;gf&#10;&#10;">
       <created>1427642668080</created>
       <option name="number" value="00566" />
@@ -855,7 +851,13 @@
       <option name="project" value="LOCAL" />
       <updated>1428308076530</updated>
     </task>
-    <option name="localTasksCounter" value="614" />
+    <task id="LOCAL-00614" summary="&#10;gf&#10;&#10;">
+      <created>1428308149422</created>
+      <option name="number" value="00614" />
+      <option name="project" value="LOCAL" />
+      <updated>1428308149422</updated>
+    </task>
+    <option name="localTasksCounter" value="615" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1332,8 +1334,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBoosterBox.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44556677" vertical-offset="249" max-vertical-offset="2527">
-          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.27497193" vertical-offset="249" max-vertical-offset="2527">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
           <folding />
         </state>
       </provider>
