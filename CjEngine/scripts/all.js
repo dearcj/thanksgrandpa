@@ -9699,14 +9699,11 @@ PlayerData.getVKfriends = function(playerItem)
             vkparams.friendsids.push(vkparams.friends[i].uid);
         }
 
-        console.log("FILTERING AZURE RECORDS WITH " + JSON.stringify(vkparams.friendsids));
-        console.log("TOTAL FILTERS: " + vkparams.friendsids.length.toString());
-        azureclient.invokeApi("get_scores", {
-            body: {filter: vkparams.friendsids},
+         azureclient.invokeApi("get_scores", {
+            body: {filter: vkparams.friendsids, take: 1000},
             method: "post"
         }).done(function (results) {
 
-            console.log("AZURE RECORDS: " + JSON.stringify(results.result));
             vkparams.friendsIngame = results.result;
             vkparams.friendsIngameIDs = [];
             if (!results.result) return;
