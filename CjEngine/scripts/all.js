@@ -9256,10 +9256,7 @@ PlayerData.prototype.loadData = function(cb)
        function (results) {
           PlayerData.inst.items_enabled = results;
 
-
           var defaultRifleID = "68AFAEDC-B3E0-401E-9E1A-E272084F2E11";
-
-
 
           var found = false;
           var eq = false;
@@ -9411,7 +9408,7 @@ PlayerData.getVKfriends = function(playerItem)
     }
     console.log("Gettin vk friends");
 
-    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 750, fields: "uid"}, function(data) {
+    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 500, fields: "uid"}, function(data) {
         if (!data.response || !data.response.length)
         {
             PlayerData.getVKfriends(playerItem);
@@ -9426,7 +9423,7 @@ PlayerData.getVKfriends = function(playerItem)
         {
             vkparams.friendsids.push(vkparams.friends[i].uid);
         }
-        console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
+     //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
 
         azureclient.invokeApi("get_scores", {
             body: {filter: vkparams.friendsids, take: 1000},
@@ -9443,6 +9440,7 @@ PlayerData.getVKfriends = function(playerItem)
 
            PlayerData.getVKuserData(playerItem);
         }, function(error) {
+            PlayerData.getVKuserData(playerItem);
         });
 
     });
@@ -10635,8 +10633,9 @@ function onAssetsLoaded() {
 
     PlayerData.inst.updateEnergy();
 
-    if (vkparams.registered)
-        SM.inst.openStage(window.comixStage); else
+    //if (vkparams.registered)
+    if (PlayerData.inst.playerItem.maxdistance == 0)
+    SM.inst.openStage(window.comixStage); else
         SM.inst.openStage(window.charStage);
 }
 
