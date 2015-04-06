@@ -1897,7 +1897,7 @@ CharStage.prototype.createFriendsPanel = function () {
                     VK.api("wall.post", {
                         owner_id: uapi,
                         message: uname + ", возвращайся в игру, дружище" + '\n' + "https://vk.com/app4654201",
-                        attachments: ["photo90523698_359515858", "https://vk.com/app4654201"]
+                        attachments: ["photo-90523698_359515858", "https://vk.com/app4654201"]
                     }, function (data) {
 
                     });
@@ -2550,20 +2550,25 @@ ShopStage.prototype.createStatsPanel = function (cb) {
                     setTimeout(function(){
                         dp.text = t;
                         CObj.getById("descbg").gfx.visible = true;
-                    }, 100);
+                    }, 40);
                 }
         }
 
         obj.gfx.mouseout = function (evt) {
 
+
+            var t = text;
+            setTimeout(function(){
                 var dp = CObj.getById("descpanel");
                 if (dp)
                 {
-                    setTimeout(function(){
-                        dp.text = " ";
-                        CObj.getById("descbg").gfx.visible = false;
-                    }, 0);
+
+                    dp.text = " ";
+                    CObj.getById("descbg").gfx.visible = false;
+
                 }
+            }, 40);
+
         }
     }
 
