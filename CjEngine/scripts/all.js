@@ -50,7 +50,7 @@ function superRand(l) {
     }
     return s / l;
 }
-function dateDiff(date, delayMin)
+function dateDiff(date, delayMin, hidehours)
 {
     var nd = new Date();
     var d = nd.getTime() - date.getTime();
@@ -68,8 +68,11 @@ function dateDiff(date, delayMin)
 
     var s = Math.floor(d % 60);
 
+    if (hidehours) str = ""; else
+    var str = (h < 10 ? "0" + h : h) + " : ";
+    str += (m < 10 ? "0" + m : m) + " : " + (s < 10 ? "0" + s : s);
 
-    return {d: d, m: m, h: h, s: s, timeString : (h < 10 ? "0" + h : h) + " : " + (m < 10 ? "0" + m : m) + " : " + (s < 10 ? "0" + s : s)};
+    return {d: d, m: m, h: h, s: s, timeString : str};
 }
 
 function crsp(texName)
@@ -2073,7 +2076,7 @@ ShopStage.prototype.updateEnergyText = function () {
     var tf = CObj.getById("tfdelay");
     if (tf && PlayerData.inst.playerItem.energy < 1) {
         if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
-            var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000);
+            var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000, true);
             tf.text = timeRes.timeString;
         } else {
             tf.text = "";
@@ -2801,7 +2804,7 @@ CharStage.prototype.onShowContinue = function () {
     CObj.getById("btnfight").click = function () {
         if (PlayerData.inst.playerItem.energy >= 1) {
             PlayerData.inst.playerItem.energy -= 1;
-
+            PlayerData.inst.savePlayerData();
             SM.inst.openStage(gameStage)
         } else {
             var en1 = CObj.getById("tfenergy");
@@ -8771,7 +8774,7 @@ PlayerData = function(pi)
    console.log("PlayerData init");
 
    this.maxEnergy = 10;
-   this.epm = 0.2;
+   this.epm = 0.1;
    this.delayEnergyMS = (1 / this.epm)*60000;
    this.xpLevel = [
       {crystals: 1, money: 25, xp: 0},
