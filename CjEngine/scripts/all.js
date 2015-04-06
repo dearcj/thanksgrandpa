@@ -9408,25 +9408,19 @@ PlayerData.getVKfriends = function(playerItem)
     }
     console.log("Gettin vk friends");
 
-    VK.api("friends.getAppUsers",{},function(data){
-        console.log("friends.get data" + JSON.stringify(data));
-    });
 
-    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 500, fields: "uid"}, function(data) {
+
+    VK.api('friends.getAppUsers',{}, function(data) {
         if (!data.response || !data.response.length)
         {
             PlayerData.getVKfriends(playerItem);
             return;
         }
+        console.log("friends.get data" + JSON.stringify(data.response));
 
         vkparams.friends = data.response;
-        vkparams.friendsids = [];
+        vkparams.friendsids = data.response;
         console.log("VK friends+");
-
-        for (var i = 0; i < vkparams.friends.length; ++i)
-        {
-            vkparams.friendsids.push(vkparams.friends[i].uid);
-        }
      //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
 
         azureclient.invokeApi("get_scores", {
