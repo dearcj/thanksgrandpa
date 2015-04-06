@@ -6694,8 +6694,7 @@ Boss2.prototype.fire = function()
     var moneyCrowProb = 0.4;
     this.patterns =
         [
-            {mons: "+........", diff: 1, prob: bonusProb}
-            /*{mons: "+.", diff: 1, prob: bonusProb},
+            {mons: "+.", diff: 1, prob: bonusProb},
             {mons: "s..000l00..s.", diff: 1, prob: 1},
             {mons: "f..000..c.", diff: 1, prob: 1},
             {mons: "f..f00szf..000", diff: 1, prob: 1},
@@ -6754,7 +6753,7 @@ Boss2.prototype.fire = function()
                 {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1},
                 {mons: ".c.chH..h..H..000000", diff: 10, prob: 1},
                 {mons: "ss...ssss..b.l..c", diff: 10, prob: 1},
-                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1}*/
+                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1}
 
         ];
     this.carClips = ["car","car1","car2"];
