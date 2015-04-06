@@ -7305,8 +7305,8 @@ CBoosterDrone.prototype.dealDamage = function()
         this.boosterBox.allowTrackSpeed = true;
         this.boosterBox.vx = 6.5;
         this.boosterBox.vy = -10;
-        this.boosterBox=  null;
         this.boosterBox.drone = null;
+        this.boosterBox = null;
         this.spawned = true;
         this.flyAway();
     }
