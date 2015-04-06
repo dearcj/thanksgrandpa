@@ -634,6 +634,16 @@ GameStage.prototype.process = function () {
     MM.inst.process();
 }
 
+GameStage.prototype.mobileTouchStart = function(e)
+{
+
+}
+
+GameStage.prototype.mobileTouchEnd = function(e)
+{
+
+}
+
 GameStage.prototype.onHide = function (newStage) {
 
     gameStage.menuBtn = null;
@@ -654,6 +664,15 @@ GameStage.prototype.onHide = function (newStage) {
 
     TweenMax.killAll(true, true, true);
     CustomStage.prototype.onHide.call(this, null);
+
+
+    if (MOBILE)
+    {
+        $(function() {
+            $(document).off('touchstart', gameStage.mobileTouchStart);
+            $(document).off('touchend', gameStage.mobileTouchEnd);
+        });
+    }
 
     $(function() {
         $(document).off('keydown', this.doKeyDown);
@@ -1308,7 +1327,8 @@ GameStage.prototype.onShowContinue = function () {
     if (MOBILE)
     {
         $(function() {
-            $(document).touchstart('keydown', func);
+            $(document).on('touchstart', gameStage.mobileTouchStart);
+            $(document).on('touchend', gameStage.mobileTouchEnd);
         });
     }
 /*
@@ -9408,21 +9428,26 @@ PlayerData.getVKfriends = function(playerItem)
     }
     console.log("Gettin vk friends");
 
-
+    //if (!PlayerData.vkFriendsLoad)
 
     VK.api('friends.getAppUsers',{}, function(data) {
+
+
         if (!data.response || !data.response.length)
         {
-            PlayerData.getVKfriends(playerItem);
-            return;
+
+            vkparams.friendsids = [];
+
+            //PlayerData.getVKfriends(playerItem);
+           // return;
+        } else {
+            console.log("friends.get data" + JSON.stringify(data.response));
+
+            vkparams.friends = data.response;
+            vkparams.friendsids = data.response;
+            console.log("VK friends+");
+            //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
         }
-        console.log("friends.get data" + JSON.stringify(data.response));
-
-        vkparams.friends = data.response;
-        vkparams.friendsids = data.response;
-        console.log("VK friends+");
-     //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
-
         azureclient.invokeApi("get_scores", {
             body: {filter: vkparams.friendsids, take: 1000},
             method: "post"
