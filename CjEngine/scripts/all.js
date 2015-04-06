@@ -1305,6 +1305,12 @@ GameStage.prototype.onShowContinue = function () {
         $(document).mouseup(gameStage.fup);
     });
 
+    if (MOBILE)
+    {
+        $(function() {
+            $(document).touchstart('keydown', func);
+        });
+    }
 /*
     document.addEventListener("keydown", gameStage.doKeyDown, false);
     document.addEventListener("keyup", gameStage.doKeyUp, false);
@@ -8648,8 +8654,8 @@ CMagnetBooster.prototype.process = function()
                 var l = Math.sqrt(dx*dx + dy*dy);
                 dx /= l;
                 dy /= l;
-                CCoin.coins[i].vx -= dx*1.5;
-                CCoin.coins[i].vy -= dy*1.5;
+                CCoin.coins[i].vx -= dx*1.;
+                CCoin.coins[i].vy -= dy*1.;
             }
         }
     }
@@ -9405,8 +9411,7 @@ PlayerData.getVKfriends = function(playerItem)
     }
     console.log("Gettin vk friends");
 
-    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000, fields: "domain"}, function(data) {
-        console.log("friends.get data" + JSON.stringify(data));
+    VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 1000}, function(data) {
         if (!data.response || !data.response.length)
         {
             PlayerData.getVKfriends(playerItem);
@@ -9421,8 +9426,9 @@ PlayerData.getVKfriends = function(playerItem)
         {
             vkparams.friendsids.push(vkparams.friends[i].uid);
         }
+        console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
 
-         azureclient.invokeApi("get_scores", {
+        azureclient.invokeApi("get_scores", {
             body: {filter: vkparams.friendsids, take: 1000},
             method: "post"
         }).done(function (results) {
@@ -10470,7 +10476,9 @@ function preloaderLoaded() {
     if (window.MOBILE) init_scale = 1.3;
     var fg = crsp("1st plan");
     fg.x = SCR_WIDTH / 2;
-    fg.y = SCR_HEIGHT / 2;
+    if (window.MOBILE)
+        fg.anchor.y = 0.44;
+        fg.y = SCR_HEIGHT / 2;
     fg.scale.x = init_scale;
     fg.scale.y = init_scale;
     var bg = crsp("background");
