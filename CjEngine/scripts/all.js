@@ -1835,8 +1835,6 @@ CharStage.prototype.onHide = function (newStage) {
         charStage.icons[i].texture.destroy(true);
     }
 
-
-
     charStage.eventsArray = [];
     for (var i = 0; i < CObj.objects.length; ++i) {
         if (CObj.checkType(CObj.objects[i], CEActionGUI)) {
@@ -8853,8 +8851,7 @@ CBooster.prototype.process = function()
     }
 
     var d = PauseTimer.getTimer() - this.startTime;
-    console.log(PauseTimer.totalPauseTime.toString());
-    if (this.startTime && d > this.duration*1000)
+     if (this.startTime && d > this.duration*1000)
     {
         this.onDeactivate();
     }
@@ -9702,11 +9699,13 @@ PlayerData.getVKfriends = function(playerItem)
             vkparams.friendsids.push(vkparams.friends[i].uid);
         }
 
+        console.log("FILTERING AZURE RECORDS WITH " + JSON.stringify(vkparams.friendsids));
         azureclient.invokeApi("get_scores", {
             body: {filter: vkparams.friendsids},
             method: "post"
         }).done(function (results) {
 
+            console.log("AZURE RECORDS: " + JSON.stringify(results.result));
             vkparams.friendsIngame = results.result;
             vkparams.friendsIngameIDs = [];
             if (!results.result) return;
