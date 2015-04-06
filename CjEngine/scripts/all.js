@@ -9700,6 +9700,7 @@ PlayerData.getVKfriends = function(playerItem)
         }
 
         console.log("FILTERING AZURE RECORDS WITH " + JSON.stringify(vkparams.friendsids));
+        console.log("TOTAL FILTERS: " + vkparams.friendsids.length.toString());
         azureclient.invokeApi("get_scores", {
             body: {filter: vkparams.friendsids},
             method: "post"
