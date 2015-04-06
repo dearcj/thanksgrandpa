@@ -9408,6 +9408,10 @@ PlayerData.getVKfriends = function(playerItem)
     }
     console.log("Gettin vk friends");
 
+    VK.api("friends.getAppUsers",{},function(data){
+        console.log("friends.get data" + JSON.stringify(data));
+    });
+
     VK.api('friends.get',{user_id:vkparams.viewerid, order: 'name', count: 500, fields: "uid"}, function(data) {
         if (!data.response || !data.response.length)
         {
