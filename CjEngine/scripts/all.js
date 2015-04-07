@@ -237,12 +237,14 @@ ZSound.Init = function(manifest) {
         return;
     }
     var audioPath = "res/snd/";
+    if (!MOBILE)
     createjs.Sound.alternateExtensions = ["mp3"];
     ZSound.loaded = 0;
     ZSound.total = manifest.length;
-    var handleLoad = function()
+    var handleLoad = function(x)
     {
         ZSound.loaded++;
+        console.log(x.src);
         console.log("ZSound loaded " + ZSound.loaded.toString() + " / " + manifest.length.toString());
         if ( ZSound.loaded == manifest.length) {
             if (ZSound.soundLoadedFunction) {
@@ -252,7 +254,7 @@ ZSound.Init = function(manifest) {
 
         }
     }
-    createjs.Sound.addEventListener("fileload", handleLoad); // call handleLoad when each sound loads
+    createjs.Sound.on("fileload", handleLoad); // call handleLoad when each sound loads
 
     createjs.Sound.registerSounds(manifest, audioPath);
 }
@@ -10359,6 +10361,10 @@ if (window.MOBILE) {
 window.SCR_SCALE = 1.0;
 window.FRAME_RATE = 60;
 
+function isSafari() {
+    return /^((?!chrome).)*safari/i.test(navigator.userAgent);
+}
+
 var loadingState = "prepreload";
 
 window.openSponsorWindow = null;
@@ -10633,16 +10639,18 @@ function assetsButSoundsLoaded() {
     ZSound.soundLoadedFunction = onAssetsLoaded;
 
     ZSound.Init([
+
+        {id: "jump2", src: "jump2.ogg"},
+        {id: "lazer", src: "Vystrel_lazer.ogg"},
+        {id: "mini", src: "Vystrel_minigan.ogg"},
+        {id: "ochered", src: "Vystrel_ochered.ogg"},
+        {id: "rifle", src: "rifle.ogg"},
+
         {id: "m_room", src: "PostRoom.ogg"},
         {id: "m_ded", src: "Dedushka.ogg"},
         {id: "coin", src: "Pickup_Coin66.ogg"},
             {id: "CLICK", src: "CLICK2.ogg"},
         {id: "jump", src: "jump.ogg"},
-        {id: "jump2", src: "jump2.ogg"},
-            {id: "lazer", src: "Vystrel_lazer.ogg"},
-        {id: "mini", src: "Vystrel_minigan.ogg"},
-        {id: "ochered", src: "Vystrel_ochered.ogg"},
-        {id: "rifle", src: "rifle.ogg"},
         {id: "levelup", src: "levelup.ogg"},
         {id: "buy", src: "buy.ogg"},
         {id: "losing", src: "losing.ogg"},
