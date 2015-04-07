@@ -243,9 +243,9 @@ ZSound.Init = function(manifest) {
     var handleLoad = function()
     {
         ZSound.loaded++;
+        console.log("ZSound loaded " + ZSound.loaded.toString() + " / " + manifest.length.toString());
         if ( ZSound.loaded == manifest.length) {
             if (ZSound.soundLoadedFunction) {
-                console.log("ZSound loaded " + ZSound.loaded.toString() + " / " + manifest.length.toString());
                 ZSound.loaded = true;
                 ZSound.soundLoadedFunction();
             }
@@ -349,7 +349,7 @@ LevelManager.removeLastLevel = function()
 
 LevelManager.loadLevel = function(str, onCompleteFunction, layer)
 {
-    var data = LevelManager.levels["levels/" + str + ".json"];
+    var data = LevelManager.levels[LevelManager.levFolder + str + ".json"];
     LevelManager.objs = CObj.DeserializeArray(data);
     LevelManager.layer = layer;
     LevelManager.objs.sort(function (a, b) {
@@ -636,12 +636,12 @@ GameStage.prototype.process = function () {
 
 GameStage.prototype.mobileTouchStart = function(e)
 {
-
+    console.log(JSON.stringify(e));
 }
 
 GameStage.prototype.mobileTouchEnd = function(e)
 {
-
+    console.log(JSON.stringify(e));
 }
 
 GameStage.prototype.onHide = function (newStage) {
@@ -2553,8 +2553,12 @@ CharStage.prototype.onHide = function (newStage) {
 
     charStage.icons = null;
     charStage.pl = null;
-    charStage.frp.parent.removeChild(charStage.frp);
-    charStage.frp = null;
+
+    if (charStage.frp)
+    {
+        rp(charStage.frp);
+        charStage.frp = null;
+    }
     CustomStage.prototype.onHide.call(this, null);
     CObj.destroyAll();
     CObj.processAll();
@@ -2787,21 +2791,22 @@ CharStage.prototype.onShowContinue = function () {
 
     //PlayerData.inst.addNotification("some msg", PlayerData.inst.playerItem.vkapi);
 
-    CObj.getById("frprev").click = function () {
-        charStage.skipFriends -= 5;
-        if (charStage.skipFriends < 0)
-            charStage.skipFriends = 0;
+    if (!MOBILE) {
+        CObj.getById("frprev").click = function () {
+            charStage.skipFriends -= 5;
+            if (charStage.skipFriends < 0)
+                charStage.skipFriends = 0;
 
-        charStage.frp.parent.removeChild(charStage.frp);
-        charStage.frp = charStage.createFriendsPanel();
-    };
+            charStage.frp.parent.removeChild(charStage.frp);
+            charStage.frp = charStage.createFriendsPanel();
+        };
 
-    CObj.getById("frnext").click = function () {
-        charStage.skipFriends += 5;
-        charStage.frp.parent.removeChild(charStage.frp);
-        charStage.frp = charStage.createFriendsPanel();
-    };
-
+        CObj.getById("frnext").click = function () {
+            charStage.skipFriends += 5;
+            charStage.frp.parent.removeChild(charStage.frp);
+            charStage.frp = charStage.createFriendsPanel();
+        };
+    }
 
 
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
@@ -2841,7 +2846,7 @@ CharStage.prototype.onShowContinue = function () {
         }
     };
 
-    var pl = new CPlayer(400, 430);
+    var pl = new CPlayer(SCR_WIDTH / 2, 430);
     charStage.pl = pl;
     pl.gfx.scale.x = 0.34;
     pl.gfx.scale.y = 0.34;
@@ -2923,6 +2928,7 @@ CharStage.prototype.onShowContinue = function () {
 
     shopStage.updateStatsPanel();
 
+    if (!MOBILE)
     charStage.frp = charStage.createFriendsPanel();
 }
 
@@ -5557,7 +5563,7 @@ LauncherBG.prototype.process = function (fake) {
 }
 
 LauncherBG.prototype.addLevel = function (levName, distance) {
-    var original = LevelManager.levels["levels/" + levName + ".json"];
+    var original = LevelManager.levels[LevelManager.levFolder + levName + ".json"];
     var dataClone = clone(original);
     var layers = [];
     var layerNum = 7;
@@ -9422,13 +9428,16 @@ PlayerData.getVKfriends = function(playerItem)
 {
     vkparams.first_name = "Аноним";
     vkparams.last_name = "";
-    if (vkparams.novk) {
-        new PlayerData(playerItem);
-        return;
-    }
     console.log("Gettin vk friends");
 
     //if (!PlayerData.vkFriendsLoad)
+    vkparams.friendsids = [];
+    vkparams.friendsIngameIDs = [];
+    if (!VK || vkparams.novk)
+    {
+        new PlayerData(playerItem);
+        return;
+    }
 
     VK.api('friends.getAppUsers',{}, function(data) {
 
@@ -9436,7 +9445,6 @@ PlayerData.getVKfriends = function(playerItem)
         if (!data.response || !data.response.length)
         {
 
-            vkparams.friendsids = [];
 
             //PlayerData.getVKfriends(playerItem);
            // return;
@@ -10344,8 +10352,7 @@ PauseTimer.resume = function()
 if (window.MOBILE) {
     window.SCR_WIDTH = 1024;
     window.SCR_HEIGHT = 576;
-} else
-{
+} else {
     window.SCR_WIDTH = 800;
     window.SCR_HEIGHT = 600;
 }
@@ -10368,11 +10375,15 @@ window.loader.onComplete = preloaderLoaded;
 window.loader.load();
 PlayerData.dbInit();
 
-$(document).bind('contextmenu', function (){return false;});
-window.apiid = 4654201;
-VK.init({apiId: window.apiid}, function () {
-}, function () {
+$(document).bind('contextmenu', function () {
+    return false;
 });
+window.apiid = 4654201;
+if (VK) {
+    VK.init({apiId: window.apiid}, function () {
+    }, function () {
+    });
+}
 
 function order(item) {
     var params = {
@@ -10383,8 +10394,7 @@ function order(item) {
     VK.callMethod('showOrderBox', params);
 }
 
-function orderSuccess(order_id)
-{
+function orderSuccess(order_id) {
     var amount = 0;
     if (window.currentOrder == "item1") {
         window.currentOrder == null;
@@ -10438,24 +10448,32 @@ VK.addCallback('onOrderCancel', function () {
     }
 });
 
-function showADs2()
-{
+function showADs2() {
     var user_id = vkparams.viewerid; //id пользователя
     var app_id = window.apiid; //id вашего приложения
-    var a=new VKAdman();
-    a.onNoAds(function(){console.log("Adman: No ads");});
-    a.onStarted(function(){console.log("Adman: Started");});
-    a.onCompleted(function(){console.log("Adman: Completed");});
-    a.onSkipped(function(){console.log("Adman: Skipped");});
-    a.onClicked(function(){console.log("Adman: Clicked");});
+    var a = new VKAdman();
+    a.onNoAds(function () {
+        console.log("Adman: No ads");
+    });
+    a.onStarted(function () {
+        console.log("Adman: Started");
+    });
+    a.onCompleted(function () {
+        console.log("Adman: Completed");
+    });
+    a.onSkipped(function () {
+        console.log("Adman: Skipped");
+    });
+    a.onClicked(function () {
+        console.log("Adman: Clicked");
+    });
 // a.setupPreroll(app_id, {preview: 8}); //для проверки корректности работы рекламы
     a.setupPreroll(app_id);
     admanStat(app_id, user_id);
 }
 
 
-function showADs()
-{
+function showADs() {
     var div = document.createElement('div');
     div.id = "vk_ads_55316";
     div.setAttribute("style", "position:absolute;left:0%;top:0%;");
@@ -10463,13 +10481,15 @@ function showADs()
 //Вставляем на страницу
     document.body.appendChild(div);
 
-    setTimeout(function() {
+    setTimeout(function () {
 
 
-        var adsParams = {"ad_unit_id":55316,"ad_unit_hash":"d4685898a5210c69b772bf2ab6fb0571"};
+        var adsParams = {"ad_unit_id": 55316, "ad_unit_hash": "d4685898a5210c69b772bf2ab6fb0571"};
+
         function vkAdsInit() {
             VK.Widgets.Ads('vk_ads_55316', {}, adsParams);
         }
+
         if (window.VK && VK.Widgets) {
             vkAdsInit();
         } else {
@@ -10499,12 +10519,12 @@ function preloaderLoaded() {
     fg.x = SCR_WIDTH / 2;
     if (window.MOBILE)
         fg.anchor.y = 0.44;
-        fg.y = SCR_HEIGHT / 2;
+    fg.y = SCR_HEIGHT / 2;
     fg.scale.x = init_scale;
     fg.scale.y = init_scale;
     var bg = crsp("background");
     bg.x = SCR_WIDTH / 2;
-    bg.y = SCR_HEIGHT/ 2;
+    bg.y = SCR_HEIGHT / 2;
     bg.scale.x = init_scale;
     bg.scale.y = init_scale;
     preloaderBg.addChild(bg);
@@ -10512,14 +10532,14 @@ function preloaderLoaded() {
 
     var bgBar = crsp("loading bar");
     bgBar.x = SCR_WIDTH / 2;
-    bgBar.y = SCR_HEIGHT/ 2 + 160;
+    bgBar.y = SCR_HEIGHT / 2 + 160;
     preloaderBg.addChild(bgBar);
     SM.inst.addLayersToStage();
     SM.inst.superStage.addChild(preloaderBg);
     var barLine = crsp("loading bar line");
     barLine.x = SCR_WIDTH / 2;
-    barLine.y = SCR_HEIGHT/ 2 + 160;
-    window.pbWidth  = barLine.width;
+    barLine.y = SCR_HEIGHT / 2 + 160;
+    window.pbWidth = barLine.width;
     barLine.mask = new PIXI.Graphics();
     barLine.mask.x = -pbWidth / 2;
     window.progressMask = barLine.mask;
@@ -10527,26 +10547,27 @@ function preloaderLoaded() {
     preloaderBg.addChild(barLine);
     SM.inst.addLayersToStage();
     SM.inst.superStage.addChild(loadingScreen);
-
+    if (MOBILE) LevelManager.levFolder = "levels_mobile/"; else
+        LevelManager.levFolder = "levels/";
 
     window.loadingState = "loading";
     window.assetsToLoader = [
-        "levels/energywindow.json",
-        "levels/settings.json",
-        "levels/levelpremium.json",
-        "levels/levelup.json",
-        "levels/levach.json",
-        "levels/levshop.json",
-        "levels/hud.json",
-        "levels/plantPart1.json",
-        "levels/plantPart2.json",
-        "levels/levelmenu.json",
-        "levels/levelwin.json",
-        "levels/levelgameover.json",
-        "levels/rotatescreen.json",
-        "levels/levchar.json",
-        "levels/levscore.json",
-        "levels/upperPanel.json",
+        LevelManager.levFolder + "energywindow.json",
+        LevelManager.levFolder + "settings.json",
+        LevelManager.levFolder + "levelpremium.json",
+        LevelManager.levFolder + "levelup.json",
+        LevelManager.levFolder + "levach.json",
+        LevelManager.levFolder + "levshop.json",
+        LevelManager.levFolder + "hud.json",
+        LevelManager.levFolder + "plantPart1.json",
+        LevelManager.levFolder + "plantPart2.json",
+        LevelManager.levFolder + "levelmenu.json",
+        LevelManager.levFolder + "levelwin.json",
+        LevelManager.levFolder + "levelgameover.json",
+        LevelManager.levFolder + "rotatescreen.json",
+        LevelManager.levFolder + "levchar.json",
+        LevelManager.levFolder + "levscore.json",
+        LevelManager.levFolder + "upperPanel.json",
         "imgtps/comix.json",
         "imgtps/bg.json",
         "imgtps/guiatlas.json",
@@ -10586,16 +10607,15 @@ function preloaderLoaded() {
 
     assetsButSoundsLoaded();
 
-    loader.onComplete = function()
-    {
+    loader.onComplete = function () {
         window.loaded = true;
+        console.log("gfx loaded");
         window.gfxLoaded = true;
         onAssetsLoaded();
     };
     loader.load();
     loader.onProgress = onAssetsProgress;
 }
-
 
 
 function onAssetsProgress(evt) {
@@ -10611,21 +10631,21 @@ function assetsButSoundsLoaded() {
     ZSound.soundLoadedFunction = onAssetsLoaded;
 
     ZSound.Init([
-        {id: "m_ded", src: "Dedushka.ogg"},
         {id: "m_room", src: "PostRoom.ogg"},
-        {id: "CLICK", src: "CLICK2.ogg"},
+        {id: "m_ded", src: "Dedushka.ogg"},
+        /*{id: "coin", src: "Pickup_Coin66.ogg"},
+            {id: "CLICK", src: "CLICK2.ogg"},
         {id: "jump", src: "jump.ogg"},
         {id: "jump2", src: "jump2.ogg"},
-        {id: "lazer", src: "Vystrel_lazer.ogg"},
+            {id: "lazer", src: "Vystrel_lazer.ogg"},
         {id: "mini", src: "Vystrel_minigan.ogg"},
-        {id: "ochered", src: "Vystrel_ochered.ogg"},
+        {id: "ochered", src: "Vystrel_ochered.ogg"},*/
         {id: "rifle", src: "rifle.ogg"},
         {id: "levelup", src: "levelup.ogg"},
         {id: "buy", src: "buy.ogg"},
         {id: "losing", src: "losing.ogg"},
         {id: "grenade", src: "grenade.ogg"},
-        {id: "vzbodritsa", src: "vzbodritsa.ogg"},
-        {id: "coin", src: "Pickup_Coin66.ogg"}
+        {id: "vzbodritsa", src: "vzbodritsa.ogg"}
     ]);
 }
 
@@ -10645,9 +10665,11 @@ function onAssetsLoaded() {
     x.destroy(true);
     window.progressMask = null;
     /*var tex = PIXI.Texture.fromImage("preloader.png");
-    tex.destroy(true);*/
-    window.addEventListener("orientationchange", orientchange, false);
-    orientchange();
+     tex.destroy(true);*/
+    if (!MOBILE) {
+        window.addEventListener("orientationchange", orientchange, false);
+        orientchange();
+    }
     setTimeout("window.scrollTo(0, 1)", 10);
 
     var div = document.getElementById('vk_ads_55316');
@@ -10658,7 +10680,7 @@ function onAssetsLoaded() {
 
     //if (vkparams.registered)
     if (PlayerData.inst.playerItem.maxdistance == 0)
-    SM.inst.openStage(window.comixStage); else
+        SM.inst.openStage(window.comixStage); else
         SM.inst.openStage(window.charStage);
 }
 
@@ -10758,16 +10780,15 @@ function animate() {
     requestAnimFrame(animate);
     window.time = (new Date()).getTime();
     if (loadingState == "prepreload") {
-    } else
-    if (loadingState == "loading") {
+    } else if (loadingState == "loading") {
         var p = (assetsLoaded / window.assetsToLoader.length);//*0.5 + 0.5*(ZSound.loaded / ZSound.total) + 0.07;
         if (p > 1) p = 1;
         /*  loadingScreen.beginFill(0xAA4444);
          loadingScreen.drawRect(SCR_WIDTH / 2 - 90, SCR_HEIGHT / 2 + 193, 240, 32);
          loadingScreen.endFill();*/
 
-        var px = Math.cos(window.time / 2000)*5;
-        var py = Math.sin(window.time / 1600)*5;
+        var px = Math.cos(window.time / 2000) * 5;
+        var py = Math.sin(window.time / 1600) * 5;
         window.preloaderBg.children[0].x = SCR_WIDTH / 2 + px;
         window.preloaderBg.children[0].y = SCR_HEIGHT / 2 - py / 3;
 
@@ -10778,8 +10799,7 @@ function animate() {
         window.progressMask.beginFill(0xFF7777);
         window.progressMask.drawRect(0, -16, (window.pbWidth + 1) * p, 32 - 4);
         window.progressMask.endFill();
-    } else
-    if (loadingState == "game") {
+    } else if (loadingState == "game") {
         if (SM.inst)
             SM.inst.process();
         var thisLoop = new Date;
