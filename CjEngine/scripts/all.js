@@ -3,6 +3,17 @@ var CG_MONSTER = 2;
 var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
+function noc(obj, f)
+{
+    obj.click = null;
+    obj.tap = null;
+}
+
+function onc(obj, f)
+{
+    obj.click = f;
+    obj.tap = f;
+}
 
 function extractName(obj)
 {
@@ -225,20 +236,24 @@ PIXI.HueTexure = function(texture, hue) {
 
 ZSound.Init = function(manifest) {
 
-    createjs.FlashAudioPlugin.swfPath = "res/snd/"; // Initialize the base path from this document to the Flash Plugin
+    var audioPath = "res/snd/";
+    if (!MOBILE) {
+        createjs.FlashAudioPlugin.swfPath = "res/snd/"; // Initialize the base path from this document to the Flash Plugin
 
-    createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
+        createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
 
+        createjs.Sound.alternateExtensions = ["mp3"];
 
+    }
     ZSound.available = createjs.Sound.initializeDefaultPlugins();
+
     if (!ZSound.available) {
         console.log("ZSound loaded without plugins [NO SOUND]");
         ZSound.loaded = true;
         return;
     }
-    var audioPath = "res/snd/";
-    if (!MOBILE)
-    createjs.Sound.alternateExtensions = ["mp3"];
+
+
     ZSound.loaded = 0;
     ZSound.total = manifest.length;
     var handleLoad = function(x)
@@ -818,9 +833,9 @@ GameStage.prototype.shAfterLife = function () {
     SM.inst.guiLayer.addChild(cb.gfx);
 
     removeafterlife = function () {
-        gainbgsprite.parent.removeChild(gainbgsprite);
-        bodrtext.parent.removeChild(bodrtext);
-        tf.parent.removeChild(tf);
+        rp(gainbgsprite);
+        rp(bodrtext);
+        rp(tf);
         cb.gfx.visible = false;
     }
 
@@ -844,7 +859,7 @@ GameStage.prototype.shAfterLife = function () {
 
     cb.gfx.interactive = true;
 
-    cb.gfx.click = function () {
+    onc(cb.gfx, function () {
         failtween.pause();
 
         var continueGame = function()
@@ -865,7 +880,6 @@ GameStage.prototype.shAfterLife = function () {
             new TweenMax(LauncherBG.inst, 2, {maxVelocity: LauncherBG.inst.preVelocity});
         }
 
-        //price = 1000;
         if (PlayerData.inst.playerItem.crystals > gameStage.revealPrice) {
             continueGame();
         } else
@@ -883,15 +897,15 @@ GameStage.prototype.shAfterLife = function () {
                {
                    continueGame();
                }
-            }
+            };
             var cancel = function()
             {
                 failtween.resume();
-            }
+            };
             VK.orderFail = cancel;
             VK.orderCancel = cancel;
           }
-    }
+    });
     var bsX = cb.gfx.scale.x;
     var bsY = cb.gfx.scale.y;
     cb.gfx.mouseover = function (evt) {
@@ -1275,6 +1289,7 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.updateItems();
 
     gameStage.barXP = CObj.getById("barxp");
+    gameStage.barXP.upperOfsY = 1;
 
     gameStage.player.updateAppearence(true, true, "idle");
 
@@ -2729,10 +2744,10 @@ CharStage.prototype.openEnergyWindow = function () {
             CObj.enableButtons(true);
 
             LevelManager.removeLastLevel();
-            charStage.disableWnd.click = null;
+            noc(charStage.disableWnd);
         };
 
-        charStage.disableWnd.click = function () {
+        onc(charStage.disableWnd ,function () {
             var obj = CObj.getById("energybg");
             var bnds = obj.gfx.getBounds();
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
@@ -2742,7 +2757,7 @@ CharStage.prototype.openEnergyWindow = function () {
             } else {
                 close();
             }
-        }
+        });
 
     }, SM.inst.fontLayer);
 }
@@ -2835,6 +2850,8 @@ CharStage.prototype.onShowContinue = function () {
         SM.inst.openStage(achStage)
     };
     CObj.getById("btnfight").click = function () {
+
+        //RE MOVE
         if (PlayerData.inst.playerItem.energy >= 1) {
             PlayerData.inst.playerItem.energy -= 1;
             PlayerData.inst.savePlayerData();
@@ -2871,11 +2888,12 @@ CharStage.prototype.onShowContinue = function () {
 
         charStage.closeEventsWnd = function () {
             rp(charStage.disableWnd);
+            noc(charStage.disableWnd);
             CObj.enableButtons(true);
             charStage.bar.gfx.visible = false;
         }
 
-        charStage.disableWnd.click = function () {
+        onc(charStage.disableWnd, function () {
             var obj = charStage.bar;
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                 window.mouseX < obj.x + obj.gfx.width / 2 &&
@@ -2884,7 +2902,7 @@ CharStage.prototype.onShowContinue = function () {
             } else {
                 charStage.closeEventsWnd();
             }
-        }
+        });
 
         charStage.bar.gfx.parent.removeChild(charStage.bar.gfx);
         SM.inst.fontLayer.addChild(charStage.bar.gfx);
@@ -4598,8 +4616,6 @@ function CHPBar(in_x,in_y,textname,in_body) {
     this.PublicFields += 'upperImage,space,tile, ';
     prop = 1;
 }
-
-
 CHPBar.prototype.destroy = function()
 {
     if (this.doRemove) return;
@@ -4616,7 +4632,7 @@ Object.defineProperty(CHPBar.prototype, 'prop', {
     },
     set: function (value) {
         if (this.doRemove) return;
-
+      //  value = 0;
 
         this._prop = value;
         if (this._prop < 0) this._prop = 0;
@@ -4624,8 +4640,8 @@ Object.defineProperty(CHPBar.prototype, 'prop', {
         if (this.tile)
         w = Math.round(w / this.upperImageClip.texture.width + 1) * this.upperImageClip.texture.width;
         this.upperImageClip.width = w;
-        this.upperImageClip.x = 0;
-        this.upperImageClip.y = 0;
+        this.upperImageClip.x = -1;
+        this.upperImageClip.y = this.upperOfsY;
         }
     }
 );
@@ -4637,7 +4653,7 @@ CHPBar.prototype.tweenProp = function(newProp)
 
 CHPBar.prototype.init = function()
 {
-
+    if (!this.upperOfsY) this.upperOfsY= 0;
     this.space = parseInt(this.space);
     if (!this.gfx) this.gfx = new PIXI.DisplayObjectContainer(); else
     {
@@ -4828,10 +4844,11 @@ CPlayer.prototype.collide = function (obj2)
     if (this.prekilled || this.doRemove) return;
     if (this.superMode && CObj.checkType(obj2, CMonster)) {
 
-        if (window.time - this.lastUseExpl > 500) {
+     /*   if (window.time - this.lastUseExpl > 500) {
             this.lastUseExpl = window.time;
             CGrenade.makeBoom((this.x + obj2.x) / 2, (this.y + obj2.y) / 2, 80, 300);
         }
+        */
     }
 }
 
@@ -5964,7 +5981,7 @@ CBoosterBox.prototype.getBooster = function()
     new TweenMax(b.gfx.scale, 0.3, {x: 0.6, y: 0.6, repeat: 2, yoyo: true});
 
     var px = 35 + 50*(CBooster.list.length - 1);
-    new TweenMax(b, 0.7, {delay: 0.8, x: px, y: 100});
+    new TweenMax(b, 0.7, {delay: 0.8, x: px, y: 130});
     var fnl = function(){b.onActivate();};
     if (replaceObj) fnl = function(){b.destroy();};
     new TweenMax(b.gfx.scale, 0.7, {delay: 0.8, x: 0.3, y: 0.3, onComplete: fnl});
@@ -7664,17 +7681,17 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
         new TweenMax(gf.scale, 0.4, {x: bsX, ease: Elastic.easeOut} );
     }
 
-    gf.click = function()
+    onc(gf, function()
     {
         if (edeventgui.ready && !pledevent.reward_ready)
         {
             edeventgui.startAction();
         }
-    }
+    });
 
     this.progressbg.interactive = true;
-    this.progressbg.click = this.onclick;
-    this.progressbg.tap = this.onclick;
+    onc(this.progressbg, this.onclick)
+
     if (this.eventpl.lastused == null)
     {
         this.pos = 1;
@@ -7881,6 +7898,7 @@ function CQueueGun(_id, _name, _desc,  __params,__gfx, _upgrades)
     this.queueLife = 0;
     this._sound = this.sound;
     this.sound = null;
+  //  this.magCapacity = 10;
     this.canFireQueue = true;
 }
 
@@ -7888,7 +7906,7 @@ CQueueGun.prototype.reload = function()
 {
     this.canFireQueue = false;
     CWeapon.prototype.reload.call(this);
-    this.queueLife = this.queue + 1;
+    this.queueLife = this.queue;
 }
 
 CQueueGun.prototype.process = function()
@@ -8465,7 +8483,7 @@ var w_ak74 = new CQueueGun(
         accRecoil: 0.12,
         recoil: 2.5, //recoil
         magcap: 50, //magcap
-        delay: 600, //delay
+        delay: 520, //delay
         damage: 55, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 2200},//__reloadTime,}
@@ -9220,7 +9238,7 @@ PlayerData.prototype.getEventById = function(id)
 
 PlayerData.prototype.loadData = function(cb)
 {
-  /*  if (checkDb)
+   /* if (checkDb)
     checkDb();*/
    this.loadCount = 0;
     console.log("PlayerData.loadData");
@@ -9586,7 +9604,7 @@ var dbobj =
                     {
                         desc: "Постирать мундир",
                         name: "event5",
-                        delay_min: 2,
+                        delay_min: 48*60,
                         xp_gain: 0,
                         money_gain: 0,
                         crystal_gain: 8,
@@ -10796,9 +10814,10 @@ function animate() {
         /*  loadingScreen.beginFill(0xAA4444);
          loadingScreen.drawRect(SCR_WIDTH / 2 - 90, SCR_HEIGHT / 2 + 193, 240, 32);
          loadingScreen.endFill();*/
-
-        var px = Math.cos(window.time / 2000) * 5;
-        var py = Math.sin(window.time / 1600) * 5;
+        if (!window.preloaderTime) window.preloaderTime = 0;
+        window.preloaderTime += 30;
+        var px = Math.cos(window.preloaderTime / 2000) * 5;
+        var py = Math.sin(window.preloaderTime / 1600) * 5;
         window.preloaderBg.children[0].x = SCR_WIDTH / 2 + px;
         window.preloaderBg.children[0].y = SCR_HEIGHT / 2 - py / 3;
 

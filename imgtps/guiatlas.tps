@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>json</string>
+        <string>sparrow</string>
         <key>textureFileName</key>
         <filename>guiatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>guiatlas.json</filename>
+        <filename>guiatlas.xml</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -292,6 +292,8 @@
             <filename>../../../../dedgame/everyday actions/take reward.png</filename>
             <filename>../../../../dedgame/records window/ava cover.png</filename>
             <filename>../../../../dedgame/home screen/desc bg.png</filename>
+            <filename>../../../../dedgame/fight screen/exp bar.jpg</filename>
+            <filename>../../../../dedgame/fight screen/exp bar circle.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
