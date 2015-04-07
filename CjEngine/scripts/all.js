@@ -10619,6 +10619,8 @@ function preloaderLoaded() {
 
 
 function onAssetsProgress(evt) {
+    console.log(window.assetsLoaded.toString() + " asset loaded");
+
     window.assetsLoaded++;
     if (evt.json) {
         if (evt.json.objects != undefined) {
@@ -10633,13 +10635,13 @@ function assetsButSoundsLoaded() {
     ZSound.Init([
         {id: "m_room", src: "PostRoom.ogg"},
         {id: "m_ded", src: "Dedushka.ogg"},
-        /*{id: "coin", src: "Pickup_Coin66.ogg"},
+        {id: "coin", src: "Pickup_Coin66.ogg"},
             {id: "CLICK", src: "CLICK2.ogg"},
         {id: "jump", src: "jump.ogg"},
         {id: "jump2", src: "jump2.ogg"},
             {id: "lazer", src: "Vystrel_lazer.ogg"},
         {id: "mini", src: "Vystrel_minigan.ogg"},
-        {id: "ochered", src: "Vystrel_ochered.ogg"},*/
+        {id: "ochered", src: "Vystrel_ochered.ogg"},
         {id: "rifle", src: "rifle.ogg"},
         {id: "levelup", src: "levelup.ogg"},
         {id: "buy", src: "buy.ogg"},
