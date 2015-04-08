@@ -6,6 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/levels/loading.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -51,8 +52,8 @@
       <file leaf-file-name="GameStage.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3651877" vertical-offset="15917" max-vertical-offset="19361">
-              <caret line="849" column="8" selection-start-line="849" selection-start-column="8" selection-end-line="849" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.13822526" vertical-offset="15917" max-vertical-offset="19361">
+              <caret line="842" column="75" selection-start-line="842" selection-start-column="75" selection-end-line="842" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -523,11 +524,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\levels_mobile" />
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\libs" />
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\res\snd" />
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts" />
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps" />
-      <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\CjEngine\scripts\Objects" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\res\snd" />
@@ -610,12 +611,6 @@
       <created>1417091906056</created>
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
-    </task>
-    <task id="LOCAL-00595" summary="&#10;gf&#10;&#10;">
-      <created>1427902439946</created>
-      <option name="number" value="00595" />
-      <option name="project" value="LOCAL" />
-      <updated>1427902439946</updated>
     </task>
     <task id="LOCAL-00596" summary="&#10;gf&#10;&#10;">
       <created>1427906163687</created>
@@ -905,7 +900,13 @@
       <option name="project" value="LOCAL" />
       <updated>1428508319440</updated>
     </task>
-    <option name="localTasksCounter" value="644" />
+    <task id="LOCAL-00644" summary="&#10;gf&#10;&#10;">
+      <created>1428508391858</created>
+      <option name="number" value="00644" />
+      <option name="project" value="LOCAL" />
+      <updated>1428508391858</updated>
+    </task>
+    <option name="localTasksCounter" value="645" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1481,8 +1482,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3651877" vertical-offset="15917" max-vertical-offset="19361">
-          <caret line="849" column="8" selection-start-line="849" selection-start-column="8" selection-end-line="849" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.13822526" vertical-offset="15917" max-vertical-offset="19361">
+          <caret line="842" column="75" selection-start-line="842" selection-start-column="75" selection-end-line="842" selection-end-column="75" />
           <folding />
         </state>
       </provider>
