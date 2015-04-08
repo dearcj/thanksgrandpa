@@ -1244,15 +1244,11 @@ GameStage.prototype.fup = function (md) {
         if (gameStage.player)
             gameStage.player.weapon.mouseUp();
     }
-    //    md.preventDefault();
-    //    window.focus();
 }
 
 
 //NO "THIS" IN CURRENT CONTEXT
 GameStage.prototype.onShowContinue = function () {
-
-
 
     gameStage.doProcess = true;
     gameStage.stepSize = gameStage.invFR;
@@ -7318,7 +7314,7 @@ Object.defineProperty(CScrollbar.prototype, 'pos', {
 
         var touchervalue = value;
 
-        this.toucher.y =this.toucher.height / 2 + (this.ph0 - this.toucher.height)*( touchervalue/(this.ph)) - this.ph0/2;// - this.ph0*(value/this.ph);
+        this.toucher.y = this.toucher.height / 2 + (this.ph0 - this.toucher.height)*( touchervalue/(this.ph)) - this.ph0/2;// - this.ph0*(value/this.ph);
        /* if (this.toucher.y < this.toucher.height / 2 - this.ph0/2)
             this.toucher.y = this.toucher.height / 2 - this.ph0/2;
 */
@@ -7371,6 +7367,19 @@ CScrollbar.prototype.destroy = function()
 }
 
 
+CScrollbar.prototype.updatePosFromEvent = function(y)
+{
+    var cy = y / SCR_SCALE;
+    var th = this.toucher.height;
+    var startBarLine =  th + this.y - (this.ph0 / 2);
+    cy -= startBarLine;
+    cy = cy / (this.ph0 - 2*th);//0..1
+  //  this.toucher.pressed = false;
+    this.pos =  cy*(this.ph);
+    this.toucher.pressed = true;
+}
+
+
 CScrollbar.prototype.touchStart = function(e)
 {
     console.log("debug");
@@ -7420,29 +7429,28 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
         obj.mover = false;
     }
 
-    this.gfx.touchmove =  function(e) {
-        console.log("ENIS");
-        if (!obj.prevSwipeX) obj.prevSwipeX = e.global.x;
-        if (!obj.prevSwipeY) obj.prevSwipeY = e.global.y;
-        var d = (e.global.y - obj.prevSwipeY);
-        console.log(d);
-        obj.pos += d;
-        obj.prevSwipeX = e.global.x;
-        obj.prevSwipeY = e.global.y;
-    }
+    if (MOBILE) {
+        this.gfx.touchmove = function (e) {
+            console.log("ENIS");
+            if (!obj.prevSwipeX) obj.prevSwipeX = e.global.x;
+            if (!obj.prevSwipeY) obj.prevSwipeY = e.global.y;
+            var d = (e.global.y - obj.prevSwipeY);
+            //console.log(d);
+            obj.pos -= d;
+            obj.prevSwipeX = e.global.x;
+            obj.prevSwipeY = e.global.y;
+        }
 
-    this.gfx.touchstart = function(e)
-    {
-        console.log("start");
-    }
+        this.gfx.touchstart = function (e) {
+            console.log("start");
+        }
 
-    this.gfx.touchend = function(e)
-    {
-        console.log("NIS");
-        obj.prevSwipeX = null;
-        obj.prevSwipeY = null;
+        this.gfx.touchend = function (e) {
+            console.log("NIS");
+            obj.prevSwipeX = null;
+            obj.prevSwipeY = null;
+        }
     }
-
     this.bg = new PIXI.Sprite(PIXI.Texture.fromFrame(bgpanel));
     this.bg.width = this.pw + dw;
     this.bg.height = this.ph + dw;
@@ -7464,23 +7472,29 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
       //  this.gfx.touchstart = this.touchStart;
 
 
+    var tchr = this.toucher;
 
     this.toucher.mousedown = function(a)
     {
-        this.pressed = true;
+    //    a.preventDefault();
+        console.log("TOUCHER DOWN");
+        tchr.pressed = true;
     };
 
-    this.toucher.mouseup = function(a)
+    this.toucher.mouseupoutside = this.toucher.mouseup = function(a)
     {
-        this.pressed = false;
+        console.log("MOUSE UP");
+        //a.preventDefault();
+        tchr.pressed = false;
     };
-    this.toucher.mouseupoutside = this.toucher.mouseup;
+
 
     this.toucher.mousemove = function(a)
     {
-        if (this.pressed && this.scrollbar)
+    //    a.preventDefault();
+        if (tchr.pressed && this.scrollbar)
         {
-            this.scrollbar.pos = a.global.y / SCR_SCALE - this.scrollbar.y + this.scrollbar.ph / 2;
+            this.scrollbar.updatePosFromEvent(a.global.y);
         }
     }
 
@@ -7492,10 +7506,15 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
     this.bar.x = this.pw / 2 - scrWidth / 2;
     this.bar.interactive = true;
     this.bar.scrollbar = this;
+
+    this.bar.mouseup = this.bar.mouseupoutside = this.toucher.mouseup;
+
     this.bar.mousedown = function(a)
     {
-        this.scrollbar.pos = a.global.y / SCR_SCALE - this.scrollbar.y + this.scrollbar.ph / 2;
-        this.scrollbar.toucher.pressed = true;
+        console.log("MOUSE DOWN");
+        var t = this.scrollbar;
+        setTimeout(
+        function(){t.updatePosFromEvent(a.global.y);}, 20);
     }
 
     this.container = new PIXI.DisplayObjectContainer();
