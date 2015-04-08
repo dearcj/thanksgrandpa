@@ -365,7 +365,18 @@ LevelManager.removeLastLevel = function()
     objs = null;
 }
 
-LevelManager.loadLevel = function(str, onCompleteFunction, layer)
+
+LevelManager.destroyLevel = function(str) {
+    for (var i = 0; i < CObj.objects.length; ++i)
+    {
+        if (CObj.objects[i].levelName == str)
+        {
+            CObj.objects[i].destroy();
+        }
+    }
+    CObj.processAll();
+}
+LevelManager.loadLevel = function(str, onCompleteFunction, layer, offsX, offsY)
 {
     var data = LevelManager.levels[LevelManager.levFolder + str + ".json"];
     LevelManager.objs = CObj.DeserializeArray(data);
@@ -380,8 +391,12 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer)
 
     var atlases = [];
 
+
     for (var i = 0; i < LevelManager.objs.length; ++i)
     {
+        LevelManager.objs[i].levelName = str;
+        if (offsX)    LevelManager.objs[i].x += offsX;
+        if (offsY)    LevelManager.objs[i].y += offsY;
         if ((LevelManager.objs[i].sAtlasName != undefined) && (LevelManager.objs[i].sAtlasName!="")&& atlases.indexOf(LevelManager.objs[i].sAtlasName) < 0)
         {
             atlases.push(LevelManager.objs[i].sAtlasName);
@@ -1166,11 +1181,18 @@ GameStage.prototype.showTutorial = function () {
 
 
 GameStage.prototype.onShow = function () {
+    if (MOBILE) {
+        LevelManager.loadLevel("loading", function()
+        {
+            renderer.render(stage);
+        }, SM.inst.superStage);
+    }
+
     ZSound.PlayMusic("m_ded");
 
     PlayerData.inst.score = 0;
 
-    if (vkparams.registered) gameStage.tutorial = true; else gameStage.tutorial = false;
+    if (vkparams.registered || PlayerData.inst.playerItem.maxdistance == 0 || PlayerData.inst.playerItem.maxdistance == null) gameStage.tutorial = true; else gameStage.tutorial = false;
 
     CustomStage.prototype.onShow.call(this);
     gameStage.killing = false;
@@ -1229,6 +1251,9 @@ GameStage.prototype.fup = function (md) {
 
 //NO "THIS" IN CURRENT CONTEXT
 GameStage.prototype.onShowContinue = function () {
+
+
+
     gameStage.doProcess = true;
     gameStage.stepSize = gameStage.invFR;
     gameStage.doPhys = true;
@@ -1275,7 +1300,7 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.reloadBar.pos = 0.5;
     gameStage.reloadBar.gfx.visible = false;
     SM.inst.guiLayer.addChild(gameStage.reloadBar.gfx);
-    gameStage.player = new CPlayer(140, SCR_HEIGHT - 160);
+    gameStage.player = new CPlayer(140, 440);
     gameStage.player.gfx.pivot.y = -190;
     gameStage.player.gfx.scale.x = 0.22;
     gameStage.player.gfx.scale.y = 0.22;
@@ -1327,39 +1352,74 @@ GameStage.prototype.onShowContinue = function () {
         gameStage.fadeScreen();
         gameStage.visibleAllText(false);
         TweenMax.killTweensOf(gameStage.menuBtn, true);
-        LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.fontLayer);
+        LevelManager.loadLevel("levelmenu", gameStage.makePause, SM.inst.fontLayer, LevelManager.levelLoadOffsetX);
     }
 
 
-
-
-    var func =  gameStage.doKeyDown;
-    var func2 = gameStage.doKeyUp;
     $(function() {
-        $(document).on('keydown', func);
-        $(document).on('keyup', func2);
+        $(document).on('keydown', gameStage.doKeyDown);
+        $(document).on('keyup', gameStage.doKeyUp);
         $(document).mousedown(gameStage.fdown);
         $(document).mouseup(gameStage.fup);
     });
 
     if (MOBILE)
     {
-        $(function() {
-            $(document).on('touchstart', gameStage.mobileTouchStart);
-            $(document).on('touchend', gameStage.mobileTouchEnd);
-        });
+        SM.inst.superStage.interactive = true;
+        SM.inst.superStage.touchstart = function(data)
+        {
+            console.log("TSTART");
+            data.originalEvent.preventDefault();
+            // store a refference to the data
+            // The reason for this is because of multitouch
+            // we want to track the movement of this particular touch
+            if (data.global.x / SCR_SCALE > SCR_WIDTH / 2)
+            {
+                window.mouseX = data.global.x/SCR_SCALE;
+                window.mouseY = data.global.y/SCR_SCALE;
+                gameStage.fireTouch = data;
+                gameStage.fireState = true;
+            } else
+            {
+                gameStage.player.onJump();
+            }
+        };
+
+        /*SM.inst.superStage.tap = function(e)
+        {
+            if (e.global.x / SCR_SCALE < SCR_WIDTH / 2)
+            {
+                gameStage.player.onJump();
+            }
+        }
+        */
+        // set the callbacks for when the mouse or a touch moves
+        SM.inst.superStage.touchmove = function(data) {
+         //   console.log("TMOVE");
+            data.originalEvent.preventDefault();
+            // need to get parent coords..
+                if (data == gameStage.fireTouch)
+                {
+                //    console.log("MOVE MOUSE UPDATE");
+                    window.mouseX = data.global.x/SCR_SCALE;
+                    window.mouseY = data.global.y/SCR_SCALE;
+                }
+        }
+
+        // set the events for when the mouse is released or a touch is released
+        SM.inst.superStage.touchend = SM.inst.superStage.touchendoutside = function(data)
+        {
+            console.log("TEND");
+            if (data == gameStage.fireTouch)
+            {
+                gameStage.fireState = false;
+                gameStage.fireTouch = null;
+            }
+        };
+
+
     }
-/*
-    document.addEventListener("keydown", gameStage.doKeyDown, false);
-    document.addEventListener("keyup", gameStage.doKeyUp, false);
-    document.addEventListener("mousedown", fdown, true);
-    document.addEventListener("mouseup", fup, true);
-*/
- /*   stage.touchstart = fdown;
-    stage.touchend = fup;
-    stage.mousedown = fdown;
-    stage.mouseup = fup;
-*/
+
     gameStage.updateXP();
     LauncherBG.inst.maxVelocity = 0.1;
 
@@ -1369,6 +1429,9 @@ GameStage.prototype.onShowContinue = function () {
     {
         PlayerData.inst.progressAch("Gold medal 1", 1, false);
     }
+
+    if (MOBILE)
+    LevelManager.destroyLevel("loading");
 }
 
 GameStage.prototype.makePause = function () {
@@ -2127,7 +2190,8 @@ ShopStage.prototype.updateEnergyText = function () {
     var tf = CObj.getById("tfdelay");
     if (tf && PlayerData.inst.playerItem.energy < 1) {
         if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
-            var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, PlayerData.inst.delayEnergyMS / 60000, true);
+            var mins = (1 - PlayerData.inst.playerItem.energy)*PlayerData.inst.delayEnergyMS / 60000;
+            var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, mins, true);
             tf.text = timeRes.timeString;
         } else {
             tf.text = "";
@@ -2769,7 +2833,7 @@ CharStage.prototype.openEnergyWindow = function () {
             }
         });
 
-    }, SM.inst.fontLayer);
+    }, SM.inst.fontLayer, LevelManager.levelLoadOffsetX);
 }
 
 CharStage.prototype.updateMusicButton = function (btn) {
@@ -2819,6 +2883,8 @@ CharStage.prototype.onShowContinue = function () {
     //PlayerData.inst.addNotification("some msg", PlayerData.inst.playerItem.vkapi);
 
     if (!MOBILE) {
+
+
         CObj.getById("frprev").click = function () {
             charStage.skipFriends -= 5;
             if (charStage.skipFriends < 0)
@@ -2835,7 +2901,11 @@ CharStage.prototype.onShowContinue = function () {
         };
     }
 
-
+    if (MOBILE)
+    {
+        CObj.getById("bshop").deltaHoverY = 46;
+        CObj.getById("bsofa").deltaHoverY = 30;
+    }
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
     CObj.getById("bbuy2").click = charStage.openPremiumWindow;
 
@@ -4087,17 +4157,18 @@ CButton.prototype.updateGraphics=function()
     if (this.gfx && this.textField) {
             var ddx = 0;
             var ddy = 0;
-            if (this.hover)
-            {
+
                 if (this.deltaHoverY) {
 
                     ddy = this.deltaHoverY;
                 } else {
-                    if (this.y > SCR_HEIGHT - 100) {
-                        ddy = -50;
-                    } else ddy = 50;
+                    if (this.hover)
+                    {
+                        if (this.y > SCR_HEIGHT - 100) {
+                            ddy = -50;
+                       } else ddy = 50;
+                    }
                 }
-            }
         if (!this.addToSameLayer)
         {
             this.textField.y = this.gfx.y - this.textField.height * 0.7 + ddy;// + this.textField.height / 4;// - this.gfx.height * 0.25;
@@ -5193,24 +5264,23 @@ CPlayer.prototype.dealDamage = function(dmg)
     if (this.invulnerable > 0) return;
     this.revealTime = window.time;
 
-    for (var i = 0; i < this.gfx.skeleton.slots.length; ++i)
-    {
-        this.gfx.skeleton.slots[i].r = 1;
-        this.gfx.skeleton.slots[i].g = 0;
-        this.gfx.skeleton.slots[i].b = 0;
-    }
-
-    var f = this.gfx;
-    TweenMax.delayedCall(0.2, function ()
-    {
-        for (var i = 0; i < f.skeleton.slots.length; ++i)
-        {
-            f.skeleton.slots[i].r = 1;
-            f.skeleton.slots[i].g = 1;
-            f.skeleton.slots[i].b = 1;
+    if (!MOBILE) {
+        for (var i = 0; i < this.gfx.skeleton.slots.length; ++i) {
+            this.gfx.skeleton.slots[i].r = 1;
+            this.gfx.skeleton.slots[i].g = 0;
+            this.gfx.skeleton.slots[i].b = 0;
         }
 
-    });
+        var f = this.gfx;
+        TweenMax.delayedCall(0.2, function () {
+            for (var i = 0; i < f.skeleton.slots.length; ++i) {
+                f.skeleton.slots[i].r = 1;
+                f.skeleton.slots[i].g = 1;
+                f.skeleton.slots[i].b = 1;
+            }
+
+        });
+    }
 
     this.gfx.skeleton.setAttachment("head", "head4");
     TweenMax.delayedCall(0.7, function(){
@@ -5464,7 +5534,8 @@ LauncherBG.prototype.destroy = function () {
 LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
     var cobj = CObj.DeserializeCObj(obj);
     CObj.AssignTexturesToObjects([cobj], SM.inst.bg);
-    var g = cobj.gfx;
+
+        var g = cobj.gfx;
     if (g && g.parent) g.parent.removeChild(g);
     cobj.gfx = null;
     cobj.destroy();
@@ -5489,7 +5560,12 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
     } else
         layer.rightBound += obj.baseDim.x * obj.scaleX;
 
-   // if (dist)
+    if (cobj.id == "skybg") {
+        g.width = SCR_WIDTH;
+        g.position.x = SCR_WIDTH / 2;
+    }
+
+    // if (dist)
    // console.log("SPAWNED OBJ AT " + g.position.x + " AT DISTANCE " + dist.toString());
 }
 
@@ -7697,8 +7773,8 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     gainbgsprite.y = 12 - 14;
     this.gfx.addChild(gainbgsprite);
 
-    this.rewText = CTextField.createTextField({tint: "0x333333", text: "Награда", fontSize: 18, align: "center"});
-    this.rewText.x = 50 + d;
+    this.rewText = CTextField.createTextField({tint: "0x333333", text: "Награда", fontSize: 20, align: "center"});
+    this.rewText.x = 35 + d;
     this.rewText.y = -12;
     this.gfx.addChild(this.rewText);
 
@@ -7707,9 +7783,9 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     this.timeleft.y = 27;
     this.gfx.addChild(this.timeleft);
 
-    var tf = CTextField.createTextField({tint: "0x333333", text: gain.toString(), fontSize: 16, align: "center"});
+    var tf = CTextField.createTextField({tint: "0x333333", text: gain.toString(), fontSize: 20, align: "center"});
     tf.x = 170 + d;
-    tf.y = 3 -14;
+    tf.y = 3 -16;
     this.gfx.addChild(tf);
 
     var edeventgui = this;
@@ -8914,12 +8990,13 @@ PlayerData = function(pi)
    this.score = 0;
    PlayerData.inst = this;
    this.loadData(this.loadEnd);
+
+    window.onbeforeunload = function(e)
+    {
+        console.log("UNLOAD");
+        PlayerData.inst.updateEnergy();
+    }
 }
-
-
-
-
-
 
 PlayerData.prototype.addNotification = function(message, vkapi)
 {
@@ -9238,8 +9315,7 @@ PlayerData.prototype.updateEnergy = function()
       shopStage.updateStatsPanel();
 
    }
-
-   var t = this;
+    var t = this;
    setTimeout(function(){t.updateEnergy();}, this.delayEnergyMS);
 }
 
@@ -10419,6 +10495,9 @@ PauseTimer.resume = function()
     TweenMax.resumeAll();
     PauseTimer.paused = false;
 };
+window.initialWidth = 800;
+window.initialHeight = 600;
+
 if (window.MOBILE) {
     window.SCR_WIDTH = 1024;
     window.SCR_HEIGHT = 576;
@@ -10426,6 +10505,9 @@ if (window.MOBILE) {
     window.SCR_WIDTH = 800;
     window.SCR_HEIGHT = 600;
 }
+LevelManager.levelLoadOffsetX = (window.SCR_WIDTH - window.initialWidth) / 2;
+LevelManager.levelLoadOffsetY = (window.SCR_HEIGHT - window.initialHeight) / 2;
+
 window.SCR_SCALE = 1.0;
 window.FRAME_RATE = 60;
 
@@ -10642,6 +10724,7 @@ function preloaderLoaded() {
         LevelManager.levFolder + "levchar.json",
         LevelManager.levFolder + "levscore.json",
         LevelManager.levFolder + "upperPanel.json",
+        LevelManager.levFolder + "loading.json",
         "imgtps/comix.json",
         "imgtps/bg.json",
         "imgtps/guiatlas.json",
