@@ -237,6 +237,7 @@ PIXI.HueTexure = function(texture, hue) {
 ZSound.Init = function(manifest) {
 
     var audioPath = "res/snd/";
+
     if (!MOBILE) {
         createjs.FlashAudioPlugin.swfPath = "res/snd/"; // Initialize the base path from this document to the Flash Plugin
 
@@ -247,7 +248,7 @@ ZSound.Init = function(manifest) {
     }
     ZSound.available = createjs.Sound.initializeDefaultPlugins();
 
-    if (!ZSound.available) {
+    if (!ZSound.available || MOBILE) {
         console.log("ZSound loaded without plugins [NO SOUND]");
         ZSound.loaded = true;
         return;
@@ -1574,6 +1575,7 @@ AchStage.prototype.updateAchievements = function()
 {
     var numColumns = 4;
 
+    var deltaW = SCR_WIDTH / (numColumns * 2);
 
     for (var i = 0; i < PlayerData.inst.achs_progress.length;++i)
     {
@@ -1593,7 +1595,7 @@ AchStage.prototype.updateAchievements = function()
         achObject = crsp(ach.gfx);
 
         //    achObject.tint = 0x332299;
-        achObject.x = 95 + (i % numColumns)*200;
+        achObject.x = deltaW + (i) * 2 * deltaW;
         achObject.y = 120+Math.floor(i / numColumns)*220;
         achObject.width = 90;
         achObject.scale.y = achObject.scale.x;
@@ -1625,7 +1627,7 @@ AchStage.prototype.onShowContinue = function()
         SM.inst.openStage(charStage);
     };
 
-    achStage.bar = new CScrollbar(400,338, "", SCR_WIDTH, 524, "ordena background 1 px.png");
+    achStage.bar = new CScrollbar(SCR_WIDTH / 2,338, "", SCR_WIDTH, 524, "ordena background 1 px.png");
     achStage.bar.gfx.parent.removeChild(achStage.bar.gfx);
     SM.inst.bg.addChild(achStage.bar.gfx);
     achStage.updateAchievements();
@@ -2044,7 +2046,9 @@ ShopStage.prototype.updateStatsPanel = function () {
 
 ShopStage.prototype.onShowContinue = function () {
     CustomStage.prototype.onShow.call(this);
-    CObj.getById("photo").click = function () {
+
+    var photoBtn = CObj.getById("photo");
+    if (photoBtn) photoBtn.click = function () {
         if (vkparams.novk) return;
         CObj.enableButtons(false);
         shopStage.transScreen = SM.inst.addDisableWindow("ФОТОГРАФИРУЕМ... ОЖИДАЙТЕ");
@@ -2056,7 +2060,8 @@ ShopStage.prototype.onShowContinue = function () {
         }
         uploadPhoto(vkparams.viewerid, false, removeTint);
     }
-    CObj.getById("ava").click = function () {
+    var avaBtn = CObj.getById("ava");
+    if (avaBtn) avaBtn.click = function () {
         if (vkparams.novk) return;
         CObj.enableButtons(false);
         shopStage.transScreen = SM.inst.addDisableWindow("ФОТОГРАФИРУЕМ... ОЖИДАЙТЕ");
@@ -2069,7 +2074,8 @@ ShopStage.prototype.onShowContinue = function () {
         uploadPhoto(vkparams.viewerid, true, removeTint);
     }
 
-    shopStage.bar = new CScrollbar(610, 335, "", 380, 524);
+    var w = SCR_WIDTH / 2;
+    shopStage.bar = new CScrollbar(SCR_WIDTH / 2 + w / 2, 335, "", w, 524);
     shopStage.bar.gfx.parent.removeChild(shopStage.bar.gfx);
     SM.inst.ol.addChildAt(shopStage.bar.gfx, 1);
     shopStage.updateStatsPanel();
@@ -2094,6 +2100,8 @@ ShopStage.prototype.onShowContinue = function () {
 
     shopStage.updateBar("bstuff", tBoost);
 
+    var plPos = CObj.getById("plpos");
+    if (plPos) pl = new CPlayer(plPos.x, plPos.y); else
     var pl = new CPlayer(180, 400);
     shopStage.pl = pl;
     shopStage.pl.updateAppearence(true, false, "breath", null, null);
@@ -2747,9 +2755,11 @@ CharStage.prototype.openEnergyWindow = function () {
             noc(charStage.disableWnd);
         };
 
-        onc(charStage.disableWnd ,function () {
+        onc(charStage.disableWnd ,function (e) {
             var obj = CObj.getById("energybg");
             var bnds = obj.gfx.getBounds();
+            window.mouseX = e.global.x / SCR_SCALE;
+            window.mouseY = e.global.y / SCR_SCALE;
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                 window.mouseX < obj.x + obj.gfx.width / 2 &&
                 window.mouseY > obj.y - obj.gfx.height / 2 &&
@@ -2893,8 +2903,10 @@ CharStage.prototype.onShowContinue = function () {
             charStage.bar.gfx.visible = false;
         }
 
-        onc(charStage.disableWnd, function () {
+        onc(charStage.disableWnd, function (e) {
             var obj = charStage.bar;
+            window.mouseX = e.global.x/ SCR_SCALE;
+            window.mouseY = e.global.y/ SCR_SCALE;
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                 window.mouseX < obj.x + obj.gfx.width / 2 &&
                 window.mouseY > obj.y - obj.gfx.height / 2 &&
@@ -7264,6 +7276,9 @@ CScrollbar.prototype.clear = function()
 
 CScrollbar.prototype.destroy = function()
 {
+    this.gfx.touchstart= null;
+    this.gfx.touchend = null;
+    this.gfx.parentObj = null;
     this.toucher.mousedown = null;
     this.toucher.mouseup = null;
     this.toucher.mousemove = null;
@@ -7277,6 +7292,12 @@ CScrollbar.prototype.destroy = function()
     this.sbMask = null;
 
     CObj.prototype.destroy.call(this);
+}
+
+
+CScrollbar.prototype.touchStart = function(e)
+{
+    console.log("debug");
 }
 
 
@@ -7323,12 +7344,36 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
         obj.mover = false;
     }
 
+    this.gfx.touchmove =  function(e) {
+        console.log("ENIS");
+        if (!obj.prevSwipeX) obj.prevSwipeX = e.global.x;
+        if (!obj.prevSwipeY) obj.prevSwipeY = e.global.y;
+        var d = (e.global.y - obj.prevSwipeY);
+        console.log(d);
+        obj.pos += d;
+        obj.prevSwipeX = e.global.x;
+        obj.prevSwipeY = e.global.y;
+    }
+
+    this.gfx.touchstart = function(e)
+    {
+        console.log("start");
+    }
+
+    this.gfx.touchend = function(e)
+    {
+        console.log("NIS");
+        obj.prevSwipeX = null;
+        obj.prevSwipeY = null;
+    }
+
     this.bg = new PIXI.Sprite(PIXI.Texture.fromFrame(bgpanel));
     this.bg.width = this.pw + dw;
     this.bg.height = this.ph + dw;
     this.bg.anchor.x = 0.5;
     this.bg.anchor.y = 0.5;
     this.gfx.addChild(this.bg);
+    this.gfx.parentObj = this;
     this.updateGraphics();
     this.toucher = new PIXI.Sprite(PIXI.Texture.fromFrame(sbToucher));
     this.toucher.width = scrWidth;
@@ -7340,15 +7385,19 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
     this.toucher.scrollbar = this;
 
 
+      //  this.gfx.touchstart = this.touchStart;
+
+
+
     this.toucher.mousedown = function(a)
     {
         this.pressed = true;
-    }
+    };
 
     this.toucher.mouseup = function(a)
     {
         this.pressed = false;
-    }
+    };
     this.toucher.mouseupoutside = this.toucher.mouseup;
 
     this.toucher.mousemove = function(a)
@@ -7569,7 +7618,7 @@ CEActionGUI.prototype.endAction = function()
 
 
 CEActionGUI.prototype.addRewardButton = function() {
-    this.btnReward = new CButton(268, -3, "take reward");
+    this.btnReward = new CButton(0, -3, "take reward");
     this.btnReward.fontSize = 17;
     this.btnReward.gfx.scale.x = 1.1;
     this.btnReward.gfx.scale.y = 1.1;
@@ -7640,25 +7689,26 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
         gainbg = "price star.png";
     }
 
+    var d = 30;
     var gainbgsprite = new PIXI.Sprite(PIXI.Texture.fromFrame(gainbg));
     gainbgsprite.anchor.x = 0.5;
     gainbgsprite.anchor.y = 0.5;
-    gainbgsprite.x = 170;
+    gainbgsprite.x = 170 + d;
     gainbgsprite.y = 12 - 14;
     this.gfx.addChild(gainbgsprite);
 
     this.rewText = CTextField.createTextField({tint: "0x333333", text: "Награда", fontSize: 18, align: "center"});
-    this.rewText.x = 50;
+    this.rewText.x = 50 + d;
     this.rewText.y = -12;
     this.gfx.addChild(this.rewText);
 
     this.timeleft = CTextField.createTextField({tint: "0x333333", text: "", fontSize: 17, align: "center"});
-    this.timeleft.x = 50;
+    this.timeleft.x = 50 + d;
     this.timeleft.y = 27;
     this.gfx.addChild(this.timeleft);
 
     var tf = CTextField.createTextField({tint: "0x333333", text: gain.toString(), fontSize: 16, align: "center"});
-    tf.x = 170;
+    tf.x = 170 + d;
     tf.y = 3 -14;
     this.gfx.addChild(tf);
 
