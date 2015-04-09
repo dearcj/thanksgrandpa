@@ -3012,17 +3012,6 @@ CharStage.prototype.onShowContinue = function () {
 
     var baseScl = pl.gfx.scale.x;
 
-    $.ajax({
-        type: "POST",
-        url: 'levelup.php',
-        data: {uid: "2882845", lev: 1},
-        dataType: "text"
-
-    }).success(function (res) {
-
-        console.log(JSON.stringify(res));
-    });
-
 
     /*  pl.gfx.mouseover = function (evt) {
      TweenMax.killTweensOf(f.scale);
@@ -9200,7 +9189,20 @@ PlayerData.prototype.gainExp = function(amount) {
       this.playerItem.crystals += this.xpLevel[this.playerItem.lvl].crystals;
       this.playerItem.lvl++;
 
-      ZSound.Play("levelup");
+       if (!vkparams.novk) {
+           $.ajax({
+               type: "POST",
+               url: 'levelup.php',
+               data: {uid: vkparams.viewerid, lev: this.playerItem.lvl},
+               dataType: "text"
+
+           }).success(function (res) {
+           });
+       }
+
+
+
+       ZSound.Play("levelup");
        if (ingame)
            this.score += this.xpLevel[this.playerItem.lvl].money; else {
            this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
@@ -9636,7 +9638,7 @@ PlayerData.getVKfriends = function(playerItem)
     //if (!PlayerData.vkFriendsLoad)
     vkparams.friendsids = [];
     vkparams.friendsIngameIDs = [];
-    if (!VK || vkparams.novk)
+    if (vkparams.novk)
     {
         new PlayerData(playerItem);
         return;
@@ -9711,7 +9713,7 @@ PlayerData.dbInit = function() {
     vkparams.viewerid = getURLParameter("viewer_id");
 
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
-    if (!vkparams.viewerid)
+    if (!vkparams.viewerid || !VK)
     {
         vkparams.viewerid = 2882845;
         vkparams.novk = true;
