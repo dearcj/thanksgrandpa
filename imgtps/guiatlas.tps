@@ -294,6 +294,12 @@
             <filename>../../../../dedgame/home screen/desc bg.png</filename>
             <filename>../../../../dedgame/fight screen/exp bar.jpg</filename>
             <filename>../../../../dedgame/fight screen/exp bar circle.png</filename>
+            <filename>../../../../dedgame/ded skeleton/loadico.png</filename>
+            <filename>../../../../dedgame/shop/unwear button.png</filename>
+            <filename>../../../../dedgame/home screen/help grandpa/help window.png</filename>
+            <filename>../../../../dedgame/home screen/help grandpa/dont help.png</filename>
+            <filename>../../../../dedgame/home screen/help grandpa/help button.png</filename>
+            <filename>../../../../dedgame/home screen/help grandpa/help cover.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
