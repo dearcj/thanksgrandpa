@@ -1035,8 +1035,8 @@ GameStage.prototype.openEndWindowLoaded = function () {
                 function setClick(i, friendObject) {
                     CObj.getById("b" + (i + 1).toString()).click = function () {
                         VK.api("wall.post", {
-                            owner_id: friendObject.vkapi,
-                            message: "Я проехал " + rec.toString() + " метров. *id"+friendObject.vkapi.toString() +"(" + friendObject.name + ") " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!" + '\n' + "https://vk.com/app4654201",
+                            owner_id: friendObject.platformid,
+                            message: "Я проехал " + rec.toString() + " метров. *id"+friendObject.platformid +"(" + friendObject.name + ") " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!" + '\n' + "https://vk.com/app4654201",
                             attachments: ["photo-90523698_359515827", "https://vk.com/app4654201"]
                         }, function (data) {
 
@@ -2269,9 +2269,9 @@ ScoreStage.prototype.updateSB = function(arr)
         var clIco = crsp("buy small button");
 
         clips.push(clIco);
-        clips[i].vkapi = arr[i].vkapi;
+        clips[i].platformid = arr[i].platformid;
         if (fr != "") fr += ",";
-        fr+= arr[i].vkapi;
+        fr+= arr[i].platformid;
         if (scoreStage.skip + i < 3)
         {
             var nameTex;
@@ -2695,7 +2695,7 @@ CharStage.prototype.createFriendsPanel = function () {
             continue;
         } else {
             var username = vkparams.friendsIngame[i].name;
-            var userAPI = vkparams.friendsIngame[i].vkapi;
+            var userAPI = vkparams.friendsIngame[i].platformid;
 
             function setClick(uname, uapi, fc) {
                 fc.click = function () {
@@ -2713,10 +2713,10 @@ CharStage.prototype.createFriendsPanel = function () {
                 setClick(username, userAPI, friendClip)
         }
 
-        if (vkparams.friendsIngame[i].vkapi) {
+        if (vkparams.friendsIngame[i].platformid) {
             if (fr != "") fr += ",";
-            fr += vkparams.friendsIngame[i].vkapi.toString();
-            friendClip.vkapi = vkparams.friendsIngame[i].vkapi;
+            fr += vkparams.friendsIngame[i].platformid.toString();
+            friendClip.platformid = vkparams.friendsIngame[i].platformid;
         }
         clips.push(friendClip);
     }
@@ -2949,7 +2949,8 @@ CharStage.prototype.onShowContinue = function () {
 
         var closeHelp = function()
         {
-            charStage.pl.gfx.skeleton.setAttachment("head", "head2");
+            pl.updateAppearence(true, false, "breath");
+            //charStage.pl.gfx.skeleton.setAttachment("head", "head2");
             CObj.enableButtons(true);
             LevelManager.destroyLevel("helpded");
             charStage.openHelp = false;
@@ -2959,6 +2960,8 @@ CharStage.prototype.onShowContinue = function () {
             closeHelp();
         } else
         {
+            charStage.pl.gfx.skeleton.setAttachment("hat", null);
+
             charStage.pl.gfx.skeleton.setAttachment("head", "head5");
             CObj.enableButtons(false);
             CObj.getById("helpded").gfx.interactive = true;
@@ -3262,9 +3265,9 @@ CharStage.prototype.updateSB = function (arr) {
         var clIco = crsp("ava cover");
 
         clips.push(clIco);
-        clips[i].vkapi = arr[i].vkapi;
+        clips[i].platformid = arr[i].platformid;
         if (fr != "") fr += ",";
-        fr += arr[i].vkapi;
+        fr += arr[i].platformid;
         if (charStage.skip + i < 3) {
             var nameTex;
             if (charStage.skip + i == 0) nameTex = "1st place";
@@ -9075,10 +9078,10 @@ PlayerData = function(pi)
     }
 }
 
-PlayerData.prototype.addNotification = function(message, vkapi)
+PlayerData.prototype.addNotification = function(message, platformid)
 {
    var t = window.azureclient.getTable("tb_notifications");
-   t.insert({message: message, vkapi: vkapi});
+   t.insert({message: message, platformid: platformid});
 }
 
 PlayerData.prototype.comboCheck = function()
@@ -9703,7 +9706,7 @@ PlayerData.getVKfriends = function(playerItem)
             if (!results.result) return;
             for (var i = 0; i < results.result.length; ++i)
             {
-                vkparams.friendsIngameIDs.push(results.result[i].vkapi);
+                vkparams.friendsIngameIDs.push(results.result[i].platformid);
             }
 
            PlayerData.getVKuserData(playerItem);
@@ -9717,7 +9720,7 @@ PlayerData.getVKfriends = function(playerItem)
 PlayerData.azureLogin = function()
 {
     azureclient.invokeApi("login", {
-        body: {vkapi: vkparams.viewerid, ref: vkparams.refferer},
+        body: {platformid: vkparams.viewerid, ref: vkparams.refferer},
         method: "post"
     }).done(function (results) {
         var message = results.result;
@@ -9748,6 +9751,11 @@ PlayerData.dbInit = function() {
     if (!vkparams.viewerid || !VK)
     {
         vkparams.viewerid = 2882845;
+
+        if (MOBILE)
+        {
+            vkparams.viewerid = Cocoon.Device.getDeviceId();
+        }
         vkparams.novk = true;
     }
 
@@ -10907,7 +10915,6 @@ function onAssetsLoaded() {
     if (!window.dbinit || ZSound.loaded != true || !window.gfxLoaded) return;
 
     rp(preloaderBg);
-
     loadingState = "game";
     rp(loadingScreen);
     loadingScreen = null;
@@ -10917,8 +10924,6 @@ function onAssetsLoaded() {
     var x = PIXI.TextureCache["1st plan.png"];
     x.destroy(true);
     window.progressMask = null;
-    /*var tex = PIXI.Texture.fromImage("preloader.png");
-     tex.destroy(true);*/
     if (!MOBILE) {
         window.addEventListener("orientationchange", orientchange, false);
         orientchange();

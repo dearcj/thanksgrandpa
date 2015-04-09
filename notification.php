@@ -21,7 +21,7 @@ $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?'
 
 print ($token["access_token"]);
 
-$pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db",
+$pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db2",
                 "crazyjuice","girkinLOH1");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $n = 10;
