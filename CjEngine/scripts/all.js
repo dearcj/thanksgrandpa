@@ -1762,9 +1762,6 @@ ShopStage.prototype.createStatsPanel = function (cb) {
 
 }
 ShopStage.prototype.onShow = function () {
-
-    /*PlayerData.inst.playerItem.money = 10000;
-     PlayerData.inst.playerItem.crystals = 1000;*/
     azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
 
     LevelManager.loadLevel("levshop", function () {
@@ -1952,8 +1949,18 @@ ShopStage.prototype.createItemBtn = function (item) {
             }
         }
     } else {
-        if (equipped == true)
-            btnName = "equipped button"; else {
+        if (equipped == true) {
+
+            if (shopStage.currentTab == "bcloth")
+            {
+                btnName = "unwear button";
+                clickFunc = takeOff;
+            } else {
+                btnName = "equipped button";
+
+            }
+        }
+        else {
             clickFunc = wearItem;
             btnName = "wear button"
         }
@@ -1981,12 +1988,19 @@ ShopStage.prototype.createItemBtn = function (item) {
     btn.gfx.btn = btn;
     btn.click = clickFunc;
 
+    function takeOff(event)
+    {
+        PlayerData.inst.equipItem(item, false);
+        shopStage.pl.updateAppearence(true, false, null, null, null);
+        shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
+    }
+
     function unlockItem(event) {
         shopStage.buyItem(event, true);
     }
 
     function wearItem(event) {
-        PlayerData.inst.equipItem(item);
+        PlayerData.inst.equipItem(item, true);
         shopStage.pl.updateAppearence(true, false, null, null, null);
         shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
     }
@@ -2997,6 +3011,19 @@ CharStage.prototype.onShowContinue = function () {
     PlayerData.inst.comboCheck();
 
     var baseScl = pl.gfx.scale.x;
+
+    $.ajax({
+        type: "POST",
+        url: 'levelup.php',
+        data: {uid: "2882845", lev: 1},
+        dataType: "text"
+
+    }).success(function (res) {
+
+        console.log(JSON.stringify(res));
+    });
+
+
     /*  pl.gfx.mouseover = function (evt) {
      TweenMax.killTweensOf(f.scale);
 
@@ -9132,8 +9159,9 @@ PlayerData.prototype.getUpgrade = function(item, itemName)
 }
 
 
-PlayerData.prototype.equipItem = function(item)
+PlayerData.prototype.equipItem = function(item, state)
 {
+
    var id = item.id;
 
    var itemOwned = false;
@@ -9151,7 +9179,7 @@ PlayerData.prototype.equipItem = function(item)
       if (this.getType(PlayerData.inst.items_enabled[i]) == itemtype)
       {
          if (PlayerData.inst.items_enabled[i].id_item == id)
-            PlayerData.inst.items_enabled[i].equipped = true; else
+            PlayerData.inst.items_enabled[i].equipped = state; else
          PlayerData.inst.items_enabled[i].equipped = false;
       }
    }
