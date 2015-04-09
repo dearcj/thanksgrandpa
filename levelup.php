@@ -6,6 +6,9 @@ try
 $uid = $_POST['uid'];
 $lev = $_POST['lev'];
 
+$uid = 2882845;//$_POST['uid'];
+$lev = 1;//$_POST['lev'];
+
 $api_id = 4654201;
 $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ приложения
 
