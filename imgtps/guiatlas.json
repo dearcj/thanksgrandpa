@@ -2,7 +2,7 @@
 
 "1boost_button.png":
 {
-	"frame": {"x":198,"y":1091,"w":35,"h":33},
+	"frame": {"x":539,"y":1184,"w":35,"h":33},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
@@ -42,7 +42,7 @@
 },
 "3rd place.png":
 {
-	"frame": {"x":739,"y":1218,"w":42,"h":38},
+	"frame": {"x":401,"y":1184,"w":42,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":38},
@@ -50,7 +50,7 @@
 },
 "action 1.png":
 {
-	"frame": {"x":812,"y":1463,"w":97,"h":89},
+	"frame": {"x":711,"y":1463,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -58,7 +58,7 @@
 },
 "action 10.png":
 {
-	"frame": {"x":711,"y":1463,"w":97,"h":89},
+	"frame": {"x":610,"y":1463,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -66,7 +66,7 @@
 },
 "action 11.png":
 {
-	"frame": {"x":610,"y":1463,"w":97,"h":89},
+	"frame": {"x":509,"y":1463,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -74,7 +74,7 @@
 },
 "action 12.png":
 {
-	"frame": {"x":509,"y":1463,"w":97,"h":89},
+	"frame": {"x":1917,"y":1880,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -82,7 +82,7 @@
 },
 "action 13.png":
 {
-	"frame": {"x":1919,"y":1880,"w":97,"h":89},
+	"frame": {"x":1917,"y":1787,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -90,7 +90,7 @@
 },
 "action 14.png":
 {
-	"frame": {"x":1919,"y":1787,"w":97,"h":89},
+	"frame": {"x":1917,"y":1694,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -98,7 +98,7 @@
 },
 "action 2.png":
 {
-	"frame": {"x":1919,"y":1694,"w":97,"h":89},
+	"frame": {"x":1917,"y":1601,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -106,7 +106,7 @@
 },
 "action 3.png":
 {
-	"frame": {"x":1919,"y":1601,"w":97,"h":89},
+	"frame": {"x":675,"y":1184,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -114,7 +114,7 @@
 },
 "action 4.png":
 {
-	"frame": {"x":621,"y":1131,"w":97,"h":89},
+	"frame": {"x":555,"y":1091,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -122,7 +122,7 @@
 },
 "action 5.png":
 {
-	"frame": {"x":520,"y":1131,"w":97,"h":89},
+	"frame": {"x":454,"y":1091,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -130,7 +130,7 @@
 },
 "action 6.png":
 {
-	"frame": {"x":253,"y":1131,"w":97,"h":89},
+	"frame": {"x":353,"y":1091,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -138,7 +138,7 @@
 },
 "action 7.png":
 {
-	"frame": {"x":152,"y":1131,"w":97,"h":89},
+	"frame": {"x":675,"y":1091,"w":97,"h":89},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":89},
@@ -210,7 +210,7 @@
 },
 "ava icon.png":
 {
-	"frame": {"x":739,"y":1133,"w":44,"h":38},
+	"frame": {"x":447,"y":1047,"w":44,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":38},
@@ -242,7 +242,7 @@
 },
 "battle button.png":
 {
-	"frame": {"x":354,"y":1002,"w":162,"h":172},
+	"frame": {"x":187,"y":1047,"w":162,"h":172},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":162,"h":172},
@@ -290,7 +290,7 @@
 },
 "booster1.png":
 {
-	"frame": {"x":1751,"y":1878,"w":164,"h":156},
+	"frame": {"x":507,"y":1240,"w":164,"h":156},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":164,"h":156},
@@ -346,7 +346,7 @@
 },
 "buy button.png":
 {
-	"frame": {"x":362,"y":1463,"w":143,"h":57},
+	"frame": {"x":398,"y":1401,"w":143,"h":57},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":143,"h":57},
@@ -434,7 +434,7 @@
 },
 "empty orden.png":
 {
-	"frame": {"x":1111,"y":1240,"w":134,"h":273},
+	"frame": {"x":1010,"y":1240,"w":134,"h":273},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
@@ -474,7 +474,7 @@
 },
 "equipped button.png":
 {
-	"frame": {"x":217,"y":1524,"w":143,"h":57},
+	"frame": {"x":362,"y":1463,"w":143,"h":57},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":143,"h":57},
@@ -538,7 +538,7 @@
 },
 "game over ded.png":
 {
-	"frame": {"x":498,"y":1403,"w":237,"h":41},
+	"frame": {"x":260,"y":1002,"w":237,"h":41},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":237,"h":41},
@@ -682,7 +682,7 @@
 },
 "health dead.png":
 {
-	"frame": {"x":152,"y":1091,"w":42,"h":36},
+	"frame": {"x":493,"y":1184,"w":42,"h":36},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":36},
@@ -690,7 +690,7 @@
 },
 "health.png":
 {
-	"frame": {"x":673,"y":1091,"w":42,"h":36},
+	"frame": {"x":447,"y":1184,"w":42,"h":36},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":36},
@@ -722,7 +722,7 @@
 },
 "item back.png":
 {
-	"frame": {"x":507,"y":1240,"w":162,"h":156},
+	"frame": {"x":1751,"y":1878,"w":162,"h":156},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":162,"h":156},
@@ -778,7 +778,7 @@
 },
 "mute02.png":
 {
-	"frame": {"x":398,"y":1403,"w":48,"h":48},
+	"frame": {"x":364,"y":1529,"w":48,"h":48},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
@@ -786,7 +786,7 @@
 },
 "notification.png":
 {
-	"frame": {"x":450,"y":1403,"w":44,"h":44},
+	"frame": {"x":353,"y":1184,"w":44,"h":44},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":44},
@@ -914,7 +914,7 @@
 },
 "pause button.png":
 {
-	"frame": {"x":739,"y":1175,"w":42,"h":39},
+	"frame": {"x":353,"y":1047,"w":42,"h":39},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":39},
@@ -922,7 +922,7 @@
 },
 "photo icon.png":
 {
-	"frame": {"x":739,"y":1091,"w":44,"h":38},
+	"frame": {"x":399,"y":1047,"w":44,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":38},
@@ -970,7 +970,7 @@
 },
 "progress bg.png":
 {
-	"frame": {"x":1012,"y":1463,"w":95,"h":88},
+	"frame": {"x":911,"y":1463,"w":95,"h":88},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":88},
@@ -978,7 +978,7 @@
 },
 "progress fore.png":
 {
-	"frame": {"x":913,"y":1463,"w":95,"h":88},
+	"frame": {"x":812,"y":1463,"w":95,"h":88},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":88},
@@ -1194,6 +1194,14 @@
 },
 "unlock button.png":
 {
+	"frame": {"x":217,"y":1524,"w":143,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":143,"h":57},
+	"sourceSize": {"w":143,"h":57}
+},
+"unwear button.png":
+{
 	"frame": {"x":215,"y":1463,"w":143,"h":57},
 	"rotated": false,
 	"trimmed": false,
@@ -1231,6 +1239,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:32d79bd9f100d86b7a2cc311a9b326d1$"
+	"smartupdate": "$TexturePacker:SmartUpdate:e64b1b17a73f7cbc6107b7459107b032$"
 }
 }

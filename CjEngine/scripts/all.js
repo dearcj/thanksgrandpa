@@ -934,6 +934,7 @@ GameStage.prototype.shAfterLife = function () {
         cb.gfx.tint = 0xffffff;
         new TweenMax(cb.gfx.scale, 0.3, {x: bsX, y: bsY, ease: Elastic.easeOut} );
     }
+
     var gainbgsprite = new PIXI.Sprite(PIXI.Texture.fromFrame("bodrost star.png"));
     gainbgsprite.anchor.x = 0.5;
     gainbgsprite.anchor.y = 0.5;
@@ -1654,7 +1655,7 @@ AchStage.prototype.updateAchievements = function()
         achObject = crsp(ach.gfx);
 
         //    achObject.tint = 0x332299;
-        achObject.x = deltaW + (i) * 2 * deltaW;
+        achObject.x = deltaW + (i % numColumns) * 2 * deltaW;
         achObject.y = 120+Math.floor(i / numColumns)*220;
         achObject.width = 90;
         achObject.scale.y = achObject.scale.x;
@@ -2199,6 +2200,7 @@ ShopStage.prototype.updateEnergyText = function () {
 }
 
 ShopStage.prototype.process = function () {
+    shopStage.updateStatsPanel();
 
     this.updateEnergyText();
     CObj.processAll();
@@ -2789,7 +2791,7 @@ CharStage.prototype.openPremiumWindow = function () {
         };
 
         CObj.getById("btnclose").click = close;
-    }, SM.inst.fontLayer);
+    }, SM.inst.fontLayer, LevelManager.levelLoadOffsetX);
 }
 
 CharStage.prototype.openEnergyWindow = function () {
@@ -2901,6 +2903,9 @@ CharStage.prototype.onShowContinue = function () {
     {
         CObj.getById("bshop").deltaHoverY = 46;
         CObj.getById("bsofa").deltaHoverY = 30;
+    } else
+    {
+        CObj.getById("btnachs").deltaHoverY = 15;
     }
     CObj.getById("bbuy1").click = charStage.openPremiumWindow;
     CObj.getById("bbuy2").click = charStage.openPremiumWindow;
@@ -4715,7 +4720,7 @@ Object.defineProperty(CHPBar.prototype, 'prop', {
 
         this._prop = value;
         if (this._prop < 0) this._prop = 0;
-        var w = (1/this.gfx.scale.x)*this._prop*(this.gfx.width - 2*this.space);
+        var w = this.initScale*this._prop*(this.totalWidth - 2*this.space);
         if (this.tile)
         w = Math.round(w / this.upperImageClip.texture.width + 1) * this.upperImageClip.texture.width;
         this.upperImageClip.width = w;
@@ -4739,7 +4744,6 @@ CHPBar.prototype.init = function()
        this.gfx.anchor.x = 0;
           this.gfx.anchor.y = 0;
     }
-    this.x -= this.gfx.width*0.5;
     if (!this.space) this.space = 0;
     if (this.upperImage)
     {
@@ -4754,6 +4758,12 @@ CHPBar.prototype.init = function()
         this.upperImageClip.height -= this.space;
         this.gfx.addChild(this.upperImageClip);
     }
+
+    this.initScale = (1/this.gfx.scale.x);
+    if (this.gfx.width > 0)
+    this.totalWidth = this.gfx.width; else
+    this.totalWidth = this.upperImageClip.width;
+    this.x -= this.gfx.width*0.5;
 
     this.prop = 1;
     this.updateGraphics();
@@ -6550,11 +6560,11 @@ Boss2.prototype.fire = function()
         });
     }
 };MM = function () {
-    var bonusProb = 0.8;
+    var bonusProb = 0.7;
     var moneyCrowProb = 0.4;
     this.patterns =
         [
-            {mons: "+.", diff: 1, prob: bonusProb},
+            {mons: "+..", diff: 1, prob: bonusProb},
             {mons: "s..000l00..s.", diff: 1, prob: 1},
             {mons: "f..000..c.", diff: 1, prob: 1},
             {mons: "f..f00szf..000", diff: 1, prob: 1},
@@ -6581,14 +6591,14 @@ Boss2.prototype.fire = function()
                 {mons: "..f..f.z.o..f..", diff: 3, prob: 1},
                 {mons: "jd..df...f.", diff: 4, prob: 1},
                 {mons: "..dz..d..z.z", diff: 4, prob: 1},
-                {mons: "+.", diff: 3, prob: bonusProb},
+                {mons: "+..", diff: 3, prob: bonusProb},
                 {mons: ".F..l.l.F..l.", diff: 4, prob: 1},
                 {mons: ".b.bf..", diff: 4, prob: 0.1},
                 {mons: "..s.sss..s..l", diff: 4, prob: 1},
                 {mons: "l.l.l...ssl.lbl.l.", diff: 4, prob: 1},
                 {mons: "f..c.flf.c00", diff: 5, prob: 1},
                 {mons: ".c..c..z..s..sc..sc..sc..", diff: 5, prob: 1},
-                {mons: "+.", diff: 5, prob: bonusProb},
+                {mons: "+..", diff: 5, prob: bonusProb},
                 {mons: ".f.ffc..c..", diff: 5, prob: 1},
                 {mons: ".b..bbb..bbbbbbb..", diff: 5, prob: 0.1},
                 {mons: "gg.g...g..g..G.GG.", diff: 5, prob: 1},
@@ -6599,7 +6609,7 @@ Boss2.prototype.fire = function()
                 {mons: ".c..c..l..g..g..g", diff: 6, prob: 1},
                 {mons: "j", diff: 6, prob: moneyCrowProb},
                 {mons: "..s..s..dss", diff: 6, prob: 0.1},
-                {mons: "+.", diff: 6, prob: bonusProb},
+                {mons: "+..", diff: 6, prob: bonusProb},
                 {mons: "h.llH.lzh..H.l.l", diff: 7, prob: 1},
                 {mons: ".b..bbb..bbbbb000bbbbbbb..", diff: 7, prob: 0.1},
                 {mons: ".o.H.H..l..", diff: 7, prob: 1},
@@ -6607,7 +6617,7 @@ Boss2.prototype.fire = function()
                 {mons: ".czgG.gFl...", diff: 7, prob: 1},
                 {mons: "h..c.hsh.?.", diff: 8, prob: 1},
                 {mons: ".c.b.cbb..lb.gG.Gg..g.", diff: 8, prob: 1},
-                {mons: "+.", diff: 8, prob: bonusProb},
+                {mons: "+..", diff: 8, prob: bonusProb},
                 {mons: "o...ss.s.s.d..o.o..", diff: 8, prob: 1},
                 {mons: "Fz.Fz.zFz.", diff: 8, prob: 1},
                 {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1},
