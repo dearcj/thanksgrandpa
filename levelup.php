@@ -22,8 +22,8 @@ $params = array(
 $tokenstr = file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params)));		
 $token = json_decode($tokenstr, true);
 print($tokenstr);
-$VK = new vkapi($api_id, $secret_key);//,
-$resp = $VK->api('secure.setUserLevel', array('access_token'=>$token["access_token"], 'user_id'=>$uid, 'level'=>$lev));
+$VK = new vkapi($api_id, $secret_key);//,'access_token'=>$token["access_token"], 
+$resp = $VK->api('secure.setUserLevel', array('user_id'=>$uid, 'level'=>$lev));
 $answer = json_encode($resp);
 print($answer);
 }
