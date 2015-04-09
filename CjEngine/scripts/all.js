@@ -2089,7 +2089,7 @@ ShopStage.prototype.updateBar = function (tab, filter, baroffset) {
 
 ShopStage.prototype.updateStatsPanel = function () {
     var b = CObj.getById("bar");
-    b.gfx.width = 200;
+    b.totalWidth = 200;
     var xp = PlayerData.inst.playerItem.xp;
     var needed = PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].xp;
     b.prop = xp / needed;
@@ -2200,7 +2200,7 @@ ShopStage.prototype.updateEnergyText = function () {
 }
 
 ShopStage.prototype.process = function () {
-    shopStage.updateStatsPanel();
+    //shopStage.updateStatsPanel();
 
     this.updateEnergyText();
     CObj.processAll();
