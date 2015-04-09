@@ -2813,7 +2813,7 @@ CharStage.prototype.openEnergyWindow = function () {
 
     charStage.disableWnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
     charStage.disableWnd.interactive = true;
-    var objs = LevelManager.loadLevel("energywindow", function () {
+    LevelManager.loadLevel("energywindow", function () {
         CObj.getById("breplenish").click = function () {
             order("item7");
             VK.orderComplete = function (order_id) {
@@ -2944,6 +2944,38 @@ CharStage.prototype.onShowContinue = function () {
     CObj.getById("btnachs").click = function () {
         SM.inst.openStage(achStage)
     };
+
+    CObj.getById("helpded").click = function () {
+
+        var closeHelp = function()
+        {
+            charStage.pl.gfx.skeleton.setAttachment("head", "head2");
+            CObj.enableButtons(true);
+            LevelManager.destroyLevel("helpded");
+            charStage.openHelp = false;
+
+        }
+        if (charStage.openHelp) {
+            closeHelp();
+        } else
+        {
+            charStage.pl.gfx.skeleton.setAttachment("head", "head5");
+            CObj.enableButtons(false);
+            CObj.getById("helpded").gfx.interactive = true;
+            charStage.openHelp = true;
+            LevelManager.loadLevel("helpded", function ()
+            {
+
+            CObj.getById("gohelp").click = function()
+            {
+                OpenInNewTab("http://bit.ly/1BnM4B8");
+            };
+
+            CObj.getById("closehelp").click =  closeHelp;
+        }, SM.inst.ol);
+        }
+    };
+
     CObj.getById("btnfight").click = function () {
 
         //RE MOVE
@@ -3138,7 +3170,7 @@ CharStage.prototype.openScore = function () {
     CObj.enableButtons(false);
     charStage.disableWnd = SM.inst.addDisableWindow(null, SM.inst.fontLayer);
 
-    var objs = LevelManager.loadLevel("levscore", function () {
+    LevelManager.loadLevel("levscore", function () {
 
         charStage.container = new PIXI.DisplayObjectContainer();
         charStage.container.x = 170;
@@ -10767,6 +10799,7 @@ function preloaderLoaded() {
 
     window.loadingState = "loading";
     window.assetsToLoader = [
+        LevelManager.levFolder + "helpded.json",
         LevelManager.levFolder + "energywindow.json",
         LevelManager.levFolder + "settings.json",
         LevelManager.levFolder + "levelpremium.json",
