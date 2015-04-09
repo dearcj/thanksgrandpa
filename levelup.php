@@ -16,7 +16,7 @@ $params = array(
 	        'v' => "5.28"
 	    );
 
-$tokenStr = (file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
+$tokenStr = file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 $token = json_decode($tokenStr);
 print($tokenStr);
 $VK = new vkapi($api_id, $secret_key);//,
