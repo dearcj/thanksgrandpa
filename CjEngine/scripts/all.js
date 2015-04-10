@@ -9477,8 +9477,7 @@ PlayerData.prototype.getEventById = function(id)
 
 PlayerData.prototype.loadData = function(cb)
 {
-   /* if (checkDb)
-    checkDb();*/
+    checkDb();
    this.loadCount = 0;
     console.log("PlayerData.loadData");
 
@@ -9809,7 +9808,7 @@ var tHat = "hat";
 
 function checkDb ()
 {
-   updDb(dbobj);
+   //updDb(dbobj);
 }
 
 var dbobj =
@@ -9848,7 +9847,7 @@ var dbobj =
                         money_gain: 0,
                         crystal_gain: 0,
                         gfx: "action 3.png",
-                        reqlvl: 1,
+                        reqlvl: 2,
                         exectime: 30
                     },
                     {
@@ -9859,7 +9858,7 @@ var dbobj =
                         money_gain: 0,
                         crystal_gain: 0,
                         gfx: "action 4.png",
-                        reqlvl: 4,
+                        reqlvl: 7,
                         exectime: 140
                     },
                     {
@@ -9870,7 +9869,7 @@ var dbobj =
                         money_gain: 0,
                         crystal_gain: 8,
                         gfx: "action 5.png",
-                        reqlvl: 5,
+                        reqlvl: 9,
                         exectime: 120
                     },
                     {
@@ -9892,7 +9891,7 @@ var dbobj =
                         money_gain: 0,
                         crystal_gain: 0,
                         gfx: "action 7.png",
-                        reqlvl: 5,
+                        reqlvl: 8,
                         exectime: 80
                     },
                     {
@@ -9903,7 +9902,7 @@ var dbobj =
                         money_gain: 0,
                         crystal_gain: 3,
                         gfx: "action 8.png",
-                        reqlvl: 4,
+                        reqlvl: 6,
                         exectime: 50
                     },
                     {
@@ -9914,7 +9913,7 @@ var dbobj =
                         money_gain: 0,
                         crystal_gain: 0,
                         gfx: "action 9.png",
-                        reqlvl: 3,
+                        reqlvl: 5,
                         exectime: 120
                     },
                     {
@@ -9937,7 +9936,7 @@ var dbobj =
                         money_gain: 0,
                         crystal_gain: 1,
                         gfx: "action 11.png",
-                        reqlvl: 3,
+                        reqlvl: 5,
                         exectime: 60
 
                     },
@@ -9961,7 +9960,7 @@ var dbobj =
                         money_gain: 1000,
                         crystal_gain: 3,
                         gfx: "action 13.png",
-                        reqlvl: 2,
+                        reqlvl: 3,
                         exectime: 200
 
                     },
@@ -9973,7 +9972,7 @@ var dbobj =
                         money_gain: 1000,
                         crystal_gain: 0,
                         gfx: "action 14.png",
-                        reqlvl: 5,
+                        reqlvl: 6,
                         exectime: 30
                     }
                 ]
