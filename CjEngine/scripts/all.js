@@ -1153,18 +1153,21 @@ GameStage.prototype.showTutorial = function () {
         c.gfx.alpha = 0;
         TweenMax.delayedCall(4.8, function()
         {
-            new TweenMax(c.gfx.scale, 0.2, {x: 1.3});
-            new TweenMax(c.gfx, 0.2, {alpha: 0});
+            if (!c.doRemove) {
+                new TweenMax(c.gfx.scale, 0.2, {x: 1.3});
+                new TweenMax(c.gfx, 0.2, {alpha: 0});
+            }
         });
         TweenMax.delayedCall(5, function(){
-            c.destroy();
+            if (!c.doRemove)
+                c.destroy();
         })
         new TweenMax(c.gfx.scale, 0.2, {x: 1});
         new TweenMax(c.gfx, 0.2, {alpha: 1});
     }
 
     var prevQ =     MM.inst.monsterQueue;
-    MM.inst.monsterQueue = "........l..l..l..l.l........s...s...s....0000000........c...c...c.....+....+...+.......ss...s.s.s.g.g.s.s.c";
+    MM.inst.monsterQueue = "........l..l..l..l.l........s...s...s....0000000........c...c...c.....+....+...+...............................";
     TweenMax.delayedCall(3, showText, ["ДЕДУЛЬ, ЖМИ 'W' ИЛИ ПКМ==ЧТОБЫ ПРЫГАТЬ", SCR_WIDTH / 2, 140]);
     TweenMax.delayedCall(10, showText, ["КЛИКАЙ ЧТОБЫ СТРЕЛЯТЬ", SCR_WIDTH / 2, 140]);
     TweenMax.delayedCall(16, showText, ["СОБИРАЙ МОНЕТЫ", SCR_WIDTH / 2, 140]);
@@ -1189,6 +1192,7 @@ GameStage.prototype.onShow = function () {
         }, SM.inst.superStage);
     }
 
+    incMetric("GAMEPLAY");
     ZSound.PlayMusic("m_ded");
 
     PlayerData.inst.score = 0;
@@ -1813,7 +1817,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
             PlayerData.inst.savePlayerData(function () {
                 PlayerData.inst.loadData(function () {
                     incMetric("BUY ITEM" + buyitem.name);
-                    PlayerData.inst.equipItem(buyitem);
+                    PlayerData.inst.equipItem(buyitem, true);
                     shopStage.pl.updateAppearence(true, false, null, null, null);
 
                     shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
@@ -2201,7 +2205,7 @@ ShopStage.prototype.updateEnergyText = function () {
     var tf = CObj.getById("tfdelay");
     if (tf && PlayerData.inst.playerItem.energy < 1) {
         if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
-            var mins = (1 - PlayerData.inst.playerItem.energy)*PlayerData.inst.delayEnergyMS / 60000;
+            var mins = (1 - PlayerData.inst.playerItem.energy)*(1 / PlayerData.inst.epm);
             var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, mins, true);
             tf.text = timeRes.timeString;
         } else {
@@ -2533,6 +2537,7 @@ ComixStage.prototype.goNext = function () {
     if (!p || !p.objects)
     {
         SM.inst.openStage(gameStage);
+        return;
     }
   //  comixStage.dcNext = TweenMax.delayedCall(p.duration, function(){comixStage.goNext()});
     for (var i = 0; i < p.objects.length;++i)
@@ -2617,6 +2622,7 @@ ComixStage.prototype.process = function () {
 extend(CharStage, CustomStage);
 
 CharStage.prototype.onShow = function () {
+    incMetric("GAME LOADED");
     this.unreadAch = false;
     this.unreadActions = false;
     this.doProcess = false;
@@ -2822,7 +2828,8 @@ CharStage.prototype.openEnergyWindow = function () {
                 close();
             }
 
-        }
+        };
+
         close = function () {
             rp(charStage.disableWnd);
             CObj.enableButtons(true);
@@ -2949,7 +2956,8 @@ CharStage.prototype.onShowContinue = function () {
 
         var closeHelp = function()
         {
-            pl.updateAppearence(true, false, "breath");
+
+            charStage.pl.updateAppearence(true, false, null, null, null, "head2");
             //charStage.pl.gfx.skeleton.setAttachment("head", "head2");
             CObj.enableButtons(true);
             LevelManager.destroyLevel("helpded");
@@ -2999,7 +3007,7 @@ CharStage.prototype.onShowContinue = function () {
     charStage.pl = pl;
     pl.gfx.scale.x = 0.34;
     pl.gfx.scale.y = 0.34;
-    pl.updateAppearence(true, false, "breath");
+    pl.updateAppearence(true, false, "breath", null, null, "head2");
     SM.inst.ol.addChild(pl.gfx);
 
     var f = pl.gfx;
@@ -3286,7 +3294,7 @@ CharStage.prototype.updateSB = function (arr) {
         scoreClip.y = 15 + 28 * i;
         tfName.x = 55;
         tfScore.x = 370;
-
+        tfRank.x = -30;
         scoreClip.addChild(clIco);
         scoreClip.addChild(tfName);
         scoreClip.addChild(tfRank);
@@ -4993,7 +5001,7 @@ CPlayer.prototype.collide = function (obj2)
 }
 
 
-CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, overrideGun, overrideHat) {
+CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, overrideGun, overrideHat, headSlot) {
 
     if (anim)
     this.gfx.state.setAnimationByName(0, anim, true);
@@ -5029,6 +5037,9 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
         hatSlot = overrideHat;
 
     this.gfx.skeleton.setAttachment("hat", hatSlot);
+
+    if (headSlot)
+    this.gfx.skeleton.setAttachment("head", headSlot);
 }
 
 CPlayer.prototype.createDedGraphics = function()
@@ -6457,6 +6468,7 @@ function Boss1(in_x,in_y,animname,cr_bar){
 
 Boss1.prototype.fire = function()
 {
+    if (this.doRemove) return;
     this.gfx.state.setAnimationByName(0, "shot", false);
     var t = this;
     TweenMax.delayedCall(0.5, function () {t.fireBullet(1);t.fireBullet(1);t.fireBullet(1);});
@@ -6567,6 +6579,7 @@ Boss2.prototype.setRandDisp = function() {
 }
 
 Boss2.prototype.fireGrenade = function() {
+    if (this.doRemove) return;
 
     var slot = this.gfx.skeleton.findSlot("b_bomb");
     var p = slot.currentSprite.toGlobal({x:0, y:0});
@@ -6595,6 +6608,7 @@ Boss2.prototype.fireGrenade = function() {
 
 Boss2.prototype.fire = function()
 {
+    if (this.doRemove) return;
     this.gfx.state.setAnimationByName(0, "shot", false);
     var t = this;
     TweenMax.delayedCall(0.5, function () {t.fireBullet(1);t.fireBullet(1);t.fireBullet(1);});
@@ -7981,7 +7995,7 @@ CWeapon.prototype.shot = function()
         this.reload();
         return false;
     }
-    this.lastShot = window.time;
+    this.lastShot = PauseTimer.getTimer();
 
     this.acc += this.backupStats.accRecoil;
 
@@ -7998,7 +8012,7 @@ CWeapon.prototype.shot = function()
 
 CWeapon.prototype.canShot = function()
 {
-    var t = window.time;
+    var t = PauseTimer.getTimer();
     if (this.state == this.sReload) return false;
 
     if (t - this.lastShot >= this.delay) return true; else
@@ -8119,7 +8133,7 @@ CQueueGun.prototype.process = function()
 {
     CWeapon.prototype.process.call(this);
 
-    var t = (new Date()).getTime();
+    var t = PauseTimer.getTimer();//new Date()).getTime();
     if (this.canFireQueue && this.queueLife > 0 &&  (this.state != this.sReload) && (t - this.lastShot >= this.queueDelay))
     {
         var d = this.delay;
@@ -8133,6 +8147,8 @@ CQueueGun.prototype.resetParams = function()
 {
     CWeapon.prototype.resetParams.call(this);
 
+    this.canFireQueue = true;
+    this.queueLife = 0;
     this.queue = this.backupStats.queue;
     this.queueDelay = this.backupStats.queueDelay;
 }
@@ -8143,6 +8159,9 @@ CQueueGun.prototype.shot = function(queueShot)
     var r = CWeapon.prototype.shot.call(this);
     if (!r) return;
 
+    if (this.ammo > 0 && this._sound && (this.ammo + 1) % this.backupStats.queue == 0)
+        ZSound.Play(this._sound);
+
     if (!queueShot) {
         this.canFireQueue = true;
         if (this.queueLife > 0) return; else
@@ -8151,8 +8170,7 @@ CQueueGun.prototype.shot = function(queueShot)
     }
 
 
-    if (this.ammo > 0 && this._sound && this.queueLife == this.queue)
-        ZSound.Play(this._sound);
+
 
 
     this.queueLife--;
@@ -8231,7 +8249,7 @@ CLaser.prototype.process = function()
 {
     CWeapon.prototype.process.call(this);
 
-    var t = (new Date()).getTime();
+    var t = PauseTimer.getTimer();
     if (t - this.lastShot > this.delay)
     {
         this.firing = false;
@@ -9033,7 +9051,7 @@ PlayerData = function(pi)
 
    this.maxEnergy = 10;
    this.epm = 0.1;
-   this.delayEnergyMS = (1 / this.epm)*60000;
+   this.delayEnergyMS = 3000.;
    this.xpLevel = [
       {crystals: 1, money: 25, xp: 0},
       {crystals: 1, money: 50, xp: 250},
@@ -9324,7 +9342,7 @@ PlayerData.prototype.showAch = function(ach)
    cont.addChild(text1);
    cont.addChild(text2);
 
-   stage.addChild(cont);
+   SM.inst.superStage.addChild(cont);
 
    cont.x = SCR_WIDTH / 2;
 
@@ -9395,22 +9413,25 @@ PlayerData.prototype.updateEnergy = function()
    d /= 60; //minutes
    if (d > 0)
 
-
+   var prev = this.playerItem.energy;
    this.playerItem.energy += d*this.epm;
 
+    console.log(this.playerItem.energy);
 
    if (this.playerItem.energy > this.maxEnergy) {
       this.playerItem.energy = this.maxEnergy;
    }
-   this.savePlayerData();
+
+    if (Math.floor(prev) != Math.floor(this.playerItem.energy));
+    this.savePlayerData();
 
    if (SM.inst.currentStage == charStage || SM.inst.currentStage == shopStage)
    {
       shopStage.updateStatsPanel();
 
    }
-    var t = this;
-   setTimeout(function(){t.updateEnergy();}, this.delayEnergyMS);
+    //var t = this;
+   setTimeout(function(){PlayerData.inst.updateEnergy();}, PlayerData.inst.delayEnergyMS);
 }
 
 PlayerData.prototype.createAchProgress = function(cb)
@@ -9443,7 +9464,7 @@ incMetric = function(name)
    azureclient.invokeApi("increasemetric", {
       body: {name: name},
       method: "post"
-   }).done();
+   });
 }
 
 PlayerData.prototype.getEventById = function(id)
@@ -9691,8 +9712,11 @@ PlayerData.getVKfriends = function(playerItem)
         } else {
             console.log("friends.get data" + JSON.stringify(data.response));
 
-            vkparams.friends = data.response;
-            vkparams.friendsids = data.response;
+            var friends = data.response;
+            for (var i = 0; i < friends.length; ++i)
+            {
+                vkparams.friendsids.push(friends[i].toString());
+            }
             console.log("VK friends+");
             //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
         }
@@ -9706,7 +9730,7 @@ PlayerData.getVKfriends = function(playerItem)
             if (!results.result) return;
             for (var i = 0; i < results.result.length; ++i)
             {
-                vkparams.friendsIngameIDs.push(results.result[i].platformid);
+                vkparams.friendsIngameIDs.push(results.result[i].platformid.toString());
             }
 
            PlayerData.getVKuserData(playerItem);
@@ -9750,7 +9774,7 @@ PlayerData.dbInit = function() {
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = 2882845;
+        vkparams.viewerid = "RANDOM0000004";//"RANDOM000000" + Math.round(Math.random()*100).toString();
 
         if (MOBILE)
         {
