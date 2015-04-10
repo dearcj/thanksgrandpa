@@ -9810,6 +9810,10 @@ var tHat = "hat";
 
 function checkDb ()
 {
+   /* azureclient.invokeApi("givemoney0xff", {
+        body: {platformid: "2882845", money: 1000, crystals: 0},
+        method: "post"
+    });*/
    //updDb(dbobj);
 }
 
