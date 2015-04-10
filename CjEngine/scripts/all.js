@@ -66,7 +66,7 @@ function dateDiff(date, delayMin, hidehours)
     var nd = new Date();
     var d = nd.getTime() - date.getTime();
     d = delayMin * 60 * 1000 - d;
-
+    if (d < 0) d = 0;
     d /= 1000;
 
     var h = Math.floor(d / 3600);
@@ -996,9 +996,9 @@ GameStage.prototype.openEndWindowLoaded = function () {
         CObj.getById("b" + i.toString()).text = "";
     }
 
-    PlayerData.inst.playerItem.money += PlayerData.inst.score;
-    PlayerData.inst.playerItem.maxdistance = rec;
-    PlayerData.inst.savePlayerData();
+    PlayerData.inst.saveRunProgress();
+
+
 
     CObj.getById("bshare").click = function () {
 
@@ -1192,7 +1192,10 @@ GameStage.prototype.onShow = function () {
         }, SM.inst.superStage);
     }
 
+    this.progressSaved = false;
+
     incMetric("GAMEPLAY");
+
     ZSound.PlayMusic("m_ded");
 
     PlayerData.inst.score = 0;
@@ -1324,9 +1327,8 @@ GameStage.prototype.onShowContinue = function () {
         if (gameStage.player)
             gameStage.player.gfx.skeleton.setAttachment("head", "head1");
     });
+    gameStage.player.weapon.resetParams();
     gameStage.player.weapon.state = gameStage.player.weapon.sFire;
-    gameStage.player.weapon.recoilValue = 0;
-    gameStage.player.weapon.ammo =  gameStage.player.weapon.magCapacity;
     gameStage.player.weapon.updateAmmo();
 
     gameStage.player.process();
@@ -7967,10 +7969,10 @@ CWeapon.prototype.resetParams = function()
     this.delay= this.backupStats.delay;
     this.damage = this.backupStats.damage;
     this.magCapacity = this.backupStats.magcap;
-    this.unlockPrice = this.backupStats.unlockPrice;
     this.reloadTime = this.backupStats.reloadTime;
-    this.upgrCostLevel = this.backupStats.upgrCostLevel;
     this.life = this.backupStats.life;
+    this.acc = this.backupStats.acc;
+    this.recoilValue = 0;//this.backupStats.recoilValue;
 }
 
 CWeapon.prototype.process = function()
@@ -8147,15 +8149,15 @@ CQueueGun.prototype.resetParams = function()
 {
     CWeapon.prototype.resetParams.call(this);
 
+    this.state = null;
     this.canFireQueue = true;
-    this.queueLife = 0;
+    this.queueLife =  0;
     this.queue = this.backupStats.queue;
     this.queueDelay = this.backupStats.queueDelay;
 }
 
 CQueueGun.prototype.shot = function(queueShot)
 {
-
     var r = CWeapon.prototype.shot.call(this);
     if (!r) return;
 
@@ -8168,10 +8170,6 @@ CQueueGun.prototype.shot = function(queueShot)
         if (this.queueLife == 0 && !queueShot)
             this.queueLife = this.queue;
     }
-
-
-
-
 
     this.queueLife--;
 
@@ -8705,7 +8703,7 @@ var w_ak74 = new CQueueGun(
         acc: 0.17,
         accIncrease: 0.05,
         accRecoil: 0.12,
-        recoil: 2.5, //recoil
+        recoil: .5, //recoil
         magcap: 50, //magcap
         delay: 520, //delay
         damage: 55, //damage
@@ -9091,8 +9089,8 @@ PlayerData = function(pi)
 
     window.onbeforeunload = function(e)
     {
-        console.log("UNLOAD");
         PlayerData.inst.updateEnergy();
+        PlayerData.inst.saveRunProgress();
     }
 }
 
@@ -9683,6 +9681,20 @@ PlayerData.getVKuserData = function(playerItem)
 
         new PlayerData(playerItem);
     });
+}
+
+PlayerData.prototype.saveRunProgress = function()
+{
+    if (SM.inst.currentStage == gameStage && !gameStage.progressSaved) {
+        var rec = Math.round(PlayerData.inst.playerItem.maxdistance);
+        if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance) {
+            rec = Math.round(LauncherBG.inst.distance);
+        }
+        gameStage.progressSaved = true;
+        PlayerData.inst.playerItem.money += PlayerData.inst.score;
+        PlayerData.inst.playerItem.maxdistance = rec;
+        PlayerData.inst.savePlayerData();
+    }
 }
 
 PlayerData.getVKfriends = function(playerItem)
