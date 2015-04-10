@@ -66,7 +66,7 @@ function dateDiff(date, delayMin, hidehours)
     var nd = new Date();
     var d = nd.getTime() - date.getTime();
     d = delayMin * 60 * 1000 - d;
-    if (d < 0) d = 0;
+ //   if (d < 0) d = 0;
     d /= 1000;
 
     var h = Math.floor(d / 3600);
@@ -2209,6 +2209,7 @@ ShopStage.prototype.updateEnergyText = function () {
         if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
             var mins = (1 - PlayerData.inst.playerItem.energy)*(1 / PlayerData.inst.epm);
             var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, mins, true);
+            if (timeRes.d < 0) tf.text = "";
             tf.text = timeRes.timeString;
         } else {
             tf.text = "";
@@ -5868,8 +5869,8 @@ CGrenade.makeBoom = function (x, y, dmg, dist, owner)
 
     var sd = dist*dist;
 
-    if (!CMonster.list) l = 0;
-    var l = CMonster.list.length;
+    var l = 0;
+    if (CMonster.list) l = CMonster.list.length;
 
    for (var i = 0; i < l; ++i)
     {
@@ -9781,11 +9782,12 @@ PlayerData.dbInit = function() {
     vkparams.userid = getURLParameter("user_id");
     vkparams.sid = getURLParameter("sid");
     vkparams.viewerid = getURLParameter("viewer_id");
+    if (vkparams.viewerid) vkparams.viewerid = vkparams.viewerid.toString();
 
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "RANDOM0000004";//"RANDOM000000" + Math.round(Math.random()*100).toString();
+        vkparams.viewerid = "2882845";//"RANDOM0000004";//"RANDOM000000" + Math.round(Math.random()*100).toString();
 
         if (MOBILE)
         {
