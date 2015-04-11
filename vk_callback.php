@@ -56,21 +56,21 @@ if ($sig != md5($str.$secret_key)) {
       elseif ($item == 'item4') {
                      $response['response'] = array(
                        'item_id' => 711,
-                       'title' => '3 звезд',
+                       'title' => '12 звезд',
                        'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                        'price' => 3
                      );}
       elseif ($item == 'item5') {
                            $response['response'] = array(
                              'item_id' => 712,
-                             'title' => '15 звезд',
+                             'title' => '60 звезд',
                              'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                              'price' => 10
                            );}
       elseif ($item == 'item6') {
                                  $response['response'] = array(
                                    'item_id' => 713,
-                                   'title' => '80 звезд',
+                                   'title' => '320 звезд',
                                    'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                                    'price' => 50);
       }
@@ -120,21 +120,21 @@ case 'get_item_test':
           elseif ($item == 'item4') {
                          $response['response'] = array(
                            'item_id' => 701,
-                           'title' => '3 звезд',
+                           'title' => '12 звезд',
                            'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                            'price' => 3
                          );}
           elseif ($item == 'item5') {
                                $response['response'] = array(
                                  'item_id' => 702,
-                                 'title' => '15 звезд',
+                                 'title' => '60 звезд',
                                  'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                                  'price' => 10
                                );}
           elseif ($item == 'item6') {
                                      $response['response'] = array(
                                        'item_id' => 703,
-                                       'title' => '80 звезд',
+                                       'title' => '320 звезд',
                                        'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
                                        'price' => 50);
           }

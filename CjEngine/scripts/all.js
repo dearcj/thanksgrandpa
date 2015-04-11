@@ -9410,20 +9410,22 @@ PlayerData.prototype.updateEnergy = function()
 
    d /= 1000;//secs
    d /= 60; //minutes
-   if (d > 0)
-
-   var prev = this.playerItem.energy;
-   this.playerItem.energy += d*this.epm;
+   if (d > 0) {
+       var prev = this.playerItem.energy;
+       this.playerItem.energy += d * this.epm;
 
     console.log(this.playerItem.energy);
 
    if (this.playerItem.energy > this.maxEnergy) {
       this.playerItem.energy = this.maxEnergy;
    }
+    if (this.playerItem.energy < 0) {
+        this.playerItem.energy = 0;
+    }
 
-    if (Math.floor(prev) != Math.floor(this.playerItem.energy));
+        if (Math.floor(prev) != Math.floor(this.playerItem.energy));
     this.savePlayerData();
-
+   }
    if (SM.inst.currentStage == charStage || SM.inst.currentStage == shopStage)
    {
       shopStage.updateStatsPanel();
