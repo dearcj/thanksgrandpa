@@ -9044,10 +9044,8 @@ CTabletsBooster.prototype.onDeactivate = function()
     p.blink = false;
 }
 
-PlayerData = function(pi)
+PlayerData = function()
 {
-   console.log("PlayerData init");
-
    this.maxEnergy = 10;
    this.epm = 0.1;
    this.delayEnergyMS = 3000.;
@@ -9081,17 +9079,22 @@ PlayerData = function(pi)
 
    this.items = {};
    this.achs = {};
-   if (pi) {
-      this.playerItem = pi;
-   }
+
    this.score = 0;
+
+
    PlayerData.inst = this;
-   this.loadData(this.loadEnd);
+
+   PlayerData.inst.azureLogin();
+
+
+
 
     window.onbeforeunload = function(e)
     {
         PlayerData.inst.updateEnergy();
         PlayerData.inst.saveRunProgress();
+        PlayerData.inst.updateScore();
     }
 }
 
@@ -9405,9 +9408,9 @@ PlayerData.prototype.loadEnd = function()
 
 PlayerData.prototype.updateEnergy = function()
 {
+    if (!this.playerItem) return;
    var d = (new Date()).getTime() - this.playerItem.updateDate.getTime();
    this.playerItem.updateDate = new Date();
-
    d /= 1000;//secs
    d /= 60; //minutes
    if (d > 0) {
@@ -9478,34 +9481,23 @@ PlayerData.prototype.getEventById = function(id)
    return null;
 }
 
+PlayerData.prototype.updateScore = function()
+{
+    azureclient.invokeApi("update_score", {
+        body: {id_player: PlayerData.inst.playerItem.id, score: PlayerData.inst.playerItem.maxdistance},
+        method: "post"
+    }).done(function()
+    {
+    });
+}
+
 PlayerData.prototype.loadData = function(cb)
 {
-    checkDb();
+   checkDb();
    this.loadCount = 0;
-    console.log("PlayerData.loadData");
+   console.log("PlayerData.loadData");
 
-    var totalLoads = 7;
-   window.azureclient.getTable("tb_players").read().done(
-   function (results) {
-      PlayerData.inst.playerItem = results[0];
-       console.log("PlayerData.get player record");
-
-       PlayerData.inst.playerItem.name = vkparams.first_name;
-      PlayerData.inst.playerItem.last_name = vkparams.last_name;
-
-
-
-      azureclient.invokeApi("update_score", {
-         body: {id_player: PlayerData.inst.playerItem.id, score: PlayerData.inst.playerItem.maxdistance},
-         method: "post"
-      }).done();
-
-      if (!PlayerData.inst.playerItem.crystals)
-         PlayerData.inst.playerItem.crystals = 0;
-      PlayerData.inst.loadCount ++;
-      if (PlayerData.inst.loadCount == totalLoads && cb) cb();
-      }, function (res) {}
-   );
+    var totalLoads = 6;
 
    window.azureclient.getTable("tb_achs").read().done(
        function (results) {
@@ -9567,9 +9559,10 @@ PlayerData.prototype.loadData = function(cb)
           if (!found)
           {
              azureclient.invokeApi("buy_item", {
-                body: {id_item: defaultRifleID, id_player: PlayerData.pid, equipped: eq},
+                body: {id_item: defaultRifleID, id_player: PlayerData.inst.pid, equipped: eq},
                 method: "post"
              }).done(function (results) {
+
              }, function(error) {
              });
 
@@ -9579,11 +9572,10 @@ PlayerData.prototype.loadData = function(cb)
              PlayerData.inst.items_enabled.push(
                  {
                     id_item: defaultRifleID,
-                    id_player:PlayerData.pid,
+                    id_player:PlayerData.inst.pid,
                     equipped: eq
                  }
              );
-            // PlayerData.inst.savePlayerItems();
           }
 
           PlayerData.inst.loadCount ++;
@@ -9609,7 +9601,7 @@ PlayerData.prototype.loadData = function(cb)
    );
 }
 
-PlayerData.prototype.savePlayerData = function()
+PlayerData.prototype.saveAllData = function()
 {
    this.savePlayerData();
    this.savePlayerItems();
@@ -9642,7 +9634,7 @@ PlayerData.prototype.savePlayerEvents = function(onlyOne)
 
 PlayerData.prototype.savePlayerItems = function(onlyOne)
 {
-   for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
+   for (var i = 0; i < this.items_enabled.length; ++i) {
       if (onlyOne && onlyOne.id != PlayerData.inst.items_enabled[i].id) continue;
       window.azureclient.getTable("tb_item_player").update(PlayerData.inst.items_enabled[i]).done(function (result) {
       }, function (err) {
@@ -9653,7 +9645,7 @@ PlayerData.prototype.savePlayerItems = function(onlyOne)
 
 PlayerData.prototype.savePlayerData = function(cb)
 {
-   window.azureclient.getTable("tb_players").update(PlayerData.inst.playerItem).done(function (result) {
+   window.azureclient.getTable("tb_players").update(this.playerItem).done(function (result) {
       PlayerData.inst.playerItem = result;
        if (cb) cb();
    }, function (err) {
@@ -9666,11 +9658,11 @@ getURLParameter = function (name) {
 }
 
 
-PlayerData.getVKuserData = function(playerItem)
+PlayerData.prototype.getVKuserData = function(playerItem)
 {
     VK.api('users.get',{user_ids:vkparams.viewerid.toString()}, function(data) {
         if (!data.response || data.response.length == 0) {
-            PlayerData.getVKuserData(playerItem);
+            PlayerData.inst.getVKuserData(playerItem);
             return;
         }
         if (data.response[0].first_name)
@@ -9681,7 +9673,8 @@ PlayerData.getVKuserData = function(playerItem)
             vkparams.last_name = data.response[0].last_name; else
             vkparams.last_name = "";
 
-        new PlayerData(playerItem);
+
+        PlayerData.inst.loadData(PlayerData.inst.loadEnd);
     });
 }
 
@@ -9699,32 +9692,26 @@ PlayerData.prototype.saveRunProgress = function()
     }
 }
 
-PlayerData.getVKfriends = function(playerItem)
+PlayerData.prototype.getVKfriends = function()
 {
     vkparams.first_name = "Аноним";
     vkparams.last_name = "";
     console.log("Gettin vk friends");
 
-    //if (!PlayerData.vkFriendsLoad)
     vkparams.friendsids = [];
     vkparams.friendsIngameIDs = [];
     if (vkparams.novk)
     {
-        new PlayerData(playerItem);
+        this.loadData(this.loadEnd);
         return;
     }
 
     VK.api('friends.getAppUsers',{}, function(data) {
-
-
         if (!data.response || !data.response.length)
         {
 
-
-            //PlayerData.getVKfriends(playerItem);
-           // return;
         } else {
-            console.log("friends.get data" + JSON.stringify(data.response));
+            //console.log("friends.get data" + JSON.stringify(data.response));
 
             var friends = data.response;
             for (var i = 0; i < friends.length; ++i)
@@ -9747,32 +9734,43 @@ PlayerData.getVKfriends = function(playerItem)
                 vkparams.friendsIngameIDs.push(results.result[i].platformid.toString());
             }
 
-           PlayerData.getVKuserData(playerItem);
+            PlayerData.inst.getVKuserData();
         }, function(error) {
-            PlayerData.getVKuserData(playerItem);
+            PlayerData.inst.getVKuserData();
         });
 
     });
 };
 
-PlayerData.azureLogin = function()
+PlayerData.prototype.azureLogin = function()
 {
     azureclient.invokeApi("login", {
         body: {platformid: vkparams.viewerid, ref: vkparams.refferer},
         method: "post"
     }).done(function (results) {
-        var message = results.result;
+        console.log(JSON.stringify(results.result));
         vkparams.registered = results.result.registered;
 
         if (!vkparams.registered)console.log("user logged in"); else
             console.log("user registered");
-        PlayerData.pid = results.result.userId.split(':')[1];
+        PlayerData.inst.pid = results.result.userId.split(':')[1];
+
+
+        PlayerData.inst.playerItem = results.result.playerItem;
+
+        PlayerData.inst.playerItem.name = vkparams.first_name;
+        PlayerData.inst.playerItem.last_name = vkparams.last_name;
+
+        if (!PlayerData.inst.playerItem.crystals)
+        PlayerData.inst.playerItem.crystals = 0;
+
+        console.log("Player item read from login" + JSON.stringify(PlayerData.inst.playerItem));
 
         azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
         vkparams.id = results.result.id;
-        PlayerData.getVKfriends(results.result);
+        PlayerData.inst.getVKfriends();
     }, function(error) {
-        PlayerData.azureLogin();
+        PlayerData.inst.azureLogin();
     });
 }
 
@@ -9789,7 +9787,7 @@ PlayerData.dbInit = function() {
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "2882845";//"RANDOM0000004";//"RANDOM000000" + Math.round(Math.random()*100).toString();
+        vkparams.viewerid = "2882845";//"CARLSON"+Math.round(Math.random()*1000000).toString();
 
         if (MOBILE)
         {
@@ -9803,7 +9801,7 @@ PlayerData.dbInit = function() {
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("login / register user");
-    PlayerData.azureLogin();
+    new PlayerData();
 };var tWeapon = "weap";
 var tPerk = "perk";
 var tBoost = "boost";
@@ -9815,6 +9813,9 @@ function checkDb ()
    /* azureclient.invokeApi("givemoney0xff", {
         body: {platformid: "2882845", money: 1000, crystals: 0},
         method: "post"
+    }).done(function(r)
+    {
+        console.log("MONEY GIVE Ok");
     });*/
    //updDb(dbobj);
 }
@@ -10491,6 +10492,10 @@ getDedImage = function (ava) {
     var r = new PIXI.RenderTexture(w, h);
 
     if (ava) {
+        CObj.getById("bback").textField.alpha = 0;
+        CObj.getById("ava").textField.alpha = 0;
+
+
         CObj.getById("bback").gfx.visible = false;
         CObj.getById("ava").gfx.visible = false;
         CObj.getById("bgshopded").gfx.visible = false;
