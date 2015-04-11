@@ -9427,8 +9427,7 @@ PlayerData.prototype.updateEnergy = function()
         this.playerItem.energy = 0;
     }
 
-        if (Math.floor(prev) != Math.floor(this.playerItem.energy));
-    this.savePlayerData();
+        if (Math.floor(prev) != Math.floor(this.playerItem.energy))  this.savePlayerData();
    }
    if (SM.inst.currentStage == charStage || SM.inst.currentStage == shopStage)
    {
@@ -10498,8 +10497,6 @@ getDedImage = function (ava) {
 
 
     if (ava) {
-
-
         CObj.getById("bback").gfx.visible = false;
         CObj.getById("ava").gfx.visible = false;
         CObj.getById("bgshopded").gfx.visible = false;
@@ -10541,7 +10538,6 @@ uploadPhoto = function (id, ava, endCB) {
             url: 'upload.php',
             data: {uploadUrl: uplurl, photo: str},
             dataType: "text"
-
         }).success(function (res) {
             var obj = JSON.parse(res);
             if (ava) {
