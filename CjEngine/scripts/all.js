@@ -10489,17 +10489,23 @@ getDedImage = function (ava) {
         ox = 0;
         oy = 0;
     }
-    var r = new PIXI.RenderTexture(w, h);
+
+    var bb = CObj.getById("bback");
+    var ab = CObj.getById("ava");
+
+    bb.textField.alpha = 0;
+    ab.textField.alpha = 0;
+
 
     if (ava) {
-        CObj.getById("bback").textField.alpha = 0;
-        CObj.getById("ava").textField.alpha = 0;
 
 
         CObj.getById("bback").gfx.visible = false;
         CObj.getById("ava").gfx.visible = false;
         CObj.getById("bgshopded").gfx.visible = false;
     }
+
+    var r = new PIXI.RenderTexture(w, h);
     renderer.render(stage, true);
 
     var _matrix = new PIXI.Matrix();
@@ -10582,7 +10588,7 @@ uploadPhoto = function (id, ava, endCB) {
             }
             console.log("");
         }).error(function (res) {
-            console.log("");
+            console.log("ERROR UPLOAD");
             if (endCB)endCB();
         });
         //post(r.response.upload_url, {photo: s}, "post");
