@@ -9399,6 +9399,7 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
 
 PlayerData.prototype.loadEnd = function()
 {
+    PlayerData.inst.updateScore();
     PlayerData.inst.createAchProgress();
     window.dbinit  = true;
     console.log("DB intialized");
@@ -9460,7 +9461,6 @@ PlayerData.prototype.createAchProgress = function(cb)
       }
 
    }
-
 }
 
 incMetric = function(name)
