@@ -9744,6 +9744,7 @@ PlayerData.prototype.getVKfriends = function()
 PlayerData.prototype.azureLogin = function()
 {
     console.log("LOGIN VK USER ID = " + vkparams.viewerid.toString());
+    
     azureclient.invokeApi("login", {
         body: {platformid: vkparams.viewerid, ref: vkparams.refferer},
         method: "post"

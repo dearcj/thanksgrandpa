@@ -83,8 +83,8 @@
       <file leaf-file-name="all.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="34378" max-vertical-offset="211451">
-              <caret line="1825" column="41" selection-start-line="1825" selection-start-column="41" selection-end-line="1825" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="34416" max-vertical-offset="211470">
+              <caret line="1827" column="41" selection-start-line="1827" selection-start-column="41" selection-end-line="1827" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -103,8 +103,8 @@
       <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14702581" vertical-offset="13112" max-vertical-offset="14535">
-              <caret line="697" column="44" selection-start-line="697" selection-start-column="44" selection-end-line="697" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.21099888" vertical-offset="13112" max-vertical-offset="14554">
+              <caret line="700" column="4" selection-start-line="700" selection-start-column="4" selection-end-line="700" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -655,12 +655,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00638" summary="&#10;gf&#10;&#10;">
-      <created>1428397650327</created>
-      <option name="number" value="00638" />
-      <option name="project" value="LOCAL" />
-      <updated>1428397650328</updated>
-    </task>
     <task id="LOCAL-00639" summary="&#10;gf&#10;&#10;">
       <created>1428408756670</created>
       <option name="number" value="00639" />
@@ -949,7 +943,13 @@
       <option name="project" value="LOCAL" />
       <updated>1428827181170</updated>
     </task>
-    <option name="localTasksCounter" value="687" />
+    <task id="LOCAL-00687" summary="&#10;gf&#10;&#10;">
+      <created>1428827494680</created>
+      <option name="number" value="00687" />
+      <option name="project" value="LOCAL" />
+      <updated>1428827494680</updated>
+    </task>
+    <option name="localTasksCounter" value="688" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1381,8 +1381,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/all.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="34378" max-vertical-offset="211451">
-          <caret line="1825" column="41" selection-start-line="1825" selection-start-column="41" selection-end-line="1825" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="34416" max-vertical-offset="211470">
+          <caret line="1827" column="41" selection-start-line="1827" selection-start-column="41" selection-end-line="1827" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1453,8 +1453,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14702581" vertical-offset="13112" max-vertical-offset="14535">
-          <caret line="697" column="44" selection-start-line="697" selection-start-column="44" selection-end-line="697" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.21099888" vertical-offset="13112" max-vertical-offset="14554">
+          <caret line="700" column="4" selection-start-line="700" selection-start-column="4" selection-end-line="700" selection-end-column="4" />
           <folding />
         </state>
       </provider>
