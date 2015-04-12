@@ -39,20 +39,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.892858" vertical-offset="511" max-vertical-offset="2375">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.522831" vertical-offset="283" max-vertical-offset="2356">
+              <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MM.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MM.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.386083" vertical-offset="0" max-vertical-offset="10279">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10279">
               <caret line="65" column="66" selection-start-line="65" selection-start-column="66" selection-end-line="65" selection-end-column="66" />
               <folding />
             </state>
@@ -196,9 +196,9 @@
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CBoosterBox.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -654,12 +654,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00641" summary="&#10;gf&#10;&#10;">
-      <created>1428508256036</created>
-      <option name="number" value="00641" />
-      <option name="project" value="LOCAL" />
-      <updated>1428508256036</updated>
-    </task>
     <task id="LOCAL-00642" summary="&#10;gf&#10;&#10;">
       <created>1428508300582</created>
       <option name="number" value="00642" />
@@ -948,7 +942,13 @@
       <option name="project" value="LOCAL" />
       <updated>1428873043117</updated>
     </task>
-    <option name="localTasksCounter" value="690" />
+    <task id="LOCAL-00690" summary="&#10;gf&#10;&#10;">
+      <created>1428874995080</created>
+      <option name="number" value="00690" />
+      <option name="project" value="LOCAL" />
+      <updated>1428874995080</updated>
+    </task>
+    <option name="localTasksCounter" value="691" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1434,14 +1434,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.892858" vertical-offset="511" max-vertical-offset="2375">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBoosterBox.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="361" max-vertical-offset="2584">
@@ -1452,8 +1444,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.386083" vertical-offset="0" max-vertical-offset="10279">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10279">
           <caret line="65" column="66" selection-start-line="65" selection-start-column="66" selection-end-line="65" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.522831" vertical-offset="283" max-vertical-offset="2356">
+          <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
           <folding />
         </state>
       </provider>
