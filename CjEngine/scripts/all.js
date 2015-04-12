@@ -9668,7 +9668,7 @@ PlayerData.prototype.getVKuserData = function(playerItem)
             vkparams.first_name = data.response[0].first_name; else
             vkparams.first_name = "Ноунейм";
 
-        if (data.response[0].first_name)
+        if (data.response[0].last_name)
             vkparams.last_name = data.response[0].last_name; else
             vkparams.last_name = "";
 
@@ -9757,7 +9757,9 @@ PlayerData.prototype.azureLogin = function()
 
         PlayerData.inst.playerItem = results.result.playerItem;
 
+        if (vkparams.first_name)
         PlayerData.inst.playerItem.name = vkparams.first_name;
+        if (vkparams.last_name)
         PlayerData.inst.playerItem.last_name = vkparams.last_name;
 
         if (!PlayerData.inst.playerItem.crystals)
@@ -9766,7 +9768,7 @@ PlayerData.prototype.azureLogin = function()
         console.log("Player item read from login" + JSON.stringify(PlayerData.inst.playerItem));
 
         azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
-        vkparams.id = results.result.id;
+        vkparams.id = PlayerData.inst.playerItem.id;
         PlayerData.inst.getVKfriends();
     }, function(error) {
         PlayerData.inst.azureLogin();
