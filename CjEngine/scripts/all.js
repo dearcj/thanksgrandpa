@@ -6088,13 +6088,16 @@ CBoosterBox.prototype.getBooster = function()
 {
 
     ///
+    if (gameStage.player.state == this.sDying) return;
     if (!gameStage.player.pickupBooster) return;
     var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
         {name: "Double", cls: CDoubleBooster}];
 
     if (gameStage.tutorial)
         boosters = [{name: "Tablets", cls: CTabletsBooster}];
+
     var boost = getRand(boosters);
+
 
     if (CBooster.list)
     for (var i = 0; i < CBooster.list.length; ++i)
@@ -6632,6 +6635,7 @@ Boss2.prototype.fire = function()
     var moneyCrowProb = 0.4;
     this.patterns =
         [
+
             {mons: "+..", diff: 1, prob: bonusProb},
             {mons: "s..000l00..s.", diff: 1, prob: 1},
             {mons: "f..000..c.", diff: 1, prob: 1},
@@ -8943,16 +8947,15 @@ function CSupermanBooster(x,y,gfx,upgr) {
 CSupermanBooster.prototype.onActivate = function()
 {
     if (!gameStage.player) return;
+    if (gameStage.player.state == this.sDying) return;
     //if (gameStage.player.jumping) return;
     CBooster.prototype.onActivate.call(this);
     gameStage.player.gfx.skeleton.setAttachment("body", "body1");
 
-    new TweenMax(gameStage.player, 0.6, {y: 200, ease: Linear.easeOut});
+    this.tweenUp = new TweenMax(gameStage.player, 0.6, {y: 200, ease: Linear.easeOut});
     gameStage.player.jumping = true;
     gameStage.player.gravityEnabled = false;
    // gameStage.player.jumpBoost = false;
-
-
 
     this.fire1 = CObj.createMovieClip("firesmall");
     this.fire1.x = -314;
@@ -8990,6 +8993,10 @@ CSupermanBooster.prototype.onDeactivate = function()
     rp(b.fire1);
     rp(b.fire2);
     rp(b.fire3);
+    if (this.tweenUp) {
+        this.tweenUp.kill();
+        this.tweenUp = null;
+    }
     b.fire1 = null;
     b.fire2 = null;
     b.fire3 = null;
@@ -9744,7 +9751,7 @@ PlayerData.prototype.getVKfriends = function()
 PlayerData.prototype.azureLogin = function()
 {
     console.log("LOGIN VK USER ID = " + vkparams.viewerid.toString());
-    
+
     azureclient.invokeApi("login", {
         body: {platformid: vkparams.viewerid, ref: vkparams.refferer},
         method: "post"
