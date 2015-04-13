@@ -9722,41 +9722,39 @@ PlayerData.prototype.getVKfriends = function()
 
     VK.api('friends.getAppUsers',{}, function(data) {
         vkparams.friendsIngameIDs = [];
-        if (!data.response || !data.response.length)
-        {
+        if (!data.response || !data.response.length) {
             PlayerData.inst.getVKuserData();
 
         } else {
             //console.log("friends.get data" + JSON.stringify(data.response));
 
-            var friends = data.response;
-            for (var i = 0; i < friends.length; ++i)
-            {
-                vkparams.friendsIngameIDs.push(friends[i].toString());
-            }
-            console.log("VK friends+");
-            PlayerData.inst.getVKuserData();
-            //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
+            /*     var friends = data.response;
+             for (var i = 0; i < friends.length; ++i)
+             {
+             vkparams.friendsIngameIDs.push(friends[i].toString());
+             }
+             console.log("VK friends+");
+             PlayerData.inst.getVKuserData();
+             //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
+             }*/
+            //   vkparams.friendsIngameIDs = vkparams.friendsids;
+            azureclient.invokeApi("get_scores", {
+                body: {filter: vkparams.friendsids, take: 15},
+                method: "post"
+            }).done(function (results) {
+
+                vkparams.friendsIngame = results.result;
+                vkparams.friendsIngameIDs = [];
+                if (!results.result) return;
+                for (var i = 0; i < results.result.length; ++i) {
+                    vkparams.friendsIngameIDs.push(results.result[i].platformid.toString());
+                }
+
+                PlayerData.inst.getVKuserData();
+            }, function (error) {
+                PlayerData.inst.getVKuserData();
+            });
         }
-     //   vkparams.friendsIngameIDs = vkparams.friendsids;
-      /*  azureclient.invokeApi("get_scores", {
-            body: {filter: vkparams.friendsids, take: 1000},
-            method: "post"
-        }).done(function (results) {
-
-            vkparams.friendsIngame = results.result;
-            vkparams.friendsIngameIDs = [];
-            if (!results.result) return;
-            for (var i = 0; i < results.result.length; ++i)
-            {
-                vkparams.friendsIngameIDs.push(results.result[i].platformid.toString());
-            }
-
-            PlayerData.inst.getVKuserData();
-        }, function(error) {
-            PlayerData.inst.getVKuserData();
-        });*/
-
     });
 };
 
