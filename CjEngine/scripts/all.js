@@ -3154,7 +3154,7 @@ CharStage.prototype.process = function () {
 
 CharStage.prototype.updateFriends = function () {
 
-    PlayerData.inst.savePlayerData();
+   // PlayerData.inst.savePlayerData();
 
     azureclient.invokeApi("get_scores", {
         body: {filter: vkparams.friendsIngameIDs, take: charStage.showRecords, skip: charStage.skip},
@@ -7774,7 +7774,7 @@ CEActionGUI.prototype.takeReward = function()
     this.btnReward.destroy();
     this.btnReward = null;
     PlayerData.inst.savePlayerEvents(this.eventpl);
-    PlayerData.inst.savePlayerData();
+    //PlayerData.inst.savePlayerData();
     shopStage.updateStatsPanel();
 
     this.acting = false;
@@ -9092,8 +9092,9 @@ PlayerData = function()
 
     window.onbeforeunload = function(e)
     {
-        PlayerData.inst.updateEnergy();
-        PlayerData.inst.saveRunProgress();
+        PlayerData.inst.updateEnergy(true);
+        PlayerData.inst.saveRunProgress(true);
+        PlayerData.inst.savePlayerData();
         PlayerData.inst.updateScore();
     }
 }
@@ -9399,7 +9400,7 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
 
 PlayerData.prototype.loadEnd = function()
 {
-    PlayerData.inst.updateScore();
+   // PlayerData.inst.updateScore();
     PlayerData.inst.createAchProgress();
     window.dbinit  = true;
     console.log("DB intialized");
@@ -9407,7 +9408,7 @@ PlayerData.prototype.loadEnd = function()
 }
 
 
-PlayerData.prototype.updateEnergy = function()
+PlayerData.prototype.updateEnergy = function(noUpdate)
 {
     if (!this.playerItem) return;
    var d = (new Date()).getTime() - this.playerItem.updateDate.getTime();
@@ -9427,7 +9428,7 @@ PlayerData.prototype.updateEnergy = function()
         this.playerItem.energy = 0;
     }
 
-        if (Math.floor(prev) != Math.floor(this.playerItem.energy))  this.savePlayerData();
+       if ((noUpdate == null) && Math.floor(prev) != Math.floor(this.playerItem.energy)) this.savePlayerData();
    }
    if (SM.inst.currentStage == charStage || SM.inst.currentStage == shopStage)
    {
@@ -9464,6 +9465,7 @@ PlayerData.prototype.createAchProgress = function(cb)
 
 incMetric = function(name)
 {
+    return;
    azureclient.invokeApi("increasemetric", {
       body: {name: name},
       method: "post"
@@ -9517,19 +9519,25 @@ PlayerData.prototype.loadData = function(cb)
        }
    );
 
+    PlayerData.inst.items = JSON.parse(itemsVar);
+    PlayerData.inst.loadCount ++;
 
-   window.azureclient.getTable("tb_items").read().done(
-       function (results) {
-          PlayerData.inst.items = results;
-           PlayerData.inst.items.sort(function(a, b) {
-               return a.reqlvl - b.reqlvl;
-           });
 
-          PlayerData.inst.loadCount ++;
-          if (PlayerData.inst.loadCount == totalLoads && cb) cb();
-       }, function (res) {}
-   );
+    /*
+       window.azureclient.getTable("tb_items").read().done(
+           function (results) {
+              PlayerData.inst.items = results;
+               console.log(JSON.stringify(results));
 
+               PlayerData.inst.items.sort(function(a, b) {
+                   return a.reqlvl - b.reqlvl;
+               });
+
+              PlayerData.inst.loadCount ++;
+              if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+           }, function (res) {}
+       );
+    */
    window.azureclient.getTable("tb_item_player").read().done(
        function (results) {
           PlayerData.inst.items_enabled = results;
@@ -9591,13 +9599,18 @@ PlayerData.prototype.loadData = function(cb)
        }, function (res) {}
    );
 
-   window.azureclient.getTable("tb_edevent").read().done(
-       function (results) {
-          PlayerData.inst.events = results;
-          PlayerData.inst.loadCount ++;
-          if (PlayerData.inst.loadCount == totalLoads && cb) cb();
-       }, function (res) {}
-   );
+    PlayerData.inst.events = JSON.parse(eventsVar);
+    PlayerData.inst.loadCount ++;
+    /*
+       window.azureclient.getTable("tb_edevent").read().done(
+           function (results) {
+              PlayerData.inst.events = results;
+              console.log(JSON.stringify(results));
+              PlayerData.inst.loadCount ++;
+              if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+           }, function (res) {}
+       );
+       */
 }
 
 PlayerData.prototype.saveAllData = function()
@@ -9677,7 +9690,7 @@ PlayerData.prototype.getVKuserData = function(playerItem)
     });
 }
 
-PlayerData.prototype.saveRunProgress = function()
+PlayerData.prototype.saveRunProgress = function(noUpdate)
 {
     if (SM.inst.currentStage == gameStage && !gameStage.progressSaved) {
         var rec = Math.round(PlayerData.inst.playerItem.maxdistance);
@@ -9687,6 +9700,7 @@ PlayerData.prototype.saveRunProgress = function()
         gameStage.progressSaved = true;
         PlayerData.inst.playerItem.money += PlayerData.inst.score;
         PlayerData.inst.playerItem.maxdistance = rec;
+        if (noUpdate == null)
         PlayerData.inst.savePlayerData();
     }
 }
@@ -9813,6 +9827,11 @@ var tPerk = "perk";
 var tBoost = "boost";
 var tApp = "app.";
 var tHat = "hat";
+
+
+var eventsVar = '[{"id":"AD7026E7-E8D3-4875-8603-88A2359B0815","name":"event2","desc":"Получить пенсию","delay_min":2880,"xp_gain":0,"money_gain":500,"crystal_gain":0,"gfx":"action 2.png","reqlvl":1,"exectime":120},{"id":"A5EB5C84-97C3-4887-9D68-154BB315A895","name":"event5","desc":"Постирать мундир","delay_min":2880,"xp_gain":0,"money_gain":0,"crystal_gain":8,"gfx":"action 5.png","reqlvl":9,"exectime":120},{"id":"1F94C1A3-64F2-49D1-BD3C-8C66209EA613","name":"event4","desc":"Заглянуть в интернет","delay_min":1440,"xp_gain":600,"money_gain":0,"crystal_gain":0,"gfx":"action 4.png","reqlvl":6,"exectime":140},{"id":"A8080122-06EE-442E-949B-5FE8E960DF54","name":"event3","desc":"Посмотреть новости","delay_min":360,"xp_gain":50,"money_gain":0,"crystal_gain":0,"gfx":"action 3.png","reqlvl":2,"exectime":30},{"id":"A35101AA-2484-4C98-92C1-9A26D564E809","name":"event6","desc":"Доесть ужин","delay_min":1440,"xp_gain":100,"money_gain":0,"crystal_gain":0,"gfx":"action 6.png","reqlvl":1,"exectime":10},{"id":"86AB8110-BD8D-4DE5-A535-5DCE4EB19452","name":"event10","desc":"Посмотреть фотографии","delay_min":60,"xp_gain":50,"money_gain":0,"crystal_gain":0,"gfx":"action 10.png","reqlvl":1,"exectime":10},{"id":"2461E45B-C109-45EA-9295-91D9685E5651","name":"event1","desc":"Помянуть боевых товарищей","delay_min":1440,"xp_gain":0,"money_gain":0,"crystal_gain":2,"gfx":"action 1.png","reqlvl":2,"exectime":30},{"id":"78AC92A6-76C8-4D74-9001-95C4CBEC8DF8","name":"event7","desc":"Позвонить внуку","delay_min":1440,"xp_gain":900,"money_gain":0,"crystal_gain":0,"gfx":"action 7.png","reqlvl":8,"exectime":80},{"id":"785A09ED-A4FF-4066-8E8B-9D2810219975","name":"event8","desc":"Помочь бабке по хозяйству","delay_min":240,"xp_gain":0,"money_gain":0,"crystal_gain":3,"gfx":"action 8.png","reqlvl":6,"exectime":50},{"id":"9F0FBADB-58B1-4D32-B317-88C9E7732664","name":"event9","desc":"Подремать","delay_min":360,"xp_gain":200,"money_gain":0,"crystal_gain":0,"gfx":"action 9.png","reqlvl":5,"exectime":120},{"id":"50DC67F5-9EEC-49FA-9BFD-3D9A74DFD02C","name":"event13","desc":"Сходить в поликлинику","delay_min":2880,"xp_gain":0,"money_gain":1000,"crystal_gain":3,"gfx":"action 13.png","reqlvl":3,"exectime":200},{"id":"505A0266-322A-422D-A429-EA768DBDB9C8","name":"event12","desc":"Почистить ордена","delay_min":1440,"xp_gain":0,"money_gain":0,"crystal_gain":2,"gfx":"action 12.png","reqlvl":1,"exectime":1},{"id":"42E71D8A-AB18-4BBA-9515-F227A7B3909C","name":"event11","desc":"Почитать книгу","delay_min":240,"xp_gain":0,"money_gain":0,"crystal_gain":1,"gfx":"action 11.png","reqlvl":5,"exectime":60},{"id":"F40FDAC0-ABB3-47D9-952B-B28FF1EE5493","name":"event14","desc":"Покормить кота","delay_min":360,"xp_gain":0,"money_gain":1000,"crystal_gain":0,"gfx":"action 14.png","reqlvl":6,"exectime":30}]';
+var itemsVar = '[{"id":"6ED7C938-E203-4D30-88D1-0BF07C1823C9","type":"weap","price":2400,"pricecrys":48,"name":"Minigun","desc":"Миниган - многоствольный скорострельный пулемёт==построенный по схеме Гатлинга==магазин 100 патронов","gfx":"gun3","reqlvl":7},{"id":"68AFAEDC-B3E0-401E-9E1A-E272084F2E11","type":"weap","price":-1,"pricecrys":-1,"name":"Rifle","desc":"Старое дедовское ружьишко","gfx":"gun0","reqlvl":-1},{"id":"ADDE46AE-5172-4998-A040-8A30208F82F5","type":"weap","price":8000,"pricecrys":160,"name":"Grenade launcher","desc":"Гранатомёт - ручной многозарядный==полуавтоматический гранатомет==3 снаряда","gfx":"gun4","reqlvl":10},{"id":"099C7C92-CE98-4271-AB3D-26D01CD14EA5","type":"weap","price":30000,"pricecrys":600,"name":"Plazma Cannon","desc":"Лазерная винтовка - энергетическое оружие==разработанное в центре Сколково","gfx":"gun5","reqlvl":15},{"id":"5D1C0768-4641-4BCB-A11C-BC28FDF5E8DA","type":"boost","price":150,"pricecrys":-1,"name":"Tablets","desc":"Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 1 секунда.","gfx":"booster1","reqlvl":1},{"id":"502C9C7F-6844-4F80-98A8-FC47282EBA47","type":"app.hat","price":3200,"pricecrys":-1,"name":"Appearence.Hat2","desc":"Боевая каска.==Осталась со времён войны.","gfx":"hat2","reqlvl":-1},{"id":"F54396E1-7C3B-4AE2-A6CC-CA1FD5FE9978","type":"app.hat","price":8500,"pricecrys":-1,"name":"Appearence.Hat4","desc":"Молодёжная кепка.==Внучок оставил однажды и забыл забрать.","gfx":"hat4","reqlvl":-1},{"id":"20D318C0-4633-41D0-B406-FD34485A88BE","type":"app.hat","price":1500,"pricecrys":-1,"name":"Appearence.Hat1","desc":"Старая добрая ушаночка.","gfx":"hat1","reqlvl":-1},{"id":"55FDBF00-18D5-4166-8CAA-EA857282A1CD","type":"weap","price":1300,"pricecrys":26,"name":"AK-74","desc":"Калаш|АК-47 - автомат был сконструирован==Михаилом Тимофеевичем Калашниковым==Увеличенный магазин: 50 патронов","gfx":"gun2","reqlvl":4},{"id":"AC2FBF7D-C1C3-436E-9143-62B214E84BED","type":"app.hat","price":5300,"pricecrys":-1,"name":"Appearence.Hat3","desc":"Вязаная шапка.==Сделана бабкой с любовью.","gfx":"hat3","reqlvl":-1},{"id":"9BC2F82D-3E58-4C4A-8B9A-5DB44AF8007C","type":"boost","price":100,"pricecrys":-1,"name":"Magnet","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 5 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":1},{"id":"3AE0E027-3DAD-4F2E-A212-69A1E255F1A0","type":"app.hat","price":13000,"pricecrys":-1,"name":"Appearence.Hat6","desc":"Ковбойская шляпа.==Сын привёз из командировки в Америку.","gfx":"hat6","reqlvl":-1},{"id":"ACEB3015-EB8A-4A64-940F-2691A4E0446D","type":"app.hat","price":10000,"pricecrys":-1,"name":"Appearence.Hat5","desc":"Подарок от старого товарища Брюса.","gfx":"hat5","reqlvl":-1},{"id":"4E8B719A-899C-4891-9D99-E802703DE82E","type":"boost","price":500,"pricecrys":-1,"name":"Health","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 2 жизни","gfx":"booster4","reqlvl":1},{"id":"49834C28-2216-4FF9-93AF-557E9CF1C986","type":"boost","price":600,"pricecrys":-1,"name":"Double","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 3 секунды.==+225% золота.","gfx":"booster3","reqlvl":-1},{"id":"105A3B3C-160C-4355-AB38-9F107DB5A831","type":"boost","price":300,"pricecrys":-1,"name":"MarioStar","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 2 секунды.","gfx":"booster5","reqlvl":1},{"id":"BCEB6650-A98F-4AFA-A0FA-102BC2FBC1AD","type":"weap","price":600,"pricecrys":12,"name":"PPS","desc":"ППШ|Пистолет-пулемёт Шпагина==магазин 20 патронов","gfx":"gun1","reqlvl":2},{"id":"EC8B0A97-C84C-4325-B600-16EDC6F4CE2A","type":"boost","price":400,"pricecrys":8,"name":"Magnet$2","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 15 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":4},{"id":"0B97B8DF-372A-4230-BD08-FCB8E7453BE1","type":"boost","price":2000,"pricecrys":40,"name":"Magnet$4","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 25 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":8},{"id":"47FA0935-0CC3-4F23-A027-2649E81BBA92","type":"boost","price":800,"pricecrys":16,"name":"Magnet$3","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 20 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":6},{"id":"5EF89B3A-A758-4DFA-A952-63538BF1907E","type":"boost","price":200,"pricecrys":4,"name":"Magnet$1","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 10 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":2},{"id":"1E76FCE6-457D-4EF1-A66E-6A275013937D","type":"boost","price":1800,"pricecrys":24,"name":"Tablets$3","desc":"Биодобавки|Таблетка: ускоряет деда==и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 4 секунда.","gfx":"booster1","reqlvl":9},{"id":"3B6692F2-5ED9-420D-8A03-2C6FED5F5C32","type":"boost","price":600,"pricecrys":12,"name":"Tablets$2","desc":"Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 3 секунды.","gfx":"booster1","reqlvl":6},{"id":"095B6806-CDAA-4784-AB43-2CB2B5C2B66E","type":"boost","price":300,"pricecrys":6,"name":"Tablets$1","desc":"Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 2 секунды.","gfx":"booster1","reqlvl":3},{"id":"F33D13E2-C070-4FA3-AE40-B770D4718473","type":"boost","price":3500,"pricecrys":60,"name":"Tablets$4","desc":"Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 5 секунд.","gfx":"booster1","reqlvl":12},{"id":"5E575830-911E-41B8-88EF-538F37DF9A7F","type":"boost","price":600,"pricecrys":8,"name":"MarioStar$1","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 4 секунды.","gfx":"booster5","reqlvl":3},{"id":"D7B1CFCD-99CB-4A6A-8337-1707BAD25887","type":"boost","price":1000,"pricecrys":20,"name":"Health$1","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 3 жизни","gfx":"booster4","reqlvl":4},{"id":"4A54E9DC-93B8-4DCB-8B01-33E6AC168E74","type":"boost","price":4000,"pricecrys":80,"name":"Health$3","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 5 жизней","gfx":"booster4","reqlvl":12},{"id":"7FC75CEE-7E82-4871-B169-C437940C98B8","type":"boost","price":10000,"pricecrys":200,"name":"Health$4","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==Восстанавливает здоровье==+Дополнительный слот жизни навсегда.","gfx":"booster4","reqlvl":15},{"id":"38B9E840-F701-4E87-A991-68519C8A95CB","type":"boost","price":5000,"pricecrys":100,"name":"MarioStar$4","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 10 секунды.","gfx":"booster5","reqlvl":10},{"id":"5D7B9DE0-A146-43F8-8B22-0FC8875A0BE5","type":"boost","price":2400,"pricecrys":32,"name":"MarioStar$3","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 8 секунды.","gfx":"booster5","reqlvl":7},{"id":"E37EBDDF-D155-4C59-A98C-8E73EF3D4D9E","type":"boost","price":1200,"pricecrys":24,"name":"Double$1","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 6 секунд.==+250% золота.","gfx":"booster3","reqlvl":4},{"id":"015F93BB-A89B-47E4-8F1B-E13E421B5974","type":"boost","price":4400,"pricecrys":88,"name":"Double$3","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 12 секунд.== +300% золота","gfx":"booster3","reqlvl":10},{"id":"4E524D43-9C94-4E4F-B77B-CA2FC46728EB","type":"boost","price":2200,"pricecrys":44,"name":"Double$2","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 9 секунд.== +275% золота.","gfx":"booster3","reqlvl":8},{"id":"3F416BFA-8F49-4279-BF26-B5D8BA92A690","type":"boost","price":9000,"pricecrys":180,"name":"Double$4","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 15 секунд.== +325% золота","gfx":"booster3","reqlvl":15},{"id":"CEA6B748-2B72-4D7A-9320-5CFF079C640A","type":"boost","price":2000,"pricecrys":40,"name":"Health$2","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь.==[Улучшение]==Лечит на 4 жизни.","gfx":"booster4","reqlvl":8},{"id":"39F933BC-11E6-4ABA-8DB8-C3649E428B21","type":"boost","price":1200,"pricecrys":16,"name":"MarioStar$2","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 6 секунды.","gfx":"booster5","reqlvl":5}]';
+
 
 function checkDb ()
 {
