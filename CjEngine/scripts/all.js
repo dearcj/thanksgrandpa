@@ -891,7 +891,7 @@ GameStage.prototype.shAfterLife = function () {
             PlayerData.inst.playerItem.crystals -= gameStage.revealPrice;
             gameStage.revealPrice *= 2;
             gameStage.player.reveal();
-            PlayerData.inst.savePlayerData();
+
 
             new TweenMax(LauncherBG.inst, 2, {maxVelocity: LauncherBG.inst.preVelocity});
         }
@@ -996,9 +996,12 @@ GameStage.prototype.openEndWindowLoaded = function () {
         CObj.getById("b" + i.toString()).text = "";
     }
 
-    PlayerData.inst.saveRunProgress();
-
-
+    PlayerData.inst.saveRunProgress(true);
+    PlayerData.inst.updateScore(function (r)
+    {
+        PlayerData.inst.playerItem.rank = r.rank;
+        PlayerData.inst.savePlayerData();
+    });
 
     CObj.getById("bshare").click = function () {
 
@@ -2992,7 +2995,7 @@ CharStage.prototype.onShowContinue = function () {
         //RE MOVE
         if (PlayerData.inst.playerItem.energy >= 1) {
             PlayerData.inst.playerItem.energy -= 1;
-            PlayerData.inst.savePlayerData();
+           // PlayerData.inst.savePlayerData();
             SM.inst.openStage(gameStage)
         } else {
             var en1 = CObj.getById("tfenergy");
@@ -9079,7 +9082,6 @@ PlayerData = function()
 
    this.items = {};
    this.achs = {};
-
    this.score = 0;
 
 
@@ -9088,14 +9090,16 @@ PlayerData = function()
    PlayerData.inst.azureLogin();
 
 
-
-
     window.onbeforeunload = function(e)
     {
         PlayerData.inst.updateEnergy(true);
         PlayerData.inst.saveRunProgress(true);
+        PlayerData.inst.updateScore(function (r)
+        {
+            PlayerData.inst.playerItem.rank = r.rank;
+            PlayerData.inst.savePlayerData();
+        });
         PlayerData.inst.savePlayerData();
-        PlayerData.inst.updateScore();
     }
 }
 
@@ -9428,7 +9432,7 @@ PlayerData.prototype.updateEnergy = function(noUpdate)
         this.playerItem.energy = 0;
     }
 
-       if ((noUpdate == null) && Math.floor(prev) != Math.floor(this.playerItem.energy)) this.savePlayerData();
+    //   if ((noUpdate == null) && Math.floor(prev) != Math.floor(this.playerItem.energy)) this.savePlayerData();
    }
    if (SM.inst.currentStage == charStage || SM.inst.currentStage == shopStage)
    {
@@ -9482,13 +9486,14 @@ PlayerData.prototype.getEventById = function(id)
    return null;
 }
 
-PlayerData.prototype.updateScore = function()
+PlayerData.prototype.updateScore = function(cb)
 {
     azureclient.invokeApi("update_score", {
         body: {id_player: PlayerData.inst.playerItem.id, score: PlayerData.inst.playerItem.maxdistance},
         method: "post"
-    }).done(function()
+    }).done(function(r)
     {
+        if (cb) cb(r);
     });
 }
 
@@ -9565,13 +9570,13 @@ PlayerData.prototype.loadData = function(cb)
 
           if (!found)
           {
-             azureclient.invokeApi("buy_item", {
+            /* azureclient.invokeApi("buy_item", {
                 body: {id_item: defaultRifleID, id_player: PlayerData.inst.pid, equipped: eq},
                 method: "post"
              }).done(function (results) {
 
              }, function(error) {
-             });
+             });*/
 
              var eq = true;
              if (PlayerData.inst.items_enabled.length > 0)
@@ -9818,7 +9823,7 @@ PlayerData.dbInit = function() {
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "2882845";//"CARLSON"+Math.round(Math.random()*1000000).toString();
+        vkparams.viewerid = "CARLAPA2882845";//"CARLSON"+Math.round(Math.random()*1000000).toString();
 
         if (MOBILE)
         {
