@@ -9715,6 +9715,7 @@ PlayerData.prototype.getVKfriends = function()
     vkparams.friendsIngameIDs = [];
     if (vkparams.novk)
     {
+        if (window.location.search == "?lhst=1922")
         this.loadData(this.loadEnd);
         return;
     }
