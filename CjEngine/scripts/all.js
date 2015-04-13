@@ -9738,22 +9738,28 @@ PlayerData.prototype.getVKfriends = function()
              //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
              }*/
             //   vkparams.friendsIngameIDs = vkparams.friendsids;
-            azureclient.invokeApi("get_scores", {
-                body: {filter: vkparams.friendsids, take: 15},
-                method: "post"
-            }).done(function (results) {
 
-                vkparams.friendsIngame = results.result;
-                vkparams.friendsIngameIDs = [];
-                if (!results.result) return;
-                for (var i = 0; i < results.result.length; ++i) {
-                    vkparams.friendsIngameIDs.push(results.result[i].platformid.toString());
-                }
+            if (vkparams.friendsIngameIDs > 0) {
+                azureclient.invokeApi("get_scores", {
+                    body: {filter: vkparams.friendsids, take: 15},
+                    method: "post"
+                }).done(function (results) {
 
+                    vkparams.friendsIngame = results.result;
+                    vkparams.friendsIngameIDs = [];
+                    if (!results.result) return;
+                    for (var i = 0; i < results.result.length; ++i) {
+                        vkparams.friendsIngameIDs.push(results.result[i].platformid.toString());
+                    }
+
+                    PlayerData.inst.getVKuserData();
+                }, function (error) {
+                    PlayerData.inst.getVKuserData();
+                });
+            } else
+            {
                 PlayerData.inst.getVKuserData();
-            }, function (error) {
-                PlayerData.inst.getVKuserData();
-            });
+            }
         }
     });
 };
