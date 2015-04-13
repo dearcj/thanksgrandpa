@@ -2938,7 +2938,8 @@ CharStage.prototype.onShowContinue = function () {
     CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
 
     CObj.getById("bpubl").click = function () {
-        OpenInNewTab("https://vk.com/thanksgradpa");
+
+        OpenInNewTab("https://vk.com/thanksgrandpa");
     };
 
     charStage.updateMusicButton(CObj.getById("bmusic"));
