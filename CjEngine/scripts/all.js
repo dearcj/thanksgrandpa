@@ -1804,21 +1804,21 @@ ShopStage.prototype.buyItem = function (event, unlock) {
         // shopStage.unequipAll();
         shopStage.transScreen = SM.inst.addDisableWindow("ПРОВОДИТСЯ ТРАНЗАКЦИЯ" + '\n' + "ПОЖАЛУЙСТА ПОДОЖДИТЕ");
 
-        if (unlock && buyitem.pricecrys > 0)
-            PlayerData.inst.playerItem.crystals -= buyitem.pricecrys;
-        else
-            PlayerData.inst.playerItem.money -= buyitem.price;
-
 
         ZSound.Play("buy");
         azureclient.invokeApi("buy_item", {
             body: {id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id},
             method: "post"
         }).done(function (results) {
-            shopStage.updateStatsPanel();
-            PlayerData.inst.savePlayerData(function () {
-                PlayerData.inst.loadData(function () {
                     incMetric("BUY ITEM" + buyitem.name);
+
+                    if (unlock && buyitem.pricecrys > 0)
+                        PlayerData.inst.playerItem.crystals -= buyitem.pricecrys;
+                    else
+                        PlayerData.inst.playerItem.money -= buyitem.price;
+
+                    shopStage.updateStatsPanel();
+
                     PlayerData.inst.equipItem(buyitem, true);
                     shopStage.pl.updateAppearence(true, false, null, null, null);
 
@@ -1826,11 +1826,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                     shopStage.updateStatsPanel();
                     shopStage.transScreen.parent.removeChild(shopStage.transScreen);
                     shopStage.transScreen = null;
-                });
-            }, function (error) {
-                shopStage.transScreen.parent.removeChild(shopStage.transScreen);
-                shopStage.transScreen = null;
-            });
+                    PlayerData.inst.savePlayerData();
         });
     } else {
         charStage.openPremiumWindow();
