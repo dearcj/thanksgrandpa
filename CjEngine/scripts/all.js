@@ -6006,7 +6006,7 @@ CKey.prototype.collide = function(obj2)
     if (!PlayerData.inst.playerItem.keys) PlayerData.inst.playerItem.keys = 0;
 
     PlayerData.inst.playerItem.keys ++;
-    PlayerData.inst.savePlayerData();
+    //PlayerData.inst.savePlayerData();
     var tfKeys = CTextField.createTextField({fontFamily: "dedgamecaps", fontSize: 25, text: "СОБРАНО " + PlayerData.inst.playerItem.keys.toString() + " КЛЮЧЕЙ"}) ;
     tfKeys.updateText();
     tfKeys.x = this.x;
@@ -9303,7 +9303,7 @@ PlayerData.prototype.gainExp = function(amount) {
                    } else {
                        shopStage.updateStatsPanel();
                        charStage.closeEventsWnd();
-                       PlayerData.inst.savePlayerData();
+                       //PlayerData.inst.savePlayerData();
                    }
                 };
 
