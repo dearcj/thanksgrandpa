@@ -8820,10 +8820,6 @@ CBooster.prototype.removeBoosterItem = function() {
     if (i < PlayerData.inst.items_enabled.length)
         PlayerData.inst.items_enabled.splice(this.ieid, 1);
 
-    azureclient.invokeApi("removeitem", {
-        body: {iditemplayer: this.ieid},
-        method: "post"
-    });
 }
 
 CBooster.prototype.onActivate = function() {
@@ -9710,8 +9706,10 @@ PlayerData.prototype.getVKfriends = function()
     }
 
     VK.api('friends.getAppUsers',{}, function(data) {
+        vkparams.friendsIngameIDs = [];
         if (!data.response || !data.response.length)
         {
+            PlayerData.inst.getVKuserData();
 
         } else {
             //console.log("friends.get data" + JSON.stringify(data.response));
@@ -9719,12 +9717,14 @@ PlayerData.prototype.getVKfriends = function()
             var friends = data.response;
             for (var i = 0; i < friends.length; ++i)
             {
-                vkparams.friendsids.push(friends[i].toString());
+                vkparams.friendsIngameIDs.push(friends[i].toString());
             }
             console.log("VK friends+");
+            PlayerData.inst.getVKuserData();
             //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
         }
-        azureclient.invokeApi("get_scores", {
+     //   vkparams.friendsIngameIDs = vkparams.friendsids;
+      /*  azureclient.invokeApi("get_scores", {
             body: {filter: vkparams.friendsids, take: 1000},
             method: "post"
         }).done(function (results) {
@@ -9740,7 +9740,7 @@ PlayerData.prototype.getVKfriends = function()
             PlayerData.inst.getVKuserData();
         }, function(error) {
             PlayerData.inst.getVKuserData();
-        });
+        });*/
 
     });
 };
