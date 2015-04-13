@@ -9738,10 +9738,16 @@ PlayerData.prototype.getVKfriends = function()
              //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
              }*/
             //   vkparams.friendsIngameIDs = vkparams.friendsids;
+            var friends = data.response;
+            for (var i = 0; i < friends.length; ++i)
+            {
+                vkparams.friendsIngameIDs.push(friends[i].toString());
+            }
 
-            if (vkparams.friendsIngameIDs > 0) {
+
+            if (vkparams.friendsIngameIDs.length > 0) {
                 azureclient.invokeApi("get_scores", {
-                    body: {filter: vkparams.friendsids, take: 15},
+                    body: {filter: vkparams.friendsIngameIDs, take: 15},
                     method: "post"
                 }).done(function (results) {
 
