@@ -1820,9 +1820,13 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                     else
                         PlayerData.inst.playerItem.money -= buyitem.price;
 
+
+                    PlayerData.inst.items_enabled.push({id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
                     shopStage.updateStatsPanel();
 
-                    PlayerData.inst.equipItem(buyitem, true);
+
+
+            PlayerData.inst.equipItem(buyitem, true);
                     shopStage.pl.updateAppearence(true, false, null, null, null);
 
                     shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
@@ -9094,6 +9098,7 @@ PlayerData = function()
     {
         PlayerData.inst.updateEnergy(true);
         PlayerData.inst.saveRunProgress(true);
+        PlayerData.inst.savePlayerItems();
         PlayerData.inst.updateScore(function (r)
         {
             PlayerData.inst.playerItem.rank = r.rank;
@@ -9233,7 +9238,7 @@ PlayerData.prototype.equipItem = function(item, state)
       }
    }
 
-   this.savePlayerItems();
+
 }
 
 
