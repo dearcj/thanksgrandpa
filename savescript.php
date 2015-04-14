@@ -13,10 +13,11 @@ foreach($pl as $key => $value){
   $sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $pdo->quote($value); 
 }
 $sqlclause = implode(",",$sql);
-print_r ($sqlclause);
+$wholestr = "UPDATE INTO thanksdad.tb_players SET $sqlclause";
+print_r ($wholestr);
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$statement = $pdo->prepare("UPDATE INTO thanksdad.tb_players SET $sqlclause");
+$statement = $pdo->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll();
 
