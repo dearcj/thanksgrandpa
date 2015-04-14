@@ -9,7 +9,7 @@ $pl = json_decode('{"id":"3EA0232F-4A28-4FD2-83AC-EC6254F90BC6","ref":null,"vkap
 
 $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db2",
                 "crazyjuice","girkinLOH1");
-foreach($my_arr as $key => $value){
+foreach($pl as $key => $value){
   $sql[] = (is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . $pdo->quote($value) . "'"; 
 }
 $sqlclause = implode(",",$sql);
