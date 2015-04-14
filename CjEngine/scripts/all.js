@@ -1009,6 +1009,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
     {
         PlayerData.inst.playerItem.rank = r.rank;
     });
+
     PlayerData.inst.savePlayerData();
 
     CObj.getById("bshare").click = function () {
@@ -1203,7 +1204,7 @@ GameStage.prototype.onShow = function () {
         }, SM.inst.superStage);
     }
 
-    this.progressSaved = false;
+    gameStage.progressSaved = false;
 
     incMetric("GAMEPLAY");
 
@@ -9687,6 +9688,7 @@ PlayerData.prototype.savePlayerData = function(cb)
 {
    window.azureclient.getTable("tb_players").update(this.playerItem).done(function (result) {
       PlayerData.inst.playerItem = result;
+       console.log("DATA SAVED");
        if (cb) cb();
    }, function (err) {
    });
