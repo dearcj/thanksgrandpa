@@ -10,10 +10,11 @@ $pl = json_decode('{"id":"3EA0232F-4A28-4FD2-83AC-EC6254F90BC6","ref":null,"vkap
 $pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db2",
                 "crazyjuice","girkinLOH1");
 foreach($pl as $key => $value){
+	if ($value == null) continue;
   $sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $pdo->quote($value); 
 }
 $sqlclause = implode(",",$sql);
-$wholestr = "UPDATE INTO thanksdad.tb_players SET $sqlclause";
+$wholestr = "UPDATE thanksdad.tb_players SET $sqlclause WHERE id = " . quote($pl['id']);
 print_r ($wholestr);
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
