@@ -6090,8 +6090,6 @@ CBoosterBox.prototype.destroy = function()
 
 CBoosterBox.prototype.getBooster = function()
 {
-
-    ///
     if (gameStage.player.state == this.sDying) return;
     if (!gameStage.player.pickupBooster) return;
     var boosters = [{name: "Magnet", cls: CMagnetBooster}, {name: "Tablets", cls: CTabletsBooster}, {name: "Health", cls: CHeartBooster}, {name: "MarioStar", cls: CSupermanBooster},
@@ -6100,8 +6098,9 @@ CBoosterBox.prototype.getBooster = function()
     if (gameStage.tutorial)
         boosters = [{name: "Tablets", cls: CTabletsBooster}];
 
-    var boost = getRand(boosters);
+    boosters = {name: "MarioStar", cls: CSupermanBooster};
 
+    var boost = getRand(boosters);
 
     if (CBooster.list)
     for (var i = 0; i < CBooster.list.length; ++i)
@@ -6112,7 +6111,6 @@ CBoosterBox.prototype.getBooster = function()
             break;
         }
     }
-
 
     for (var i = 0;i < PlayerData.inst.items.length;++i)
     {
@@ -6639,6 +6637,7 @@ Boss2.prototype.fire = function()
     var moneyCrowProb = 0.4;
     this.patterns =
         [
+            {mons: "+..", diff: 1, prob: bonusProb}/*,
 
             {mons: "+..", diff: 1, prob: bonusProb},
             {mons: "s..000l00..s.", diff: 1, prob: 1},
@@ -6699,7 +6698,7 @@ Boss2.prototype.fire = function()
                 {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1},
                 {mons: ".c.chH..h..H..000000", diff: 10, prob: 1},
                 {mons: "ss...ssss..b.l..c", diff: 10, prob: 1},
-                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1}
+                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1} */
 
         ];
     this.carClips = ["car","car1","car2"];
@@ -9700,6 +9699,10 @@ PlayerData.prototype.getVKuserData = function(playerItem)
             vkparams.last_name = data.response[0].last_name; else
             vkparams.last_name = "";
 
+        if (vkparams.first_name)
+            PlayerData.inst.playerItem.name = vkparams.first_name;
+        if (vkparams.last_name)
+            PlayerData.inst.playerItem.last_name = vkparams.last_name;
 
         PlayerData.inst.loadData(PlayerData.inst.loadEnd);
     });
@@ -9802,10 +9805,7 @@ PlayerData.prototype.azureLogin = function()
 
         PlayerData.inst.playerItem = results.result.playerItem;
 
-        if (vkparams.first_name)
-        PlayerData.inst.playerItem.name = vkparams.first_name;
-        if (vkparams.last_name)
-        PlayerData.inst.playerItem.last_name = vkparams.last_name;
+
 
         if (!PlayerData.inst.playerItem.crystals)
         PlayerData.inst.playerItem.crystals = 0;
@@ -9833,7 +9833,7 @@ PlayerData.dbInit = function() {
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "CARLAPA2882845";//"CARLSON"+Math.round(Math.random()*1000000).toString();
+        vkparams.viewerid = "CARLAPA2882845ww";//"CARLSON"+Math.round(Math.random()*1000000).toString();
 
         if (MOBILE)
         {
