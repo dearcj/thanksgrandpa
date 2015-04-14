@@ -690,7 +690,6 @@ GameStage.prototype.onHide = function (newStage) {
     gameStage.losing = false;
     gameStage.scoreObj = null;
     gameStage.preWinText = null;
-    gameStage.curweapon = null;
 
     gameStage.ammobar = null;
     gameStage.ammoico = null;
@@ -816,26 +815,29 @@ GameStage.prototype.updateItems = function () {
             k++;
         }
 */
+    var curweapon = w_rifle;
+
+
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
         if (item.type == tWeapon && PlayerData.inst.items_enabled[i].equipped)
         {
             if (item.name == "Rifle")
-                gameStage.curweapon = w_rifle;
+                curweapon = w_rifle;
             if (item.name == "PPS")
-                gameStage.curweapon = w_pps;
+                curweapon = w_pps;
             if (item.name == "AK-74")
-                gameStage.curweapon = w_ak74;
+                curweapon = w_ak74;
             if (item.name == "Minigun")
-                gameStage.curweapon = w_minigun;
+                curweapon = w_minigun;
             if (item.name == "Grenade launcher")
-                gameStage.curweapon = w_grenadel;
+                curweapon = w_grenadel;
             if (item.name == "Plazma Cannon")
-                gameStage.curweapon = w_laser;
+                curweapon = w_laser;
         }
     }
 
-    gameStage.player.weapon = gameStage.curweapon;
+    gameStage.player.weapon = curweapon;
 }
 
 GameStage.prototype.shAfterLife = function () {
@@ -876,6 +878,11 @@ GameStage.prototype.shAfterLife = function () {
     cb.gfx.interactive = true;
 
     onc(cb.gfx, function () {
+        if (vkparams.novk)
+        {
+            return;
+        }
+
         failtween.pause();
 
         var continueGame = function()
@@ -900,6 +907,7 @@ GameStage.prototype.shAfterLife = function () {
             continueGame();
         } else
         {
+
             var needed = gameStage.revealPrice  - PlayerData.inst.playerItem.crystals;
             if (needed <= 3)
                 order("item4");else
@@ -5244,34 +5252,34 @@ CPlayer.prototype.process = function()
         var dx = 0;
         var dy = 0;
         var da = 0;
-        if (gameStage.curweapon == w_laser) {
+        if (this.weapon == w_laser) {
             dx = 0;
             dy = 200;
         }else
 
-        if (gameStage.curweapon == w_ak74) {
+        if (this.weapon == w_ak74) {
             dx = 220;
             dy = 0;
         }else
 
-        if (gameStage.curweapon == w_rifle) {
+        if (this.weapon == w_rifle) {
             dx = 220;
             dy = 20;
         }
         else
-        if (gameStage.curweapon == w_pps) {
+        if (this.weapon == w_pps) {
             dx = 330;
             dy = 20;
             da = -Math.PI / 20;
         }
         else
-        if (gameStage.curweapon == w_grenadel) {
+        if (this.weapon == w_grenadel) {
             dx = -20;
             dy = 250;
             da = 0;
         }
         else
-        if (gameStage.curweapon == w_minigun)
+        if (this.weapon == w_minigun)
         {
             dy = 380;
             dx = -68;
@@ -6098,7 +6106,6 @@ CBoosterBox.prototype.getBooster = function()
     if (gameStage.tutorial)
         boosters = [{name: "Tablets", cls: CTabletsBooster}];
 
-    boosters = {name: "MarioStar", cls: CSupermanBooster};
 
     var boost = getRand(boosters);
 
@@ -6637,7 +6644,7 @@ Boss2.prototype.fire = function()
     var moneyCrowProb = 0.4;
     this.patterns =
         [
-            {mons: "+..", diff: 1, prob: bonusProb}/*,
+
 
             {mons: "+..", diff: 1, prob: bonusProb},
             {mons: "s..000l00..s.", diff: 1, prob: 1},
@@ -6698,7 +6705,7 @@ Boss2.prototype.fire = function()
                 {mons: "bb..o..b.o.H.h..c", diff: 9, prob: 1},
                 {mons: ".c.chH..h..H..000000", diff: 10, prob: 1},
                 {mons: "ss...ssss..b.l..c", diff: 10, prob: 1},
-                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1} */
+                {mons: ".z..zz...zzz..G.zzzz.", diff: 10, prob: 1}
 
         ];
     this.carClips = ["car","car1","car2"];
@@ -8598,6 +8605,7 @@ var w_pistol = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        recoilValue: 0,
         visualWidth: 20,
         dw: -0.7,
         speed: 40.5,
@@ -8621,6 +8629,7 @@ var w_rifle = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        recoilValue: 0,
         visualWidth: 15,
         dw: 0.3,
         speed: 50.5,
@@ -8648,6 +8657,7 @@ var w_pps = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        recoilValue: 0,
         visualWidth: 25,
         dw: -1.2,
         speed: 45.5,
@@ -8675,6 +8685,7 @@ var w_minigun = new CPistol(
     "пистолет", //name
     "описание", //desc
     {
+        recoilValue: 0,
         visualWidth: 20,
         dw: -0.7,
         speed: 40.5,
@@ -8701,6 +8712,7 @@ var w_ak74 = new CQueueGun(
     "пистолет", //name
     "описание", //desc
     {
+        recoilValue: 0,
         visualWidth: 10,
         dw: 0.1,
         speed: 60.5,
@@ -8730,6 +8742,7 @@ var w_grenadel = new CGrenadeLauncher(
     "лазер", //name
     "описание", //desc
     {
+        recoilValue: 0,
         visualWidth: 20,
         dw: -0.7,
         speed: 40.5,
@@ -8755,6 +8768,7 @@ var w_laser = new CLaser(
     "лазер", //name
     "описание", //desc
     {
+        recoilValue: 0,
         visualWidth: 20,
         dw: -0.7,
         speed: 40.5,
