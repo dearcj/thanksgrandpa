@@ -14,7 +14,7 @@ foreach($pl as $key => $value){
   $sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $pdo->quote($value); 
 }
 $sqlclause = implode(",",$sql);
-$wholestr = "UPDATE thanksdad.tb_players SET $sqlclause WHERE id = " . quote($pl['id']);
+$wholestr = "UPDATE thanksdad.tb_players SET $sqlclause WHERE id = " . $pdo->quote($pl['id']);
 print_r ($wholestr);
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
