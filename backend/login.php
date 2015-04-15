@@ -34,6 +34,14 @@ $result = $statement->fetchAll();
 		$statement->execute();
         $playerItem = $statement->fetchAll()[0];
 		$userid = $playerItem["id"];
+		$achs = readJSON($pdo, 'tb_ach', $userid);
+		foreach($achs as $ach){
+			$plach = array('id_ach' => $ach["id"],
+			'id_player' => $userid,
+			'progress' => 0);
+			insertJSON($pdo, "tb_ach_player", null, $plach);
+		} 
+		
 	} else die();
    }
 
@@ -47,7 +55,6 @@ $tokenJWT = JWT::encode($token, $secret_key);
 $response = array('tokeJWT' => $tokenJWT, 'playerItem' => $playerItem);
 echo json_encode($response);
 
-var_dump(readJSON($pdo, 'tb_ach_player', $userid));
 }
 catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
