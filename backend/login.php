@@ -5,7 +5,7 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = 'AZAZ';//'2882845';
+$vkid = 'AZAZ2';//'2882845';
 if (!$vkid) return;
 
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
@@ -15,7 +15,8 @@ $result = $statement->fetchAll();
    if ($result && count($result > 0))
    {
 	   $userid = $result[0]['id'];
-      echo 'LOGIN USER WITH ID = ' . $userid;
+	   $playerItem = $result[0];
+       echo 'LOGIN USER WITH ID = ' . $userid;
 	}  else
    {
     echo 'REGISTER NEW USER';
