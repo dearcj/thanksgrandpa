@@ -23,7 +23,7 @@ $result = $statement->fetchAll();
     'xp' => 0,
     'lvl' => 1,
     'energy' => 10, 
-	'maxdistance' => 0););
+	'maxdistance' => 0));
 	  echo($res);
    }
 
