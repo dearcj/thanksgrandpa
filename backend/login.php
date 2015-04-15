@@ -29,7 +29,7 @@ $result = $statement->fetchAll();
 	  
 	  echo $res;
    }
-print($pdo->lastInsertId('id'));
+
 $token = array();
 $token['vkid'] = $vkid;
 $token['userid'] = $userid;

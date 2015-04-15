@@ -19,6 +19,7 @@ $keystr = implode(",",$sqlkeys);
 $wholestr = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr .");";
 $statement = $conn->prepare($wholestr);
 $statement->execute();
+print($pdo->lastInsertId('id'));
 $statement = null;
 return $conn->lastInsertId();
 }
