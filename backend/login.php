@@ -5,7 +5,7 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = '2882845';
+$vkid = 'AZA';//'2882845';
 if (!$vkid) return;
 
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
@@ -35,10 +35,15 @@ $result = $statement->fetchAll();
         $playerItem = $statement->fetchAll()[0];
 		$userid = $playerItem["id"];
 		$achs = readJSON($pdo, 'tb_ach', $userid);
+		var_dump($achs);
 		foreach($achs as $ach){
+			var_dump($ach);
+		
 			$plach = array('id_ach' => $ach["id"],
 			'id_player' => $userid,
 			'progress' => 0);
+			var_dump($plach);
+					
 			insertJSON($pdo, "tb_ach_player", null, $plach);
 		} 
 		
