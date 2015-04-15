@@ -69,6 +69,7 @@ $token = array(
 echo "PENIS AGAIN";
 
 $tokenJWT = JWT::encode($token, $secret_key);
+echo $tokenJWT;
 $resp = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 echo json_encode($resp);
 ?>
