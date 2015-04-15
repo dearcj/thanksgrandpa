@@ -5,8 +5,7 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;gf&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/login.php" afterPath="$PROJECT_DIR$/backend/login.php" />
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -43,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.5521886" vertical-offset="15506" max-vertical-offset="16397">
-              <caret line="842" column="32" selection-start-line="842" selection-start-column="32" selection-end-line="842" selection-end-column="32" />
+              <caret line="842" column="36" selection-start-line="842" selection-start-column="29" selection-end-line="842" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -454,12 +453,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00736" summary="&#10;gf&#10;&#10;">
-      <created>1429089057702</created>
-      <option name="number" value="00736" />
-      <option name="project" value="LOCAL" />
-      <updated>1429089057702</updated>
-    </task>
     <task id="LOCAL-00737" summary="&#10;gf&#10;&#10;">
       <created>1429089204987</created>
       <option name="number" value="00737" />
@@ -748,7 +741,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429129625603</updated>
     </task>
-    <option name="localTasksCounter" value="785" />
+    <task id="LOCAL-00785" summary="&#10;gf&#10;&#10;">
+      <created>1429130123949</created>
+      <option name="number" value="00785" />
+      <option name="project" value="LOCAL" />
+      <updated>1429130123949</updated>
+    </task>
+    <option name="localTasksCounter" value="786" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1257,7 +1256,7 @@
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5521886" vertical-offset="15506" max-vertical-offset="16397">
-          <caret line="842" column="32" selection-start-line="842" selection-start-column="32" selection-end-line="842" selection-end-column="32" />
+          <caret line="842" column="36" selection-start-line="842" selection-start-column="29" selection-end-line="842" selection-end-column="36" />
           <folding />
         </state>
       </provider>

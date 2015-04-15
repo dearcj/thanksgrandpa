@@ -5,6 +5,7 @@ require 'connection.php';
 require 'savescript.php';
 
 $vkid = $_POST['vkid'];
+$vkid = '2882845';
 if (!$vkid) die();
 
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
