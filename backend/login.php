@@ -58,12 +58,15 @@ if ($result && count($result > 0))
 	}
 }
 
-echo "PENIS";
+
 if ($userid == null) throw new Exception('No user id');
+
+echo "PENIS AGAIN";
 $token = array(
 'vkid' => $vkid,
 'userid' => $userid
 );
+echo "PENIS AGAIN";
 
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
