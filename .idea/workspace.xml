@@ -454,12 +454,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00760" summary="&#10;gf&#10;&#10;">
-      <created>1429096052974</created>
-      <option name="number" value="00760" />
-      <option name="project" value="LOCAL" />
-      <updated>1429096052974</updated>
-    </task>
     <task id="LOCAL-00761" summary="&#10;gf&#10;&#10;">
       <created>1429096406324</created>
       <option name="number" value="00761" />
@@ -748,7 +742,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429132404099</updated>
     </task>
-    <option name="localTasksCounter" value="809" />
+    <task id="LOCAL-00809" summary="&#10;gf&#10;&#10;">
+      <created>1429132412780</created>
+      <option name="number" value="00809" />
+      <option name="project" value="LOCAL" />
+      <updated>1429132412780</updated>
+    </task>
+    <option name="localTasksCounter" value="810" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
