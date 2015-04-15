@@ -5,7 +5,7 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = 'Allahu akbar9';
+$vkid = 'Allahu akbar10';
 if (!$vkid) return;
 
 $strFindPlayer = "select TOP 1 platformid, id from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
@@ -30,7 +30,7 @@ $result = $statement->fetchAll();
 	
 	if ($res)
 	{
-		$statement = $conn->prepare($strFindPlayer);
+		$statement = $pdo->prepare($strFindPlayer);
 		$statement->execute();
         $playerResult = $statement->fetchAll();
 		echo json_encode($playerResult);
