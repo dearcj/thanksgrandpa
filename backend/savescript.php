@@ -2,6 +2,38 @@
 try
 {
 
+function readJSON($conn, $table, $userid, $id)
+{
+	$filter = "WHERE";
+	if ($table == "tb_ach_player" || $table == "tb_item_player" || $table == "tb_edevent_player")
+	{
+		$filter[] = "id_player = " . &userid;
+	}
+	
+	if ($table == "tb_players")
+	{
+		$filter[] = "id = " . &userid;
+	} else
+	if ($id != null)
+	{
+		$filter[] = "id = " . &id;	
+	}
+	
+	if (count($filter) > 0)
+ 	{
+		$filterstr = "WHERE ".implode(",",$filter);
+	} else
+	$filterstr = "";
+	$wholequery = "select *  from thanksdad.".$table.$filter;
+	echo $wholequery;
+	$statement = $conn->prepare($wholequery);
+	$statement->execute();
+	$ids = "";
+	$result = $statement->fetchAll();
+	return $result;
+}
+
+
 function insertJSON($conn, $table, $jsonString, $jsonEncoded)
 {
 	if (!$jsonEncoded)
