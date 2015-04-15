@@ -5,7 +5,7 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = 'Allahu akbar4';
+$vkid = 'Allahu akbar5';
 if (!$vkid) return;
 
 $statement = $pdo->prepare("select TOP 1 platformid, id from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid));
@@ -29,7 +29,7 @@ $result = $statement->fetchAll();
 	  
 	  echo $res;
    }
-print($pdo->lastInsertId());
+print($pdo->lastInsertId('id'));
 $token = array();
 $token['vkid'] = $vkid;
 $token['userid'] = $userid;
