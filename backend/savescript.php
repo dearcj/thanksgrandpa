@@ -11,8 +11,8 @@ function insertJSON($table, $jsonString, $jsonEncoded)
 	
 	foreach($obj as $key => $value){
 		if ($value == null) continue;
-		$sqlvalues[] = ; 
-		$sqlkeys[] = (is_numeric($value)) ? "$value" : $pdo->quote($value); 
+		$sqlkeys[] = $key; 
+		$sqlvalues[] = (is_numeric($value)) ? "$value" : $pdo->quote($value); 
 	}
 $valuesstr = implode(",",$sqlvalues);
 $keystr = implode(",",$sqlkeys);
@@ -20,6 +20,7 @@ $wholestr = "INSERT INTO thanksdad.".$table." (".keystr.") VALUES (".$valuesstr 
 $statement = $pdo->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll();
+$statement = null;
 return $result;
 }
 
@@ -39,6 +40,7 @@ $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause WHERE id = " . $pdo->quo
 $statement = $pdo->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll();
+$statement = null;
 return $result;
 }
 }
