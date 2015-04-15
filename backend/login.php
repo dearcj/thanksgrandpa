@@ -14,6 +14,8 @@ $statement->execute();
 $result = $statement->fetchAll();
 if ($result && count($result > 0))
 {
+	$json = json_encode($result);
+	echo $json;
 	$userid = $result[0]['id'];
 	$playerItem = $result[0];
 	
