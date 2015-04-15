@@ -6,16 +6,16 @@ function readJSON($conn, $table, $userid, $id)
 {
 	if ($table == "tb_ach_player" || $table == "tb_item_player" || $table == "tb_edevent_player")
 	{
-		$filter[] = "id_player = " . $userid;
+		$filter[] = "id_player = " . $conn->quote($userid);
 	}
 	
 	if ($table == "tb_players")
 	{
-		$filter[] = "id = " . $userid;
+		$filter[] = "id = " . $conn->quote($userid);
 	} else
 	if ($id != null)
 	{
-		$filter[] = "id = " . $id;	
+		$filter[] = "id = " . $conn->quote($id);	
 	}
 	
 	if (count($filter) > 0)
