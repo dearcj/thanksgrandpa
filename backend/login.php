@@ -61,6 +61,7 @@ if ($result && count($result > 0))
 	}
 }
 
+var_dump($playerItem);
 
 if ($userid == null) throw new Exception('No user id');
 
@@ -72,5 +73,5 @@ $token = array(
 $tokenJWT = JWT::encode($token, $secret_key);
 
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
-echo $resp;
+echo json_encode($resp, JSON_FORCE_OBJECT);
 ?>

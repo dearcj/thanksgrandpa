@@ -43,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.27497193" vertical-offset="11687" max-vertical-offset="16416">
-              <caret line="628" column="23" selection-start-line="628" selection-start-column="23" selection-end-line="628" selection-end-column="23" />
+              <caret line="628" column="24" selection-start-line="628" selection-start-column="24" selection-end-line="628" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -444,12 +444,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00779" summary="&#10;gf&#10;&#10;">
-      <created>1429115124152</created>
-      <option name="number" value="00779" />
-      <option name="project" value="LOCAL" />
-      <updated>1429115124153</updated>
-    </task>
     <task id="LOCAL-00780" summary="&#10;gf&#10;&#10;">
       <created>1429115375072</created>
       <option name="number" value="00780" />
@@ -738,7 +732,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429141736023</updated>
     </task>
-    <option name="localTasksCounter" value="828" />
+    <task id="LOCAL-00828" summary="&#10;gf&#10;&#10;">
+      <created>1429141873091</created>
+      <option name="number" value="00828" />
+      <option name="project" value="LOCAL" />
+      <updated>1429141873091</updated>
+    </task>
+    <option name="localTasksCounter" value="829" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1247,7 +1247,7 @@
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27497193" vertical-offset="11687" max-vertical-offset="16416">
-          <caret line="628" column="23" selection-start-line="628" selection-start-column="23" selection-end-line="628" selection-end-column="23" />
+          <caret line="628" column="24" selection-start-line="628" selection-start-column="24" selection-end-line="628" selection-end-column="24" />
           <folding />
         </state>
       </provider>
