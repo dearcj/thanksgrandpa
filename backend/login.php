@@ -34,7 +34,7 @@ $result = $statement->fetchAll();
 		$statement->execute();
         $playerItem = $statement->fetchAll()[0];
 		$userid = $playerItem["id"];
-		$achs = readJSON($pdo, 'tb_ach', $userid);
+		$achs = readJSON($pdo, 'tb_achs', $userid);
 		var_dump($achs);
 		foreach($achs as $ach){
 			var_dump($ach);

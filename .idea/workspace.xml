@@ -102,8 +102,8 @@
       <file leaf-file-name="CharStage.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.056116723" vertical-offset="11711" max-vertical-offset="13718">
-              <caret line="619" column="13" selection-start-line="619" selection-start-column="13" selection-end-line="619" selection-end-column="13" />
+            <state vertical-scroll-proportion="-0.07182941" vertical-offset="12281" max-vertical-offset="13718">
+              <caret line="643" column="42" selection-start-line="643" selection-start-column="42" selection-end-line="643" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -412,12 +412,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00727" summary="&#10;gf&#10;&#10;">
-      <created>1429087783588</created>
-      <option name="number" value="00727" />
-      <option name="project" value="LOCAL" />
-      <updated>1429087783588</updated>
-    </task>
     <task id="LOCAL-00728" summary="&#10;gf&#10;&#10;">
       <created>1429087816724</created>
       <option name="number" value="00728" />
@@ -706,7 +700,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429114308008</updated>
     </task>
-    <option name="localTasksCounter" value="776" />
+    <task id="LOCAL-00776" summary="&#10;gf&#10;&#10;">
+      <created>1429114400597</created>
+      <option name="number" value="00776" />
+      <option name="project" value="LOCAL" />
+      <updated>1429114400597</updated>
+    </task>
+    <option name="localTasksCounter" value="777" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1214,8 +1214,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.056116723" vertical-offset="11711" max-vertical-offset="13718">
-          <caret line="619" column="13" selection-start-line="619" selection-start-column="13" selection-end-line="619" selection-end-column="13" />
+        <state vertical-scroll-proportion="-0.07182941" vertical-offset="12281" max-vertical-offset="13718">
+          <caret line="643" column="42" selection-start-line="643" selection-start-column="42" selection-end-line="643" selection-end-column="42" />
           <folding />
         </state>
       </provider>
