@@ -20,7 +20,7 @@ function readJSON($conn, $table, $userid, $id)
 	
 	if (count($filter) > 0)
  	{
-		$filterstr = "WHERE ".implode(",",$filter);
+		$filterstr = " WHERE ".implode(",",$filter);
 	} else
 	$filterstr = "";
 	$wholequery = "SELECT * FROM thanksdad.".$table.$filterstr;
