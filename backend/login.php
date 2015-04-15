@@ -5,7 +5,7 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = 'AZA';//'2882845';
+$vkid = 'AZAZ';//'2882845';
 if (!$vkid) return;
 
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
@@ -57,7 +57,7 @@ $result = $statement->fetchAll();
 	);
 
 $tokenJWT = JWT::encode($token, $secret_key);
-$response = array('tokeJWT' => $tokenJWT, 'playerItem' => $playerItem);
+$response = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 echo json_encode($response);
 
 }
