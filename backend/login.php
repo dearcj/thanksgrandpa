@@ -11,13 +11,14 @@ if (!$vkid) return;
 $statement = $pdo->prepare("select TOP 1 platformid, id from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid));
 $statement->execute();
 $result = $statement->fetchAll();
-echo $result;
-   if (count($result > 0))
+   if ($result && count($result > 0))
    {
 	   $userid = $result[0]['id'];
-   }  else
+      echo 'LOGIN USER WITH ID = ' . $userid;
+	}  else
    {
-
+     echo 'REGISTER NEW USER';
+	
 	   $res= insertJSON("tb_players", null, array('platformid' => $vkid,
     'money' => 0,
     'crystals' => 0,
