@@ -12,6 +12,7 @@ $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo
 $statement = $pdo->prepare($strFindPlayer);
 try
 {
+	$pdo->beginTransaction();
 	$statement->execute();
 	$result = $statement->fetchAll();
 	if ($result && count($result > 0))
@@ -50,11 +51,11 @@ try
 				insertJSON($pdo, "tb_ach_player", null, $plach);
 			} 
 			
-		} else die();
+		} else throw new Exception('Can''t add player record');
 	}
 	$pdo->commit();
 
-	if (!$userid) die();
+	if (!$userid) throw new Exception('No user id');
 	$token = array(
 	'vkid' => $vkid,
 	'userid' => $userid
