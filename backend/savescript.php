@@ -18,16 +18,11 @@ $valuesstr = implode(",",$sqlvalues);
 $keystr = implode(",",$sqlkeys);
 $wholestr = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr .");";
 $statement = $conn->prepare($wholestr);
-$statement->execute();
-print($wholestr);
-
-$statement = $conn->query("SELECT LAST_INSERT_ID() FROM thanksdad.tb_players");
-$lastId = $statement->fetch(PDO::FETCH_NUM);
-$lastId = $lastId[0];
-print $lastId;
+$res = $statement->execute();
+//print($wholestr);
 
 $statement = null;
-return $conn->lastInsertId();
+return $res;
 }
 
 function updateJSON($table, $jsonString, $jsonEncoded)
@@ -38,7 +33,7 @@ function updateJSON($table, $jsonString, $jsonEncoded)
 	} else $obj = $jsonEncoded;
 	
 	foreach($obj as $key => $value){
-		if ($value == null) continue;
+		if ($value == '') continue;
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
 	}
 $sqlclause = implode(",",$sql);

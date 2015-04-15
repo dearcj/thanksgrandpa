@@ -1004,13 +1004,14 @@ GameStage.prototype.openEndWindowLoaded = function () {
         CObj.getById("b" + i.toString()).text = "";
     }
 
-    PlayerData.inst.saveRunProgress(true);
     PlayerData.inst.updateScore(function (r)
     {
         PlayerData.inst.playerItem.rank = r.rank;
+        PlayerData.inst.savePlayerData();
     });
+    PlayerData.inst.saveRunProgress();
 
-    PlayerData.inst.savePlayerData();
+   // PlayerData.inst.savePlayerData();
 
     CObj.getById("bshare").click = function () {
 
@@ -9691,6 +9692,7 @@ PlayerData.prototype.savePlayerData = function(cb)
        console.log("DATA SAVED");
        if (cb) cb();
    }, function (err) {
+       PlayerData.inst.savePlayerData(cb);
    });
 };
 
