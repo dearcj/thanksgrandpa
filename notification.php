@@ -2,8 +2,6 @@
 require 'vkapi.class.php';
 try
 {
-
-
 $api_id = 4654201;
 $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ приложения
 
@@ -42,6 +40,7 @@ print($ids);
 
 $statement = $pdo->prepare("delete TOP (".$n.") from thanksdad.tb_notifications");
 $statement->execute();
+
 
 
 $VK = new vkapi($api_id, $secret_key);//'access_token'=>$token["access_token"],
