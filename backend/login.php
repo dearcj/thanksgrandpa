@@ -16,12 +16,12 @@ if ($result && count($result > 0))
 {
 	$userid = $result[0]['id'];
 	$playerItem = $result[0];
-	var_dump($playerItem);
-	echo 'LOGIN USER WITH ID = ' . $userid;
+	
+	//echo 'LOGIN USER WITH ID = ' . $userid;
 }  else
 {
 	try{
-		echo 'REGISTER NEW USER';
+	//	echo 'REGISTER NEW USER';
 		
 		$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
 		'money' => 0,
@@ -62,15 +62,15 @@ if ($result && count($result > 0))
 
 if ($userid == null) throw new Exception('No user id');
 
-echo "PENIS AGAIN";
 $token = array(
 'vkid' => $vkid,
 'userid' => $userid
 );
-echo "PENIS AGAIN";
 
 $tokenJWT = JWT::encode($token, $secret_key);
-echo $tokenJWT;
+var_dump($playerItem);
 $resp = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
+$str = json_encode($resp);
+print $str;
 echo json_encode($resp);
 ?>
