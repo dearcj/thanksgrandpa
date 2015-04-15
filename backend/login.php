@@ -5,10 +5,11 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = 'Allahu akbar8';
+$vkid = 'Allahu akbar9';
 if (!$vkid) return;
 
-$statement = $pdo->prepare("select TOP 1 platformid, id from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid));
+$strFindPlayer = "select TOP 1 platformid, id from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
+$statement = $pdo->prepare($strFindPlayer);
 $statement->execute();
 $result = $statement->fetchAll();
    if ($result && count($result > 0))
@@ -17,7 +18,7 @@ $result = $statement->fetchAll();
       echo 'LOGIN USER WITH ID = ' . $userid;
 	}  else
    {
-     echo 'REGISTER NEW USER';
+    echo 'REGISTER NEW USER';
 	
 	$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
     'money' => 0,
@@ -26,8 +27,14 @@ $result = $statement->fetchAll();
     'lvl' => 1,
     'energy' => 10, 
 	'maxdistance' => 0));
-	  
-	  echo $res;
+	
+	if ($res)
+	{
+		$statement = $conn->prepare($strFindPlayer);
+		$statement->execute();
+        $playerResult = $statement->fetchAll();
+		echo json_encode($playerResult);
+	} else die();
    }
 
 $token = array();
