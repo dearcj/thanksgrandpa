@@ -9692,7 +9692,7 @@ PlayerData.prototype.savePlayerData = function(cb)
        console.log("DATA SAVED");
        if (cb) cb();
    }, function (err) {
-       PlayerData.inst.savePlayerData(cb);
+       //PlayerData.inst.savePlayerData(cb);
    });
 };
 
