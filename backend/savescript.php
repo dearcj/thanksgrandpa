@@ -26,10 +26,10 @@ return $result;
 
 function updateJSON($table, $jsonString, $jsonEncoded)
 {
-	if (!jsonEncoded)
+	if (!$jsonEncoded)
 	{
 		$obj = json_decode(jsonString);
-	} else $obj = jsonEncoded;
+	} else $obj = $jsonEncoded;
 	
 	foreach($obj as $key => $value){
 		if ($value == null) continue;
