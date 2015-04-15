@@ -56,7 +56,7 @@ function readJSON($conn, $table, $userid, $id)
 	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
-	$result = $statement->fetchAll();
+	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 	return $result;
 }
 
@@ -99,7 +99,7 @@ $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause WHERE id = " . $conn->quote($obj['id']);
 $statement = $conn->prepare($wholestr);
 $statement->execute();
-$result = $statement->fetchAll();
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 $statement = null;
 return $result;
 }

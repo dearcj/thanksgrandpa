@@ -11,7 +11,7 @@ $statement = $pdo->prepare($strFindPlayer);
 
 $pdo->beginTransaction();
 $statement->execute();
-$result = $statement->fetchAll();
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 if ($result && count($result > 0))
 {
 	$userid = $result[0]['id'];
@@ -34,7 +34,7 @@ if ($result && count($result > 0))
 		{
 			$statement = $pdo->prepare($strFindPlayer);
 			$statement->execute();
-			$playerItem = $statement->fetchAll()[0];
+			$playerItem = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
 			$userid = $playerItem["id"];
 			$achs = readJSON($pdo, 'tb_achs', $userid);
 			//var_dump($achs);
@@ -69,8 +69,6 @@ $token = array(
 $tokenJWT = JWT::encode($token, $secret_key);
 
 $resp = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
-$data = array_values($playerItem);
-echo _json_encode($data);
-
+echo json_encode($resp);
 echo _json_encode($resp);
 ?>
