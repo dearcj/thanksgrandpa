@@ -27,7 +27,6 @@ function readJSON($conn, $table, $userid, $id)
 	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
-	$ids = "";
 	$result = $statement->fetchAll();
 	return $result;
 }
