@@ -19,7 +19,7 @@ $result = $statement->fetchAll();
    {
      echo 'REGISTER NEW USER';
 	
-	   $res= insertJSON("tb_players", null, array('platformid' => $vkid,
+	$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
     'money' => 0,
     'crystals' => 0,
     'xp' => 0,
