@@ -4,19 +4,18 @@ try
 
 function readJSON($conn, $table, $userid, $id)
 {
-	$filter = "WHERE";
 	if ($table == "tb_ach_player" || $table == "tb_item_player" || $table == "tb_edevent_player")
 	{
-		$filter[] = "id_player = " . &userid;
+		$filter[] = "id_player = " . $userid;
 	}
 	
 	if ($table == "tb_players")
 	{
-		$filter[] = "id = " . &userid;
+		$filter[] = "id = " . $userid;
 	} else
 	if ($id != null)
 	{
-		$filter[] = "id = " . &id;	
+		$filter[] = "id = " . $id;	
 	}
 	
 	if (count($filter) > 0)
