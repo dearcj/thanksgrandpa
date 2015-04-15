@@ -14,8 +14,6 @@ $statement->execute();
 $result = $statement->fetchAll();
 if ($result && count($result > 0))
 {
-	$json = json_encode($result, JSON_FORCE_OBJECT);
-	echo $json;
 	$userid = $result[0]['id'];
 	$playerItem = $result[0];
 	//echo 'LOGIN USER WITH ID = ' . $userid;
@@ -72,7 +70,7 @@ $tokenJWT = JWT::encode($token, $secret_key);
 
 $resp = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 $data = array_values($playerItem);
-echo json_encode($data, JSON_FORCE_OBJECT);
+echo _json_encode($data);
 
-echo json_encode($resp, JSON_FORCE_OBJECT);
+echo _json_encode($resp);
 ?>
