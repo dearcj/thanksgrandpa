@@ -51,7 +51,7 @@ try
 				insertJSON($pdo, "tb_ach_player", null, $plach);
 			} 
 			
-		} else throw new Exception('Can''t add player record');
+		} else throw new Exception('Cant add player record');
 	}
 	$pdo->commit();
 
