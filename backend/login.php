@@ -17,10 +17,10 @@ try
 	{
 		$userid = $result[0]['id'];
 		$playerItem = $result[0];
-		echo 'LOGIN USER WITH ID = ' . $userid;
+		//echo 'LOGIN USER WITH ID = ' . $userid;
 	}  else
 	{
-		echo 'REGISTER NEW USER';
+		//echo 'REGISTER NEW USER';
 		
 		$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
 		'money' => 0,
@@ -37,14 +37,14 @@ try
 			$playerItem = $statement->fetchAll()[0];
 			$userid = $playerItem["id"];
 			$achs = readJSON($pdo, 'tb_achs', $userid);
-			var_dump($achs);
+			//var_dump($achs);
 			foreach($achs as $ach){
-				var_dump($ach);
+				//var_dump($ach);
 				
 				$plach = array('id_ach' => $ach["id"],
 				'id_player' => $userid,
 				'progress' => 0);
-				var_dump($plach);
+				//var_dump($plach);
 				
 				insertJSON($pdo, "tb_ach_player", null, $plach);
 			} 
