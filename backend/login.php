@@ -16,9 +16,11 @@ if ($result && count($result > 0))
 {
 	$userid = $result[0]['id'];
 	$playerItem = $result[0];
+	$registered = false;
 	//echo 'LOGIN USER WITH ID = ' . $userid;
 }  else
 {
+	$registered = true;
 	try{
 	//	echo 'REGISTER NEW USER';
 		$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
@@ -69,6 +71,6 @@ $token = array(
 
 $tokenJWT = JWT::encode($token, $secret_key);
 
-$resp = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
+$resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 echo _json_encode($resp);
 ?>
