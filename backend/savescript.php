@@ -20,7 +20,12 @@ $wholestr = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 print($wholestr);
-print($pdo->lastInsertId('id'));
+
+$statement = $conn->query("SELECT LAST_INSERT_ID() FROM thanksdad.tb_players");
+$lastId = $statement->fetch(PDO::FETCH_NUM);
+$lastId = $lastId[0];
+print $lastId;
+
 $statement = null;
 return $conn->lastInsertId();
 }
