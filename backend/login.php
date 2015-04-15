@@ -58,15 +58,13 @@ if ($result && count($result > 0))
 	}
 }
 
-if (!$userid) throw new Exception('No user id');
+if ($userid == null) throw new Exception('No user id');
 $token = array(
 'vkid' => $vkid,
 'userid' => $userid
 );
 
 $tokenJWT = JWT::encode($token, $secret_key);
-$response = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
-echo json_encode($response);
-
-
+$resp = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
+echo json_encode($resp);
 ?>
