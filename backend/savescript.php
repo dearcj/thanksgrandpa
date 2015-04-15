@@ -10,7 +10,7 @@ function insertJSON($conn, $table, $jsonString, $jsonEncoded)
 	} else $obj = $jsonEncoded;
 	
 	foreach($obj as $key => $value){
-		if ($value == null) continue;
+	//	if ($value == null) continue;
 		$sqlkeys[] = $key; 
 		$sqlvalues[] = (is_numeric($value)) ? "$value" : $conn->quote($value); 
 	}
