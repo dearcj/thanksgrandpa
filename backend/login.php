@@ -20,8 +20,8 @@ if ($result && count($result > 0))
 }  else
 {
 	try{
-	echo 'REGISTER NEW USER';
-	
+		echo 'REGISTER NEW USER';
+		
 		$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
 		'money' => 0,
 		'crystals' => 0,
@@ -49,14 +49,14 @@ if ($result && count($result > 0))
 				insertJSON($pdo, "tb_ach_player", null, $plach);
 			} 
 		} else throw new Exception('Cant add player record');
-	$pdo->commit();
+		$pdo->commit();
+	}
+	catch (PDOException $e) {
+		$pdo->rollBack();
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
 }
-catch (PDOException $e) {
-	$pdo->rollBack();
-	print "Error!: " . $e->getMessage() . "<br/>";
-	die();
-}
-
 
 if (!$userid) throw new Exception('No user id');
 $token = array(
