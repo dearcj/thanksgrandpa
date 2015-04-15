@@ -20,6 +20,7 @@ $wholestr = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll();
+var_dump($result);
 $statement = null;
 return $result;
 }
