@@ -20,7 +20,7 @@ $wholestr = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 $statement = null;
-return $pdo->lastInsertId();
+return $conn->lastInsertId();
 }
 
 function updateJSON($table, $jsonString, $jsonEncoded)
