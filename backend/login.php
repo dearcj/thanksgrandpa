@@ -70,7 +70,7 @@ $token = array(
 $tokenJWT = JWT::encode($token, $secret_key);
 var_dump($playerItem);
 $resp = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
-$str = json_encode($resp);
+$str = json_encode($resp, JSON_FORCE_OBJECT);
 print $str;
-echo json_encode($resp);
+echo json_encode($resp, JSON_FORCE_OBJECT);
 ?>
