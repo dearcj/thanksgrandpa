@@ -5,7 +5,7 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = 'Allahu akbar10';
+$vkid = 'Allahu akbar11';
 if (!$vkid) return;
 
 $strFindPlayer = "select TOP 1 platformid, id from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
@@ -32,16 +32,20 @@ $result = $statement->fetchAll();
 	{
 		$statement = $pdo->prepare($strFindPlayer);
 		$statement->execute();
-        $playerResult = $statement->fetchAll();
-		echo json_encode($playerResult);
+        $playerItem = $statement->fetchAll();
+		$userid = $playerItem['id'];
 	} else die();
    }
 
-$token = array();
-$token['vkid'] = $vkid;
-$token['userid'] = $userid;
-echo JWT::encode($token, $secret_key);
+   if (!$userid) die();
+	$token = array(
+		'vkid' => $vkid,
+		'userid' => $userid
+	);
 
+$tokenJWT = JWT::encode($token, $secret_key);
+$response = array('tokeJWT' => $tokeJWT, 'playerItem' => $playerItem);
+echo json_encode($response);
 }
 catch (PDOException $e) {
 
