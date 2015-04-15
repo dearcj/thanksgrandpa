@@ -21,7 +21,6 @@ if ($result && count($result > 0))
 {
 	try{
 	//	echo 'REGISTER NEW USER';
-		
 		$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
 		'money' => 0,
 		'crystals' => 0,
@@ -37,16 +36,18 @@ if ($result && count($result > 0))
 			$playerItem = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
 			$userid = $playerItem["id"];
 			$achs = readJSON($pdo, 'tb_achs', $userid);
-			//var_dump($achs);
+			//CREATING ACHS
 			foreach($achs as $ach){
-				//var_dump($ach);
-				
 				$plach = array('id_ach' => $ach["id"],
 				'id_player' => $userid,
 				'progress' => 0);
-				//var_dump($plach);
-				
 				insertJSON($pdo, "tb_ach_player", null, $plach);
+			} 
+			$events = readJSON($pdo, 'tb_edevent', $userid);
+			foreach($events as $event){
+				$plevent = array('id_edevent' => $event["id"],
+				'id_player' => $userid);
+				insertJSON($pdo, "tb_edevent_player", null, $plevent);
 			} 
 		} else throw new Exception('Cant add player record');
 		$pdo->commit();
