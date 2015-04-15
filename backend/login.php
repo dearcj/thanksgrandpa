@@ -58,6 +58,7 @@ if ($result && count($result > 0))
 	}
 }
 
+echo "PENIS";
 if ($userid == null) throw new Exception('No user id');
 $token = array(
 'vkid' => $vkid,
