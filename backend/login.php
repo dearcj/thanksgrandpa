@@ -5,10 +5,10 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = 'Allahu akbar13';
+$vkid = 'Allahu akbar15';
 if (!$vkid) return;
 
-$strFindPlayer = "select TOP 1 platformid, id from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
+$strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
 $statement = $pdo->prepare($strFindPlayer);
 $statement->execute();
 $result = $statement->fetchAll();
