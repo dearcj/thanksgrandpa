@@ -23,7 +23,7 @@ function readJSON($conn, $table, $userid, $id)
 		$filterstr = "WHERE ".implode(",",$filter);
 	} else
 	$filterstr = "";
-	$wholequery = "SELECT * FROM thanksdad.".$table.$filter;
+	$wholequery = "SELECT * FROM thanksdad.".$table.$filterstr;
 	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
