@@ -4,10 +4,10 @@ try
 
 function insertJSON($table, $jsonString, $jsonEncoded)
 {
-	if (!jsonEncoded)
+	if (!$jsonEncoded)
 	{
-		$obj = json_decode(jsonString);
-	} else $obj = jsonEncoded;
+		$obj = json_decode($jsonString);
+	} else $obj = $jsonEncoded;
 	
 	foreach($obj as $key => $value){
 		if ($value == null) continue;
@@ -16,7 +16,7 @@ function insertJSON($table, $jsonString, $jsonEncoded)
 	}
 $valuesstr = implode(",",$sqlvalues);
 $keystr = implode(",",$sqlkeys);
-$wholestr = "INSERT INTO thanksdad.".$table." (".keystr.") VALUES (".$valuesstr .");";
+$wholestr = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr .");";
 $statement = $pdo->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll();
@@ -28,7 +28,7 @@ function updateJSON($table, $jsonString, $jsonEncoded)
 {
 	if (!$jsonEncoded)
 	{
-		$obj = json_decode(jsonString);
+		$obj = json_decode($jsonString);
 	} else $obj = $jsonEncoded;
 	
 	foreach($obj as $key => $value){
