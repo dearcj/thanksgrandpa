@@ -8,8 +8,7 @@ $vkid = '2882845';
 
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
 $statement = $pdo->prepare($strFindPlayer);
-try
-{
+
 	$pdo->beginTransaction();
 	$statement->execute();
 	$result = $statement->fetchAll();
@@ -17,11 +16,12 @@ try
 	{
 		$userid = $result[0]['id'];
 		$playerItem = $result[0];
-		//echo 'LOGIN USER WITH ID = ' . $userid;
+		echo 'LOGIN USER WITH ID = ' . $userid;
 	}  else
 	{
-		//echo 'REGISTER NEW USER';
-		
+		echo 'REGISTER NEW USER';
+		try
+		{
 		$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
 		'money' => 0,
 		'crystals' => 0,
@@ -48,10 +48,16 @@ try
 				
 				insertJSON($pdo, "tb_ach_player", null, $plach);
 			} 
-			
+		}
 		} else throw new Exception('Cant add player record');
-	}
 	$pdo->commit();
+	}
+	catch (PDOException $e) {
+	$pdo->rollBack();
+	print "Error!: " . $e->getMessage() . "<br/>";
+	die();
+}
+	
 
 	if (!$userid) throw new Exception('No user id');
 	$token = array(
@@ -62,10 +68,6 @@ try
 	$tokenJWT = JWT::encode($token, $secret_key);
 	$response = array('tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 	echo json_encode($response);
-}
-catch (PDOException $e) {
-	$pdo->rollBack();
-	print "Error!: " . $e->getMessage() . "<br/>";
-	die();
-}
+
+
 ?>
