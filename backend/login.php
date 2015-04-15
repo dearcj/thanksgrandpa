@@ -1,5 +1,4 @@
 ﻿<?php
-header("Content-Type: application/json; encoding=utf-8");
 require 'jwt_helper.php';
 require 'connection.php';
 require 'savescript.php';
