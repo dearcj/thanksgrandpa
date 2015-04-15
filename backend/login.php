@@ -16,6 +16,7 @@ if ($result && count($result > 0))
 {
 	$userid = $result[0]['id'];
 	$playerItem = $result[0];
+	var_dump($playerItem);
 	echo 'LOGIN USER WITH ID = ' . $userid;
 }  else
 {
