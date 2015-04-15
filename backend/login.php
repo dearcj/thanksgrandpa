@@ -5,7 +5,7 @@ require 'savescript.php';
 try
 {
 $vkid = $_POST['vkid'];
-$vkid = '2882845abbuZasdasA';
+$vkid = '2882845abbuZasdasAdd';
 if (!$vkid) return;
 
 $statement = $pdo->prepare("select TOP 1 platformid, id from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid));
