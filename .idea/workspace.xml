@@ -51,7 +51,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.65068495" vertical-offset="285" max-vertical-offset="2337">
+            <state vertical-scroll-proportion="-0.6917808" vertical-offset="1461" max-vertical-offset="2337">
               <caret line="45" column="57" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
               <folding />
             </state>
@@ -411,18 +411,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00692" summary="&#10;gf&#10;&#10;">
-      <created>1428915517465</created>
-      <option name="number" value="00692" />
-      <option name="project" value="LOCAL" />
-      <updated>1428915517465</updated>
-    </task>
-    <task id="LOCAL-00693" summary="&#10;gf&#10;&#10;">
-      <created>1428916158913</created>
-      <option name="number" value="00693" />
-      <option name="project" value="LOCAL" />
-      <updated>1428916158914</updated>
-    </task>
     <task id="LOCAL-00694" summary="&#10;gf&#10;&#10;">
       <created>1428916964750</created>
       <option name="number" value="00694" />
@@ -705,7 +693,19 @@
       <option name="project" value="LOCAL" />
       <updated>1429089730034</updated>
     </task>
-    <option name="localTasksCounter" value="741" />
+    <task id="LOCAL-00741" summary="&#10;gf&#10;&#10;">
+      <created>1429089781388</created>
+      <option name="number" value="00741" />
+      <option name="project" value="LOCAL" />
+      <updated>1429089781388</updated>
+    </task>
+    <task id="LOCAL-00742" summary="&#10;gf&#10;&#10;">
+      <created>1429089786735</created>
+      <option name="number" value="00742" />
+      <option name="project" value="LOCAL" />
+      <updated>1429089786736</updated>
+    </task>
+    <option name="localTasksCounter" value="743" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1213,7 +1213,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65068495" vertical-offset="285" max-vertical-offset="2337">
+        <state vertical-scroll-proportion="-0.6917808" vertical-offset="1461" max-vertical-offset="2337">
           <caret line="45" column="57" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
           <folding />
         </state>
