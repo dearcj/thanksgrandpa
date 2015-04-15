@@ -26,7 +26,7 @@ $result = $statement->fetchAll();
     'lvl' => 1,
     'energy' => 10, 
 	'maxdistance' => 0));
-	  echo($res);
+	  echo(json_decode($res));
    }
 
 $token = array();
