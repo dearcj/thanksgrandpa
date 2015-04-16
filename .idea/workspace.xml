@@ -6,7 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/savescript.php" afterPath="$PROJECT_DIR$/backend/savescript.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/connection.php" afterPath="$PROJECT_DIR$/backend/connection.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -42,8 +42,8 @@
       <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39761093" vertical-offset="8431" max-vertical-offset="17632">
-              <caret line="456" column="43" selection-start-line="456" selection-start-column="43" selection-end-line="456" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.55972695" vertical-offset="16848" max-vertical-offset="17613">
+              <caret line="904" column="36" selection-start-line="904" selection-start-column="29" selection-end-line="904" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -480,12 +480,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00879" summary="&#10;gf&#10;&#10;">
-      <created>1429182965896</created>
-      <option name="number" value="00879" />
-      <option name="project" value="LOCAL" />
-      <updated>1429182965896</updated>
-    </task>
     <task id="LOCAL-00880" summary="&#10;gf&#10;&#10;">
       <created>1429183643526</created>
       <option name="number" value="00880" />
@@ -774,7 +768,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429209505914</updated>
     </task>
-    <option name="localTasksCounter" value="928" />
+    <task id="LOCAL-00928" summary="&#10;gf&#10;&#10;">
+      <created>1429209944334</created>
+      <option name="number" value="00928" />
+      <option name="project" value="LOCAL" />
+      <updated>1429209944334</updated>
+    </task>
+    <option name="localTasksCounter" value="929" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1210,14 +1210,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.035715" vertical-offset="550" max-vertical-offset="2318">
-          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1743" max-vertical-offset="10450">
@@ -1274,10 +1266,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.035715" vertical-offset="550" max-vertical-offset="2318">
+          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39761093" vertical-offset="8431" max-vertical-offset="17632">
-          <caret line="456" column="43" selection-start-line="456" selection-start-column="43" selection-end-line="456" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.55972695" vertical-offset="16848" max-vertical-offset="17613">
+          <caret line="904" column="36" selection-start-line="904" selection-start-column="29" selection-end-line="904" selection-end-column="36" />
           <folding />
         </state>
       </provider>
