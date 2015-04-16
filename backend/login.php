@@ -5,23 +5,6 @@ require_once 'connection.php';
 require_once 'savescript.php';
 require_once 'json.php';
 
-
- function json_decode2($var) {
-    $JSON = new Services_JSON;
-    return $JSON->decode($var);
-  }
-
-
-  function json_encode2($var) {
-    $JSON = new Services_JSON;
-    return $JSON->encode($var);
-  }
-
-
-
-
-
-
 $vkid = $_POST['vkid'];
 $vkid = '197515742';
 if (!$vkid) return "NO USER ID";
@@ -98,10 +81,9 @@ $str2 = $achs[0]['desc'];
 echo $str;
 
 */
-echo mb_detect_encoding($playerItem['name']);
+
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
-$str = json_decode(json_encode($resp));
-var_dump($str);
+$str = json_encode($resp);
 echo $str;
 ?>
