@@ -9,15 +9,16 @@ $method = $_POST['method'];
 $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
+error_log("PENIS", 3 ,"/var/tmp/errors2.log");
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken);
 
-error_log("DATA=".$data, 3 ,"/var/tmp/my-errors.log");
+error_log("DATA=".$data, 3 ,"/var/tmp/errors2.log");
 
 $platformid = $token['vkid'];
 $userid = $token['userid'];
 
-error_log($platformid.$userid, 3 ,"/var/tmp/my-errors.log");
+error_log($platformid.$userid, 3 ,"/var/tmp/errors2.log");
 
 
 if ($method == "INSERT")
