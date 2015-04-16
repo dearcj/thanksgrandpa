@@ -71,8 +71,9 @@ function buyItem($conn, $data, $userid, $id)
 	$statement = $conn->prepare($plscript);
 	$statement->execute();
 	$res = $statement->fetchAll(PDO::FETCH_ASSOC);
-	$player = $res[0];
+	$player = $res;
 	if ($player == null) return false;
+	
 	var_dump($pl);
 	
 	$res = readJSON($conn, "tb_items", $userid, $id);
@@ -97,7 +98,7 @@ function buyItem($conn, $data, $userid, $id)
 	$eq = false;
 	if ($data != null) $eq = true;
 	insertJSON($conn, "tb_item_player", null, array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
-	updateJSON($conn, "tb_players", $player, null, $userid);
+	updateJSON($conn, "tb_players", null, $player, $userid);
 }
 
 function readJSON($conn, $table, $userid, $id)
