@@ -66,6 +66,25 @@ function readJSON($conn, $table, $userid, $id)
 	return $result;
 }
 
+function getScores($conn, $data, $userid)
+{
+	$decr = json_decode($data);
+	$take = $decr['take'];
+	$skip = $decr['skip'];
+	$filter = $decr['filter'];
+	//SELECT id, maxdistance  from thanksdad.tb_players WHERE id IN ('4EA93A3F-6A42-4C1F-A003-24C247C695B4', 'C049BF3A-CF33-4307-87A5-2C79583DBBF4') ORDER BY maxdistance DESC OFFSET 0 ROWS FETCH NEXT 20 ROWS ONLY 
+	$wholequery = "SELECT platformid, id, maxdistance, lvl FROM thanksdad.tb_players ";
+	if ($filter)
+	{
+		$wholequery = $wholequery." WHERE id IN (".$filter,"),";
+	}
+	$wholequery = $wholequery." ORDER BY maxdistance DESC OFFSET ".$skip." ROWS FETCH NEXT ."$take". ROWS ONLY ";
+	$statement = $conn->prepare($wholequery);
+	$statement->execute();
+	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+	return $result;
+}
+
 function updateScore($conn, $curdist, $userid)
 {
 	$wholequery = "SELECT COUNT(*) FROM thanksdad.tb_players WHERE maxdistance > ".$curdist;
