@@ -78,12 +78,6 @@ $str = json_encode($achs[0], JSON_FORCE_OBJECT);
 $str2 = $achs[0]['desc'];
 
 echo $str2;
-echo iconv('UTF-8', 'ISO8859-1', $str2);
-echo iconv('ISO8859-1', 'UTF-8' , $str2);
-echo iconv('UTF-8', 'cp1251' , $str2);
-echo iconv('UTF-8', 'windows-1251' , $str2);
-echo iconv('cp1251', 'UTF-8' , $str2);
-echo iconv('windows-1251', 'UTF-8' , $str2);
 
 
 
@@ -91,5 +85,5 @@ echo iconv('windows-1251', 'UTF-8' , $str2);
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 $str = json_encode($resp, JSON_FORCE_OBJECT);
-//echo $str;
+echo $str;
 ?>
