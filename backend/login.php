@@ -72,6 +72,10 @@ $token = array(
 'userid' => $userid
 );
 
+$achs = readJSON($pdo, 'tb_achs', $userid);
+$str = json_encode($achs[0], JSON_FORCE_OBJECT);
+echo $str;
+
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 $str = json_encode($resp, JSON_FORCE_OBJECT);
