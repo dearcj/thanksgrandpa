@@ -80,7 +80,7 @@ $str2 = $achs[0]['desc'];
 echo $str;
 
 */
-
+echo mb_detect_encoding($playerItem['name']);
 $tokenJWT = JWT::encode($token, $secret_key);
 $playerItem['name'] = utf8_encode($playerItem['name']);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
