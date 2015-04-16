@@ -17,7 +17,7 @@ $id  = null;
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 */
 
-$data = '1000';
+$data = 1000;
 $table = 'tb_players';
 $method = 'UPDATE_SCORE';
 $id  = null;
