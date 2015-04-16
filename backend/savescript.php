@@ -83,7 +83,7 @@ function getScores($conn, $data, $userid)
 	{
 		$wholequery = $wholequery." WHERE id IN (".$filter."),";
 	}
-	$wholequery = $wholequery." ORDER BY maxdistance DESC OFFSET ".$skip." ROWS FETCH NEXT ."$take". ROWS ONLY ";
+	$wholequery = $wholequery." ORDER BY maxdistance DESC OFFSET ".$skip." ROWS FETCH NEXT ."$take.". ROWS ONLY ";
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
