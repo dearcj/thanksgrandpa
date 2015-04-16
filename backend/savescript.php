@@ -56,6 +56,37 @@ function playerFilter($conn, $table, $userid, $id)
 	return $filterstr;
 }
 
+
+function buyItem($conn, $data, $userid, $id)
+{
+	$r = readJSON($conn, "tb_item_player", $userid, $id);
+	if (count($r) > 0) return false;
+	
+	$plscript = "SELECT money, crystals FROM thanksdad.tb_players WHERE id = ".$conn->quote($userid);
+	$statement = $conn->prepare($plscript);
+	$statement->execute();
+	$pl = $statement->fetchAll(PDO::FETCH_ASSOC);
+	if ($pl[0]) return false;
+	var_dump($pl);
+	
+	$item = readJSON($conn, "tb_items", $userid, $id);
+	if (!$item[0]) return;
+	var_dump($item);
+	/*
+	$statement = $conn->prepare($plscript);
+	$statement->execute();
+	$pl = $statement->fetchAll(PDO::FETCH_ASSOC);
+	if ($pl[0]) return false;
+	
+	
+	
+	$wholequery = "SELECT * FROM thanksdad.".$table.$f;
+	$statement = $conn->prepare($wholequery);
+	$statement->execute();
+	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+	return $result;*/
+}
+
 function readJSON($conn, $table, $userid, $id)
 {
 	$f = playerFilter($conn, $table, $userid, $id);

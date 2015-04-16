@@ -30,6 +30,13 @@ $id  = null;
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 */
 
+
+$data = null;
+$method = 'BUY_ITEM';
+$id  = '099C7C92-CE98-4271-AB3D-26D01CD14EA5';//'105A3B3C-160C-4355-AB38-9F107DB5A831'
+$jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
+
+
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
 if (!$token) die();
@@ -58,6 +65,11 @@ if ($method == "UPDATE_SCORE")
 if ($method == "GET_SCORES")
 {
 	$res = getScores($pdo,  $data,  $userid);
+}
+ else 
+if ($method == "BUY_ITEM")
+{
+	$res = buyItem($pdo,  $data,  $userid, $id);
 }
 echo _json_encode($res);
 ?>
