@@ -7,6 +7,10 @@ require_once 'json.php';
 
 $vkid = $_POST['vkid'];
 $vkid = '197515742';
+
+$rutest = $_POST['rutest'];
+echo $rutest; return;
+
 if (!$vkid) return "NO USER ID";
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
 $statement = $pdo->prepare($strFindPlayer);
