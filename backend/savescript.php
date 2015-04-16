@@ -68,7 +68,10 @@ function readJSON($conn, $table, $userid, $id)
 
 function getScores($conn, $data, $userid)
 {
+	var_dump($data);
 	$decr = json_decode($data);
+	var_dump($decr);
+	
 	$take = $decr['take'];
 	$skip = $decr['skip'];
 	$filter = $decr['filter'];
