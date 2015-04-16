@@ -1,5 +1,5 @@
 ﻿<?php
-header('Content-Type: text/html; charset=utf-8');
+header('Content-Type: text/html; charset=windows-1251');
 require 'jwt_helper.php';
 require 'connection.php';
 require 'savescript.php';
