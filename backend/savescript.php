@@ -53,7 +53,6 @@ function readJSON($conn, $table, $userid, $id)
 	} else
 	$filterstr = "";
 	$wholequery = "SELECT * FROM thanksdad.".$table.$filterstr;
-	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
