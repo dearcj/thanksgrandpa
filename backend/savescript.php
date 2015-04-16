@@ -80,7 +80,6 @@ function getScores($conn, $data, $userid)
 		$wholequery = $wholequery." WHERE id IN (".$filter.")";
 	}
 	$wholequery = $wholequery." ORDER BY maxdistance DESC OFFSET ".$skip." ROWS FETCH NEXT ".$take." ROWS ONLY ";
-	echo $wholequery; 
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -90,14 +89,11 @@ function getScores($conn, $data, $userid)
 function updateScore($conn, $curdist, $userid)
 {
 	$wholequery = "SELECT COUNT(*) FROM thanksdad.tb_players WHERE maxdistance > ".$curdist;
-	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-	var_dump($result);
 	$rank	= 	$result[0][""];
 	$wholequery = "UPDATE thanksdad.tb_players SET rank = ".$rank." WHERE id = ".$conn->quote($userid);
-	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 }
@@ -146,7 +142,6 @@ $statement = $conn->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 $statement = null;
-var_dump($result);
 return $result;
 }
 }

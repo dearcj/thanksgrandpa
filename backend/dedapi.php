@@ -23,12 +23,12 @@ $id  = null;
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 */
 
-
+/*
 $data = json_encode(array('take'=>10, 'skip'=>0,'filter'=>"'4EA93A3F-6A42-4C1F-A003-24C247C695B4','C049BF3A-CF33-4307-87A5-2C79583DBBF4'" ) );
 $method = 'GET_SCORES';
 $id  = null;
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
-
+*/
 
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
