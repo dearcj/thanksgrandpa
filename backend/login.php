@@ -10,7 +10,6 @@ $vkid = '197515742';
 
 $rutest = $_POST['rutest'];
 $r = json_encode($rutest, JSON_UNESCAPED_UNICODE);
-$r = preg_replace('/\x{feff}$/u', '', $r);
 echo $r;
  return;
 
