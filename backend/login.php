@@ -10,7 +10,7 @@ $vkid = '2882845';
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
 $statement = $pdo->prepare($strFindPlayer);
 
-$pdo->beginTransaction();
+
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 if ($result && count($result > 0))
@@ -23,6 +23,7 @@ if ($result && count($result > 0))
 {
 	$registered = true;
 	try{
+		$pdo->beginTransaction();
 	//	echo 'REGISTER NEW USER';
 		$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
 		'money' => 0,

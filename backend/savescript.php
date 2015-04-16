@@ -96,8 +96,17 @@ function buyItem($conn, $data, $userid, $id)
 	}
 	$eq = false;
 	if ($data != null) $eq = true;
-	insertJSON($conn, "tb_item_player", null, array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
-	updateJSON($conn, "tb_players", null, $player, $userid);
+	try{
+		$conn->beginTransaction();
+		insertJSON($conn, "tb_item_player", null, array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
+		updateJSON($conn, "tb_players", null, $player, $userid);
+		$conn->commit();
+	} 
+	catch (PDOException $e) {
+		$conn->rollBack();
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
 }
 
 function readJSON($conn, $table, $userid, $id)
