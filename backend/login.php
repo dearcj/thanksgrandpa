@@ -73,6 +73,7 @@ $token = array(
 );
 
 $achs = readJSON($pdo, 'tb_achs', $userid);
+var_dump($achs[0]);
 $str = json_encode($achs[0], JSON_FORCE_OBJECT);
 echo $str;
 
