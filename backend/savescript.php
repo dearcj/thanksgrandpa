@@ -74,7 +74,7 @@ function updateScore($conn, $curdist, $userid)
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 	var_dump($result);
-	$rank	= 	$result[0][0];
+	$rank	= 	$result[0][""];
 	$wholequery = "UPDATE thanksdad.tb_players SET rank = ".$rank." WHERE id = ".$userid;
 	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
