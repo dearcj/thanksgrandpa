@@ -45,7 +45,7 @@ if ($method == "UPDATE")
  else 
 if ($method == "UPDATE_SCORE")
 {
-	$res = update_score($pdo,  $data,  $userid);
+	$res = updateScore($pdo,  $data,  $userid);
 }
 echo _json_encode($res);
 ?>
