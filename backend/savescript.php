@@ -124,7 +124,7 @@ function getScores($conn, $data, $userid)
 	$skip = $decr->skip;
 	$filter = $decr->filter;
 	//SELECT id, maxdistance  from thanksdad.tb_players WHERE id IN ('4EA93A3F-6A42-4C1F-A003-24C247C695B4', 'C049BF3A-CF33-4307-87A5-2C79583DBBF4') ORDER BY maxdistance DESC OFFSET 0 ROWS FETCH NEXT 20 ROWS ONLY 
-	$wholequery = "SELECT platformid, id, maxdistance, lvl FROM thanksdad.tb_players ";
+	$wholequery = "SELECT platformid, id, maxdistance, lvl, name, last_name FROM thanksdad.tb_players ";
 	if ($filter)
 	{
 		$wholequery = $wholequery." WHERE id IN (".$filter.")";

@@ -4,7 +4,7 @@ try
 
 $secret_key = '56rZjlj9S2O0aUVE';
 
-$pdo = new PDO("dblib:host=e5906u8eu8.database.windows.net;dbname=thanksdad_db3",
+$pdo = new PDO("dblib:host=e5906u8eu8.database.windows.net;dbname=thanksdad_db4",
                 "crazyjuice","girkinLOH1");
 //,array(
 //    PDO::ATTR_PERSISTENT => true
