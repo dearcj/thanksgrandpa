@@ -67,32 +67,37 @@ function buyItem($conn, $data, $userid, $id)
 	if ($itemalready[0]) return "ALREADY HAVE ITEM";
 	var_dump($itemalready);
 	
-	$plscript = "SELECT money, crystals FROM thanksdad.tb_players WHERE id = ".$conn->quote($userid);
+	$plscript = "SELECT money, crystals, lvl FROM thanksdad.tb_players WHERE id = ".$conn->quote($userid);
 	$statement = $conn->prepare($plscript);
 	$statement->execute();
-	$pl = $statement->fetchAll(PDO::FETCH_ASSOC);
-	if ($pl[0] == null) return false;
+	$res = $statement->fetchAll(PDO::FETCH_ASSOC);
+	$player = $res[0];
+	if ($player == null) return false;
 	var_dump($pl);
 	
-	$item = readJSON($conn, "tb_items", $userid, $id);
-	if ($item[0] == null) return;
+	$res = readJSON($conn, "tb_items", $userid, $id);
+	$item = $res[0];
+	if ($item == null) return;
 	var_dump($item);
 	
-	
-	
-	/*
-	$statement = $conn->prepare($plscript);
-	$statement->execute();
-	$pl = $statement->fetchAll(PDO::FETCH_ASSOC);
-	if ($pl[0]) return false;
-	
-	
-	
-	$wholequery = "SELECT * FROM thanksdad.".$table.$f;
-	$statement = $conn->prepare($wholequery);
-	$statement->execute();
-	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-	return $result;*/
+	if ($player['lvl'] >= $item['reqlvl'])
+	{
+		if ($player['money'] >= $item['price'])
+		{
+			$player['money'] -= $item['price'];
+		} else return "NOT ENOUGH MONEY";
+	} else 
+	{
+		if ($player['crystals'] >= $item['pricecrys'])
+		{
+			$player['crystals'] -= $item['pricecrys'];
+		}
+		else return "NOT ENOUGH CRYSTALS";
+	}
+	$eq = false;
+	if ($data != null) $eq = true;
+	insertJSON($conn, "tb_item_player", null, array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
+	updateJSON($conn, "tb_players", $player, null, $userid);
 }
 
 function readJSON($conn, $table, $userid, $id)
