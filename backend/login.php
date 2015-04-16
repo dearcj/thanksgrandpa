@@ -81,6 +81,8 @@ $str2 = $achs[0]['desc'];
 echo $str;
 
 */
+$playerItem['name'] = "Виталий";
+$playerItem['last_name'] = "Юпитеров";
 
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
