@@ -19,8 +19,8 @@ if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
 if (!$token) die();
 
-$platformid = $token['vkid'];
-$userid = $token['userid'];
+$platformid = $token->vkid;
+$userid = $token->userid;
 echo $userid;
 echo $platformid;
 
