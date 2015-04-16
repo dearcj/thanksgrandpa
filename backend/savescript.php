@@ -50,7 +50,7 @@ function playerFilter($conn, $table, $userid, $id)
 	
 	if (count($filter) > 0)
  	{
-		$filterstr = " WHERE ".implode(",",$filter);
+		$filterstr = " WHERE ".implode(" AND ",$filter);
 	} else
 	$filterstr = "";
 	return $filterstr;
@@ -59,6 +59,14 @@ function playerFilter($conn, $table, $userid, $id)
 
 function buyItem($conn, $data, $userid, $id)
 {
+	
+	$itemplquery = "SELECT id FROM thanksdad.tb_item_player WHERE id_player = ".$conn->quote($userid).', id_item ='.$conn->quote($id);
+	$statement = $conn->prepare($itemplquery);
+	$statement->execute();
+	$pl = $statement->fetchAll(PDO::FETCH_ASSOC);
+	if ($pl[0]) return false;
+	var_dump($pl);
+	
 	$r = readJSON($conn, "tb_item_player", $userid, $id);
 	if (count($r) > 0) return false;
 	
