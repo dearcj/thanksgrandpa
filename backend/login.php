@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=UTF-8');
 require_once 'jwt_helper.php';
 require_once 'connection.php';
 require_once 'savescript.php';
-require_once('JSON.php');
+require_once 'json.php';
 
 
  function json_decode2($var) {
