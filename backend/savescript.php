@@ -178,6 +178,8 @@ function updateJSON($conn, $table, $jsonEncoded, $userid, $id)
 	
 	foreach($obj as $key => $value){
 		if ($value == '') continue;
+		$value = mb_convert_encoding($value, 'UCS-2LE', mb_detect_encoding($value, mb_detect_order(), true));
+		
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
 	}
 	$f = playerFilter($conn, $table, $userid, $id);
