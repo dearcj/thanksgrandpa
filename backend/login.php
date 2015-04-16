@@ -1,5 +1,5 @@
 ﻿<?php
-header('Content-Type: text/html; charset=UTF-8');
+header('Content-Type: application/json; charset=UTF-8');
 require_once 'jwt_helper.php';
 require_once 'connection.php';
 require_once 'savescript.php';
