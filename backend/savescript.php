@@ -71,10 +71,9 @@ function buyItem($conn, $data, $userid, $id)
 	$statement = $conn->prepare($plscript);
 	$statement->execute();
 	$res = $statement->fetchAll(PDO::FETCH_ASSOC);
-	$player = $res;
+	$player = $res[0];
 	if ($player == null) return false;
-
-	var_dump($pl);
+	var_dump($player);
 	
 	$res = readJSON($conn, "tb_items", $userid, $id);
 	$item = $res[0];
