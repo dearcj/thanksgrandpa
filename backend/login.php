@@ -10,7 +10,7 @@ require_once('JSON.php');
     $JSON = new Services_JSON;
     return $JSON->decode($var);
   }
-}
+
 
   function json_encode2($var) {
     $JSON = new Services_JSON;
