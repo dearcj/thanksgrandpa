@@ -178,9 +178,10 @@ function updateJSON($conn, $table, $jsonEncoded, $userid, $id)
 	
 	foreach($obj as $key => $value){
 		if ($value == '') continue;
-		$value = mb_convert_encoding($value, 'UCS-2LE', mb_detect_encoding($value, mb_detect_order(), true));
 		
-		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
+		$val = mb_convert_encoding($value, 'UCS-2LE', mb_detect_encoding($value, mb_detect_order(), true));
+		
+		$sql[] = (is_numeric($val)) ? "$key = $val" : "$key = " . $conn->quote($val); 
 	}
 	$f = playerFilter($conn, $table, $userid, $id);
 $sqlclause = implode(",",$sql);
