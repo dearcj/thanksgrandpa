@@ -10,7 +10,7 @@ $table = $_POST['table'];
 $id = $_POST['id'];
 
 
-$data = '{"id":"301786C3-E6BA-4CF8-ADD5-BE2CCF356E90","__createdAt":"2015-03-31 09:46:48.245 +00:00","__updatedAt":"2015-04-16 18:55:35.445 +00:00","__deleted":"0","id_edevent":"505A0266-322A-422D-A429-EA768DBDB9C8","id_player":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","lastused":"2015-04-16T23:08:18.637Z","reward_ready":false}';
+$data = json_decode('{"id":"301786C3-E6BA-4CF8-ADD5-BE2CCF356E90","__createdAt":"2015-03-31 09:46:48.245 +00:00","__updatedAt":"2015-04-16 18:55:35.445 +00:00","__deleted":"0","id_edevent":"505A0266-322A-422D-A429-EA768DBDB9C8","id_player":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","lastused":"2015-04-16T23:08:18.637Z","reward_ready":false}');
 $table = 'tb_edevent_player';
 $method = 'UPDATE';
 $id  = '301786C3-E6BA-4CF8-ADD5-BE2CCF356E90';
