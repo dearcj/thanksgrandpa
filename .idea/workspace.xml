@@ -42,8 +42,8 @@
       <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.34812286" vertical-offset="15347" max-vertical-offset="17708">
-              <caret line="797" column="25" selection-start-line="797" selection-start-column="16" selection-end-line="797" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.52730376" vertical-offset="15347" max-vertical-offset="17708">
+              <caret line="824" column="77" selection-start-line="824" selection-start-column="77" selection-end-line="824" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -480,12 +480,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00922" summary="&#10;gf&#10;&#10;">
-      <created>1429200250801</created>
-      <option name="number" value="00922" />
-      <option name="project" value="LOCAL" />
-      <updated>1429200250801</updated>
-    </task>
     <task id="LOCAL-00923" summary="&#10;gf&#10;&#10;">
       <created>1429200444378</created>
       <option name="number" value="00923" />
@@ -774,7 +768,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429218308298</updated>
     </task>
-    <option name="localTasksCounter" value="971" />
+    <task id="LOCAL-00971" summary="&#10;&#10;a">
+      <created>1429218418454</created>
+      <option name="number" value="00971" />
+      <option name="project" value="LOCAL" />
+      <updated>1429218418454</updated>
+    </task>
+    <option name="localTasksCounter" value="972" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1278,8 +1278,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.34812286" vertical-offset="15347" max-vertical-offset="17708">
-          <caret line="797" column="25" selection-start-line="797" selection-start-column="16" selection-end-line="797" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.52730376" vertical-offset="15347" max-vertical-offset="17708">
+          <caret line="824" column="77" selection-start-line="824" selection-start-column="77" selection-end-line="824" selection-end-column="77" />
           <folding />
         </state>
       </provider>
