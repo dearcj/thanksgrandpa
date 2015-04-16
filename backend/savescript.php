@@ -71,11 +71,11 @@ function buyItem($conn, $data, $userid, $id)
 	$statement = $conn->prepare($plscript);
 	$statement->execute();
 	$pl = $statement->fetchAll(PDO::FETCH_ASSOC);
-	if ($pl[0]) return false;
+	if ($pl[0] == null) return false;
 	var_dump($pl);
 	
 	$item = readJSON($conn, "tb_items", $userid, $id);
-	if (!$item[0]) return;
+	if ($item[0] == null) return;
 	var_dump($item);
 	
 	
