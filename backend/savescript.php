@@ -73,9 +73,9 @@ function getScores($conn, $data, $userid)
 	$decr = json_decode($data);
 	var_dump($decr);
 	
-	$take = $decr['take'];
-	$skip = $decr['skip'];
-	$filter = $decr['filter'];
+	$take = $decr->take;
+	$skip = $decr->skip;
+	$filter = $decr->filter;
 	echo $take.$skip.$filter; 
 	//SELECT id, maxdistance  from thanksdad.tb_players WHERE id IN ('4EA93A3F-6A42-4C1F-A003-24C247C695B4', 'C049BF3A-CF33-4307-87A5-2C79583DBBF4') ORDER BY maxdistance DESC OFFSET 0 ROWS FETCH NEXT 20 ROWS ONLY 
 	$wholequery = "SELECT platformid, id, maxdistance, lvl FROM thanksdad.tb_players ";
