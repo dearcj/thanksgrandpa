@@ -102,8 +102,9 @@ function updateJSON($table, $jsonString, $jsonEncoded,$userid, $id)
 	}
 	$f = playerFilter($table, $userid, $id);
 $sqlclause = implode(",",$sql);
-$wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f);
-echo $wholestr;
+$wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
+ini_set($wholestr, "/tmp/php-error.log");
+
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
