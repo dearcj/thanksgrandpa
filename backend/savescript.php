@@ -178,7 +178,7 @@ function updateJSON($conn, $table, $jsonEncoded, $userid, $id)
 	
 	foreach($obj as $key => $value){
 		if ($value == '') continue;
-		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
+		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote(utf8_decode($value)); 
 	}
 	$f = playerFilter($conn, $table, $userid, $id);
 $sqlclause = implode(",",$sql);
