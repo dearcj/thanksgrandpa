@@ -181,7 +181,7 @@ echo 'ID = '.$id;
 	$f = playerFilter($conn, $table, $userid, $data['id']);
 $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
-echo $wholestr;
+echo $wholestr; return;
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
