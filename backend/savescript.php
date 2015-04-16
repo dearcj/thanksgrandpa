@@ -2,6 +2,7 @@
 try
 {
 
+
 function _json_encode($val)
 {
     if (is_string($val)) return '"'.addslashes($val).'"';
@@ -64,6 +65,19 @@ function readJSON($conn, $table, $userid, $id)
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 	return $result;
 }
+
+function updateScore($conn, $curdist, $userid)
+{
+	$wholequery = "SELECT COUNT(*) FROM tb_players WHERE maxdistance > ".$curdist;
+	$statement = $conn->prepare($wholequery);
+	$statement->execute();
+	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+	$rank	= 	$result[0][0];
+	$wholequery = "UPDATE thanksdad.tb_players SET rank = ".$rank." WHERE id = ".$userid;
+	$statement = $conn->prepare($wholequery);
+	$statement->execute();
+}
+
 
 
 function insertJSON($conn, $table, $jsonString, $jsonEncoded)

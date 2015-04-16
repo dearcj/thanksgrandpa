@@ -15,6 +15,14 @@ $method = 'UPDATE';
 $id  = null;
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 */
+
+$data = '1000';
+$table = 'tb_players';
+$method = 'UPDATE_SCORE';
+$id  = null;
+$jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
+
+
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
 if (!$token) die();
@@ -34,5 +42,10 @@ if ($method == "UPDATE")
 {
 	$res = updateJSON($pdo, $table, $data, null, $userid, $id);
 } 
+ else 
+if ($method == "UPDATE_SCORE")
+{
+	$res = update_score($pdo,  $data,  $userid);
+}
 echo _json_encode($res);
 ?>
