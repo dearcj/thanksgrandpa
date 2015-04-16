@@ -8,6 +8,9 @@ $method = $_POST['method'];
 $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
+
+error_log($data['name'], 3, "/var/tmp/my-errors.log");
+
 /*
 $data = '{"id":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","__createdAt":"2015-03-31 09:46:47.464 +00:00","__updatedAt":"2015-04-09 22:29:23.609 +00:00","__deleted":"1","ref":"2882845","vkapi":"2882845","xp":"659.3935154046127","createDate":"2015-03-31 09:46:47.034 +00:00","updateDate":"2015-04-02 21:33:49.694 +00:00","userId":"Custom:78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","money":"1500","crystals":"360","maxdistance":"916","lvl":"7","energy":"10","rank":"9","combodate":"2015-03-31 09:54:27.233 +00:00","keys":100,"platformid":"2882845"}';
 $table = 'tb_players';
