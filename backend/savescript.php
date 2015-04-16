@@ -60,7 +60,7 @@ function playerFilter($conn, $table, $userid, $id)
 function buyItem($conn, $data, $userid, $id)
 {
 	
-	$itemplquery = "SELECT id FROM thanksdad.tb_item_player WHERE id_player = ".$conn->quote($userid).', id_item ='.$conn->quote($id);
+	$itemplquery = "SELECT id FROM thanksdad.tb_item_player WHERE id_player = ".$conn->quote($userid).' AND id_item ='.$conn->quote($id);
 	$statement = $conn->prepare($itemplquery);
 	$statement->execute();
 	$itemalready = $statement->fetchAll(PDO::FETCH_ASSOC);
