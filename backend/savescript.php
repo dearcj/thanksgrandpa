@@ -69,11 +69,14 @@ function readJSON($conn, $table, $userid, $id)
 function updateScore($conn, $curdist, $userid)
 {
 	$wholequery = "SELECT COUNT(*) FROM tb_players WHERE maxdistance > ".$curdist;
+	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+	var_dump($result);
 	$rank	= 	$result[0][0];
 	$wholequery = "UPDATE thanksdad.tb_players SET rank = ".$rank." WHERE id = ".$userid;
+	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 }
