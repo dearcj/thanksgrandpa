@@ -157,7 +157,7 @@ function insertJSON($conn, $table, $jsonEncoded)
 	foreach($obj as $key => $value){
 	//	if ($value == null) continue;
 		$sqlkeys[] = $key; 
-		$sqlvalues[] = (is_numeric($value)) ? "$value" : $conn->quote($value); 
+		$sqlvalues[] = (is_numeric($value)) ? "$value" : "N".$conn->quote($value); 
 	}
 $valuesstr = implode(",",$sqlvalues);
 $keystr = implode(",",$sqlkeys);
