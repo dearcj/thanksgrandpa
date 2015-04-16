@@ -31,7 +31,7 @@ function _json_encode($val)
     return ($assoc)? '{'.$res.'}' : '['.$res.']';
 }
 
-function readJSON($conn, $table, $userid, $id)
+function playerFilter($table, $userid, $id)
 {
 	if ($table == "tb_ach_player" || $table == "tb_item_player" || $table == "tb_edevent_player")
 	{
@@ -52,7 +52,13 @@ function readJSON($conn, $table, $userid, $id)
 		$filterstr = " WHERE ".implode(",",$filter);
 	} else
 	$filterstr = "";
-	$wholequery = "SELECT * FROM thanksdad.".$table.$filterstr;
+	return $filterstr;
+}
+
+function readJSON($conn, $table, $userid, $id)
+{
+	$f = playerFilter($table, $userid, $id);
+	$wholequery = "SELECT * FROM thanksdad.".$table.$f;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -83,7 +89,7 @@ $statement = null;
 return $res;
 }
 
-function updateJSON($table, $jsonString, $jsonEncoded)
+function updateJSON($table, $jsonString, $jsonEncoded,$userid, $id)
 {
 	if (!$jsonEncoded)
 	{
@@ -94,8 +100,10 @@ function updateJSON($table, $jsonString, $jsonEncoded)
 		if ($value == '') continue;
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
 	}
+	$f = playerFilter($table, $userid, $id);
 $sqlclause = implode(",",$sql);
-$wholestr = "UPDATE thanksdad.".$table." SET $sqlclause WHERE id = " . $conn->quote($obj['id']);
+$wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f);
+echo $wholestr;
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
