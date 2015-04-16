@@ -97,6 +97,7 @@ function buyItem($conn, $data, $userid, $id)
 		insertJSON($conn, "tb_item_player", null, array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
 		updateJSON($conn, "tb_players", null, $player, $userid);
 		$conn->commit();
+		return $player;
 	} 
 	catch (PDOException $e) {
 		$conn->rollBack();
