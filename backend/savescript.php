@@ -171,7 +171,7 @@ return $res;
 
 function updateJSON($conn, $table, $jsonEncoded, $userid, $id)
 {
-	if ($table != "tb_players" && !$id) return "SEND ID";
+	if ($table != "tb_players" && $id == null) return "SEND ID";
 	
 	$obj = $jsonEncoded;
 	
