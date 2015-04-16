@@ -5,10 +5,10 @@ require 'connection.php';
 require 'savescript.php';
 
 $vkid = $_POST['vkid'];
+$vkid = '197515742';
 if (!$vkid) return "NO USER ID";
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
 $statement = $pdo->prepare($strFindPlayer);
-
 
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
