@@ -58,6 +58,8 @@ function playerFilter($conn, $table, $userid, $id)
 
 function buyItem($conn, $data, $userid, $id)
 {
+	$id = $data['id'];
+	$eq = $data['equipped'];
 	$itemplquery = "SELECT id FROM thanksdad.tb_item_player WHERE id_player = ".$conn->quote($userid).' AND id_item ='.$conn->quote($id);
 	$statement = $conn->prepare($itemplquery);
 	$statement->execute();
@@ -89,8 +91,7 @@ function buyItem($conn, $data, $userid, $id)
 		}
 		else return "NOT ENOUGH CRYSTALS";
 	}
-	$eq = false;
-	if ($data != null) $eq = true;
+
 	try{
 		$conn->beginTransaction();
 		insertJSON($conn, "tb_item_player", array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
@@ -168,11 +169,9 @@ $statement = null;
 return $res;
 }
 
-function updateJSON($conn, $table, $jsonEncoded, $userid, $id)
+function updateJSON($conn, $table, $data, $userid, $id)
 {
-	if ($table != "tb_players" && $id == null) return "SEND ID";
-	
-	$obj = $jsonEncoded;
+	$obj = $data;
 	
 	foreach($obj as $key => $value){
 		if ($value == '') continue;
@@ -180,7 +179,7 @@ function updateJSON($conn, $table, $jsonEncoded, $userid, $id)
 		//$value = mb_convert_encoding($value, 'UCS-2LE', mb_detect_encoding($value, mb_detect_order(), true));
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = N" . $conn->quote($value); 
 	}
-	$f = playerFilter($conn, $table, $userid, $id);
+	$f = playerFilter($conn, $table, $userid, $data['id']);
 $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
 $statement = $conn->prepare($wholestr);

@@ -7,14 +7,13 @@ $jwtToken = $_POST['token'];
 $method = $_POST['method'];
 $data = $_POST['data'];
 $table = $_POST['table'];
-$id = $_POST['id'];
 
 
-/*
-$data = json_decode('{"id":"301786C3-E6BA-4CF8-ADD5-BE2CCF356E90","__createdAt":"2015-03-31 09:46:48.245 +00:00","__updatedAt":"2015-04-16 18:55:35.445 +00:00","__deleted":"0","id_edevent":"505A0266-322A-422D-A429-EA768DBDB9C8","id_player":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","lastused":"2015-04-16T23:08:18.637Z","reward_ready":false}');
-$table = 'tb_edevent_player';
+
+$data = json_decode('{"id":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","__createdAt":"2015-03-31 09:46:47.464 +00:00","__updatedAt":"2015-04-16 23:25:09.023 +00:00","__deleted":"1","ref":"2882845","vkapi":"2882845","xp":959.39351540461,"createDate":"2015-03-31 09:46:47.034 +00:00","updateDate":"Fri Apr 17 2015 02:30:22 GMT+0300 (FLE Daylight Time)","userId":"Custom:78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","money":1500,"crystals":378,"maxdistance":916,"lvl":7,"energy":10,"name":"Юрий","last_name":"Дорогой","rank":1499,"combodate":"2015-03-31 09:54:27.233 +00:00","keys":null,"platformid":"2882845"}');
+$table = 'tb_players';
 $method = 'UPDATE';
-$id  = '301786C3-E6BA-4CF8-ADD5-BE2CCF356E90';
+//$id  = '78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D';
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 */
 
@@ -53,7 +52,7 @@ if ($method == "INSERT")
 } else 
 if ($method == "READ")
 {
-	$res = readJSON($pdo, $table, $userid, $id);
+	$res = readJSON($pdo, $table, $userid, $data);
 } else 
 if ($method == "UPDATE")
 {
@@ -72,7 +71,7 @@ if ($method == "GET_SCORES")
  else 
 if ($method == "BUY_ITEM")
 {
-	$res = buyItem($pdo,  $data,  $userid, $id);
+	$res = buyItem($pdo,  $data,  $userid, $data['id']);
 }
 echo json_encode($res, JSON_UNESCAPED_UNICODE);
 ?>
