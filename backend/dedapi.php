@@ -2,8 +2,7 @@
 require 'jwt_helper.php';
 require 'connection.php';
 require 'savescript.php';
-try
-{
+
 $jwtToken = $_POST['token'];
 $method = $_POST['method'];
 $data = $_POST['data'];
@@ -12,7 +11,7 @@ $id = $_POST['id'];
 error_log("PENIS".$jwtToken, 3 ,"/var/tmp/errors2.log");
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken);
-
+if (!$token) die();
 error_log("DATA=".$data, 3 ,"/var/tmp/errors2.log");
 
 $platformid = $token['vkid'];
@@ -34,9 +33,5 @@ if ($method == "UPDATE")
 	$res = updateJSON($pdo, $table, $id, $userid);
 } 
 echo $res;
-}
-catch (PDOException $e) {
-    print "Error!: " . $e->getMessage() . "<br/>";
-    die();
-}
+
 ?>
