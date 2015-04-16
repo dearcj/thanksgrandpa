@@ -94,8 +94,8 @@ function buyItem($conn, $data, $userid, $id)
 	if ($data != null) $eq = true;
 	try{
 		$conn->beginTransaction();
-		insertJSON($conn, "tb_item_player", null, array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
-		updateJSON($conn, "tb_players", null, $player, $userid);
+		insertJSON($conn, "tb_item_player", array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
+		updateJSON($conn, "tb_players", $player, $userid);
 		$conn->commit();
 		return $player;
 	} 
@@ -150,12 +150,9 @@ function updateScore($conn, $curdist, $userid)
 
 
 
-function insertJSON($conn, $table, $jsonString, $jsonEncoded)
+function insertJSON($conn, $table, $jsonEncoded)
 {
-	if (!$jsonEncoded)
-	{
-		$obj = json_decode($jsonString);
-	} else $obj = $jsonEncoded;
+	$obj = $jsonEncoded;
 	
 	foreach($obj as $key => $value){
 	//	if ($value == null) continue;
@@ -173,13 +170,11 @@ $statement = null;
 return $res;
 }
 
-function updateJSON($conn, $table, $jsonString, $jsonEncoded, $userid, $id)
+function updateJSON($conn, $table, $jsonEncoded, $userid, $id)
 {
 	if ($table != "tb_players" && !$id) return "SEND ID";
-	if (!$jsonEncoded)
-	{
-		$obj = json_decode($jsonString);
-	} else $obj = $jsonEncoded;
+	
+	$obj = $jsonEncoded;
 	
 	foreach($obj as $key => $value){
 		if ($value == '') continue;

@@ -46,7 +46,7 @@ $userid = $token->userid;
 
 if ($method == "INSERT")
 {
-	$res = insertJSON($pdo, $table, $data, null);
+	$res = insertJSON($pdo, $table, $data);
 } else 
 if ($method == "READ")
 {
@@ -54,7 +54,7 @@ if ($method == "READ")
 } else 
 if ($method == "UPDATE")
 {
-	$res = updateJSON($pdo, $table, $data, null, $userid, $id);
+	$res = updateJSON($pdo, $table, $data,  $userid, $id);
 } 
  else 
 if ($method == "UPDATE_SCORE")
