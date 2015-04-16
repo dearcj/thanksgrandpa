@@ -21,8 +21,6 @@ if (!$token) die();
 
 $platformid = $token->vkid;
 $userid = $token->userid;
-echo $userid;
-echo $platformid;
 
 if ($method == "INSERT")
 {

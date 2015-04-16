@@ -6,6 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;gf&#10;&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/dedapi.php" afterPath="$PROJECT_DIR$/backend/dedapi.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/savescript.php" afterPath="$PROJECT_DIR$/backend/savescript.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -434,12 +435,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00828" summary="&#10;gf&#10;&#10;">
-      <created>1429141873091</created>
-      <option name="number" value="00828" />
-      <option name="project" value="LOCAL" />
-      <updated>1429141873091</updated>
-    </task>
     <task id="LOCAL-00829" summary="&#10;gf&#10;&#10;">
       <created>1429142003275</created>
       <option name="number" value="00829" />
@@ -728,7 +723,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429182680332</updated>
     </task>
-    <option name="localTasksCounter" value="877" />
+    <task id="LOCAL-00877" summary="&#10;gf&#10;&#10;">
+      <created>1429182750469</created>
+      <option name="number" value="00877" />
+      <option name="project" value="LOCAL" />
+      <updated>1429182750469</updated>
+    </task>
+    <option name="localTasksCounter" value="878" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
