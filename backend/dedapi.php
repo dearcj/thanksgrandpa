@@ -8,17 +8,13 @@ $method = $_POST['method'];
 $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
-error_log("PENIS".$jwtToken, 3 ,"/var/tmp/errors2.log");
+
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken);
 if (!$token) die();
-error_log("DATA=".$data, 3 ,"/var/tmp/errors2.log");
 
 $platformid = $token['vkid'];
 $userid = $token['userid'];
-
-error_log($platformid.$userid, 3 ,"/var/tmp/errors2.log");
-
 
 if ($method == "INSERT")
 {
@@ -26,12 +22,11 @@ if ($method == "INSERT")
 } else 
 if ($method == "READ")
 {
-	$res = readJSON($pdo, $table, $id, $userid);
+	$res = readJSON($pdo, $table, $userid, $id);
 } else 
 if ($method == "UPDATE")
 {
-	$res = updateJSON($pdo, $table, $id, $userid);
+	$res = updateJSON($pdo, $table, $data, null, $userid, $id);
 } 
-echo $res;
-
+echo _json_encode($res);
 ?>

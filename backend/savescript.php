@@ -89,7 +89,7 @@ $statement = null;
 return $res;
 }
 
-function updateJSON($table, $jsonString, $jsonEncoded,$userid, $id)
+function updateJSON($conn, $table, $jsonString, $jsonEncoded, $userid, $id)
 {
 	if (!$jsonEncoded)
 	{
@@ -103,7 +103,6 @@ function updateJSON($table, $jsonString, $jsonEncoded,$userid, $id)
 	$f = playerFilter($table, $userid, $id);
 $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
-error_log($wholestr, 3 ,"/var/tmp/my-errors.log");
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
