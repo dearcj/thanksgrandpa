@@ -59,13 +59,11 @@ function playerFilter($conn, $table, $userid, $id)
 
 function buyItem($conn, $data, $userid, $id)
 {
-	
 	$itemplquery = "SELECT id FROM thanksdad.tb_item_player WHERE id_player = ".$conn->quote($userid).' AND id_item ='.$conn->quote($id);
 	$statement = $conn->prepare($itemplquery);
 	$statement->execute();
 	$itemalready = $statement->fetchAll(PDO::FETCH_ASSOC);
 	if ($itemalready[0]) return "ALREADY HAVE ITEM";
-	var_dump($itemalready);
 	
 	$plscript = "SELECT money, crystals, lvl FROM thanksdad.tb_players WHERE id = ".$conn->quote($userid);
 	$statement = $conn->prepare($plscript);
@@ -73,12 +71,10 @@ function buyItem($conn, $data, $userid, $id)
 	$res = $statement->fetchAll(PDO::FETCH_ASSOC);
 	$player = $res[0];
 	if ($player == null) return false;
-	var_dump($player);
 	
 	$res = readJSON($conn, "tb_items", $userid, $id);
 	$item = $res[0];
 	if ($item == null) return;
-	var_dump($item);
 	
 	if ($player['lvl'] >= $item['reqlvl'])
 	{
