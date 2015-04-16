@@ -71,5 +71,5 @@ if ($method == "BUY_ITEM")
 {
 	$res = buyItem($pdo,  $data,  $userid, $id);
 }
-echo _json_encode($res);
+echo json_encode($res, JSON_UNESCAPED_UNICODE);
 ?>

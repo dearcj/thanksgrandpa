@@ -8,10 +8,6 @@ require_once 'json.php';
 $vkid = $_POST['vkid'];
 $vkid = '197515742';
 
-$rutest = $_POST['rutest'];
-$r = json_encode($rutest, JSON_UNESCAPED_UNICODE);
-echo $r;
- return;
 
 if (!$vkid) return "NO USER ID";
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
@@ -92,6 +88,6 @@ $playerItem['last_name'] = "Юпитеров";
 
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
-$str = json_encode($resp);
+$str = json_encode($resp, JSON_UNESCAPED_UNICODE);
 echo $str;
 ?>
