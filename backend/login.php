@@ -9,7 +9,9 @@ $vkid = $_POST['vkid'];
 $vkid = '197515742';
 
 $rutest = $_POST['rutest'];
-echo json_encode($rutest, JSON_UNESCAPED_UNICODE); return;
+$r = json_encode($rutest, JSON_UNESCAPED_UNICODE);
+$r = preg_replace('/\x{feff}$/u', '', $r);
+echo $r return;
 
 if (!$vkid) return "NO USER ID";
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
