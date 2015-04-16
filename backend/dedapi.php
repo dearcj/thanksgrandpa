@@ -71,7 +71,7 @@ if ($method == "GET_SCORES")
  else 
 if ($method == "BUY_ITEM")
 {
-	$res = buyItem($pdo,  $data,  $userid, $data['id']);
+	$res = buyItem($pdo,  $data, $userid, $data['id']);
 }
 echo json_encode($res, JSON_UNESCAPED_UNICODE);
 ?>

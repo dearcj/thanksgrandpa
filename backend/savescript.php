@@ -171,7 +171,6 @@ return $res;
 
 function updateJSON($conn, $table, $data, $userid, $id)
 {
-echo 'ID = '.$id;
 	$obj = $data;
 	
 	foreach($obj as $key => $value){
@@ -181,7 +180,6 @@ echo 'ID = '.$id;
 	$f = playerFilter($conn, $table, $userid, $data['id']);
 $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
-echo $wholestr; return;
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
