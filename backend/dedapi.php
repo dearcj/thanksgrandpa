@@ -9,6 +9,7 @@ $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
 
+error_log('PENIS', 3, "errors.log");
 error_log(var_dump($data), 3, "errors.log");
 
 /*
