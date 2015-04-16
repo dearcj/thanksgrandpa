@@ -75,8 +75,5 @@ $token = array(
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 $str = _json_encode($resp);
-$str=iconv("windows-1250","UTF-8",$str);
-        
-
 echo $str;
 ?>
