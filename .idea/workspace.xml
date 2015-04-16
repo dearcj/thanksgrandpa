@@ -5,8 +5,8 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;gf&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vk_callback.php" afterPath="$PROJECT_DIR$/vk_callback.php" />
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/dedapi.php" afterPath="$PROJECT_DIR$/backend/dedapi.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -434,12 +434,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00818" summary="&#10;gf&#10;&#10;">
-      <created>1429138467862</created>
-      <option name="number" value="00818" />
-      <option name="project" value="LOCAL" />
-      <updated>1429138467862</updated>
-    </task>
     <task id="LOCAL-00819" summary="&#10;gf&#10;&#10;">
       <created>1429138671700</created>
       <option name="number" value="00819" />
@@ -728,7 +722,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429177264629</updated>
     </task>
-    <option name="localTasksCounter" value="867" />
+    <task id="LOCAL-00867" summary="&#10;gf&#10;&#10;">
+      <created>1429178818664</created>
+      <option name="number" value="00867" />
+      <option name="project" value="LOCAL" />
+      <updated>1429178818664</updated>
+    </task>
+    <option name="localTasksCounter" value="868" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">

@@ -12,12 +12,13 @@ $id = $_POST['id'];
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken);
 
-ini_set("DATA=".$data, "/tmp/php-error.log");
+error_log("DATA=".$data, 3 ,"/var/tmp/my-errors.log");
 
 $platformid = $token['vkid'];
 $userid = $token['userid'];
 
-ini_set($platformid.$userid, "/tmp/php-error.log");
+error_log($platformid.$userid, 3 ,"/var/tmp/my-errors.log");
+
 
 if ($method == "INSERT")
 {
