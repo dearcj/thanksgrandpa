@@ -2,7 +2,6 @@
 try
 {
 
-
 function _json_encode($val)
 {
     if (is_string($val)) return '"'.addslashes($val).'"';
@@ -184,7 +183,6 @@ function updateJSON($conn, $table, $jsonEncoded, $userid, $id)
 	$f = playerFilter($conn, $table, $userid, $id);
 $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
-echo $wholestr;
 $statement = $conn->prepare($wholestr);
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
