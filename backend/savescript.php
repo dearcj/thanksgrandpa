@@ -68,7 +68,7 @@ function readJSON($conn, $table, $userid, $id)
 
 function updateScore($conn, $curdist, $userid)
 {
-	$wholequery = "SELECT COUNT(*) FROM tb_players WHERE maxdistance > ".$curdist;
+	$wholequery = "SELECT COUNT(*) FROM thanksdad.tb_players WHERE maxdistance > ".$curdist;
 	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
