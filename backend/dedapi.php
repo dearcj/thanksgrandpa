@@ -12,12 +12,16 @@ $id = $_POST['id'];
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken);
 
+ini_set("DATA=".$data, "/tmp/php-error.log");
+
 $platformid = $token['vkid'];
 $userid = $token['userid'];
 
+ini_set($platformid.$userid, "/tmp/php-error.log");
+
 if ($method == "INSERT")
 {
-	$res = insertJSON($pdo, $table, $id, $userid);
+	$res = insertJSON($pdo, $table, $data, null);
 } else 
 if ($method == "READ")
 {
