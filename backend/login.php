@@ -84,6 +84,6 @@ echo $str;
 
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
-$str = json_encode($resp);
+$str = _json_encode($resp);
 echo $str;
 ?>
