@@ -1,8 +1,26 @@
 ﻿<?php
 header('Content-Type: text/html; charset=UTF-8');
-require 'jwt_helper.php';
-require 'connection.php';
-require 'savescript.php';
+require_once 'jwt_helper.php';
+require_once 'connection.php';
+require_once 'savescript.php';
+require_once('JSON.php');
+
+
+ function json_decode2($var) {
+    $JSON = new Services_JSON;
+    return $JSON->decode($var);
+  }
+}
+
+  function json_encode2($var) {
+    $JSON = new Services_JSON;
+    return $JSON->encode($var);
+  }
+
+
+
+
+
 
 $vkid = $_POST['vkid'];
 $vkid = '197515742';
@@ -84,6 +102,6 @@ echo mb_detect_encoding($playerItem['name']);
 $tokenJWT = JWT::encode($token, $secret_key);
 $playerItem['name'] = utf8_encode($playerItem['name']);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
-$str = json_encode($resp);
+$str = json_encode2($resp);
 echo $str;
 ?>
