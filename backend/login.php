@@ -77,7 +77,7 @@ $achs = readJSON($pdo, 'tb_achs', $userid);
 $str = json_encode($achs[0], JSON_FORCE_OBJECT);
 $str2 = $achs[0]['desc'];
 
-echo $str2;
+echo $str;
 
 
 
