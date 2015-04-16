@@ -9,7 +9,7 @@ $method = $_POST['method'];
 $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
-error_log("PENIS", 3 ,"/var/tmp/errors2.log");
+error_log("PENIS".$jwtToken, 3 ,"/var/tmp/errors2.log");
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken);
 
