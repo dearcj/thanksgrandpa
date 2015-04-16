@@ -144,6 +144,7 @@ function updateScore($conn, $curdist, $userid)
 	$wholequery = "UPDATE thanksdad.tb_players SET rank = ".$rank." WHERE id = ".$conn->quote($userid);
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
+	return $rank;
 }
 
 
