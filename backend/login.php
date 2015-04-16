@@ -6,8 +6,6 @@ require_once 'savescript.php';
 require_once 'json.php';
 
 $vkid = $_POST['vkid'];
-$vkid = '197515742';
-
 
 if (!$vkid) return "NO USER ID";
 $strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
@@ -83,9 +81,6 @@ $str2 = $achs[0]['desc'];
 echo $str;
 
 */
-$playerItem['name'] = "Виталий";
-$playerItem['last_name'] = "Юпитеров";
-updateJSON($pdo, 'tb_players', $playerItem, $userid);
 
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
