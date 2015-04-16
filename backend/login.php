@@ -85,6 +85,7 @@ echo $str;
 */
 $playerItem['name'] = "Виталий";
 $playerItem['last_name'] = "Юпитеров";
+updateJSON($pdo, 'tb_players', $playerItem, $userid);
 
 $tokenJWT = JWT::encode($token, $secret_key);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
