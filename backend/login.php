@@ -73,7 +73,6 @@ $token = array(
 );
 
 $tokenJWT = JWT::encode($token, $secret_key);
-var_dump($playerItem);
 $resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 echo _json_encode($resp);
 ?>
