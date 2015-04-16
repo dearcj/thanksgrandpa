@@ -60,15 +60,12 @@ function playerFilter($conn, $table, $userid, $id)
 function buyItem($conn, $data, $userid, $id)
 {
 	
-/*	$itemplquery = "SELECT id FROM thanksdad.tb_item_player WHERE id_player = ".$conn->quote($userid).', id_item ='.$conn->quote($id);
+	$itemplquery = "SELECT id FROM thanksdad.tb_item_player WHERE id_player = ".$conn->quote($userid).', id_item ='.$conn->quote($id);
 	$statement = $conn->prepare($itemplquery);
 	$statement->execute();
-	$pl = $statement->fetchAll(PDO::FETCH_ASSOC);
-	if ($pl[0]) return false;
-	var_dump($pl);
-	*/
-	$r = readJSON($conn, "tb_item_player", $userid, $id);
-	if (count($r) > 0) return false;
+	$itemalready = $statement->fetchAll(PDO::FETCH_ASSOC);
+	if ($itemalready[0]) return "ALREADY HAVE ITEM";
+	var_dump($itemalready);
 	
 	$plscript = "SELECT money, crystals FROM thanksdad.tb_players WHERE id = ".$conn->quote($userid);
 	$statement = $conn->prepare($plscript);
@@ -80,6 +77,9 @@ function buyItem($conn, $data, $userid, $id)
 	$item = readJSON($conn, "tb_items", $userid, $id);
 	if (!$item[0]) return;
 	var_dump($item);
+	
+	
+	
 	/*
 	$statement = $conn->prepare($plscript);
 	$statement->execute();
