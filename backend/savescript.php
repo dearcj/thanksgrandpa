@@ -125,7 +125,7 @@ function getScores($conn, $data, $userid)
 	$wholequery = "SELECT platformid, id, maxdistance, lvl, name, last_name FROM thanksdad.tb_players ";
 	if ($filter)
 	{
-		$wholequery = $wholequery." WHERE id IN (".$filter.")";
+		$wholequery = $wholequery." WHERE platformid IN (".$filter.")";
 	}
 	$wholequery = $wholequery." ORDER BY maxdistance DESC OFFSET ".$skip." ROWS FETCH NEXT ".$take." ROWS ONLY ";
 	$statement = $conn->prepare($wholequery);
