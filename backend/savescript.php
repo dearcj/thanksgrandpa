@@ -164,8 +164,6 @@ function updateScore($conn, $curdist, $userid)
 	return $rank;
 }
 
-
-
 function insertJSON($conn, $table, $jsonEncoded)
 {
 	$obj = $jsonEncoded;
@@ -186,7 +184,7 @@ $statement = null;
 return $res;
 }
 
-function updateJSON($conn, $table, $data, $userid)
+function updateJSON($conn, $table, $data, $userid, $id)
 {
 	$obj = $data;
 	
@@ -195,7 +193,7 @@ function updateJSON($conn, $table, $data, $userid)
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = N" . $conn->quote($value); 
 	}
 	
-	$f = playerFilter($conn, $table, $userid, $data['id']);
+	$f = playerFilter($conn, $table, $userid, $id);
 $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
 $statement = $conn->prepare($wholestr);
