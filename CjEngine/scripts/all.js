@@ -9696,7 +9696,7 @@ PlayerData.prototype.getVKfriends = function()
             for (var i = 0; i < friends.length; ++i)
             {
                 var s = friends[i].toString();
-                vkparams.friendsIngameIDsStr.push("\"" + s +"\"") ;
+                vkparams.friendsIngameIDsStr.push("\'" + s +"\'") ;
                 vkparams.friendsIngameIDs.push(s);
             }
 
