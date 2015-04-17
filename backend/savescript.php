@@ -76,7 +76,7 @@ function buyItem($conn, $data, $userid)
 	$res = readJSON($conn, "tb_items", $userid, $id);
 	$item = $res[0];
 	if ($item == null) {
-		echo "NO SUCH ITEM"
+		echo "NO SUCH ITEM";
 		return;
 	}
 	
