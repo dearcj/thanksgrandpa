@@ -1873,8 +1873,8 @@ ShopStage.prototype.buyItem = function (event, unlock) {
             console.log("SCORE UPDATED " + x);
             if (x && x.crystals && x.money) {
                 //SUCCESS
-                PlayerData.inst.playerItem.crystals = x.crystals;
-                PlayerData.inst.playerItem.money = x.money;
+                PlayerData.inst.playerItem.crystals = parseFloat(x.crystals);
+                PlayerData.inst.playerItem.money = parseFloat(x.money);
 
                 PlayerData.inst.items_enabled.push({id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
                 shopStage.updateStatsPanel();
@@ -1888,8 +1888,10 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                 shopStage.transScreen = null;
 
             } else {
-                shopStage.transScreen.parent.removeChild(shopStage.transScreen);
-                shopStage.transScreen = null;
+                if (shopStage.transScreen.parent) {
+                    rp(shopStage.transScreen.parent)
+                    shopStage.transScreen = null;
+                }
             }
         });
     } else charStage.openPremiumWindow();
@@ -8991,11 +8993,9 @@ PlayerData.prototype.comboCheck = function()
          if (d > dayminutes*10)
          this.progressAch("Gold medal 9", 1, false);
       }
-
    } else
    {
       this.playerItem.combodate  = this.playerItem.updateDate;
-
    }
 }
 
@@ -9031,7 +9031,6 @@ PlayerData.prototype.getUpgrade = function(item, itemName)
                 break;
             }
         }
-
     }
 
     var nm = item.name;
@@ -9055,7 +9054,7 @@ PlayerData.prototype.getUpgrade = function(item, itemName)
                 baseBuyed = true;
             }
 
-                if (PlayerData.inst.items_enabled[k].id_item == upgrIds[i].id)
+            if (PlayerData.inst.items_enabled[k].id_item == upgrIds[i].id)
             {
                 if (i > 0) var idNext = upgrIds[i - 1].id; else idNext = null;
                 return {upgr: 5 - i, id: upgrIds[i].id, idNext: idNext};
@@ -9070,7 +9069,6 @@ PlayerData.prototype.getUpgrade = function(item, itemName)
 
 PlayerData.prototype.equipItem = function(item, state)
 {
-
    var id = item.id;
 
    var itemOwned = false;
@@ -9087,18 +9085,25 @@ PlayerData.prototype.equipItem = function(item, state)
    {
       if (this.getType(PlayerData.inst.items_enabled[i]) == itemtype)
       {
+          var saveOnServer = false;
+
          if (PlayerData.inst.items_enabled[i].id_item == id) {
              PlayerData.inst.items_enabled[i].equipped = state;
-             PlayerData.inst.callDedAPI("UPDATE", "tb_item_player", null, PlayerData.inst.items_enabled[i]);
+             saveOnServer = true;
          }else {
-             if (PlayerData.inst.items_enabled[i].equipped == "1")
-             PlayerData.inst.items_enabled[i].equipped = "0";
-             PlayerData.inst.callDedAPI("UPDATE", "tb_item_player", null, PlayerData.inst.items_enabled[i]);
+             if (PlayerData.inst.items_enabled[i].equipped == "1") {
+                 PlayerData.inst.items_enabled[i].equipped = "0";
+                saveOnServer = true;
+             }
          }
+
+          if (saveOnServer)
+          {
+              if (PlayerData.inst.items_enabled[i].id)
+              PlayerData.inst.callDedAPI("UPDATE", "tb_item_player", PlayerData.inst.items_enabled[i].id, PlayerData.inst.items_enabled[i]);
+          }
       }
    }
-
-
 }
 
 
@@ -9124,8 +9129,6 @@ PlayerData.prototype.gainExp = function(amount) {
            }).success(function (res) {
            });
        }
-
-
 
        ZSound.Play("levelup");
        if (ingame)
@@ -9264,13 +9267,33 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
    return complete;
 }
 
-PlayerData.prototype.loadEnd = function()
-{
-    console.log("LOAD END");
+PlayerData.prototype.loadEnd = function() {
+
+    function getPlItem(id)
+    {
+        for (var i =0; i < PlayerData.inst.items_enabled.length;++i)
+        {
+            if (PlayerData.inst.items_enabled[i].id_item == id) return PlayerData.inst.items_enabled[i];
+        }
+    }
+
+    var eqWeapon = false;
+    for (var i = 0; i < PlayerData.inst.items.length; ++i)
+    {
+        if (PlayerData.inst.items[i].type == tWeapon) {
+            var plit = getPlItem(PlayerData.inst.items[i].id);
+            if (plit && plit.equipped == "1") {
+                eqWeapon = true;
+                break;
+            }
+        }
+    }
+
+    if (!eqWeapon) PlayerData.inst.equipItem(PlayerData.inst.baseWeapIt, "1");
+
    // PlayerData.inst.updateScore();
     //PlayerData.inst.createAchProgress();
     window.dbinit  = true;
-    console.log("DB intialized");
     onAssetsLoaded();
 }
 
@@ -9474,44 +9497,19 @@ PlayerData.prototype.loadData = function(cb)
     {
        PlayerData.inst.items_enabled = PlayerData.inst.intJSON(r);
 
+        var defaultRifleID = "68AFAEDC-B3E0-401E-9E1A-E272084F2E11";
+
+        PlayerData.inst.baseWeapIt =  PlayerData.inst.getItemById("68AFAEDC-B3E0-401E-9E1A-E272084F2E11");
+        PlayerData.inst.baseWeapItPl = {
+            id_item: defaultRifleID,
+            id_player:PlayerData.inst.pid,
+            equipped: false
+        };
+        PlayerData.inst.items_enabled.push(PlayerData.inst.baseWeapItPl);
+
         PlayerData.inst.loadCount ++;
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
 
-
-        var defaultRifleID = "68AFAEDC-B3E0-401E-9E1A-E272084F2E11";
-
-        var found = false;
-        var eq = false;
-        var inxRifle = -1;
-        for (var i = 0;i < PlayerData.inst.items_enabled.length; ++i)
-        {
-            if (PlayerData.inst.items_enabled[i].id_item == defaultRifleID)
-            {
-                inxRifle = i;
-                found = true;
-                //     break;
-            }
-            if (PlayerData.inst.items_enabled[i].equipped != "0")
-                eq = true;
-        }
-
-        if (!eq && found)
-            PlayerData.inst.items_enabled[inxRifle].equipped = true;
-
-
-        if (!found)
-        {
-            var eq = true;
-            if (PlayerData.inst.items_enabled.length > 0)
-                eq = false;
-            PlayerData.inst.items_enabled.push(
-                {
-                    id_item: defaultRifleID,
-                    id_player:PlayerData.inst.pid,
-                    equipped: eq
-                }
-            );
-        }
     });
 
 
@@ -9639,7 +9637,6 @@ PlayerData.prototype.login = function()
 
         PlayerData.inst.pid = x.playerItem.id;
         PlayerData.inst.playerItem = PlayerData.inst.intJSON(x.playerItem);
-
         if (!PlayerData.inst.playerItem.crystals)
             PlayerData.inst.playerItem.crystals = 0;
 
@@ -9683,19 +9680,11 @@ PlayerData.prototype.callDedAPI = function(method, table, id, data, cb)
 
 PlayerData.prototype.savePlayerData = function(cb)
 {
-   // this.playerItem.money = 20000;
     console.log(JSON.stringify(this.playerItem));
     PlayerData.inst.callDedAPI("UPDATE", "tb_players", null, this.playerItem, function(x)
     {
         console.log(x);
     });
-  /* window.azureclient.getTable("tb_players").update(this.playerItem).done(function (result) {
-      PlayerData.inst.playerItem = result;
-       console.log("DATA SAVED");
-       if (cb) cb();
-   }, function (err) {
-       //PlayerData.inst.savePlayerData(cb);
-   });*/
 };
 
 
@@ -9821,37 +9810,6 @@ PlayerData.prototype.getVKfriends = function()
     });
 };
 
-PlayerData.prototype.azureLogin = function()
-{
-/*    console.log("LOGIN VK USER ID = " + vkparams.viewerid.toString());
-
-    azureclient.invokeApi("login", {
-        body: {platformid: vkparams.viewerid, ref: vkparams.refferer},
-        method: "post"
-    }).done(function (results) {
-        console.log(JSON.stringify(results.result));
-        vkparams.registered = results.result.registered;
-
-        if (!vkparams.registered)console.log("user logged in"); else
-            console.log("user registered");
-        PlayerData.inst.pid = results.result.userId.split(':')[1];
-
-        PlayerData.inst.playerItem = results.result.playerItem;
-
-
-
-        if (!PlayerData.inst.playerItem.crystals)
-        PlayerData.inst.playerItem.crystals = 0;
-
-        console.log("Player item read from login" + JSON.stringify(PlayerData.inst.playerItem));
-
-        azureclient.currentUser = {userId:results.result.userId, mobileServiceAuthenticationToken: results.result.token};
-        vkparams.id = PlayerData.inst.playerItem.id;
-        PlayerData.inst.getVKfriends();
-    }, function(error) {
-        PlayerData.inst.azureLogin();
-    });*/
-}
 
 PlayerData.dbInit = function() {
     console.log("dbInit start. Connecting to azure");
@@ -9866,7 +9824,7 @@ PlayerData.dbInit = function() {
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "2882845";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
+        vkparams.viewerid = "282617259";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
 
         if (MOBILE)
         {
@@ -9875,9 +9833,9 @@ PlayerData.dbInit = function() {
         vkparams.novk = true;
     }
 
-    if (vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+ /*   if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
     vkparams.viewerid != "197515742") return;
-
+*/
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
@@ -10793,31 +10751,31 @@ function order(item) {
 function orderSuccess(order_id) {
     var amount = 0;
     if (window.currentOrder == "item1") {
-        window.currentOrder == null;
+        window.currentOrder = null;
         PlayerData.inst.playerItem.money += 1200;
     }
     if (window.currentOrder == "item2") {
-        window.currentOrder == null;
+        window.currentOrder = null;
         PlayerData.inst.playerItem.money += 6000;
     }
     if (window.currentOrder == "item3") {
-        window.currentOrder == null;
+        window.currentOrder = null;
         PlayerData.inst.playerItem.money += 32000;
     }
     if (window.currentOrder == "item4") {
-        window.currentOrder == null;
+        window.currentOrder = null;
         PlayerData.inst.playerItem.crystals += 12;
     }
     if (window.currentOrder == "item5") {
-        window.currentOrder == null;
+        window.currentOrder = null;
         PlayerData.inst.playerItem.crystals += 60;
     }
     if (window.currentOrder == "item6") {
-        window.currentOrder == null;
+        window.currentOrder = null;
         PlayerData.inst.playerItem.crystals += 320;
     }
     if (window.currentOrder == "item7") {
-        window.currentOrder == null;
+        window.currentOrder = null;
         PlayerData.inst.playerItem.energy += 10;
     }
 
