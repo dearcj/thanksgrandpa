@@ -75,21 +75,34 @@ function buyItem($conn, $data, $userid)
 	
 	$res = readJSON($conn, "tb_items", $userid, $id);
 	$item = $res[0];
-	if ($item == null) return;
+	if ($item == null) {
+		echo "NO SUCH ITEM"
+		return;
+	}
 	
 	if ($player['lvl'] >= $item['reqlvl'])
 	{
+		echo "level ok";
 		if ($player['money'] >= $item['price'])
 		{
 			$player['money'] -= $item['price'];
-		} else return "NOT ENOUGH MONEY";
+		} else
+		{	
+			echo "NOT ENOUGH MONEY";
+			return;
+		}
 	} else 
 	{
+		echo "level premium";
 		if ($player['crystals'] >= $item['pricecrys'])
 		{
 			$player['crystals'] -= $item['pricecrys'];
 		}
-		else return "NOT ENOUGH CRYSTALS";
+		else 
+		{	
+			echo "NOT ENOUGH CRYSTALS";
+			return;
+		}
 	}
 
 	try{
