@@ -56,7 +56,7 @@ function playerFilter($conn, $table, $userid, $id)
 }
 
 
-function buyItem($conn, $data, $userid, $id)
+function buyItem($conn, $data, $userid)
 {
 	$id = $data['id'];
 	$eq = $data['equipped'];
