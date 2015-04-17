@@ -39,7 +39,7 @@ $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZX
 
 
 
-$data = array('id' => '20D318C0-4633-41D0-B406-FD34485A88BE', 'equipped' => true);
+$data = array('id' => '3B6692F2-5ED9-420D-8A03-2C6FED5F5C32', 'equipped' => true);
 $method = 'BUY_ITEM';
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 
@@ -50,6 +50,8 @@ if (!$token) die();
 
 $platformid = $token->vkid;
 $userid = $token->userid;
+
+$userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
 
 if ($method == "INSERT")
 {
