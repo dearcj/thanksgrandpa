@@ -169,7 +169,7 @@ $statement = null;
 return $res;
 }
 
-function updateJSON($conn, $table, $data, $userid, $id)
+function updateJSON($conn, $table, $data, $userid)
 {
 	$obj = $data;
 	
@@ -177,6 +177,7 @@ function updateJSON($conn, $table, $data, $userid, $id)
 		if ($value == '') continue;
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = N" . $conn->quote($value); 
 	}
+	
 	$f = playerFilter($conn, $table, $userid, $data['id']);
 $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;

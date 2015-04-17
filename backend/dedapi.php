@@ -33,10 +33,11 @@ $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZX
 */
 
 
+/*
 $data = array('id' => '20D318C0-4633-41D0-B406-FD34485A88BE', 'equipped' => true);
 $method = 'BUY_ITEM';
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
-
+*/
 
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
