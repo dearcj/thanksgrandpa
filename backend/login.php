@@ -25,7 +25,7 @@ if ($result && count($result > 0))
 	try{
 		$pdo->beginTransaction();
 	//	echo 'REGISTER NEW USER';
-		$res= insertJSON($pdo, "tb_players", null, array('platformid' => $vkid,
+		$res= insertJSON($pdo, "tb_players", array('platformid' => $vkid,
 		'money' => 0,
 		'crystals' => 0,
 		'xp' => 0,
@@ -45,13 +45,13 @@ if ($result && count($result > 0))
 				$plach = array('id_ach' => $ach["id"],
 				'id_player' => $userid,
 				'progress' => 0);
-				insertJSON($pdo, "tb_ach_player", null, $plach);
+				insertJSON($pdo, "tb_ach_player",  $plach);
 			} 
 			$events = readJSON($pdo, 'tb_edevent', $userid);
 			foreach($events as $event){
 				$plevent = array('id_edevent' => $event["id"],
 				'id_player' => $userid);
-				insertJSON($pdo, "tb_edevent_player", null, $plevent);
+				insertJSON($pdo, "tb_edevent_player",  $plevent);
 			} 
 		} else throw new Exception('Cant add player record');
 		$pdo->commit();
