@@ -186,7 +186,6 @@ return $res;
 
 function updateJSON($conn, $table, $data, $userid, $id)
 {
-	echo $id." THIS IS MY ID";
 	$obj = $data;
 	
 	foreach($obj as $key => $value){
@@ -199,7 +198,6 @@ $sqlclause = implode(",",$sql);
 $wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
 $statement = $conn->prepare($wholestr);
 $statement->execute();
-echo $wholestr;
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 $statement = null;
 return $result;
