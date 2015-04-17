@@ -9875,6 +9875,8 @@ PlayerData.dbInit = function() {
         vkparams.novk = true;
     }
 
+    if (vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+    vkparams.viewerid != "197515742") return;
 
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
