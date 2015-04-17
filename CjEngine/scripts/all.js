@@ -9704,7 +9704,7 @@ PlayerData.prototype.getVKfriends = function()
 
             if (vkparams.friendsIngameIDs.length > 0) {
 
-                PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: null, take: 15, skip: 0}, function(c)
+                PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: vkparams.friendsFilter, take: 15, skip: 0}, function(c)
                 {
                     vkparams.friendsIngame = c;
                     /*vkparams.friendsIngameIDs = [];
