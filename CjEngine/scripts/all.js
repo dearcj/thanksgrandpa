@@ -3,6 +3,11 @@ var CG_MONSTER = 2;
 var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
+function strad(str1, str2)
+{
+    return parseInt(str1) + parseInt(str2);
+}
+
 function noc(obj, f)
 {
     obj.click = null;
@@ -53,6 +58,16 @@ function clone(obj) {
     return copy;*/
 }
 
+function sqlDate(d)
+{
+    return d.getUTCFullYear() + '-' +
+    ('00' + (d.getUTCMonth() + 1)).slice(-2) + '-' +
+    ('00' + d.getUTCDate()).slice(-2) + ' ' +
+    ('00' + d.getUTCHours()).slice(-2) + ':' +
+    ('00' + d.getUTCMinutes()).slice(-2) + ':' +
+    ('00' + d.getUTCSeconds()).slice(-2);
+}
+
 function superRand(l) {
     var s = 0;
     for (var i = 0; i < l; ++i)
@@ -64,7 +79,8 @@ function superRand(l) {
 function dateDiff(date, delayMin, hidehours)
 {
     var nd = new Date();
-    var d = nd.getTime() - date.getTime();
+    var d2 = new Date(date);
+    var d = nd.getTime() - d2.getTime();
     d = delayMin * 60 * 1000 - d;
  //   if (d < 0) d = 0;
     d /= 1000;
@@ -985,7 +1001,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
         tf3.id = "tf" + (num + 1).toString() + "3";
     }
 
-    CObj.getById("tfmon").text = PlayerData.inst.score.toString();
+    CObj.getById("tfmon").text = Math.round(PlayerData.inst.score).toString();
     CObj.getById("tfprev").text = Math.round(LauncherBG.inst.distance).toString() + " м";
 
     var rec = Math.round(PlayerData.inst.playerItem.maxdistance);
@@ -1030,12 +1046,8 @@ GameStage.prototype.openEndWindowLoaded = function () {
         addLine(i);
     }
 
-
-    azureclient.invokeApi("get_scores", {
-        body: {filter: vkparams.friendsIngameIDs, take: 5, skip: scoreStage.skip},
-        method: "post"
-    }).done(function (results) {
-        var arr = results.result;
+    PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: vkparams.friendsFilter, take: 5, skip: 0}, function(c) {
+        var arr = c;
 
         for (var i = 0; i < Math.min(5, arr.length); ++i) {
             CObj.getById("tf" + (i + 1).toString() + "2").text = extractName(arr[i]);
@@ -1098,7 +1110,7 @@ GameStage.prototype.updateWindowLevWin = function () {
 
 GameStage.prototype.updateScore = function () {
     if (gameStage.scoreObj)
-        gameStage.scoreObj.text = PlayerData.inst.score.toString();
+        gameStage.scoreObj.text = Math.round(PlayerData.inst.score).toString();
 }
 
 // event.type должен быть keypress
@@ -1781,7 +1793,7 @@ ShopStage.prototype.createStatsPanel = function (cb) {
 
 }
 ShopStage.prototype.onShow = function () {
-    azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
+  //  azureclient.getTable("tb_players").update(PlayerData.inst.playerItem);//
 
     LevelManager.loadLevel("levshop", function () {
         shopStage.createStatsPanel(shopStage.onShowContinue);
@@ -1819,7 +1831,32 @@ ShopStage.prototype.buyItem = function (event, unlock) {
 
 
         ZSound.Play("buy");
-        azureclient.invokeApi("buy_item", {
+
+        PlayerData.inst.callDedAPI("BUY_ITEM", null, null,{id: buyitem.id, equipped: true}, function (x) {
+            console.log("SCORE UPDATED " + x);
+            if (x && x.crystals && x.money) {
+                //SUCCESS
+                PlayerData.inst.playerItem.crystals = x.crystals;
+                PlayerData.inst.playerItem.money = x.money;
+
+                PlayerData.inst.items_enabled.push({id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
+                shopStage.updateStatsPanel();
+
+                PlayerData.inst.equipItem(buyitem, true);
+                shopStage.pl.updateAppearence(true, false, null, null, null);
+
+                shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
+                shopStage.updateStatsPanel();
+                shopStage.transScreen.parent.removeChild(shopStage.transScreen);
+                shopStage.transScreen = null;
+
+            } else {
+                shopStage.transScreen.parent.removeChild(shopStage.transScreen);
+                shopStage.transScreen = null;
+            }
+        });
+    } else charStage.openPremiumWindow();
+        /*azureclient.invokeApi("buy_item", {
             body: {id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id},
             method: "post"
         }).done(function (results) {
@@ -1836,7 +1873,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
 
 
 
-            PlayerData.inst.equipItem(buyitem, true);
+                    PlayerData.inst.equipItem(buyitem, true);
                     shopStage.pl.updateAppearence(true, false, null, null, null);
 
                     shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
@@ -1847,7 +1884,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
         });
     } else {
         charStage.openPremiumWindow();
-    }
+    }*/
 }
 
 ShopStage.prototype.createItemBtn = function (item) {
@@ -2221,7 +2258,7 @@ ShopStage.prototype.updateEnergyText = function () {
     if (tf && PlayerData.inst.playerItem.energy < 1) {
         if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
             var mins = (1 - PlayerData.inst.playerItem.energy)*(1 / PlayerData.inst.epm);
-            var timeRes = dateDiff(PlayerData.inst.playerItem.updateDate, mins, true);
+            var timeRes = dateDiff(new Date(PlayerData.inst.playerItem.updateDate), mins, true);
             if (timeRes.d < 0) tf.text = "";
             tf.text = timeRes.timeString;
         } else {
@@ -2237,233 +2274,6 @@ ShopStage.prototype.process = function () {
     //shopStage.updateStatsPanel();
 
     this.updateEnergyText();
-    CObj.processAll();
-};
-function ScoreStage() {
-    CustomStage.apply(this);
-}
-
-extend(ScoreStage, CustomStage);
-
-ScoreStage.prototype.updateFriends = function() {
-
-    PlayerData.inst.savePlayerData();
-
-    azureclient.invokeApi("get_scores", {
-        body: {filter: vkparams.friendsIngameIDs, take: scoreStage.showRecords, skip: scoreStage.skip},
-        method: "post"
-    }).done(function (results) {
-        scoreStage.updateSB(results.result);
-    }, function(error) {
-
-    });
-}
-
-ScoreStage.prototype.updateTotal = function() {
-
-
-    azureclient.invokeApi("get_scores", {
-        body: {filter: null, take: scoreStage.showRecords, skip: scoreStage.skip},
-        method: "post"
-    }).done(function (results) {
-        scoreStage.updateSB(results.result);
-    }, function(error) {
-
-    });
-}
-
-
-ScoreStage.prototype.updateSB = function(arr)
-{
-    while     (scoreStage.container.children.length > 0)
-    {
-        rp(scoreStage.container.getChildAt(0));
-    }
-    var clips = [];
-    var fr = "";
-    for (var i = 0; i < arr.length; ++i) {
-        var scoreClip = new PIXI.DisplayObjectContainer();
-        var tfRank = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: (scoreStage.skip + i + 1).toString() + '.'}) ;
-        var tfName = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: arr[i].name + ' ' + arr[i].last_name}) ;
-        var tfScore = CTextField.createTextField({tint: 0x333333, fontSize: 15, text: Math.round(arr[i].maxdistance).toString() + "м."}) ;
-        var clIco = crsp("buy small button");
-
-        clips.push(clIco);
-        clips[i].platformid = arr[i].platformid;
-        if (fr != "") fr += ",";
-        fr+= arr[i].platformid;
-        if (scoreStage.skip + i < 3)
-        {
-            var nameTex;
-            if (scoreStage.skip + i == 0) nameTex = "1st place";
-            if (scoreStage.skip + i == 1) nameTex = "2nd place";
-            if (scoreStage.skip + i == 2) nameTex = "3rd place";
-            var bgCircle = crsp(nameTex);
-            bgCircle.x = 4;
-            bgCircle.y = 10;
-            bgCircle.scale.x = 0.8;
-            bgCircle.scale.y = 0.8;
-            scoreClip.addChild(bgCircle);
-        }
-        clIco.y = 10;
-        clIco.x = 35;
-        scoreClip.x = 20;
-        scoreClip.y = 15 + 28*i;
-        tfName.x = 55;
-        tfScore.x = 370;
-
-        scoreClip.addChild(clIco);
-        scoreClip.addChild(tfName);
-        scoreClip.addChild(tfRank);
-        scoreClip.addChild(tfScore);
-        scoreStage.container.addChild(scoreClip);
-    }
-
-    if (VK && fr != "")
-    VK.api('users.get', {user_ids: fr, fields: "photo"}, function (data) {
-
-        for (var j = 0; j < data.response.length; ++j) {
-            var purl = data.response[j].photo;
-            if (!data.response || data.response.length == 0) return;
-
-            var upperClip = clips[j];
-            upperClip.loader = new PIXI.ImageLoader(purl);
-
-            var setLoader = function (clip, url) {
-                clip.loader.onLoaded = function () {
-                    var ico = new PIXI.Sprite(PIXI.TextureCache[url]);
-                    ico.scale.x = 0.5;
-                    ico.scale.y = 0.5;
-                    ico.anchor.x = 0.5;
-                    ico.anchor.y = 0.5;
-                    clip.addChild(ico);
-                //    charStage.icons.push(ico);
-                }
-            };
-            setLoader(upperClip, purl);
-            upperClip.loader.load();
-        }
-    });
-
-
-
-}
-
-ScoreStage.prototype.onShow = function() {
-    CustomStage.prototype.onShow.call(this);
-    scoreStage.skip = 0;
-
-    scoreStage.tab = "total";
-    scoreStage.showRecords = 10;
-    LevelManager.loadLevel("levscore", this.onShowContinue);
-    scoreStage.container = new PIXI.DisplayObjectContainer();
-    scoreStage.container.x = 170;
-    scoreStage.container.y = 170;
-    SM.inst.ol.addChild(scoreStage.container);
-}
-
-ScoreStage.prototype.onHide = function(newStage) {
-    while (scoreStage.container.children.length > 0)
-    {
-        rp(scoreStage.container.getChildAt(0));
-    }
-
-    CustomStage.prototype.onHide.call(this, null);
-    CObj.destroyAll();
-    CObj.processAll();
-}
-
-ScoreStage.prototype.onShowContinue = function()
-{
-   CObj.getById("tplscore").text = PlayerData.inst.playerItem.maxdistance.toString() + 'м.';
-   CObj.getById("tplace").text = PlayerData.inst.playerItem.rank.toString() + ".";
-    // '\n' +
-  //  "ВАШ РАНГ " +
-
-    var current = scoreStage.skip + 1;
-
- //   CObj.getById("tdisplayed").text =  (current).toString() + " - " + (current+ scoreStage.showRecords).toString();
-
-    CObj.getById("bfriends").click = function ()
-    {
-        scoreStage.skip = 0;
-        if (scoreStage.tab == "friends")
-        {
-            CObj.getById("bfriends").text = "Все очки";
-            scoreStage.tab = "total";
-            scoreStage.updateTotal();
-        } else {
-            CObj.getById("bfriends").text = "Очки друзей";
-            scoreStage.tab = "friends";
-            scoreStage.updateFriends();
-        }
-    }
-
-    CObj.getById("bfriends").click();
-
-    CObj.getById("bforwardlist").click = function ()
-    {
-        scoreStage.skip += scoreStage.showRecords;
-        var current = scoreStage.skip + 1;
-         if (scoreStage.tab == "total")
-            scoreStage.updateTotal();
-        if (scoreStage.tab == "friends")
-            scoreStage.updateFriends();
-
-    };
-
-    CObj.getById("bback").click = function ()
-    {
-        SM.inst.openStage(charStage);
-    }
-    CObj.getById("bbacklist").click = function ()
-    {
-        scoreStage.skip -= scoreStage.showRecords;
-        if (scoreStage.skip < 0) scoreStage.skip = 0;
-        var current = scoreStage.skip + 1;
-         if (scoreStage.tab == "total")
-            scoreStage.updateTotal();
-        if (scoreStage.tab == "friends")
-            scoreStage.updateFriends();
-
-    };
-
-    /*  shopStage.updateStatsPanel();
-
-      var cx = 300;
-      var cy = 400;
-      var rad = 150;
-      var da = Math.PI * 2 / PlayerData.inst.eventsplayer.length;
-      var angle = 0;
-      for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
-          var o = new CEActionGUI(cx + Math.cos(angle)*rad, cy  + Math.sin(angle)*rad);
-          o.init(PlayerData.inst.eventsplayer[i]);
-          SM.inst.fg.addChild(o.gfx);
-          angle += da;
-      }
-
-      if (vkparams.first_name)
-          CObj.getById("tname").text = vkparams.first_name.toUpperCase() + " " + vkparams.last_name.toUpperCase();
-
-      CObj.getById("bshop").click = function() {
-          SM.inst.openStage(shopStage);
-      }
-
-
-      CObj.getById("btnachs").click = function(){
-
-
-          SM.inst.openStage(achStage)
-      };
-      CObj.getById("btnfight").click = function(){SM.inst.openStage(gameStage)};
-
-      var pl = new CPlayer(300, 400);
-      SM.inst.ol.addChild(pl.gfx);
-  */
-}
-
-
-ScoreStage.prototype.process = function() {
     CObj.processAll();
 };function ComixStage() {
     CustomStage.apply(this);
@@ -3173,25 +2983,16 @@ CharStage.prototype.updateFriends = function () {
 
    // PlayerData.inst.savePlayerData();
 
-    azureclient.invokeApi("get_scores", {
-        body: {filter: vkparams.friendsIngameIDs, take: charStage.showRecords, skip: charStage.skip},
-        method: "post"
-    }).done(function (results) {
-        charStage.updateSB(results.result);
-    }, function (error) {
-
+    PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: vkparams.friendsFilter, take: charStage.showRecords, skip: charStage.skip}, function(c) {
+        charStage.updateSB(c);
     });
 }
 
 CharStage.prototype.updateTotal = function () {
-    azureclient.invokeApi("get_scores", {
-        body: {filter: null, take: charStage.showRecords, skip: charStage.skip},
-        method: "post"
-    }).done(function (results) {
-        charStage.updateSB(results.result);
-    }, function (error) {
-
+    PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: null, take: charStage.showRecords, skip: charStage.skip}, function(c) {
+        charStage.updateSB(c);
     });
+
 }
 
 CharStage.prototype.openScore = function () {
@@ -7768,7 +7569,7 @@ CEActionGUI.prototype.takeReward = function()
     this.progressfore.visible = false;
 
     this.eventpl.reward_ready = false;
-    this.eventpl.lastused = new Date();
+    this.eventpl.lastused = sqlDate(new Date());
     if (this.event.money_gain)
         PlayerData.inst.playerItem.money += this.event.money_gain;
 
@@ -7777,7 +7578,6 @@ CEActionGUI.prototype.takeReward = function()
 
     if (this.event.xp_gain)
         PlayerData.inst.gainExp(this.event.xp_gain);
-
 
 
     incMetric("USED EVENT " + this.event.name);
@@ -7789,7 +7589,7 @@ CEActionGUI.prototype.takeReward = function()
     this.btnReward.destroy();
     this.btnReward = null;
     PlayerData.inst.savePlayerEvents(this.eventpl);
-    //PlayerData.inst.savePlayerData();
+    PlayerData.inst.savePlayerData();
     shopStage.updateStatsPanel();
 
     this.acting = false;
@@ -7922,7 +7722,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
 
     onc(gf, function()
     {
-        if (edeventgui.ready && !pledevent.reward_ready)
+        if (edeventgui.ready && (pledevent.reward_ready == null || pledevent.reward_ready == false || pledevent.reward_ready == ""))
         {
             edeventgui.startAction();
         }
@@ -7942,7 +7742,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     this.gfx.addChild(tf);
 
 
-    if (this.eventpl.reward_ready)
+    if (this.eventpl.reward_ready == true || this.eventpl.reward_ready == "true")
         this.addRewardButton();
 
     this.progressbg.visible = false;
@@ -9106,7 +8906,8 @@ PlayerData = function()
 
    PlayerData.inst = this;
 
-   PlayerData.inst.azureLogin();
+    PlayerData.inst.login()
+   //PlayerData.inst.azureLogin();
 
 
     window.onbeforeunload = function(e)
@@ -9125,20 +8926,20 @@ PlayerData = function()
 
 PlayerData.prototype.addNotification = function(message, platformid)
 {
-   var t = window.azureclient.getTable("tb_notifications");
-   t.insert({message: message, platformid: platformid});
+   //var t = window.azureclient.getTable("tb_notifications");
+   //t.insert({message: message, platformid: platformid});
 }
 
 PlayerData.prototype.comboCheck = function()
 {
    if (this.playerItem.combodate)
    {
-      var d = (new Date()).getTime() - this.playerItem.updateDate.getTime();
+      var d = (new Date()).getTime() - (new Date(this.playerItem.updateDate)).getTime();
       d /= 1000;//secs
       d /= 60; //minutes
       if (d > 60*29)
       {
-         this.playerItem.combodate = new Date();
+         this.playerItem.combodate = (new Date()).toString();
       } else
       {
          var d = (new Date()).getTime() - this.playerItem.combodate;
@@ -9421,8 +9222,9 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
 
 PlayerData.prototype.loadEnd = function()
 {
+    console.log("LOAD END");
    // PlayerData.inst.updateScore();
-    PlayerData.inst.createAchProgress();
+    //PlayerData.inst.createAchProgress();
     window.dbinit  = true;
     console.log("DB intialized");
     onAssetsLoaded();
@@ -9431,8 +9233,9 @@ PlayerData.prototype.loadEnd = function()
 PlayerData.prototype.updateEnergy = function(noUpdate)
 {
     if (!this.playerItem) return;
-   var d = (new Date()).getTime() - this.playerItem.updateDate.getTime();
-   this.playerItem.updateDate = new Date();
+    var d2 = new Date(this.playerItem.updateDate);
+   var d = (new Date()).getTime() - d2.getTime();
+   this.playerItem.updateDate = sqlDate(new Date());//(new Date()).toString();
    d /= 1000;//secs
    d /= 60; //minutes
    if (d > 0) {
@@ -9486,10 +9289,10 @@ PlayerData.prototype.createAchProgress = function(cb)
 incMetric = function(name)
 {
     return;
-   azureclient.invokeApi("increasemetric", {
+   /*azureclient.invokeApi("increasemetric", {
       body: {name: name},
       method: "post"
-   });
+   });*/
 }
 
 PlayerData.prototype.getEventById = function(id)
@@ -9504,14 +9307,41 @@ PlayerData.prototype.getEventById = function(id)
 
 PlayerData.prototype.updateScore = function(cb)
 {
-    azureclient.invokeApi("update_score", {
+    PlayerData.inst.callDedAPI("UPDATE_SCORE", null, null, PlayerData.inst.playerItem.maxdistance, cb);
+    /*azureclient.invokeApi("update_score", {
         body: {id_player: PlayerData.inst.playerItem.id, score: PlayerData.inst.playerItem.maxdistance},
         method: "post"
     }).done(function(r)
     {
         if (cb) cb(JSON.parse(r.response));
-    });
+    });*/
 }
+
+PlayerData.prototype.intJSON = function(obj)
+{
+    var gameFloatFields = ["reward_ready", "progress", "xp_gain", "money_gain", "crystal_gain", "reqlvl", "exectime", "delay_min", "xp", "money", "crystals", "maxdistance", "lvl", "energy", "rank", "keys"];
+
+    if(Object.prototype.toString.call(obj) === '[object Array]' ) {
+        for (var i = 0; i < obj.length; ++i)
+        {
+            this.intJSON(obj[i]);
+        }
+    } else
+    {
+        for(var propertyName in obj) {
+
+            if (typeof obj[propertyName] != "string") continue;
+            if (gameFloatFields.indexOf(propertyName) > -1)
+            {
+                obj[propertyName] = parseFloat(obj[propertyName]);
+            }
+            // propertyName is what you want
+            // you can get the value like this: myObject[propertyName]
+        }
+    }
+    return obj;
+}
+
 
 PlayerData.prototype.loadData = function(cb)
 {
@@ -9569,7 +9399,42 @@ PlayerData.prototype.loadData = function(cb)
        );
     */
 
-    window.azureclient.getTable("tb_ach_player").read().done(
+
+   /* window.azureclient.getTable("tb_edevent_player").read().done(
+        function (results) {
+            PlayerData.inst.eventsplayer = results;
+            PlayerData.inst.loadCount ++;
+
+            if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+        }, function (res) {}
+    );*/
+
+    PlayerData.inst.callDedAPI("READ", "tb_edevent_player", null, null, function(r)
+    {
+        PlayerData.inst.eventsplayer = PlayerData.inst.intJSON(r);
+        PlayerData.inst.loadCount ++;
+
+        if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+    });
+
+    PlayerData.inst.callDedAPI("READ", "tb_ach_player", null, null, function(r)
+    {
+       PlayerData.inst.achs_progress = PlayerData.inst.intJSON(r);
+
+        PlayerData.inst.loadCount ++;
+        if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+    });
+
+    PlayerData.inst.callDedAPI("READ", "tb_item_player", null, null, function(r)
+    {
+       PlayerData.inst.items_enabled = PlayerData.inst.intJSON(r);
+
+        PlayerData.inst.loadCount ++;
+        if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+    });
+
+
+    /*window.azureclient.getTable("tb_ach_player").read().done(
         function (results) {
             PlayerData.inst.achs_progress = results;
 
@@ -9577,9 +9442,9 @@ PlayerData.prototype.loadData = function(cb)
             if (PlayerData.inst.loadCount == totalLoads && cb) cb();
         }, function (res) {
         }
-    );
+    );*/
 
-   window.azureclient.getTable("tb_item_player").read().done(
+/*   window.azureclient.getTable("tb_item_player").read().done(
        function (results) {
           PlayerData.inst.items_enabled = results;
 
@@ -9606,13 +9471,7 @@ PlayerData.prototype.loadData = function(cb)
 
           if (!found)
           {
-            /* azureclient.invokeApi("buy_item", {
-                body: {id_item: defaultRifleID, id_player: PlayerData.inst.pid, equipped: eq},
-                method: "post"
-             }).done(function (results) {
 
-             }, function(error) {
-             });*/
 
              var eq = true;
              if (PlayerData.inst.items_enabled.length > 0)
@@ -9631,15 +9490,7 @@ PlayerData.prototype.loadData = function(cb)
        }, function (res) {}
    );
 
-   window.azureclient.getTable("tb_edevent_player").read().done(
-       function (results) {
-          PlayerData.inst.eventsplayer = results;
-          PlayerData.inst.loadCount ++;
-
-          if (PlayerData.inst.loadCount == totalLoads && cb) cb();
-       }, function (res) {}
-   );
-
+*/
 
 }
 
@@ -9655,10 +9506,10 @@ PlayerData.prototype.savePlayerAchs = function(onlyOne)
 {
    for (var i = 0; i < PlayerData.inst.achs_progress.length; ++i) {
       if (onlyOne && onlyOne.id != PlayerData.inst.achs_progress[i].id) continue;
-      window.azureclient.getTable("tb_ach_player").update(PlayerData.inst.achs_progress[i]).done(function (result) {
-      }, function (err) {
-      });
-   }
+      PlayerData.inst.callDedAPI("UPDATE", "tb_ach_player", PlayerData.inst.achs_progress[i].id, PlayerData.inst.achs_progress[i]);
+
+      //window.azureclient.getTable("tb_ach_player").update().done(function (result) {
+      }
 }
 
 
@@ -9667,33 +9518,103 @@ PlayerData.prototype.savePlayerEvents = function(onlyOne)
    for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
       if (onlyOne && onlyOne.id != PlayerData.inst.eventsplayer[i].id) continue;
 
-      window.azureclient.getTable("tb_edevent_player").update(PlayerData.inst.eventsplayer[i]).done(function (result) {
-      }, function (err) {
-      });
+       var js = JSON.stringify(PlayerData.inst.eventsplayer[i]);
+       console.log(js);
+       console.log(PlayerData.inst.eventsplayer[i].id);
+
+       PlayerData.inst.callDedAPI("UPDATE", "tb_edevent_player", PlayerData.inst.eventsplayer[i].id, PlayerData.inst.eventsplayer[i]);
    }
 }
-
 
 PlayerData.prototype.savePlayerItems = function(onlyOne)
 {
    for (var i = 0; i < this.items_enabled.length; ++i) {
       if (onlyOne && onlyOne.id != PlayerData.inst.items_enabled[i].id) continue;
-      window.azureclient.getTable("tb_item_player").update(PlayerData.inst.items_enabled[i]).done(function (result) {
-      }, function (err) {
-      });
+       PlayerData.inst.callDedAPI("UPDATE", "tb_item_player", PlayerData.inst.items_enabled[i].id, PlayerData.inst.items_enabled[i]);
    }
+}
+
+PlayerData.prototype.login = function()
+{
+
+    $.ajax({
+        encoding:"UTF-8",
+        type: "POST",
+        url: 'https://www.dedgame.ru/backend/login.php',
+        dataType: "text",
+        data: {
+            vkid: vkparams.viewerid
+        }
+
+    }).done(function (res) {
+        var r = res.substring(2, res.length);
+        var x = JSON.parse(r);
+
+        vkparams.token = x.tokenJWT;
+        vkparams.registered = x.registered;
+
+        if (!vkparams.registered)console.log("user logged in"); else
+            console.log("user registered");
+
+        PlayerData.inst.pid = x.playerItem.id;
+        PlayerData.inst.playerItem = PlayerData.inst.intJSON(x.playerItem);
+
+        if (!PlayerData.inst.playerItem.crystals)
+            PlayerData.inst.playerItem.crystals = 0;
+
+        vkparams.id = PlayerData.inst.playerItem.id;
+        PlayerData.inst.getVKfriends();
+        }).fail(function (res)
+        {
+            console.log(JSON.stringify(res));
+        }
+    );
+}
+
+PlayerData.prototype.callDedAPI = function(method, table, id, data, cb)
+{
+    console.log("DEDAPI"+method + table);
+    $.ajax({
+        type: "POST",
+        url: 'https://www.dedgame.ru/backend/dedapi.php',
+        data: {
+            encoding:"UTF-8",
+            method: method,
+            table: table,
+            data: data,
+            id: id,
+            token: vkparams.token
+        },
+        dataType: "text"
+    }).done(function (res) {
+       if (!cb) return;
+        var res = res.substring(2, res.length);
+
+        try {
+            var resObj = JSON.parse(res);
+        } catch (e) {
+            cb(res);
+        }
+        cb(resObj);
+    });
 }
 
 
 PlayerData.prototype.savePlayerData = function(cb)
 {
-   window.azureclient.getTable("tb_players").update(this.playerItem).done(function (result) {
+   // this.playerItem.money = 20000;
+    console.log(JSON.stringify(this.playerItem));
+    PlayerData.inst.callDedAPI("UPDATE", "tb_players", null, this.playerItem, function(x)
+    {
+        console.log(x);
+    });
+  /* window.azureclient.getTable("tb_players").update(this.playerItem).done(function (result) {
       PlayerData.inst.playerItem = result;
        console.log("DATA SAVED");
        if (cb) cb();
    }, function (err) {
        //PlayerData.inst.savePlayerData(cb);
-   });
+   });*/
 };
 
 
@@ -9745,6 +9666,15 @@ PlayerData.prototype.getVKfriends = function()
 {
     vkparams.first_name = "Аноним";
     vkparams.last_name = "";
+    console.log("!!!!" + PlayerData.inst.playerItem.name);
+    //PlayerData.inst.savePlayerData();
+    PlayerData.inst.updateScore(function (r)
+    {
+        PlayerData.inst.playerItem.rank = parseInt(r);
+        PlayerData.inst.savePlayerData();
+    });
+
+
     console.log("Gettin vk friends");
 
     vkparams.friendsids = [];
@@ -9758,32 +9688,36 @@ PlayerData.prototype.getVKfriends = function()
 
     VK.api('friends.getAppUsers',{}, function(data) {
         vkparams.friendsIngameIDs = [];
+        vkparams.friendsIngameIDsStr = [];
         if (!data.response || !data.response.length) {
             PlayerData.inst.getVKuserData();
-
         } else {
-            //console.log("friends.get data" + JSON.stringify(data.response));
-
-            /*     var friends = data.response;
-             for (var i = 0; i < friends.length; ++i)
-             {
-             vkparams.friendsIngameIDs.push(friends[i].toString());
-             }
-             console.log("VK friends+");
-             PlayerData.inst.getVKuserData();
-             //   console.log("friends.get data" + JSON.stringify(vkparams.friendsids));
-             }*/
-            //   vkparams.friendsIngameIDs = vkparams.friendsids;
             var friends = data.response;
             for (var i = 0; i < friends.length; ++i)
             {
-                vkparams.friendsIngameIDs.push(friends[i].toString());
+                var s = friends[i].toString();
+                vkparams.friendsIngameIDsStr.push("\"" + s +"\"") ;
+                vkparams.friendsIngameIDs.push(s);
             }
 
+            vkparams.friendsFilter = vkparams.friendsIngameIDsStr.join(', ');
 
             if (vkparams.friendsIngameIDs.length > 0) {
-                azureclient.invokeApi("get_scores", {
-                    body: {filter: vkparams.friendsIngameIDs, take: 15},
+
+                PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: null, take: 15, skip: 0}, function(c)
+                {
+                    vkparams.friendsIngame = c;
+                    /*vkparams.friendsIngameIDs = [];
+                    if (!c || c.length == 0) return;
+                    for (var i = 0; i < c.length; ++i) {
+                        vkparams.friendsIngameIDs.push(c[i].platformid.toString());
+                    }
+                    */
+                    PlayerData.inst.getVKuserData();
+
+                });
+            /*    azureclient.invokeApi("get_scores", {
+                    body: {filter: friendsFilter, take: 15, skip: 0},
                     method: "post"
                 }).done(function (results) {
 
@@ -9797,7 +9731,7 @@ PlayerData.prototype.getVKfriends = function()
                     PlayerData.inst.getVKuserData();
                 }, function (error) {
                     PlayerData.inst.getVKuserData();
-                });
+                });*/
             } else
             {
                 PlayerData.inst.getVKuserData();
@@ -9808,7 +9742,7 @@ PlayerData.prototype.getVKfriends = function()
 
 PlayerData.prototype.azureLogin = function()
 {
-    console.log("LOGIN VK USER ID = " + vkparams.viewerid.toString());
+/*    console.log("LOGIN VK USER ID = " + vkparams.viewerid.toString());
 
     azureclient.invokeApi("login", {
         body: {platformid: vkparams.viewerid, ref: vkparams.refferer},
@@ -9835,13 +9769,13 @@ PlayerData.prototype.azureLogin = function()
         PlayerData.inst.getVKfriends();
     }, function(error) {
         PlayerData.inst.azureLogin();
-    });
+    });*/
 }
 
 PlayerData.dbInit = function() {
     console.log("dbInit start. Connecting to azure");
 
-    window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
+    //window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
     window.vkparams = {};
     vkparams.userid = getURLParameter("user_id");
     vkparams.sid = getURLParameter("sid");
@@ -9851,14 +9785,16 @@ PlayerData.dbInit = function() {
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "CARLAPA2882845ww";//"CARLSON"+Math.round(Math.random()*1000000).toString();
+        vkparams.viewerid = "2882845";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
 
         if (MOBILE)
         {
             vkparams.viewerid = Cocoon.Device.getDeviceId();
         }
         vkparams.novk = true;
-    }
+    } else
+    if (vkparams.viewerid != "282617259")
+    return;
 
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
@@ -9888,6 +9824,9 @@ function checkDb ()
     });*/
    //updDb(dbobj);
 }
+
+
+
 
 var dbobj =
     [
@@ -10967,7 +10906,7 @@ function preloaderLoaded() {
 
     window.charStage = new CharStage();
     window.comixStage = new ComixStage();
-    window.scoreStage = new ScoreStage();
+    //window.scoreStage = new ScoreStage();
     window.gameStage = new GameStage();
     window.achStage = new AchStage();
     window.shopStage = new ShopStage();
