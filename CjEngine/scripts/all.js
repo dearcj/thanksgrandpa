@@ -9291,6 +9291,7 @@ PlayerData.prototype.loadEnd = function() {
 
     if (!eqWeapon) PlayerData.inst.equipItem(PlayerData.inst.baseWeapIt, "1");
 
+    console.log("db init")
    // PlayerData.inst.updateScore();
     //PlayerData.inst.createAchProgress();
     window.dbinit  = true;
