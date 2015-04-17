@@ -62,7 +62,7 @@ function clone(obj) {
 function sqlToJsDate(sqlDate){
 
     //sqlDate in SQL DATETIME format ("yyyy-mm-dd hh:mm:ss.ms")
-
+    if (!sqlDate) return new Date();
     var sqlDateArr1 = sqlDate.split("-");
 
     //format of sqlDateArr1[] = ['yyyy','mm','dd hh:mm:ms']
@@ -9825,7 +9825,7 @@ PlayerData.dbInit = function() {
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "282617259";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
+        vkparams.viewerid = "AZZA282617259";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
 
         if (MOBILE)
         {
