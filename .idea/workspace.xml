@@ -5,9 +5,7 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;&#10;a">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -114,8 +112,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6007005" vertical-offset="322" max-vertical-offset="2318">
-              <caret line="35" column="102" selection-start-line="35" selection-start-column="102" selection-end-line="35" selection-end-column="102" />
+            <state vertical-scroll-proportion="0.26795095" vertical-offset="322" max-vertical-offset="2299">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -511,12 +509,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-00985" summary="&#10;&#10;a">
-      <created>1429224048234</created>
-      <option name="number" value="00985" />
-      <option name="project" value="LOCAL" />
-      <updated>1429224048234</updated>
-    </task>
     <task id="LOCAL-00986" summary="&#10;&#10;a">
       <created>1429224623566</created>
       <option name="number" value="00986" />
@@ -805,7 +797,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429281451456</updated>
     </task>
-    <option name="localTasksCounter" value="1034" />
+    <task id="LOCAL-01034" summary="&#10;&#10;a">
+      <created>1429285308367</created>
+      <option name="number" value="01034" />
+      <option name="project" value="LOCAL" />
+      <updated>1429285308367</updated>
+    </task>
+    <option name="localTasksCounter" value="1035" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1317,8 +1315,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6007005" vertical-offset="322" max-vertical-offset="2318">
-          <caret line="35" column="102" selection-start-line="35" selection-start-column="102" selection-end-line="35" selection-end-column="102" />
+        <state vertical-scroll-proportion="0.26795095" vertical-offset="322" max-vertical-offset="2299">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
