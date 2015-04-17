@@ -32,7 +32,7 @@ if ($sig != md5($str.$secret_key)) {
 	if($item == 'item1') {
         $response['response'] = array(
           'item_id' => 611,
-          'title' => '100 монет',
+          'title' => '1200 монет',
           'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
           'price' => 5
         );
@@ -40,7 +40,7 @@ if ($sig != md5($str.$secret_key)) {
       elseif ($item == 'item2') {
         $response['response'] = array(
           'item_id' => 612,
-          'title' => '1200 монет',
+          'title' => '6000 монет',
           'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
           'price' => 10
         );
@@ -48,7 +48,7 @@ if ($sig != md5($str.$secret_key)) {
       elseif ($item == 'item3') {
                $response['response'] = array(
                  'item_id' => 613,
-                 'title' => '7000 монет',
+                 'title' => '32000 монет',
                  'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
                  'price' => 50
                );
@@ -96,7 +96,7 @@ case 'get_item_test':
      if ($item == 'item1') {
             $response['response'] = array(
               'item_id' => 601,
-              'title' => '100 монет',
+              'title' => '1200 монет',
               'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
               'price' => 5
             );
@@ -104,7 +104,7 @@ case 'get_item_test':
           elseif ($item == 'item2') {
             $response['response'] = array(
               'item_id' => 602,
-              'title' => '1200 монет',
+              'title' => '6000 монет',
               'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
               'price' => 10
             );
@@ -112,7 +112,7 @@ case 'get_item_test':
           elseif ($item == 'item3') {
                    $response['response'] = array(
                      'item_id' => 603,
-                     'title' => '7000 монет',
+                     'title' => '32000 монет',
                      'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
                      'price' => 50
                    );
