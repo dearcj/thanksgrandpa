@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header("Content-Type: application/json; encoding=utf-8");
 
 $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ приложения
@@ -34,7 +34,7 @@ if ($sig != md5($str.$secret_key)) {
           'item_id' => 611,
           'title' => '100 монет',
           'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
-          'price' => 3
+          'price' => 5
         );
       }
       elseif ($item == 'item2') {
@@ -58,7 +58,7 @@ if ($sig != md5($str.$secret_key)) {
                        'item_id' => 711,
                        'title' => '12 звезд',
                        'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
-                       'price' => 3
+                       'price' => 5
                      );}
       elseif ($item == 'item5') {
                            $response['response'] = array(
@@ -98,7 +98,7 @@ case 'get_item_test':
               'item_id' => 601,
               'title' => '100 монет',
               'photo_url' => 'https://pp.vk.me/c624525/v624525259/1745c/uEvOX2oEj2E.jpg',
-              'price' => 3
+              'price' => 5
             );
           }
           elseif ($item == 'item2') {
@@ -122,7 +122,7 @@ case 'get_item_test':
                            'item_id' => 701,
                            'title' => '12 звезд',
                            'photo_url' => 'https://pp.vk.me/c624525/v624525259/173bd/0Mux0DXYDzU.jpg',
-                           'price' => 3
+                           'price' => 5
                          );}
           elseif ($item == 'item5') {
                                $response['response'] = array(
