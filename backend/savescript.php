@@ -80,6 +80,7 @@ function buyItem($conn, $data, $userid)
 		return;
 	}
 	
+	var_dump($item);
 	var_dump($player);
 	if ($player['lvl'] >= $item['reqlvl'])
 	{

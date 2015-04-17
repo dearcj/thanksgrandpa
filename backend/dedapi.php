@@ -39,7 +39,7 @@ $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZX
 
 
 
-$data = array('id' => 'BCEB6650-A98F-4AFA-A0FA-102BC2FBC1AD', 'equipped' => true);
+$data = array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' => true);
 $method = 'BUY_ITEM';
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 
