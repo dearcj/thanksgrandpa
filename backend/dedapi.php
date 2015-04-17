@@ -51,7 +51,7 @@ if (!$token) die();
 $platformid = $token->vkid;
 $userid = $token->userid;
 
-$userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
+$userid = '7FC75CEE-7E82-4871-B169-C437940C98B8';
 
 if ($method == "INSERT")
 {
