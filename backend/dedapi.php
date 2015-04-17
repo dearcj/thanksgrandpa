@@ -9,6 +9,8 @@ $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
 
+$res = readJSON($conn, "tb_items", 'F800A350-EE15-4F1C-9CCF-050B775A4CD9', '68AFAEDC-B3E0-401E-9E1A-E272084F2E11');
+echo $res;
 /*
 $data = json_decode('{"id":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","__createdAt":"2015-03-31 09:46:47.464 +00:00","__updatedAt":"2015-04-16 23:25:09.023 +00:00","__deleted":"1","ref":"2882845","vkapi":"2882845","xp":959.39351540461,"createDate":"2015-03-31 09:46:47.034 +00:00","updateDate":"Fri Apr 17 2015 02:30:22 GMT+0300 (FLE Daylight Time)","userId":"Custom:78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","money":1500,"crystals":378,"maxdistance":916,"lvl":7,"energy":10,"name":"Юрий","last_name":"Дорогой","rank":1499,"combodate":"2015-03-31 09:54:27.233 +00:00","keys":null,"platformid":"2882845"}');
 $table = 'tb_players';
