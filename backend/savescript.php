@@ -186,6 +186,7 @@ return $res;
 
 function updateJSON($conn, $table, $data, $userid, $id)
 {
+	echo $id." THIS IS MY ID";
 	$obj = $data;
 	
 	foreach($obj as $key => $value){
