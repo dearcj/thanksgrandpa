@@ -64,7 +64,11 @@ function buyItem($conn, $data, $userid)
 	$statement = $conn->prepare($itemplquery);
 	$statement->execute();
 	$itemalready = $statement->fetchAll(PDO::FETCH_ASSOC);
-	if ($itemalready[0]) return "ALREADY HAVE ITEM";
+	if ($itemalready[0]) 
+	{	
+		echo "ALREADY HAVE ITEM";
+		return;
+	}
 	
 	$plscript = "SELECT money, crystals, lvl FROM thanksdad.tb_players WHERE id = ".$conn->quote($userid);
 	$statement = $conn->prepare($plscript);
@@ -80,11 +84,10 @@ function buyItem($conn, $data, $userid)
 		return;
 	}
 	
-	var_dump($item);
-	var_dump($player);
+	//var_dump($item);
+	//var_dump($player);
 	if ($player['lvl'] >= $item['reqlvl'])
 	{
-		echo "level ok";
 		if ($player['money'] >= $item['price'])
 		{
 			$player['money'] -= $item['price'];
@@ -95,7 +98,6 @@ function buyItem($conn, $data, $userid)
 		}
 	} else 
 	{
-		echo "level premium";
 		if ($player['crystals'] >= $item['pricecrys'])
 		{
 			$player['crystals'] -= $item['pricecrys'];
