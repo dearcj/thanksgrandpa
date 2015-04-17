@@ -58,14 +58,51 @@ function clone(obj) {
     return copy;*/
 }
 
+
+function sqlToJsDate(sqlDate){
+
+    //sqlDate in SQL DATETIME format ("yyyy-mm-dd hh:mm:ss.ms")
+
+    var sqlDateArr1 = sqlDate.split("-");
+
+    //format of sqlDateArr1[] = ['yyyy','mm','dd hh:mm:ms']
+
+    var sYear = sqlDateArr1[0];
+
+    var sMonth = (Number(sqlDateArr1[1]) - 1).toString();
+
+    var sqlDateArr2 = sqlDateArr1[2].split(" ");
+
+    //format of sqlDateArr2[] = ['dd', 'hh:mm:ss.ms']
+
+    var sDay = sqlDateArr2[0];
+
+    var sqlDateArr3 = sqlDateArr2[1].split(":");
+
+    //format of sqlDateArr3[] = ['hh','mm','ss.ms']
+
+    var sHour = sqlDateArr3[0];
+
+    var sMinute = sqlDateArr3[1];
+
+    var sqlDateArr4 = sqlDateArr3[2].split(".");
+
+    //format of sqlDateArr4[] = ['ss','ms']
+
+    var sSecond = sqlDateArr4[0];
+
+    var sMillisecond = sqlDateArr4[1];
+    return new Date(sYear,sMonth,sDay,sHour,sMinute,sSecond,0);
+}
+
 function sqlDate(d)
 {
-    return d.getUTCFullYear() + '-' +
-    ('00' + (d.getUTCMonth() + 1)).slice(-2) + '-' +
-    ('00' + d.getUTCDate()).slice(-2) + ' ' +
-    ('00' + d.getUTCHours()).slice(-2) + ':' +
-    ('00' + d.getUTCMinutes()).slice(-2) + ':' +
-    ('00' + d.getUTCSeconds()).slice(-2);
+    return d.getFullYear() + '-' +
+    ('00' + (d.getMonth() + 1)).slice(-2) + '-' +
+    ('00' + d.getDate()).slice(-2) + ' ' +
+    ('00' + d.getHours()).slice(-2) + ':' +
+    ('00' + d.getMinutes()).slice(-2) + ':' +
+    ('00' + d.getSeconds()).slice(-2);
 }
 
 function superRand(l) {
@@ -836,7 +873,7 @@ GameStage.prototype.updateItems = function () {
 
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
-        if (item.type == tWeapon && PlayerData.inst.items_enabled[i].equipped)
+        if (item.type == tWeapon && PlayerData.inst.items_enabled[i].equipped == "1")
         {
             if (item.name == "Rifle")
                 curweapon = w_rifle;
@@ -1802,7 +1839,7 @@ ShopStage.prototype.onShow = function () {
 
 ShopStage.prototype.checkEq = function (item) {
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
-        if (PlayerData.inst.items_enabled[i].id_item == item.id && PlayerData.inst.items_enabled[i].equipped == true) return true;
+        if (PlayerData.inst.items_enabled[i].id_item == item.id && PlayerData.inst.items_enabled[i].equipped == "1") return true;
     }
     return false;
 }
@@ -1817,7 +1854,7 @@ ShopStage.prototype.checkOwned = function (item) {
 ShopStage.prototype.unequipAll = function () {
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i) {
         if (PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item).type == shopStage.currentFilter)
-            PlayerData.inst.items_enabled[i].equipped = false;
+            PlayerData.inst.items_enabled[i].equipped = "0";
     }
 }
 
@@ -1842,7 +1879,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                 PlayerData.inst.items_enabled.push({id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
                 shopStage.updateStatsPanel();
 
-                PlayerData.inst.equipItem(buyitem, true);
+                PlayerData.inst.equipItem(buyitem, "1");
                 shopStage.pl.updateAppearence(true, false, null, null, null);
 
                 shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
@@ -2046,7 +2083,7 @@ ShopStage.prototype.createItemBtn = function (item) {
 
     function takeOff(event)
     {
-        PlayerData.inst.equipItem(item, false);
+        PlayerData.inst.equipItem(item, "0");
         shopStage.pl.updateAppearence(true, false, null, null, null);
         shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
     }
@@ -2056,7 +2093,7 @@ ShopStage.prototype.createItemBtn = function (item) {
     }
 
     function wearItem(event) {
-        PlayerData.inst.equipItem(item, true);
+        PlayerData.inst.equipItem(item, "1");
         shopStage.pl.updateAppearence(true, false, null, null, null);
         shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
     }
@@ -2258,7 +2295,7 @@ ShopStage.prototype.updateEnergyText = function () {
     if (tf && PlayerData.inst.playerItem.energy < 1) {
         if (Math.round(PlayerData.inst.playerItem.energy) < Math.round(PlayerData.inst.maxEnergy)) {
             var mins = (1 - PlayerData.inst.playerItem.energy)*(1 / PlayerData.inst.epm);
-            var timeRes = dateDiff(new Date(PlayerData.inst.playerItem.updateDate), mins, true);
+            var timeRes = dateDiff(new Date(sqlToJsDate(PlayerData.inst.playerItem.updateDate)), mins, true);
             if (timeRes.d < 0) tf.text = "";
             tf.text = timeRes.timeString;
         } else {
@@ -4835,7 +4872,7 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
     {
         for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
         {
-            if (PlayerData.inst.items_enabled[i].equipped)
+            if (PlayerData.inst.items_enabled[i].equipped == "1")
             {
                 var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
                 if (item.type == tApp + tHat) hatSlot = item.gfx;
@@ -7627,7 +7664,7 @@ CEActionGUI.prototype.updateRecharge= function()
     if (!this.eventpl) return;
     if (!this.eventpl.lastused) timeRes = {d: -1};
     else {
-        var timeRes = dateDiff(this.eventpl.lastused, this.event.delay_min);
+        var timeRes = dateDiff(new Date(sqlToJsDate(this.eventpl.lastused)), this.event.delay_min);
     }
 
     this.timeleft.tint = 0x333333;
@@ -8645,6 +8682,7 @@ CBooster.prototype.removeBoosterItem = function() {
 }
 
 CBooster.prototype.onActivate = function() {
+    if (this.doRemove) return;
     this.activate = true;
     PlayerData.inst.progressAch("Gold medal 5", 1, false);
 
@@ -8912,6 +8950,7 @@ PlayerData = function()
 
     window.onbeforeunload = function(e)
     {
+     /*   PlayerData.inst.savePlayerData();
         PlayerData.inst.updateEnergy(true);
         PlayerData.inst.saveRunProgress(true);
         PlayerData.inst.savePlayerItems();
@@ -8920,7 +8959,7 @@ PlayerData = function()
             PlayerData.inst.playerItem.rank = r.rank;
             PlayerData.inst.savePlayerData();
         });
-        PlayerData.inst.savePlayerData();
+        */
     }
 }
 
@@ -8934,15 +8973,15 @@ PlayerData.prototype.comboCheck = function()
 {
    if (this.playerItem.combodate)
    {
-      var d = (new Date()).getTime() - (new Date(this.playerItem.updateDate)).getTime();
+      var d = (new Date()).getTime() - (new Date(sqlToJsDate(this.playerItem.updateDate))).getTime();
       d /= 1000;//secs
       d /= 60; //minutes
       if (d > 60*29)
       {
-         this.playerItem.combodate = (new Date()).toString();
+         this.playerItem.combodate = sqlDate(new Date());
       } else
       {
-         var d = (new Date()).getTime() - this.playerItem.combodate;
+         var d = (new Date()).getTime() - new Date(sqlToJsDate(this.playerItem.combodate)).getTime();
          d /= 1000;//secs
          d /= 60; //minutes
          var dayminutes = 24*60;
@@ -9048,9 +9087,14 @@ PlayerData.prototype.equipItem = function(item, state)
    {
       if (this.getType(PlayerData.inst.items_enabled[i]) == itemtype)
       {
-         if (PlayerData.inst.items_enabled[i].id_item == id)
-            PlayerData.inst.items_enabled[i].equipped = state; else
-         PlayerData.inst.items_enabled[i].equipped = false;
+         if (PlayerData.inst.items_enabled[i].id_item == id) {
+             PlayerData.inst.items_enabled[i].equipped = state;
+             PlayerData.inst.callDedAPI("UPDATE", "tb_item_player", null, PlayerData.inst.items_enabled[i]);
+         }else {
+             if (PlayerData.inst.items_enabled[i].equipped == "1")
+             PlayerData.inst.items_enabled[i].equipped = "0";
+             PlayerData.inst.callDedAPI("UPDATE", "tb_item_player", null, PlayerData.inst.items_enabled[i]);
+         }
       }
    }
 
@@ -9233,7 +9277,7 @@ PlayerData.prototype.loadEnd = function()
 PlayerData.prototype.updateEnergy = function(noUpdate)
 {
     if (!this.playerItem) return;
-    var d2 = new Date(this.playerItem.updateDate);
+    var d2 = sqlToJsDate(this.playerItem.updateDate);
    var d = (new Date()).getTime() - d2.getTime();
    this.playerItem.updateDate = sqlDate(new Date());//(new Date()).toString();
    d /= 1000;//secs
@@ -9251,7 +9295,8 @@ PlayerData.prototype.updateEnergy = function(noUpdate)
         this.playerItem.energy = 0;
     }
 
-    //   if ((noUpdate == null) && Math.floor(prev) != Math.floor(this.playerItem.energy)) this.savePlayerData();
+    if ((noUpdate == null) && Math.floor(prev) != Math.floor(this.playerItem.energy))
+        this.savePlayerData();
    }
    if (SM.inst.currentStage == charStage || SM.inst.currentStage == shopStage)
    {
@@ -9431,6 +9476,42 @@ PlayerData.prototype.loadData = function(cb)
 
         PlayerData.inst.loadCount ++;
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+
+
+        var defaultRifleID = "68AFAEDC-B3E0-401E-9E1A-E272084F2E11";
+
+        var found = false;
+        var eq = false;
+        var inxRifle = -1;
+        for (var i = 0;i < PlayerData.inst.items_enabled.length; ++i)
+        {
+            if (PlayerData.inst.items_enabled[i].id_item == defaultRifleID)
+            {
+                inxRifle = i;
+                found = true;
+                //     break;
+            }
+            if (PlayerData.inst.items_enabled[i].equipped != "0")
+                eq = true;
+        }
+
+        if (!eq && found)
+            PlayerData.inst.items_enabled[inxRifle].equipped = true;
+
+
+        if (!found)
+        {
+            var eq = true;
+            if (PlayerData.inst.items_enabled.length > 0)
+                eq = false;
+            PlayerData.inst.items_enabled.push(
+                {
+                    id_item: defaultRifleID,
+                    id_player:PlayerData.inst.pid,
+                    equipped: eq
+                }
+            );
+        }
     });
 
 
@@ -9792,9 +9873,8 @@ PlayerData.dbInit = function() {
             vkparams.viewerid = Cocoon.Device.getDeviceId();
         }
         vkparams.novk = true;
-    } else
-    if (vkparams.viewerid != "282617259")
-    return;
+    }
+
 
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
