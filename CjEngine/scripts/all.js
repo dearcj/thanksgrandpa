@@ -8988,22 +8988,22 @@ PlayerData = function()
 
     var data = getCookie("LOGIN_DATA");
     //data = data.substring(2, data.length);
-    var dataJSON = JSON.parse(data);
-    //PlayerData.inst.login()
+    var x = JSON.parse(data);
 
-    window.onbeforeunload = function(e)
-    {
-     /*   PlayerData.inst.savePlayerData();
-        PlayerData.inst.updateEnergy(true);
-        PlayerData.inst.saveRunProgress(true);
-        PlayerData.inst.savePlayerItems();
-        PlayerData.inst.updateScore(function (r)
-        {
-            PlayerData.inst.playerItem.rank = r.rank;
-            PlayerData.inst.savePlayerData();
-        });
-        */
-    }
+    vkparams.token = x.tokenJWT;
+    vkparams.registered = x.registered;
+
+    if (!vkparams.registered)console.log("user logged in"); else
+        console.log("user registered");
+
+    PlayerData.inst.pid = x.playerItem.id;
+    PlayerData.inst.playerItem = PlayerData.inst.intJSON(x.playerItem);
+
+    if (!PlayerData.inst.playerItem.crystals)
+        PlayerData.inst.playerItem.crystals = 0;
+
+    vkparams.id = PlayerData.inst.playerItem.id;
+    PlayerData.inst.getVKfriends();
 }
 
 PlayerData.prototype.addNotification = function(message, platformid)

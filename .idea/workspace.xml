@@ -6,6 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;&#10;a">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -43,8 +44,8 @@
       <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5177665" vertical-offset="1100" max-vertical-offset="17955">
-              <caret line="74" column="6" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.81556684" vertical-offset="15877" max-vertical-offset="17955">
+              <caret line="861" column="21" selection-start-line="861" selection-start-column="21" selection-end-line="861" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -404,12 +405,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01029" summary="&#10;&#10;a">
-      <created>1429280360491</created>
-      <option name="number" value="01029" />
-      <option name="project" value="LOCAL" />
-      <updated>1429280360491</updated>
-    </task>
     <task id="LOCAL-01030" summary="&#10;&#10;a">
       <created>1429280495233</created>
       <option name="number" value="01030" />
@@ -698,7 +693,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429485345170</updated>
     </task>
-    <option name="localTasksCounter" value="1078" />
+    <task id="LOCAL-01078" summary="&#10;&#10;a">
+      <created>1429485403926</created>
+      <option name="number" value="01078" />
+      <option name="project" value="LOCAL" />
+      <updated>1429485403926</updated>
+    </task>
+    <option name="localTasksCounter" value="1079" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1182,8 +1183,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5177665" vertical-offset="1100" max-vertical-offset="17955">
-          <caret line="74" column="6" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.81556684" vertical-offset="15877" max-vertical-offset="17955">
+          <caret line="861" column="21" selection-start-line="861" selection-start-column="21" selection-end-line="861" selection-end-column="21" />
           <folding />
         </state>
       </provider>
