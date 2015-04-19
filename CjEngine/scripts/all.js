@@ -9825,7 +9825,7 @@ PlayerData.dbInit = function() {
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "AZZA282617259";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
+        vkparams.viewerid = "CARLSON";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
 
         if (MOBILE)
         {
@@ -9834,9 +9834,9 @@ PlayerData.dbInit = function() {
         vkparams.novk = true;
     }
 
- /*   if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+    if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
     vkparams.viewerid != "197515742") return;
-*/
+
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
