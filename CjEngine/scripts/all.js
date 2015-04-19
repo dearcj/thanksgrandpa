@@ -9441,7 +9441,7 @@ PlayerData.prototype.intJSON = function(obj)
         for(var propertyName in obj) {
 
             if (typeof obj[propertyName] != "string") continue;
-            if (indexOf(obj[propertyName], date) >= 0)
+            if (obj[propertyName].indexOf("date") >= 0)
             {
                 obj[propertyName] = sqlDate(obj[propertyName]);
             }
