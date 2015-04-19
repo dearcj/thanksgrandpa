@@ -5,7 +5,7 @@ require_once 'connection.php';
 require_once 'savescript.php';
 require_once 'json.php';
 
-function doLogin($vkid, $pdo)
+function doLogin($vkid, $pdo, $secret_key)
 {
 	if (!$vkid) return "NO USER ID";
 	$strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
