@@ -8953,9 +8953,43 @@ PlayerData = function()
 
    PlayerData.inst = this;
 
-    PlayerData.inst.login()
+
    //PlayerData.inst.azureLogin();
 
+    console.log("dbInit start. Connecting to azure");
+
+    //window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
+    window.vkparams = {};
+    vkparams.userid = getURLParameter("user_id");
+    vkparams.sid = getURLParameter("sid");
+    vkparams.viewerid = getURLParameter("viewer_id");
+    if (vkparams.viewerid) vkparams.viewerid = vkparams.viewerid.toString();
+
+    //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
+    if (!vkparams.viewerid || !VK)
+    {
+        vkparams.viewerid = "CARLSON";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
+
+        if (MOBILE)
+        {
+            vkparams.viewerid = Cocoon.Device.getDeviceId();
+        }
+        vkparams.novk = true;
+    }
+
+    if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+        vkparams.viewerid != "197515742") return;
+
+    vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
+    vkparams.auth_key = getURLParameter("auth_key");
+    vkparams.refferer = getURLParameter("referrer");
+    vkparams.accesstoken = getURLParameter("access_token");
+    console.log("login / register user");
+
+    var data = getCookie("LOGIN_DATA");
+    data = data.substring(3, data.length);
+    var dataJSON = JSON.parse(data);
+    //PlayerData.inst.login()
 
     window.onbeforeunload = function(e)
     {
@@ -9818,41 +9852,7 @@ PlayerData.prototype.getVKfriends = function()
     });
 };
 
-
-PlayerData.dbInit = function() {
-    console.log("dbInit start. Connecting to azure");
-
-    //window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
-    window.vkparams = {};
-    vkparams.userid = getURLParameter("user_id");
-    vkparams.sid = getURLParameter("sid");
-    vkparams.viewerid = getURLParameter("viewer_id");
-    if (vkparams.viewerid) vkparams.viewerid = vkparams.viewerid.toString();
-
-    //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
-    if (!vkparams.viewerid || !VK)
-    {
-        vkparams.viewerid = "CARLSON";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
-
-        if (MOBILE)
-        {
-            vkparams.viewerid = Cocoon.Device.getDeviceId();
-        }
-        vkparams.novk = true;
-    }
-
-    if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
-    vkparams.viewerid != "197515742") return;
-
-    vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
-    vkparams.auth_key = getURLParameter("auth_key");
-    vkparams.refferer = getURLParameter("referrer");
-    vkparams.accesstoken = getURLParameter("access_token");
-    console.log("login / register user");
-
-console.log(getCookie("LOGIN_DATA"));
-    //new PlayerData();
-};var tWeapon = "weap";
+var tWeapon = "weap";
 var tPerk = "perk";
 var tBoost = "boost";
 var tApp = "app.";
@@ -10737,7 +10737,7 @@ window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGH
 window.loader = new PIXI.AssetLoader(preloaderAsset);
 window.loader.onComplete = preloaderLoaded;
 window.loader.load();
-PlayerData.dbInit();
+new PlayerData();
 
 $(document).bind('contextmenu', function () {
     return false;
