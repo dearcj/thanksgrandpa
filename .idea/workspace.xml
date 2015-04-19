@@ -42,8 +42,8 @@
       <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59430605" vertical-offset="17393" max-vertical-offset="17955">
-              <caret line="933" column="20" selection-start-line="933" selection-start-column="20" selection-end-line="933" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.9661922" vertical-offset="12833" max-vertical-offset="17955">
+              <caret line="704" column="59" selection-start-line="704" selection-start-column="45" selection-end-line="704" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -72,8 +72,8 @@
       <file leaf-file-name="GameStage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2622" max-vertical-offset="19589">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="8106" max-vertical-offset="19589">
+              <caret line="435" column="29" selection-start-line="435" selection-start-column="29" selection-end-line="435" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -257,6 +257,20 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="ProjectPane">
@@ -388,12 +402,6 @@
       <created>1417091906056</created>
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
-    </task>
-    <task id="LOCAL-01019" summary="&#10;&#10;a">
-      <created>1429278060715</created>
-      <option name="number" value="01019" />
-      <option name="project" value="LOCAL" />
-      <updated>1429278060715</updated>
     </task>
     <task id="LOCAL-01020" summary="&#10;&#10;a">
       <created>1429278149174</created>
@@ -683,7 +691,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429481620708</updated>
     </task>
-    <option name="localTasksCounter" value="1068" />
+    <task id="LOCAL-01068" summary="&#10;&#10;a">
+      <created>1429481655507</created>
+      <option name="number" value="01068" />
+      <option name="project" value="LOCAL" />
+      <updated>1429481655507</updated>
+    </task>
+    <option name="localTasksCounter" value="1069" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1141,14 +1155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="19589">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="11749" max-vertical-offset="13547">
@@ -1165,10 +1171,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8106" max-vertical-offset="19589">
+          <caret line="435" column="29" selection-start-line="435" selection-start-column="29" selection-end-line="435" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59430605" vertical-offset="17393" max-vertical-offset="17955">
-          <caret line="933" column="20" selection-start-line="933" selection-start-column="20" selection-end-line="933" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.9661922" vertical-offset="12833" max-vertical-offset="17955">
+          <caret line="704" column="59" selection-start-line="704" selection-start-column="45" selection-end-line="704" selection-end-column="59" />
           <folding />
         </state>
       </provider>
