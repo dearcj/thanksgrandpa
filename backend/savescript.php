@@ -127,7 +127,6 @@ function readJSON($conn, $table, $userid, $id)
 {
 	$f = playerFilter($conn, $table, $userid, $id);
 	$wholequery = "SELECT * FROM thanksdad.".$table.$f;
-	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
