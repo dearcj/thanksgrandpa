@@ -9036,7 +9036,7 @@ PlayerData.prototype.comboCheck = function()
       }
    } else
    {
-      this.playerItem.combodate  = this.playerItem.updateDate;
+      this.playerItem.combodate = this.playerItem.updateDate;
    }
 }
 
@@ -9441,6 +9441,12 @@ PlayerData.prototype.intJSON = function(obj)
         for(var propertyName in obj) {
 
             if (typeof obj[propertyName] != "string") continue;
+            if (indexOf(obj[propertyName], date) >= 0)
+            {
+                obj[propertyName] = sqlDate(obj[propertyName]);
+            }
+
+
             if (gameFloatFields.indexOf(propertyName) > -1)
             {
                 obj[propertyName] = parseFloat(obj[propertyName]);
