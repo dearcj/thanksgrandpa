@@ -5,7 +5,7 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;&#10;a">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -389,12 +389,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01005" summary="&#10;&#10;a">
-      <created>1429230902149</created>
-      <option name="number" value="01005" />
-      <option name="project" value="LOCAL" />
-      <updated>1429230902150</updated>
-    </task>
     <task id="LOCAL-01006" summary="&#10;&#10;a">
       <created>1429231061972</created>
       <option name="number" value="01006" />
@@ -683,7 +677,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429478519333</updated>
     </task>
-    <option name="localTasksCounter" value="1054" />
+    <task id="LOCAL-01054" summary="&#10;&#10;a">
+      <created>1429478632573</created>
+      <option name="number" value="01054" />
+      <option name="project" value="LOCAL" />
+      <updated>1429478632573</updated>
+    </task>
+    <option name="localTasksCounter" value="1055" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
