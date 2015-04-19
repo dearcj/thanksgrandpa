@@ -9444,7 +9444,7 @@ PlayerData.prototype.intJSON = function(obj)
             if (typeof obj[propertyName] != "string") continue;
             if (propertyName.indexOf("Date") >= 0)
             {
-                obj[propertyName] = sqlDate(obj[propertyName]);
+                obj[propertyName] = sqlDate(new Date(obj[propertyName]));
             }
 
 
@@ -9687,7 +9687,7 @@ PlayerData.prototype.login = function()
         PlayerData.inst.pid = x.playerItem.id;
         PlayerData.inst.playerItem = PlayerData.inst.intJSON(x.playerItem);
         if (!PlayerData.inst.playerItem.crystals)
-            PlayerData.inst.playerItem.crystals = 0;
+        PlayerData.inst.playerItem.crystals = 0;
 
         vkparams.id = PlayerData.inst.playerItem.id;
         PlayerData.inst.getVKfriends();
