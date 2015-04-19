@@ -69,17 +69,19 @@ function doLogin($vkid, $pdo, $secret_key, $auth_key)
 	
 	if ($userid == null) throw new Exception('No user id');
 	
+	/*
 	$p_events = readJSON($pdo, "tb_edevent_player", $userid);
 	$p_items = readJSON($pdo, "tb_item_player", $userid);
 	$p_achs	= readJSON($pdo, "tb_ach_player", $userid);
-	
+	*/
 	$token = array(
 	'vkid' => $vkid,
 	'userid' => $userid
 	);
 
 	$tokenJWT = JWT::encode($token, $secret_key);
-	$resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem, "events" => $p_events, "items" => $p_items, "achs" => $p_achs);
+	//, "events" => $p_events, "items" => $p_items, "achs" => $p_achs
+	$resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 	return $resp;
 }
 
