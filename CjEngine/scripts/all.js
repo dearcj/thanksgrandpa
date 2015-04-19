@@ -3,6 +3,13 @@ var CG_MONSTER = 2;
 var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
 function strad(str1, str2)
 {
     return parseInt(str1) + parseInt(str2);
@@ -9627,7 +9634,7 @@ PlayerData.prototype.login = function()
         }
 
     }).done(function (res) {
-        var r = res.substring(4, res.length);
+        var r = res.substring(3, res.length);
         var x = JSON.parse(r);
 
         vkparams.token = x.tokenJWT;
@@ -9842,7 +9849,9 @@ PlayerData.dbInit = function() {
     vkparams.refferer = getURLParameter("referrer");
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("login / register user");
-    new PlayerData();
+
+console.log(getCookie("LOGIN_DATA"));
+    //new PlayerData();
 };var tWeapon = "weap";
 var tPerk = "perk";
 var tBoost = "boost";
