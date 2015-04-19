@@ -5,9 +5,12 @@ require_once 'connection.php';
 require_once 'savescript.php';
 require_once 'json.php';
 
-function doLogin($vkid, $pdo, $secret_key)
+function doLogin($vkid, $pdo, $secret_key, $auth_key)
 {
+	$api_id = '4654201';
+	$app_secret = 'qV6RXByT51TBnwGZX8Py';
 	if (!$vkid) return "NO USER ID";
+	if (md5($api_id+'_'+$vkid+'_'+$app_secret) != $auth_key) return "INCORRECT AUTH KEY";
 	$strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
 	$statement = $pdo->prepare($strFindPlayer);
 
