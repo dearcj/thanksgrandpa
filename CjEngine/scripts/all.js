@@ -9627,7 +9627,7 @@ PlayerData.prototype.login = function()
         }
 
     }).done(function (res) {
-        var r = res.substring(2, res.length);
+        var r = res.substring(4, res.length);
         var x = JSON.parse(r);
 
         vkparams.token = x.tokenJWT;
