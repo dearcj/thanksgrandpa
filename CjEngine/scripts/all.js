@@ -8987,7 +8987,7 @@ PlayerData = function()
     console.log("login / register user");
 
     var data = getCookie("LOGIN_DATA");
-    data = data.substring(3, data.length);
+    //data = data.substring(2, data.length);
     var dataJSON = JSON.parse(data);
     //PlayerData.inst.login()
 
