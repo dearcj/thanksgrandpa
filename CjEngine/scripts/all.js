@@ -9000,8 +9000,9 @@ PlayerData = function()
     console.log("login / register user");
 
     var data = getCookie("LOGIN_DATA");
-
     data = decodeURIComponent(data);
+    data = data.replace('+', ' ');
+    data = data.replace('@', '+');
 
     var d = window.decompress(data);
     //data = data.substring(2, data.length);
