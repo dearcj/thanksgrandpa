@@ -12,11 +12,15 @@ function getCookie2(name) {
 }
 
 
-function getCookie(name) {
-    var matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
 }
 
 function strad(str1, str2)
@@ -8996,6 +9000,7 @@ PlayerData = function()
     console.log("login / register user");
 
     var data = getCookie("LOGIN_DATA");
+    data = decodeURIComponent(data);
     var d = window.decompress(data);
     //data = data.substring(2, data.length);
     var x = JSON.parse(data);
