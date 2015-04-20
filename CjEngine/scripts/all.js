@@ -9000,7 +9000,7 @@ PlayerData = function()
     console.log("login / register user");
 
     var data = getCookie("LOGIN_DATA");
-    data = data.replace('%2', '+');
+    data = data.replace('%2', ' ');
     data = decodeURIComponent(data);
 
     var d = window.decompress(data);
