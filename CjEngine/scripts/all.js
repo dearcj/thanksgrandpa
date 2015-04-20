@@ -9001,8 +9001,8 @@ PlayerData = function()
 
     var data = getCookie("LOGIN_DATA");
     data = decodeURIComponent(data);
-    data = data.replace(' ', '+');
-    data = data.replace('+', '@');
+    data = data.replace(/\+/g, ' ');
+    data = data.replace(/@/g, '+');
 
     var d = window.decompress(data);
     //data = data.substring(2, data.length);
