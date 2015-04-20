@@ -9003,8 +9003,6 @@ PlayerData = function()
     data = decodeURIComponent(data);
     data = data.replace(/\+/g, ' ');
     data = data.replace(/@/g, '+');
-
-    var d = window.decompress(data);
     //data = data.substring(2, data.length);
     var x = JSON.parse(data);
 
