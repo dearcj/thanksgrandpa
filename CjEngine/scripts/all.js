@@ -3,6 +3,15 @@ var CG_MONSTER = 2;
 var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
+
+function getCookie2(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches[1];
+}
+
+
 function getCookie(name) {
     var matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
@@ -8986,7 +8995,8 @@ PlayerData = function()
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("login / register user");
 
-    var data = getCookie("LOGIN_DATA");
+    var data = getCookie2("LOGIN_DATA");
+    var d = window.decompress(data);
     //data = data.substring(2, data.length);
     var x = JSON.parse(data);
 
