@@ -9346,7 +9346,7 @@ PlayerData.prototype.loadEnd = function() {
 
     if (!eqWeapon) PlayerData.inst.equipItem(PlayerData.inst.baseWeapIt, "1");
 
-    console.log("db init")
+    console.log("db init");
    // PlayerData.inst.updateScore();
     //PlayerData.inst.createAchProgress();
     window.dbinit  = true;
@@ -9406,7 +9406,6 @@ PlayerData.prototype.createAchProgress = function(cb)
       {
          this.achs_progress.push({id_ach: this.achs[i].id, id_player: this.playerItem.id, progress: 0});
       }
-
    }
 }
 
@@ -9540,7 +9539,7 @@ PlayerData.prototype.loadData = function(cb)
     {
         PlayerData.inst.eventsplayer = PlayerData.inst.intJSON(r);
         PlayerData.inst.loadCount ++;
-
+        console.log("events loaded");
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
     });
 
@@ -9548,13 +9547,15 @@ PlayerData.prototype.loadData = function(cb)
     {
        PlayerData.inst.achs_progress = PlayerData.inst.intJSON(r);
 
+        console.log("achs loaded");
         PlayerData.inst.loadCount ++;
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
     });
 
     PlayerData.inst.callDedAPI("READ", "tb_item_player", null, null, function(r)
     {
-       PlayerData.inst.items_enabled = PlayerData.inst.intJSON(r);
+        console.log("items loaded");
+        PlayerData.inst.items_enabled = PlayerData.inst.intJSON(r);
 
         var defaultRifleID = "68AFAEDC-B3E0-401E-9E1A-E272084F2E11";
 
