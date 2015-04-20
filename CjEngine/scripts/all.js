@@ -9452,10 +9452,6 @@ PlayerData.prototype.intJSON = function(obj)
 
 
             if (typeof obj[propertyName] != "string") continue;
-            if (propertyName.indexOf("Date") >= 0)
-            {
-                obj[propertyName] = sqlDate(new Date(obj[propertyName]));
-            }
 
 
             if (gameFloatFields.indexOf(propertyName) > -1)
