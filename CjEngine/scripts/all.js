@@ -8995,7 +8995,7 @@ PlayerData = function()
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("login / register user");
 
-    var data = getCookie2("LOGIN_DATA");
+    var data = getCookie("LOGIN_DATA");
     var d = window.decompress(data);
     //data = data.substring(2, data.length);
     var x = JSON.parse(data);
