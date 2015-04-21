@@ -1,6 +1,4 @@
 <?php 
-
-phpinfo();
 // Показывать всю информацию, по умолчанию INFO_ALL
 
 require_once __DIR__.'/backendmysql/connection.php';
