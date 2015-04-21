@@ -1,7 +1,7 @@
 ﻿<?php
 
 
-
+/*
 $pdo = new PDO('mysql:host=127.0.0.1;dbname=thanksdad', "root", "girkinLOH1", array(
     PDO::ATTR_PERSISTENT => true
 ));
@@ -9,7 +9,7 @@ $pdo = new PDO('mysql:host=127.0.0.1;dbname=thanksdad', "root", "girkinLOH1", ar
 $pdo = new PDO('mysql:host=localhost;dbname=thanksdad', "root", "girkinLOH1", array(
     PDO::ATTR_PERSISTENT => true
 ));
-
+*/
 
 $pdo = new PDO('mysql:host=188.166.55.191;dbname=thanksdad', "root", "girkinLOH1", array(
     PDO::ATTR_PERSISTENT => true
