@@ -6,16 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backendmysql/connection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backendmysql/dedapi.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backendmysql/json.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backendmysql/jwt_helper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backendmysql/login.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backendmysql/login_api.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backendmysql/savescript.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test2.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test2.php" afterPath="$PROJECT_DIR$/test2.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -482,12 +473,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01079" summary="&#10;&#10;a">
-      <created>1429485562425</created>
-      <option name="number" value="01079" />
-      <option name="project" value="LOCAL" />
-      <updated>1429485562425</updated>
-    </task>
     <task id="LOCAL-01080" summary="&#10;&#10;a">
       <created>1429486062782</created>
       <option name="number" value="01080" />
@@ -776,7 +761,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429554035475</updated>
     </task>
-    <option name="localTasksCounter" value="1128" />
+    <task id="LOCAL-01128" summary="&#10;&#10;a">
+      <created>1429643380019</created>
+      <option name="number" value="01128" />
+      <option name="project" value="LOCAL" />
+      <updated>1429643380019</updated>
+    </task>
+    <option name="localTasksCounter" value="1129" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">

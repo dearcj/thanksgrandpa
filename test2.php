@@ -1,4 +1,8 @@
 <?php 
+
+// Показывать всю информацию, по умолчанию INFO_ALL
+phpinfo();
+
 require_once __DIR__.'/backendmysql/connection.php';
 require_once __DIR__.'/backendmysql/login_api.php';
 $userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
