@@ -8,6 +8,7 @@ $t1 =microtime(true);
 $p_events = readJSON($pdo, "tb_edevent_player", $userid);
 $t2 =microtime(true);
 echo $t2 - $t1;
+echo json_encode($p_events, JSON_UNESCAPED_UNICODE);
 /*$p_items = readJSON($pdo, "tb_item_player", $userid);
 $t1 =microtime(true);
 echo $t1 - $t2;
