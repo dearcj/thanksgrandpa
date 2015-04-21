@@ -6,7 +6,7 @@ require_once __DIR__.'/backendmysql/login_api.php';
 $userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
 if ($userid)
 {
-$p = readJSON($pdo, "tb_achs", $userid);
+$p = readJSON($pdo, "tb_achs", $userid, '06D260E8-21E0-49A8-AAD7-2CCDBCEDA1AE');
 $desc =  $p[0]['desc'];
 echo $desc;
 //echo json_encode($p, JSON_UNESCAPED_UNICODE);
