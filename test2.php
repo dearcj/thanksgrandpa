@@ -1,7 +1,7 @@
 <?php 
 
-// Показывать всю информацию, по умолчанию INFO_ALL
 phpinfo();
+// Показывать всю информацию, по умолчанию INFO_ALL
 
 require_once __DIR__.'/backendmysql/connection.php';
 require_once __DIR__.'/backendmysql/login_api.php';
