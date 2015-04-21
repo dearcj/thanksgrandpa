@@ -9012,7 +9012,7 @@ PlayerData = function()
 
     PlayerData.inst.pid = x.playerItem.id;
     PlayerData.inst.playerItem = PlayerData.inst.intJSON(x.playerItem);
-
+    PlayerData.inst.playerItem.money = Math.round(PlayerData.inst.playerItem.money);
     if (!PlayerData.inst.playerItem.crystals)
         PlayerData.inst.playerItem.crystals = 0;
 
@@ -9188,7 +9188,7 @@ PlayerData.prototype.gainExp = function(amount) {
        ZSound.Play("levelup");
        if (ingame)
            this.score += this.xpLevel[this.playerItem.lvl].money; else {
-           this.playerItem.money += this.xpLevel[this.playerItem.lvl].money;
+           this.playerItem.money += Math.round(this.xpLevel[this.playerItem.lvl].money);
            shopStage.updateStatsPanel();
        }
        if (!ingame)
@@ -9785,7 +9785,7 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
             rec = Math.round(LauncherBG.inst.distance);
         }
         gameStage.progressSaved = true;
-        PlayerData.inst.playerItem.money += PlayerData.inst.score;
+        PlayerData.inst.playerItem.money += Math.round(PlayerData.inst.score);
         PlayerData.inst.playerItem.maxdistance = rec;
         if (noUpdate == null)
         PlayerData.inst.savePlayerData();
