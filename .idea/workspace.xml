@@ -7,7 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/connection.php" afterPath="$PROJECT_DIR$/backendmysql/connection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test2.php" afterPath="$PROJECT_DIR$/test2.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -474,12 +473,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01088" summary="&#10;&#10;a">
-      <created>1429487352129</created>
-      <option name="number" value="01088" />
-      <option name="project" value="LOCAL" />
-      <updated>1429487352129</updated>
-    </task>
     <task id="LOCAL-01089" summary="&#10;&#10;a">
       <created>1429487504387</created>
       <option name="number" value="01089" />
@@ -768,7 +761,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429650301666</updated>
     </task>
-    <option name="localTasksCounter" value="1137" />
+    <task id="LOCAL-01137" summary="&#10;&#10;a">
+      <created>1429652385275</created>
+      <option name="number" value="01137" />
+      <option name="project" value="LOCAL" />
+      <updated>1429652385275</updated>
+    </task>
+    <option name="localTasksCounter" value="1138" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
