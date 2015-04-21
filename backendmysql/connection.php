@@ -12,7 +12,8 @@ $pdo = new PDO('mysql:host=localhost;dbname=thanksdad', "root", "girkinLOH1", ar
 */
 
 $pdo = new PDO('mysql:host=188.166.55.191;dbname=thanksdad', "root", "girkinLOH1", array(
-    PDO::ATTR_PERSISTENT => true
+    PDO::ATTR_PERSISTENT => true,
+	PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
 ));
 
 try
