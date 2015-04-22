@@ -201,9 +201,9 @@ function updateJSON($conn, $table, $data, $userid, $id)
 	$f = playerFilter($conn, $table, $userid, $id);
 $sqlclause = implode(",",$sql);
 
-	$wholestr = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
+	$wholequery = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
 	echo $wholequery;
-$statement = $conn->prepare($wholestr);
+$statement = $conn->prepare($wholequery);
 
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
