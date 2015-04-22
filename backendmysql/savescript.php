@@ -127,7 +127,7 @@ function readJSON($conn, $table, $userid, $id)
 {
 	$f = playerFilter($conn, $table, $userid, $id);
 	$wholequery = "SELECT * FROM thanksdad.".$table.$f;
-	echo $wholequery;
+	//echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -146,7 +146,7 @@ function getScores($conn, $data, $userid)
 		$wholequery = $wholequery." WHERE platformid IN (".$filter.")";
 	}
 	$wholequery = $wholequery." ORDER BY maxdistance LIMIT ".$take." OFFSET ".$skip;
-	echo $wholequery;
+	//echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -156,13 +156,13 @@ function getScores($conn, $data, $userid)
 function updateScore($conn, $curdist, $userid)
 {
 	$wholequery = "SELECT COUNT(*) as total FROM thanksdad.tb_players WHERE maxdistance > ".$curdist;
-	echo $wholequery;
+	//echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 	$rank	= 	$result[0]['total'];
 	$wholequery = "UPDATE thanksdad.tb_players SET rank = ".$rank." WHERE id = ".$conn->quote($userid);
-	echo $wholequery;
+	//echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	return $rank;
@@ -181,7 +181,7 @@ $valuesstr = implode(",",$sqlvalues);
 $keystr = implode(",",$sqlkeys);
 
 	$wholequery = "INSERT INTO thanksdad.".$table." (id,".$keystr.") VALUES (UUID(),".$valuesstr .");";
-echo $wholequery;
+//echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 $res = $statement->execute();
 //print($wholequery);
@@ -203,7 +203,7 @@ function updateJSON($conn, $table, $data, $userid, $id)
 $sqlclause = implode(",",$sql);
 
 	$wholequery = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
-	echo $wholequery;
+	//echo $wholequery;
 $statement = $conn->prepare($wholequery);
 
 $statement->execute();

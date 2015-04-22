@@ -6,11 +6,6 @@ require_once __DIR__.'/backendmysql/login_api.php';
 $userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
 if ($userid)
 {
-$p = readJSON($pdo, "tb_achs", $userid);
-$desc =  $p[4]['desc'];
-$s = iconv('utf-8', 'windows-1252', $desc);
-// Преобразуем строку из однобайтной кодировки обратно в utf-8, выдав её за windows-1251
-$s = iconv('windows-1251', 'utf-8', $s);
 
 echo $s;
 //echo json_encode($p, JSON_UNESCAPED_UNICODE);
