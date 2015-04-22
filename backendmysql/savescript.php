@@ -155,13 +155,14 @@ function getScores($conn, $data, $userid)
 
 function updateScore($conn, $curdist, $userid)
 {
-	$wholequery = "SELECT COUNT(*) FROM thanksdad.tb_players WHERE maxdistance > ".$curdist;
+	$wholequery = "SELECT COUNT(*) as total FROM thanksdad.tb_players WHERE maxdistance > ".$curdist;
 	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-	$rank	= 	$result[0][""];
+	$rank	= 	$result['total']
 	$wholequery = "UPDATE thanksdad.tb_players SET rank = ".$rank." WHERE id = ".$conn->quote($userid);
+	echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	return $rank;
