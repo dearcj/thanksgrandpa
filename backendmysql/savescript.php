@@ -179,11 +179,12 @@ function insertJSON($conn, $table, $jsonEncoded)
 	}
 $valuesstr = implode(",",$sqlvalues);
 $keystr = implode(",",$sqlkeys);
+
+	$wholequery = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr .");";
 echo $wholequery;
-	$wholestr = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr .");";
-$statement = $conn->prepare($wholestr);
+	$statement = $conn->prepare($wholequery);
 $res = $statement->execute();
-//print($wholestr);
+//print($wholequery);
 
 $statement = null;
 return $res;
