@@ -9,9 +9,20 @@ $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
 
-
+/*
 $res = readJSON($pdo, "tb_items", 'F800A350-EE15-4F1C-9CCF-050B775A4CD9', '68AFAEDC-B3E0-401E-9E1A-E272084F2E11');
 var_dump($res);
+echo $res;
+*/
+
+$res = insertJSON($pdo, "tb_players", array('platformid' => $vkid,
+			'money' => 0,
+			'crystals' => 0,
+			'xp' => 0,
+			'lvl' => 1,
+			'energy' => 10, 
+			'maxdistance' => 0));
+			var_dump($res);
 echo $res;
 
 
@@ -43,9 +54,8 @@ $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZX
 $data = array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' => true);
 $method = 'BUY_ITEM';
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
-*/
 buyItem($pdo, array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' => true), $userid);
-
+*/
 
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
