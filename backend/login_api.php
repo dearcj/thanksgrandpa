@@ -9,8 +9,16 @@ function doLogin($vkid, $pdo, $secret_key, $auth_key)
 {
 	$api_id = '4654201';
 	$app_secret = 'qV6RXByT51TBnwGZX8Py';
-	if (!$vkid || $vkid == '') return "NO USER ID";
-	if (md5($api_id.'_'.$vkid.'_'.$app_secret) != $auth_key) return "INCORRECT AUTH KEY";
+	if (!$vkid || $vkid == '') 
+	{
+		echo "NO USER ID";
+		return; 
+	}
+	if (md5($api_id.'_'.$vkid.'_'.$app_secret) != $auth_key) 
+	{
+		echo "INCORRECT AUTH KEY";
+		return;
+	}
 	$strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
 	$statement = $pdo->prepare($strFindPlayer);
 
