@@ -180,7 +180,7 @@ function insertJSON($conn, $table, $jsonEncoded)
 $valuesstr = implode(",",$sqlvalues);
 $keystr = implode(",",$sqlkeys);
 
-	$wholequery = "INSERT INTO thanksdad.".$table." (".$keystr.") VALUES (".$valuesstr .");";
+	$wholequery = "INSERT INTO thanksdad.".$table." (id,".$keystr.") VALUES (UUID(),".$valuesstr .");";
 echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 $res = $statement->execute();
