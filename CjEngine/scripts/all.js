@@ -9408,7 +9408,7 @@ PlayerData.prototype.updateEnergy = function(noUpdate)
        var prev = this.playerItem.energy;
        this.playerItem.energy += d * this.epm;
 
-    console.log(this.playerItem.energy);
+   // console.log(this.playerItem.energy);
 
    if (this.playerItem.energy > this.maxEnergy) {
       this.playerItem.energy = this.maxEnergy;
