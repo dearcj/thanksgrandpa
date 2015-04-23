@@ -80,5 +80,10 @@ if ($method == "BUY_ITEM")
 {
 	$res = buyItem($pdo, $data, $userid);
 }
+ else 
+if ($method == "GET_DATE")
+{
+	$res = date(DateTime::RFC822);
+}
 echo json_encode($res, JSON_UNESCAPED_UNICODE);
 ?>

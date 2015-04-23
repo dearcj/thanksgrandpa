@@ -111,7 +111,7 @@ function buyItem($conn, $data, $userid)
 
 	try{
 		$conn->beginTransaction();
-		insertJSON($conn, "tb_item_player", array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>$eq));
+		insertJSON($conn, "tb_item_player", array('id_player'=> $userid, 'id_item' => $id, 'equipped'=>"1"));
 		updateJSON($conn, "tb_players", $player, $userid);
 		$conn->commit();
 		return $player;
