@@ -203,13 +203,13 @@ function updateJSON($conn, $table, $data, $userid, $id)
 $sqlclause = implode(",",$sql);
 
 	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
-	echo $wholequery;
+//	echo $wholequery;
 $statement = $conn->prepare($wholequery);
 
 $statement->execute();
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+//$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 $statement = null;
-return $result;
+return true;
 }
 }
 catch (PDOException $e) {
