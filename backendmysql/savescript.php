@@ -202,7 +202,7 @@ function updateJSON($conn, $table, $data, $userid, $id)
 	$f = playerFilter($conn, $table, $userid, $id);
 $sqlclause = implode(",",$sql);
 
-	$wholequery = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
+	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
 	echo $wholequery;
 $statement = $conn->prepare($wholequery);
 
