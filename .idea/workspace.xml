@@ -44,8 +44,8 @@
       <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41863075" vertical-offset="14618" max-vertical-offset="18088">
-              <caret line="789" column="12" selection-start-line="789" selection-start-column="12" selection-end-line="789" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.22671156" vertical-offset="14618" max-vertical-offset="18088">
+              <caret line="780" column="9" selection-start-line="780" selection-start-column="9" selection-end-line="780" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -455,12 +455,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01122" summary="&#10;&#10;a">
-      <created>1429547273089</created>
-      <option name="number" value="01122" />
-      <option name="project" value="LOCAL" />
-      <updated>1429547273090</updated>
-    </task>
     <task id="LOCAL-01123" summary="&#10;&#10;a">
       <created>1429547366149</created>
       <option name="number" value="01123" />
@@ -749,7 +743,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429791040429</updated>
     </task>
-    <option name="localTasksCounter" value="1171" />
+    <task id="LOCAL-01171" summary="&#10;&#10;a">
+      <created>1429793191964</created>
+      <option name="number" value="01171" />
+      <option name="project" value="LOCAL" />
+      <updated>1429793191964</updated>
+    </task>
+    <option name="localTasksCounter" value="1172" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -774,7 +774,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1634" height="1066" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32527474" sideWeight="0.5844981" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
@@ -783,7 +783,7 @@
       <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="429" y="587" width="746" height="339" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12083333" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21508035" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21508035" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3265086" sideWeight="0.4155019" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14213198" sideWeight="0.50080514" order="1" side_tool="true" content_ui="tabs" />
@@ -1240,8 +1240,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41863075" vertical-offset="14618" max-vertical-offset="18088">
-          <caret line="789" column="12" selection-start-line="789" selection-start-column="12" selection-end-line="789" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.22671156" vertical-offset="14618" max-vertical-offset="18088">
+          <caret line="780" column="9" selection-start-line="780" selection-start-column="9" selection-end-line="780" selection-end-column="9" />
           <folding />
         </state>
       </provider>

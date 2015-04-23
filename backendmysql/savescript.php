@@ -196,7 +196,7 @@ function updateJSON($conn, $table, $data, $userid, $id)
 	
 	foreach($obj as $key => $value){
 		if ($value == '') continue;
-		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = N" . $conn->quote($value); 
+		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
 	}
 	
 	$f = playerFilter($conn, $table, $userid, $id);
