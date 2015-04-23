@@ -4,6 +4,23 @@ var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
 
+
+
+function ajaxCalltoGetTime() {
+    $.ajax({
+        type: "GET",
+        url: 'http://json-time.appspot.com/time.json',
+        dataType: 'jsonp'
+    })
+        .done(function (msg) {
+            window.date = new Date(msg.hour + ":" + msg.minute + ":" + msg.second);
+        });
+}
+
+function startServerTimeTicker() {
+    setInterval(ajaxCalltoGetTime, 1000);
+}
+
 function getCookie2(name) {
     var matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
@@ -752,6 +769,7 @@ GameStage.prototype.mobileTouchEnd = function(e)
 
 GameStage.prototype.onHide = function (newStage) {
 
+    PlayerData.inst.saveRunProgress();
     gameStage.menuBtn = null;
     gameStage.player = null;
     gameStage.barXP = null;
@@ -5743,10 +5761,9 @@ CGrenade.makeBoom = function (x, y, dmg, dist, owner)
 
     var sd = dist*dist;
 
-    var l = 0;
-    if (CMonster.list) l = CMonster.list.length;
-
-   for (var i = 0; i < l; ++i)
+   // var l = 0;
+    if (CMonster.list)
+   for (var i = 0; i < CMonster.list.length; ++i)
     {
         var m = CMonster.list[i];
         if (m.doRemove) continue;
@@ -5763,7 +5780,7 @@ CGrenade.makeBoom = function (x, y, dmg, dist, owner)
         if (m.doRemove)
         {
             i--;
-            l--;
+        //    l--;
         }
     }
 
@@ -8993,13 +9010,21 @@ PlayerData = function()
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("login / register user");
 
-    var data = getCookie("LOGIN_DATA");
-    data = decodeURIComponent(data);
-    data = data.replace(/\+/g, ' ');
-    data = data.replace(/@/g, '+');
-    //data = data.substring(2, data.length);
-    var x = JSON.parse(data);
-
+    if (window.location.search == "?lhst=1922") {
+        this.playerJSON = '{"registered":false,"tokenJWT":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjgyNjE3MjU5IiwidXNlcmlkIjoiNzhGNkY3Q0UtMjhFMy00QUVBLUIxNDMtMkJCQjJDQkVBNTREIn0.P-nWGsKp866LbgRrzuVhBut8p4ZaAZ8XZfhIchgsph4","playerItem":{"id":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","ref":"282617259","vkapi":"282617259","xp":"256.94042397661","createDate":"2015-03-25 12:31:46","updateDate":"2015-04-17 00:50:13","userId":"Custom:F800A350-EE15-4F1C-9CCF-050B775A4CD9","money":"9639","crystals":"1000","maxdistance":"918","lvl":"3","energy":"10","name":"Геннадий","last_name":"Геннадич","rank":"2467","combodate":"2015-03-25 15:56:09","keys":null,"platformid":"282617259"}}';
+        this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
+        this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
+        x = JSON.parse(this.playerJSON);
+    } else {
+        this.loginPage = 'https://www.dedgame.ru/backend/login.php';
+        this.apiSource = "https://www.dedgame.ru/backend/dedapi.php";
+        var data = getCookie("LOGIN_DATA");
+        data = decodeURIComponent(data);
+        data = data.replace(/\+/g, ' ');
+        data = data.replace(/@/g, '+');
+        //data = data.substring(2, data.length);
+        var x = JSON.parse(data);
+    }
     vkparams.token = x.tokenJWT;
     vkparams.registered = x.registered;
 
@@ -9676,7 +9701,7 @@ PlayerData.prototype.login = function()
     $.ajax({
         encoding:"UTF-8",
         type: "POST",
-        url: 'https://www.dedgame.ru/backend/login.php',
+        url: PlayerData.inst.loginPage,
         dataType: "text",
         data: {
             vkid: vkparams.viewerid
@@ -9711,7 +9736,7 @@ PlayerData.prototype.callDedAPI = function(method, table, id, data, cb)
     console.log("DEDAPI"+method + table);
     $.ajax({
         type: "POST",
-        url: 'https://www.dedgame.ru/backend/dedapi.php',
+        url: PlayerData.inst.apiSource,
         data: {
             encoding:"UTF-8",
             method: method,
@@ -9791,8 +9816,8 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
 
 PlayerData.prototype.getVKfriends = function()
 {
-    vkparams.first_name = "Аноним";
-    vkparams.last_name = "";
+    vkparams.first_name = PlayerData.inst.playerItem.name;//"Аноним";
+    vkparams.last_name = PlayerData.inst.playerItem.last_name;
     console.log("!!!!" + PlayerData.inst.playerItem.name);
     //PlayerData.inst.savePlayerData();
     PlayerData.inst.updateScore(function (r)
@@ -9808,7 +9833,6 @@ PlayerData.prototype.getVKfriends = function()
     vkparams.friendsIngameIDs = [];
     if (vkparams.novk)
     {
-        if (window.location.search == "?lhst=1922")
         this.loadData(this.loadEnd);
         return;
     }
