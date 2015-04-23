@@ -9017,25 +9017,24 @@ PlayerData = function()
         this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
         this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
         x = JSON.parse(this.playerJSON);
-    } else
+    } else {
+        if (window.location.search == "?p=MYSQL") {
+            this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
+            this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
+        } else
+        {
+            this.loginPage = 'https://www.dedgame.ru/backend/login.php';
+            this.apiSource = "https://www.dedgame.ru/backend/dedapi.php";
+        }
 
-    if (window.location.search == "?p=MYSQL") {
-        this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
-        this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
+            var data = getCookie("LOGIN_DATA");
+            data = decodeURIComponent(data);
+            data = data.replace(/\+/g, ' ');
+            data = data.replace(/@/g, '+');
+            //data = data.substring(2, data.length);
+            var x = JSON.parse(data);
+        
     }
-
-    if (!x)
-    {
-        this.loginPage = 'https://www.dedgame.ru/backend/login.php';
-        this.apiSource = "https://www.dedgame.ru/backend/dedapi.php";
-        var data = getCookie("LOGIN_DATA");
-        data = decodeURIComponent(data);
-        data = data.replace(/\+/g, ' ');
-        data = data.replace(/@/g, '+');
-        //data = data.substring(2, data.length);
-        var x = JSON.parse(data);
-    }
-
 
     vkparams.token = x.tokenJWT;
     vkparams.registered = x.registered;
