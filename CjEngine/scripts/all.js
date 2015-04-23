@@ -9019,13 +9019,14 @@ PlayerData = function()
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("login / register user");
 
+    this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
+    this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
+
     if (window.location.search == "?p=LOCAL") {
         this.playerJSON = '{"registered":false,"tokenJWT":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjgyNjE3MjU5IiwidXNlcmlkIjoiNzhGNkY3Q0UtMjhFMy00QUVBLUIxNDMtMkJCQjJDQkVBNTREIn0.P-nWGsKp866LbgRrzuVhBut8p4ZaAZ8XZfhIchgsph4","playerItem":{"id":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","ref":"282617259","vkapi":"282617259","xp":"256.94042397661","createDate":"2015-03-25 12:31:46","updateDate":"2015-04-17 00:50:13","userId":"Custom:F800A350-EE15-4F1C-9CCF-050B775A4CD9","money":"9639","crystals":"1000","maxdistance":"918","lvl":"3","energy":"10","name":"Геннадий","last_name":"Геннадич","rank":"2467","combodate":"2015-03-25 15:56:09","keys":null,"platformid":"282617259"}}';
-        this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
-        this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
         x = JSON.parse(this.playerJSON);
     } else {
-        if (window.location.search == "?p=MYSQL") {
+    /*    if (window.location.search == "?p=MYSQL") {
             this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
             this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
         } else
@@ -9033,17 +9034,14 @@ PlayerData = function()
             this.loginPage = 'https://www.dedgame.ru/backend/login.php';
             this.apiSource = "https://www.dedgame.ru/backend/dedapi.php";
         }
-
+*/
             var data = getCookie("LOGIN_DATA");
             data = decodeURIComponent(data);
             data = data.replace(/\+/g, ' ');
             data = data.replace(/@/g, '+');
             //data = data.substring(2, data.length);
             var x = JSON.parse(data);
-
     }
-
-
 
     vkparams.token = x.tokenJWT;
     vkparams.registered = x.registered;
