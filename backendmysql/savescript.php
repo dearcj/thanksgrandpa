@@ -145,7 +145,7 @@ function getScores($conn, $data, $userid)
 	{
 		$wholequery = $wholequery." WHERE platformid IN (".$filter.")";
 	}
-	$wholequery = $wholequery." ORDER BY maxdistance LIMIT ".$take." OFFSET ".$skip;
+	$wholequery = $wholequery." ORDER BY maxdistance DESC LIMIT ".$take." OFFSET ".$skip;
 	//echo $wholequery;
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
