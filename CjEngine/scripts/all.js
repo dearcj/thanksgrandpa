@@ -8971,16 +8971,12 @@ PlayerData = function()
 
     //window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
     window.vkparams = {};
-    vkparams.userid = getURLParameter("user_id");
     vkparams.sid = getURLParameter("sid");
     vkparams.viewerid = getURLParameter("viewer_id");
-    if (vkparams.viewerid) vkparams.viewerid = vkparams.viewerid.toString();
 
     //CCREMOVE!!!!!!!!!!!!!!!!!!!!!!!!
     if (!vkparams.viewerid || !VK)
     {
-        vkparams.viewerid = "CARLSON";//"282617259";//"CARLSON"+Math.round(Math.random()*1000000).toString();
-
         if (MOBILE)
         {
             vkparams.viewerid = Cocoon.Device.getDeviceId();
@@ -9012,6 +9008,7 @@ PlayerData = function()
 
     PlayerData.inst.pid = x.playerItem.id;
     PlayerData.inst.playerItem = PlayerData.inst.intJSON(x.playerItem);
+    vkparams.viewerid = PlayerData.inst.playerItem.platformid;
     PlayerData.inst.playerItem.money = Math.round(PlayerData.inst.playerItem.money);
     if (!PlayerData.inst.playerItem.crystals)
         PlayerData.inst.playerItem.crystals = 0;
