@@ -83,7 +83,7 @@ if ($method == "BUY_ITEM")
  else 
 if ($method == "GET_DATE")
 {
-	$res = date(DateTime::RFC822);
+	echo date(DateTime::RFC822);
 }
 echo json_encode($res, JSON_UNESCAPED_UNICODE);
 ?>
