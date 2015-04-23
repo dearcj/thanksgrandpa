@@ -1125,8 +1125,10 @@ GameStage.prototype.openEndWindowLoaded = function () {
         var arr = c;
 
         for (var i = 0; i < Math.min(5, arr.length); ++i) {
+            var d = arr[i].maxdistance;
+            if (!d) d = 0;
             CObj.getById("tf" + (i + 1).toString() + "2").text = extractName(arr[i]);
-            CObj.getById("tf" + (i + 1).toString() + "3").text = arr[i].maxdistance.toString();
+            CObj.getById("tf" + (i + 1).toString() + "3").text = d.toString();
             if (rec > arr[i].maxdistance) {
                 CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
                 CObj.getById("b" + (i + 1).toString()).text = "Я тебя уделал";
@@ -9010,12 +9012,20 @@ PlayerData = function()
     vkparams.accesstoken = getURLParameter("access_token");
     console.log("login / register user");
 
-    if (window.location.search == "?lhst=1922") {
+    if (window.location.search == "?p=LOCAL") {
         this.playerJSON = '{"registered":false,"tokenJWT":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjgyNjE3MjU5IiwidXNlcmlkIjoiNzhGNkY3Q0UtMjhFMy00QUVBLUIxNDMtMkJCQjJDQkVBNTREIn0.P-nWGsKp866LbgRrzuVhBut8p4ZaAZ8XZfhIchgsph4","playerItem":{"id":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","ref":"282617259","vkapi":"282617259","xp":"256.94042397661","createDate":"2015-03-25 12:31:46","updateDate":"2015-04-17 00:50:13","userId":"Custom:F800A350-EE15-4F1C-9CCF-050B775A4CD9","money":"9639","crystals":"1000","maxdistance":"918","lvl":"3","energy":"10","name":"Геннадий","last_name":"Геннадич","rank":"2467","combodate":"2015-03-25 15:56:09","keys":null,"platformid":"282617259"}}';
         this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
         this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
         x = JSON.parse(this.playerJSON);
-    } else {
+    } else
+
+    if (window.location.search == "?p=MYSQL") {
+        this.loginPage = 'https://www.dedgame.ru/backendmysql/login.php';
+        this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
+    }
+
+    if (!x)
+    {
         this.loginPage = 'https://www.dedgame.ru/backend/login.php';
         this.apiSource = "https://www.dedgame.ru/backend/dedapi.php";
         var data = getCookie("LOGIN_DATA");
@@ -9025,6 +9035,8 @@ PlayerData = function()
         //data = data.substring(2, data.length);
         var x = JSON.parse(data);
     }
+
+
     vkparams.token = x.tokenJWT;
     vkparams.registered = x.registered;
 
