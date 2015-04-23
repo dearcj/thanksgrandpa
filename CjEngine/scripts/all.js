@@ -4,21 +4,27 @@ var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
 
+function datetime()
+{
+    return window.date;
+    //return new Date();
+}
 
 
 function ajaxCalltoGetTime() {
-    $.ajax({
-        type: "GET",
-        url: 'http://json-time.appspot.com/time.json',
-        dataType: 'jsonp'
-    })
-        .done(function (msg) {
-            window.date = new Date(msg.hour + ":" + msg.minute + ":" + msg.second);
-        });
+
+
+    PlayerData.inst.callDedAPI("GET_DATE", null, null, null, function(r)
+    {
+        if (!isNaN(new Date(r).getTime()))
+        window.date = new Date(r);
+    });
+
 }
 
 function startServerTimeTicker() {
-    setInterval(ajaxCalltoGetTime, 1000);
+    ajaxCalltoGetTime();
+    setInterval(ajaxCalltoGetTime, 10000);
 }
 
 function getCookie2(name) {
@@ -7647,7 +7653,7 @@ CEActionGUI.prototype.takeReward = function()
     this.progressfore.visible = false;
 
     this.eventpl.reward_ready = false;
-    this.eventpl.lastused = sqlDate(new Date());
+    this.eventpl.lastused = sqlDate(datetime());
     if (this.event.money_gain)
         PlayerData.inst.playerItem.money += this.event.money_gain;
 
@@ -8632,9 +8638,9 @@ var w_grenadel = new CGrenadeLauncher(
         accIncrease: 0.0,
         accRecoil: 0.0,
         recoil: 3, //recoil
-        magcap: 3, //magcap
-        delay: 400, //delay
-        damage: 135, //damage
+        magcap: 4, //magcap
+        delay: 500, //delay
+        damage: 165, //damage
         reloadTime: 2200},//__reloadTime,}
     "asd",// __gfx,
     [
@@ -8660,7 +8666,7 @@ var w_laser = new CLaser(
         recoil: 0, //recoil
         magcap: 60, //magcap
         delay: 150, //delay
-        damage: 190, //damage
+        damage: 270, //damage
         unlockprice: 10, //unlockprice
         reloadTime: 2200},//__reloadTime,}
     "asd",// __gfx,
@@ -8984,6 +8990,7 @@ PlayerData = function()
 
    PlayerData.inst = this;
 
+
    //PlayerData.inst.azureLogin();
 
     console.log("dbInit start. Connecting to azure");
@@ -9033,12 +9040,14 @@ PlayerData = function()
             data = data.replace(/@/g, '+');
             //data = data.substring(2, data.length);
             var x = JSON.parse(data);
-        
+
     }
+
+
 
     vkparams.token = x.tokenJWT;
     vkparams.registered = x.registered;
-
+    startServerTimeTicker();
     if (!vkparams.registered)console.log("user logged in"); else
         console.log("user registered");
 
@@ -9063,7 +9072,7 @@ PlayerData.prototype.comboCheck = function()
 {
    if (this.playerItem.combodate)
    {
-      var d = (new Date()).getTime() - (new Date(sqlToJsDate(this.playerItem.updateDate))).getTime();
+      var d = (datetime()).getTime() - (new Date(sqlToJsDate(this.playerItem.updateDate))).getTime();
       d /= 1000;//secs
       d /= 60; //minutes
       if (d > 60*29)
@@ -9071,7 +9080,7 @@ PlayerData.prototype.comboCheck = function()
          this.playerItem.combodate = sqlDate(new Date());
       } else
       {
-         var d = (new Date()).getTime() - new Date(sqlToJsDate(this.playerItem.combodate)).getTime();
+         var d = (datetime()).getTime() - new Date(sqlToJsDate(this.playerItem.combodate)).getTime();
          d /= 1000;//secs
          d /= 60; //minutes
          var dayminutes = 24*60;
@@ -9389,9 +9398,12 @@ PlayerData.prototype.loadEnd = function() {
 PlayerData.prototype.updateEnergy = function(noUpdate)
 {
     if (!this.playerItem) return;
-    var d2 = sqlToJsDate(this.playerItem.updateDate);
-   var d = (new Date()).getTime() - d2.getTime();
-   this.playerItem.updateDate = sqlDate(new Date());//(new Date()).toString();
+    if  (isNaN(new Date(this.playerItem.updateDate).getTime()))
+        this.playerItem.updateDate = sqlDate(datetime());
+
+        var d2 = sqlToJsDate(this.playerItem.updateDate);
+   var d = (datetime()).getTime() - d2.getTime();
+   this.playerItem.updateDate = sqlDate(datetime());//(new Date()).toString();
    d /= 1000;//secs
    d /= 60; //minutes
    if (d > 0) {
@@ -10768,7 +10780,7 @@ LevelManager.levelLoadOffsetY = (window.SCR_HEIGHT - window.initialHeight) / 2;
 
 window.SCR_SCALE = 1.0;
 window.FRAME_RATE = 60;
-
+window.date = new Date();
 function isSafari() {
     return /^((?!chrome).)*safari/i.test(navigator.userAgent);
 }
@@ -11195,7 +11207,10 @@ function onWindowResize() {
 
 function animate() {
     requestAnimFrame(animate);
+    var lastTime = window.time;
     window.time = (new Date()).getTime();
+    var delta = window.time - lastTime;
+    if (delta > 100) delta = 100;
     if (loadingState == "prepreload") {
     } else if (loadingState == "loading") {
         var p = (assetsLoaded / window.assetsToLoader.length);//*0.5 + 0.5*(ZSound.loaded / ZSound.total) + 0.07;
@@ -11223,6 +11238,12 @@ function animate() {
         var thisLoop = new Date;
         //  fps = 1000 / (thisLoop - lastLoop);
         lastLoop = thisLoop;
+
+        if (window.date) {
+            var t = window.date.getTime();
+            window.date = new Date(t + delta);
+            console.log(window.date.getTime() / 1000);
+        }
         //  txtFps.setText("FPS: " + parseInt(fps));
     }
     //   applyRatio(stage, SCR_SCALE);
