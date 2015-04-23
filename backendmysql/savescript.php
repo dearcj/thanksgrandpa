@@ -203,7 +203,7 @@ function updateJSON($conn, $table, $data, $userid, $id)
 $sqlclause = implode(",",$sql);
 
 	$wholequery = "UPDATE thanksdad.".$table." SET $sqlclause ".$f;
-	//echo $wholequery;
+	echo $wholequery;
 $statement = $conn->prepare($wholequery);
 
 $statement->execute();
