@@ -36,7 +36,7 @@ $data = array(
 			'xp' => 0,
 			'lvl' => 1,
 			'energy' => 10, 
-			'maxdistance' => 0));
+			'maxdistance' => 0);
 //$id  = '78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D';
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 
