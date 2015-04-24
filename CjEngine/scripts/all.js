@@ -1101,11 +1101,7 @@ GameStage.prototype.openEndWindowLoaded = function () {
         CObj.getById("b" + i.toString()).text = "";
     }
 
-    PlayerData.inst.updateScore(function (r)
-    {
-        PlayerData.inst.playerItem.rank = r.rank;
-        PlayerData.inst.savePlayerData();
-    });
+
     PlayerData.inst.saveRunProgress();
 
    // PlayerData.inst.savePlayerData();
@@ -9831,8 +9827,16 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
         gameStage.progressSaved = true;
         PlayerData.inst.playerItem.money += Math.round(PlayerData.inst.score);
         PlayerData.inst.playerItem.maxdistance = rec;
+
         if (noUpdate == null)
         PlayerData.inst.savePlayerData();
+
+
+        PlayerData.inst.updateScore(function (r)
+        {
+            PlayerData.inst.playerItem.rank = parseInt(r.rank);
+            PlayerData.inst.savePlayerData();
+        });
     }
 }
 
@@ -11176,8 +11180,6 @@ function rescale() {
     renderer.resize(SCR_WIDTH * SCR_SCALE, SCR_HEIGHT * SCR_SCALE);
 
     if (SM.inst.superStage) {
-        //    stage.scale.x = SCR_SCALE;
-        // stage.scale.y = SCR_SCALE;
         SM.inst.superStage.scale.x = SCR_SCALE;
         SM.inst.superStage.scale.y = SCR_SCALE;
     }
