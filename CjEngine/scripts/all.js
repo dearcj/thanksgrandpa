@@ -3095,7 +3095,8 @@ CharStage.prototype.openScore = function () {
         if (PlayerData.inst.playerItem.maxdistance) d = PlayerData.inst.playerItem.maxdistance.toString();
 
         var r = "";
-        if (PlayerData.inst.playerItem.rank) r = PlayerData.inst.playerItem.rank.toString() + ".";
+        if (PlayerData.inst.playerItem.rank)
+            r = PlayerData.inst.playerItem.rank.toString() + ".";
 
         CObj.getById("tplscore").text = d + 'м.';
         CObj.getById("tplace").text = r;
