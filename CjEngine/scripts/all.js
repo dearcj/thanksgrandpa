@@ -11241,7 +11241,7 @@ function animate() {
         if (window.date) {
             var t = window.date.getTime();
             window.date = new Date(t + delta);
-            console.log(window.date.getTime() / 1000);
+            //console.log(window.date.getTime() / 1000);
         }
         //  txtFps.setText("FPS: " + parseInt(fps));
     }
