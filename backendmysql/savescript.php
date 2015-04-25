@@ -56,6 +56,33 @@ function playerFilter($conn, $table, $userid, $id)
 }
 
 
+function updateRunProgress($conn, $data, $userid)
+{
+	$dist = $data['dist']; 
+	$score = $data['score'];
+	$res = readJSON($conn, "tb_players", $userid);
+	$prevdate = $res[0]['lastcheckdate'];
+	$prevdate = $res[0]['lastcheckdate'];
+		$date_curr = date(DateTime::RFC822);
+	if ($prevdate)
+	{
+	
+		$since_start = $prevdate->diff($date_curr);
+		if ($since_start->i < $deltamin)
+		{
+			//ok
+		} else 
+		{
+			return false;
+		}
+	} else 
+	{
+		$res = updateJSON($conn, 'tb_players', array('score'=> $score, 'lastcheckdate' => $date_curr, 'curdist'=>$dist), $userid);
+	}
+}
+
+
+
 function buyItem($conn, $data, $userid)
 {
 	$id = $data['id'];

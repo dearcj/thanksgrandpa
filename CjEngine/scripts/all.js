@@ -4,16 +4,21 @@ var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
 
+function isValidDate(d) {
+    if ( Object.prototype.toString.call(d) !== "[object Date]" )
+        return false;
+    return !isNaN(d.getTime());
+}
+
 function datetime()
 {
-    return window.date;
+    if (window.date)
+    return window.date; else return new Date();
     //return new Date();
 }
 
 
 function ajaxCalltoGetTime() {
-
-
     PlayerData.inst.callDedAPI("GET_DATE", null, null, null, function(r)
     {
         if (!isNaN(new Date(r).getTime()))
@@ -9393,7 +9398,7 @@ PlayerData.prototype.loadEnd = function() {
 PlayerData.prototype.updateEnergy = function(noUpdate)
 {
     if (!this.playerItem) return;
-    if  (isNaN(new Date(this.playerItem.updateDate).getTime()))
+    if  (!isValidDate(sqlToJsDate(this.playerItem.updateDate)))
         this.playerItem.updateDate = sqlDate(datetime());
 
         var d2 = sqlToJsDate(this.playerItem.updateDate);
@@ -9827,7 +9832,6 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
         gameStage.progressSaved = true;
         PlayerData.inst.playerItem.money += Math.round(PlayerData.inst.score);
         PlayerData.inst.playerItem.maxdistance = rec;
-
         if (noUpdate == null)
         PlayerData.inst.savePlayerData();
 
@@ -11240,7 +11244,7 @@ function animate() {
         //  fps = 1000 / (thisLoop - lastLoop);
         lastLoop = thisLoop;
 
-        if (window.date) {
+        if (isValidDate(window.date)) {
             var t = window.date.getTime();
             window.date = new Date(t + delta);
             //console.log(window.date.getTime() / 1000);
