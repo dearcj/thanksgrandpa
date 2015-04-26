@@ -64,7 +64,7 @@ $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZX
 buyItem($pdo, array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' => true), $userid);
 */
 
-$userid = '0B97B8DF-372A-4230-BD08-FCB8E7453BE1';
+$userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
 updateRunProgress($pdo, array('dist' => 400, 'score' => 200), $userid);
 updateRunProgress($pdo, array('dist' => 400, 'score' => 200), $userid);
 /*
