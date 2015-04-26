@@ -67,7 +67,7 @@ function updateRunProgress($conn, $data, $userid)
 	if ($prevdate) $prevdate = new DateTime($prevdate);
 	$curscore = $res[0]['score'];
 	$curdist = $res[0]['curdist'];
-	$date_curr = date(DateTime::RFC822);
+	$date_curr = new DateTime();
 	if ($prevdate)
 	{
 		$since_start = $prevdate->diff($date_curr);
