@@ -64,8 +64,7 @@ $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZX
 buyItem($pdo, array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' => true), $userid);
 */
 
-
-$jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
+$userid = '0B97B8DF-372A-4230-BD08-FCB8E7453BE1';
 updateRunProgress($pdo, array('dist' => 400, 'score' => 200), $userid);
 updateRunProgress($pdo, array('dist' => 400, 'score' => 200), $userid);
 
