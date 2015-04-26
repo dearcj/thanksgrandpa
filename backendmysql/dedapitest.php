@@ -67,7 +67,7 @@ buyItem($pdo, array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' =
 $userid = '0B97B8DF-372A-4230-BD08-FCB8E7453BE1';
 updateRunProgress($pdo, array('dist' => 400, 'score' => 200), $userid);
 updateRunProgress($pdo, array('dist' => 400, 'score' => 200), $userid);
-
+/*
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
 if (!$token) die();
@@ -103,5 +103,5 @@ if ($method == "BUY_ITEM")
 {
 	$res = buyItem($pdo, $data, $userid);
 }
-echo json_encode($res, JSON_UNESCAPED_UNICODE);
+echo json_encode($res, JSON_UNESCAPED_UNICODE);*/
 ?>
