@@ -10617,7 +10617,7 @@ getDedImage = function (ava) {
         oy = 0;
     }
 
-    var bb = CObj.getById("bback");
+    var bb = CObj.getById("photo");
     var ab = CObj.getById("ava");
 
     bb.textField.alpha = 0;
@@ -10625,7 +10625,7 @@ getDedImage = function (ava) {
 
 
     if (ava) {
-        CObj.getById("bback").gfx.visible = false;
+        CObj.getById("photo").gfx.visible = false;
         CObj.getById("ava").gfx.visible = false;
         CObj.getById("bgshopded").gfx.visible = false;
     }
