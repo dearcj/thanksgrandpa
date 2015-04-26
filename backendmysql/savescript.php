@@ -69,6 +69,9 @@ function updateRunProgress($conn, $data, $userid)
 	if ($prevdate)
 	{
 		$since_start = $prevdate->diff($date_curr);
+		echo $since_start;
+		echo $since_start->s;
+		
 		if ($since_start->s < $deltasec)
 		{
 			if (abs($dist - $curdist) < 300 && abs($score - $curscore) < 400 )
