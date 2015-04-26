@@ -77,7 +77,7 @@ function updateRunProgress($conn, $data, $userid)
 			if (abs($dist - $curdist) < 300 && abs($score - $curscore) < 400 )
 			{
 				echo "NEXT SUBMIT";
-				updateJSON($conn, 'tb_players', array('score'=> $curscore, 'lastcheckdate' => $date_curr, 'curdist'=> $curdist), $userid);			
+				updateJSONdebug($conn, 'tb_players', array('score'=> $curscore, 'lastcheckdate' => $date_curr, 'curdist'=> $curdist), $userid);			
 			}
 			//ok
 		} else 
@@ -88,7 +88,7 @@ function updateRunProgress($conn, $data, $userid)
 	} else 
 	{
 		echo "FIRST SUBMIT";
-		$res = updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_curr, 'curdist'=>0), $userid);
+		$res = updateJSONdebug($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_curr, 'curdist'=>0), $userid);
 	}
 }
 
@@ -226,6 +226,28 @@ $res = $statement->execute();
 
 $statement = null;
 return $res;
+}
+
+
+function updateJSONdebug($conn, $table, $data, $userid, $id)
+{
+	$obj = $data;
+	
+	foreach($obj as $key => $value){
+		if ($value == '') continue;
+		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
+	}
+	
+	$f = playerFilter($conn, $table, $userid, $id);
+$sqlclause = implode(",",$sql);
+
+	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
+	echo $wholequery;
+$statement = $conn->prepare($wholequery);
+
+$statement->execute();
+$statement = null;
+return true;
 }
 
 function updateJSON($conn, $table, $data, $userid, $id)
