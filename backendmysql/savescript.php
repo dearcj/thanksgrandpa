@@ -68,7 +68,7 @@ function finalizeScore($conn, $data, $userid)
 	$curmoney = $res[0]['money'];
 	$prevdist = $res[0]['maxdistance'];
 	$curdist = $res[0]['curdist'];
-	$money = (int)$curmoney + (int)$curscore;
+	$money = (float)$curmoney + (float)$curscore;
 	if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 	{
 		echo "SCORE FINALIZE OK";
