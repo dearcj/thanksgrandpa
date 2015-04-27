@@ -65,20 +65,17 @@ function updateRunProgress($conn, $data, $userid)
 	$prevdate = $res[0]['lastcheckdate'];
 	if ($prevdate) 
 	{
-		$phpdate = strtotime( $prevdate );
-		$mysqldate = date( 'Y-m-d H:i:s', $phpdate );
-		var_dump($mysqldate);
+		$prevdatetime = strtotime( $prevdate );
+		$prevdate = date( 'Y-m-d H:i:s', $prevdatetime );
 	}
 	$curscore = $res[0]['score'];
 	$curdist = $res[0]['curdist'];
-	$date_curr = new DateTime();
+
 	$date_currstr = date(DateTime::RFC822);
 	if ($prevdate)
 	{
-		echo 'DATE CURR TST '.$date_curr->getTimestamp();
-		echo 'PREV DATE TST '.$prevdate->getTimestamp();
 		
-		$since_start = $date_curr->getTimestamp() - $prevdate->getTimestamp();
+		$since_start = strtotime($date_curr) - $prevdatetime;
 		echo $since_start;
 		
 		if ($since_start > $deltasec)
