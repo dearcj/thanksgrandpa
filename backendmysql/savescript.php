@@ -116,7 +116,7 @@ function updateRunProgress($conn, $data, $userid)
 	} else 
 	{
 		echo "FIRST SUBMIT";
-		$res = updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_currstr, 'curdist'=>0), $userid);
+		updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_currstr, 'curdist'=>0), $userid);
 	}
 }
 
@@ -276,7 +276,7 @@ function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 $sqlclause = implode(",",$sql);
 
 	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
-//	echo $wholequery;
+	echo $wholequery;
 $statement = $conn->prepare($wholequery);
 
 $statement->execute();
