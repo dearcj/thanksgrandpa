@@ -76,9 +76,9 @@ function updateRunProgress($conn, $data, $userid)
 	echo "NOW ".$date_currstr;
 	if ($prevdate)
 	{
-		echo 'DATE CURR TIME'.strtotime($date_curr);
+		echo 'DATE CURR TIME'.strtotime($date_currstr);
 		echo 'PREV DATE TIME'.$prevdatetime;
-		$since_start = strtotime($date_curr) - $prevdatetime;
+		$since_start = strtotime($date_currstr) - $prevdatetime;
 		echo $since_start;
 		
 		if ($since_start > $deltasec)
