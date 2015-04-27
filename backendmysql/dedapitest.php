@@ -66,7 +66,17 @@ buyItem($pdo, array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' =
 
 $userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
 updateRunProgress($pdo, array('dist' => 0, 'score' => 0), $userid);
-
+slip(15);
+updateRunProgress($pdo, array('dist' => 10, 'score' => 10), $userid);
+slip(15);
+updateRunProgress($pdo, array('dist' => 20, 'score' => 20), $userid);
+slip(15);
+updateRunProgress($pdo, array('dist' => 30, 'score' => 30), $userid);
+slip(15);
+updateRunProgress($pdo, array('dist' => 40, 'score' => 40), $userid);
+slip(15);
+updateRunProgress($pdo, array('dist' => 50, 'score' => 50), $userid);
+slip(15);
 
 /*
 if (!$jwtToken) die();

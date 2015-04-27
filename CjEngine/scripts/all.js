@@ -8992,11 +8992,6 @@ PlayerData = function()
 
    PlayerData.inst = this;
 
-
-   //PlayerData.inst.azureLogin();
-
-    console.log("dbInit start. Connecting to azure");
-
     //window.azureclient = new WindowsAzure.MobileServiceClient("https://thanksdad.azure-mobile.net/", "DRoaNHnoaCjxrhkbpOzHxGEHOFgGLS75" );
     window.vkparams = {};
     vkparams.sid = getURLParameter("sid");
@@ -9012,9 +9007,9 @@ PlayerData = function()
         vkparams.novk = true;
     }
 
-    /*if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+    if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
         vkparams.viewerid != "197515742") return;
-*/
+
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");

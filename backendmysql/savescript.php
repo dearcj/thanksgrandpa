@@ -56,9 +56,29 @@ function playerFilter($conn, $table, $userid, $id)
 }
 
 
+function finalizeScore($conn, $data, $userid)
+{
+	$dist = $data['dist']; 
+	$score = $data['score'];
+	$res = readJSON($conn, "tb_players", $userid);
+	$prevdate = $res[0]['lastcheckdate'];
+	$curscore = $res[0]['score'];
+	$curmoney = $res[0]['money'];
+	$prevdist = $res[0]['maxdistance'];
+	$curdist = $res[0]['curdist'];
+	if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
+	{
+		$md = $dist;
+		if ($prevdist > $md) $md = $prevdist;
+			updateJSONdebug($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => null, 'curdist'=> 0, 'money'=> $curmoney + $curscore, 'maxdistance'=>$md), $userid);					
+	}
+}
+
 function updateRunProgress($conn, $data, $userid)
 {
 	$deltasec = 15;
+	$deltadist = 300;
+	$deltascore = 400;
 	$dist = $data['dist']; 
 	$score = $data['score'];
 	$res = readJSON($conn, "tb_players", $userid);
@@ -83,16 +103,14 @@ function updateRunProgress($conn, $data, $userid)
 		
 		if ($since_start > $deltasec)
 		{
-			if (abs($dist - $curdist) < 300 && abs($score - $curscore) < 400 )
+			if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 			{
 				echo "NEXT SUBMIT";
 				updateJSONdebug($conn, 'tb_players', array('score'=> $curscore, 'lastcheckdate' => $date_currstr, 'curdist'=> $curdist), $userid);			
 			}
-			//ok
 		} else 
 		{
 			echo "TOO FREQUENTLY";
-			//return false;
 		}
 	} else 
 	{
