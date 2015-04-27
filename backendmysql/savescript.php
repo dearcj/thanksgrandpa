@@ -77,7 +77,7 @@ function updateRunProgress($conn, $data, $userid)
 	if ($prevdate)
 	{
 		echo 'DATE CURR TIME'.strtotime($date_curr);
-		echo 'PREV DATE TIME'$prevdatetime;
+		echo 'PREV DATE TIME'.$prevdatetime;
 		$since_start = strtotime($date_curr) - $prevdatetime;
 		echo $since_start;
 		
