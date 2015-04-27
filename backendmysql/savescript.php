@@ -71,11 +71,10 @@ function updateRunProgress($conn, $data, $userid)
 	$date_currstr = date(DateTime::RFC822);
 	if ($prevdate)
 	{
-		$since_start = $prevdate->diff($date_curr);
-		var_dump($since_start);
-		echo $since_start->s;
+		$since_start = $date_curr->getTimestamp() - $prevdate->getTimestamp();
+		echo $since_start;
 		
-		if ($since_start->s > $deltasec)
+		if ($since_start > $deltasec)
 		{
 			if (abs($dist - $curdist) < 300 && abs($score - $curscore) < 400 )
 			{
