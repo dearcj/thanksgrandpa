@@ -118,7 +118,7 @@ function updateRunProgress($conn, $data, $userid)
 			if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 			{
 				echo "NEXT SUBMIT";
-				updateJSON($conn, 'tb_players', array('score'=> (string)$curscore, 'lastcheckdate' => $date_currstr, 'curdist'=> (string)$curdist), $userid);			
+				updateJSON($conn, 'tb_players', array('score'=> (string)$score, 'lastcheckdate' => $date_currstr, 'curdist'=> (string)$dist), $userid);			
 			}
 		} else 
 		{
