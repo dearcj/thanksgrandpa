@@ -58,6 +58,8 @@ function playerFilter($conn, $table, $userid, $id)
 
 function finalizeScore($conn, $data, $userid)
 {
+	$deltadist = 300;
+	$deltascore = 400;
 	$dist = $data['dist']; 
 	$score = $data['score'];
 	$res = readJSON($conn, "tb_players", $userid);
