@@ -73,7 +73,7 @@ function finalizeScore($conn, $data, $userid)
 		echo "SCORE FINALIZE OK";
 		$md = $dist;
 		if ($prevdist > $md) $md = $prevdist;
-		updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => null, 'curdist'=> 0, 'money'=> $curmoney + $curscore, 'maxdistance'=>$md), $userid);					
+		updateJSON($conn, 'tb_players', array('score'=> '0', 'lastcheckdate' => null, 'curdist'=> '0', 'money'=> $curmoney + $curscore, 'maxdistance'=>$md), $userid);					
 	} else echo "CAN'T FINALIZE SCORE";
 }
 
@@ -118,7 +118,7 @@ function updateRunProgress($conn, $data, $userid)
 			if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 			{
 				echo "NEXT SUBMIT";
-				updateJSON($conn, 'tb_players', array('score'=> $curscore, 'lastcheckdate' => $date_currstr, 'curdist'=> $curdist), $userid);			
+				updateJSON($conn, 'tb_players', array('score'=> (string)$curscore, 'lastcheckdate' => $date_currstr, 'curdist'=> (string)$curdist), $userid);			
 			}
 		} else 
 		{

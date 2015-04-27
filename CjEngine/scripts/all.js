@@ -6622,7 +6622,7 @@ Boss2.prototype.fire = function()
         ];
     this.carClips = ["car","car1","car2"];
 
-    this.bosses = [{cls: Boss1, dist: 5}, {cls: Boss2, dist: 2000}];
+    this.bosses = [{cls: Boss1, dist: 1000}, {cls: Boss2, dist: 2000}];
     // c l z - преграды
     //s - монстр
     this.monY = 360;
