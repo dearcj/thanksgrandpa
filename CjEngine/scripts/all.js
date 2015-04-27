@@ -791,6 +791,7 @@ GameStage.prototype.mobileTouchEnd = function(e)
 
 GameStage.prototype.onHide = function (newStage) {
 
+    if  (gameStage.ari)
     gameStage.ari.kill();
     //clearInterval(gameStage.ari);
     gameStage.menuBtn = null;
@@ -1588,6 +1589,7 @@ GameStage.prototype.makePause = function () {
 
     CObj.getById("blevs").click = function () {
         removePause();
+        PlayerData.inst.saveRunProgress();
         SM.inst.openStage(charStage);
     }
 }
@@ -2551,7 +2553,7 @@ extend(CharStage, CustomStage);
 
 CharStage.prototype.onShow = function () {
     if (localStorage["sound_state"] == "false")
-    ZSound.available = false;
+    ZSound.Mute();
 
 
 
@@ -9887,6 +9889,11 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
         var rec = Math.round(PlayerData.inst.playerItem.maxdistance);
         if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance) {
             rec = Math.round(LauncherBG.inst.distance);
+
+            PlayerData.inst.updateScore(function (r)
+            {
+                PlayerData.inst.playerItem.rank = parseInt(r.rank);
+            });
         }
         gameStage.progressSaved = true;
         PlayerData.inst.playerItem.money += Math.round(PlayerData.inst.score);
@@ -9896,13 +9903,11 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
         PlayerData.inst.savePlayerData();
         */
 
+        if (gameStage.ari) {gameStage.ari.kill();
+            gameStage.ari = null;}
         PlayerData.inst.saveScore();
 
-        PlayerData.inst.updateScore(function (r)
-        {
-            PlayerData.inst.playerItem.rank = parseInt(r.rank);
-        //    PlayerData.inst.savePlayerData();
-        });
+
     }
 }
 
