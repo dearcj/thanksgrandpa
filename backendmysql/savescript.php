@@ -80,7 +80,7 @@ function finalizeScore($conn, $data, $userid)
 function resetRunProgress($conn, $data, $userid)
 {
 	$date_currstr = date('Y-m-d H:i:s');
-	updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_currstr, 'curdist'=>0), $userid);
+	updateJSON($conn, 'tb_players', array('score'=> "0", 'lastcheckdate' => $date_currstr, 'curdist'=>'0'), $userid);
 }
 
 

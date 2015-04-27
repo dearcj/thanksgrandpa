@@ -5,11 +5,8 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;&#10;a">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/dedapi.php" afterPath="$PROJECT_DIR$/backendmysql/dedapi.php" />
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/savescript.php" afterPath="$PROJECT_DIR$/backendmysql/savescript.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -614,12 +611,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01179" summary="&#10;&#10;a">
-      <created>1429796706900</created>
-      <option name="number" value="01179" />
-      <option name="project" value="LOCAL" />
-      <updated>1429796706900</updated>
-    </task>
     <task id="LOCAL-01180" summary="&#10;&#10;a">
       <created>1429816059182</created>
       <option name="number" value="01180" />
@@ -908,7 +899,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430173562827</updated>
     </task>
-    <option name="localTasksCounter" value="1228" />
+    <task id="LOCAL-01228" summary="&#10;&#10;a">
+      <created>1430174303131</created>
+      <option name="number" value="01228" />
+      <option name="project" value="LOCAL" />
+      <updated>1430174303131</updated>
+    </task>
+    <option name="localTasksCounter" value="1229" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
