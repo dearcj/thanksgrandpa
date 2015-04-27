@@ -1334,10 +1334,10 @@ GameStage.prototype.onShow = function () {
 
     LevelManager.loadLevel("hud", gameStage.onShowContinue, SM.inst.guiLayer);
 
-    gameStage.ari = TweenMax.delayedCall(15,
-        function (){
+    var tweenVar = 0;
+    gameStage.ari = new TweenMax(tweenVar, 1, {repeat: -1, yoyo: false, onRepeat: function (){
         PlayerData.inst.azureReadData();
-    },{repeat: -1});
+    }});
 }
 
 GameStage.prototype.fdown = function (md) {
