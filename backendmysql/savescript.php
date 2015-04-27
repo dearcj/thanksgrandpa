@@ -68,12 +68,13 @@ function finalizeScore($conn, $data, $userid)
 	$curmoney = $res[0]['money'];
 	$prevdist = $res[0]['maxdistance'];
 	$curdist = $res[0]['curdist'];
+	$money = (int)$curmoney + (int)$curscore;
 	if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 	{
 		echo "SCORE FINALIZE OK";
 		$md = $dist;
-		if ($prevdist > $md) $md = $prevdist;
-		updateJSON($conn, 'tb_players', array('score'=> '0', 'lastcheckdate' => null, 'curdist'=> '0', 'money'=> $curmoney + $curscore, 'maxdistance'=>$md), $userid);					
+		if ((float)$prevdist > (float)$md) $md = $prevdist;
+		updateJSON($conn, 'tb_players', array('score'=> '0', 'lastcheckdate' => null, 'curdist'=> '0', 'money'=> (string)$money, 'maxdistance'=>$md), $userid);					
 	} else echo "CAN'T FINALIZE SCORE";
 }
 
