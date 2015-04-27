@@ -70,7 +70,7 @@ function finalizeScore($conn, $data, $userid)
 	{
 		$md = $dist;
 		if ($prevdist > $md) $md = $prevdist;
-			updateJSONdebug($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => null, 'curdist'=> 0, 'money'=> $curmoney + $curscore, 'maxdistance'=>$md), $userid);					
+			updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => null, 'curdist'=> 0, 'money'=> $curmoney + $curscore, 'maxdistance'=>$md), $userid);					
 	}
 }
 
@@ -106,7 +106,7 @@ function updateRunProgress($conn, $data, $userid)
 			if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 			{
 				echo "NEXT SUBMIT";
-				updateJSONdebug($conn, 'tb_players', array('score'=> $curscore, 'lastcheckdate' => $date_currstr, 'curdist'=> $curdist), $userid);			
+				updateJSON($conn, 'tb_players', array('score'=> $curscore, 'lastcheckdate' => $date_currstr, 'curdist'=> $curdist), $userid);			
 			}
 		} else 
 		{
@@ -115,7 +115,7 @@ function updateRunProgress($conn, $data, $userid)
 	} else 
 	{
 		echo "FIRST SUBMIT";
-		$res = updateJSONdebug($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_currstr, 'curdist'=>0), $userid);
+		$res = updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_currstr, 'curdist'=>0), $userid);
 	}
 }
 
@@ -256,32 +256,14 @@ return $res;
 }
 
 
-function updateJSONdebug($conn, $table, $data, $userid, $id)
-{
-	$obj = $data;
-	
-	foreach($obj as $key => $value){
-		if ($value == '') continue;
-		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
-	}
-	
-	$f = playerFilter($conn, $table, $userid, $id);
-$sqlclause = implode(",",$sql);
-
-	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
-	echo $wholequery;
-$statement = $conn->prepare($wholequery);
-
-$statement->execute();
-$statement = null;
-return true;
-}
 
 function updateJSON($conn, $table, $data, $userid, $id)
 {
 	$obj = $data;
 	
 	foreach($obj as $key => $value){
+		if ($key == "score") continue;
+		if ($key == "maxdistance") continue;
 		if ($value == '') continue;
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
 	}

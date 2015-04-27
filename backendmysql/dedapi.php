@@ -84,6 +84,15 @@ if ($method == "BUY_ITEM")
 if ($method == "GET_DATE")
 {
 	echo date(DateTime::RFC822);
-}
+} else 
+if ($method == "AZURE_READ_DATA")
+{
+	updateRunProgress($pdo, $data, $userid);
+} else 
+if ($method == "FINALIZE_DATA")
+{
+	finalizeScore($pdo, $data, $userid);
+} 
+	
 echo json_encode($res, JSON_UNESCAPED_UNICODE);
 ?>
