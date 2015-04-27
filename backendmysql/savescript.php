@@ -71,6 +71,9 @@ function updateRunProgress($conn, $data, $userid)
 	$date_currstr = date(DateTime::RFC822);
 	if ($prevdate)
 	{
+		echo 'DATE CURR TST '.$date_curr->getTimestamp();
+		echo 'PREV DATE TST '.$prevdate->getTimestamp();
+		
 		$since_start = $date_curr->getTimestamp() - $prevdate->getTimestamp();
 		echo $since_start;
 		
