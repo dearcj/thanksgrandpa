@@ -51,7 +51,7 @@ setcookie("LOGIN_DATA", $str);
 
 
 <!--<script src="CjEngine/scripts/obf/all.min.js"></script>-->
-<script src="CjEngine/scripts/obf/all.min.js"></script>
+<script src="CjEngine/scripts/all.min.js"></script>
 
 
 <!--

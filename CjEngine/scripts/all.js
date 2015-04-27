@@ -2534,6 +2534,11 @@ ComixStage.prototype.process = function () {
 extend(CharStage, CustomStage);
 
 CharStage.prototype.onShow = function () {
+    if (localStorage["sound_state"] == false)
+    ZSound.available = false;
+
+
+
     incMetric("GAME LOADED");
     this.unreadAch = false;
     this.unreadActions = false;
@@ -2773,6 +2778,8 @@ CharStage.prototype.updateMusicButton = function (btn) {
     } else {
         btn.gfx.gotoAndStop(1);
     }
+
+    localStorage["sound_state"] = ZSound.available;
 
     btn.click = function () {
         if (ZSound.available) {
@@ -9110,6 +9117,23 @@ PlayerData.prototype.getType = function (item_player)
    return null;
 }
 
+PlayerData.prototype.azureReadData = function()
+{
+    PlayerData.inst.callDedAPI("AZURE_READ_DATA", null, null, {score: PlayerData.inst.score, dist: LauncherBG.inst.distance}, function(c)
+    {
+
+    });
+}
+
+PlayerData.prototype.saveScore = function()
+{
+    PlayerData.inst.callDedAPI("SAVE_SCORE", null, null, {score: PlayerData.inst.score, dist: LauncherBG.inst.distance}, function(c)
+    {
+
+    });
+}
+
+
 
 PlayerData.prototype.getUpgrade = function(item, itemName)
 {
@@ -9470,7 +9494,7 @@ PlayerData.prototype.getEventById = function(id)
 
 PlayerData.prototype.updateScore = function(cb)
 {
-    PlayerData.inst.callDedAPI("UPDATE_SCORE", null, null, PlayerData.inst.playerItem.maxdistance, cb);
+    PlayerData.inst.callDedAPI("UPDATE_SCORE", null, null, null, cb);
     /*azureclient.invokeApi("update_score", {
         body: {id_player: PlayerData.inst.playerItem.id, score: PlayerData.inst.playerItem.maxdistance},
         method: "post"
