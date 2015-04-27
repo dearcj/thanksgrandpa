@@ -63,9 +63,12 @@ function updateRunProgress($conn, $data, $userid)
 	$score = $data['score'];
 	$res = readJSON($conn, "tb_players", $userid);
 	$prevdate = $res[0]['lastcheckdate'];
-	var_dump($prevdate);
-	echo $prevdate;
-	if ($prevdate) $prevdate = new DateTime($prevdate);
+	if ($prevdate) 
+	{
+		$phpdate = strtotime( $prevdate );
+		$mysqldate = date( 'Y-m-d H:i:s', $phpdate );
+		var_dump($mysqldate);
+	}
 	$curscore = $res[0]['score'];
 	$curdist = $res[0]['curdist'];
 	$date_curr = new DateTime();
