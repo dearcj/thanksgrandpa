@@ -1335,9 +1335,7 @@ GameStage.prototype.onShow = function () {
     LevelManager.loadLevel("hud", gameStage.onShowContinue, SM.inst.guiLayer);
 
     var tweenVar = 0;
-    gameStage.ari = new TweenMax(tweenVar, 14, {repeat: -1, onRepeat: function (){
-        PlayerData.inst.azureReadData();
-    }});
+    gameStage.ari = TweenMax.to(tweenVar, 14, {yoyo: false, repeat: -1, onRepeat: PlayerData.inst.azureReadData});
 }
 
 GameStage.prototype.fdown = function (md) {
