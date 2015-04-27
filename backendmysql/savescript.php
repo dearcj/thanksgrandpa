@@ -257,13 +257,12 @@ return $res;
 
 
 
-function updateJSON($conn, $table, $data, $userid, $id)
+function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 {
 	$obj = $data;
 	
 	foreach($obj as $key => $value){
-		if ($key == "score") continue;
-		if ($key == "maxdistance") continue;
+		if ($bannedColumns && in_array($key, $bannedColumns)) continue;
 		if ($value == '') continue;
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
 	}

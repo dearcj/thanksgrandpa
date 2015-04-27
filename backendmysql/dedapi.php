@@ -63,7 +63,7 @@ if ($method == "READ")
 } else 
 if ($method == "UPDATE")
 {
-	$res = updateJSON($pdo, $table, $data, $userid, $id);
+	$res = updateJSON($pdo, $table, $data, $userid, $id, array("maxdistance", "score", "curdist", "lastcheckdate"));
 } 
  else 
 if ($method == "UPDATE_SCORE")
