@@ -6,7 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/savescript.php" afterPath="$PROJECT_DIR$/backendmysql/savescript.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/obf/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/obf/all.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -611,12 +613,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01189" summary="&#10;&#10;a">
-      <created>1430079964048</created>
-      <option name="number" value="01189" />
-      <option name="project" value="LOCAL" />
-      <updated>1430079964048</updated>
-    </task>
     <task id="LOCAL-01190" summary="&#10;&#10;a">
       <created>1430080353923</created>
       <option name="number" value="01190" />
@@ -905,7 +901,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430178208253</updated>
     </task>
-    <option name="localTasksCounter" value="1238" />
+    <task id="LOCAL-01238" summary="&#10;&#10;a">
+      <created>1430178431804</created>
+      <option name="number" value="01238" />
+      <option name="project" value="LOCAL" />
+      <updated>1430178431804</updated>
+    </task>
+    <option name="localTasksCounter" value="1239" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
