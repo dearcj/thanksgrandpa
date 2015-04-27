@@ -5,10 +5,8 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;&#10;a">
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -613,12 +611,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01167" summary="&#10;&#10;a">
-      <created>1429780863318</created>
-      <option name="number" value="01167" />
-      <option name="project" value="LOCAL" />
-      <updated>1429780863318</updated>
-    </task>
     <task id="LOCAL-01168" summary="&#10;&#10;a">
       <created>1429783388533</created>
       <option name="number" value="01168" />
@@ -907,7 +899,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430169165703</updated>
     </task>
-    <option name="localTasksCounter" value="1216" />
+    <task id="LOCAL-01216" summary="&#10;&#10;a">
+      <created>1430169300179</created>
+      <option name="number" value="01216" />
+      <option name="project" value="LOCAL" />
+      <updated>1430169300179</updated>
+    </task>
+    <option name="localTasksCounter" value="1217" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
