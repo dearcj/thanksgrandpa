@@ -66,12 +66,8 @@ buyItem($pdo, array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' =
 
 $userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
 updateRunProgress($pdo, array('dist' => 0, 'score' => 0), $userid);
-sleep(15);
-updateRunProgress($pdo, array('dist' => 250, 'score' => 10), $userid);
-sleep(15);
-updateRunProgress($pdo, array('dist' => 270, 'score' => 40), $userid);
-sleep(15);
-updateRunProgress($pdo, array('dist' => 300, 'score' => 50), $userid);
+
+
 /*
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
