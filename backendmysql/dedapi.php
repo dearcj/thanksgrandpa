@@ -87,11 +87,11 @@ if ($method == "GET_DATE")
 } else 
 if ($method == "AZURE_READ_DATA")
 {
-	updateRunProgress($pdo, $data, $userid);
+	$res = updateRunProgress($pdo, $data, $userid);
 } else 
 if ($method == "SAVE_SCORE")
 {
-	finalizeScore($pdo, $data, $userid);
+	$res = finalizeScore($pdo, $data, $userid);
 } 
 	
 echo json_encode($res, JSON_UNESCAPED_UNICODE);

@@ -780,7 +780,7 @@ GameStage.prototype.mobileTouchEnd = function(e)
 
 GameStage.prototype.onHide = function (newStage) {
 
-    PlayerData.inst.saveRunProgress();
+    clearInterval(gameStage.ari);
     gameStage.menuBtn = null;
     gameStage.player = null;
     gameStage.barXP = null;
@@ -1332,6 +1332,10 @@ GameStage.prototype.onShow = function () {
     MM.inst.init();
 
     LevelManager.loadLevel("hud", gameStage.onShowContinue, SM.inst.guiLayer);
+
+    gameStage.ari = setInterval(function (){
+        PlayerData.inst.azureReadData();
+    }, 15000);
 }
 
 GameStage.prototype.fdown = function (md) {
@@ -2779,12 +2783,12 @@ CharStage.prototype.updateMusicButton = function (btn) {
         btn.gfx.gotoAndStop(1);
     }
 
-    localStorage["sound_state"] = ZSound.available;
-
     btn.click = function () {
         if (ZSound.available) {
             ZSound.Mute();
         } else ZSound.UnMute();
+
+        localStorage["sound_state"] = ZSound.available;
 
         if (ZSound.available) {
             btn.gfx.gotoAndStop(0);
@@ -9121,7 +9125,7 @@ PlayerData.prototype.azureReadData = function()
 {
     PlayerData.inst.callDedAPI("AZURE_READ_DATA", null, null, {score: PlayerData.inst.score, dist: LauncherBG.inst.distance}, function(c)
     {
-
+        console.log(c);
     });
 }
 
@@ -9129,7 +9133,7 @@ PlayerData.prototype.saveScore = function()
 {
     PlayerData.inst.callDedAPI("SAVE_SCORE", null, null, {score: PlayerData.inst.score, dist: LauncherBG.inst.distance}, function(c)
     {
-
+        console.log(c);
     });
 }
 
@@ -9851,14 +9855,17 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
         gameStage.progressSaved = true;
         PlayerData.inst.playerItem.money += Math.round(PlayerData.inst.score);
         PlayerData.inst.playerItem.maxdistance = rec;
+        /*
         if (noUpdate == null)
         PlayerData.inst.savePlayerData();
+        */
 
+        PlayerData.inst.saveScore();
 
         PlayerData.inst.updateScore(function (r)
         {
             PlayerData.inst.playerItem.rank = parseInt(r.rank);
-            PlayerData.inst.savePlayerData();
+        //    PlayerData.inst.savePlayerData();
         });
     }
 }
