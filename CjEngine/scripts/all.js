@@ -780,7 +780,8 @@ GameStage.prototype.mobileTouchEnd = function(e)
 
 GameStage.prototype.onHide = function (newStage) {
 
-    clearInterval(gameStage.ari);
+    gameStage.ari.kill();
+    //clearInterval(gameStage.ari);
     gameStage.menuBtn = null;
     gameStage.player = null;
     gameStage.barXP = null;
@@ -1333,9 +1334,10 @@ GameStage.prototype.onShow = function () {
 
     LevelManager.loadLevel("hud", gameStage.onShowContinue, SM.inst.guiLayer);
 
-    gameStage.ari = setInterval(function (){
+    gameStage.ari = TweenMax.delayedCall(15,
+        function (){
         PlayerData.inst.azureReadData();
-    }, 15000);
+    },{repeat: -1});
 }
 
 GameStage.prototype.fdown = function (md) {
@@ -2538,7 +2540,7 @@ ComixStage.prototype.process = function () {
 extend(CharStage, CustomStage);
 
 CharStage.prototype.onShow = function () {
-    if (localStorage["sound_state"] == false)
+    if (localStorage["sound_state"] == "false")
     ZSound.available = false;
 
 

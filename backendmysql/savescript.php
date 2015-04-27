@@ -77,7 +77,7 @@ function finalizeScore($conn, $data, $userid)
 
 function updateRunProgress($conn, $data, $userid)
 {
-	$deltasec = 15;
+	$deltasec = 12;
 	$deltadist = 300;
 	$deltascore = 400;
 	$dist = $data['dist']; 
