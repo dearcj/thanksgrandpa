@@ -70,7 +70,7 @@ function finalizeScore($conn, $data, $userid)
 	{
 		$md = $dist;
 		if ($prevdist > $md) $md = $prevdist;
-			updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => null, 'curdist'=> 0, 'money'=> $curmoney + $curscore, 'maxdistance'=>$md), $userid);					
+		updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => null, 'curdist'=> 0, 'money'=> $curmoney + $curscore, 'maxdistance'=>$md), $userid);					
 	}
 }
 
@@ -220,6 +220,12 @@ function getScores($conn, $data, $userid)
 
 function updateScore($conn, $curdist, $userid)
 {
+	$wholequery = "SELECT maxdistance FROM thanksdad.tb_players WHERE id =  ".$conn->quote($userid);
+	$statement = $conn->prepare($wholequery);
+	$statement->execute();
+	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+	$curdist = $result[0]['maxdistance'];
+	
 	$wholequery = "SELECT COUNT(*) as total FROM thanksdad.tb_players WHERE maxdistance > ".$curdist;
 	//echo $wholequery;
 	$statement = $conn->prepare($wholequery);

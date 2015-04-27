@@ -89,7 +89,7 @@ if ($method == "AZURE_READ_DATA")
 {
 	updateRunProgress($pdo, $data, $userid);
 } else 
-if ($method == "FINALIZE_DATA")
+if ($method == "SAVE_SCORE")
 {
 	finalizeScore($pdo, $data, $userid);
 } 
