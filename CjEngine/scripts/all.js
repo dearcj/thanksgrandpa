@@ -4,6 +4,17 @@ var CG_PLAYER = 4;
 var CG_BULLET = 8;
 
 
+checkLineCircle = function (x3, y3, xx,yy, x2,y2, sqrad)
+{
+    var k = ((y2-yy) * (x3-xx) - (x2-xx) * (y3-yy)) / ((y2-yy)*(y2-yy) + (x2-xx)*(x2-xx));
+    var x4 = x3 - k * (y2-yy);
+    var y4 = y3 + k * (x2-xx);
+    var dxx = x3 - x4;
+    var dyy = y3 - y4;
+    if (dxx*dxx + dyy*dyy < sqrad)
+        return true; else return false;
+}
+
 function isValidDate(d) {
     if ( Object.prototype.toString.call(d) !== "[object Date]" )
         return false;
@@ -6610,7 +6621,7 @@ Boss2.prototype.fire = function()
         ];
     this.carClips = ["car","car1","car2"];
 
-    this.bosses = [{cls: Boss1, dist: 1000}, {cls: Boss2, dist: 2000}];
+    this.bosses = [{cls: Boss1, dist: 5}, {cls: Boss2, dist: 2000}];
     // c l z - преграды
     //s - монстр
     this.monY = 360;
@@ -8222,20 +8233,33 @@ CLaser.prototype.process = function()
         var y2 = yy + vy*10000;
         var x2 = xx + vx*10000;
 
+
+
         if (CMonster.list)
         for (var i = 0; i < CMonster.list.length; ++i)
         {
-            var x3 = CMonster.list[i].x;
-            var y3 = CMonster.list[i].y;
-            var k = ((y2-yy) * (x3-xx) - (x2-xx) * (y3-yy)) / ((y2-yy)*(y2-yy) + (x2-xx)*(x2-xx));
-            var x4 = x3 - k * (y2-yy);
-            var y4 = y3 + k * (x2-xx);
-            var dxx = x3 - x4;
-            var dyy = y3 - y4;
-            if (dxx*dxx + dyy*dyy < CMonster.list[i]._sqr)
+            var deal = false;
+            if (CMonster.list[i].hitTestCircles)
             {
-                CMonster.list[i].dealDamage(this.damage / 60);
+                for (var j =0; j<CMonster.list[i].hitTestCircles.length; ++j)
+                {
+                    var circ = CMonster.list[i].hitTestCircles[j];
+                    if (checkLineCircle(circ.x, circ.y, xx,yy, x2,y2, circ.r*circ.r))
+                    {
+                        deal = true;
+                    }
+                }
             }
+
+
+            if (checkLineCircle(CMonster.list[i].x, CMonster.list[i].y, xx,yy, x2,y2, CMonster.list[i]._sqr))
+            {
+                deal = true;
+            }
+
+            if (deal)
+                CMonster.list[i].dealDamage(this.damage / 60);
+
         }
 
         //COLLISION WITH CIRCLES
