@@ -8244,7 +8244,7 @@ CLaser.prototype.process = function()
                 for (var j =0; j<CMonster.list[i].hitTestCircles.length; ++j)
                 {
                     var circ = CMonster.list[i].hitTestCircles[j];
-                    if (checkLineCircle(circ.x, circ.y, xx,yy, x2,y2, circ.r*circ.r))
+                    if (checkLineCircle(CMonster.list[i].x + circ.x, CMonster.list[i].y + circ.y, xx,yy, x2,y2, circ.r*circ.r))
                     {
                         deal = true;
                     }

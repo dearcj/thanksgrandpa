@@ -5,8 +5,9 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+    <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="&#10;&#10;a">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -132,8 +133,8 @@
       <file leaf-file-name="CLaser.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CLaser.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6515487" vertical-offset="1501" max-vertical-offset="6802">
-              <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.5544332" vertical-offset="1729" max-vertical-offset="6802">
+              <caret line="117" column="90" selection-start-line="117" selection-start-column="90" selection-end-line="117" selection-end-column="90" />
               <folding />
             </state>
           </provider>
@@ -611,12 +612,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01176" summary="&#10;&#10;a">
-      <created>1429795177252</created>
-      <option name="number" value="01176" />
-      <option name="project" value="LOCAL" />
-      <updated>1429795177253</updated>
-    </task>
     <task id="LOCAL-01177" summary="&#10;&#10;a">
       <created>1429795961326</created>
       <option name="number" value="01177" />
@@ -905,7 +900,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430172376646</updated>
     </task>
-    <option name="localTasksCounter" value="1225" />
+    <task id="LOCAL-01225" summary="&#10;&#10;a">
+      <created>1430173230312</created>
+      <option name="number" value="01225" />
+      <option name="project" value="LOCAL" />
+      <updated>1430173230312</updated>
+    </task>
+    <option name="localTasksCounter" value="1226" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1398,8 +1399,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Weapons/CLaser.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6515487" vertical-offset="1501" max-vertical-offset="6802">
-          <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.5544332" vertical-offset="1729" max-vertical-offset="6802">
+          <caret line="117" column="90" selection-start-line="117" selection-start-column="90" selection-end-line="117" selection-end-column="90" />
           <folding />
         </state>
       </provider>
