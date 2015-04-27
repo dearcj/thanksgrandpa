@@ -9045,9 +9045,9 @@ PlayerData = function()
         vkparams.novk = true;
     }
 
-    if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+   /* if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
         vkparams.viewerid != "197515742") return;
-
+*/
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
@@ -9161,15 +9161,15 @@ PlayerData.prototype.resetRP = function()
 
 PlayerData.prototype.azureReadData = function()
 {
-    PlayerData.inst.callDedAPI("AZURE_READ_DATA", null, null, {score: PlayerData.inst.score, dist: LauncherBG.inst.distance}, function(c)
+    PlayerData.inst.callDedAPI("AZURE_READ_DATA", null, null, {score: PlayerData.inst.score, dist: Math.round(LauncherBG.inst.distance)}, function(c)
     {
-        console.log(c);
+      //  console.log(c);
     });
 }
 
 PlayerData.prototype.saveScore = function()
 {
-    PlayerData.inst.callDedAPI("SAVE_SCORE", null, null, {score: PlayerData.inst.score, dist: LauncherBG.inst.distance}, function(c)
+    PlayerData.inst.callDedAPI("SAVE_SCORE", null, null, {score: PlayerData.inst.score, dist: Math.round(LauncherBG.inst.distance)}, function(c)
     {
         console.log(c);
     });

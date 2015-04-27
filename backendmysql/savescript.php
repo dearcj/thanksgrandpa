@@ -58,8 +58,8 @@ function playerFilter($conn, $table, $userid, $id)
 
 function finalizeScore($conn, $data, $userid)
 {
-	$deltadist = 300;
-	$deltascore = 400;
+	$deltadist = 450;
+	$deltascore = 300;
 	$dist = $data['dist']; 
 	$score = $data['score'];
 	$res = readJSON($conn, "tb_players", $userid);
@@ -69,14 +69,14 @@ function finalizeScore($conn, $data, $userid)
 	$prevdist = $res[0]['maxdistance'];
 	$curdist = $res[0]['curdist'];
 	$money = (float)$curmoney + (float)$curscore;
-	echo "MONEY".$money;
+	//echo "MONEY".$money;
 	if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 	{
-		echo "SCORE FINALIZE OK";
+	//	echo "SCORE FINALIZE OK";
 		$md = $dist;
 		if ((float)$prevdist > (float)$md) $md = $prevdist;
 		updateJSON($conn, 'tb_players', array('score'=> '0', 'lastcheckdate' => null, 'curdist'=> '0', 'money'=> (string)$money, 'maxdistance'=>round($md)), $userid);					
-	} else echo "CAN'T FINALIZE SCORE";
+	} //else echo "CAN'T FINALIZE SCORE";
 }
 
 function resetRunProgress($conn, $data, $userid)
@@ -89,13 +89,13 @@ function resetRunProgress($conn, $data, $userid)
 function updateRunProgress($conn, $data, $userid)
 {
 	$deltasec = 12;
-	$deltadist = 300;
-	$deltascore = 400;
+	$deltadist = 450;
+	$deltascore = 300;
 	$dist = $data['dist']; 
 	$score = $data['score'];
 	$res = readJSON($conn, "tb_players", $userid);
 	$prevdate = $res[0]['lastcheckdate'];
-	echo "PREV DATE ".$prevdate;
+	//echo "PREV DATE ".$prevdate;
 	if ($prevdate) 
 	{
 		$prevdatetime = strtotime( $prevdate );
@@ -105,26 +105,26 @@ function updateRunProgress($conn, $data, $userid)
 	$curdist = $res[0]['curdist'];
 
 	$date_currstr = date('Y-m-d H:i:s');
-	echo "NOW ".$date_currstr;
+	//echo "NOW ".$date_currstr;
 	if ($prevdate)
 	{
-		echo 'DATE CURR TIME'.strtotime($date_currstr);
-		echo 'PREV DATE TIME'.$prevdatetime;
+	//	echo 'DATE CURR TIME'.strtotime($date_currstr);
+	//	echo 'PREV DATE TIME'.$prevdatetime;
 		$since_start = strtotime($date_currstr) - $prevdatetime;
-		echo 'DIFFERENCE'.$since_start;
+	//	echo 'DIFFERENCE'.$since_start;
 		
 		if ($since_start > $deltasec)
 		{
-			echo "DIST DIFF        ".abs($dist - $curdist);
-			echo "SCORE DIFF        ".abs($score - $curscore) ;
+		//	echo "DIST DIFF        ".abs($dist - $curdist);
+		//	echo "SCORE DIFF        ".abs($score - $curscore) ;
 			if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 			{
-				echo "NEXT SUBMIT";
+			//	echo "NEXT SUBMIT";
 				updateJSON($conn, 'tb_players', array('score'=> (string)$score, 'lastcheckdate' => $date_currstr, 'curdist'=> (string)$dist), $userid);			
 			}
 		} else 
 		{
-			echo "TOO FREQUENTLY";
+		//	echo "TOO FREQUENTLY";
 		}
 	}
 /*	else 
@@ -291,7 +291,7 @@ function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 $sqlclause = implode(",",$sql);
 
 	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
-	echo $wholequery;
+//	echo $wholequery;
 $statement = $conn->prepare($wholequery);
 
 $statement->execute();
