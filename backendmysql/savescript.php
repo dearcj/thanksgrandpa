@@ -68,6 +68,7 @@ function updateRunProgress($conn, $data, $userid)
 	$curscore = $res[0]['score'];
 	$curdist = $res[0]['curdist'];
 	$date_curr = new DateTime();
+	$date_currstr = date(DateTime::RFC822);
 	if ($prevdate)
 	{
 		$since_start = $prevdate->diff($date_curr);
@@ -79,7 +80,7 @@ function updateRunProgress($conn, $data, $userid)
 			if (abs($dist - $curdist) < 300 && abs($score - $curscore) < 400 )
 			{
 				echo "NEXT SUBMIT";
-				updateJSONdebug($conn, 'tb_players', array('score'=> $curscore, 'lastcheckdate' => $date_curr, 'curdist'=> $curdist), $userid);			
+				updateJSONdebug($conn, 'tb_players', array('score'=> $curscore, 'lastcheckdate' => $date_currstr, 'curdist'=> $curdist), $userid);			
 			}
 			//ok
 		} else 
@@ -90,7 +91,7 @@ function updateRunProgress($conn, $data, $userid)
 	} else 
 	{
 		echo "FIRST SUBMIT";
-		$res = updateJSONdebug($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_curr, 'curdist'=>0), $userid);
+		$res = updateJSONdebug($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_currstr, 'curdist'=>0), $userid);
 	}
 }
 
