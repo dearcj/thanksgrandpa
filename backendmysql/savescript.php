@@ -77,6 +77,13 @@ function finalizeScore($conn, $data, $userid)
 	} else echo "CAN'T FINALIZE SCORE";
 }
 
+function resetRunProgress($conn, $data, $userid)
+{
+	$date_currstr = date('Y-m-d H:i:s');
+	updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_currstr, 'curdist'=>0), $userid);
+}
+
+
 function updateRunProgress($conn, $data, $userid)
 {
 	$deltasec = 12;
@@ -106,6 +113,8 @@ function updateRunProgress($conn, $data, $userid)
 		
 		if ($since_start > $deltasec)
 		{
+			echo "DIST DIFF        ".abs($dist - $curdist);
+			echo "SCORE DIFF        ".abs($score - $curscore) ;
 			if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
 			{
 				echo "NEXT SUBMIT";
@@ -115,11 +124,13 @@ function updateRunProgress($conn, $data, $userid)
 		{
 			echo "TOO FREQUENTLY";
 		}
-	} else 
+	}
+/*	else 
 	{
 		echo "FIRST SUBMIT";
 		updateJSON($conn, 'tb_players', array('score'=> 0, 'lastcheckdate' => $date_currstr, 'curdist'=>0), $userid);
 	}
+	*/
 }
 
 function buyItem($conn, $data, $userid)

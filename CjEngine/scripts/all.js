@@ -1346,6 +1346,7 @@ GameStage.prototype.onShow = function () {
     LevelManager.loadLevel("hud", gameStage.onShowContinue, SM.inst.guiLayer);
 
     var tweenVar = {x: 0};
+    PlayerData.inst.resetRP();
     gameStage.ari = TweenMax.to(tweenVar, 14, {x: 1, yoyo: false, repeat: -1, onRepeat: PlayerData.inst.azureReadData});
 }
 
@@ -9144,6 +9145,17 @@ PlayerData.prototype.getType = function (item_player)
    }
    return null;
 }
+
+
+
+PlayerData.prototype.resetRP = function()
+{
+    PlayerData.inst.callDedAPI("RESET_RP", null, null, null, function(c)
+    {
+        console.log(c);
+    });
+}
+
 
 PlayerData.prototype.azureReadData = function()
 {

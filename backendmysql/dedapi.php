@@ -84,7 +84,11 @@ if ($method == "BUY_ITEM")
 if ($method == "GET_DATE")
 {
 	echo date(DateTime::RFC822);
-} else 
+} else
+if ($method == "RESET_RP")
+{
+	$res = resetRunProgress($pdo, $data, $userid);
+}
 if ($method == "AZURE_READ_DATA")
 {
 	$res = updateRunProgress($pdo, $data, $userid);
