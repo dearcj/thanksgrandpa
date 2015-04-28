@@ -9322,12 +9322,12 @@ PlayerData.prototype.gainExp = function(amount) {
                 CObj.getById("levnum").text = PlayerData.inst.playerItem.lvl.toString();
                 CObj.getById("btnclose").click = function () {
                     LevelManager.removeLastLevel();
-                   if (ingame) {
+                    PlayerData.inst.savePlayerData();
+                    if (ingame) {
                       gameStage.unpause();
                    } else {
                        shopStage.updateStatsPanel();
                        charStage.closeEventsWnd();
-                       PlayerData.inst.savePlayerData();
                    }
                 };
 
@@ -9919,8 +9919,8 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
         PlayerData.inst.playerItem.maxdistance = rec;
         /*
         if (noUpdate == null)
-        PlayerData.inst.savePlayerData();
         */
+        PlayerData.inst.savePlayerData();
 
         if (gameStage.ari) {gameStage.ari.kill();
             gameStage.ari = null;}
