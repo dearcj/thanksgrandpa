@@ -71,7 +71,7 @@ function finalizeScore($conn, $data, $userid)
 
 	$money = (float)$curmoney + (float)$score;
 
-	if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
+	if (abs($dist - $curdist) < $deltadist)
 	{
 		echo "SCORE FINALIZE OK";
 		$md = $dist;
@@ -118,7 +118,7 @@ function updateRunProgress($conn, $data, $userid)
 		{
 		//	echo "DIST DIFF        ".abs($dist - $curdist);
 		//	echo "SCORE DIFF        ".abs($score - $curscore) ;
-			if (abs($dist - $curdist) < $deltadist && abs($score - $curscore) < $deltascore)
+			if (abs($dist - $curdist) < $deltadist)
 			{
 			//	echo "NEXT SUBMIT";
 				updateJSON($conn, 'tb_players', array('score'=> (string)$score, 'lastcheckdate' => $date_currstr, 'curdist'=> (string)$dist), $userid);			
