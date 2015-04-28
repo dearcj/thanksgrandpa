@@ -9586,8 +9586,7 @@ PlayerData.prototype.loadData = function(cb)
        }, function (res) {}
    );*/
 
-    PlayerData.inst.events = JSON.parse(eventsVar);
-    PlayerData.inst.loadCount ++;
+
     /*
      window.azureclient.getTable("tb_edevent").read().done(
      function (results) {
@@ -9599,6 +9598,32 @@ PlayerData.prototype.loadData = function(cb)
      );
      */
 
+    PlayerData.inst.callDedAPI("READ", "tb_edevent", null, null, function(r)
+    {
+        PlayerData.inst.events = PlayerData.inst.intJSON(r);
+        PlayerData.inst.loadCount ++;
+        if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+    });
+
+    PlayerData.inst.callDedAPI("READ", "tb_achs", null, null, function(r)
+    {
+        PlayerData.inst.achs = PlayerData.inst.intJSON(r);
+        PlayerData.inst.loadCount ++;
+        if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+    });
+
+
+    PlayerData.inst.callDedAPI("READ", "tb_items", null, null, function(r)
+    {
+        PlayerData.inst.items = PlayerData.inst.intJSON(r);
+        PlayerData.inst.loadCount ++;
+        if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+    });
+
+/*
+    PlayerData.inst.events = JSON.parse(eventsVar);
+    PlayerData.inst.loadCount ++;
+
 
     PlayerData.inst.achs = JSON.parse(achsVar);
     PlayerData.inst.loadCount ++;
@@ -9607,7 +9632,7 @@ PlayerData.prototype.loadData = function(cb)
 
     PlayerData.inst.items = JSON.parse(itemsVar);
     PlayerData.inst.loadCount ++;
-
+*/
 
     /*
        window.azureclient.getTable("tb_items").read().done(
