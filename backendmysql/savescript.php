@@ -73,11 +73,11 @@ function finalizeScore($conn, $data, $userid)
 
 	if (abs($dist - $curdist) < $deltadist)
 	{
-		echo "SCORE FINALIZE OK";
+		//echo "SCORE FINALIZE OK";
 		$md = $dist;
 		if ((float)$prevdist > (float)$md) $md = $prevdist;
 		updateJSON($conn, 'tb_players', array('score'=> '0', 'lastcheckdate' => null, 'curdist'=> '0', 'money'=> (string)$money, 'maxdistance'=>round($md)), $userid);					
-	} else echo "CAN'T FINALIZE SCORE";
+	} //else echo "CAN'T FINALIZE SCORE";
 }
 
 function resetRunProgress($conn, $data, $userid)
@@ -292,7 +292,7 @@ function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 $sqlclause = implode(",",$sql);
 
 	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
-	echo $wholequery;
+	//echo $wholequery;
 $statement = $conn->prepare($wholequery);
 
 $statement->execute();

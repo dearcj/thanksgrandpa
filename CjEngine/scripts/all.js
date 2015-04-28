@@ -1953,8 +1953,8 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                 shopStage.transScreen = null;
 
             } else {
-                if (shopStage.transScreen.parent) {
-                    rp(shopStage.transScreen.parent)
+                if (shopStage.transScreen) {
+                    rp(shopStage.transScreen)
                     shopStage.transScreen = null;
                 }
             }
@@ -9074,7 +9074,6 @@ PlayerData = function()
             data = decodeURIComponent(data);
             data = data.replace(/\+/g, ' ');
             data = data.replace(/@/g, '+');
-            //data = data.substring(2, data.length);
             var x = JSON.parse(data);
     }
 
@@ -9097,8 +9096,6 @@ PlayerData = function()
 
 PlayerData.prototype.addNotification = function(message, platformid)
 {
-   //var t = window.azureclient.getTable("tb_notifications");
-   //t.insert({message: message, platformid: platformid});
 }
 
 PlayerData.prototype.comboCheck = function()
