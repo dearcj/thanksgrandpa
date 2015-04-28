@@ -1862,8 +1862,6 @@ ShopStage.prototype.createStatsPanel = function (cb) {
         }
 
         obj.gfx.mouseout = function (evt) {
-
-
             var t = text;
             setTimeout(function(){
                 var dp = CObj.getById("descpanel");
@@ -1875,7 +1873,6 @@ ShopStage.prototype.createStatsPanel = function (cb) {
 
                 }
             }, 40);
-
         }
     }
 
