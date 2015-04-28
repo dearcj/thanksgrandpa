@@ -78,14 +78,14 @@ function doLogin($vkid, $pdo, $secret_key, $auth_key)
 	if ($userid == null) throw new Exception('No user id');
 	
 	
-	$p_events = readJSON($pdo, "tb_edevent_player", $userid);
+/*	$p_events = readJSON($pdo, "tb_edevent_player", $userid);
 	$p_items = readJSON($pdo, "tb_item_player", $userid);
 	$p_achs	= readJSON($pdo, "tb_ach_player", $userid);
 	
 	$total_events = readJSON($pdo, "tb_edevent", $userid);
 	$total_items = readJSON($pdo, "tb_items", $userid);
 	$total_achs	= readJSON($pdo, "tb_achs", $userid);
-	
+	*/
 	
 	$token = array(
 	'vkid' => $vkid,
@@ -94,8 +94,11 @@ function doLogin($vkid, $pdo, $secret_key, $auth_key)
 
 	$tokenJWT = JWT::encode($token, $secret_key);
 	//, "events" => $p_events, "items" => $p_items, "achs" => $p_achs
-	$resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem, 'pl_events' => $p_events, 'pl_items' => $p_items, 'pl_achs' => $p_achs, 
-	'achs' => $total_achs, 'items' => $total_items, 'events' => $total_events);
+	//$resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem, 'pl_events' => $p_events, 'pl_items' => $p_items, 'pl_achs' => $p_achs, 
+	//'achs' => $total_achs, 'items' => $total_items, 'events' => $total_events);
+	
+	$resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
+	
 	return $resp;
 }
 
