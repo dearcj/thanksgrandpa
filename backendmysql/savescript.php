@@ -316,6 +316,7 @@ function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 	
 	foreach($obj as $key => $value){
 		if ($bannedColumns && in_array($key, $bannedColumns)) continue;
+		if ($key == 'desc') $key = '`'.$key.'`'; 
 		if ($value == '') continue;
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
 	}
