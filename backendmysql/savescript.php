@@ -293,6 +293,7 @@ function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 	}
 	
 	$f = playerFilter($conn, $table, $userid, $id);
+	if ($f == "") return;
 $sqlclause = implode(",",$sql);
 
 	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
