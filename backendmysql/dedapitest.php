@@ -3,7 +3,7 @@ require 'jwt_helper.php';
 require 'connection.php';
 require 'savescript.php';
 
-$jwtToken = $_POST['token'];
+$jwtToken = "eyJhbGciOiJIUzI1NiIsICJ0eXAiOiJKV1QifQ.eyJhZ2UiOiAyMX0.OVMaUVue2RMiesK-XjFwO--s2lWyCoC9HOnvFCjv2EM";//$_POST['token'];
 $method = $_POST['method'];
 $data = $_POST['data'];
 $table = $_POST['table'];
