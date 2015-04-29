@@ -277,6 +277,33 @@ $statement = null;
 return $res;
 }
 
+
+function updateJSON2($conn, $table, $data, $userid, $id, $bannedColumns)
+{
+	$obj = $data;
+	
+	if ($userid == null)
+	{
+		if ($table == 'tb_players') return;
+	}
+	
+	foreach($obj as $key => $value){
+		if ($bannedColumns && in_array($key, $bannedColumns)) continue;
+		if ($value == '') continue;
+		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
+	}
+	
+	$f = playerFilter($conn, $table, $userid, $id);
+	if ($f == "") return;
+	$sqlclause = implode(",",$sql);
+
+	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
+	echo $wholequery;
+//$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+$statement = null;
+return true;
+}
+
 function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 {
 	$obj = $data;
@@ -294,7 +321,7 @@ function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 	
 	$f = playerFilter($conn, $table, $userid, $id);
 	if ($f == "") return;
-$sqlclause = implode(",",$sql);
+	$sqlclause = implode(",",$sql);
 
 	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
 	//echo $wholequery;

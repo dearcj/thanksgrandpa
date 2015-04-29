@@ -6,6 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/dedapi.php" afterPath="$PROJECT_DIR$/backendmysql/dedapi.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/savescript.php" afterPath="$PROJECT_DIR$/backendmysql/savescript.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -62,10 +63,10 @@
       <file leaf-file-name="dbinit.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1919192" vertical-offset="0" max-vertical-offset="2660">
-              <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+            <state vertical-scroll-proportion="-1.3243546" vertical-offset="1769" max-vertical-offset="2660">
+              <caret line="602" column="25" selection-start-line="602" selection-start-column="25" selection-end-line="602" selection-end-column="25" />
               <folding>
-                <element signature="e#13389#36904#0" expanded="false" />
+                <element signature="e#13387#36902#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -441,12 +442,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01211" summary="&#10;&#10;a">
-      <created>1430140897133</created>
-      <option name="number" value="01211" />
-      <option name="project" value="LOCAL" />
-      <updated>1430140897133</updated>
-    </task>
     <task id="LOCAL-01212" summary="&#10;&#10;a">
       <created>1430166706894</created>
       <option name="number" value="01212" />
@@ -735,7 +730,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430343901652</updated>
     </task>
-    <option name="localTasksCounter" value="1260" />
+    <task id="LOCAL-01260" summary="&#10;&#10;a">
+      <created>1430343998633</created>
+      <option name="number" value="01260" />
+      <option name="project" value="LOCAL" />
+      <updated>1430343998633</updated>
+    </task>
+    <option name="localTasksCounter" value="1261" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -764,7 +765,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33483145" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="434" y="711" width="746" height="339" />
+      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="434" y="711" width="746" height="339" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3265086" sideWeight="0.4155019" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32581738" sideWeight="0.5006345" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14213198" sideWeight="0.50080514" order="1" side_tool="true" content_ui="tabs" />
@@ -835,7 +836,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="1155" />
+      <option name="time" value="1156" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
@@ -1237,10 +1238,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1919192" vertical-offset="0" max-vertical-offset="2660">
-          <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+        <state vertical-scroll-proportion="-1.3243546" vertical-offset="1769" max-vertical-offset="2660">
+          <caret line="602" column="25" selection-start-line="602" selection-start-column="25" selection-end-line="602" selection-end-column="25" />
           <folding>
-            <element signature="e#13389#36904#0" expanded="false" />
+            <element signature="e#13387#36902#0" expanded="false" />
           </folding>
         </state>
       </provider>
