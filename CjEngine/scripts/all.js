@@ -6125,7 +6125,7 @@ function CMonster(in_x,in_y,textname,cr_bar){
     CMonster.list.push(this);
     this.maxHp = 50;
     this.spawnCoins = true;
-    this.coinAmount = 4;
+    this.coinAmount = 1 + Math.floor(Math.random()*3);
     this.hp = this.maxHp;
     if (cr_bar == true || cr_bar == null) {
         this.bar = new CHPBar(in_x, in_y, "health bar empty");
