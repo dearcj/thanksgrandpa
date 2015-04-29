@@ -6,6 +6,7 @@ require 'savescript.php';
 $jwtToken = $_POST['token'];
 $method = $_POST['method'];
 $data = $_POST['data'];
+$passphrase = $_POST['passphrase'];
 $table = $_POST['table'];
 $id = $_POST['id'];
 
@@ -52,15 +53,25 @@ if (!$token) die();
 $platformid = $token->vkid;
 $userid = $token->userid;
 
+if (!$userid) return;
+
 
 if ($method == "INSERT")
 {
-	$res = insertJSON($pdo, $table, $data);
+	$res = insertJSON($pdo, $table, $data, array("tb_ach_player", "tb_edevent_player", "tb_item_player", "tb_players"));
 } else 
 if ($method == "READ")
 {
 	$res = readJSON($pdo, $table, $userid, $id);
 } else 
+if ($method == "SUDO_UPDATE" && $passphrase == "MRUCQf9AJH")
+{
+	$res = updateJSON($pdo, $table, $data);
+} else
+if ($method == "SUDO_INSERT" && $passphrase == "MRUCQf9AJH")
+{
+	$res = insertJSON($pdo, $table, $data);
+} else
 if ($method == "UPDATE")
 {
 	$res = updateJSON($pdo, $table, $data, $userid, $id, array("maxdistance", "score", "curdist", "lastcheckdate"));

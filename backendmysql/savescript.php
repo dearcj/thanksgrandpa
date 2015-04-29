@@ -254,9 +254,10 @@ function updateScore($conn, $curdist, $userid)
 	return $rank;
 }
 
-function insertJSON($conn, $table, $jsonEncoded)
+function insertJSON($conn, $table, $jsonEncoded, $enabledTables)
 {
 	$obj = $jsonEncoded;
+	if ($enabledTables && !in_array($table, $enabledTables)) return;
 	
 	foreach($obj as $key => $value){
 	//	if ($value == null) continue;
@@ -276,11 +277,14 @@ $statement = null;
 return $res;
 }
 
-
-
 function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 {
 	$obj = $data;
+	
+	if ($userid == null)
+	{
+		if ($table == 'tb_players') return;
+	}
 	
 	foreach($obj as $key => $value){
 		if ($bannedColumns && in_array($key, $bannedColumns)) continue;
