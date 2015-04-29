@@ -9,6 +9,13 @@ $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
 
+	$token = array(
+	'age' => 21
+	);
+
+	$tokenJWT2 = JWT::encode($token, 122);
+	echo $tokenJWT2;
+
 $token = JWT::decode($jwtToken, "122");
 echo $token;
 
