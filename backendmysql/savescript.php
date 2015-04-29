@@ -288,6 +288,7 @@ function updateJSON2($conn, $table, $data, $userid, $id, $bannedColumns)
 	}
 	
 	foreach($obj as $key => $value){
+		if ($key == 'desc') $key = $conn->quote($desc); 
 		if ($bannedColumns && in_array($key, $bannedColumns)) continue;
 		if ($value == '') continue;
 		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
