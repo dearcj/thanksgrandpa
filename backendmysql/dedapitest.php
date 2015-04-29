@@ -9,7 +9,7 @@ $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
 
-$token = JWT::decode($jwtToken, $secret_key);
+$token = JWT::decode($jwtToken, "ASSHOLE");
 echo $token;
 
 /*
