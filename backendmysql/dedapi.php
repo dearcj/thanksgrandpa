@@ -66,7 +66,7 @@ if ($method == "READ")
 } else 
 if ($method == "SUDO_UPDATE" && $passphrase == "MRUCQf9AJH")
 {
-	$res = updateJSON($pdo, $table, $data);
+	$res = updateJSON($pdo, $table, $data, $userid, $id);
 } else
 if ($method == "SUDO_INSERT" && $passphrase == "MRUCQf9AJH")
 {

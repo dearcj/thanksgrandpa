@@ -6,7 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/dedapitest.php" afterPath="$PROJECT_DIR$/backendmysql/dedapitest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/dedapi.php" afterPath="$PROJECT_DIR$/backendmysql/dedapi.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/savescript.php" afterPath="$PROJECT_DIR$/backendmysql/savescript.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="thanksgrandpa.iws" />
@@ -39,11 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayerData.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37598205" vertical-offset="1413" max-vertical-offset="19893">
-              <caret line="92" column="67" selection-start-line="92" selection-start-column="67" selection-end-line="92" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="16233" max-vertical-offset="19931">
+              <caret line="868" column="1" selection-start-line="868" selection-start-column="1" selection-end-line="868" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -52,9 +53,21 @@
       <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-38.07143" vertical-offset="1062" max-vertical-offset="2394">
-              <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+            <state vertical-scroll-proportion="-9.571428" vertical-offset="359" max-vertical-offset="2337">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbinit.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.68013465" vertical-offset="1750" max-vertical-offset="2641">
+              <caret line="695" column="61" selection-start-line="695" selection-start-column="61" selection-end-line="695" selection-end-column="61" />
+              <folding>
+                <element signature="e#13369#36884#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,16 +107,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="5094" max-vertical-offset="10431">
               <caret line="336" column="20" selection-start-line="336" selection-start-column="0" selection-end-line="337" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CharStage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13699">
-              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -178,7 +181,6 @@
         <option value="$PROJECT_DIR$/CjEngine/scripts/Boosters/CSupermanBooster.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CKey.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CBoosterBox.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/package.json" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/sss.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/ScoreStage.js" />
@@ -197,8 +199,9 @@
         <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/ShopStage.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/MM.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js" />
-        <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js" />
+        <option value="$PROJECT_DIR$/test.html" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js" />
       </list>
     </option>
   </component>
@@ -290,46 +293,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="libs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="libs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="jwt">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="libs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="jwt">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="ext">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -623,12 +586,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01208" summary="&#10;&#10;a">
-      <created>1430136645266</created>
-      <option name="number" value="01208" />
-      <option name="project" value="LOCAL" />
-      <updated>1430136645266</updated>
-    </task>
     <task id="LOCAL-01209" summary="&#10;&#10;a">
       <created>1430136680426</created>
       <option name="number" value="01209" />
@@ -917,7 +874,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430321230165</updated>
     </task>
-    <option name="localTasksCounter" value="1257" />
+    <task id="LOCAL-01257" summary="&#10;&#10;a">
+      <created>1430321514443</created>
+      <option name="number" value="01257" />
+      <option name="project" value="LOCAL" />
+      <updated>1430321514443</updated>
+    </task>
+    <option name="localTasksCounter" value="1258" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1225,14 +1188,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="12844">
-          <caret line="55" column="51" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CGrenade.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1124" max-vertical-offset="2679">
@@ -1393,14 +1348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="798" max-vertical-offset="19703">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/CMonster.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2907">
@@ -1411,17 +1358,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-38.07143" vertical-offset="1062" max-vertical-offset="2394">
-          <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+        <state vertical-scroll-proportion="-9.571428" vertical-offset="359" max-vertical-offset="2337">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="798" max-vertical-offset="19703">
+          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/PlayerData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37598205" vertical-offset="1413" max-vertical-offset="19893">
-          <caret line="92" column="67" selection-start-line="92" selection-start-column="67" selection-end-line="92" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="16233" max-vertical-offset="19931">
+          <caret line="868" column="1" selection-start-line="868" selection-start-column="1" selection-end-line="868" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/dbinit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68013465" vertical-offset="1750" max-vertical-offset="2641">
+          <caret line="695" column="61" selection-start-line="695" selection-start-column="61" selection-end-line="695" selection-end-column="61" />
+          <folding>
+            <element signature="e#13369#36884#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

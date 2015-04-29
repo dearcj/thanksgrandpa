@@ -51,7 +51,7 @@ function playerFilter($conn, $table, $userid, $id)
  	{
 		$filterstr = " WHERE ".implode(" AND ",$filter);
 	} else
-	$filterstr = "";
+	$filterstr = " WHERE id = 'NO SUCH ID'";
 	return $filterstr;
 }
 
