@@ -9,6 +9,9 @@ $data = $_POST['data'];
 $table = $_POST['table'];
 $id = $_POST['id'];
 
+$token = JWT::decode($jwtToken, $secret_key);
+echo $token;
+
 /*
 $res = readJSON($pdo, "tb_items", 'F800A350-EE15-4F1C-9CCF-050B775A4CD9', '68AFAEDC-B3E0-401E-9E1A-E272084F2E11');
 var_dump($res);
@@ -64,6 +67,8 @@ $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZX
 buyItem($pdo, array('id' => '0B97B8DF-372A-4230-BD08-FCB8E7453BE1', 'equipped' => true), $userid);
 */
 
+/*
+
 $userid = 'F800A350-EE15-4F1C-9CCF-050B775A4CD9';
 updateRunProgress($pdo, array('dist' => 0, 'score' => 0), $userid);
 slip(15);
@@ -77,7 +82,7 @@ updateRunProgress($pdo, array('dist' => 40, 'score' => 40), $userid);
 slip(15);
 updateRunProgress($pdo, array('dist' => 50, 'score' => 50), $userid);
 slip(15);
-
+*/
 /*
 if (!$jwtToken) die();
 $token = JWT::decode($jwtToken, $secret_key);
