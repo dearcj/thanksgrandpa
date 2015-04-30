@@ -261,8 +261,9 @@ function insertJSON($conn, $table, $jsonEncoded, $enabledTables)
 	
 	foreach($obj as $key => $value){
 	//	if ($value == null) continue;
+		if ($key == 'desc') $key = '`'.$key.'`'; 
 		$sqlkeys[] = $key; 
-		$sqlvalues[] = (is_numeric($value)) ? "$value" : "N".$conn->quote($value); 
+		$sqlvalues[] = (is_numeric($value)) ? "$value" : $conn->quote($value); 
 	}
 	$valuesstr = implode(",",$sqlvalues);
 	$keystr = implode(",",$sqlkeys);
@@ -277,32 +278,6 @@ function insertJSON($conn, $table, $jsonEncoded, $enabledTables)
 	$statement = null;
 	return $uuid;
 }
-
-
-function insertJSON2($conn, $table, $jsonEncoded, $enabledTables)
-{
-	$obj = $jsonEncoded;
-	if ($enabledTables && !in_array($table, $enabledTables)) return;
-	
-	foreach($obj as $key => $value){
-	//	if ($value == null) continue;
-		$sqlkeys[] = $key; 
-		$sqlvalues[] = (is_numeric($value)) ? "$value" : "N".$conn->quote($value); 
-	}
-	$valuesstr = implode(",",$sqlvalues);
-	$keystr = implode(",",$sqlkeys);
-
-	$statement = $conn->prepare("SELECT UUID()");
-	$statement->execute();
-	$res = $statement->fetch(PDO::FETCH_ASSOC);
-	$uuid = $res['UUID()'];
-	$wholequery = "INSERT INTO thanksdad.".$table." (id,".$keystr.") VALUES (".$conn->quote($uuid).",".$valuesstr .");";
-	$statement = $conn->prepare($wholequery);
-	$res = $statement->execute();
-	$statement = null;
-	return $uuid;
-}
-
 
 function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 {
