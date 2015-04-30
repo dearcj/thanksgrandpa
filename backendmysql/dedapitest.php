@@ -42,7 +42,7 @@ $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZX
 */
 $res = insertJSON2($pdo, 'tb_metrics', array('name' => "test",
 			'value' => 150));
-
+echo $res;
 /*
 $data = '1000';
 $table = 'tb_players';
