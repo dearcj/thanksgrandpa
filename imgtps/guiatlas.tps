@@ -20,7 +20,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>sparrow</string>
+        <string>json</string>
         <key>textureFileName</key>
         <filename>guiatlas.png</filename>
         <key>flipPVR</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>guiatlas.xml</filename>
+        <filename>guiatlas.json</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -188,7 +188,6 @@
             <filename>../../../../dedgame/gameover/share button.png</filename>
             <filename>../../../../dedgame/gameover/bodrost bar.png</filename>
             <filename>../../../../dedgame/gameover/bodrost bar bg.png</filename>
-            <filename>../../../../dedgame/ordens/orden.png</filename>
             <filename>../../../../dedgame/ordens/ordena background 1 px.png</filename>
             <filename>../../../../dedgame/ordens/ordena top.png</filename>
             <filename>../../../../dedgame/ordens/notifiction cover.png</filename>
@@ -256,18 +255,6 @@
             <filename>../../../../dedgame/fight screen/exp bar line.png</filename>
             <filename>../../../../dedgame/fight screen/health bar empty.png</filename>
             <filename>../../../../dedgame/fight screen/health bar full.png</filename>
-            <filename>../../../../dedgame/ordens/orden12.png</filename>
-            <filename>../../../../dedgame/ordens/orden2.png</filename>
-            <filename>../../../../dedgame/ordens/orden3.png</filename>
-            <filename>../../../../dedgame/ordens/orden4.png</filename>
-            <filename>../../../../dedgame/ordens/orden5.png</filename>
-            <filename>../../../../dedgame/ordens/orden6.png</filename>
-            <filename>../../../../dedgame/ordens/orden7.png</filename>
-            <filename>../../../../dedgame/ordens/orden8.png</filename>
-            <filename>../../../../dedgame/ordens/orden9.png</filename>
-            <filename>../../../../dedgame/ordens/orden10.png</filename>
-            <filename>../../../../dedgame/ordens/orden11.png</filename>
-            <filename>../../../../dedgame/ordens/empty orden.png</filename>
             <filename>../../../../dedgame/home screen/settings/write button.png</filename>
             <filename>../../../../dedgame/home screen/settings/music.png</filename>
             <filename>../../../../dedgame/home screen/settings/settings bubble.png</filename>

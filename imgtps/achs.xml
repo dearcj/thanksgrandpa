@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:424bbeea4c55bc8aa1d904d4686683bf$ -->
+<TextureAtlas imagePath="achs.png">
+    <SubTexture name="empty orden" x="831" y="1388" width="134" height="273"/>
+    <SubTexture name="orden" x="693" y="1388" width="134" height="273"/>
+    <SubTexture name="orden10" x="555" y="1665" width="134" height="273"/>
+    <SubTexture name="orden11" x="555" y="1388" width="134" height="273"/>
+    <SubTexture name="orden12" x="417" y="1665" width="134" height="273"/>
+    <SubTexture name="orden13" x="417" y="1388" width="134" height="273"/>
+    <SubTexture name="orden14" x="831" y="1111" width="134" height="273"/>
+    <SubTexture name="orden15" x="693" y="1111" width="134" height="273"/>
+    <SubTexture name="orden16" x="555" y="1111" width="134" height="273"/>
+    <SubTexture name="orden17" x="417" y="1111" width="134" height="273"/>
+    <SubTexture name="orden18" x="279" y="1665" width="134" height="273"/>
+    <SubTexture name="orden19" x="279" y="1388" width="134" height="273"/>
+    <SubTexture name="orden2" x="279" y="1111" width="134" height="273"/>
+    <SubTexture name="orden20" x="141" y="1665" width="134" height="273"/>
+    <SubTexture name="orden21" x="141" y="1388" width="134" height="273"/>
+    <SubTexture name="orden22" x="141" y="1111" width="134" height="273"/>
+    <SubTexture name="orden23" x="831" y="834" width="134" height="273"/>
+    <SubTexture name="orden24" x="693" y="834" width="134" height="273"/>
+    <SubTexture name="orden25" x="555" y="834" width="134" height="273"/>
+    <SubTexture name="orden26" x="417" y="834" width="134" height="273"/>
+    <SubTexture name="orden27" x="279" y="834" width="134" height="273"/>
+    <SubTexture name="orden28" x="141" y="834" width="134" height="273"/>
+    <SubTexture name="orden29" x="3" y="1665" width="134" height="273"/>
+    <SubTexture name="orden3" x="3" y="1388" width="134" height="273"/>
+    <SubTexture name="orden30" x="3" y="1111" width="134" height="273"/>
+    <SubTexture name="orden31" x="3" y="834" width="134" height="273"/>
+    <SubTexture name="orden32" x="831" y="557" width="134" height="273"/>
+    <SubTexture name="orden33" x="693" y="557" width="134" height="273"/>
+    <SubTexture name="orden34" x="555" y="557" width="134" height="273"/>
+    <SubTexture name="orden35" x="417" y="557" width="134" height="273"/>
+    <SubTexture name="orden36" x="279" y="557" width="134" height="273"/>
+    <SubTexture name="orden37" x="141" y="557" width="134" height="273"/>
+    <SubTexture name="orden38" x="3" y="557" width="134" height="273"/>
+    <SubTexture name="orden39" x="831" y="280" width="134" height="273"/>
+    <SubTexture name="orden4" x="693" y="280" width="134" height="273"/>
+    <SubTexture name="orden40" x="555" y="280" width="134" height="273"/>
+    <SubTexture name="orden41" x="417" y="280" width="134" height="273"/>
+    <SubTexture name="orden42" x="279" y="280" width="134" height="273"/>
+    <SubTexture name="orden43" x="141" y="280" width="134" height="273"/>
+    <SubTexture name="orden44" x="3" y="280" width="134" height="273"/>
+    <SubTexture name="orden45" x="831" y="3" width="134" height="273"/>
+    <SubTexture name="orden46" x="693" y="3" width="134" height="273"/>
+    <SubTexture name="orden5" x="555" y="3" width="134" height="273"/>
+    <SubTexture name="orden6" x="417" y="3" width="134" height="273"/>
+    <SubTexture name="orden7" x="279" y="3" width="134" height="273"/>
+    <SubTexture name="orden8" x="141" y="3" width="134" height="273"/>
+    <SubTexture name="orden9" x="3" y="3" width="134" height="273"/>
+</TextureAtlas>

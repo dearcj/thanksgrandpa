@@ -1733,7 +1733,33 @@ AchStage.prototype.onShow = function() {
     charStage.unreadAch = false;
     CustomStage.prototype.onShow.call(this);
 
-    LevelManager.loadLevel("levach", this.onShowContinue);
+    function findAchsById(id)
+    {
+        for (var j = 0; j < PlayerData.inst.achs.length; ++j)
+        {
+            if (PlayerData.inst.achs[j].id == id)
+            {
+                return PlayerData.inst.achs[j];
+            }
+        }
+    }
+
+    PlayerData.inst.achs_progress.sort(function(a, b) {
+
+        return findAchsById(a.id_ach).name.localeCompare(findAchsById(b.id_ach).name);
+    });
+
+    LevelManager.loadLevel("levach", achStage.onShowContinue);
+
+    /* var preloaderAsset = [
+         "imgtps/achs.json"
+     ];
+
+     var loader = new PIXI.AssetLoader(preloaderAsset);
+     loader.onComplete = function()
+     {
+     };
+     loader.load();*/
 }
 
 AchStage.prototype.createDesc = function()
@@ -1935,7 +1961,23 @@ ShopStage.prototype.buyItem = function (event, unlock) {
             console.log("SCORE UPDATED " + x);
             if (x && x.crystals && x.money) {
                 //SUCCESS
-                PlayerData.inst.playerItem.crystals = parseFloat(x.crystals);
+
+                if (buyitem.name == "Tablets$4")
+                    this.progressAch("Gold medal 22", 1, false);
+
+                if (buyitem.name == "Health$4")
+                    this.progressAch("Gold medal 20", 1, false);
+
+                if (buyitem.name == "MarioStar$4")
+                    this.progressAch("Gold medal 24", 1, false);
+
+                if (buyitem.name == "Double$4")
+                    this.progressAch("Gold medal 23", 1, false);
+
+                if (buyitem.name == "Magnet$4")
+                    this.progressAch("Gold medal 21", 1, false);
+
+                                    PlayerData.inst.playerItem.crystals = parseFloat(x.crystals);
                 PlayerData.inst.playerItem.money = parseFloat(x.money);
 
                 PlayerData.inst.items_enabled.push({id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
@@ -2039,6 +2081,7 @@ ShopStage.prototype.createItemBtn = function (item) {
         tf.setTextSafe(desctext);
         tf.item = item;
     }
+
     ico.mouseout = function (evt) {
         var tf = CObj.getById("tfdescd");
         if (tf.item == item)
@@ -2099,7 +2142,7 @@ ShopStage.prototype.createItemBtn = function (item) {
                 bgSprite = "price star.png";
                 tftext = item.pricecrys.toString();
             } else {
-            clickFunc = buyItem;
+                clickFunc = buyItem;
                 bgSprite = "price coin.png";
                 btnName = "buy button";
                 tftext = item.price.toString();
@@ -5585,6 +5628,15 @@ LauncherBG.prototype.process = function (fake) {
             PlayerData.inst.progressAch("Gold medal 4", 1);
         }
 
+        if (this.distance > 1500 && this.distance < 1520) {
+            PlayerData.inst.progressAch("Gold medal 37", 1);
+        }
+
+        if (this.distance > 3000 && this.distance < 3020) {
+            PlayerData.inst.progressAch("Gold medal 38", 1);
+        }
+
+
         if (Math.floor(this.distance / this.incDist) != Math.floor((this.distance + delta) / this.incDist)) {
 
             this.maxVelocity += this.speedUpCoef;
@@ -6191,8 +6243,11 @@ CMonster.prototype.kill = function()
     }
 
 
-    PlayerData.inst.progressAch("Gold medal 10", 1/100, false);
+    PlayerData.inst.progressAch("Gold medal 10", 1/50, false);
     PlayerData.inst.progressAch("Gold medal 11", 1/200, false);
+    PlayerData.inst.progressAch("Gold medal 12", 1/500, false);
+    PlayerData.inst.progressAch("Gold medal 13", 1/1000, false);
+    PlayerData.inst.progressAch("Gold medal 14", 1/3000, false);
 
 
     PlayerData.inst.gainExp(this.xp);
@@ -6304,6 +6359,16 @@ CDrone.prototype.spawnGrenade = function()
     var t = this;
     new TweenMax.delayedCall(1, function(){t.spawnGrenade();});
 }
+
+CDrone.prototype.kill = function()
+{
+    CMonster.prototype.kill.call(this);
+
+    PlayerData.inst.progressAch("Gold medal 34", 1/10, false);
+    PlayerData.inst.progressAch("Gold medal 35", 1/50, false);
+    PlayerData.inst.progressAch("Gold medal 36", 1/100, false);
+}
+
 CDrone.prototype.process = function()
 {
 
@@ -6317,6 +6382,15 @@ function CDrone2(in_x,in_y,animname,cr_bar){
     var t = this;
 }
 
+
+CDrone2.prototype.kill = function()
+{
+    CMonster.prototype.kill.call(this);
+
+    PlayerData.inst.progressAch("Gold medal 34", 1/10, false);
+    PlayerData.inst.progressAch("Gold medal 35", 1/50, false);
+    PlayerData.inst.progressAch("Gold medal 36", 1/100, false);
+}
 extend(CObstacle, CMonster, true);
 
 function CObstacle(in_x,in_y,animname,cr_bar){
@@ -6496,6 +6570,12 @@ function Boss2(in_x,in_y,animname,cr_bar){
     this.setRandDisp();
 
 };
+
+Boss2.prototype.kill = function()
+{
+    CMonster.prototype.kill.call(this);
+    PlayerData.inst.progressAch("Gold medal 15", 1, false);
+}
 
 Boss2.prototype.setRandDisp = function() {
     var x = (1 + Math.floor(Math.random()*5)).toString();
@@ -7116,6 +7196,15 @@ function BonusMonGnome(in_x,in_y,animname,cr_bar){
 BonusMonGnome.prototype.collide = function (obj2)
 {
 
+}
+
+BonusMonGnome.prototype.kill = function()
+{
+    CMonster.prototype.kill.call(this);
+
+    PlayerData.inst.progressAch("Gold medal 31", 1/10, false);
+    PlayerData.inst.progressAch("Gold medal 32", 1/50, false);
+    PlayerData.inst.progressAch("Gold medal 33", 1/100, false);
 }
 
 BonusMonGnome.prototype.dealDamage = function(dmg)
@@ -9021,6 +9110,7 @@ PlayerData = function()
        {crystals: 3, money: 3000, xp: 34000},
        {crystals: 3, money: 3000, xp: 35000}];
 
+   this.achChanged = [];
    this.items = {};
    this.achs = {};
    this.score = 0;
@@ -9042,9 +9132,9 @@ PlayerData = function()
         vkparams.novk = true;
     }
 
-   /* if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+    if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
         vkparams.viewerid != "197515742") return;
-*/
+
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
@@ -9074,8 +9164,14 @@ PlayerData = function()
             var x = JSON.parse(data);
     }
 
+
+    //var sJWS = KJUR.jws.JWS.sign("none", '{"cty":"JWT"}', '{"age": 21}');
+
     vkparams.token = x.tokenJWT;
     vkparams.registered = x.registered;
+
+
+
     startServerTimeTicker();
     if (!vkparams.registered)console.log("user logged in"); else
         console.log("user registered");
@@ -9116,6 +9212,17 @@ PlayerData.prototype.comboCheck = function()
 
          if (d > dayminutes*10)
          this.progressAch("Gold medal 9", 1, false);
+
+          if (d > dayminutes*5)
+              this.progressAch("Gold medal 16", 1, false);
+
+          if (d > dayminutes*15)
+              this.progressAch("Gold medal 18", 1, false);
+
+          if (d > dayminutes*20)
+              this.progressAch("Gold medal 19", 1, false);
+
+
       }
    } else
    {
@@ -9394,6 +9501,11 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
       if (this.achs_progress[j].id_ach == this.achs[i].id)
       {
 
+          if (this.achChanged.indexOf(this.achs_progress[j].id_ach) < 0)
+          {
+              this.achChanged.push(this.achs_progress[j].id_ach);
+          }
+
          if (replace)
          {
             if (progress >= 1) complete = true;
@@ -9414,7 +9526,6 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
    {
       this.savePlayerAchs(this.achs_progress[j]);
       this.showAch(this.achs[i]);
-      incMetric("ACH GAINED " + this.achs[i].name);
    }
    return complete;
 }
@@ -9444,8 +9555,6 @@ PlayerData.prototype.loadEnd = function() {
     if (!eqWeapon) PlayerData.inst.equipItem(PlayerData.inst.baseWeapIt, "1");
 
     console.log("db init");
-   // PlayerData.inst.updateScore();
-    //PlayerData.inst.createAchProgress();
     window.dbinit  = true;
     onAssetsLoaded();
 }
@@ -9504,7 +9613,12 @@ PlayerData.prototype.createAchProgress = function(cb)
 
       if (!containAch)
       {
-         this.achs_progress.push({id_ach: this.achs[i].id, id_player: this.playerItem.id, progress: 0});
+          var obj = {id_ach: this.achs[i].id, id_player: this.playerItem.id, progress: 0};
+          this.achs_progress.push(obj);
+          PlayerData.inst.callDedAPI("INSERT", "tb_ach_player", null, obj, function(id)
+          {
+              obj.id = id;
+          });
       }
    }
 }
@@ -9531,13 +9645,6 @@ PlayerData.prototype.getEventById = function(id)
 PlayerData.prototype.updateScore = function(cb)
 {
     PlayerData.inst.callDedAPI("UPDATE_SCORE", null, null, null, cb);
-    /*azureclient.invokeApi("update_score", {
-        body: {id_player: PlayerData.inst.playerItem.id, score: PlayerData.inst.playerItem.maxdistance},
-        method: "post"
-    }).done(function(r)
-    {
-        if (cb) cb(JSON.parse(r.response));
-    });*/
 }
 
 PlayerData.prototype.intJSON = function(obj)
@@ -9574,29 +9681,7 @@ PlayerData.prototype.loadData = function(cb)
    checkDb();
    this.loadCount = 0;
    console.log("PlayerData.loadData");
-
     var totalLoads = 6;
-
- /*  window.azureclient.getTable("tb_achs").read().done(
-       function (results) {
-           console.log(JSON.stringify(results));
-          PlayerData.inst.achs = results;
-          PlayerData.inst.loadCount ++;
-          if (PlayerData.inst.loadCount == totalLoads && cb) cb();
-       }, function (res) {}
-   );*/
-
-
-    /*
-     window.azureclient.getTable("tb_edevent").read().done(
-     function (results) {
-     PlayerData.inst.events = results;
-     console.log(JSON.stringify(results));
-     PlayerData.inst.loadCount ++;
-     if (PlayerData.inst.loadCount == totalLoads && cb) cb();
-     }, function (res) {}
-     );
-     */
 
     PlayerData.inst.callDedAPI("READ", "tb_edevent", null, null, function(r)
     {
@@ -9608,6 +9693,7 @@ PlayerData.prototype.loadData = function(cb)
     PlayerData.inst.callDedAPI("READ", "tb_achs", null, null, function(r)
     {
         PlayerData.inst.achs = PlayerData.inst.intJSON(r);
+
         PlayerData.inst.loadCount ++;
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
     });
@@ -9670,8 +9756,8 @@ PlayerData.prototype.loadData = function(cb)
 
     PlayerData.inst.callDedAPI("READ", "tb_ach_player", null, null, function(r)
     {
-       PlayerData.inst.achs_progress = PlayerData.inst.intJSON(r);
-
+        PlayerData.inst.achs_progress = PlayerData.inst.intJSON(r);
+        PlayerData.inst.createAchProgress();
         console.log("achs loaded");
         PlayerData.inst.loadCount ++;
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
@@ -9776,7 +9862,6 @@ PlayerData.prototype.savePlayerAchs = function(onlyOne)
       }
 }
 
-
 PlayerData.prototype.savePlayerEvents = function(onlyOne)
 {
    for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
@@ -9800,7 +9885,6 @@ PlayerData.prototype.savePlayerItems = function(onlyOne)
 
 PlayerData.prototype.login = function()
 {
-
     $.ajax({
         encoding:"UTF-8",
         type: "POST",
@@ -9905,6 +9989,7 @@ PlayerData.prototype.getVKuserData = function(playerItem)
 PlayerData.prototype.saveRunProgress = function(noUpdate)
 {
     if (SM.inst.currentStage == gameStage && !gameStage.progressSaved) {
+
         var rec = Math.round(PlayerData.inst.playerItem.maxdistance);
         if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance) {
             rec = Math.round(LauncherBG.inst.distance);
@@ -9914,19 +9999,20 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
                 PlayerData.inst.playerItem.rank = parseInt(r.rank);
             });
         }
+
         gameStage.progressSaved = true;
         PlayerData.inst.playerItem.money += Math.round(PlayerData.inst.score);
         PlayerData.inst.playerItem.maxdistance = rec;
-        /*
-        if (noUpdate == null)
-        */
         PlayerData.inst.savePlayerData();
 
         if (gameStage.ari) {gameStage.ari.kill();
             gameStage.ari = null;}
         PlayerData.inst.saveScore();
 
-
+        for (var i = 0; i < PlayerData.inst.achChanged.length; ++i) {
+            PlayerData.inst.savePlayerAchs(PlayerData.inst.achChanged[i]);
+            console.log("ACH SAVED");
+        }
     }
 }
 
@@ -9960,6 +10046,18 @@ PlayerData.prototype.getVKfriends = function()
             PlayerData.inst.getVKuserData();
         } else {
             var friends = data.response;
+            var fl = friends.length;
+            if (fl >= 3)
+                PlayerData.inst.progressAch("Gold medal 26", 1, false);
+            if (fl >= 5)
+                PlayerData.inst.progressAch("Gold medal 27", 1, false);
+            if (fl >= 10)
+                PlayerData.inst.progressAch("Gold medal 28", 1, false);
+            if (fl >= 15)
+                PlayerData.inst.progressAch("Gold medal 29", 1, false);
+            if (fl >= 20)
+                PlayerData.inst.progressAch("Gold medal 30", 1, false);
+
             for (var i = 0; i < friends.length; ++i)
             {
                 var s = friends[i].toString();
@@ -9971,7 +10069,7 @@ PlayerData.prototype.getVKfriends = function()
 
             if (vkparams.friendsIngameIDs.length > 0) {
 
-                PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: vkparams.friendsFilter, take: 15, skip: 0}, function(c)
+                PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: vkparams.friendsFilter, take: 60, skip: 0}, function(c)
                 {
                     vkparams.friendsIngame = c;
                     /*vkparams.friendsIngameIDs = [];
@@ -10007,676 +10105,6 @@ PlayerData.prototype.getVKfriends = function()
     });
 };
 
-var tWeapon = "weap";
-var tPerk = "perk";
-var tBoost = "boost";
-var tApp = "app.";
-var tHat = "hat";
-
-
-var eventsVar = '[{"id":"AD7026E7-E8D3-4875-8603-88A2359B0815","name":"event2","desc":"Получить пенсию","delay_min":2880,"xp_gain":0,"money_gain":500,"crystal_gain":0,"gfx":"action 2.png","reqlvl":1,"exectime":120},{"id":"A5EB5C84-97C3-4887-9D68-154BB315A895","name":"event5","desc":"Постирать мундир","delay_min":2880,"xp_gain":0,"money_gain":0,"crystal_gain":8,"gfx":"action 5.png","reqlvl":9,"exectime":120},{"id":"1F94C1A3-64F2-49D1-BD3C-8C66209EA613","name":"event4","desc":"Заглянуть в интернет","delay_min":1440,"xp_gain":600,"money_gain":0,"crystal_gain":0,"gfx":"action 4.png","reqlvl":6,"exectime":140},{"id":"A8080122-06EE-442E-949B-5FE8E960DF54","name":"event3","desc":"Посмотреть новости","delay_min":360,"xp_gain":50,"money_gain":0,"crystal_gain":0,"gfx":"action 3.png","reqlvl":2,"exectime":30},{"id":"A35101AA-2484-4C98-92C1-9A26D564E809","name":"event6","desc":"Доесть ужин","delay_min":1440,"xp_gain":100,"money_gain":0,"crystal_gain":0,"gfx":"action 6.png","reqlvl":1,"exectime":10},{"id":"86AB8110-BD8D-4DE5-A535-5DCE4EB19452","name":"event10","desc":"Посмотреть фотографии","delay_min":60,"xp_gain":50,"money_gain":0,"crystal_gain":0,"gfx":"action 10.png","reqlvl":1,"exectime":10},{"id":"2461E45B-C109-45EA-9295-91D9685E5651","name":"event1","desc":"Помянуть боевых товарищей","delay_min":1440,"xp_gain":0,"money_gain":0,"crystal_gain":2,"gfx":"action 1.png","reqlvl":2,"exectime":30},{"id":"78AC92A6-76C8-4D74-9001-95C4CBEC8DF8","name":"event7","desc":"Позвонить внуку","delay_min":1440,"xp_gain":900,"money_gain":0,"crystal_gain":0,"gfx":"action 7.png","reqlvl":8,"exectime":80},{"id":"785A09ED-A4FF-4066-8E8B-9D2810219975","name":"event8","desc":"Помочь бабке по хозяйству","delay_min":240,"xp_gain":0,"money_gain":0,"crystal_gain":3,"gfx":"action 8.png","reqlvl":6,"exectime":50},{"id":"9F0FBADB-58B1-4D32-B317-88C9E7732664","name":"event9","desc":"Подремать","delay_min":360,"xp_gain":200,"money_gain":0,"crystal_gain":0,"gfx":"action 9.png","reqlvl":5,"exectime":120},{"id":"50DC67F5-9EEC-49FA-9BFD-3D9A74DFD02C","name":"event13","desc":"Сходить в поликлинику","delay_min":2880,"xp_gain":0,"money_gain":1000,"crystal_gain":3,"gfx":"action 13.png","reqlvl":3,"exectime":200},{"id":"505A0266-322A-422D-A429-EA768DBDB9C8","name":"event12","desc":"Почистить ордена","delay_min":1440,"xp_gain":0,"money_gain":0,"crystal_gain":2,"gfx":"action 12.png","reqlvl":1,"exectime":1},{"id":"42E71D8A-AB18-4BBA-9515-F227A7B3909C","name":"event11","desc":"Почитать книгу","delay_min":240,"xp_gain":0,"money_gain":0,"crystal_gain":1,"gfx":"action 11.png","reqlvl":5,"exectime":60},{"id":"F40FDAC0-ABB3-47D9-952B-B28FF1EE5493","name":"event14","desc":"Покормить кота","delay_min":360,"xp_gain":0,"money_gain":1000,"crystal_gain":0,"gfx":"action 14.png","reqlvl":6,"exectime":30}]';
-var itemsVar = '[{"id":"6ED7C938-E203-4D30-88D1-0BF07C1823C9","type":"weap","price":2400,"pricecrys":48,"name":"Minigun","desc":"Миниган - многоствольный скорострельный пулемёт==построенный по схеме Гатлинга==магазин 100 патронов","gfx":"gun3","reqlvl":7},{"id":"68AFAEDC-B3E0-401E-9E1A-E272084F2E11","type":"weap","price":-1,"pricecrys":-1,"name":"Rifle","desc":"Старое дедовское ружьишко","gfx":"gun0","reqlvl":-1},{"id":"ADDE46AE-5172-4998-A040-8A30208F82F5","type":"weap","price":8000,"pricecrys":160,"name":"Grenade launcher","desc":"Гранатомёт - ручной многозарядный==полуавтоматический гранатомет==3 снаряда","gfx":"gun4","reqlvl":10},{"id":"099C7C92-CE98-4271-AB3D-26D01CD14EA5","type":"weap","price":30000,"pricecrys":600,"name":"Plazma Cannon","desc":"Лазерная винтовка - энергетическое оружие==разработанное в центре Сколково","gfx":"gun5","reqlvl":15},{"id":"5D1C0768-4641-4BCB-A11C-BC28FDF5E8DA","type":"boost","price":150,"pricecrys":-1,"name":"Tablets","desc":"Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 1 секунда.","gfx":"booster1","reqlvl":1},{"id":"502C9C7F-6844-4F80-98A8-FC47282EBA47","type":"app.hat","price":3200,"pricecrys":-1,"name":"Appearence.Hat2","desc":"Боевая каска.==Осталась со времён войны.","gfx":"hat2","reqlvl":-1},{"id":"F54396E1-7C3B-4AE2-A6CC-CA1FD5FE9978","type":"app.hat","price":8500,"pricecrys":-1,"name":"Appearence.Hat4","desc":"Молодёжная кепка.==Внучок оставил однажды и забыл забрать.","gfx":"hat4","reqlvl":-1},{"id":"20D318C0-4633-41D0-B406-FD34485A88BE","type":"app.hat","price":1500,"pricecrys":-1,"name":"Appearence.Hat1","desc":"Старая добрая ушаночка.","gfx":"hat1","reqlvl":-1},{"id":"55FDBF00-18D5-4166-8CAA-EA857282A1CD","type":"weap","price":1300,"pricecrys":26,"name":"AK-74","desc":"Калаш|АК-47 - автомат был сконструирован==Михаилом Тимофеевичем Калашниковым==Увеличенный магазин: 50 патронов","gfx":"gun2","reqlvl":4},{"id":"AC2FBF7D-C1C3-436E-9143-62B214E84BED","type":"app.hat","price":5300,"pricecrys":-1,"name":"Appearence.Hat3","desc":"Вязаная шапка.==Сделана бабкой с любовью.","gfx":"hat3","reqlvl":-1},{"id":"9BC2F82D-3E58-4C4A-8B9A-5DB44AF8007C","type":"boost","price":100,"pricecrys":-1,"name":"Magnet","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 5 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":1},{"id":"3AE0E027-3DAD-4F2E-A212-69A1E255F1A0","type":"app.hat","price":13000,"pricecrys":-1,"name":"Appearence.Hat6","desc":"Ковбойская шляпа.==Сын привёз из командировки в Америку.","gfx":"hat6","reqlvl":-1},{"id":"ACEB3015-EB8A-4A64-940F-2691A4E0446D","type":"app.hat","price":10000,"pricecrys":-1,"name":"Appearence.Hat5","desc":"Подарок от старого товарища Брюса.","gfx":"hat5","reqlvl":-1},{"id":"4E8B719A-899C-4891-9D99-E802703DE82E","type":"boost","price":500,"pricecrys":-1,"name":"Health","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 2 жизни","gfx":"booster4","reqlvl":1},{"id":"49834C28-2216-4FF9-93AF-557E9CF1C986","type":"boost","price":600,"pricecrys":-1,"name":"Double","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 3 секунды.==+225% золота.","gfx":"booster3","reqlvl":-1},{"id":"105A3B3C-160C-4355-AB38-9F107DB5A831","type":"boost","price":300,"pricecrys":-1,"name":"MarioStar","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 2 секунды.","gfx":"booster5","reqlvl":1},{"id":"BCEB6650-A98F-4AFA-A0FA-102BC2FBC1AD","type":"weap","price":600,"pricecrys":12,"name":"PPS","desc":"ППШ|Пистолет-пулемёт Шпагина==магазин 20 патронов","gfx":"gun1","reqlvl":2},{"id":"EC8B0A97-C84C-4325-B600-16EDC6F4CE2A","type":"boost","price":400,"pricecrys":8,"name":"Magnet$2","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 15 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":4},{"id":"0B97B8DF-372A-4230-BD08-FCB8E7453BE1","type":"boost","price":2000,"pricecrys":40,"name":"Magnet$4","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 25 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":8},{"id":"47FA0935-0CC3-4F23-A027-2649E81BBA92","type":"boost","price":800,"pricecrys":16,"name":"Magnet$3","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 20 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":6},{"id":"5EF89B3A-A758-4DFA-A952-63538BF1907E","type":"boost","price":200,"pricecrys":4,"name":"Magnet$1","desc":"Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 10 секунд==Дистанция подбора увеличена.","gfx":"booster2","reqlvl":2},{"id":"1E76FCE6-457D-4EF1-A66E-6A275013937D","type":"boost","price":1800,"pricecrys":24,"name":"Tablets$3","desc":"Биодобавки|Таблетка: ускоряет деда==и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 4 секунда.","gfx":"booster1","reqlvl":9},{"id":"3B6692F2-5ED9-420D-8A03-2C6FED5F5C32","type":"boost","price":600,"pricecrys":12,"name":"Tablets$2","desc":"Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 3 секунды.","gfx":"booster1","reqlvl":6},{"id":"095B6806-CDAA-4784-AB43-2CB2B5C2B66E","type":"boost","price":300,"pricecrys":6,"name":"Tablets$1","desc":"Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 2 секунды.","gfx":"booster1","reqlvl":3},{"id":"F33D13E2-C070-4FA3-AE40-B770D4718473","type":"boost","price":3500,"pricecrys":60,"name":"Tablets$4","desc":"Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 5 секунд.","gfx":"booster1","reqlvl":12},{"id":"5E575830-911E-41B8-88EF-538F37DF9A7F","type":"boost","price":600,"pricecrys":8,"name":"MarioStar$1","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 4 секунды.","gfx":"booster5","reqlvl":3},{"id":"D7B1CFCD-99CB-4A6A-8337-1707BAD25887","type":"boost","price":1000,"pricecrys":20,"name":"Health$1","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 3 жизни","gfx":"booster4","reqlvl":4},{"id":"4A54E9DC-93B8-4DCB-8B01-33E6AC168E74","type":"boost","price":4000,"pricecrys":80,"name":"Health$3","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 5 жизней","gfx":"booster4","reqlvl":12},{"id":"7FC75CEE-7E82-4871-B169-C437940C98B8","type":"boost","price":10000,"pricecrys":200,"name":"Health$4","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==Восстанавливает здоровье==+Дополнительный слот жизни навсегда.","gfx":"booster4","reqlvl":15},{"id":"38B9E840-F701-4E87-A991-68519C8A95CB","type":"boost","price":5000,"pricecrys":100,"name":"MarioStar$4","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 10 секунды.","gfx":"booster5","reqlvl":10},{"id":"5D7B9DE0-A146-43F8-8B22-0FC8875A0BE5","type":"boost","price":2400,"pricecrys":32,"name":"MarioStar$3","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 8 секунды.","gfx":"booster5","reqlvl":7},{"id":"E37EBDDF-D155-4C59-A98C-8E73EF3D4D9E","type":"boost","price":1200,"pricecrys":24,"name":"Double$1","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 6 секунд.==+250% золота.","gfx":"booster3","reqlvl":4},{"id":"015F93BB-A89B-47E4-8F1B-E13E421B5974","type":"boost","price":4400,"pricecrys":88,"name":"Double$3","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 12 секунд.== +300% золота","gfx":"booster3","reqlvl":10},{"id":"4E524D43-9C94-4E4F-B77B-CA2FC46728EB","type":"boost","price":2200,"pricecrys":44,"name":"Double$2","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 9 секунд.== +275% золота.","gfx":"booster3","reqlvl":8},{"id":"3F416BFA-8F49-4279-BF26-B5D8BA92A690","type":"boost","price":9000,"pricecrys":180,"name":"Double$4","desc":"В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 15 секунд.== +325% золота","gfx":"booster3","reqlvl":15},{"id":"CEA6B748-2B72-4D7A-9320-5CFF079C640A","type":"boost","price":2000,"pricecrys":40,"name":"Health$2","desc":"Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь.==[Улучшение]==Лечит на 4 жизни.","gfx":"booster4","reqlvl":8},{"id":"39F933BC-11E6-4ABA-8DB8-C3649E428B21","type":"boost","price":1200,"pricecrys":16,"name":"MarioStar$2","desc":"Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 6 секунды.","gfx":"booster5","reqlvl":5}]';
-var achsVar = '[{"id":"A5D77986-E2A9-4712-B0FE-F2E3044E5356","name":"Gold medal 1","desc":"Первый бой","gfx":"orden.png"},{"id":"E2CE9CFA-09A4-4BB9-99AE-24CAE2E9A839","name":"Gold medal 2","desc":"Долгий путь 100м","gfx":"orden6.png"},{"id":"8AD0AF15-BAE3-4515-AE72-8930DFA49143","name":"Gold medal 5","desc":"Использовать бустер","gfx":"orden5.png"},{"id":"06D260E8-21E0-49A8-AAD7-2CCDBCEDA1AE","name":"Gold medal 3","desc":"Долгий путь 500м","gfx":"orden10.png"},{"id":"13FB9A76-46C6-4914-A525-308E6EE1D041","name":"Gold medal 4","desc":"Долгий путь 1000м","gfx":"orden11.png"},{"id":"F5FBBD96-4E36-492D-ACCB-D89B90457CC3","name":"Gold medal 6","desc":"10 раз помянул друзей","gfx":"orden2.png"},{"id":"2F0BDF1B-C7B4-40EA-84A6-1AF259D7AD97","name":"Gold medal 7","desc":"Победил первого босса","gfx":"orden.png"},{"id":"F14C0F44-F586-4CE1-A538-073E4DC98589","name":"Gold medal 9","desc":"10 дней без перерыва","gfx":"orden2.png"},{"id":"4ECA073B-329C-4578-B705-FDE874400DE6","name":"Gold medal 8","desc":"3 дня без перерыва","gfx":"orden7.png"},{"id":"F52BC29E-88EC-4435-8AE5-8F2568565329","name":"Gold medal 10","desc":"Наказать 100 школьников","gfx":"orden6.png"},{"id":"8E1375CB-D048-4027-9890-AD0BC7E9630E","name":"Gold medal 11","desc":"Наказать 200 школьников","gfx":"orden12.png"}]';
-
-function checkDb ()
-{
-   /* azureclient.invokeApi("givemoney0xff", {
-        body: {platformid: "2882845", money: 1000, crystals: 0},
-        method: "post"
-    }).done(function(r)
-    {
-        console.log("MONEY GIVE Ok");
-    });*/
-   //updDb(dbobj);
-}
-
-
-
-
-var dbobj =
-    [
-        {
-            tbname: "tb_edevent",
-            items:
-                [
-                    {
-                        desc: "Помянуть боевых товарищей",
-                        name: "event1",
-                        delay_min: 24*60,
-                        xp_gain: 0,
-                        money_gain: 0,
-                        crystal_gain: 2,
-                        gfx: "action 1.png",
-                        reqlvl: 2,
-                        exectime: 30
-                    },
-                    {
-                        desc: "Получить пенсию",
-                        name: "event2",
-                        delay_min: 48*60,
-                        xp_gain: 0,
-                        money_gain: 500,
-                        crystal_gain: 0,
-                        gfx: "action 2.png",
-                        reqlvl: 1,
-                        exectime: 120
-                    },
-                    {
-                        desc: "Посмотреть новости",
-                        name: "event3",
-                        delay_min: 6*60,
-                        xp_gain: 50,
-                        money_gain: 0,
-                        crystal_gain: 0,
-                        gfx: "action 3.png",
-                        reqlvl: 2,
-                        exectime: 30
-                    },
-                    {
-                        desc: "Заглянуть в интернет",
-                        name: "event4",
-                        delay_min: 24*60,
-                        xp_gain: 600,
-                        money_gain: 0,
-                        crystal_gain: 0,
-                        gfx: "action 4.png",
-                        reqlvl: 7,
-                        exectime: 140
-                    },
-                    {
-                        desc: "Постирать мундир",
-                        name: "event5",
-                        delay_min: 48*60,
-                        xp_gain: 0,
-                        money_gain: 0,
-                        crystal_gain: 8,
-                        gfx: "action 5.png",
-                        reqlvl: 9,
-                        exectime: 120
-                    },
-                    {
-                        desc: "Доесть ужин",
-                        name: "event6",
-                        delay_min: 24*60,
-                        xp_gain: 100,
-                        money_gain: 0,
-                        crystal_gain: 0,
-                        gfx: "action 6.png",
-                        reqlvl: 1,
-                        exectime: 10
-                    },
-                    {
-                        desc: "Позвонить внуку",
-                        name: "event7",
-                        delay_min: 24*60,
-                        xp_gain: 900,
-                        money_gain: 0,
-                        crystal_gain: 0,
-                        gfx: "action 7.png",
-                        reqlvl: 8,
-                        exectime: 80
-                    },
-                    {
-                        desc: "Помочь бабке по хозяйству",
-                        name: "event8",
-                        delay_min: 4*60,
-                        xp_gain: 0,
-                        money_gain: 0,
-                        crystal_gain: 3,
-                        gfx: "action 8.png",
-                        reqlvl: 6,
-                        exectime: 50
-                    },
-                    {
-                        desc: "Подремать",
-                        name: "event9",
-                        delay_min: 6*60,
-                        xp_gain: 200,
-                        money_gain: 0,
-                        crystal_gain: 0,
-                        gfx: "action 9.png",
-                        reqlvl: 5,
-                        exectime: 120
-                    },
-                    {
-                        desc: "Посмотреть фотографии",
-                        name: "event10",
-                        delay_min: 60,
-                        xp_gain: 50,
-                        money_gain: 0,
-                        crystal_gain: 0,
-                        gfx: "action 10.png",
-                        reqlvl: 1,
-                        exectime: 10
-
-                    },
-                    {
-                        desc: "Почитать книгу",
-                        name: "event11",
-                        delay_min: 4*60,
-                        xp_gain: 0,
-                        money_gain: 0,
-                        crystal_gain: 1,
-                        gfx: "action 11.png",
-                        reqlvl: 5,
-                        exectime: 60
-
-                    },
-                    {
-                        desc: "Почистить ордена",
-                        name: "event12",
-                        delay_min: 24*60,
-                        xp_gain: 0,
-                        money_gain: 0,
-                        crystal_gain: 2,
-                        gfx: "action 12.png",
-                        reqlvl: 1,
-                        exectime: 1
-
-                    },
-                    {
-                        desc: "Сходить в поликлинику",
-                        name: "event13",
-                        delay_min: 48*60,
-                        xp_gain: 0,
-                        money_gain: 1000,
-                        crystal_gain: 3,
-                        gfx: "action 13.png",
-                        reqlvl: 3,
-                        exectime: 200
-
-                    },
-                    {
-                        name: "event14",
-                        desc: "Покормить кота",
-                        delay_min: 6*60,
-                        xp_gain: 0,
-                        money_gain: 1000,
-                        crystal_gain: 0,
-                        gfx: "action 14.png",
-                        reqlvl: 6,
-                        exectime: 30
-                    }
-                ]
-
-        },
-        {
-            tbname: "tb_achs",
-            items:
-                [
-                    {
-                        name: "Gold medal 1",
-                        desc: "Первый бой",
-                        gfx: "orden.png"
-                    },
-                    {
-                        name: "Gold medal 2",
-                        desc: "Долгий путь 100м", //+
-                        gfx: "orden6.png"
-                    },
-                    {
-                        name: "Gold medal 3",
-                        desc: "Долгий путь 500м", //+
-                        gfx: "orden10.png"
-                    },
-                    {
-                        name: "Gold medal 4",
-                        desc: "Долгий путь 1000м",// +
-                        gfx: "orden11.png"
-                    },
-                    {
-                        name: "Gold medal 5",
-                        desc: "Использовать бустер",
-                        gfx: "orden5.png"
-                    },
-                    {
-                        name: "Gold medal 6",
-                        desc: "10 раз помянул друзей",
-                        gfx: "orden2.png"
-                    },
-                    {
-                        name: "Gold medal 7",
-                        desc: "Победил первого босса",
-                        gfx: "orden.png"
-                    }
-                    ,
-                    {
-                        name: "Gold medal 8",
-                        desc: "3 дня без перерыва", //+
-                        gfx: "orden7.png"
-                    }
-                    ,
-                    {
-                        name: "Gold medal 9",
-                        desc: "10 дней без перерыва", //+
-                        gfx: "orden2.png"
-                    }
-                    ,
-                    {
-                        name: "Gold medal 10",
-                        desc: "Наказать 100 школьников", //+
-                        gfx: "orden6.png"
-                    }
-                    ,
-                    {
-                        name: "Gold medal 11",
-                        desc: "Наказать 200 школьников", //+
-                        gfx: "orden12.png"
-                    }
-                ]
-        },
-        {
-            tbname: "tb_items",
-
-            items:
-                [
-                    {
-                        type: tWeapon,
-                        price :-1,
-                        pricecrys: -1,
-                        name:"Rifle",
-                        desc:"Старое дедовское ружьишко",
-                        gfx: "gun0",
-                        reqlvl: -1
-                    },
-                    {
-                        type: tWeapon,
-                        price :600,
-                        pricecrys: 12,
-                        name:"PPS",
-                        desc:"ППШ|Пистолет-пулемёт Шпагина==магазин 20 патронов",
-                        gfx: "gun1",
-                        reqlvl: 2
-                    },
-                    {
-                        type: tWeapon,
-                        price: 1300,
-                        pricecrys: 26,
-                        name: "AK-74",
-                        desc: "Калаш|АК-47 - автомат был сконструирован==Михаилом Тимофеевичем Калашниковым==Увеличенный магазин: 50 патронов",
-                        gfx: "gun2",
-                        reqlvl: 4
-                    },
-                    {
-                        type: tWeapon,
-                        price: 2400,
-                        pricecrys: 48,
-                        name: "Minigun",
-                        desc: "Миниган - многоствольный скорострельный пулемёт==построенный по схеме Гатлинга==магазин 100 патронов",
-                        gfx: "gun3",
-                        reqlvl: 7
-                    },
-                    {
-                        type: tWeapon,
-                        price: 8000,
-                        pricecrys: 160,
-                        name: "Grenade launcher",
-                        desc: "Гранатомёт - ручной многозарядный==полуавтоматический гранатомет==3 снаряда",
-                        gfx: "gun4",
-                        reqlvl: 10
-                    },
-                    {
-                        type: tWeapon,
-                        price: 30000,
-                        pricecrys: 600,
-                        name: "Plazma Cannon",
-                        desc: "Лазерная винтовка - энергетическое оружие==разработанное в центре Сколково",
-                        gfx: "gun5",
-                        reqlvl: 15
-                    },
-                    {
-                        type: tBoost,
-                        price: 100,
-                        pricecrys: -1,
-                        name: "Magnet",
-                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 5 секунд==Дистанция подбора увеличена.",
-                        gfx: "booster2",
-                        reqlvl: 1
-                    },
-                    {
-                        type: tBoost,
-                        price: 200,
-                        pricecrys: 4,
-                        name: "Magnet$1",
-                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 10 секунд==Дистанция подбора увеличена.",
-                        gfx: "booster2",
-                        reqlvl: 2
-                    },
-                    {
-                        type: tBoost,
-                        price: 400,
-                        pricecrys: 8,
-                        name: "Magnet$2",
-                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 15 секунд==Дистанция подбора увеличена.",
-                        gfx: "booster2",
-                        reqlvl: 4
-                    },
-                    {
-                        type: tBoost,
-                        price: 800,
-                        pricecrys: 16,
-                        name: "Magnet$3",
-                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 20 секунд==Дистанция подбора увеличена.",
-                        gfx: "booster2",
-                        reqlvl: 6
-                    },
-                    {
-                        type: tBoost,
-                        price: 2000,
-                        pricecrys: 40,
-                        name: "Magnet$4",
-                        desc: "Магнит|Магнит: притягивает монеты прямо в карман.==Действует 40 секунд.==[Улучшение]==Продолжительность + 25 секунд==Дистанция подбора увеличена.",
-                        gfx: "booster2",
-                        reqlvl: 8
-                    },
-                    {
-                        type: tBoost,
-                        price: 150,
-                        pricecrys: -1,
-                        name: "Tablets",
-                        desc: "Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 1 секунда.",
-                        gfx: "booster1",
-                        reqlvl: 1
-                    },
-                    {
-                        type: tBoost,
-                        price: 300,
-                        pricecrys: 6,
-                        name: "Tablets$1",
-                        desc: "Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 2 секунды.",
-                        gfx: "booster1",
-                        reqlvl: 3
-                    },
-                    {
-                        type: tBoost,
-                        price: 600,
-                        pricecrys: 12,
-                        name: "Tablets$2",
-                        desc: "Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 3 секунды.",
-                        gfx: "booster1",
-                        reqlvl: 6
-                    },
-                    {
-                        type: tBoost,
-                        price: 1800,
-                        pricecrys: 24,
-                        name: "Tablets$3",
-                        desc: "Биодобавки|Таблетка: ускоряет деда==и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 4 секунда.",
-                        gfx: "booster1",
-                        reqlvl: 9
-                    },
-                    {
-                        type: tBoost,
-                        price: 3500,
-                        pricecrys: 60,
-                        name: "Tablets$4",
-                        desc: "Биодобавки|Таблетка: ускоряет деда== и делает неуязвимым на 5 секунд.==[Улучшение]==Продолжительность + 5 секунд.",
-                        gfx: "booster1",
-                        reqlvl: 12
-                    },
-                    {
-                        type: tBoost,
-                        price: 500,
-                        pricecrys: -1,
-                        name: "Health",
-                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 2 жизни",
-                        gfx: "booster4",
-                        reqlvl: 1
-                    },
-                    {
-                        type: tBoost,
-                        price: 1000,
-                        pricecrys: 20,
-                        name: "Health$1",
-                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 3 жизни",
-                        gfx: "booster4",
-                        reqlvl: 4
-                    },
-                    {
-                        type: tBoost,
-                        price: 2000,
-                        pricecrys: 40,
-                        name: "Health$2",
-                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь.==[Улучшение]==Лечит на 4 жизни.",
-                        gfx: "booster4",
-                        reqlvl: 8
-                    },
-                    {
-                        type: tBoost,
-                        price: 4000,
-                        pricecrys: 80,
-                        name: "Health$3",
-                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==лечит на 5 жизней",
-                        gfx: "booster4",
-                        reqlvl: 12
-                    },
-                    {
-                        type: tBoost,
-                        price: 10000,
-                        pricecrys: 200,
-                        name: "Health$4",
-                        desc: "Больше ЖЫЗНИ|Сердце: лечит на 1 жизнь==[Улучшение]==Восстанавливает здоровье==+Дополнительный слот жизни навсегда.",
-                        gfx: "booster4",
-                        reqlvl: 15
-                    },
-                    {
-                        type: tBoost,
-                        price: 300,
-                        pricecrys: -1,
-                        name: "MarioStar",
-                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 2 секунды.",
-                        gfx: "booster5",
-                        reqlvl: 1
-                    },
-                    {
-                        type: tBoost,
-                        price: 600,
-                        pricecrys: 8,
-                        name: "MarioStar$1",
-                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 4 секунды.",
-                        gfx: "booster5",
-                        reqlvl: 3
-                    },
-                    {
-                        type: tBoost,
-                        price: 1200,
-                        pricecrys: 16,
-                        name: "MarioStar$2",
-                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 6 секунды.",
-                        gfx: "booster5",
-                        reqlvl: 5
-                    },
-                    {
-                        type: tBoost,
-                        price: 2400,
-                        pricecrys: 32,
-                        name: "MarioStar$3",
-                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 8 секунды.",
-                        gfx: "booster5",
-                        reqlvl: 7
-                    },
-                    {
-                        type: tBoost,
-                        price: 5000,
-                        pricecrys: 100,
-                        name: "MarioStar$4",
-                        desc: "Неуязвимость!|Глушитель от «Волги»:==позволяет деду летать в течение 9 секунд.==[Улучшение]==Продолжительность + 10 секунды.",
-                        gfx: "booster5",
-                        reqlvl: 10
-                    },
-                    {
-                        type: tBoost,
-                        price: 600,
-                        pricecrys: -1,
-                        name: "Double",
-                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 3 секунды.==+225% золота.",
-                        gfx: "booster3",
-                        reqlvl: -1
-                    },
-                    {
-                        type: tBoost,
-                        price: 1200,
-                        pricecrys: 24,
-                        name: "Double$1",
-                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 6 секунд.==+250% золота.",
-                        gfx: "booster3",
-                        reqlvl: 4
-                    },
-                    {
-                        type: tBoost,
-                        price: 2200,
-                        pricecrys: 44,
-                        name: "Double$2",
-                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 9 секунд.== +275% золота.",
-                        gfx: "booster3",
-                        reqlvl: 8
-                    },
-                    {
-                        type: tBoost,
-                        price: 4400,
-                        pricecrys: 88,
-                        name: "Double$3",
-                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 12 секунд.== +300% золота",
-                        gfx: "booster3",
-                        reqlvl: 10
-                    },
-                    {
-                        type: tBoost,
-                        price: 9000,
-                        pricecrys: 180,
-                        name: "Double$4",
-                        desc: "В два раза больше монет|Счастливая монетка: ==Выпадает больше золота. Действует 15 секунд.==[Улучшение]==Продолжительность + 15 секунд.== +325% золота",
-                        gfx: "booster3",
-                        reqlvl: 15
-                    },
-                    {
-                        type: tApp + tHat,
-                        price: 1500,
-                        pricecrys: -1,
-                        name: "Appearence.Hat1",
-                        desc: "Старая добрая ушаночка.",
-                        gfx: "hat1",
-                        reqlvl: -1
-                    },
-                    {
-                        type: tApp + tHat,
-                        price: 3200,
-                        pricecrys: -1,
-                        name: "Appearence.Hat2",
-                        desc: "Боевая каска.==Осталась со времён войны.",
-                        gfx: "hat2",
-                        reqlvl: -1
-                    },
-                    {
-                        type: tApp + tHat,
-                        price: 5300,
-                        pricecrys: -1,
-                        name: "Appearence.Hat3",
-                        desc: "Вязаная шапка.==Сделана бабкой с любовью.",
-                        gfx: "hat3",
-                        reqlvl: -1
-                    },
-                    {
-                        type: tApp + tHat,
-                        price: 8500,
-                        pricecrys: -1,
-                        name: "Appearence.Hat4",
-                        desc: "Молодёжная кепка.==Внучок оставил однажды и забыл забрать.",
-                        gfx: "hat4",
-                        reqlvl: -1
-                    },
-                    {
-                        type: tApp + tHat,
-                        price: 10000,
-                        pricecrys: -1,
-                        name: "Appearence.Hat5",
-                        desc: "Подарок от старого товарища Брюса.",
-                        gfx: "hat5",
-                        reqlvl: -1
-                    },
-                    {
-                        type: tApp + tHat,
-                        price: 13000,
-                        pricecrys: -1,
-                        name: "Appearence.Hat6",
-                        desc: "Ковбойская шляпа.==Сын привёз из командировки в Америку.",
-                        gfx: "hat6",
-                        reqlvl: -1
-                    }
-                ]
-        }
-    ];
-
-
-function updDb(o, onlyRead)
-{
-    /*
-     function makeid()
-     {
-     var text = "";
-     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-     for( var i=0; i < 5; i++ )
-     text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-     return text;
-     }
-
-
-     for (var i =0; i < 1000; ++i) {
-
-     var obj = {
-     name: makeid(),
-     last_name: makeid(),
-     vkapi: Math.floor((Math.random()*50000000)).toString(),
-     money: 0,
-     crystals: 0,
-     xp: 0,
-     lvl: Math.floor(Math.random()*20),
-     energy: 0,
-     maxdistance: Math.random()*10000
-     }
-
-     azureclient.getTable("tb_players").insert(obj);
-     }
-     */
-
-    for (var i = 0; i < o.length; ++i)
-    {
-        var tname = o[i].tbname;
-        var t = window.azureclient.getTable(tname);
-        for (var j = 0; j < o[i].items.length; ++j)
-        {
-            var s = o[i].items[j];
-            function xx(someobj, table)
-            {
-                var whereobj;
-                if (o[i].items[j].id)
-                    whereobj ={
-                        id: o[i].items[j].id
-                    }; else
-                    whereobj ={
-                        name: o[i].items[j].name
-                    };
-
-                table.where(whereobj).read().done(function(results)
-                {
-                    if (results.length > 0) {
-                        someobj.id = results[0].id;
-                        table.update(someobj);
-                    } else {
-                        table.insert(someobj);
-                    }}, function (err) {
-                    console.log("Error: " + err);
-
-                });
-            }
-            xx(s, t);
-        }
-    }
-
-
-};
 /**
  * Created by KURWINDALLAS on 20.03.2015.
  */
@@ -11091,6 +10519,7 @@ function preloaderLoaded() {
         LevelManager.levFolder + "loading.json",
         "imgtps/comix.json",
         "imgtps/bg.json",
+        "imgtps/achs.json",
         "imgtps/guiatlas.json",
         "imgtps/pussyatlas.json",
         "imgtps/dedgamedesc.xml",

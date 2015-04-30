@@ -1,0 +1,388 @@
+{"frames": {
+
+"empty orden.png":
+{
+	"frame": {"x":831,"y":1388,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden.png":
+{
+	"frame": {"x":693,"y":1388,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden10.png":
+{
+	"frame": {"x":555,"y":1665,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden11.png":
+{
+	"frame": {"x":555,"y":1388,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden12.png":
+{
+	"frame": {"x":417,"y":1665,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden13.png":
+{
+	"frame": {"x":417,"y":1388,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden14.png":
+{
+	"frame": {"x":831,"y":1111,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden15.png":
+{
+	"frame": {"x":693,"y":1111,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden16.png":
+{
+	"frame": {"x":555,"y":1111,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden17.png":
+{
+	"frame": {"x":417,"y":1111,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden18.png":
+{
+	"frame": {"x":279,"y":1665,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden19.png":
+{
+	"frame": {"x":279,"y":1388,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden2.png":
+{
+	"frame": {"x":279,"y":1111,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden20.png":
+{
+	"frame": {"x":141,"y":1665,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden21.png":
+{
+	"frame": {"x":141,"y":1388,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden22.png":
+{
+	"frame": {"x":141,"y":1111,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden23.png":
+{
+	"frame": {"x":831,"y":834,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden24.png":
+{
+	"frame": {"x":693,"y":834,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden25.png":
+{
+	"frame": {"x":555,"y":834,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden26.png":
+{
+	"frame": {"x":417,"y":834,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden27.png":
+{
+	"frame": {"x":279,"y":834,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden28.png":
+{
+	"frame": {"x":141,"y":834,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden29.png":
+{
+	"frame": {"x":3,"y":1665,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden3.png":
+{
+	"frame": {"x":3,"y":1388,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden30.png":
+{
+	"frame": {"x":3,"y":1111,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden31.png":
+{
+	"frame": {"x":3,"y":834,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden32.png":
+{
+	"frame": {"x":831,"y":557,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden33.png":
+{
+	"frame": {"x":693,"y":557,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden34.png":
+{
+	"frame": {"x":555,"y":557,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden35.png":
+{
+	"frame": {"x":417,"y":557,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden36.png":
+{
+	"frame": {"x":279,"y":557,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden37.png":
+{
+	"frame": {"x":141,"y":557,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden38.png":
+{
+	"frame": {"x":3,"y":557,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden39.png":
+{
+	"frame": {"x":831,"y":280,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden4.png":
+{
+	"frame": {"x":693,"y":280,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden40.png":
+{
+	"frame": {"x":555,"y":280,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden41.png":
+{
+	"frame": {"x":417,"y":280,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden42.png":
+{
+	"frame": {"x":279,"y":280,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden43.png":
+{
+	"frame": {"x":141,"y":280,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden44.png":
+{
+	"frame": {"x":3,"y":280,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden45.png":
+{
+	"frame": {"x":831,"y":3,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden46.png":
+{
+	"frame": {"x":693,"y":3,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden5.png":
+{
+	"frame": {"x":555,"y":3,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden6.png":
+{
+	"frame": {"x":417,"y":3,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden7.png":
+{
+	"frame": {"x":279,"y":3,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden8.png":
+{
+	"frame": {"x":141,"y":3,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+},
+"orden9.png":
+{
+	"frame": {"x":3,"y":3,"w":134,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":134,"h":273},
+	"sourceSize": {"w":134,"h":273}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "achs.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:59fb00eb40df37a5bf34cc06278741a8$"
+}
+}
