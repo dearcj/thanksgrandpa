@@ -9679,7 +9679,7 @@ PlayerData.prototype.intJSON = function(obj)
 
 PlayerData.prototype.loadData = function(cb)
 {
-   checkDb();
+   if (window.checkDb) checkDb();
    this.loadCount = 0;
    console.log("PlayerData.loadData");
     var totalLoads = 6;
