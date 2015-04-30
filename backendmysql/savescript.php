@@ -278,32 +278,32 @@ return $res;
 }
 
 
-function updateJSON2($conn, $table, $data, $userid, $id, $bannedColumns)
+function insertJSON2($conn, $table, $jsonEncoded, $enabledTables)
 {
-	$obj = $data;
-	
-	if ($userid == null)
-	{
-		if ($table == 'tb_players') return;
-	}
+	$obj = $jsonEncoded;
+	if ($enabledTables && !in_array($table, $enabledTables)) return;
 	
 	foreach($obj as $key => $value){
-		if ($key == 'desc') $key = '`'.$key.'`'; 
-		if ($bannedColumns && in_array($key, $bannedColumns)) continue;
-		if ($value == '') continue;
-		$sql[] = (is_numeric($value)) ? "$key = $value" : "$key = " . $conn->quote($value); 
+	//	if ($value == null) continue;
+		$sqlkeys[] = $key; 
+		$sqlvalues[] = (is_numeric($value)) ? "$value" : "N".$conn->quote($value); 
 	}
-	
-	$f = playerFilter($conn, $table, $userid, $id);
-	if ($f == "") return;
-	$sqlclause = implode(",",$sql);
+$valuesstr = implode(",",$sqlvalues);
+$keystr = implode(",",$sqlkeys);
 
-	$wholequery = "update thanksdad.".$table." SET $sqlclause ".$f;
-	echo $wholequery;
-//$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+	$statement = $conn->prepare("SELECT UUID()");
+	$res = $statement->execute();
+	$uuid = $statement->fetch(PDO::FETCH_ASSOC)['UUID'];
+
+	$wholequery = "INSERT INTO thanksdad.".$table." (id,".$keystr.") VALUES ($uuid,".$valuesstr .");";
+//echo $wholequery;
+	$statement = $conn->prepare($wholequery);
+$res = $statement->execute();
+//print($wholequery);
 $statement = null;
-return true;
+return $uuid;
 }
+
 
 function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 {
