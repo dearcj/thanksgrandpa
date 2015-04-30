@@ -2,7 +2,11 @@ var CG_GROUND = 1;
 var CG_MONSTER = 2;
 var CG_PLAYER = 4;
 var CG_BULLET = 8;
-
+var tWeapon = "weap";
+var tPerk = "perk";
+var tBoost = "boost";
+var tApp = "app.";
+var tHat = "hat";
 
 checkLineCircle = function (x3, y3, xx,yy, x2,y2, sqrad)
 {
