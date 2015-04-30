@@ -9,7 +9,6 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgtps/achs.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgtps/achs.json" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgtps/achs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/dedapitest.php" afterPath="$PROJECT_DIR$/backendmysql/dedapitest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.png" afterPath="$PROJECT_DIR$/imgtps/guiatlas.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backendmysql/savescript.php" afterPath="$PROJECT_DIR$/backendmysql/savescript.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgtps/guiatlas.json" afterPath="$PROJECT_DIR$/imgtps/guiatlas.json" />
@@ -520,12 +519,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01217" summary="&#10;&#10;a">
-      <created>1430169395544</created>
-      <option name="number" value="01217" />
-      <option name="project" value="LOCAL" />
-      <updated>1430169395544</updated>
-    </task>
     <task id="LOCAL-01218" summary="&#10;&#10;a">
       <created>1430169845786</created>
       <option name="number" value="01218" />
@@ -814,7 +807,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430347399885</updated>
     </task>
-    <option name="localTasksCounter" value="1266" />
+    <task id="LOCAL-01266" summary="&#10;&#10;a">
+      <created>1430394838047</created>
+      <option name="number" value="01266" />
+      <option name="project" value="LOCAL" />
+      <updated>1430394838047</updated>
+    </task>
+    <option name="localTasksCounter" value="1267" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">

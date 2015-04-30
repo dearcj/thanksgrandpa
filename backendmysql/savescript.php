@@ -292,9 +292,9 @@ $valuesstr = implode(",",$sqlvalues);
 $keystr = implode(",",$sqlkeys);
 
 	$statement = $conn->prepare("SELECT UUID()");
-	$res = $statement->execute();
-	$uuid = $statement->fetch(PDO::FETCH_ASSOC)['UUID'];
-
+	$statement->execute();
+	$res = $statement->fetch(PDO::FETCH_ASSOC);
+	var_dump($res);
 	$wholequery = "INSERT INTO thanksdad.".$table." (id,".$keystr.") VALUES ($uuid,".$valuesstr .");";
 //echo $wholequery;
 	$statement = $conn->prepare($wholequery);
