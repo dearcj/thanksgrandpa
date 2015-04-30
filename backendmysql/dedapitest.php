@@ -40,7 +40,7 @@ $data = array(
 //$id  = '78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D';
 $jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjg4Mjg0NSIsInVzZXJpZCI6Ijc4RjZGN0NFLTI4RTMtNEFFQS1CMTQzLTJCQkIyQ0JFQTU0RCJ9.3e2eO6RCwDPodk2no56Exd8US24dH5XocIR2ZGx-lDk";
 */
-$res = insertJSON2($pdo, 'tb_metrics', array('name' => "test",
+$res = insertJSON($pdo, 'tb_metrics', array('name' => "test",
 			'value' => 150));
 echo $res;
 /*
