@@ -9761,6 +9761,18 @@ PlayerData.prototype.loadData = function(cb)
         PlayerData.inst.createAchProgress();
         console.log("achs loaded");
         PlayerData.inst.loadCount ++;
+
+        if (PlayerData.inst.frCount >= 3)
+            PlayerData.inst.progressAch("Gold medal 26", 1, false);
+        if (PlayerData.inst.frCount >= 5)
+            PlayerData.inst.progressAch("Gold medal 27", 1, false);
+        if (PlayerData.inst.frCount >= 10)
+            PlayerData.inst.progressAch("Gold medal 28", 1, false);
+        if (PlayerData.inst.frCount >= 15)
+            PlayerData.inst.progressAch("Gold medal 29", 1, false);
+        if (PlayerData.inst.frCount >= 20)
+            PlayerData.inst.progressAch("Gold medal 30", 1, false);
+
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
     });
 
@@ -10047,17 +10059,7 @@ PlayerData.prototype.getVKfriends = function()
             PlayerData.inst.getVKuserData();
         } else {
             var friends = data.response;
-            var fl = friends.length;
-            if (fl >= 3)
-                PlayerData.inst.progressAch("Gold medal 26", 1, false);
-            if (fl >= 5)
-                PlayerData.inst.progressAch("Gold medal 27", 1, false);
-            if (fl >= 10)
-                PlayerData.inst.progressAch("Gold medal 28", 1, false);
-            if (fl >= 15)
-                PlayerData.inst.progressAch("Gold medal 29", 1, false);
-            if (fl >= 20)
-                PlayerData.inst.progressAch("Gold medal 30", 1, false);
+            PlayerData.inst.frCount = friends.length;
 
             for (var i = 0; i < friends.length; ++i)
             {
