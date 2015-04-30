@@ -264,17 +264,18 @@ function insertJSON($conn, $table, $jsonEncoded, $enabledTables)
 		$sqlkeys[] = $key; 
 		$sqlvalues[] = (is_numeric($value)) ? "$value" : "N".$conn->quote($value); 
 	}
-$valuesstr = implode(",",$sqlvalues);
-$keystr = implode(",",$sqlkeys);
+	$valuesstr = implode(",",$sqlvalues);
+	$keystr = implode(",",$sqlkeys);
 
-	$wholequery = "INSERT INTO thanksdad.".$table." (id,".$keystr.") VALUES (UUID(),".$valuesstr .");";
-//echo $wholequery;
+	$statement = $conn->prepare("SELECT UUID()");
+	$statement->execute();
+	$res = $statement->fetch(PDO::FETCH_ASSOC);
+	$uuid = $res['UUID()'];
+	$wholequery = "INSERT INTO thanksdad.".$table." (id,".$keystr.") VALUES (".$conn->quote($uuid).",".$valuesstr .");";
 	$statement = $conn->prepare($wholequery);
-$res = $statement->execute();
-//print($wholequery);
-
-$statement = null;
-return $res;
+	$res = $statement->execute();
+	$statement = null;
+	return $uuid;
 }
 
 
@@ -288,21 +289,18 @@ function insertJSON2($conn, $table, $jsonEncoded, $enabledTables)
 		$sqlkeys[] = $key; 
 		$sqlvalues[] = (is_numeric($value)) ? "$value" : "N".$conn->quote($value); 
 	}
-$valuesstr = implode(",",$sqlvalues);
-$keystr = implode(",",$sqlkeys);
+	$valuesstr = implode(",",$sqlvalues);
+	$keystr = implode(",",$sqlkeys);
 
 	$statement = $conn->prepare("SELECT UUID()");
 	$statement->execute();
 	$res = $statement->fetch(PDO::FETCH_ASSOC);
-	var_dump($res);
 	$uuid = $res['UUID()'];
 	$wholequery = "INSERT INTO thanksdad.".$table." (id,".$keystr.") VALUES (".$conn->quote($uuid).",".$valuesstr .");";
-//echo $wholequery;
 	$statement = $conn->prepare($wholequery);
-$res = $statement->execute();
-//print($wholequery);
-$statement = null;
-return $uuid;
+	$res = $statement->execute();
+	$statement = null;
+	return $uuid;
 }
 
 
