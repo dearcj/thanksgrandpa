@@ -9132,7 +9132,7 @@ PlayerData = function()
         vkparams.novk = true;
     }
 
-    if (vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+    if (window.location.search != "?p=LOCAL" && vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
         vkparams.viewerid != "197515742") return;
 
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
@@ -9494,6 +9494,7 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
          break;
       }
    }
+    if (i == this.achs.length) return;
 
    var complete = false;
    for (var j = 0; j < this.achs_progress.length; ++j)
