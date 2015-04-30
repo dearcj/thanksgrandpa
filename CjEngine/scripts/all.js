@@ -1833,6 +1833,7 @@ AchStage.prototype.updateAchievements = function()
         achStage.bar.container.addChild(txtName);
         achStage.bar.container.addChild(achObject);
     }
+    achStage.bar.updateHeight();
     achStage.bar.pos = 0;
 }
 
@@ -1850,7 +1851,7 @@ AchStage.prototype.onShowContinue = function()
         SM.inst.openStage(charStage);
     };
 
-    achStage.bar = new CScrollbar(SCR_WIDTH / 2,338, "", SCR_WIDTH, 524, "ordena background 1 px.png");
+    achStage.bar = new CScrollbar(SCR_WIDTH / 2,338, "", SCR_WIDTH, 524, "ordena background 1 px.png", null, null);
     achStage.bar.gfx.parent.removeChild(achStage.bar.gfx);
     SM.inst.bg.addChild(achStage.bar.gfx);
     achStage.updateAchievements();
@@ -9136,9 +9137,9 @@ PlayerData = function()
         vkparams.novk = true;
     }
 
-    if (window.location.search != "?p=LOCAL" && vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
+    /*if (window.location.search != "?p=LOCAL" && vkparams.viewerid != "CARLSON" && vkparams.viewerid != "2882845" && vkparams.viewerid != "282617259" &&
         vkparams.viewerid != "197515742") return;
-
+*/
     vkparams.gamerid = vkparams.userid ||  vkparams.viewerid;
     vkparams.auth_key = getURLParameter("auth_key");
     vkparams.refferer = getURLParameter("referrer");
@@ -9604,7 +9605,6 @@ PlayerData.prototype.createAchProgress = function(cb)
 {
    for (var i = 0; i< this.achs.length; ++i)
    {
-
       var containAch = false;
       for (var j = 0; j < this.achs_progress.length; ++j)
       {
@@ -9612,7 +9612,6 @@ PlayerData.prototype.createAchProgress = function(cb)
          {
             containAch = true;
             break;
-
          }
       }
 
@@ -9620,10 +9619,15 @@ PlayerData.prototype.createAchProgress = function(cb)
       {
           var obj = {id_ach: this.achs[i].id, id_player: this.playerItem.id, progress: 0};
           this.achs_progress.push(obj);
-          PlayerData.inst.callDedAPI("INSERT", "tb_ach_player", null, obj, function(id)
+          insertAndUpdate = function (o)
           {
-              obj.id = id;
-          });
+              PlayerData.inst.callDedAPI("INSERT", "tb_ach_player", null, o, function(id)
+              {
+                  o.id = id;
+              });
+          }
+          insertAndUpdate(obj);
+          console.log("INSER NEW ACH PLAYER");
       }
    }
 }
@@ -9701,6 +9705,28 @@ PlayerData.prototype.loadData = function(cb)
 
         PlayerData.inst.loadCount ++;
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+
+
+        PlayerData.inst.callDedAPI("READ", "tb_ach_player", null, null, function(r)
+        {
+            PlayerData.inst.achs_progress = PlayerData.inst.intJSON(r);
+            PlayerData.inst.createAchProgress();
+            console.log("achs loaded");
+            PlayerData.inst.loadCount ++;
+
+            if (PlayerData.inst.frCount >= 3)
+                PlayerData.inst.progressAch("Gold medal 26", 1, false);
+            if (PlayerData.inst.frCount >= 5)
+                PlayerData.inst.progressAch("Gold medal 27", 1, false);
+            if (PlayerData.inst.frCount >= 10)
+                PlayerData.inst.progressAch("Gold medal 28", 1, false);
+            if (PlayerData.inst.frCount >= 15)
+                PlayerData.inst.progressAch("Gold medal 29", 1, false);
+            if (PlayerData.inst.frCount >= 20)
+                PlayerData.inst.progressAch("Gold medal 30", 1, false);
+
+            if (PlayerData.inst.loadCount == totalLoads && cb) cb();
+        });
     });
 
 
@@ -9759,26 +9785,7 @@ PlayerData.prototype.loadData = function(cb)
         if (PlayerData.inst.loadCount == totalLoads && cb) cb();
     });
 
-    PlayerData.inst.callDedAPI("READ", "tb_ach_player", null, null, function(r)
-    {
-        PlayerData.inst.achs_progress = PlayerData.inst.intJSON(r);
-        PlayerData.inst.createAchProgress();
-        console.log("achs loaded");
-        PlayerData.inst.loadCount ++;
 
-        if (PlayerData.inst.frCount >= 3)
-            PlayerData.inst.progressAch("Gold medal 26", 1, false);
-        if (PlayerData.inst.frCount >= 5)
-            PlayerData.inst.progressAch("Gold medal 27", 1, false);
-        if (PlayerData.inst.frCount >= 10)
-            PlayerData.inst.progressAch("Gold medal 28", 1, false);
-        if (PlayerData.inst.frCount >= 15)
-            PlayerData.inst.progressAch("Gold medal 29", 1, false);
-        if (PlayerData.inst.frCount >= 20)
-            PlayerData.inst.progressAch("Gold medal 30", 1, false);
-
-        if (PlayerData.inst.loadCount == totalLoads && cb) cb();
-    });
 
     PlayerData.inst.callDedAPI("READ", "tb_item_player", null, null, function(r)
     {
