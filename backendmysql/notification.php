@@ -23,7 +23,7 @@ $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?'
 print ($token["access_token"]);
 
 $n = 10;
-$statement = $pdo->prepare("select TOP ".$n. " vkapi from thanksdad.tb_notifications");
+/*$statement = $pdo->prepare("select TOP ".$n. " vkapi from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
 $result = $statement->fetchAll();
@@ -40,7 +40,7 @@ print($ids);
 
 $statement = $pdo->prepare("delete TOP (".$n.") from thanksdad.tb_notifications");
 $statement->execute();
-
+*/
 
 
 $VK = new vkapi($api_id, $secret_key);//'access_token'=>$token["access_token"],
