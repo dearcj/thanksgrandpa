@@ -20,22 +20,19 @@ $params = array(
 
 $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 
-print ($token["access_token"]);
 
-
-$statement = $pdo->prepare("select value from thanksdad.tb_notifications where name = 'notMsgIndex'");
+$statement = $pdo->prepare("select value from thanksdad.tb_metrics where name = 'notMsgIndex'");
 $statement->execute();
 $notMsgIndex = $statement->fetch(PDO::FETCH_ASSOC)['value'];
 echo $notMsgIndex;
 
 
-$statement = $pdo->prepare("select value from thanksdad.tb_notifications where name = 'notSkip'");
+$statement = $pdo->prepare("select value from thanksdad.tb_metrics where name = 'notSkip'");
 $statement->execute();
 $notSkip = $statement->fetch(PDO::FETCH_ASSOC)['value'];
 echo $notSkip;
 
 
-$n = 10;
 /*$statement = $pdo->prepare("select TOP ".$n. " vkapi from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
