@@ -1967,25 +1967,15 @@ ShopStage.prototype.buyItem = function (event, unlock) {
             if (x && x.crystals && x.money) {
                 //SUCCESS
 
-                if (buyitem.name == "Tablets$4")
-                    this.progressAch("Gold medal 22", 1, false);
-
-                if (buyitem.name == "Health$4")
-                    this.progressAch("Gold medal 20", 1, false);
-
-                if (buyitem.name == "MarioStar$4")
-                    this.progressAch("Gold medal 24", 1, false);
-
-                if (buyitem.name == "Double$4")
-                    this.progressAch("Gold medal 23", 1, false);
-
-                if (buyitem.name == "Magnet$4")
-                    this.progressAch("Gold medal 21", 1, false);
 
                                     PlayerData.inst.playerItem.crystals = parseFloat(x.crystals);
                 PlayerData.inst.playerItem.money = parseFloat(x.money);
 
                 PlayerData.inst.items_enabled.push({id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
+
+                PlayerData.inst.checkItemAchs();
+
+
                 shopStage.updateStatsPanel();
 
                 PlayerData.inst.equipItem(buyitem, "1");
@@ -2600,7 +2590,7 @@ CharStage.prototype.onShow = function () {
     if (localStorage["sound_state"] == "false")
     ZSound.Mute();
 
-
+    PlayerData.inst.checkItemAchs();
 
     incMetric("GAME LOADED");
     this.unreadAch = false;
@@ -9244,6 +9234,42 @@ PlayerData.prototype.getItemById = function(id)
    return null;
 }
 
+
+PlayerData.prototype.checkItemAchs = function(name) {
+    if (PlayerData.inst.ownedItemByName("Tablets$4"))
+        this.progressAch("Gold medal 22", 1, false);
+
+    if (PlayerData.inst.ownedItemByName("Health$4"))
+        this.progressAch("Gold medal 20", 1, false);
+
+    if (PlayerData.inst.ownedItemByName("MarioStar$4"))
+        this.progressAch("Gold medal 24", 1, false);
+
+    if (PlayerData.inst.ownedItemByName("Double$4"))
+        this.progressAch("Gold medal 23", 1, false);
+
+    if (PlayerData.inst.ownedItemByName("Magnet$4"))
+        this.progressAch("Gold medal 21", 1, false);
+}
+
+
+PlayerData.prototype.ownedItemByName = function(name)
+{
+    for (var i =0; i < this.items.length;++i)
+    {
+        if (this.items[i].name == name) break;
+    }
+
+    if (i == this.items.length) return false;
+
+    for (var j =0; j < this.items_enabled.length;++j)
+    {
+        if (this.items_enabled[j].id_item == this.items[i].id)
+        return true;
+    }
+    return false;
+}
+
 PlayerData.prototype.getType = function (item_player)
 {
    for (var i = 0; i < PlayerData.inst.items.length; ++i)
@@ -9507,9 +9533,9 @@ PlayerData.prototype.progressAch = function(name, progress, replace)
       if (this.achs_progress[j].id_ach == this.achs[i].id)
       {
 
-          if (this.achChanged.indexOf(this.achs_progress[j].id_ach) < 0)
+          if (this.achs_progress[j].progress < 1 && this.achChanged.indexOf(this.achs_progress[j]) < 0)
           {
-              this.achChanged.push(this.achs_progress[j].id_ach);
+              this.achChanged.push(this.achs_progress[j]);
           }
 
          if (replace)
@@ -10037,6 +10063,7 @@ PlayerData.prototype.saveRunProgress = function(noUpdate)
             PlayerData.inst.savePlayerAchs(PlayerData.inst.achChanged[i]);
             console.log("ACH SAVED");
         }
+        PlayerData.inst.achChanged = [];
     }
 }
 
