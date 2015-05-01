@@ -48,7 +48,17 @@ $secret_key = 'CIoXBH0UcOkIhrEiR9rt'; // Защищенный ключ прил�
 	$statement = $pdo->prepare("update thanksdad.tb_metrics set value = $notMsgIndex where name = 'notMsgIndex'");
 	$statement->execute();
 	
+	$statement = $pdo->prepare("select platformid from tb_players order by updateDate asc limit 100 offset $notSkip");
+	$statement->execute();
+	$results = $statement->fetchAll(PDO::FETCH_ASSOC);
 	
+	$s = '';
+	foreach ($results as $value)
+		if ($s != '') $s = $s.',';
+		$s = $s.$value;
+	}
+	
+	echo $s;
 	/*$statement = $pdo->prepare("select TOP ".$n. " vkapi from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
