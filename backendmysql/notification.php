@@ -22,6 +22,19 @@ $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?'
 
 print ($token["access_token"]);
 
+
+$statement = $pdo->prepare("select value from thanksdad.tb_notifications where name = 'notMsgIndex'");
+$statement->execute();
+$notMsgIndex = $statement->fetch(PDO::FETCH_ASSOC)['value'];
+echo $notMsgIndex;
+
+
+$statement = $pdo->prepare("select value from thanksdad.tb_notifications where name = 'notSkip'");
+$statement->execute();
+$notSkip = $statement->fetch(PDO::FETCH_ASSOC)['value'];
+echo $notSkip;
+
+
 $n = 10;
 /*$statement = $pdo->prepare("select TOP ".$n. " vkapi from thanksdad.tb_notifications");
 $statement->execute();
@@ -41,12 +54,17 @@ print($ids);
 $statement = $pdo->prepare("delete TOP (".$n.") from thanksdad.tb_notifications");
 $statement->execute();
 */
-
-$msg = "Скорее возвращайся в игру! https://vk.com/app4654201";
+/*
+$msg = "Скорее возвращайся в игру! У нас много интересного";
 $VK = new vkapi($api_id, $secret_key);//'access_token'=>$token["access_token"],
 $resp = $VK->api('secure.sendNotification', array('uid'=>'2882845', 'message'=>$msg));
 $answer = json_encode($resp);
 print($answer);
+*/
+
+ini_set("log_errors", 1);
+ini_set("error_log", "/tmp/php-error.log");
+error_log( "Hello, errors!" );
 }
 catch (PDOException $e) {
 
