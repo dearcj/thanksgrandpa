@@ -54,7 +54,7 @@ $secret_key = 'CIoXBH0UcOkIhrEiR9rt'; // Защищенный ключ прил�
 	
 	$s = '';
 	foreach ($results as $value)
-		if ($s != '') $s = $s.',';
+	{	if ($s != '') $s = $s.',';
 		$s = $s.$value;
 	}
 	
