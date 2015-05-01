@@ -54,11 +54,21 @@ $secret_key = 'CIoXBH0UcOkIhrEiR9rt'; // Защищенный ключ прил�
 	
 	$s = '';
 	foreach ($results as $value)
-	{	if ($s != '') $s = $s.',';
+	{	
+		if ($s != '') $s = $s.',';
 		$s = $s.$value['platformid'];
 	}
 	
 	echo $s;
+	
+	$VK = new vkapi($api_id, $secret_key);//'access_token'=>$token["access_token"],
+	$resp = $VK->api('secure.sendNotification', array('user_ids'=>$s, 'message'=>$msg));
+	$answer = json_encode($resp);
+
+	ini_set("log_errors", 1);
+	ini_set("error_log", "/tmp/php-error.log");
+	error_log( $answer );
+	
 	/*$statement = $pdo->prepare("select TOP ".$n. " vkapi from thanksdad.tb_notifications");
 $statement->execute();
 $ids = "";
@@ -76,16 +86,6 @@ print($ids);
 
 $statement = $pdo->prepare("delete TOP (".$n.") from thanksdad.tb_notifications");
 $statement->execute();
-*/
-	/*
-$msg = "Скорее возвращайся в игру! У нас много интересного";
-$VK = new vkapi($api_id, $secret_key);//'access_token'=>$token["access_token"],
-$resp = $VK->api('secure.sendNotification', array('uid'=>'2882845', 'message'=>$msg));
-$answer = json_encode($resp);
-
-ini_set("log_errors", 1);
-ini_set("error_log", "/tmp/php-error.log");
-error_log( $answer );
 */
 }
 catch (PDOException $e) {
