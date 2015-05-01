@@ -42,7 +42,7 @@ $statement = $pdo->prepare("delete TOP (".$n.") from thanksdad.tb_notifications"
 $statement->execute();
 */
 
-
+$msg = "Скорее возвращайся в игру! https://vk.com/app4654201";
 $VK = new vkapi($api_id, $secret_key);//'access_token'=>$token["access_token"],
 $resp = $VK->api('secure.sendNotification', array('uid'=>'2882845', 'message'=>$msg));
 $answer = json_encode($resp);
