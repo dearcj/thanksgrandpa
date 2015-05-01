@@ -1,12 +1,15 @@
 ﻿<?php
-require 'vkapi.class.php';
+require_once 'vkapi.class.php';
+require_once 'connection.php';
+require_once 'savescript.php';
 try
 {
 $api_id = 4654201;
 $secret_key = 'qV6RXByT51TBnwGZX8Py'; // Защищенный ключ приложения
 
-$api_id = 3824852;
+/*$api_id = 3824852;
 $secret_key = 'CIoXBH0UcOkIhrEiR9rt'; // Защищенный ключ приложения
+*/
 
 $params = array(
 	        'client_id' => $api_id,
@@ -19,9 +22,6 @@ $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?'
 
 print ($token["access_token"]);
 
-$pdo = new PDO("dblib:host=te1gwbas4s.database.windows.net;dbname=thanksdad_db2",
-                "crazyjuice","girkinLOH1");
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $n = 10;
 $statement = $pdo->prepare("select TOP ".$n. " vkapi from thanksdad.tb_notifications");
 $statement->execute();
@@ -47,7 +47,6 @@ $VK = new vkapi($api_id, $secret_key);//'access_token'=>$token["access_token"],
 $resp = $VK->api('secure.sendNotification', array('uid'=>'2882845', 'message'=>$msg));
 $answer = json_encode($resp);
 print($answer);
-//print_r ($result);
 }
 catch (PDOException $e) {
 
