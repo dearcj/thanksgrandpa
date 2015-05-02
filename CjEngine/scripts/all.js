@@ -2590,7 +2590,7 @@ CharStage.prototype.onShow = function () {
     if (localStorage["sound_state"] == "false")
     ZSound.Mute();
 
-    PlayerData.inst.checkItemAchs();
+
 
     incMetric("GAME LOADED");
     this.unreadAch = false;
@@ -2859,6 +2859,23 @@ CharStage.prototype.updateNotifications = function () {
 
 
 CharStage.prototype.onShowContinue = function () {
+
+    PlayerData.inst.comboCheck();
+
+    PlayerData.inst.checkItemAchs();
+
+    if (PlayerData.inst.frCount >= 3)
+        PlayerData.inst.progressAch("Gold medal 26", 1, false);
+    if (PlayerData.inst.frCount >= 5)
+        PlayerData.inst.progressAch("Gold medal 27", 1, false);
+    if (PlayerData.inst.frCount >= 10)
+        PlayerData.inst.progressAch("Gold medal 28", 1, false);
+    if (PlayerData.inst.frCount >= 15)
+        PlayerData.inst.progressAch("Gold medal 29", 1, false);
+    if (PlayerData.inst.frCount >= 20)
+        PlayerData.inst.progressAch("Gold medal 30", 1, false);
+
+
     charStage.doProcess = true;
     charStage.updateNotifications();
 
@@ -3024,7 +3041,6 @@ CharStage.prototype.onShowContinue = function () {
         charStage.updateNotifications();
     }
 
-    PlayerData.inst.comboCheck();
 
     var baseScl = pl.gfx.scale.x;
 
@@ -9740,16 +9756,6 @@ PlayerData.prototype.loadData = function(cb)
             console.log("achs loaded");
             PlayerData.inst.loadCount ++;
 
-            if (PlayerData.inst.frCount >= 3)
-                PlayerData.inst.progressAch("Gold medal 26", 1, false);
-            if (PlayerData.inst.frCount >= 5)
-                PlayerData.inst.progressAch("Gold medal 27", 1, false);
-            if (PlayerData.inst.frCount >= 10)
-                PlayerData.inst.progressAch("Gold medal 28", 1, false);
-            if (PlayerData.inst.frCount >= 15)
-                PlayerData.inst.progressAch("Gold medal 29", 1, false);
-            if (PlayerData.inst.frCount >= 20)
-                PlayerData.inst.progressAch("Gold medal 30", 1, false);
 
             if (PlayerData.inst.loadCount == totalLoads && cb) cb();
         });
@@ -9906,6 +9912,8 @@ PlayerData.prototype.savePlayerAchs = function(onlyOne)
 {
    for (var i = 0; i < PlayerData.inst.achs_progress.length; ++i) {
       if (onlyOne && onlyOne.id != PlayerData.inst.achs_progress[i].id) continue;
+
+       if (PlayerData.inst.achs_progress[i].id)
       PlayerData.inst.callDedAPI("UPDATE", "tb_ach_player", PlayerData.inst.achs_progress[i].id, PlayerData.inst.achs_progress[i]);
 
       //window.azureclient.getTable("tb_ach_player").update().done(function (result) {
