@@ -288,6 +288,8 @@ function updateJSON($conn, $table, $data, $userid, $id, $bannedColumns)
 		if ($table == 'tb_players') return;
 	}
 	
+	if ($id == null && $table != 'tb_players') return;
+	
 	foreach($obj as $key => $value){
 		if ($bannedColumns && in_array($key, $bannedColumns)) continue;
 		if ($key == 'desc') $key = '`'.$key.'`'; 
