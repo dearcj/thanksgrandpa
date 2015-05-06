@@ -2006,7 +2006,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                         rp(shopStage.transScreen);
                         shopStage.transScreen = null;
                     }
-                    uploadPhoto(vkparams.viewerid, true, removeTint, "Дед приоделся! https://vk.com/thegrandpa");
+                    uploadPhoto(vkparams.viewerid, false, removeTint, "Дед приоделся! https://vk.com/thegrandpa");
                 }
             } else {
                 if (shopStage.transScreen) {
