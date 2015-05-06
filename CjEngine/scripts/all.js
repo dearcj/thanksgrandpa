@@ -799,6 +799,9 @@ GameStage.prototype.mobileTouchEnd = function(e)
 
 GameStage.prototype.onHide = function (newStage) {
 
+
+    rp(gameStage.antiLagEffect);
+    gameStage.antiLagEffect = null;
     if  (gameStage.ari)
     gameStage.ari.kill();
     //clearInterval(gameStage.ari);
@@ -1321,6 +1324,10 @@ GameStage.prototype.onShow = function () {
             renderer.render(stage);
         }, SM.inst.superStage);
     }
+
+    gameStage.antiLagEffect = new PIXI.Sprite.fromFrame("bloodblow0010.png");
+    SM.inst.bg.addChild(gameStage.antiLagEffect);
+    //x.visible = false;
 
     gameStage.progressSaved = false;
 
@@ -2597,6 +2604,7 @@ CharStage.prototype.onShow = function () {
 
 
 
+
     incMetric("GAME LOADED");
     this.unreadAch = false;
     this.unreadActions = false;
@@ -2867,6 +2875,8 @@ CharStage.prototype.updateNotifications = function () {
 CharStage.prototype.onShowContinue = function () {
     charStage.updateNotifications();
 
+
+
     PlayerData.inst.comboCheck();
 
     PlayerData.inst.checkItemAchs();
@@ -2881,6 +2891,7 @@ CharStage.prototype.onShowContinue = function () {
         PlayerData.inst.progressAch("Gold medal 29", 1, false);
     if (PlayerData.inst.frCount >= 20)
         PlayerData.inst.progressAch("Gold medal 30", 1, false);
+
 
 
     charStage.doProcess = true;
