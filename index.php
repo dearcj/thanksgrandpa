@@ -43,7 +43,8 @@ setcookie("LOGIN_DATA", $str);
 <script src="libs/GreenSock/easing/EasePack.js"></script>
 <script src="libs/GreenSock/TweenMax.min.js"></script>
 <script src="libs/vec2.min.js"></script>
-<script src="libs/pixi.js"></script>
+<script src="libs/pixi3.js"></script>
+<script src="libs/pixi-spine.js"></script>
 <script src="libs/gzip-min.js"></script>
 <!--<script type="text/javascript" src="//ad.mail.ru/static/vkadman.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="//js.appscentrum.com/scr/preroll.js" charset="utf-8"></script> -->

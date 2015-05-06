@@ -141,9 +141,6 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../../img/monetabg.png</filename>
-            <filename>../../img/areaBeam.png</filename>
-            <filename>../../img/BULLETSHOTGUN.png</filename>
             <filename>../../../../dedgame/fight screen/road tile.png</filename>
             <filename>../../../../dedgame/fight screen/health dead.png</filename>
             <filename>../../../../dedgame/fight screen/health.png</filename>
@@ -151,17 +148,6 @@
             <filename>../../../../dedgame/fight screen/conus.png</filename>
             <filename>../../../../dedgame/fight screen/luke.png</filename>
             <filename>../../../../dedgame/fight screen/car.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0010.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0001.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0002.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0003.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0004.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0005.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0006.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0007.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0008.png</filename>
-            <filename>../../../../dedgame/effects/bloodblow0009.png</filename>
-            <filename>../../../../dedgame/bullet/head.png</filename>
             <filename>../../../../dedgame/bullet/shleyf.png</filename>
             <filename>../../../../dedgame/bullet/center.png</filename>
             <filename>../../../../dedgame/ded skeleton/head.png</filename>
@@ -179,7 +165,6 @@
             <filename>../../../../dedgame/fight screen/tree 1.png</filename>
             <filename>../../../../dedgame/fight screen/tree 2.png</filename>
             <filename>../../../../dedgame/fight screen/tree 3.png</filename>
-            <filename>../../../../dedgame/fight screen/winter road tile.png</filename>
             <filename>../../../../dedgame/fight screen/buidings/b3.png</filename>
             <filename>../../../../dedgame/fight screen/buidings/b4.png</filename>
             <filename>../../../../dedgame/fight screen/buidings/b5.png</filename>
@@ -195,58 +180,8 @@
             <filename>../../../../dedgame/fight screen/buidings/buildings behind.png</filename>
             <filename>../../../../dedgame/fight screen/buidings/b1.png</filename>
             <filename>../../../../dedgame/fight screen/buidings/b2.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0020.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0001.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0002.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0003.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0004.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0005.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0006.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0007.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0008.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0009.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0010.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0011.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/blood0012.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0001.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0002.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0003.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0004.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0005.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0006.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0007.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0008.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0009.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0010.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0011.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0012.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0013.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0014.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0015.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0016.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0017.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0018.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/Boom0019.png</filename>
             <filename>../../../../dedgame/fight screen/back sky.png</filename>
             <filename>../../../../dedgame/fight screen/enemies/dron.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0001.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0002.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0003.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0004.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0005.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0006.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0007.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0008.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0009.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0010.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0011.png</filename>
-            <filename>../../../../dedgame/animation sprites/denis fx/coinfx.png0012.png</filename>
-            <filename>../../../../dedgame/animation sprites/coin/coin001.png</filename>
-            <filename>../../../../dedgame/animation sprites/coin/coin002.png</filename>
-            <filename>../../../../dedgame/animation sprites/coin/coin003.png</filename>
-            <filename>../../../../dedgame/animation sprites/coin/coin004.png</filename>
-            <filename>../../../../dedgame/animation sprites/coin/coin005.png</filename>
-            <filename>../../../../dedgame/animation sprites/coin/coin006.png</filename>
             <filename>../../../../dedgame/fight screen/poo.png</filename>
             <filename>../../../../dedgame/fight screen/shadow_sign.png</filename>
             <filename>../../../../dedgame/fight screen/shadow_sign1.png</filename>
@@ -278,20 +213,23 @@
             <filename>../../../../dedgame/fight screen/key.png</filename>
             <filename>../../../../dedgame/fight screen/enemies/dron2.png</filename>
             <filename>../../../../dedgame/fight screen/enemies/enemy1_2.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0002.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0003.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0004.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0005.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0006.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0007.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0008.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0009.png</filename>
-            <filename>../../../../dedgame/effects/some old stuff/fxsmallblink0001.png</filename>
             <filename>../../../../dedgame/fight screen/sauron.png</filename>
             <filename>../../../../dedgame/fight screen/car2.png</filename>
             <filename>../../../../dedgame/fight screen/car1.png</filename>
             <filename>../../../../dedgame/fight screen/booster dron.png</filename>
             <filename>../../../../dedgame/fight screen/booster box.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/summer road tile.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/grass field1.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/s tree 1.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/s tree 2.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/s tree 3.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/bush1.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/bush2.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/dirt line1.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/dirt line2.png</filename>
+            <filename>../../../../dedgame/fight screen/summer pack/dirt line3.png</filename>
+            <filename>../../../../dedgame/fight screen/summer back sky.png</filename>
+            <filename>../../../../dedgame/bullet/bullhead.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

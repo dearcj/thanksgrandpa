@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:5813a0819915732e145bf9c82ba3ac9b$ -->
-<TextureAtlas imagePath="bg.png">
-    <SubTexture name="BG2" x="1079" y="585" width="849" height="564"/>
-    <SubTexture name="BG3" x="1079" y="2" width="872" height="581"/>
-    <SubTexture name="BG4" x="2" y="721" width="833" height="555"/>
-    <SubTexture name="bgmenutest" x="2" y="2" width="1075" height="717"/>
-</TextureAtlas>

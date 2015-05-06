@@ -22,7 +22,7 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>bg.png</filename>
+        <filename>effects.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -99,7 +99,7 @@
             <key>packageName</key>
             <string>Texture</string>
             <key>javaFileName</key>
-            <filename>../../MAAS2/img/pussyatlas.java</filename>
+            <filename>../../../MAAS2/img/pussyatlas.java</filename>
             <key>wrap</key>
             <struct type="AndEngineWrap">
                 <key>s</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>bg.json</filename>
+        <filename>effects.json</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -131,7 +131,7 @@
             <key>innerPadding</key>
             <uint>0</uint>
             <key>extrude</key>
-            <uint>0</uint>
+            <uint>1</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
@@ -141,9 +141,24 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../img/bg.png</filename>
-            <filename>../img/BG2.png</filename>
-            <filename>../img/bgmenutest.png</filename>
+            <filename>../../../../dedgame/ded skeleton/head.png</filename>
+            <filename>../../../../dedgame/story/cuted/2frame.png</filename>
+            <filename>../../../../dedgame/story/cuted/3frame_bottom.png</filename>
+            <filename>../../../../dedgame/story/cuted/3frame_top.png</filename>
+            <filename>../../../../dedgame/story/cuted/4frame_bottom.png</filename>
+            <filename>../../../../dedgame/story/cuted/4top_frame1.png</filename>
+            <filename>../../../../dedgame/story/cuted/4top_frame2.png</filename>
+            <filename>../../../../dedgame/story/cuted/1buttom_frame.png</filename>
+            <filename>../../../../dedgame/story/cuted/1top_frame.png</filename>
+            <filename>../../../../dedgame/story/3top_frame_signs.png</filename>
+            <filename>../../../../dedgame/story/next button.png</filename>
+            <filename>../../../../dedgame/story/StoryBackground.png</filename>
+            <filename>../../../../dedgame/story/cuted/2frame_comment2.png</filename>
+            <filename>../../../../dedgame/story/cuted/2frame_comment1.png</filename>
+            <filename>../../../../dedgame/story/cuted/1top_bubble.png</filename>
+            <filename>../../../../dedgame/story/cuted/2frame_comment3.png</filename>
+            <filename>../../../../dedgame/story/cuted/1buttom_click.png</filename>
+            <filename>../../../../dedgame/story/cuted/4bottom_bubble.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

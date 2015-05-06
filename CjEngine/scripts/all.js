@@ -526,28 +526,32 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer, offsX, offsY)
     for (i = 0; i < atlases.length; ++i)
     {
         var path = "imgtps2/" + atlases[i] ;
-        var o = PIXI.BaseTextureCache[path + ".png"];
+        var o = PIXI.utils.BaseTextureCache[path + ".png"];
         if (!o)
         assetsToLoader.push(path+ ".json");
     }
 
     if (assetsToLoader.length > 0) {
-        var loader = new PIXI.AssetLoader(assetsToLoader);
-        loader.load();
-        loader.onComplete = LevelManager.onComplete;
+
+
+        var p = new PIXI.loaders.Loader();
+        p.add(assetsToLoader);
+
+        p.once('complete',LevelManager.onComplete);
+        p.load();
     } else
         LevelManager.onComplete();
     return LevelManager.objs;
 }
 LevelManager.inst = new LevelManager();
 LevelManager.levels = {};function SM() {
-    this.fg = new PIXI.DisplayObjectContainer();
-    this.bg = new PIXI.DisplayObjectContainer();
-    this.ol = new PIXI.DisplayObjectContainer();
-    this.guiLayer = new PIXI.DisplayObjectContainer();
-    this.superGuiLayer = new PIXI.DisplayObjectContainer();
-    this.fontLayer = new PIXI.DisplayObjectContainer();
-    this.superStage = new PIXI.DisplayObjectContainer();
+    this.fg = new PIXI.Container();
+    this.bg = new PIXI.Container();
+    this.ol = new PIXI.Container();
+    this.guiLayer = new PIXI.Container();
+    this.superGuiLayer = new PIXI.Container();
+    this.fontLayer = new PIXI.Container();
+    this.superStage = new PIXI.Container();
 
 //add layers on stage
     this.bg.interactive = true;
@@ -593,7 +597,7 @@ SM.inst = new SM();
 
 SM.prototype.addDisableWindow = function(title, layer)
 {
-    var d = new PIXI.DisplayObjectContainer();
+    var d = new PIXI.Container();
     var g = new PIXI.Graphics();
     g.fillColor =0x22113322;
     g.beginFill();
@@ -631,8 +635,8 @@ SM.prototype.addLayersToStage = function()
     window.mouseX = SCR_WIDTH / 2;
     window.mouseY = SCR_HEIGHT / 2;
     this.bg.mousemove = function(md){
-        window.mouseX = md.global.x/SCR_SCALE;
-        window.mouseY = md.global.y/SCR_SCALE;
+        window.mouseX = md.data.global.x/SCR_SCALE;
+        window.mouseY = md.data.global.y/SCR_SCALE;
     }
 }
 
@@ -726,15 +730,15 @@ GameStage.prototype.createHPBar = function (x, y, max) {
     var bar = new CObj(x, y);
     var t = PIXI.Texture.fromFrame("health dead.png");
 
-    bar.gfx = new PIXI.DisplayObjectContainer();
-    var lower = new PIXI.TilingSprite(t, (t.width) - 0.5, (t.height - 0.5));
+    bar.gfx = new PIXI.Container();
+    var lower = new PIXI.TilingSprite(t, (t.width), (t.height));
     bar.id = "hpbar";
     lower.width = max * t.width;
     bar.gfx.addChild(lower);
     bar.updateGraphics();
     bar.texW = t.width;
     var tupper = PIXI.Texture.fromFrame("health.png");
-    var upperBar = new PIXI.TilingSprite(tupper, tupper.width - 0.5, tupper.height - 0.5);
+    var upperBar = new PIXI.TilingSprite(tupper, tupper.width, tupper.height);
     upperBar.height = tupper.height - 1;
     upperBar.width = max * tupper.width;
     bar.gfx.addChild(upperBar);
@@ -743,8 +747,8 @@ GameStage.prototype.createHPBar = function (x, y, max) {
 
     bar.tweenProp = function (ratio) {
         if (gameStage.player) {
-            this.gfx.getChildAt(1).width = gameStage.player.maxHp * this.texW * ratio;
-            this.gfx.getChildAt(0).width = gameStage.player.maxHp * this.texW;
+            this.gfx.getChildAt(1).width = gameStage.player.maxHp * this.texW * ratio - 5;
+            this.gfx.getChildAt(0).width = gameStage.player.maxHp * this.texW - 5;
         }
     }
 }
@@ -1388,6 +1392,7 @@ GameStage.prototype.fup = function (md) {
 //NO "THIS" IN CURRENT CONTEXT
 GameStage.prototype.onShowContinue = function () {
 
+    gameStage.fireState = false;
     gameStage.doProcess = true;
     gameStage.stepSize = gameStage.invFR;
     gameStage.doPhys = true;
@@ -1419,7 +1424,7 @@ GameStage.prototype.onShowContinue = function () {
 
     var floorHeight = 120;
     gameStage.floor = new FloorObj(SCR_WIDTH / 2, SCR_HEIGHT - floorHeight / 2, null);
-    gameStage.floor.gfx = new PIXI.DisplayObjectContainer();
+    gameStage.floor.gfx = new PIXI.Container();
     gameStage.floor.gfx.width = SCR_WIDTH;
     gameStage.floor.gfx.height = floorHeight;
     gameStage.floor.gfx.visible = false;
@@ -2026,7 +2031,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
 }
 
 ShopStage.prototype.createItemBtn = function (item) {
-    var g = new PIXI.DisplayObjectContainer();
+    var g = new PIXI.Container();
     var isBooster = shopStage.currentTab == "bstuff";
 
     if (isBooster) {
@@ -2421,7 +2426,7 @@ ShopStage.prototype.process = function () {
 extend(ComixStage, CustomStage);
 
 ComixStage.prototype.onShow = function () {
-    comixStage.comixContainer = new PIXI.DisplayObjectContainer();
+    comixStage.comixContainer = new PIXI.Container();
     SM.inst.ol.addChild(comixStage.comixContainer);
 
     this.buttonNext = new CButton(SCR_WIDTH - 60, SCR_HEIGHT - 60, "next button");
@@ -2560,7 +2565,7 @@ ComixStage.prototype.goNext = function () {
 }
 
     ComixStage.prototype.onHide = function (newStage) {
-    var x = PIXI.TextureCache["2frame.png"];
+    var x = PIXI.utils.TextureCache["2frame.png"];
     x.destroy(true);
 
     rp (comixStage.comixContainer);
@@ -2605,6 +2610,7 @@ CharStage.prototype.onShow = function () {
             shopStage.createStatsPanel(charStage.onShowContinue);
         }
         , SM.inst.ol);
+    stage.visible = false;
 }
 
 CharStage.prototype.onHide = function (newStage) {
@@ -2643,7 +2649,7 @@ CharStage.prototype.onHide = function (newStage) {
 }
 
 CharStage.prototype.createFriendsPanel = function () {
-    var panel = new PIXI.DisplayObjectContainer();
+    var panel = new PIXI.Container();
     var fr = "";
     var clips = [];
     var skip = charStage.skipFriends;
@@ -2710,7 +2716,7 @@ CharStage.prototype.createFriendsPanel = function () {
 
                 var setLoader = function (clip, url) {
                     clip.loader.onLoaded = function () {
-                        var ico = new PIXI.Sprite(PIXI.TextureCache[url]);
+                        var ico = new PIXI.Sprite(PIXI.utils.TextureCache[url]);
                         ico.anchor.x = 0.5;
                         ico.anchor.y = 0.5;
                         clip.addChild(ico);
@@ -2811,8 +2817,8 @@ CharStage.prototype.openEnergyWindow = function () {
         onc(charStage.disableWnd ,function (e) {
             var obj = CObj.getById("energybg");
             var bnds = obj.gfx.getBounds();
-            window.mouseX = e.global.x / SCR_SCALE;
-            window.mouseY = e.global.y / SCR_SCALE;
+            window.mouseX = e.data.global.x / SCR_SCALE;
+            window.mouseY = e.data.global.y / SCR_SCALE;
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                 window.mouseX < obj.x + obj.gfx.width / 2 &&
                 window.mouseY > obj.y - obj.gfx.height / 2 &&
@@ -2859,7 +2865,9 @@ CharStage.prototype.updateNotifications = function () {
 
 
 CharStage.prototype.onShowContinue = function () {
+    charStage.updateNotifications();
 
+    stage.visible = true;
     PlayerData.inst.comboCheck();
 
     PlayerData.inst.checkItemAchs();
@@ -2877,7 +2885,6 @@ CharStage.prototype.onShowContinue = function () {
 
 
     charStage.doProcess = true;
-    charStage.updateNotifications();
 
     charStage.skip = 0;
 
@@ -3023,8 +3030,8 @@ CharStage.prototype.onShowContinue = function () {
 
         onc(charStage.disableWnd, function (e) {
             var obj = charStage.bar;
-            window.mouseX = e.global.x/ SCR_SCALE;
-            window.mouseY = e.global.y/ SCR_SCALE;
+            window.mouseX = e.data.global.x/ SCR_SCALE;
+            window.mouseY = e.data.global.y/ SCR_SCALE;
             if (window.mouseX > obj.x - obj.gfx.width / 2 &&
                 window.mouseX < obj.x + obj.gfx.width / 2 &&
                 window.mouseY > obj.y - obj.gfx.height / 2 &&
@@ -3163,7 +3170,7 @@ CharStage.prototype.openScore = function () {
 
     LevelManager.loadLevel("levscore", function () {
 
-        charStage.container = new PIXI.DisplayObjectContainer();
+        charStage.container = new PIXI.Container();
         charStage.container.x = 170;
         charStage.container.y = 170;
         SM.inst.fontLayer.addChild(charStage.container);
@@ -3239,7 +3246,7 @@ CharStage.prototype.updateSB = function (arr) {
     var clips = [];
     var fr = "";
     for (var i = 0; i < arr.length; ++i) {
-        var scoreClip = new PIXI.DisplayObjectContainer();
+        var scoreClip = new PIXI.Container();
         var tfRank = CTextField.createTextField({
             tint: 0x333333,
             fontSize: 17,
@@ -3296,7 +3303,7 @@ CharStage.prototype.updateSB = function (arr) {
 
                 var setLoader = function (clip, url) {
                     clip.loader.onLoaded = function () {
-                        var ico = new PIXI.Sprite(PIXI.TextureCache[url]);
+                        var ico = new PIXI.Sprite(PIXI.utils.TextureCache[url]);
                         ico.scale.x = 0.5;
                         ico.scale.y = 0.5;
                         ico.anchor.x = 0.5;
@@ -3851,20 +3858,20 @@ CObj.createMovieClip = function(name)
     var textures = [];
     var cinx = 0;
     var count = 0;
-    for (var prop in PIXI.TextureCache) {
+    for (var prop in PIXI.utils.TextureCache) {
         if (name == prop) cinx = count;
 
         var frName = CObj.ExtractFrameName(prop);
         if (frName == frameName)
         {
-           textures.push(PIXI.TextureCache[prop]);
+           textures.push(PIXI.utils.TextureCache[prop]);
 
             count ++;
         }
     }
 
     if (textures.length == 0)
-        textures[0] = PIXI.TextureCache[name + ".png"];
+        textures[0] = PIXI.utils.TextureCache[name + ".png"];
     var img = new PIXI.MovieClip(textures);
     img.gotoAndStop(cinx);
     return img;
@@ -4179,6 +4186,7 @@ Object.defineProperty(CButton.prototype, 'text', {
     },
     set: function (value) {
         this._text = value;
+        if (this._text == "") this._text = " ";
         if (this.gfx && this.textField) {
             var tf = this.textField;
             tf.text = value;
@@ -4226,7 +4234,7 @@ CButton.prototype.init = function(){
     CObj.prototype.init.call(this);
     if (!this.gfx)
     {
-        this.gfx = new PIXI.DisplayObjectContainer();
+        this.gfx = new PIXI.Container();
         this.postCreatedContainer = true;
         this.updateGraphics();
     }
@@ -4551,7 +4559,7 @@ extend(CTextField, CObj, true);
 function CTextField(in_x,in_y,textname,in_body){
     CObj.apply(this,[in_x,in_y,textname,in_body]);
     this.gui = true;
-    this.text = "";
+    this.text = " ";
     this.PublicFields += 'text,fontFamily,fontSize,align,tint, ';
 }
 
@@ -4631,7 +4639,7 @@ CTextField.createTextField = function(obj) {
     if (obj.text) {
         obj.text = CTextField.convertSpaces(obj.text);
     }
-
+    if (obj.text == "" || obj.text == undefined) obj.text = " ";
     var pt = new PIXI.BitmapText(obj.text, {font: fontParam, align: "center", valign: "center"});
 
     pt.align = "center";
@@ -4700,7 +4708,7 @@ CNotArrow.prototype.process = function()
 
 CNotArrow.prototype.init = function()
 {
-    this.gfx = new PIXI.DisplayObjectContainer();
+    this.gfx = new PIXI.Container();
     this.updateGraphics();
     var v = new PIXI.Sprite(PIXI.Texture.fromFrame("arrow1.png"));
     v.anchor.x = 0.5;
@@ -4779,7 +4787,7 @@ CHPBar.prototype.init = function()
 {
     if (!this.upperOfsY) this.upperOfsY= 0;
     this.space = parseInt(this.space);
-    if (!this.gfx) this.gfx = new PIXI.DisplayObjectContainer(); else
+    if (!this.gfx) this.gfx = new PIXI.Container(); else
     {
        this.gfx.anchor.x = 0;
           this.gfx.anchor.y = 0;
@@ -5025,7 +5033,7 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
 
 CPlayer.prototype.createDedGraphics = function()
 {
-    var g = new PIXI.Spine("imgtps2/skeleton.json");
+    var g = new PIXI.spine.Spine.fromAtlas("imgtps2/skeleton.json");
 
     g.skeleton.setSkinByName('perded');
     g.state.setAnimationByName(0, "idle", true);
@@ -5379,10 +5387,10 @@ extend(CBullet, CObj, true);
 
 function CBullet(in_x,in_y,textname,in_body, vw) {
     CObj.apply(this, [in_x, in_y, null, in_body]);
-    this.gfx = new PIXI.DisplayObjectContainer();
+    this.gfx = new PIXI.Container();
     this.visualVel = 7;
     this.visualWidth = vw;
-    this.bhead = new PIXI.Sprite(PIXI.Texture.fromFrame("head.png"));
+    this.bhead = new PIXI.Sprite(PIXI.Texture.fromFrame("bullhead.png"));
     this.bhead.anchor.x = 0.5;
     this.bhead.anchor.y = 0.5;
     this.bhead.blendMode = PIXI.blendModes.ADD;
@@ -5417,7 +5425,6 @@ CBullet.prototype.updateBulletSpeed = function()
     this.bhead.y = -this.bmiddle.height / 2 - this.bhead.height / 2 + 2 ;
     this.bsheylf.height = 5 + this.visualVel / 2;
     this.bsheylf.y = this.bmiddle.height / 2 + this.bsheylf.height / 2 ;
-
 }
 
 CBullet.prototype.collide = function (obj2)
@@ -5467,10 +5474,10 @@ CBullet.prototype.destroy = function()
 }
 
 CBullet.prototype.process = function() {
-
     this.visualVel += 29.5;
     if (this.dw)
     this.visualWidth += this.dw;
+    if (this.visualWidth < 0) this.visualWidth = 0;
     this.updateBulletSpeed(this.visualVel);
 
     CObj.prototype.process.call(this);
@@ -5521,7 +5528,7 @@ extend(LauncherBG, CObj, true);
 function LauncherBG(in_x, in_y, textname, in_body) {
     CObj.apply(this, [in_x, in_y, textname, in_body]);
     this.levCycles = [];
-    this.gfx = new PIXI.DisplayObjectContainer();
+    this.gfx = new PIXI.Container();
     SM.inst.bg.addChild(this.gfx);
     this.nullSpeed = 10.4;
    //  var inx = CObj.objects.indexOf(this);
@@ -5530,9 +5537,9 @@ function LauncherBG(in_x, in_y, textname, in_body) {
     this.incDist = 50;
     this.speedUpCoef = 0.14;
     this.layersSpeed = [0, 0.1, 0.14, 0.65, 0.65, 1, 1];
-    this.ol = new PIXI.DisplayObjectContainer();
-    this.pllayer = new PIXI.DisplayObjectContainer();
-    this.planeLayer= new PIXI.DisplayObjectContainer();
+    this.ol = new PIXI.Container();
+    this.pllayer = new PIXI.Container();
+    this.planeLayer= new PIXI.Container();
     this.defaultLayer = null;
     this.pixToDist = 1 / 50;
    // this.verticalParallax = 0;
@@ -5601,13 +5608,13 @@ LauncherBG.prototype.spawnClip = function (layer, obj, spawnStart, dist, offs) {
     if (layer.velocity == 0) additional  = 0;
     if (g) {
         layer.clip.addChild(g);
-        layer.rightBound += obj.baseDim.x * obj.scaleX;
+        layer.rightBound += obj.baseDim.x * obj.scaleX / 2;
         if (spawnStart)
             g.position.x = additional + obj.baseDim.x * obj.scaleX / 2; else
 
             g.position.x = SCR_WIDTH + additional + obj.baseDim.x * obj.scaleX / 2 + offs - this.maxVelocity*0.8  - 3;
     } else
-        layer.rightBound += obj.baseDim.x * obj.scaleX;
+        layer.rightBound += obj.baseDim.x * obj.scaleX / 2;
 
     if (cobj.id == "skybg") {
         g.width = SCR_WIDTH;
@@ -5734,7 +5741,7 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
     var layerNum = 7;
     for (var i = 0; i < layerNum; ++i) {
 
-        var cont = new PIXI.DisplayObjectContainer();
+        var cont = new PIXI.Container();
         var vel = this.nullSpeed*this.layersSpeed[i];
 
         var layer = {rightBound: SCR_WIDTH, clip: cont, curDist: SCR_WIDTH, objects: [], velocity: vel};
@@ -5771,7 +5778,7 @@ LauncherBG.prototype.addLevel = function (levName, distance) {
         layers[l].maxx = maxx;
         layers[l].minx = minx;
         layers[l].width = maxx - minx;
-
+        console.log(layers[l].width);
         if (layers[l].velocity == 0) {
             for (var k = 0; k < layers[l].objects.length; ++k) {
                 var obj = layers[l].objects[k];
@@ -6445,7 +6452,7 @@ extend(Boss1, CMonster, true);
 function Boss1(in_x,in_y,animname,cr_bar){
     this.hitTestCircles = [{x: 10, y: 0,r: 60}, {x:10,y: -130,r: 60}, {x:0, y: -260,r: 60}];
     CMonster.apply(this,[in_x,in_y,null,null]);
-    this.gfx = new PIXI.Spine(animname);
+    this.gfx = new spine.Spine(animname);
   //  g.skeleton.setSkinByName('perded');
     this.gfx.state.setAnimationByName(0, "idle", true);
     this.gfx.scale.x = 0.48;
@@ -7187,7 +7194,7 @@ extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
    CMonster.apply(this,[in_x,in_y,null, cr_bar]);
-    this.gfx = new PIXI.Spine("imgtps2/bird.json");
+    this.gfx = new spine.Spine("imgtps2/bird.json");
     this.gfx.state.setAnimationByName(0, "animation", true);
     //  g.skeleton.setSkinByName('perded');
   // this.offsetX = 50;
@@ -7503,7 +7510,7 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
 
     CObj.apply(this, [in_x, in_y, null, null]);
 
-    this.gfx = new PIXI.DisplayObjectContainer();
+    this.gfx = new PIXI.Container();
     this.gui = true;
     this.pw = ww;
     this.ph = hh;
@@ -7620,7 +7627,7 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
         function(){t.updatePosFromEvent(a.global.y);}, 20);
     }
 
-    this.container = new PIXI.DisplayObjectContainer();
+    this.container = new PIXI.Container();
     this.container.x = -this.pw/2;
     this.container.y = -this.ph/2;
    this.sbMask =  new PIXI.Graphics();
@@ -7715,7 +7722,7 @@ CircleBar.prototype.process= function()
 
 CircleBar.prototype.init = function(cover, barup, bardown)
 {
-    this.gfx = new PIXI.DisplayObjectContainer();
+    this.gfx = new PIXI.Container();
     this.ico = crsp(cover);
 
 
@@ -7840,7 +7847,7 @@ CEActionGUI.prototype.updateRecharge= function()
 
     this.timeleft.tint = 0x333333;
     if (timeRes.d < 0 && this.event.reqlvl <= PlayerData.inst.playerItem.lvl) {
-        str = "";
+        str = " ";
         this.ico.interactive = true;
        // this.ico.tint = 0xFFFFFF;
         this.ready = true;
@@ -8236,9 +8243,9 @@ function CLaser(_id, _name, _desc,  __params,__gfx, _upgrades)
 {
     CWeapon.apply(this, [_id, _name, _desc,  __params,__gfx, _upgrades]);
 
-    this.laserClip = new PIXI.DisplayObjectContainer();
-    this.lineClip = new PIXI.DisplayObjectContainer();
-    this.particlesClip = new PIXI.DisplayObjectContainer();
+    this.laserClip = new PIXI.Container();
+    this.lineClip = new PIXI.Container();
+    this.particlesClip = new PIXI.Container();
     this.laserClip.addChild(this.particlesClip);
     this.laserClip.addChild(this.lineClip);
     SM.inst.fg.addChild(this.laserClip);
@@ -8477,7 +8484,7 @@ CPlayer.prototype.shootRope = function(dx, dy)
                 p.rope = null;
             }
         };
-        this.ropeClip = new PIXI.DisplayObjectContainer();
+        this.ropeClip = new PIXI.Container();
         SM.instance.ol.addChildAt(this.ropeClip, 4);
         //this.gfx.addChild(this.ropeClip);
         this.updateRopeLen(0);
@@ -9503,7 +9510,7 @@ PlayerData.prototype.gainExp = function(amount) {
 
 PlayerData.prototype.showAch = function(ach)
 {
-   var cont = new PIXI.DisplayObjectContainer();
+   var cont = new PIXI.Container();
 
    var bg = crsp("notifiction cover");
    cont.addChild(bg);
@@ -10193,7 +10200,7 @@ getDedImage = function (ava) {
         CObj.getById("bgshopded").gfx.visible = false;
     }
 
-    var r = new PIXI.RenderTexture(w, h);
+    var r = new PIXI.RenderTexture(renderer, w, h);
     renderer.render(stage, true);
 
     var _matrix = new PIXI.Matrix();
@@ -10365,10 +10372,19 @@ var preloaderAsset = [
 ];
 window.addScale = 1;
 window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
-
+renderer.backgroundColor = 0xffffff;
+/*
 window.loader = new PIXI.AssetLoader(preloaderAsset);
 window.loader.onComplete = preloaderLoaded;
 window.loader.load();
+*/
+
+
+var p = new PIXI.loaders.Loader();
+p.add(preloaderAsset);
+p.once('complete',preloaderLoaded);
+p.load();
+
 new PlayerData();
 
 $(document).bind('contextmenu', function () {
@@ -10508,7 +10524,7 @@ function preloaderLoaded() {
     window.px = SCR_WIDTH;
     window.py = SCR_HEIGHT;
     window.loadingScreen = new PIXI.Graphics();
-    window.preloaderBg = new PIXI.DisplayObjectContainer();
+    window.preloaderBg = new PIXI.Container();
     var init_scale = 1.1;
     if (window.MOBILE) init_scale = 1.3;
     var fg = crsp("1st plan");
@@ -10566,8 +10582,8 @@ function preloaderLoaded() {
         LevelManager.levFolder + "levscore.json",
         LevelManager.levFolder + "upperPanel.json",
         LevelManager.levFolder + "loading.json",
+        "imgtps2/effects.json",
         "imgtps2/comix.json",
-        "imgtps2/bg.json",
         "imgtps2/achs.json",
         "imgtps2/guiatlas.json",
         "imgtps2/pussyatlas.json",
@@ -10582,10 +10598,10 @@ function preloaderLoaded() {
     window.prevW = window.innerWidth;
     window.prevH = window.innerHeight;
 
-    window.loader = new PIXI.AssetLoader(assetsToLoader);
+   // window.loader = new PIXI.AssetLoader(assetsToLoader);
     document.body.appendChild(renderer.view);
 
-    PIXI.scaleModes.DEFAULT = 0;
+   // PIXI.scaleModes.DEFAULT = PIXI.SCALE_MODES.DEFAULT;
 
     window.charStage = new CharStage();
     window.comixStage = new ComixStage();
@@ -10594,7 +10610,7 @@ function preloaderLoaded() {
     window.achStage = new AchStage();
     window.shopStage = new ShopStage();
 
-    requestAnimFrame(animate);
+
 
     window.pool = new ZPool();
     FRAME_DELAY = 1000 / FRAME_RATE;
@@ -10606,24 +10622,30 @@ function preloaderLoaded() {
 
     assetsButSoundsLoaded();
 
-    loader.onComplete = function () {
+    var p = new PIXI.loaders.Loader();
+    p.add(assetsToLoader);
+
+    p.once('complete',function () {
         window.loaded = true;
         console.log("gfx loaded");
         window.gfxLoaded = true;
         onAssetsLoaded();
-    };
-    loader.load();
-    loader.onProgress = onAssetsProgress;
+    });
+    p.on('progress',onAssetsProgress);
+    p.load();
+
+    requestAnimationFrame(animate);
 }
 
 
-function onAssetsProgress(evt) {
+function onAssetsProgress(loader, evt) {
+    var x = PIXI.loader;
     console.log(window.assetsLoaded.toString() + " asset loaded");
 
     window.assetsLoaded++;
-    if (evt.json) {
-        if (evt.json.objects != undefined) {
-            LevelManager.levels[evt.url] = evt.json;
+    if (evt.isJson) {
+        if (evt.data.objects != undefined) {
+            LevelManager.levels[evt.url] = evt.data;
         }
     }
 }
@@ -10663,7 +10685,7 @@ function onAssetsLoaded() {
 
     preloaderBg = null;
 
-    var x = PIXI.TextureCache["1st plan.png"];
+    var x = PIXI.utils.TextureCache["1st plan.png"];
     x.destroy(true);
     window.progressMask = null;
     if (!MOBILE) {
@@ -10730,7 +10752,7 @@ function applyRatio(displayObj, ratio) {
         object.scale.x = object.scale.x * ratio;
         object.scale.y = object.scale.y * ratio;
     } else {
-        if (CObj.checkType(object, PIXI.Spine) || CObj.checkType(object, PIXI.Sprite) || CObj.checkType(object, PIXI.MovieClip)) {
+        if (CObj.checkType(object, spine.Spine) || CObj.checkType(object, PIXI.Sprite) || CObj.checkType(object, PIXI.MovieClip)) {
             object.scale.x = object.scale.x * ratio;
             object.scale.y = object.scale.y * ratio;
         } else
@@ -10775,7 +10797,7 @@ function onWindowResize() {
 }
 
 function animate() {
-    requestAnimFrame(animate);
+    requestAnimationFrame(animate);
     var lastTime = window.time;
     window.time = (new Date()).getTime();
     var delta = window.time - lastTime;
@@ -10816,6 +10838,7 @@ function animate() {
         //  txtFps.setText("FPS: " + parseInt(fps));
     }
     //   applyRatio(stage, SCR_SCALE);
+
     renderer.render(stage);
     //  applyRatio(stage, 1.0 / (SCR_SCALE));
 }
