@@ -1980,7 +1980,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                 //SUCCESS
 
 
-                                    PlayerData.inst.playerItem.crystals = parseFloat(x.crystals);
+                PlayerData.inst.playerItem.crystals = parseFloat(x.crystals);
                 PlayerData.inst.playerItem.money = parseFloat(x.money);
 
                 PlayerData.inst.items_enabled.push({id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
@@ -1998,6 +1998,16 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                 shopStage.transScreen.parent.removeChild(shopStage.transScreen);
                 shopStage.transScreen = null;
 
+                if (shopStage.currentTab != "bstuff") {
+                    CObj.enableButtons(false);
+                    shopStage.transScreen = SM.inst.addDisableWindow("ФОТОГРАФИРУЕМ... ОЖИДАЙТЕ");
+                    var removeTint = function () {
+                        CObj.enableButtons(true);
+                        rp(shopStage.transScreen);
+                        shopStage.transScreen = null;
+                    }
+                    uploadPhoto(vkparams.viewerid, true, removeTint, "Дед приоделся! https://vk.com/thegrandpa");
+                }
             } else {
                 if (shopStage.transScreen) {
                     rp(shopStage.transScreen)
@@ -2339,7 +2349,7 @@ ShopStage.prototype.onShowContinue = function () {
             rp(shopStage.transScreen);
             shopStage.transScreen = null;
         }
-        uploadPhoto(vkparams.viewerid, false, removeTint);
+        uploadPhoto(vkparams.viewerid, false, removeTint, "Спасибо Деду за селфи! https://vk.com/thegrandpa");
     }
     var avaBtn = CObj.getById("ava");
     if (avaBtn) avaBtn.click = function () {
@@ -2352,7 +2362,7 @@ ShopStage.prototype.onShowContinue = function () {
             rp(shopStage.transScreen);
             shopStage.transScreen = null;
         }
-        uploadPhoto(vkparams.viewerid, true, removeTint);
+        uploadPhoto(vkparams.viewerid, true, removeTint, "Спасибо Деду за селфи! https://vk.com/thegrandpa");
     }
 
     var w = SCR_WIDTH / 2;
@@ -10232,7 +10242,7 @@ getDedImage = function (ava) {
 }
 
 
-uploadPhoto = function (id, ava, endCB) {
+uploadPhoto = function (id, ava, endCB, msg) {
 
     var str = getDedImage(ava);
    //window.location = str;
@@ -10280,7 +10290,7 @@ uploadPhoto = function (id, ava, endCB) {
                         VK.api('wall.post',
                             {
                                 owner_id: vkparams.viewerid,
-                                message: "Спасибо деду за селфи",
+                                message: msg,
                                 attachments: pid
                             }, function (data) {
                                 if (endCB)endCB();
