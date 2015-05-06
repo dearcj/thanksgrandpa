@@ -525,7 +525,7 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer, offsX, offsY)
 
     for (i = 0; i < atlases.length; ++i)
     {
-        var path = "imgtps2/" + atlases[i] ;
+        var path = "imgtps3/" + atlases[i] ;
         var o = PIXI.utils.BaseTextureCache[path + ".png"];
         if (!o)
         assetsToLoader.push(path+ ".json");
@@ -1761,7 +1761,7 @@ AchStage.prototype.onShow = function() {
     LevelManager.loadLevel("levach", achStage.onShowContinue);
 
     /* var preloaderAsset = [
-         "imgtps2/achs.json"
+         "imgtps3/achs.json"
      ];
 
      var loader = new PIXI.AssetLoader(preloaderAsset);
@@ -5033,7 +5033,7 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
 
 CPlayer.prototype.createDedGraphics = function()
 {
-    var g = new PIXI.spine.Spine.fromAtlas("imgtps2/skeleton.json");
+    var g = new PIXI.spine.Spine.fromAtlas("imgtps3/skeleton.json");
 
     g.skeleton.setSkinByName('perded');
     g.state.setAnimationByName(0, "idle", true);
@@ -7171,7 +7171,7 @@ MM.prototype.process = function () {
     if (st != this.prevS) {
         if (!this.currentBoss && this.bosses.length > 0 && (this.prevS * dd - this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist)) {
             var b = this.bosses.shift();
-            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps2/boss1.json");
+            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps3/boss1.json");
             this.currentBoss.showUpAnimation();
         } else {
             if (this.currentBoss) {
@@ -7194,7 +7194,7 @@ extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
    CMonster.apply(this,[in_x,in_y,null, cr_bar]);
-    this.gfx = new spine.Spine("imgtps2/bird.json");
+    this.gfx = new spine.Spine("imgtps3/bird.json");
     this.gfx.state.setAnimationByName(0, "animation", true);
     //  g.skeleton.setSkinByName('perded');
   // this.offsetX = 50;
@@ -10368,7 +10368,7 @@ window.openSponsorWindow = null;
 window.focus();
 var assetsLoaded = 0;
 var preloaderAsset = [
-    "imgtps2/preloader.json"
+    "imgtps3/preloader.json"
 ];
 window.addScale = 1;
 window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
@@ -10582,17 +10582,17 @@ function preloaderLoaded() {
         LevelManager.levFolder + "levscore.json",
         LevelManager.levFolder + "upperPanel.json",
         LevelManager.levFolder + "loading.json",
-        "imgtps2/effects.json",
-        "imgtps2/comix.json",
-        "imgtps2/achs.json",
-        "imgtps2/guiatlas.json",
-        "imgtps2/pussyatlas.json",
-        "imgtps2/dedgamedesc.xml",
-        "imgtps2/dedgamecaps.xml",
-        "imgtps2/dedgameXP.xml",
-        "imgtps2/skeleton.json",
-        "imgtps2/boss1.json",
-        "imgtps2/bird.json"
+        "imgtps3/effects.json",
+        "imgtps3/comix.json",
+        "imgtps3/achs.json",
+        "imgtps3/guiatlas.json",
+        "imgtps3/pussyatlas.json",
+        "imgtps3/dedgamedesc.xml",
+        "imgtps3/dedgamecaps.xml",
+        "imgtps3/dedgameXP.xml",
+        "imgtps3/skeleton.json",
+        "imgtps3/boss1.json",
+        "imgtps3/bird.json"
     ];
 
     window.prevW = window.innerWidth;
