@@ -6,8 +6,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/obf/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/obf/all.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\achs.json" afterPath="$PROJECT_DIR$/imgtps3/achs.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\achs.png" afterPath="$PROJECT_DIR$/imgtps3/achs.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\achs.xml" afterPath="$PROJECT_DIR$/imgtps3/achs.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\bird.atlas" afterPath="$PROJECT_DIR$/imgtps3/bird.atlas" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\bird.json" afterPath="$PROJECT_DIR$/imgtps3/bird.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\bird.png" afterPath="$PROJECT_DIR$/imgtps3/bird.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\boss1.atlas" afterPath="$PROJECT_DIR$/imgtps3/boss1.atlas" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\boss1.json" afterPath="$PROJECT_DIR$/imgtps3/boss1.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\boss1.png" afterPath="$PROJECT_DIR$/imgtps3/boss1.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\comix.json" afterPath="$PROJECT_DIR$/imgtps3/comix.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\comix.png" afterPath="$PROJECT_DIR$/imgtps3/comix.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\comix.tps" afterPath="$PROJECT_DIR$/imgtps3/comix.tps" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\comix.xml" afterPath="$PROJECT_DIR$/imgtps3/comix.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\dedgameXP.png" afterPath="$PROJECT_DIR$/imgtps3/dedgameXP.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\dedgameXP.xml" afterPath="$PROJECT_DIR$/imgtps3/dedgameXP.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\dedgamecaps.png" afterPath="$PROJECT_DIR$/imgtps3/dedgamecaps.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\dedgamecaps.xml" afterPath="$PROJECT_DIR$/imgtps3/dedgamecaps.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\dedgamedesc.png" afterPath="$PROJECT_DIR$/imgtps3/dedgamedesc.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\dedgamedesc.xml" afterPath="$PROJECT_DIR$/imgtps3/dedgamedesc.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\effects.json" afterPath="$PROJECT_DIR$/imgtps3/effects.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\effects.png" afterPath="$PROJECT_DIR$/imgtps3/effects.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\effects.tps" afterPath="$PROJECT_DIR$/imgtps3/effects.tps" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\effects.xml" afterPath="$PROJECT_DIR$/imgtps3/effects.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\guiatlas.json" afterPath="$PROJECT_DIR$/imgtps3/guiatlas.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\guiatlas.png" afterPath="$PROJECT_DIR$/imgtps3/guiatlas.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\guiatlas.tps" afterPath="$PROJECT_DIR$/imgtps3/guiatlas.tps" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\guiatlas.xml" afterPath="$PROJECT_DIR$/imgtps3/guiatlas.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\preloader.json" afterPath="$PROJECT_DIR$/imgtps3/preloader.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\preloader.png" afterPath="$PROJECT_DIR$/imgtps3/preloader.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\preloader.tps" afterPath="$PROJECT_DIR$/imgtps3/preloader.tps" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\pussyatlas.json" afterPath="$PROJECT_DIR$/imgtps3/pussyatlas.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\pussyatlas.png" afterPath="$PROJECT_DIR$/imgtps3/pussyatlas.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\pussyatlas.xml" afterPath="$PROJECT_DIR$/imgtps3/pussyatlas.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\skeleton.atlas" afterPath="$PROJECT_DIR$/imgtps3/skeleton.atlas" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\skeleton.json" afterPath="$PROJECT_DIR$/imgtps3/skeleton.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\skeleton.png" afterPath="$PROJECT_DIR$/imgtps3/skeleton.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps2\tps.tps" afterPath="$PROJECT_DIR$/imgtps3/tps.tps" />
     </list>
     <ignored path="thanksgrandpa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,7 +90,17 @@
         <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="235" max-vertical-offset="9595">
-              <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+              <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BonusMonGnome.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.16814159" vertical-offset="0" max-vertical-offset="1083">
+              <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -74,16 +121,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="12718" max-vertical-offset="19722">
               <caret line="691" column="32" selection-start-line="691" selection-start-column="32" selection-end-line="691" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CBullet.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Objects/CBullet.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2033">
-              <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -119,21 +156,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LevelManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Utils/LevelManager.js">
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2014">
-              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+            <state vertical-scroll-proportion="-11.535714" vertical-offset="114" max-vertical-offset="2356">
+              <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test.html">
+      <file leaf-file-name="CPlayer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36872146" vertical-offset="114" max-vertical-offset="2356">
-              <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1641" max-vertical-offset="8645">
+              <caret line="104" column="39" selection-start-line="104" selection-start-column="39" selection-end-line="104" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -185,9 +222,7 @@
         <option value="$PROJECT_DIR$/CjEngine/scripts/source.map" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/StageManager.js" />
         <option value="$PROJECT_DIR$/test.html" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss1.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/CEActionGUI.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/ComixStage.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/LevelManager.js" />
@@ -197,8 +232,10 @@
         <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Objects/CObj.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Stages/CharStage.js" />
-        <option value="$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js" />
         <option value="$PROJECT_DIR$/CjEngine/scripts/Utils/PhotoUploader.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js" />
+        <option value="$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js" />
       </list>
     </option>
   </component>
@@ -290,20 +327,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="libs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="imgtps2">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -593,12 +616,6 @@
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
     </task>
-    <task id="LOCAL-01254" summary="&#10;&#10;a">
-      <created>1430311043429</created>
-      <option name="number" value="01254" />
-      <option name="project" value="LOCAL" />
-      <updated>1430311043429</updated>
-    </task>
     <task id="LOCAL-01255" summary="&#10;&#10;a">
       <created>1430321103874</created>
       <option name="number" value="01255" />
@@ -887,7 +904,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430931549976</updated>
     </task>
-    <option name="localTasksCounter" value="1303" />
+    <task id="LOCAL-01303" summary="&#10;&#10;a">
+      <created>1430931639700</created>
+      <option name="number" value="01303" />
+      <option name="project" value="LOCAL" />
+      <updated>1430931639700</updated>
+    </task>
+    <option name="localTasksCounter" value="1304" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -912,7 +935,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1634" height="1066" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33483145" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
@@ -925,7 +948,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46179774" sideWeight="0.2994924" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12083333" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21508035" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21508035" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1236,26 +1259,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1083">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/Boss1.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2375">
           <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1641" max-vertical-offset="8645">
-          <caret line="102" column="42" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -1364,14 +1371,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="235" max-vertical-offset="9595">
-          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Stages/GameStage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="12718" max-vertical-offset="19722">
@@ -1398,8 +1397,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36872146" vertical-offset="114" max-vertical-offset="2356">
+        <state vertical-scroll-proportion="-11.535714" vertical-offset="114" max-vertical-offset="2356">
           <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/LiveObjects/CPlayer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1641" max-vertical-offset="8645">
+          <caret line="104" column="39" selection-start-line="104" selection-start-column="39" selection-end-line="104" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Main/gamefile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="235" max-vertical-offset="9595">
+          <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CjEngine/scripts/Monsters/BonusMonGnome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16814159" vertical-offset="0" max-vertical-offset="1083">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
           <folding />
         </state>
       </provider>
