@@ -533,12 +533,12 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer, offsX, offsY)
 
     if (assetsToLoader.length > 0) {
 
-
-        var p = new PIXI.loaders.Loader();
+        LevelManager.onComplete();
+    /*    var p = new PIXI.loaders.Loader();
         p.add(assetsToLoader);
 
         p.once('complete',LevelManager.onComplete);
-        p.load();
+        p.load();*/
     } else
         LevelManager.onComplete();
     return LevelManager.objs;
@@ -719,7 +719,7 @@ Object.defineProperty(GameStage.prototype, 'worldSpeed', {
         var objlen = CObj.objects.length;
         for (var i = 0; i < objlen; ++i) {
             //////////////////////////FAIL CHECK
-            if (CObj.objects[i].gfx && CObj.checkType(CObj.objects[i].gfx, PIXI.MovieClip)) {
+            if (CObj.objects[i].gfx && CObj.checkType(CObj.objects[i].gfx, PIXI.extras.MovieClip)) {
                 CObj.objects[i].gfx.animationSpeed = value * CObj.objects[i].fps / FRAME_RATE;
             }
         }
@@ -731,14 +731,14 @@ GameStage.prototype.createHPBar = function (x, y, max) {
     var t = PIXI.Texture.fromFrame("health dead.png");
 
     bar.gfx = new PIXI.Container();
-    var lower = new PIXI.TilingSprite(t, (t.width), (t.height));
+    var lower = new PIXI.extras.TilingSprite(t, (t.width), (t.height));
     bar.id = "hpbar";
     lower.width = max * t.width;
     bar.gfx.addChild(lower);
     bar.updateGraphics();
     bar.texW = t.width;
     var tupper = PIXI.Texture.fromFrame("health.png");
-    var upperBar = new PIXI.TilingSprite(tupper, tupper.width, tupper.height);
+    var upperBar = new PIXI.extras.TilingSprite(tupper, tupper.width, tupper.height);
     upperBar.height = tupper.height - 1;
     upperBar.width = max * tupper.width;
     bar.gfx.addChild(upperBar);
@@ -2610,7 +2610,6 @@ CharStage.prototype.onShow = function () {
             shopStage.createStatsPanel(charStage.onShowContinue);
         }
         , SM.inst.ol);
-    stage.visible = false;
 }
 
 CharStage.prototype.onHide = function (newStage) {
@@ -2712,16 +2711,17 @@ CharStage.prototype.createFriendsPanel = function () {
                 if (!data.response || data.response.length == 0) return;
 
                 var upperClip = clips[j];
-                upperClip.loader = new PIXI.ImageLoader(purl);
+                upperClip.loader = new PIXI.loaders.Loader();
+                upperClip.loader.add(purl);
 
                 var setLoader = function (clip, url) {
-                    clip.loader.onLoaded = function () {
+                    clip.loader.on("complete", function () {
                         var ico = new PIXI.Sprite(PIXI.utils.TextureCache[url]);
                         ico.anchor.x = 0.5;
                         ico.anchor.y = 0.5;
                         clip.addChild(ico);
                         charStage.icons.push(ico);
-                    }
+                    });
                 };
                 setLoader(upperClip, purl);
                 upperClip.loader.load();
@@ -2867,7 +2867,6 @@ CharStage.prototype.updateNotifications = function () {
 CharStage.prototype.onShowContinue = function () {
     charStage.updateNotifications();
 
-    stage.visible = true;
     PlayerData.inst.comboCheck();
 
     PlayerData.inst.checkItemAchs();
@@ -3299,10 +3298,11 @@ CharStage.prototype.updateSB = function (arr) {
                 if (!data.response || data.response.length == 0) return;
 
                 var upperClip = clips[j];
-                upperClip.loader = new PIXI.ImageLoader(purl);
+                upperClip.loader = new PIXI.loaders.Loader();
+                upperClip.loader.add(purl);
 
                 var setLoader = function (clip, url) {
-                    clip.loader.onLoaded = function () {
+                    clip.loader.on("complete", function () {
                         var ico = new PIXI.Sprite(PIXI.utils.TextureCache[url]);
                         ico.scale.x = 0.5;
                         ico.scale.y = 0.5;
@@ -3310,7 +3310,7 @@ CharStage.prototype.updateSB = function (arr) {
                         ico.anchor.y = 0.5;
                         clip.addChild(ico);
                         //    charStage.icons.push(ico);
-                    }
+                    });
                 };
                 setLoader(upperClip, purl);
                 upperClip.loader.load();
@@ -3872,7 +3872,7 @@ CObj.createMovieClip = function(name)
 
     if (textures.length == 0)
         textures[0] = PIXI.utils.TextureCache[name + ".png"];
-    var img = new PIXI.MovieClip(textures);
+    var img = new PIXI.extras.MovieClip(textures);
     img.gotoAndStop(cinx);
     return img;
 }
@@ -3901,7 +3901,7 @@ CObj.AssignTexturesToObjects = function (objs, layerToAdd){
 
             if (objs[i].drawAsTexture )
             {
-                img = new PIXI.TilingSprite(tex, objs[i].baseDim.x, objs[i].baseDim.y)  ;
+                img = new PIXI.extras.TilingSprite(tex, objs[i].baseDim.x, objs[i].baseDim.y)  ;
             } else
             {
 
@@ -4614,10 +4614,10 @@ CTextField.convertSpaces = function(a)
 CTextField.createTextField = function(obj) {
     var inx = 0;
 
-    var font = PIXI.BitmapText.fonts["dedgamedesc"];
+    var font = PIXI.extras.BitmapText.fonts["dedgamedesc"];
 
     if (obj.fontFamily && obj.fontFamily != "") {
-        var fnt = PIXI.BitmapText.fonts[obj.fontFamily];
+        var fnt = PIXI.extras.BitmapText.fonts[obj.fontFamily];
         if (fnt != undefined)
         font = fnt;
     }
@@ -4640,7 +4640,7 @@ CTextField.createTextField = function(obj) {
         obj.text = CTextField.convertSpaces(obj.text);
     }
     if (obj.text == "" || obj.text == undefined) obj.text = " ";
-    var pt = new PIXI.BitmapText(obj.text, {font: fontParam, align: "center", valign: "center"});
+    var pt = new PIXI.extras.BitmapText(obj.text, {font: fontParam, align: "center", valign: "center"});
 
     pt.align = "center";
     if (obj.tint != "0xffffff" && obj.tint != undefined)
@@ -4797,7 +4797,7 @@ CHPBar.prototype.init = function()
     {
         var tex = PIXI.Texture.fromFrame(this.upperImage + ".png");
         if (this.tile) {
-            this.upperImageClip = new PIXI.TilingSprite(tex, tex.width, tex.height);
+            this.upperImageClip = new PIXI.extras.TilingSprite(tex, tex.width, tex.height);
         } else
             this.upperImageClip = new PIXI.Sprite(tex);
 
@@ -5393,19 +5393,19 @@ function CBullet(in_x,in_y,textname,in_body, vw) {
     this.bhead = new PIXI.Sprite(PIXI.Texture.fromFrame("bullhead.png"));
     this.bhead.anchor.x = 0.5;
     this.bhead.anchor.y = 0.5;
-    this.bhead.blendMode = PIXI.blendModes.ADD;
+    this.bhead.blendMode = PIXI.BLEND_MODES.ADD;
     this.bhead.width = this.visualWidth;
     //this.bhead.x -= 1;
     this.bmiddle = new PIXI.Sprite(PIXI.Texture.fromFrame("center.png"));
     this.bmiddle.width = this.visualWidth;
     this.bmiddle.anchor.x = 0.5;
     this.bmiddle.anchor.y = 0.5;
-    this.bmiddle.blendMode = PIXI.blendModes.ADD;
+    this.bmiddle.blendMode = PIXI.BLEND_MODES.ADD;
     this.bsheylf = new PIXI.Sprite(PIXI.Texture.fromFrame("shleyf.png"));
     this.bsheylf.width = this.visualWidth;
     this.bsheylf.anchor.x = 0.5;
     this.bsheylf.anchor.y = 0.5;
-    this.bsheylf.blendMode = PIXI.blendModes.ADD;
+    this.bsheylf.blendMode = PIXI.BLEND_MODES.ADD;
     this.gfx.addChild(this.bhead);
     this.gfx.addChild(this.bmiddle);
     this.gfx.addChild(this.bsheylf);
@@ -8219,7 +8219,7 @@ CQueueGun.prototype.shot = function(queueShot)
     fx.x = xx + vx * 65;
     fx.y = yy + vy*65;
     fx.rotation = fireAngle;
-    fx.blendMode = PIXI.blendModes.ADD;
+    fx.blendMode = PIXI.BLEND_MODES.ADD;
     SM.inst.fg.addChild(fx);
 
     TweenMax.delayedCall(0.03, function (){fx.parent.removeChild(fx);});
@@ -10196,6 +10196,7 @@ getDedImage = function (ava) {
 
     if (ava) {
         CObj.getById("photo").gfx.visible = false;
+        CObj.getById("bback").gfx.visible = false;
         CObj.getById("ava").gfx.visible = false;
         CObj.getById("bgshopded").gfx.visible = false;
     }
@@ -10210,8 +10211,9 @@ getDedImage = function (ava) {
     var str = r.getBase64();
     r.destroy(true);
     if (ava) {
-        CObj.getById("bgshopded").gfx.visible = true;
         CObj.getById("bback").gfx.visible = true;
+        CObj.getById("bgshopded").gfx.visible = true;
+        CObj.getById("photo").gfx.visible = true;
         CObj.getById("ava").gfx.visible = true;
     }
     if (shopStage.transScreen) shopStage.transScreen.visible = true;
@@ -10752,7 +10754,7 @@ function applyRatio(displayObj, ratio) {
         object.scale.x = object.scale.x * ratio;
         object.scale.y = object.scale.y * ratio;
     } else {
-        if (CObj.checkType(object, spine.Spine) || CObj.checkType(object, PIXI.Sprite) || CObj.checkType(object, PIXI.MovieClip)) {
+        if (CObj.checkType(object, spine.Spine) || CObj.checkType(object, PIXI.Sprite) || CObj.checkType(object, PIXI.extras.MovieClip)) {
             object.scale.x = object.scale.x * ratio;
             object.scale.y = object.scale.y * ratio;
         } else
