@@ -528,7 +528,7 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer, offsX, offsY)
 
     for (i = 0; i < atlases.length; ++i)
     {
-        var path = "imgtps5/" + atlases[i] ;
+        var path = "imgtps6/" + atlases[i] ;
         var o = PIXI.utils.BaseTextureCache[path + ".png"];
         if (!o)
         assetsToLoader.push(path+ ".json");
@@ -1777,7 +1777,7 @@ AchStage.prototype.onShow = function() {
     LevelManager.loadLevel("levach", achStage.onShowContinue);
 
     /* var preloaderAsset = [
-         "imgtps5/achs.json"
+         "imgtps6/achs.json"
      ];
 
      var loader = new PIXI.AssetLoader(preloaderAsset);
@@ -1992,7 +1992,7 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                 PlayerData.inst.playerItem.crystals = parseFloat(x.crystals);
                 PlayerData.inst.playerItem.money = parseFloat(x.money);
 
-                PlayerData.inst.items_enabled.push({id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
+                PlayerData.inst.items_enabled.push({id: x.addedid, id_item: buyitem.id, id_player: PlayerData.inst.playerItem.id});
 
                 PlayerData.inst.checkItemAchs();
 
@@ -2000,14 +2000,14 @@ ShopStage.prototype.buyItem = function (event, unlock) {
                 shopStage.updateStatsPanel();
 
                 PlayerData.inst.equipItem(buyitem, "1");
-                shopStage.pl.updateAppearence(true, false, null, null, null);
+                shopStage.pl.updateAppearence(true, true, null, null, null);
 
                 shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
                 shopStage.updateStatsPanel();
                 shopStage.transScreen.parent.removeChild(shopStage.transScreen);
                 shopStage.transScreen = null;
 
-                if (shopStage.currentTab != "bstuff") {
+                if (vkparams.novk != true && shopStage.currentTab != "bstuff") {
                     CObj.enableButtons(false);
                     shopStage.transScreen = SM.inst.addDisableWindow("ФОТОГРАФИРУЕМ... ОЖИДАЙТЕ");
                     var removeTint = function () {
@@ -2083,17 +2083,28 @@ ShopStage.prototype.createItemBtn = function (item) {
     var f = ico;
     ico.mouseover = function (evt) {
 
-        if (item.type == tWeapon || item.type == tApp + tHat) {
+        if (item.type == tWeapon || item.type.indexOf(tApp) >= 0) {
             var gfxhat = null;
             var gfxweap = null;
+            var gfxboard = null;
+            var gfxcostume = null;
             if (item.type == tWeapon) {
                 gfxweap = item.gfx;
             }
             if (item.type == tApp + tHat) {
                 gfxhat = item.gfx;
             }
-            shopStage.pl.updateAppearence(true, false, null, gfxweap, gfxhat);
+
+            if (item.type == tApp + tBoard) {
+                gfxboard = item.name;
+            }
+            if (item.type == tApp + tCostume) {
+                gfxcostume = item.name;
+            }
+
+            shopStage.pl.updateAppearence(true, true, null, gfxweap, gfxhat, null, gfxboard, gfxcostume);
         }
+
         TweenMax.killTweensOf(f.scale);
         f.tint = CButton.tintColor;
         new TweenMax(f.scale, 0.6, {y: bsY + 0.05, ease: Elastic.easeOut});
@@ -2112,8 +2123,8 @@ ShopStage.prototype.createItemBtn = function (item) {
         var tf = CObj.getById("tfdescd");
         if (tf.item == item)
             tf.setTextSafe("");
-        if (item.type == tWeapon || item.type == tApp + tHat) {
-            shopStage.pl.updateAppearence(true, false, null, null, null);
+        if (item.type == tWeapon || item.type.indexOf(tApp) >= 0) {
+            shopStage.pl.updateAppearence(true, true, null, null, null);
         }
         f.tint = 0xffffff;
         if (f.currentFrame)
@@ -2164,7 +2175,14 @@ ShopStage.prototype.createItemBtn = function (item) {
             if (item.reqlvl > PlayerData.inst.playerItem.lvl) {
                 clickFunc = unlockItem;
                 btnName = "unlock button";
-                infoText = "МИН " + item.reqlvl.toString() + " УР.";
+
+
+                    if (item.reqlvl != 99) {
+                        infoText = "МИН " + item.reqlvl.toString() + " УР.";
+                    } else {
+                        btnName = "buy button";
+                    }
+
                 bgSprite = "price star.png";
                 tftext = item.pricecrys.toString();
             } else {
@@ -2172,6 +2190,11 @@ ShopStage.prototype.createItemBtn = function (item) {
                 bgSprite = "price coin.png";
                 btnName = "buy button";
                 tftext = item.price.toString();
+
+                if (item.reqlvl == -100) {
+                    btnName = null;
+                    infoText = " ";
+                }
             }
         }
     } else {
@@ -2192,32 +2215,37 @@ ShopStage.prototype.createItemBtn = function (item) {
         }
     }
     dy = -15;
+    if (btnName) {
+        var btn = new CButton(0, 144 + dy, btnName);
+        if (btnName == "equipped button") {
+            btn.gfx.mouseout = null;
+            btn.gfx.mouseover = null;
+        }
 
-    var btn = new CButton(0, 144 + dy, btnName);
-    if (btnName == "equipped button") {
-        btn.gfx.mouseout = null;
-        btn.gfx.mouseover = null;
+        btn.fontSize = 33;
+        btn.addToSameLayer = true;
+        btn.gfx.anchor.x = 0.5;
+        btn.gfx.anchor.y = 0.5;
+        btn.gfx.scale.x = 0.8;
+        btn.gfx.scale.y = 0.8;
+        btn.init();
+        btn.gfx.parent.removeChild(btn.gfx);
+
+        if (isBooster)
+            btn.item = PlayerData.inst.getItemById(upgrObj.idNext); else
+            btn.item = item;
+        btn.gfx.btn = btn;
+        btn.click = clickFunc;
+
+        g.addChild(btn.gfx);
+        if (btn.text)
+            btn.text = btn.text;
+        g.btn = btn;
     }
-    ;
-    btn.fontSize = 33;
-    btn.addToSameLayer = true;
-    btn.gfx.anchor.x = 0.5;
-    btn.gfx.anchor.y = 0.5;
-    btn.gfx.scale.x = 0.8;
-    btn.gfx.scale.y = 0.8;
-    btn.init();
-    btn.gfx.parent.removeChild(btn.gfx);
-
-    if (isBooster)
-        btn.item = PlayerData.inst.getItemById(upgrObj.idNext); else
-        btn.item = item;
-    btn.gfx.btn = btn;
-    btn.click = clickFunc;
-
     function takeOff(event)
     {
         PlayerData.inst.equipItem(item, "0");
-        shopStage.pl.updateAppearence(true, false, null, null, null);
+        shopStage.pl.updateAppearence(true, true, null, null, null);
         shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
     }
 
@@ -2227,7 +2255,7 @@ ShopStage.prototype.createItemBtn = function (item) {
 
     function wearItem(event) {
         PlayerData.inst.equipItem(item, "1");
-        shopStage.pl.updateAppearence(true, false, null, null, null);
+        shopStage.pl.updateAppearence(true, true, null, null, null);
         shopStage.updateBar(shopStage.currentTab, shopStage.currentFilter, shopStage.bar.pos);
     }
 
@@ -2236,10 +2264,7 @@ ShopStage.prototype.createItemBtn = function (item) {
     }
 
 
-    g.addChild(btn.gfx);
-    if (btn.text)
-        btn.text = btn.text;
-    g.btn = btn;
+
 
     if (tftext) {
         if (bgSprite) {
@@ -2294,6 +2319,31 @@ ShopStage.prototype.updateBar = function (tab, filter, baroffset) {
     shopStage.updateStatsPanel();
     shopStage.currentTab = tab;
     shopStage.currentFilter = filter;
+
+
+    CObj.getById("bboards").gfx.gotoAndStop(0);
+    CObj.getById("bcostumes").gfx.gotoAndStop(0);
+    CObj.getById("bhats").gfx.gotoAndStop(0);
+    if (filter == tBoost) {
+        CObj.getById("tfapp").text = "БУСТЕРЫ";
+    }
+    if (filter == tWeapon) {
+        CObj.getById("tfapp").text = "ОРУЖИЕ";
+    }
+
+        if (filter == tApp + tHat) {
+        CObj.getById("bhats").gfx.gotoAndStop(1);
+        CObj.getById("tfapp").text = "ШЛЯПЫ";
+    }
+    if (filter == tApp + tCostume) {
+        CObj.getById("bcostumes").gfx.gotoAndStop(1);
+        CObj.getById("tfapp").text = "КОСТЮМЫ";
+    }
+    if (filter == tApp + tBoard) {
+        CObj.getById("tfapp").text = "ДОСКИ";
+        CObj.getById("bboards").gfx.gotoAndStop(1);
+    }
+
 
     CObj.getById("bstuff").gfx.alpha = 0.1;
     CObj.getById("bweap").gfx.alpha = 0.1;
@@ -2388,23 +2438,57 @@ ShopStage.prototype.onShowContinue = function () {
     }
 
     CObj.getById("bstuff").click = function () {
+        CObj.getById("bboards").gfx.visible = false;
+        CObj.getById("bcostumes").gfx.visible = false;
+        CObj.getById("bhats").gfx.visible = false;
+
         shopStage.updateBar("bstuff", tBoost);
     }
     CObj.getById("bweap").click = function () {
+        CObj.getById("bboards").gfx.visible = false;
+        CObj.getById("bcostumes").gfx.visible = false;
+        CObj.getById("bhats").gfx.visible = false;
+
         shopStage.updateBar("bweap", tWeapon);
     }
 
+    shopStage.clothFilter = tApp + tHat;
+    CObj.getById("bboards").gfx.visible = false;
+    CObj.getById("bcostumes").gfx.visible = false;
+    CObj.getById("bhats").gfx.visible = false;
+
+
+    CObj.getById("bboards").click = function()
+    {
+        shopStage.clothFilter = tApp + tBoard;
+        shopStage.updateBar("bcloth", shopStage.clothFilter);
+    };
+    CObj.getById("bcostumes").click  = function()
+    {
+        shopStage.clothFilter = tApp + tCostume;
+        shopStage.updateBar("bcloth", shopStage.clothFilter);
+    };
+    CObj.getById("bhats").click = function()
+    {
+        shopStage.clothFilter = tApp + tHat;
+        shopStage.updateBar("bcloth", shopStage.clothFilter);
+    };
+
+
     CObj.getById("bcloth").click = function () {
-        shopStage.updateBar("bcloth", tApp);
+        CObj.getById("bboards").gfx.visible = true;
+        CObj.getById("bcostumes").gfx.visible = true;
+        CObj.getById("bhats").gfx.visible = true;
+        shopStage.updateBar("bcloth", shopStage.clothFilter);
     }
 
     shopStage.updateBar("bstuff", tBoost);
 
     var plPos = CObj.getById("plpos");
     if (plPos) pl = new CPlayer(plPos.x, plPos.y); else
-    var pl = new CPlayer(180, 400);
+    var pl = new CPlayer(190, 380);
     shopStage.pl = pl;
-    shopStage.pl.updateAppearence(true, false, "breath", null, null);
+    shopStage.pl.updateAppearence(true, true, "breath", null, null);
     pl.gfx.scale.x = 0.86;
     pl.gfx.scale.y = 0.86;
     SM.inst.ol.addChild(pl.gfx);
@@ -5020,7 +5104,7 @@ CPlayer.prototype.collide = function (obj2)
 }
 
 
-CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, overrideGun, overrideHat, headSlot) {
+CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, overrideGun, overrideHat, headSlot, overrideBoard, overrideCostume) {
 
     if (anim)
     this.gfx.state.setAnimationByName(0, anim, true);
@@ -5037,49 +5121,57 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
     this.gfx.skeleton.setAttachment("board", "board");
 
 
+    function boardNameToAnimation(cname, gfx)
+    {
+        var animName;
+        if (cname == "Appearence.Board2") animName = "board2";
+        if (cname == "Appearence.Board3") animName = "board3";
+        if (cname == "Appearence.Board4") animName = "board4";
+        if (cname == "Appearence.Board5") animName = "board5";
+        if (cname == "Appearence.Board6") animName = "board6";
+        gfx.skeleton.setAttachment("board", animName);
+    }
+
+    function costumeNameToAnimation(cname, gfx)
+    {
+        var costumeId;
+        if (cname == "Appearence.Gussar") costumeId = 2;
+        if (cname == "Appearence.Chapaev") costumeId = 3;
+
+        gfx.skeleton.setAttachment("body", "body"+costumeId.toString());
+        gfx.skeleton.setAttachment("l_shoulder", "l_shoulder"+costumeId.toString());
+        gfx.skeleton.setAttachment("l_arm", "l_arm"+costumeId.toString());
+        gfx.skeleton.setAttachment("r_shoulder", "r_shoulder"+costumeId.toString());
+        gfx.skeleton.setAttachment("r_arm", "r_arm"+costumeId.toString());
+    }
+
     var costumeId = null;
     var boardId = null;
     for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
     {
         var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
-        if (item.type == tApp + tCostume)
-        {
-            if (item.name == "gussar") costumeId = 2;
-            if (item.name == "chapaev") costumeId = 3;
+        if (PlayerData.inst.items_enabled[i].equipped == "1" || PlayerData.inst.items_enabled[i].equipped == true) {
+            if (item.type == tApp + tCostume) {
+                costumeNameToAnimation(item.name, this.gfx);
+            }
+
+            if (item.type == tApp + tBoard) {
+                boardNameToAnimation(item.name, this.gfx);
+            }
         }
-
-
-        if (item.type == tApp + tBoard)
-        {
-            if (item.name == "board2") boardId = 2;
-            if (item.name == "board3") boardId = 3;
-            if (item.name == "board4") boardId = 4;
-            if (item.name == "board5") boardId = 5;
-            if (item.name == "board6") boardId = 6;
-        }
-
-    }
-   /* costumeId = 3;
-    boardId = 4;
-*/
-    if (showBoard) {
-        this.gfx.skeleton.setAttachment("board", "board");
-        if (boardId) {
-            this.gfx.skeleton.setAttachment("board", "board" + boardId.toString());
-        }
-    } else
-    {   this.gfx.skeleton.setAttachment("board", null);
-
     }
 
-    if (costumeId)
+    if (!showBoard)
     {
-        this.gfx.skeleton.setAttachment("body", "body"+costumeId.toString());
-        this.gfx.skeleton.setAttachment("l_shoulder", "l_shoulder"+costumeId.toString());
-        this.gfx.skeleton.setAttachment("l_arm", "l_arm"+costumeId.toString());
-        this.gfx.skeleton.setAttachment("r_shoulder", "r_shoulder"+costumeId.toString());
-        this.gfx.skeleton.setAttachment("r_arm", "r_arm"+costumeId.toString());
+        this.gfx.skeleton.setAttachment("board", null);
     }
+
+    if (overrideBoard)
+        boardNameToAnimation(overrideBoard, this.gfx);
+
+    if (overrideCostume)
+        costumeNameToAnimation(overrideCostume, this.gfx);
+
 
     var hatSlot = null;
     var gunSlot = "gun0";
@@ -5115,7 +5207,7 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
 
 CPlayer.prototype.createDedGraphics = function()
 {
-    var g = new PIXI.spine.Spine.fromAtlas("imgtps5/skeleton.json");
+    var g = new PIXI.spine.Spine.fromAtlas("imgtps6/skeleton.json");
 
  //   g.skeleton.setSkinByName('perded');
     g.state.setAnimationByName(0, "idle", true);
@@ -6540,8 +6632,8 @@ function Boss1(in_x,in_y,animname,cr_bar){
     this.gfx.scale.x = 0.48;
     this.gfx.scale.y = 0.48;
     this.updateGraphics();
-    this.maxHp = 1000;
-    this.xp = 250;
+    this.maxHp = 1500;
+    this.xp = 300;
     this.hp = this.maxHp;
     this.bar.gfx.width *= 2;
     this.barOffsetY = - 360;
@@ -6584,7 +6676,7 @@ Boss1.prototype.setRandDisp = function() {
 
 Boss1.prototype.goIdle = function() {
     var t = this;
-    if (!this.gfx) return;
+    if (!this.gfx || !this.gfx.state) return;
     this.gfx.state.setAnimationByName(0, "idle", true);
     this.setRandDisp();
 
@@ -6641,6 +6733,8 @@ Boss1.prototype.kill = function()
 {
     CMonster.prototype.kill.call(this);
     PlayerData.inst.progressAch("Gold medal 7", 1, false);
+
+    PlayerData.inst.ingameAchieveItem("Appearence.Board2");
 }
 
 Boss1.prototype.destroy = function()
@@ -6656,9 +6750,9 @@ extend(Boss2, Boss1, true);
 function Boss2(in_x,in_y,animname,cr_bar){
     Boss1.apply(this,[in_x,in_y,animname,null]);
 
-    this.maxHp = 1600;
+    this.maxHp = 2200;
     this.hp = this.maxHp;
-    this.xp = 400;
+    this.xp = 500;
     this.gfx.skeleton.setAttachment("b_legs", "b_legs1");
     this.gfx.skeleton.setAttachment("b_body", "b_body1");
     this.gfx.skeleton.setAttachment("b_head", "b_head1");
@@ -6675,6 +6769,8 @@ Boss2.prototype.kill = function()
 {
     CMonster.prototype.kill.call(this);
     PlayerData.inst.progressAch("Gold medal 15", 1, false);
+
+    PlayerData.inst.ingameAchieveItem("Appearence.Board3");
 }
 
 Boss2.prototype.setRandDisp = function() {
@@ -7253,7 +7349,7 @@ MM.prototype.process = function () {
     if (st != this.prevS) {
         if (!this.currentBoss && this.bosses.length > 0 && (this.prevS * dd - this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist)) {
             var b = this.bosses.shift();
-            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps5/boss1.json");
+            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps6/boss1.json");
             this.currentBoss.showUpAnimation();
         } else {
             if (this.currentBoss) {
@@ -7276,7 +7372,7 @@ extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
    CMonster.apply(this,[in_x,in_y,null, cr_bar]);
-    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps5/bird.json");
+    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps6/bird.json");
     this.gfx.state.setAnimationByName(0, "animation", true);
     //  g.skeleton.setSkinByName('perded');
   // this.offsetX = 50;
@@ -7686,7 +7782,7 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
     //    a.preventDefault();
         if (tchr.pressed && this.scrollbar)
         {
-            this.scrollbar.updatePosFromEvent(a.global.y);
+            this.scrollbar.updatePosFromEvent(a.data.global.y);
         }
     }
 
@@ -9364,6 +9460,17 @@ PlayerData.prototype.checkItemAchs = function(name) {
 }
 
 
+
+PlayerData.prototype.getItemByName = function(name)
+{
+    for (var i =0; i < this.items.length;++i)
+    {
+        if (this.items[i].name == name) return this.items[i];
+    }
+
+    return null;
+}
+
 PlayerData.prototype.ownedItemByName = function(name)
 {
     for (var i =0; i < this.items.length;++i)
@@ -9700,6 +9807,24 @@ PlayerData.prototype.loadEnd = function() {
     console.log("db init");
     window.dbinit  = true;
     onAssetsLoaded();
+}
+
+
+PlayerData.prototype.ingameAchieveItem = function(name)
+{
+    if (!PlayerData.inst.ownedItemByName(name)) {
+        var item = PlayerData.inst.getItemByName(name);
+        PlayerData.inst.callDedAPI("BUY_ITEM", null, null, {
+            id: item.id,
+            equipped: false
+        }, function (x)
+        {
+            if (x ) {
+                //SUCCESS
+                PlayerData.inst.items_enabled.push({id: x.addedid, id_item: item.id, id_player: PlayerData.inst.playerItem.id, equipped: false});
+            }
+    });
+    }
 }
 
 PlayerData.prototype.updateEnergy = function(noUpdate)
@@ -10456,7 +10581,7 @@ window.openSponsorWindow = null;
 window.focus();
 var assetsLoaded = 0;
 var preloaderAsset = [
-    "imgtps5/preloader.json"
+    "imgtps6/preloader.json"
 ];
 window.addScale = 1;
 window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
@@ -10670,17 +10795,17 @@ function preloaderLoaded() {
         LevelManager.levFolder + "levscore.json",
         LevelManager.levFolder + "upperPanel.json",
         LevelManager.levFolder + "loading.json",
-        "imgtps5/effects.json",
-        "imgtps5/comix.json",
-        "imgtps5/achs.json",
-        "imgtps5/guiatlas.json",
-        "imgtps5/pussyatlas.json",
-        "imgtps5/dedgamedesc.xml",
-        "imgtps5/dedgamecaps.xml",
-        "imgtps5/dedgameXP.xml",
-        "imgtps5/skeleton.json",
-        "imgtps5/boss1.json",
-        "imgtps5/bird.json"
+        "imgtps6/effects.json",
+        "imgtps6/comix.json",
+        "imgtps6/achs.json",
+        "imgtps6/guiatlas.json",
+        "imgtps6/pussyatlas.json",
+        "imgtps6/dedgamedesc.xml",
+        "imgtps6/dedgamecaps.xml",
+        "imgtps6/dedgameXP.xml",
+        "imgtps6/skeleton.json",
+        "imgtps6/boss1.json",
+        "imgtps6/bird.json"
     ];
 
     window.prevW = window.innerWidth;
