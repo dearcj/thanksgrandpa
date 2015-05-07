@@ -5157,7 +5157,6 @@ CPlayer.prototype.reveal = function()
 
 CPlayer.prototype.onJump = function()
 {
-    this.kill(); return;
 
 
     if ((this.state == this.sMoving)
