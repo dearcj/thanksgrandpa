@@ -837,8 +837,6 @@ GameStage.prototype.onHide = function (newStage) {
         $(document).off('keyup', this.doKeyUp);
         $(document).off('mousedown', this.fdown);
         $(document).off('mouseup', this.fup);
-    //    $(document).mousedown(this.fdown);
-     //   $(document).mouseup(this.fup);
     });
 
     /*    var inx = CObj.objects.indexOf(LauncherBG.inst);
@@ -883,8 +881,6 @@ GameStage.prototype.updateXP = function()
 {
     gameStage.barXP.prop = PlayerData.inst.playerItem.xp / PlayerData.inst.xpLevel[PlayerData.inst.playerItem.lvl].xp;
 }
-
-
 
 GameStage.prototype.updateItems = function () {
     var k = 0;
@@ -1132,8 +1128,6 @@ GameStage.prototype.openEndWindowLoaded = function () {
 
 
     PlayerData.inst.saveRunProgress();
-
-   // PlayerData.inst.savePlayerData();
 
     CObj.getById("bshare").click = function () {
 
@@ -1446,10 +1440,10 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.reloadBar.pos = 0.5;
     gameStage.reloadBar.gfx.visible = false;
     SM.inst.guiLayer.addChild(gameStage.reloadBar.gfx);
-    gameStage.player = new CPlayer(140, 440);
-    gameStage.player.gfx.pivot.y = -190;
-    gameStage.player.gfx.scale.x = 0.22;
-    gameStage.player.gfx.scale.y = 0.22;
+    gameStage.player = new CPlayer(140, 462);
+    gameStage.player.gfx.pivot.y = -50;
+    /*gameStage.player.gfx.scale.x = 0.22;
+    gameStage.player.gfx.scale.y = 0.22;*/
     gameStage.player.playable = true;
     LauncherBG.inst.pllayer.addChild(gameStage.player.gfx);
 
@@ -2396,8 +2390,8 @@ ShopStage.prototype.onShowContinue = function () {
     var pl = new CPlayer(180, 400);
     shopStage.pl = pl;
     shopStage.pl.updateAppearence(true, false, "breath", null, null);
-    pl.gfx.scale.x = 0.4;
-    pl.gfx.scale.y = 0.4;
+    pl.gfx.scale.x = 0.8;
+    pl.gfx.scale.y = 0.8;
     SM.inst.ol.addChild(pl.gfx);
 }
 
@@ -3022,8 +3016,8 @@ CharStage.prototype.onShowContinue = function () {
 
     var pl = new CPlayer(SCR_WIDTH / 2, 430);
     charStage.pl = pl;
-    pl.gfx.scale.x = 0.34;
-    pl.gfx.scale.y = 0.34;
+    pl.gfx.scale.x = 0.75;
+    pl.gfx.scale.y = 0.75;
     pl.updateAppearence(true, false, "breath", null, null, "head2");
     SM.inst.ol.addChild(pl.gfx);
 
@@ -5056,15 +5050,15 @@ CPlayer.prototype.createDedGraphics = function()
 {
     var g = new PIXI.spine.Spine.fromAtlas("imgtps3/skeleton.json");
 
-    g.skeleton.setSkinByName('perded');
+ //   g.skeleton.setSkinByName('perded');
     g.state.setAnimationByName(0, "idle", true);
     this.gunBone = g.skeleton.findSlot("gun");
 
     this.boardSlot = g.skeleton.findSlot("board");
     this.rshSlot = g.skeleton.findSlot("r_shoulder");
     this.lshSlot = g.skeleton.findSlot("l_shoulder");
-    g.scale.x = 0.3;
-    g.scale.y = 0.3;
+    g.scale.x = 0.6;
+    g.scale.y = 0.6;
 
     if (!CPlayer.rhRot)
         CPlayer.rhRot = this.rshSlot.data.boneData.rotation;
@@ -5074,7 +5068,8 @@ CPlayer.prototype.createDedGraphics = function()
     this.lshSlot.data.boneData.rotation = CPlayer.lhRot;
 
     g.skeleton.setAttachment("body", "body");
- /*   for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
+    g.skeleton.setAttachment("body", "body");
+    /*   for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
     {
         if (PlayerData.inst.items_enabled[i].id_item == "105A3B3C-160C-4355-AB38-9F107DB5A831")
         {
@@ -5249,36 +5244,39 @@ CPlayer.prototype.process = function()
         var da = 0;
         if (this.weapon == w_laser) {
             dx = 0;
-            dy = 200;
+            dy = 83;
+            da = -Math.PI / 4 - 0.1;
         }else
 
         if (this.weapon == w_ak74) {
-            dx = 220;
-            dy = 0;
+            dx = 0;
+            dy = 83;
+            da = -Math.PI / 4 - 0.1;
         }else
 
         if (this.weapon == w_rifle) {
-            dx = 220;
-            dy = 20;
+            dx = 0;
+            dy = 83;
+            da = -Math.PI / 4 - 0.1;
         }
         else
         if (this.weapon == w_pps) {
-            dx = 330;
-            dy = 20;
-            da = -Math.PI / 20;
+            dx = 0;
+            dy = 103;
+            da = -Math.PI / 4 - 0.1;
         }
         else
         if (this.weapon == w_grenadel) {
-            dx = -20;
-            dy = 250;
-            da = 0;
+            dx = 0;
+            dy = 103;
+            da = -Math.PI / 4 - 0.1;
         }
         else
         if (this.weapon == w_minigun)
         {
-            dy = 380;
-            dx = -68;
-            da = Math.PI / 7.5;
+            dx = -22;
+            dy = 162;
+            da = -Math.PI / 4 + 0.25;
         }
         var p = this.gunBone.currentSprite.toGlobal({x:dy, y: -dx});
       //  p = this.gunBone.currentSprite.parent.toGlobal(p);
@@ -5293,6 +5291,7 @@ CPlayer.prototype.process = function()
         var bangle = Math.atan2(this.y - my, this.x - mx);
 
         this.fireAngle = Math.PI + bangle - this.weapon.recoilValue/100;
+
         var newAngle = this.fireAngle+Math.PI / 2 + da;
        // if ((!this.handTween || !this.handTween.isActive())) {
 
@@ -6473,7 +6472,7 @@ extend(Boss1, CMonster, true);
 function Boss1(in_x,in_y,animname,cr_bar){
     this.hitTestCircles = [{x: 10, y: 0,r: 60}, {x:10,y: -130,r: 60}, {x:0, y: -260,r: 60}];
     CMonster.apply(this,[in_x,in_y,null,null]);
-    this.gfx = new spine.Spine(animname);
+    this.gfx =  new PIXI.spine.Spine.fromAtlas(animname);
   //  g.skeleton.setSkinByName('perded');
     this.gfx.state.setAnimationByName(0, "idle", true);
     this.gfx.scale.x = 0.48;
@@ -7215,7 +7214,7 @@ extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
    CMonster.apply(this,[in_x,in_y,null, cr_bar]);
-    this.gfx = new spine.Spine("imgtps3/bird.json");
+    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps3/bird.json");
     this.gfx.state.setAnimationByName(0, "animation", true);
     //  g.skeleton.setSkinByName('perded');
   // this.offsetX = 50;
@@ -10243,14 +10242,12 @@ getDedImage = function (ava) {
 
 
 uploadPhoto = function (id, ava, endCB, msg) {
-
     var str = getDedImage(ava);
-   //window.location = str;
     str = str.replace(/^data:image\/(png|jpg);base64,/, "");
     if (ava) var method ='photos.getProfileUploadServer'; else
         method = 'photos.getWallUploadServer';
     VK.api(method, {uid: id}, function (resp) {
-        var uplurl = resp.response.upload_url;//.replace('http://','https://');
+        var uplurl = resp.response.upload_url;
 
         var hash = getParameterByName("hash", uplurl);
         var rhash = getParameterByName("rhash", uplurl);
