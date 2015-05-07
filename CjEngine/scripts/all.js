@@ -1010,6 +1010,9 @@ GameStage.prototype.shAfterLife = function () {
 
         failtween.pause();
 
+
+
+
         var continueGame = function()
         {
             failtween.resume();
@@ -1110,12 +1113,32 @@ GameStage.prototype.openEndWindowLoaded = function () {
         tf3.id = "tf" + (num + 1).toString() + "3";
     }
 
+
+    VK.api('friends.get',{user_id: vkparams.viewerid, order: "random", fields: "name"}, function(data) {
+        console.log(JSON.stringify(data));
+    });
+
     CObj.getById("tfmon").text = Math.round(PlayerData.inst.score).toString();
     CObj.getById("tfprev").text = Math.round(LauncherBG.inst.distance).toString() + " м";
+
+    CObj.getById("bshare").click = function () {
+
+        //ПОХВАСТАТЬСЯ
+        VK.api("wall.post", {
+            owner_id: vkparams.viewerid,
+            message: "Я проехал " + rec.toString() + " метров." +'\n' + "https://vk.com/thegrandpa",
+            attachments: ["photo-90523698_359515843", "https://vk.com/app4654201"]
+        }, function (data) {
+
+        });
+    };
+
 
     var rec = Math.round(PlayerData.inst.playerItem.maxdistance);
     if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance) {
         rec = Math.round(LauncherBG.inst.distance);
+
+        CObj.getById("bshare").click();
     }
     CObj.getById("tfrec").text = rec.toString() + " м";
     CObj.getById("bmenu").click = function () {
@@ -1132,17 +1155,6 @@ GameStage.prototype.openEndWindowLoaded = function () {
 
     PlayerData.inst.saveRunProgress();
 
-    CObj.getById("bshare").click = function () {
-
-        //ПОХВАСТАТЬСЯ
-        VK.api("wall.post", {
-            owner_id: vkparams.viewerid,
-            message: "Я проехал " + rec.toString() + " метров." +'\n' + "https://vk.com/app4654201",
-            attachments: ["photo-90523698_359515843", "https://vk.com/app4654201"]
-        }, function (data) {
-
-        });
-    };
 
 
     for (var i = 0; i < 5; ++i) {
@@ -2393,8 +2405,8 @@ ShopStage.prototype.onShowContinue = function () {
     var pl = new CPlayer(180, 400);
     shopStage.pl = pl;
     shopStage.pl.updateAppearence(true, false, "breath", null, null);
-    pl.gfx.scale.x = 0.8;
-    pl.gfx.scale.y = 0.8;
+    pl.gfx.scale.x = 0.86;
+    pl.gfx.scale.y = 0.86;
     SM.inst.ol.addChild(pl.gfx);
 }
 
@@ -3019,8 +3031,8 @@ CharStage.prototype.onShowContinue = function () {
 
     var pl = new CPlayer(SCR_WIDTH / 2, 430);
     charStage.pl = pl;
-    pl.gfx.scale.x = 0.75;
-    pl.gfx.scale.y = 0.75;
+    pl.gfx.scale.x = 0.88;
+    pl.gfx.scale.y = 0.88;
     pl.updateAppearence(true, false, "breath", null, null, "head2");
     SM.inst.ol.addChild(pl.gfx);
 
@@ -5013,9 +5025,6 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
     if (anim)
     this.gfx.state.setAnimationByName(0, anim, true);
 
-
-
-
     this.gfx.skeleton.setAttachment("body", "body");
     this.gfx.skeleton.setAttachment("l_shoulder", "l_shoulder");
     this.gfx.skeleton.setAttachment("l_arm", "l_arm");
@@ -5129,7 +5138,7 @@ CPlayer.prototype.createDedGraphics = function()
     g.stateData.setMixByName("idle", "jump", 0.2);
     g.stateData.setMixByName("jump", "idle", 0.1);
     g.stateData.setMixByName("jump", "defeated", 0.3);
-    g.stateData.setMixByName("idle", "defeated", 0.72);
+    g.stateData.setMixByName("idle", "defeated", 0.2);
 
     this.bulletStart = 40;
 
@@ -5148,7 +5157,9 @@ CPlayer.prototype.reveal = function()
 
 CPlayer.prototype.onJump = function()
 {
- //   this.kill(); return;
+    this.kill(); return;
+
+
     if ((this.state == this.sMoving)
     && (!this.jumping || (this.jumping && this.jumpNumber)))
     {
@@ -5188,8 +5199,11 @@ CPlayer.prototype.kill = function()
         lbg.preVelocity = lbg.maxVelocity;
         this.gravityEnabled = true;
         ZSound.Play("losing");
-        this.gfx.state.update(0.5);
+        //this.gfx.state.update(0.5);
         this.gfx.state.setAnimationByName(0, "defeated", false);
+
+        this.rshSlot.data.boneData.rotation = 180;
+        this.lshSlot.data.boneData.rotation = 180;
 
         new TweenMax(lbg, 2, {maxVelocity: 0.5});
         TweenMax.delayedCall(2.57, gameStage.sessionEnd);
@@ -9105,6 +9119,10 @@ CSupermanBooster.prototype.onDeactivate = function()
     var b = this;
     gameStage.player.jumping = false;
     gameStage.player.gravityEnabled = true;
+
+    gameStage.player.gfx.skeleton.setAttachment("glushak", null);
+    gameStage.player.gfx.skeleton.setAttachment("glushak_b", null);
+
     rp(b.fire1);
     rp(b.fire2);
     rp(b.fire3);
