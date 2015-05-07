@@ -7,6 +7,9 @@ var tPerk = "perk";
 var tBoost = "boost";
 var tApp = "app.";
 var tHat = "hat";
+var tBoard = "board";
+var tCostume = "costume";
+
 
 checkLineCircle = function (x3, y3, xx,yy, x2,y2, sqrad)
 {
@@ -525,7 +528,7 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer, offsX, offsY)
 
     for (i = 0; i < atlases.length; ++i)
     {
-        var path = "imgtps3/" + atlases[i] ;
+        var path = "imgtps5/" + atlases[i] ;
         var o = PIXI.utils.BaseTextureCache[path + ".png"];
         if (!o)
         assetsToLoader.push(path+ ".json");
@@ -1440,7 +1443,7 @@ GameStage.prototype.onShowContinue = function () {
     gameStage.reloadBar.pos = 0.5;
     gameStage.reloadBar.gfx.visible = false;
     SM.inst.guiLayer.addChild(gameStage.reloadBar.gfx);
-    gameStage.player = new CPlayer(140, 462);
+    gameStage.player = new CPlayer(140, 455);
     gameStage.player.gfx.pivot.y = -50;
     /*gameStage.player.gfx.scale.x = 0.22;
     gameStage.player.gfx.scale.y = 0.22;*/
@@ -1762,7 +1765,7 @@ AchStage.prototype.onShow = function() {
     LevelManager.loadLevel("levach", achStage.onShowContinue);
 
     /* var preloaderAsset = [
-         "imgtps3/achs.json"
+         "imgtps5/achs.json"
      ];
 
      var loader = new PIXI.AssetLoader(preloaderAsset);
@@ -5010,9 +5013,64 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
     if (anim)
     this.gfx.state.setAnimationByName(0, anim, true);
 
-    if (showBoard)
-        this.gfx.skeleton.setAttachment("board", "board"); else
-        this.gfx.skeleton.setAttachment("board", null);
+
+
+
+    this.gfx.skeleton.setAttachment("body", "body");
+    this.gfx.skeleton.setAttachment("l_shoulder", "l_shoulder");
+    this.gfx.skeleton.setAttachment("l_arm", "l_arm");
+    this.gfx.skeleton.setAttachment("r_shoulder", "r_shoulder");
+    this.gfx.skeleton.setAttachment("r_arm", "r_arm");
+
+    this.gfx.skeleton.setAttachment("glushak", null);
+    this.gfx.skeleton.setAttachment("glushak_b", null);
+
+    this.gfx.skeleton.setAttachment("board", "board");
+
+
+    var costumeId = null;
+    var boardId = null;
+    for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
+    {
+        var item = PlayerData.inst.getItemById(PlayerData.inst.items_enabled[i].id_item);
+        if (item.type == tApp + tCostume)
+        {
+            if (item.name == "gussar") costumeId = 2;
+            if (item.name == "chapaev") costumeId = 3;
+        }
+
+
+        if (item.type == tApp + tBoard)
+        {
+            if (item.name == "board2") boardId = 2;
+            if (item.name == "board3") boardId = 3;
+            if (item.name == "board4") boardId = 4;
+            if (item.name == "board5") boardId = 5;
+            if (item.name == "board6") boardId = 6;
+        }
+
+    }
+   /* costumeId = 3;
+    boardId = 4;
+*/
+    if (showBoard) {
+        this.gfx.skeleton.setAttachment("board", "board");
+        if (boardId) {
+            this.gfx.skeleton.setAttachment("board", "board" + boardId.toString());
+        }
+    } else
+    {   this.gfx.skeleton.setAttachment("board", null);
+
+    }
+
+    if (costumeId)
+    {
+        this.gfx.skeleton.setAttachment("body", "body"+costumeId.toString());
+        this.gfx.skeleton.setAttachment("l_shoulder", "l_shoulder"+costumeId.toString());
+        this.gfx.skeleton.setAttachment("l_arm", "l_arm"+costumeId.toString());
+        this.gfx.skeleton.setAttachment("r_shoulder", "r_shoulder"+costumeId.toString());
+        this.gfx.skeleton.setAttachment("r_arm", "r_arm"+costumeId.toString());
+    }
 
     var hatSlot = null;
     var gunSlot = "gun0";
@@ -5048,7 +5106,7 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
 
 CPlayer.prototype.createDedGraphics = function()
 {
-    var g = new PIXI.spine.Spine.fromAtlas("imgtps3/skeleton.json");
+    var g = new PIXI.spine.Spine.fromAtlas("imgtps5/skeleton.json");
 
  //   g.skeleton.setSkinByName('perded');
     g.state.setAnimationByName(0, "idle", true);
@@ -5057,8 +5115,8 @@ CPlayer.prototype.createDedGraphics = function()
     this.boardSlot = g.skeleton.findSlot("board");
     this.rshSlot = g.skeleton.findSlot("r_shoulder");
     this.lshSlot = g.skeleton.findSlot("l_shoulder");
-    g.scale.x = 0.6;
-    g.scale.y = 0.6;
+    g.scale.x = 0.63;
+    g.scale.y = 0.63;
 
     if (!CPlayer.rhRot)
         CPlayer.rhRot = this.rshSlot.data.boneData.rotation;
@@ -5067,15 +5125,6 @@ CPlayer.prototype.createDedGraphics = function()
     this.rshSlot.data.boneData.rotation = CPlayer.rhRot;
     this.lshSlot.data.boneData.rotation = CPlayer.lhRot;
 
-    g.skeleton.setAttachment("body", "body");
-    g.skeleton.setAttachment("body", "body");
-    /*   for (var i = 0; i < PlayerData.inst.items_enabled.length; ++i)
-    {
-        if (PlayerData.inst.items_enabled[i].id_item == "105A3B3C-160C-4355-AB38-9F107DB5A831")
-        {
-            g.skeleton.setAttachment("body", "body1");
-        }
-    }*/
 
     g.stateData.setMixByName("idle", "jump", 0.2);
     g.stateData.setMixByName("jump", "idle", 0.1);
@@ -7191,7 +7240,7 @@ MM.prototype.process = function () {
     if (st != this.prevS) {
         if (!this.currentBoss && this.bosses.length > 0 && (this.prevS * dd - this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist)) {
             var b = this.bosses.shift();
-            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps3/boss1.json");
+            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps5/boss1.json");
             this.currentBoss.showUpAnimation();
         } else {
             if (this.currentBoss) {
@@ -7214,7 +7263,7 @@ extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
    CMonster.apply(this,[in_x,in_y,null, cr_bar]);
-    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps3/bird.json");
+    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps5/bird.json");
     this.gfx.state.setAnimationByName(0, "animation", true);
     //  g.skeleton.setSkinByName('perded');
   // this.offsetX = 50;
@@ -9014,7 +9063,9 @@ CSupermanBooster.prototype.onActivate = function()
     if (gameStage.player.state == this.sDying) return;
     //if (gameStage.player.jumping) return;
     CBooster.prototype.onActivate.call(this);
-    gameStage.player.gfx.skeleton.setAttachment("body", "body1");
+    gameStage.player.gfx.skeleton.setAttachment("glushak", "glushak");
+    gameStage.player.gfx.skeleton.setAttachment("glushak_b", "glushak_b");
+
 
     this.tweenUp = new TweenMax(gameStage.player, 0.6, {y: 200, ease: Linear.easeOut});
     gameStage.player.jumping = true;
@@ -10388,7 +10439,7 @@ window.openSponsorWindow = null;
 window.focus();
 var assetsLoaded = 0;
 var preloaderAsset = [
-    "imgtps3/preloader.json"
+    "imgtps5/preloader.json"
 ];
 window.addScale = 1;
 window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
@@ -10602,17 +10653,17 @@ function preloaderLoaded() {
         LevelManager.levFolder + "levscore.json",
         LevelManager.levFolder + "upperPanel.json",
         LevelManager.levFolder + "loading.json",
-        "imgtps3/effects.json",
-        "imgtps3/comix.json",
-        "imgtps3/achs.json",
-        "imgtps3/guiatlas.json",
-        "imgtps3/pussyatlas.json",
-        "imgtps3/dedgamedesc.xml",
-        "imgtps3/dedgamecaps.xml",
-        "imgtps3/dedgameXP.xml",
-        "imgtps3/skeleton.json",
-        "imgtps3/boss1.json",
-        "imgtps3/bird.json"
+        "imgtps5/effects.json",
+        "imgtps5/comix.json",
+        "imgtps5/achs.json",
+        "imgtps5/guiatlas.json",
+        "imgtps5/pussyatlas.json",
+        "imgtps5/dedgamedesc.xml",
+        "imgtps5/dedgamecaps.xml",
+        "imgtps5/dedgameXP.xml",
+        "imgtps5/skeleton.json",
+        "imgtps5/boss1.json",
+        "imgtps5/bird.json"
     ];
 
     window.prevW = window.innerWidth;
