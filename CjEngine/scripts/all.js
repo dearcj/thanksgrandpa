@@ -39,8 +39,10 @@ function datetime()
 function ajaxCalltoGetTime() {
     PlayerData.inst.callDedAPI("GET_DATE", null, null, null, function(r)
     {
-        if (!isNaN(new Date(r).getTime()))
-        window.date = new Date(r);
+        if (!isNaN(new Date(r).getTime())) {
+            window.date = new Date(r);
+            if (!window.startDate) window.startDate = window.date;
+        }
     });
 
 }
@@ -1024,7 +1026,7 @@ GameStage.prototype.shAfterLife = function () {
             gameStage.removeFade();
             gameStage.unpause();
             gameStage.state = "game";
-            incMetric("USED REVEAL");
+            //incMetric("USED REVEAL");
             PlayerData.inst.playerItem.crystals -= gameStage.revealPrice;
             gameStage.revealPrice *= 2;
             gameStage.player.reveal();
@@ -1116,15 +1118,11 @@ GameStage.prototype.openEndWindowLoaded = function () {
     }
 
 
-    VK.api('friends.get',{user_id: vkparams.viewerid, order: "random", fields: "name"}, function(data) {
-        console.log(JSON.stringify(data));
-    });
 
     CObj.getById("tfmon").text = Math.round(PlayerData.inst.score).toString();
     CObj.getById("tfprev").text = Math.round(LauncherBG.inst.distance).toString() + " м";
 
     CObj.getById("bshare").click = function () {
-
         //ПОХВАСТАТЬСЯ
         VK.api("wall.post", {
             owner_id: vkparams.viewerid,
@@ -1166,43 +1164,45 @@ GameStage.prototype.openEndWindowLoaded = function () {
     PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: vkparams.friendsFilter, take: 5, skip: 0}, function(c) {
         var arr = c;
 
-        for (var i = 0; i < Math.min(5, arr.length); ++i) {
-            var d = arr[i].maxdistance;
-            if (!d) d = 0;
-            CObj.getById("tf" + (i + 1).toString() + "2").text = extractName(arr[i]);
-            CObj.getById("tf" + (i + 1).toString() + "3").text = d.toString();
-            if (rec > arr[i].maxdistance) {
-                CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
-                CObj.getById("b" + (i + 1).toString()).text = "Я тебя уделал";
+      /*  if (arr.length == 0) {
+            VK.api('friends.get', {
+                user_id: vkparams.viewerid,
+                order: "random",
+                fields: "name",
+                count: 5
+            }, function (data) {
 
-                //Я ТЕБЯ УДЕЛАЛ
-                function setClick(i, friendObject) {
-                    CObj.getById("b" + (i + 1).toString()).click = function () {
-                        VK.api("wall.post", {
-                            owner_id: friendObject.platformid,
-                            message: "Я проехал " + rec.toString() + " метров. *id"+friendObject.platformid +"(" + friendObject.name + ") " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!" + '\n' + "https://vk.com/app4654201",
-                            attachments: ["photo-90523698_359515827", "https://vk.com/app4654201"]
-                        }, function (data) {
+                var friendsNonIngame = data.response;
+                //uid, first_name, last_name
+                console.log(JSON.stringify(data));
+            });
+        } else {*/
+            for (var i = 0; i < Math.min(5, arr.length); ++i) {
+                var d = arr[i].maxdistance;
+                if (!d) d = 0;
+                CObj.getById("tf" + (i + 1).toString() + "2").text = extractName(arr[i]);
+                CObj.getById("tf" + (i + 1).toString() + "3").text = d.toString();
+                if (rec > arr[i].maxdistance) {
+                    CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
+                    CObj.getById("b" + (i + 1).toString()).text = "Я тебя уделал";
 
-                        });
-                    }
+                    //Я ТЕБЯ УДЕЛАЛ
+
+                    setClick(i, arr[i]);
+                } else {
+
+
                 }
-                setClick(i, arr[i]);
-            } else
-            {
-
-
             }
 
-        }
-
-        for (var j = i; j < 5; ++j) {
-            CObj.getById("b" + (j + 1).toString()).gfx.visible = true;
-            CObj.getById("b" + (j + 1).toString()).text = "Пригласить в игру";
-            CObj.getById("b" + (j + 1).toString()).click = function () {
-                VK.callMethod("showInviteBox");
+            for (var j = i; j < 5; ++j) {
+                CObj.getById("b" + (j + 1).toString()).gfx.visible = true;
+                CObj.getById("b" + (j + 1).toString()).text = "Пригласить в игру";
+                CObj.getById("b" + (j + 1).toString()).click = function () {
+                    VK.callMethod("showInviteBox");
+                }
             }
-        }
+      //  }
     }, function (error) {
 
     });
@@ -1217,7 +1217,7 @@ GameStage.prototype.sessionEnd = function () {
         gameStage.shAfterLife();
 
         var pattern = MM.inst.patterns[MM.inst.currentPattern.pid].mons;
-        incMetric("DIED on pattern=" + pattern);
+        //incMetric("DIED on pattern=" + pattern);
     }
 }
 
@@ -1335,14 +1335,14 @@ GameStage.prototype.onShow = function () {
             renderer.render(stage);
         }, SM.inst.superStage);
     }
-
+    window.runs++;
     gameStage.antiLagEffect = new PIXI.Sprite.fromFrame("bloodblow0010.png");
     SM.inst.bg.addChild(gameStage.antiLagEffect);
     //x.visible = false;
 
     gameStage.progressSaved = false;
 
-    incMetric("GAMEPLAY");
+    //incMetric("GAMEPLAY");
 
     ZSound.PlayMusic("m_ded");
 
@@ -2707,10 +2707,6 @@ CharStage.prototype.onShow = function () {
     if (localStorage["sound_state"] == "false")
     ZSound.Mute();
 
-
-
-
-    incMetric("GAME LOADED");
     this.unreadAch = false;
     this.unreadActions = false;
     this.doProcess = false;
@@ -2721,8 +2717,8 @@ CharStage.prototype.onShow = function () {
 
     LevelManager.loadLevel("levchar", function () {
             shopStage.createStatsPanel(charStage.onShowContinue);
-        }
-        , SM.inst.ol);
+    }
+    , SM.inst.ol);
 }
 
 CharStage.prototype.onHide = function (newStage) {
@@ -7975,7 +7971,7 @@ CEActionGUI.prototype.takeReward = function()
         PlayerData.inst.gainExp(this.event.xp_gain);
 
 
-    incMetric("USED EVENT " + this.event.name);
+    //incMetric("USED EVENT " + this.event.name);
 
     if (this.event.name == "event1")
     {
@@ -9383,6 +9379,16 @@ PlayerData = function()
     vkparams.token = x.tokenJWT;
     vkparams.registered = x.registered;
 
+    $(window).bind("beforeunload",function(event){
+
+      //  if  (window.date && window.startDate) {
+            incMetric("SESSIONS_TIME", window.sessionDuration);
+            incMetric("SESSIONS", 1);
+            incMetric("RUNS", window.runs);
+      //  }
+
+       // return "ok";
+    });
 
 
     startServerTimeTicker();
@@ -9906,13 +9912,10 @@ PlayerData.prototype.createAchProgress = function(cb)
    }
 }
 
-incMetric = function(name)
+incMetric = function(name, value)
 {
-    return;
-   /*azureclient.invokeApi("increasemetric", {
-      body: {name: name},
-      method: "post"
-   });*/
+ //   if (!value) value = 1;
+    PlayerData.inst.callDedAPI("INCREASE_METRIC", null, null, {name: name, value: value}, null, false);
 }
 
 PlayerData.prototype.getEventById = function(id)
@@ -10208,8 +10211,9 @@ PlayerData.prototype.login = function()
     );
 }
 
-PlayerData.prototype.callDedAPI = function(method, table, id, data, cb)
+PlayerData.prototype.callDedAPI = function(method, table, id, data, cb, async)
 {
+    if (async == null) async = true;
     console.log("DEDAPI"+method + table);
     $.ajax({
         type: "POST",
@@ -10221,7 +10225,9 @@ PlayerData.prototype.callDedAPI = function(method, table, id, data, cb)
             data: data,
             id: id,
             token: vkparams.token
+
         },
+        async: async,
         dataType: "text"
     }).done(function (res) {
        if (!cb) return;
@@ -10569,7 +10575,8 @@ PauseTimer.resume = function()
 };
 window.initialWidth = 800;
 window.initialHeight = 600;
-
+window.runs = 0;
+window.sessionDuration = 0;
 if (window.MOBILE) {
     window.SCR_WIDTH = 1024;
     window.SCR_HEIGHT = 576;
@@ -11024,9 +11031,12 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate);
     var lastTime = window.time;
+    if (!lastTime) lastTime = (new Date()).getTime();
     window.time = (new Date()).getTime();
     var delta = window.time - lastTime;
     if (delta > 100) delta = 100;
+    window.sessionDuration += delta;
+    console.log(window.sessionDuration);
     if (loadingState == "prepreload") {
     } else if (loadingState == "loading") {
         var p = (assetsLoaded / window.assetsToLoader.length);//*0.5 + 0.5*(ZSound.loaded / ZSound.total) + 0.07;
