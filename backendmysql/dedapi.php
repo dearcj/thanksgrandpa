@@ -56,6 +56,10 @@ $userid = $token->userid;
 if (!$userid) return;
 
 
+if ($method == "INCREASE_METRIC")
+{
+	$res = increaseMetrics($pdo, $data);
+} else 
 if ($method == "INSERT")
 {
 	$res = insertJSON($pdo, $table, $data, array("tb_ach_player", "tb_edevent_player", "tb_item_player", "tb_players"));

@@ -128,7 +128,9 @@ function clone(obj) {
 function sqlToJsDate(sqlDate){
 
     //sqlDate in SQL DATETIME format ("yyyy-mm-dd hh:mm:ss.ms")
-    if (!sqlDate) return new Date();
+    if (!sqlDate || sqlDate == "0000-00-00 00:00:00") {
+        return datetime();
+    }
     var sqlDateArr1 = sqlDate.split("-");
 
     //format of sqlDateArr1[] = ['yyyy','mm','dd hh:mm:ms']
@@ -2325,7 +2327,7 @@ ShopStage.prototype.updateBar = function (tab, filter, baroffset) {
     CObj.getById("bcostumes").gfx.gotoAndStop(0);
     CObj.getById("bhats").gfx.gotoAndStop(0);
     if (filter == tBoost) {
-        CObj.getById("tfapp").text = "БУСТЕРЫ";
+        CObj.getById("tfapp").text = "УЛУЧШЕНИЯ";
     }
     if (filter == tWeapon) {
         CObj.getById("tfapp").text = "ОРУЖИЕ";
@@ -3063,17 +3065,15 @@ CharStage.prototype.onShowContinue = function () {
     };
 
     CObj.getById("helpded").click = function () {
-
         var closeHelp = function()
         {
-
             charStage.pl.updateAppearence(true, false, null, null, null, "head2");
-            //charStage.pl.gfx.skeleton.setAttachment("head", "head2");
             CObj.enableButtons(true);
             LevelManager.destroyLevel("helpded");
             charStage.openHelp = false;
 
         }
+
         if (charStage.openHelp) {
             closeHelp();
         } else
@@ -3207,7 +3207,7 @@ CharStage.prototype.updateEvents = function () {
     charStage.bar.clear();
 
     for (var i = 0; i < PlayerData.inst.eventsplayer.length; ++i) {
-        var o = new CEActionGUI(50, 70 + (i) * 150);
+        var o = new CEActionGUI(50, 70 + (i) * 122);
         var event = PlayerData.inst.getEventById(PlayerData.inst.eventsplayer[i].id_edevent);
         //if (!event) continue;
         o.init(PlayerData.inst.eventsplayer[i], event, event.gfx, "progress fore.png", "progress bg.png");
@@ -7662,23 +7662,20 @@ CScrollbar.prototype.updatePosFromEvent = function(y)
     var startBarLine =  th + this.y - (this.ph0 / 2);
     cy -= startBarLine;
     cy = cy / (this.ph0 - 2*th);//0..1
-  //  this.toucher.pressed = false;
     this.pos =  cy*(this.ph);
     this.toucher.pressed = true;
 }
-
 
 CScrollbar.prototype.touchStart = function(e)
 {
     console.log("debug");
 }
 
-
 CScrollbar.prototype.onWheel = function(e, delta, dx, dy)
 {
     e.stopPropagation();
     e.stopImmediatePropagation();
-    this.pos -= delta*25;
+    this.pos -= delta*55;
 }
 
 function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrolltoucher, dw) {
@@ -7930,6 +7927,11 @@ function CEActionGUI(in_x,in_y,textname,in_body){
 
 CEActionGUI.prototype.destroy = function()
 {
+
+    this.rewText = null;
+    this.desctf = null;
+    this.timeleft = null;
+    this.pricetf = null;
     //this.icoevent = null;
     this.event = null;
     this.eventpl = null;
@@ -8029,16 +8031,26 @@ CEActionGUI.prototype.updateRecharge= function()
         this.ico.interactive = true;
        // this.ico.tint = 0xFFFFFF;
         this.ready = true;
+        this.desctf.tint = 0x333333;
+        this.timeleft.tint = 0x333333;
+        this.pricetf.tint = 0x333333;
+
+
     }else {
         var str;
         this.ico.interactive = false;
         this.ico.alpha = 0.5;
+
+        this.desctf.tint = 0x888888;
+        this.timeleft.tint = 0x888888;
+        this.pricetf.tint = 0x888888;
+
         if (this.event.reqlvl > PlayerData.inst.playerItem.lvl) {
             str = "Требуется " + this.event.reqlvl.toString() + " ур.";
-            this.timeleft.tint = 0xff0000;
+            this.timeleft.tint = 0xcc5555;
         }else {
             str = "Доступно через " + timeRes.timeString;
-            this.timeleft.tint = 0xff0000;
+            this.timeleft.tint = 0xcc5555;
         }
         this.ready = false;
     }
@@ -8079,23 +8091,24 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     gainbgsprite.y = 12 - 14;
     this.gfx.addChild(gainbgsprite);
 
-    this.rewText = CTextField.createTextField({tint: "0x333333", text: "Награда", fontSize: 20, align: "center"});
+    var tcolor = "0x333333";
+
+    this.rewText = CTextField.createTextField({tint: 0x666666, text: "Награда", fontSize: 20, align: "center"});
     this.rewText.x = 35 + d;
     this.rewText.y = -12;
     this.gfx.addChild(this.rewText);
 
-    this.timeleft = CTextField.createTextField({tint: "0x333333", text: "", fontSize: 17, align: "center"});
+    this.timeleft = CTextField.createTextField({tint: tcolor, text: "", fontSize: 17, align: "center"});
     this.timeleft.x = 50 + d;
     this.timeleft.y = 27;
     this.gfx.addChild(this.timeleft);
 
-    var tf = CTextField.createTextField({tint: "0x333333", text: gain.toString(), fontSize: 20, align: "center"});
-    tf.x = 170 + d;
-    tf.y = 3 -16;
-    this.gfx.addChild(tf);
+    this.pricetf = CTextField.createTextField({tint: tcolor, text: gain.toString(), fontSize: 20, align: "center"});
+    this.pricetf.x = 170 + d;
+    this.pricetf.y = 3 -16;
+    this.gfx.addChild(this.pricetf);
 
     var edeventgui = this;
-   // this.gfx.interactive = true;
     var gf = this.ico;
     gf.interactive = true;
     var bsX = gf.scale.x;
@@ -8105,13 +8118,13 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     {
         new TweenMax(gf.scale, 0.6, {y: bsY+0.05, ease: Elastic.easeOut} );
         new TweenMax(gf.scale, 0.4, {x: bsX+0.05, ease: Elastic.easeOut} );
-    }
+    };
 
     gf.mouseout = function()
     {
         new TweenMax(gf.scale, 0.6, {y: bsY, ease: Elastic.easeOut} );
         new TweenMax(gf.scale, 0.4, {x: bsX, ease: Elastic.easeOut} );
-    }
+    };
 
     onc(gf, function()
     {
@@ -8129,10 +8142,10 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
         this.pos = 1;
     }
 
-    var tf = CTextField.createTextField({fontFamily: "dedgamedesc", tint: "0x1111111", text: event.desc, fontSize: 20, align: "center"});
-    tf.x = 50;
-    tf.y = -55;
-    this.gfx.addChild(tf);
+    this.desctf = CTextField.createTextField({fontFamily: "dedgamedesc", tint: tcolor, text: event.desc, fontSize: 20, align: "center"});
+    this.desctf.x = 155 - this.desctf.width / 2;
+    this.desctf.y = -52;
+    this.gfx.addChild(this.desctf);
 
 
     if (this.eventpl.reward_ready == true || this.eventpl.reward_ready == "true")
@@ -8140,8 +8153,6 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
 
     this.progressbg.visible = false;
     this.progressfore.visible = false;
-
-
 };/**
  * Created by KURWINDALLAS on 22.11.2014.
  */
@@ -9347,7 +9358,7 @@ PlayerData = function()
     this.apiSource = "https://www.dedgame.ru/backendmysql/dedapi.php";
 
     if (window.location.search == "?p=LOCAL") {
-        this.playerJSON = '{"registered":false,"tokenJWT":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjgyNjE3MjU5IiwidXNlcmlkIjoiNzhGNkY3Q0UtMjhFMy00QUVBLUIxNDMtMkJCQjJDQkVBNTREIn0.P-nWGsKp866LbgRrzuVhBut8p4ZaAZ8XZfhIchgsph4","playerItem":{"id":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","ref":"282617259","vkapi":"282617259","xp":"256.94042397661","createDate":"2015-03-25 12:31:46","updateDate":"2015-04-17 00:50:13","userId":"Custom:F800A350-EE15-4F1C-9CCF-050B775A4CD9","money":"9639","crystals":"1000","maxdistance":"918","lvl":"3","energy":"10","name":"Геннадий","last_name":"Геннадич","rank":"2467","combodate":"2015-03-25 15:56:09","keys":null,"platformid":"282617259"}}';
+        this.playerJSON = '{"registered":false,"tokenJWT":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2a2lkIjoiMjgyNjE3MjU5IiwidXNlcmlkIjoiNzhGNkY3Q0UtMjhFMy00QUVBLUIxNDMtMkJCQjJDQkVBNTREIn0.P-nWGsKp866LbgRrzuVhBut8p4ZaAZ8XZfhIchgsph4","playerItem":{"id":"78F6F7CE-28E3-4AEA-B143-2BBB2CBEA54D","ref":"282617259","vkapi":"282617259","xp":"256.94042397661","createDate":"2015-03-25 12:31:46","updateDate":"0000-00-00 00:00:00","userId":"Custom:F800A350-EE15-4F1C-9CCF-050B775A4CD9","money":"9639","crystals":"1000","maxdistance":"918","lvl":"3","energy":"10","name":"Геннадий","last_name":"Геннадич","rank":"2467","combodate":"2015-03-25 15:56:09","keys":null,"platformid":"282617259"}}';
         x = JSON.parse(this.playerJSON);
     } else {
     /*    if (window.location.search == "?p=MYSQL") {
@@ -9831,7 +9842,8 @@ PlayerData.prototype.updateEnergy = function(noUpdate)
 {
     if (!this.playerItem) return;
     if  (!isValidDate(sqlToJsDate(this.playerItem.updateDate)))
-        this.playerItem.updateDate = sqlDate(datetime());
+
+    this.playerItem.updateDate = sqlDate(datetime());
 
         var d2 = sqlToJsDate(this.playerItem.updateDate);
    var d = (datetime()).getTime() - d2.getTime();

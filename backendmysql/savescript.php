@@ -204,6 +204,22 @@ function buyItem($conn, $data, $userid)
 	}
 }
 
+function increaseMetrics($conn, $data)
+{
+	$name = $data['name'];
+	$value = $data['value'];
+	$wholequery = "SELECT value FROM thanksdad.tb_metrics where name = ".$conn->quote($name);
+	$statement = $conn->prepare($wholequery);
+	$statement->execute();
+	$result = $statement->fetch(PDO::FETCH_ASSOC);
+	$oldvalue = $result['value'];
+	if (!$oldvalue)
+	{
+		insertJSON($conn, "tb_metrics", array('name'=> $name, 'value' => 0));
+	}
+	$wholequery = "UPDATE thanksdad.tb_metrics set value = ".$conn->quote((int)$oldvalue + (int)$value)." where name = ".$conn->quote($name);
+}
+
 function readJSON($conn, $table, $userid, $id)
 {
 	$f = playerFilter($conn, $table, $userid, $id);
