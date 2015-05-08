@@ -212,14 +212,18 @@ function increaseMetrics($conn, $data)
 	$statement = $conn->prepare($wholequery);
 	$statement->execute();
 	$result = $statement->fetch(PDO::FETCH_ASSOC);
-	$oldvalue = $result['value'];
 	
-	if ($oldvalue == null)
+	if ($result == null)
 	{
 		insertJSON($conn, "tb_metrics", array('name'=> $name, 'value' => 0));
 		$oldvalue  = 0;
-	}
-	$wholequery = "UPDATE thanksdad.tb_metrics set value = ".$conn->quote((int)$oldvalue + (int)$value)." where name = ".$conn->quote($name);
+	} else 
+	$oldvalue = $result['value'];
+	
+	$val = (float)$oldvalue + (float)$value;
+	$wholequery = "UPDATE thanksdad.tb_metrics set value = ".$conn->quote($val)." where name = ".$conn->quote($name);
+	$statement = $conn->prepare($wholequery);
+	$statement->execute();
 }
 
 function readJSON($conn, $table, $userid, $id)
