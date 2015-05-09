@@ -7803,7 +7803,7 @@ function CScrollbar(in_x,in_y,textname,ww, hh, clipbg, clipscrollline, clipscrol
     this.container = new PIXI.Container();
     this.container.x = -this.pw/2;
     this.container.y = -this.ph/2;
-   this.sbMask =  new PIXI.Graphics();
+    this.sbMask =  new PIXI.Graphics();
     this.sbMask.beginFill();
     this.sbMask.drawRect(-this.pw/2, -this.ph/2, this.pw, this.ph);
     this.sbMask.endFill();
@@ -8015,7 +8015,7 @@ CEActionGUI.prototype.addRewardButton = function() {
     this.gfx.addChild(this.btnReward.gfx);
 }
 
-CEActionGUI.prototype.updateRecharge= function()
+CEActionGUI.prototype.updateRecharge = function()
 {
     if (!this.eventpl) return;
     if (!isValidSqlDate(this.eventpl.lastused)) timeRes = {d: -1};
@@ -8132,7 +8132,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
         }
     });
 
-    this.progressbg.interactive = true;
+   // this.progressbg.interactive = true;
     onc(this.progressbg, this.onclick)
 
     if (this.eventpl.lastused == null)
@@ -10611,7 +10611,7 @@ window.loader = new PIXI.AssetLoader(preloaderAsset);
 window.loader.onComplete = preloaderLoaded;
 window.loader.load();
 */
-
+showADs2();
 
 var p = new PIXI.loaders.Loader();
 p.add(preloaderAsset);
@@ -10694,7 +10694,7 @@ VK.addCallback('onOrderCancel', function () {
 });
 
 function showADs2() {
-    var user_id = vkparams.viewerid; //id пользователя
+    var user_id = getURLParameter("viewer_id");; //id пользователя
     var app_id = window.apiid; //id вашего приложения
     var a = new VKAdman();
     a.onNoAds(function () {
