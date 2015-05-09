@@ -537,7 +537,7 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer, offsX, offsY)
 
     for (i = 0; i < atlases.length; ++i)
     {
-        var path = "imgtps6/" + atlases[i] ;
+        var path = "imgtps7/" + atlases[i] ;
         var o = PIXI.utils.BaseTextureCache[path + ".png"];
         if (!o)
         assetsToLoader.push(path+ ".json");
@@ -1781,7 +1781,7 @@ AchStage.prototype.onShow = function() {
     LevelManager.loadLevel("levach", achStage.onShowContinue);
 
     /* var preloaderAsset = [
-         "imgtps6/achs.json"
+         "imgtps7/achs.json"
      ];
 
      var loader = new PIXI.AssetLoader(preloaderAsset);
@@ -5205,7 +5205,7 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
 
 CPlayer.prototype.createDedGraphics = function()
 {
-    var g = new PIXI.spine.Spine.fromAtlas("imgtps6/skeleton.json");
+    var g = new PIXI.spine.Spine.fromAtlas("imgtps7/skeleton.json");
 
  //   g.skeleton.setSkinByName('perded');
     g.state.setAnimationByName(0, "idle", true);
@@ -7347,7 +7347,7 @@ MM.prototype.process = function () {
     if (st != this.prevS) {
         if (!this.currentBoss && this.bosses.length > 0 && (this.prevS * dd - this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist)) {
             var b = this.bosses.shift();
-            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps6/boss1.json");
+            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps7/boss1.json");
             this.currentBoss.showUpAnimation();
         } else {
             if (this.currentBoss) {
@@ -7370,7 +7370,7 @@ extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
    CMonster.apply(this,[in_x,in_y,null, cr_bar]);
-    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps6/bird.json");
+    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps7/bird.json");
     this.gfx.state.setAnimationByName(0, "animation", true);
     //  g.skeleton.setSkinByName('perded');
   // this.offsetX = 50;
@@ -9382,14 +9382,10 @@ PlayerData = function()
     vkparams.registered = x.registered;
 
     $(window).bind("beforeunload",function(event){
-
-      //  if  (window.date && window.startDate) {
             incMetric("SESSIONS_TIME", window.sessionDuration);
             incMetric("SESSIONS", 1);
             incMetric("RUNS", window.runs);
-      //  }
 
-       // return "ok";
     });
 
 
@@ -10601,7 +10597,7 @@ window.openSponsorWindow = null;
 window.focus();
 var assetsLoaded = 0;
 var preloaderAsset = [
-    "imgtps6/preloader.json"
+    "imgtps7/preloader.json"
 ];
 window.addScale = 1;
 window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
@@ -10611,7 +10607,6 @@ window.loader = new PIXI.AssetLoader(preloaderAsset);
 window.loader.onComplete = preloaderLoaded;
 window.loader.load();
 */
-showADs2();
 
 var p = new PIXI.loaders.Loader();
 p.add(preloaderAsset);
@@ -10795,6 +10790,8 @@ function preloaderLoaded() {
     if (MOBILE) LevelManager.levFolder = "levels_mobile/"; else
         LevelManager.levFolder = "levels/";
 
+    showADs2();
+
     window.loadingState = "loading";
     window.assetsToLoader = [
         LevelManager.levFolder + "helpded.json",
@@ -10815,17 +10812,17 @@ function preloaderLoaded() {
         LevelManager.levFolder + "levscore.json",
         LevelManager.levFolder + "upperPanel.json",
         LevelManager.levFolder + "loading.json",
-        "imgtps6/effects.json",
-        "imgtps6/comix.json",
-        "imgtps6/achs.json",
-        "imgtps6/guiatlas.json",
-        "imgtps6/pussyatlas.json",
-        "imgtps6/dedgamedesc.xml",
-        "imgtps6/dedgamecaps.xml",
-        "imgtps6/dedgameXP.xml",
-        "imgtps6/skeleton.json",
-        "imgtps6/boss1.json",
-        "imgtps6/bird.json"
+        "imgtps7/effects.json",
+        "imgtps7/comix.json",
+        "imgtps7/achs.json",
+        "imgtps7/guiatlas.json",
+        "imgtps7/pussyatlas.json",
+        "imgtps7/dedgamedesc.xml",
+        "imgtps7/dedgamecaps.xml",
+        "imgtps7/dedgameXP.xml",
+        "imgtps7/skeleton.json",
+        "imgtps7/boss1.json",
+        "imgtps7/bird.json"
     ];
 
     window.prevW = window.innerWidth;
