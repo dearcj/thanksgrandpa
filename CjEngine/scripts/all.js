@@ -22,6 +22,11 @@ checkLineCircle = function (x3, y3, xx,yy, x2,y2, sqrad)
         return true; else return false;
 }
 
+function isValidSqlDate(d)
+{
+    if (d == null || d == "" || d =="0000-00-00 00:00:00") return false; else return true;
+}
+
 function isValidDate(d) {
     if ( Object.prototype.toString.call(d) !== "[object Date]" )
         return false;
@@ -1013,9 +1018,6 @@ GameStage.prototype.shAfterLife = function () {
         }
 
         failtween.pause();
-
-
-
 
         var continueGame = function()
         {
@@ -8016,7 +8018,7 @@ CEActionGUI.prototype.addRewardButton = function() {
 CEActionGUI.prototype.updateRecharge= function()
 {
     if (!this.eventpl) return;
-    if (!this.eventpl.lastused) timeRes = {d: -1};
+    if (!isValidSqlDate(this.eventpl.lastused)) timeRes = {d: -1};
     else {
         var timeRes = dateDiff(new Date(sqlToJsDate(this.eventpl.lastused)), this.event.delay_min);
     }
@@ -9847,8 +9849,7 @@ PlayerData.prototype.ingameAchieveItem = function(name)
 PlayerData.prototype.updateEnergy = function(noUpdate)
 {
     if (!this.playerItem) return;
-    if  (!isValidDate(sqlToJsDate(this.playerItem.updateDate)))
-
+    if  (!isValidSqlDate(this.playerItem.updateDate))
     this.playerItem.updateDate = sqlDate(datetime());
 
         var d2 = sqlToJsDate(this.playerItem.updateDate);
