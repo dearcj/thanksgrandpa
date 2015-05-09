@@ -7961,6 +7961,7 @@ CEActionGUI.prototype.takeReward = function()
     this.progressbg.visible = false;
     this.progressfore.visible = false;
 
+    this.eventpl.ready = false;
     this.eventpl.reward_ready = false;
     this.eventpl.lastused = sqlDate(datetime());
     if (this.event.money_gain)
