@@ -7961,8 +7961,9 @@ CEActionGUI.prototype.takeReward = function()
     this.progressbg.visible = false;
     this.progressfore.visible = false;
 
-    this.eventpl.ready = false;
-    this.eventpl.reward_ready = false;
+    this.ready = false;
+   // this.eventpl.ready = false;
+    this.eventpl.reward_ready = 0;
     this.eventpl.lastused = sqlDate(datetime());
     if (this.event.money_gain)
         PlayerData.inst.playerItem.money += this.event.money_gain;
@@ -7974,6 +7975,7 @@ CEActionGUI.prototype.takeReward = function()
         PlayerData.inst.gainExp(this.event.xp_gain);
 
 
+    this.updateRecharge();
     //incMetric("USED EVENT " + this.event.name);
 
     if (this.event.name == "event1")
@@ -7994,7 +7996,7 @@ CEActionGUI.prototype.endAction = function()
     this.progressbg.visible = false;
     this.progressfore.visible = false;
     this.acting = false;
-    this.eventpl.reward_ready = true;
+    this.eventpl.reward_ready = 1;
     PlayerData.inst.savePlayerEvents(this.eventpl);
     this.addRewardButton();
 }
@@ -8028,13 +8030,10 @@ CEActionGUI.prototype.updateRecharge = function()
     if (timeRes.d < 0 && this.event.reqlvl <= PlayerData.inst.playerItem.lvl) {
         str = " ";
         this.ico.interactive = true;
-       // this.ico.tint = 0xFFFFFF;
         this.ready = true;
         this.desctf.tint = 0x333333;
         this.timeleft.tint = 0x333333;
         this.pricetf.tint = 0x333333;
-
-
     }else {
         var str;
         this.ico.interactive = false;
@@ -8127,7 +8126,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
 
     onc(gf, function()
     {
-        if (edeventgui.ready && (pledevent.reward_ready == null || pledevent.reward_ready == false || pledevent.reward_ready == ""))
+        if (edeventgui.ready && (pledevent.reward_ready == null || pledevent.reward_ready == 0 || pledevent.reward_ready == "0"))
         {
             edeventgui.startAction();
         }
@@ -8147,7 +8146,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     this.gfx.addChild(this.desctf);
 
 
-    if (this.eventpl.reward_ready == true || this.eventpl.reward_ready == "true")
+    if (this.eventpl.reward_ready == true || this.eventpl.reward_ready == "1")
         this.addRewardButton();
 
     this.progressbg.visible = false;
@@ -11035,7 +11034,7 @@ function animate() {
     var delta = window.time - lastTime;
     if (delta > 100) delta = 100;
     window.sessionDuration += delta;
-    console.log(window.sessionDuration);
+    //console.log(window.sessionDuration);
     if (loadingState == "prepreload") {
     } else if (loadingState == "loading") {
         var p = (assetsLoaded / window.assetsToLoader.length);//*0.5 + 0.5*(ZSound.loaded / ZSound.total) + 0.07;
