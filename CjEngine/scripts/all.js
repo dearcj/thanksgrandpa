@@ -8133,7 +8133,7 @@ CEActionGUI.prototype.init = function(pledevent, event, bg, upper, lower)
     });
 
    // this.progressbg.interactive = true;
-    onc(this.progressbg, this.onclick)
+    onc(this.progressbg, this.onclick);
 
     if (this.eventpl.lastused == null)
     {
