@@ -6,9 +6,82 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8724dd91-709c-4687-8dc4-87adb2df4e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/all.min.js" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\achs.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\achs.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\achs.xml" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\bird.atlas" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\bird.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\bird.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\boss1.atlas" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\boss1.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\boss1.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\comix.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\comix.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\comix.tps" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\comix.xml" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgameXP.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgameXP.xml" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgamecaps.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgamecaps.xml" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgamedesc.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgamedesc.xml" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\effects.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\effects.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\effects.tps" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\effects.xml" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\guiatlas.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\guiatlas.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\guiatlas.tps" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\guiatlas.xml" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\preloader.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\preloader.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\preloader.tps" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\pussyatlas.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\pussyatlas.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\pussyatlas.xml" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\skeleton.atlas" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\skeleton.json" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\skeleton.png" afterPath="" />
+      <change type="DELETED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\tps.tps" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CjEngine/scripts/obf/all.min.js" afterPath="$PROJECT_DIR$/CjEngine/scripts/obf/all.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\achs.json" afterPath="$PROJECT_DIR$/imgtps7/achs.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\achs.png" afterPath="$PROJECT_DIR$/imgtps7/achs.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\achs.xml" afterPath="$PROJECT_DIR$/imgtps7/achs.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\bird.atlas" afterPath="$PROJECT_DIR$/imgtps7/bird.atlas" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\bird.json" afterPath="$PROJECT_DIR$/imgtps7/bird.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\bird.png" afterPath="$PROJECT_DIR$/imgtps7/bird.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\boss1.atlas" afterPath="$PROJECT_DIR$/imgtps7/boss1.atlas" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\boss1.json" afterPath="$PROJECT_DIR$/imgtps7/boss1.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\boss1.png" afterPath="$PROJECT_DIR$/imgtps7/boss1.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\comix.json" afterPath="$PROJECT_DIR$/imgtps7/comix.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\comix.png" afterPath="$PROJECT_DIR$/imgtps7/comix.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\comix.tps" afterPath="$PROJECT_DIR$/imgtps7/comix.tps" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\comix.xml" afterPath="$PROJECT_DIR$/imgtps7/comix.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgameXP.png" afterPath="$PROJECT_DIR$/imgtps7/dedgameXP.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgameXP.xml" afterPath="$PROJECT_DIR$/imgtps7/dedgameXP.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgamecaps.png" afterPath="$PROJECT_DIR$/imgtps7/dedgamecaps.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgamecaps.xml" afterPath="$PROJECT_DIR$/imgtps7/dedgamecaps.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgamedesc.png" afterPath="$PROJECT_DIR$/imgtps7/dedgamedesc.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\dedgamedesc.xml" afterPath="$PROJECT_DIR$/imgtps7/dedgamedesc.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\effects.json" afterPath="$PROJECT_DIR$/imgtps7/effects.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\effects.png" afterPath="$PROJECT_DIR$/imgtps7/effects.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\effects.tps" afterPath="$PROJECT_DIR$/imgtps7/effects.tps" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\effects.xml" afterPath="$PROJECT_DIR$/imgtps7/effects.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\guiatlas.json" afterPath="$PROJECT_DIR$/imgtps7/guiatlas.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\guiatlas.png" afterPath="$PROJECT_DIR$/imgtps7/guiatlas.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\guiatlas.tps" afterPath="$PROJECT_DIR$/imgtps7/guiatlas.tps" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\guiatlas.xml" afterPath="$PROJECT_DIR$/imgtps7/guiatlas.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\preloader.json" afterPath="$PROJECT_DIR$/imgtps7/preloader.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\preloader.png" afterPath="$PROJECT_DIR$/imgtps7/preloader.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\preloader.tps" afterPath="$PROJECT_DIR$/imgtps7/preloader.tps" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\pussyatlas.json" afterPath="$PROJECT_DIR$/imgtps7/pussyatlas.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\pussyatlas.png" afterPath="$PROJECT_DIR$/imgtps7/pussyatlas.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\pussyatlas.xml" afterPath="$PROJECT_DIR$/imgtps7/pussyatlas.xml" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\skeleton.atlas" afterPath="$PROJECT_DIR$/imgtps7/skeleton.atlas" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\skeleton.json" afterPath="$PROJECT_DIR$/imgtps7/skeleton.json" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\skeleton.png" afterPath="$PROJECT_DIR$/imgtps7/skeleton.png" />
+      <change type="MOVED" beforePath="E:\DropboxPublic\Dropbox\Public\ThanksGrandpa\thanksgrandpa\imgtps6\tps.tps" afterPath="$PROJECT_DIR$/imgtps7/tps.tps" />
     </list>
     <ignored path="thanksgrandpa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -297,6 +370,178 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="imgtps7">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Weapons">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Utils">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Stages">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Objects">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Monsters">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="LiveObjects">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="thanksgrandpa">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="CjEngine/scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Boosters">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -427,12 +672,6 @@
       <created>1417091906056</created>
       <option name="number" value="Default" />
       <updated>1417091906056</updated>
-    </task>
-    <task id="LOCAL-01277" summary="&#10;&#10;a">
-      <created>1430431169714</created>
-      <option name="number" value="01277" />
-      <option name="project" value="LOCAL" />
-      <updated>1430431169714</updated>
     </task>
     <task id="LOCAL-01278" summary="&#10;&#10;a">
       <created>1430435423796</created>
@@ -722,7 +961,13 @@
       <option name="project" value="LOCAL" />
       <updated>1431167999938</updated>
     </task>
-    <option name="localTasksCounter" value="1326" />
+    <task id="LOCAL-01326" summary="uf">
+      <created>1431168423489</created>
+      <option name="number" value="01326" />
+      <option name="project" value="LOCAL" />
+      <updated>1431168423489</updated>
+    </task>
+    <option name="localTasksCounter" value="1327" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -753,7 +998,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.55640745" sideWeight="0.49936548" order="12" side_tool="false" content_ui="tabs" x="104" y="548" width="1576" height="508" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33483145" sideWeight="0.49936548" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46179774" sideWeight="0.2994924" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="824" y="372" width="740" height="333" />
+      <window_info id="Find" active="false" anchor="top" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.3276414" sideWeight="0.25" order="0" side_tool="true" content_ui="tabs" x="824" y="372" width="740" height="333" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12083333" sideWeight="0.25547904" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21508035" sideWeight="0.49919486" order="0" side_tool="false" content_ui="combo" />
@@ -1000,6 +1245,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1123" max-vertical-offset="2014">
           <caret line="82" column="43" selection-start-line="82" selection-start-column="27" selection-end-line="82" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
