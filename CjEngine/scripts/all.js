@@ -537,7 +537,7 @@ LevelManager.loadLevel = function(str, onCompleteFunction, layer, offsX, offsY)
 
     for (i = 0; i < atlases.length; ++i)
     {
-        var path = "imgtps7/" + atlases[i] ;
+        var path = "imgtps8/" + atlases[i] ;
         var o = PIXI.utils.BaseTextureCache[path + ".png"];
         if (!o)
         assetsToLoader.push(path+ ".json");
@@ -1119,8 +1119,6 @@ GameStage.prototype.openEndWindowLoaded = function () {
         tf3.id = "tf" + (num + 1).toString() + "3";
     }
 
-
-
     CObj.getById("tfmon").text = Math.round(PlayerData.inst.score).toString();
     CObj.getById("tfprev").text = Math.round(LauncherBG.inst.distance).toString() + " м";
 
@@ -1139,7 +1137,6 @@ GameStage.prototype.openEndWindowLoaded = function () {
     var rec = Math.round(PlayerData.inst.playerItem.maxdistance);
     if (LauncherBG.inst.distance > PlayerData.inst.playerItem.maxdistance) {
         rec = Math.round(LauncherBG.inst.distance);
-
         CObj.getById("bshare").click();
     }
     CObj.getById("tfrec").text = rec.toString() + " м";
@@ -1157,10 +1154,20 @@ GameStage.prototype.openEndWindowLoaded = function () {
 
     PlayerData.inst.saveRunProgress();
 
-
-
     for (var i = 0; i < 5; ++i) {
         addLine(i);
+    }
+
+    function setClick(i, friendObject) {
+        CObj.getById("b" + (i + 1).toString()).click = function () {
+            VK.api("wall.post", {
+                owner_id: friendObject.platformid,
+                message: "Я проехал " + rec.toString() + " метров. *id"+friendObject.platformid +"(" + friendObject.name + ") " + friendObject.last_name + ",  никогда не побьешь мой рекорд!!" + '\n' + "https://vk.com/app4654201",
+                attachments: ["photo-90523698_359515827", "https://vk.com/app4654201"]
+            }, function (data) {
+
+            });
+        }
     }
 
     PlayerData.inst.callDedAPI("GET_SCORES", null, null, {filter: vkparams.friendsFilter, take: 5, skip: 0}, function(c) {
@@ -1179,6 +1186,9 @@ GameStage.prototype.openEndWindowLoaded = function () {
                 console.log(JSON.stringify(data));
             });
         } else {*/
+
+
+
             for (var i = 0; i < Math.min(5, arr.length); ++i) {
                 var d = arr[i].maxdistance;
                 if (!d) d = 0;
@@ -1187,13 +1197,9 @@ GameStage.prototype.openEndWindowLoaded = function () {
                 if (rec > arr[i].maxdistance) {
                     CObj.getById("b" + (i + 1).toString()).gfx.visible = true;
                     CObj.getById("b" + (i + 1).toString()).text = "Я тебя уделал";
-
                     //Я ТЕБЯ УДЕЛАЛ
-
                     setClick(i, arr[i]);
                 } else {
-
-
                 }
             }
 
@@ -1219,7 +1225,6 @@ GameStage.prototype.sessionEnd = function () {
         gameStage.shAfterLife();
 
         var pattern = MM.inst.patterns[MM.inst.currentPattern.pid].mons;
-        //incMetric("DIED on pattern=" + pattern);
     }
 }
 
@@ -1781,7 +1786,7 @@ AchStage.prototype.onShow = function() {
     LevelManager.loadLevel("levach", achStage.onShowContinue);
 
     /* var preloaderAsset = [
-         "imgtps7/achs.json"
+         "imgtps8/achs.json"
      ];
 
      var loader = new PIXI.AssetLoader(preloaderAsset);
@@ -5205,7 +5210,7 @@ CPlayer.prototype.updateAppearence = function(showGun, showBoard, anim, override
 
 CPlayer.prototype.createDedGraphics = function()
 {
-    var g = new PIXI.spine.Spine.fromAtlas("imgtps7/skeleton.json");
+    var g = new PIXI.spine.Spine.fromAtlas("imgtps8/skeleton.json");
 
  //   g.skeleton.setSkinByName('perded');
     g.state.setAnimationByName(0, "idle", true);
@@ -7347,7 +7352,7 @@ MM.prototype.process = function () {
     if (st != this.prevS) {
         if (!this.currentBoss && this.bosses.length > 0 && (this.prevS * dd - this.bossDistance < this.bosses[0].dist && LauncherBG.inst.distance - this.bossDistance >= this.bosses[0].dist)) {
             var b = this.bosses.shift();
-            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps7/boss1.json");
+            this.currentBoss = new b.cls(SCR_WIDTH + 200, 500, "imgtps8/boss1.json");
             this.currentBoss.showUpAnimation();
         } else {
             if (this.currentBoss) {
@@ -7370,7 +7375,7 @@ extend(BonusMonGnome, CMonster, true);
 
 function BonusMonGnome(in_x,in_y,animname,cr_bar){
    CMonster.apply(this,[in_x,in_y,null, cr_bar]);
-    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps7/bird.json");
+    this.gfx =  new PIXI.spine.Spine.fromAtlas("imgtps8/bird.json");
     this.gfx.state.setAnimationByName(0, "animation", true);
     //  g.skeleton.setSkinByName('perded');
   // this.offsetX = 50;
@@ -10229,7 +10234,6 @@ PlayerData.prototype.callDedAPI = function(method, table, id, data, cb, async)
     }).done(function (res) {
        if (!cb) return;
         var res = res.substring(2, res.length);
-
         try {
             var resObj = JSON.parse(res);
         } catch (e) {
@@ -10597,7 +10601,7 @@ window.openSponsorWindow = null;
 window.focus();
 var assetsLoaded = 0;
 var preloaderAsset = [
-    "imgtps7/preloader.json"
+    "imgtps8/preloader.json"
 ];
 window.addScale = 1;
 window.renderer = new PIXI.autoDetectRenderer(window.SCR_WIDTH, window.SCR_HEIGHT);
@@ -10812,17 +10816,17 @@ function preloaderLoaded() {
         LevelManager.levFolder + "levscore.json",
         LevelManager.levFolder + "upperPanel.json",
         LevelManager.levFolder + "loading.json",
-        "imgtps7/effects.json",
-        "imgtps7/comix.json",
-        "imgtps7/achs.json",
-        "imgtps7/guiatlas.json",
-        "imgtps7/pussyatlas.json",
-        "imgtps7/dedgamedesc.xml",
-        "imgtps7/dedgamecaps.xml",
-        "imgtps7/dedgameXP.xml",
-        "imgtps7/skeleton.json",
-        "imgtps7/boss1.json",
-        "imgtps7/bird.json"
+        "imgtps8/effects.json",
+        "imgtps8/comix.json",
+        "imgtps8/achs.json",
+        "imgtps8/guiatlas.json",
+        "imgtps8/pussyatlas.json",
+        "imgtps8/dedgamedesc.xml",
+        "imgtps8/dedgamecaps.xml",
+        "imgtps8/dedgameXP.xml",
+        "imgtps8/skeleton.json",
+        "imgtps8/boss1.json",
+        "imgtps8/bird.json"
     ];
 
     window.prevW = window.innerWidth;

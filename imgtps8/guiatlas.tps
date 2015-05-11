@@ -281,12 +281,33 @@
             <filename>../../../../dedgame/home screen/desc bg.png</filename>
             <filename>../../../../dedgame/fight screen/exp bar.jpg</filename>
             <filename>../../../../dedgame/fight screen/exp bar circle.png</filename>
-            <filename>../../../../dedgame/ded skeleton/loadico.png</filename>
             <filename>../../../../dedgame/shop/unwear button.png</filename>
             <filename>../../../../dedgame/home screen/help grandpa/help window.png</filename>
             <filename>../../../../dedgame/home screen/help grandpa/dont help.png</filename>
             <filename>../../../../dedgame/home screen/help grandpa/help button.png</filename>
             <filename>../../../../dedgame/home screen/help grandpa/help cover.png</filename>
+            <filename>../../../../dedgame/shop/costumes/costume1.png</filename>
+            <filename>../../../../dedgame/shop/costumes/costume2.png</filename>
+            <filename>../../../../dedgame/shop/boards/board0.png</filename>
+            <filename>../../../../dedgame/shop/boards/board1.png</filename>
+            <filename>../../../../dedgame/shop/boards/board2.png</filename>
+            <filename>../../../../dedgame/shop/boards/board3.png</filename>
+            <filename>../../../../dedgame/shop/boards/board4.png</filename>
+            <filename>../../../../dedgame/shop/boards/board5.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat7.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat8.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat9.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat10.png</filename>
+            <filename>../../../../dedgame/shop/hats/hat11.png</filename>
+            <filename>../../../../dedgame/shop/clothes icons/btncostume02.png</filename>
+            <filename>../../../../dedgame/shop/clothes icons/btnhats01.png</filename>
+            <filename>../../../../dedgame/shop/clothes icons/btnhats02.png</filename>
+            <filename>../../../../dedgame/shop/clothes icons/btnboard01.png</filename>
+            <filename>../../../../dedgame/shop/clothes icons/btnboard02.png</filename>
+            <filename>../../../../dedgame/shop/clothes icons/btncostume01.png</filename>
+            <filename>../../../../dedgame/home screen/events icon.png</filename>
+            <filename>../../../../dedgame/home screen/ordens icon.png</filename>
+            <filename>../../../../dedgame/home screen/shop icon.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
