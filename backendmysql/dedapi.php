@@ -112,6 +112,11 @@ if ($method == "SAVE_SCORE")
 {
 	$res = finalizeScore($pdo, $data, $userid);
 } 
+ else 
+if ($method == "MOBILE_SYNC")
+{
+	$res = mobileSync($pdo, $data, $userid);
+} 
 	
 echo json_encode($res, JSON_UNESCAPED_UNICODE);
 ?>

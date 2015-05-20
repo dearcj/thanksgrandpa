@@ -277,6 +277,58 @@ function updateScore($conn, $curdist, $userid)
 	return $rank;
 }
 
+function mobileSync($conn, $data, $userid)
+{
+	$pl_item = $data['playerItem'];
+	$pl_items = $data['items_enabled'];
+	$pl_achs = $data['achs_progress'];
+	$pl_events = $data['events_player'];
+	
+	updateJSON($conn, 'tb_players', $pl_item, $userid);					
+
+	foreach($pl_items as $pl_items_i){
+		if ($pl_items_i['id'])
+		{
+			//update
+			updateJSON($conn, 'tb_item_player', $pl_items_i, $userid, $pl_items_i['id']);					
+		} else 
+		{
+			//insert
+			$uuid =	insertJSON($conn, 'tb_item_player', $pl_items_i);	
+			$pl_items_i['id'] = $uuid;			
+		}
+	} 
+	
+	foreach($pl_achs as $pl_achs_i){
+		if ($pl_achs_i['id'])
+		{
+			//update
+			updateJSON($conn, 'tb_ach_player', $pl_achs_i, $userid, $pl_achs_i['id']);					
+		} else 
+		{
+			//insert
+			$uuid =	insertJSON($conn, 'tb_ach_player', $pl_achs_i);	
+			$pl_achs_i['id'] = $uuid;			
+		}
+	} 
+	
+	
+	foreach($pl_events as $pl_events_i){
+		if ($pl_events_i['id'])
+		{
+			//update
+			updateJSON($conn, 'tb_edevent_player', $pl_events_i, $userid, $pl_events_i['id']);					
+		} else 
+		{
+			//insert
+			$uuid =	insertJSON($conn, 'tb_edevent_player', $pl_events_i);	
+			$pl_events_i['id'] = $uuid;			
+		}
+	} 
+	
+	return array('items_enabled'=> $pl_items, 'achs_progress' => $pl_achs, 'events_player'=>pl_events);
+}
+
 function insertJSON($conn, $table, $jsonEncoded, $enabledTables)
 {
 	$obj = $jsonEncoded;
