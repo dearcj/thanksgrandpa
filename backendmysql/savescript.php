@@ -326,7 +326,7 @@ function mobileSync($conn, $data, $userid)
 		}
 	} 
 	
-	return array('items_enabled'=> $pl_items, 'achs_progress' => $pl_achs, 'events_player'=>pl_events);
+	return array('items_enabled'=> $pl_items, 'achs_progress' => $pl_achs, 'events_player'=>$pl_events);
 }
 
 function insertJSON($conn, $table, $jsonEncoded, $enabledTables)
