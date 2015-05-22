@@ -7,11 +7,7 @@ require_once 'json.php';
 
 
 
-function mobileLogin($vkid, $pdo,  $secret_key, $mobileKey)
-{
-	if ($mobileKey != "UA9tL5O9RJ") return "Incorrect Mobile Key";
-	doLogin($vkid, $pdo, $secret_key);
-}
+
 
 function vkLogin($vkid, $pdo, $secret_key, $auth_key)
 {
@@ -19,7 +15,7 @@ function vkLogin($vkid, $pdo, $secret_key, $auth_key)
 	$app_secret = 'qV6RXByT51TBnwGZX8Py';
 	if (!$vkid || $vkid == '') return "NO USER ID";
 	if (md5($api_id.'_'.$vkid.'_'.$app_secret) != $auth_key) return "INCORRECT AUTH KEY";
-	doLogin($vkid, $pdo, $secret_key, $auth_key);
+	return doLogin($vkid, $pdo, $secret_key, $auth_key);
 }
 
 function doLogin($vkid, $pdo, $secret_key)
@@ -96,6 +92,12 @@ function doLogin($vkid, $pdo, $secret_key)
 	//, "events" => $p_events, "items" => $p_items, "achs" => $p_achs
 	$resp = array('registered' => $registered,'tokenJWT' => $tokenJWT, 'playerItem' => $playerItem);
 	return $resp;
+}
+
+function mobileLogin($vkid, $pdo,  $secret_key, $mobileKey)
+{
+	if ($mobileKey != "UA9tL5O9RJ") return "Incorrect Mobile Key";
+	return doLogin($vkid, $pdo, $secret_key);
 }
 
 
