@@ -6,6 +6,13 @@ require_once 'savescript.php';
 require_once 'json.php';
 
 
+
+function mobileLogin($vkid, $pdo,  $secret_key, $mobileKey)
+{
+	if ($mobileKey != "UA9tL5O9RJ") return "Incorrect Mobile Key";
+	doLogin($vkid, $pdo, $secret_key);
+}
+
 function vkLogin($vkid, $pdo, $secret_key, $auth_key)
 {
 	$api_id = '4654201';
@@ -15,7 +22,7 @@ function vkLogin($vkid, $pdo, $secret_key, $auth_key)
 	doLogin($vkid, $pdo, $secret_key, $auth_key);
 }
 
-function doLogin($vkid, $pdo, $secret_key, $auth_key)
+function doLogin($vkid, $pdo, $secret_key)
 {
 	$strFindPlayer = "select * from thanksdad.tb_players WHERE platformid = " . $pdo->quote($vkid);
 	$statement = $pdo->prepare($strFindPlayer);
