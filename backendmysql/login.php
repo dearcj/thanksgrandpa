@@ -5,7 +5,7 @@ require_once 'login_api.php';
 
 $vkid = $_POST['vkid'];
 //if ($argv[0]) $vkid = $argv[0];
-$resp = doLogin($vkid, $pdo, $secret_key);
+$resp = vkLogin($vkid, $pdo, $secret_key);
 $str = json_encode($resp, JSON_UNESCAPED_UNICODE);
 echo $str;
 ?>
