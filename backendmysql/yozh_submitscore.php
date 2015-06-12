@@ -14,14 +14,14 @@ $player = $res[0];
 		if ($score > $player['score'])
 		{
 			$wholequery = "UPDATE yozh.tb_players set score = ".$pdo->quote($score)." where name = ".$pdo->quote($name);
-			echo $wholequery;
+			//echo $wholequery;
 			$statement = $pdo->prepare($wholequery);
 			$statement->execute();
 		}
 	} else 
 	{
 		$plscript = "INSERT INTO yozh.tb_players (score, name) VALUES (".$pdo->quote($score).",".$pdo->quote($name).");";
-		echo $plscript;
+		//echo $plscript;
 		$statement = $pdo->prepare($plscript);
 		$statement->execute();
 	}
